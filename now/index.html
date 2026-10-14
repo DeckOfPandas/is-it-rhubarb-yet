@@ -1,0 +1,57 @@
+---
+title: This week
+description: What is in season in the UK right now.
+permalink: /now/
+---
+{%- comment -%}
+All 52 weekly lists are rendered at build time. JavaScript reveals the one
+for today (or ?week=N) and wires the previous/next buttons. Without
+JavaScript every week shows, in order.
+{%- endcomment -%}
+<h1>In season <span id="week-title">this week</span></h1>
+<p class="controls" hidden>
+  <button type="button" id="prev-week">← Previous week</button>
+  <span id="week-dates"></span>
+  <button type="button" id="next-week">Next week →</button>
+</p>
+
+{%- for w in (1..52) -%}
+  {%- assign in_now = "" | split: "" -%}
+  {%- assign nearly = "" | split: "" -%}
+  {%- for food in site.data.foods -%}
+    {%- assign best = "" -%}
+    {%- assign which = "" -%}
+    {%- for v in food.varieties -%}
+      {%- for r in v.weeks -%}
+        {%- if w >= r[0] and w <= r[1] -%}
+          {%- if r[2] == "in" -%}
+            {%- assign best = "in" -%}{%- assign which = v.name -%}
+          {%- elsif best == "" -%}
+            {%- assign best = "avail" -%}{%- assign which = v.name -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- if which != "" -%}{%- assign entry = food.slug | append: "|" | append: food.name | append: " (" | append: which | append: ")" | append: "|" | append: food.colour -%}
+    {%- else -%}{%- assign entry = food.slug | append: "|" | append: food.name | append: "|" | append: food.colour -%}{%- endif -%}
+    {%- if best == "in" -%}{%- assign in_now = in_now | push: entry -%}
+    {%- elsif best == "avail" -%}{%- assign nearly = nearly | push: entry -%}{%- endif -%}
+  {%- endfor -%}
+  <section class="week" data-week="{{ w }}">
+    <h2 class="week-heading">Week {{ w }}</h2>
+    <h3>In season</h3>
+    <ul class="food-list">
+      {%- for e in in_now -%}{%- assign p = e | split: "|" -%}
+      <li><a href="{{ '/is-it/' | append: p[0] | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ p[2] }}"></span>{{ p[1] }}</a></li>
+      {%- endfor -%}
+    </ul>
+    {%- if nearly.size > 0 -%}
+    <h3>Just about</h3>
+    <ul class="food-list nearly">
+      {%- for e in nearly -%}{%- assign p = e | split: "|" -%}
+      <li><a href="{{ '/is-it/' | append: p[0] | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ p[2] }}"></span>{{ p[1] }}</a></li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
+  </section>
+{%- endfor -%}

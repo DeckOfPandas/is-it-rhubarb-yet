@@ -1,0 +1,920 @@
+# UK seasonality, one entry per food. Generated once by
+# tools/make-foods.py and hand-edited since: this file is the truth.
+#
+# weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
+# state: in = in season, avail = just coming in or going out.
+# source: ncgm = New Covent Garden Market calendar, bbc = BBC Good Food,
+#         general = common knowledge, please check.
+
+- name: "Asparagus"
+  slug: asparagus
+  group: veg
+  colour: "#7fae3f"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 26, in]
+
+- name: "Aubergine"
+  slug: aubergine
+  group: veg
+  colour: "#4a2a6a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+
+- name: "Broad beans"
+  slug: broad-beans
+  group: veg
+  colour: "#8fbf5a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 35, in]
+        - [36, 39, avail]
+
+- name: "Runner & French beans"
+  slug: runner-french-beans
+  group: veg
+  colour: "#3f8f4a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 39, in]
+        - [40, 43, avail]
+
+- name: "Beetroot"
+  slug: beetroot
+  group: veg
+  colour: "#8b1a4a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 43, in]
+
+- name: "Broccoli"
+  slug: broccoli
+  group: veg
+  colour: "#2f7a3e"
+  source: ncgm
+  note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
+  varieties:
+    - name: "Calabrese"
+      weeks:
+        - [18, 22, avail]
+        - [23, 43, in]
+        - [44, 48, avail]
+    - name: "Purple sprouting"
+      weeks:
+        - [1, 4, avail]
+        - [5, 17, in]
+
+- name: "Brussels sprouts"
+  slug: brussels-sprouts
+  group: veg
+  colour: "#4f8a3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Cabbage"
+  slug: cabbage
+  group: veg
+  colour: "#5a9a5a"
+  source: ncgm
+  varieties:
+    - name: "Red"
+      weeks:
+        - [27, 30, avail]
+        - [31, 48, in]
+    - name: "Savoy"
+      weeks:
+        - [1, 13, in]
+        - [14, 30, avail]
+        - [31, 52, in]
+    - name: "Winter white"
+      weeks:
+        - [31, 35, avail]
+        - [36, 52, in]
+
+- name: "Spring greens"
+  slug: spring-greens
+  group: veg
+  colour: "#6fb24a"
+  source: ncgm
+  note: "NCGM has these most of the year; BBC Good Food gives March to June."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 17, in]
+        - [23, 30, avail]
+        - [31, 52, in]
+
+- name: "Carrots"
+  slug: carrots
+  group: veg
+  colour: "#e8731a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [18, 22, avail]
+        - [23, 52, in]
+
+- name: "Cauliflower"
+  slug: cauliflower
+  group: veg
+  colour: "#e6dcc3"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 22, in]
+        - [27, 52, in]
+
+- name: "Celeriac"
+  slug: celeriac
+  group: veg
+  colour: "#b9a98a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Chard"
+  slug: chard
+  group: veg
+  colour: "#c8342b"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 43, in]
+
+- name: "Chillies"
+  slug: chillies
+  group: veg
+  colour: "#d62828"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 48, in]
+        - [49, 52, avail]
+
+- name: "Courgettes"
+  slug: courgettes
+  group: veg
+  colour: "#4a8f2a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Courgette flowers"
+  slug: courgette-flowers
+  group: veg
+  colour: "#f2b705"
+  source: bbc
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 35, in]
+
+- name: "Fennel"
+  slug: fennel
+  group: veg
+  colour: "#a9c98a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 48, in]
+
+- name: "Garlic"
+  slug: garlic
+  group: veg
+  colour: "#d9cfc0"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, avail]
+        - [31, 52, in]
+
+- name: "Globe artichokes"
+  slug: globe-artichokes
+  group: veg
+  colour: "#6a8f5a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 43, in]
+        - [44, 48, avail]
+
+- name: "Horseradish"
+  slug: horseradish
+  group: veg
+  colour: "#cfc6a8"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 22, in]
+        - [36, 39, avail]
+        - [40, 43, in]
+
+- name: "Jerusalem artichokes"
+  slug: jerusalem-artichokes
+  group: veg
+  colour: "#9c7a4a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [40, 43, avail]
+        - [44, 52, in]
+
+- name: "Kale"
+  slug: kale
+  group: veg
+  colour: "#2d5a3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 17, in]
+        - [31, 35, avail]
+        - [36, 52, in]
+
+- name: "Cavolo nero"
+  slug: cavolo-nero
+  group: veg
+  colour: "#1f3d2b"
+  source: bbc
+  note: "BBC Good Food screenshot is cut off after September; the autumn months are assumed."
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 52, in]
+
+- name: "Kohlrabi"
+  slug: kohlrabi
+  group: veg
+  colour: "#b7c9a3"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 48, in]
+
+- name: "Leeks"
+  slug: leeks
+  group: veg
+  colour: "#6a9f5a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [9, 13, avail]
+        - [31, 35, avail]
+        - [36, 52, in]
+
+- name: "Mangetout"
+  slug: mangetout
+  group: veg
+  colour: "#9ccf6a"
+  source: bbc
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 35, in]
+
+- name: "Marrow"
+  slug: marrow
+  group: veg
+  colour: "#5f8f3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 30, avail]
+        - [31, 43, in]
+        - [44, 48, avail]
+
+- name: "Onions"
+  slug: onions
+  group: veg
+  colour: "#c89a5a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 39, in]
+        - [40, 43, avail]
+
+- name: "Pak choi"
+  slug: pak-choi
+  group: veg
+  colour: "#8fbf7a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 39, in]
+
+- name: "Parsnips"
+  slug: parsnips
+  group: veg
+  colour: "#e3d7b8"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [9, 17, avail]
+        - [27, 30, avail]
+        - [31, 52, in]
+
+- name: "Peas"
+  slug: peas
+  group: veg
+  colour: "#6fbf3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Peppers"
+  slug: peppers
+  group: veg
+  colour: "#e04a1a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 43, in]
+
+- name: "Potatoes"
+  slug: potatoes
+  group: veg
+  colour: "#b78a5a"
+  source: ncgm
+  varieties:
+    - name: "New"
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+    - name: "Maincrop"
+      weeks:
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Pumpkin"
+  slug: pumpkin
+  group: veg
+  colour: "#e8871a"
+  source: ncgm
+  note: "NCGM also marks January to March, presumably stored; kept as given."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 13, in]
+        - [27, 52, in]
+
+- name: "Romanesco"
+  slug: romanesco
+  group: veg
+  colour: "#9fc24a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 52, in]
+
+- name: "Salsify"
+  slug: salsify
+  group: veg
+  colour: "#8a7a6a"
+  source: bbc
+  note: "BBC Good Food screenshot is cut off after September; October to December assumed."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, in]
+        - [31, 35, avail]
+        - [36, 52, in]
+
+- name: "Samphire"
+  slug: samphire
+  group: veg
+  colour: "#3fa07a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 35, in]
+
+- name: "Shallots"
+  slug: shallots
+  group: veg
+  colour: "#b06a4a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 26, in]
+        - [36, 52, in]
+
+- name: "Spinach"
+  slug: spinach
+  group: veg
+  colour: "#2f7a2f"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 43, in]
+
+- name: "Squash"
+  slug: squash
+  group: veg
+  colour: "#d9a21a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 35, avail]
+        - [36, 43, in]
+
+- name: "Swede"
+  slug: swede
+  group: veg
+  colour: "#c9a04a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 35, avail]
+        - [36, 48, in]
+
+- name: "Sweetcorn"
+  slug: sweetcorn
+  group: veg
+  colour: "#f2c31a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 30, avail]
+        - [31, 43, in]
+        - [44, 48, avail]
+
+- name: "Turnips"
+  slug: turnips
+  group: veg
+  colour: "#d8c7d8"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 17, in]
+        - [27, 52, in]
+
+- name: "Celery"
+  slug: celery
+  group: salad
+  colour: "#9fcf7a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 43, in]
+
+- name: "Chicory & radicchio"
+  slug: chicory-radicchio
+  group: salad
+  colour: "#a83a5a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 43, in]
+        - [44, 48, avail]
+
+- name: "Cucumber"
+  slug: cucumber
+  group: salad
+  colour: "#5fae3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 39, in]
+        - [40, 43, avail]
+
+- name: "Edible flowers"
+  slug: edible-flowers
+  group: salad
+  colour: "#e07aa8"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 39, in]
+
+- name: "Lettuce"
+  slug: lettuce
+  group: salad
+  colour: "#8fd14a"
+  source: ncgm
+  note: "NCGM lists five types; this row is their union."
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 43, in]
+        - [44, 48, avail]
+
+- name: "Radishes"
+  slug: radishes
+  group: salad
+  colour: "#e0305a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 48, in]
+    - name: "Mooli"
+      weeks:
+        - [18, 22, avail]
+        - [23, 48, in]
+        - [49, 52, avail]
+
+- name: "Rocket"
+  slug: rocket
+  group: salad
+  colour: "#4f9a3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 43, in]
+
+- name: "Spring onions"
+  slug: spring-onions
+  group: salad
+  colour: "#7fc04a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 22, avail]
+        - [23, 43, in]
+        - [44, 48, avail]
+
+- name: "Tomatoes"
+  slug: tomatoes
+  group: salad
+  colour: "#e03a2a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 26, avail]
+        - [27, 35, in]
+        - [36, 48, avail]
+
+- name: "Watercress"
+  slug: watercress
+  group: salad
+  colour: "#2f6a3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 26, avail]
+        - [27, 39, in]
+        - [40, 48, avail]
+
+- name: "Apples"
+  slug: apples
+  group: fruit
+  colour: "#c8302a"
+  source: ncgm
+  note: "NCGM lists eight varieties; three early-eater rows (Early Windsor, Golden Delicious, Royal Gala) are left out. NCGM marks Discovery as only 'available' in August and September; here August is in season, as it is sold."
+  varieties:
+    - name: "Discovery"
+      weeks:
+        - [31, 35, in]
+        - [36, 39, avail]
+    - name: "Bramley"
+      weeks:
+        - [31, 39, in]
+    - name: "Cox"
+      weeks:
+        - [36, 43, in]
+    - name: "Egremont Russet"
+      weeks:
+        - [36, 39, avail]
+        - [40, 43, in]
+    - name: "Braeburn"
+      weeks:
+        - [40, 43, avail]
+        - [44, 48, in]
+
+- name: "Blackberries"
+  slug: blackberries
+  group: fruit
+  colour: "#3a1f4a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 35, avail]
+        - [36, 43, in]
+        - [44, 48, avail]
+
+- name: "Blackcurrants & redcurrants"
+  slug: blackcurrants-redcurrants
+  group: fruit
+  colour: "#5a1a3a"
+  source: ncgm
+  note: "BBC Good Food has blackcurrants from late May to July; NCGM has July to August."
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 30, avail]
+        - [31, 35, in]
+
+- name: "Blueberries"
+  slug: blueberries
+  group: fruit
+  colour: "#3a4a8a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 35, in]
+
+- name: "Cherries"
+  slug: cherries
+  group: fruit
+  colour: "#a8102a"
+  source: ncgm
+  note: "BBC Good Food has cherries June to July; NCGM runs later."
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 26, avail]
+        - [27, 39, in]
+
+- name: "Cobnuts"
+  slug: cobnuts
+  group: nuts
+  colour: "#a67c52"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 35, avail]
+        - [36, 43, in]
+
+- name: "Damsons"
+  slug: damsons
+  group: fruit
+  colour: "#4a2a6a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 35, avail]
+        - [36, 39, in]
+
+- name: "Gooseberries"
+  slug: gooseberries
+  group: fruit
+  colour: "#a8c84a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 35, in]
+
+- name: "Loganberries & tayberries"
+  slug: loganberries-tayberries
+  group: fruit
+  colour: "#9a2a4a"
+  source: bbc
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 35, in]
+
+- name: "Medlars"
+  slug: medlars
+  group: fruit
+  colour: "#8a6a3a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [40, 43, avail]
+        - [44, 52, in]
+
+- name: "Pears"
+  slug: pears
+  group: fruit
+  colour: "#b8c84a"
+  source: ncgm
+  varieties:
+    - name: "Williams"
+      weeks:
+        - [31, 35, avail]
+        - [36, 39, in]
+        - [40, 43, avail]
+    - name: "Conference"
+      weeks:
+        - [36, 52, in]
+    - name: "Comice"
+      weeks:
+        - [40, 52, in]
+
+- name: "Plums"
+  slug: plums
+  group: fruit
+  colour: "#6a2a8a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 39, in]
+
+- name: "Quince"
+  slug: quince
+  group: fruit
+  colour: "#e8c84a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [40, 48, in]
+
+- name: "Raspberries"
+  slug: raspberries
+  group: fruit
+  colour: "#d8305a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 43, in]
+
+- name: "Rhubarb"
+  slug: rhubarb
+  group: fruit
+  colour: "#e0407a"
+  source: ncgm
+  note: "BBC Good Food has rhubarb January to June with no forced/outdoor split."
+  varieties:
+    - name: "Forced"
+      weeks:
+        - [1, 13, in]
+        - [44, 52, in]
+    - name: "Outdoor"
+      weeks:
+        - [18, 30, in]
+
+- name: "Strawberries"
+  slug: strawberries
+  group: fruit
+  colour: "#e8203a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 35, in]
+        - [36, 39, avail]
+
+- name: "Walnuts"
+  slug: walnuts
+  group: nuts
+  colour: "#7a5a3a"
+  source: ncgm
+  note: "Fresh (wet) walnuts."
+  varieties:
+    - name: ""
+      weeks:
+        - [40, 43, in]
+
+- name: "Sweet chestnuts"
+  slug: sweet-chestnuts
+  group: nuts
+  colour: "#6a3a1a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [40, 48, in]
+        - [49, 52, avail]
+
+- name: "Wild garlic"
+  slug: wild-garlic
+  group: wild
+  colour: "#5fa83a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 22, in]
+
+- name: "Elderflower"
+  slug: elderflower
+  group: wild
+  colour: "#f3e9b5"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 26, in]
+
+- name: "Elderberries"
+  slug: elderberries
+  group: wild
+  colour: "#2a1a3a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 35, avail]
+        - [36, 39, in]
+
+- name: "Sloes"
+  slug: sloes
+  group: wild
+  colour: "#2a2a5a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [40, 48, in]
+
+- name: "Girolles"
+  slug: girolles
+  group: wild
+  colour: "#e8a21a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 48, in]
+
+- name: "Morels"
+  slug: morels
+  group: wild
+  colour: "#8a6a4a"
+  source: ncgm
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 22, in]

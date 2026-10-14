@@ -10,7 +10,14 @@ is the only enforcement.
   is NOT in the container: say so before doing anything else.
 - **Scratch files go in this project's `tmp/`** (gitignored), never the system
   `/tmp`, never `~`.
-- <Project build / test / serve commands go here.>
+- Build: `bundle exec jekyll build`. Serve on the published port:
+  `bundle exec jekyll serve --host 0.0.0.0 --port 9000`. Check the data file:
+  `python3 -I tools/check-foods.py`. Kit tests: `python3 -m pytest`.
+- The site is Jekyll with no plugins, vanilla JS and inline SVG only. No
+  raster images, no npm, no new gems without asking.
+- `_data/foods.yml` is the source of truth for seasons. `tools/make-foods.py`
+  derived it once from the New Covent Garden Market PDF and is kept for
+  provenance; rerunning it overwrites hand edits.
 
 ## Critical restrictions
 - NEVER run `rm -rf` outside `tmp/` without asking me first.

@@ -1,0 +1,13 @@
+---
+title: Is it … yet?
+description: Ask whether a UK fruit or vegetable is in season yet.
+permalink: /is-it/
+---
+<h1>Is it … yet?</h1>
+<p class="lede">Pick a food. The answer is a yes, a no, or a date to come back on.</p>
+<ul class="ask-list">
+{%- assign sorted = site.data.foods | sort: "name" -%}
+{%- for food in sorted -%}
+  <li><a href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ food.colour }}"></span>Is it {{ food.name | downcase }} yet?</a></li>
+{%- endfor -%}
+</ul>
