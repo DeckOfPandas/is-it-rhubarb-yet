@@ -5,6 +5,9 @@
 # weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
 # state: in = in season, avail = just coming in or going out.
 # colour: per food; a variety may carry its own colour to stand apart.
+# shades: optional, two or three colours the season wheel sweeps through
+#         across the in-season run (unripe, ripe, over), on a food or a
+#         variety. The calendar keeps using colour.
 # source: ncgm = New Covent Garden Market calendar, bbc = BBC Good Food,
 #         general = common knowledge, please check.
 
@@ -648,6 +651,7 @@
   source: ncgm
   varieties:
     - name: ""
+      shades: ["#8ab83a", "#e03a2a", "#8a1e1e"]
       weeks:
         - [9, 26, avail]
         - [27, 35, in]

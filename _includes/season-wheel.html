@@ -1,0 +1,119 @@
+{% comment %}
+The season wheel for one food: the year as a ring, January at twelve
+o'clock, clockwise, one ring per variety (the first variety outermost),
+the centre cut out. Expects: food.
+
+No trigonometry: every arc is a dashed circle. pathLength puts the dash
+units in weeks (52) or days (364), so a range from week a to b is a dash
+of length b-a+1 starting at offset a-1. Rotating the whole group by -90
+degrees puts week 1 at the top.
+
+A fully in-season range is one dash in the ring's colour. A "just about"
+range is drawn a day at a time, each day mixed between the off-season
+grey and the colour by --t: rising into a season that follows it, falling
+out of one that precedes it, flat when it touches neither or both. A
+variety (or food) with `shades` sweeps those colours across its in-season
+run instead of a flat colour, and fades in from the first shade and out
+from the last.
+
+Each day (or shaded week) dash is two units long so it runs under the
+next one: a dash end that meets the grey through antialiasing shows as a
+hairline seam, so only the last dash of a run is allowed to end.
+{% endcomment %}
+{%- assign food = include.food -%}
+{%- assign C = 180 -%}{%- assign R = 140 -%}{%- assign R0 = 78 -%}
+{%- assign n = food.varieties.size -%}
+{%- assign band = R | minus: R0 | times: 1.0 | divided_by: n -%}
+{%- assign thick = band | minus: 3 | round: 2 -%}
+{%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
+{%- assign month_names = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," -%}
+<figure class="wheel">
+<svg viewBox="0 0 360 360" role="img" aria-label="Season of {{ food.name }} around the year">
+  <g transform="rotate(-90 {{ C }} {{ C }})">
+  {%- for v in food.varieties -%}
+    {%- assign k = forloop.index0 -%}
+    {%- assign shades = v.shades | default: food.shades -%}
+    {%- assign c = v.colour | default: food.colour -%}
+    {%- assign outer = band | times: k -%}{%- assign outer = R | minus: outer -%}
+    {%- assign mid = thick | divided_by: 2.0 -%}{%- assign mid = outer | minus: mid | round: 2 -%}
+    <g class="ring" fill="none" stroke-width="{{ thick }}" style="--c: {{ c }}">
+      <title>{{ v.name | default: food.name }}</title>
+      <circle class="arc off" cx="{{ C }}" cy="{{ C }}" r="{{ mid }}" />
+      {%- for r in v.weeks -%}
+        {%- assign start = r[0] | minus: 1 -%}
+        {%- assign len = r[1] | minus: r[0] | plus: 1 -%}
+        {%- if r[2] == "in" -%}
+          {%- if shades -%}
+            {%- assign sm1 = shades.size | minus: 1 -%}{%- assign sm2 = shades.size | minus: 2 -%}
+            {%- for i in (0..len) -%}{%- if i < len -%}
+              {%- assign pos = i | plus: 0.5 | divided_by: len | times: sm1 -%}
+              {%- assign seg = pos | floor | at_most: sm2 -%}
+              {%- assign t = pos | minus: seg | round: 3 -%}
+              {%- assign s2 = seg | plus: 1 -%}
+              {%- assign lenm1 = len | minus: 1 -%}
+              <circle class="arc blend" cx="{{ C }}" cy="{{ C }}" r="{{ mid }}" pathLength="52" stroke-dasharray="{% if i == lenm1 %}1.02{% else %}2{% endif %} 52" stroke-dashoffset="{{ 0 | minus: start | minus: i }}" style="--a: {{ shades[seg] }}; --b: {{ shades[s2] }}; --t: {{ t }}" />
+            {%- endif -%}{%- endfor -%}
+          {%- else -%}
+            <circle class="arc in" cx="{{ C }}" cy="{{ C }}" r="{{ mid }}" pathLength="52" stroke-dasharray="{{ len }} 52" stroke-dashoffset="{{ 0 | minus: start }}" />
+          {%- endif -%}
+        {%- else -%}
+          {%- assign before = r[0] | minus: 1 -%}{%- if before == 0 -%}{%- assign before = 52 -%}{%- endif -%}
+          {%- assign after = r[1] | plus: 1 -%}{%- if after == 53 -%}{%- assign after = 1 -%}{%- endif -%}
+          {%- assign rising = false -%}{%- assign falling = false -%}
+          {%- for o in v.weeks -%}
+            {%- if o[2] == "in" -%}
+              {%- if o[0] == after -%}{%- assign rising = true -%}{%- endif -%}
+              {%- if o[1] == before -%}{%- assign falling = true -%}{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- assign fc = c -%}
+          {%- if shades and rising and falling == false -%}{%- assign fc = shades.first -%}{%- endif -%}
+          {%- if shades and falling and rising == false -%}{%- assign fc = shades.last -%}{%- endif -%}
+          {%- assign nd = len | times: 7 -%}{%- assign nd1 = nd | plus: 1 -%}
+          {%- assign d0 = start | times: 7 -%}
+          <g style="--c: {{ fc }}">
+          {%- for i in (1..nd) -%}
+            {%- assign t = i | times: 1.0 | divided_by: nd1 | round: 3 -%}
+            {%- if rising and falling -%}{%- assign t = 0.45 -%}
+            {%- elsif falling -%}{%- assign t = 1.0 | minus: t | round: 3 -%}
+            {%- elsif rising == false -%}{%- assign t = 0.45 -%}{%- endif -%}
+            <circle class="arc fade" cx="{{ C }}" cy="{{ C }}" r="{{ mid }}" pathLength="364" stroke-dasharray="{% if i == nd %}1.05{% else %}2{% endif %} 364" stroke-dashoffset="{{ 1 | minus: i | minus: d0 }}" style="--t: {{ t }}" />
+          {%- endfor -%}
+          </g>
+        {%- endif -%}
+      {%- endfor -%}
+    </g>
+  {%- endfor -%}
+  </g>
+  {%- for m in (0..11) -%}
+    {%- assign ms = month_starts[m] | plus: 0 -%}
+    {%- assign deg = ms | minus: 1 | times: 360.0 | divided_by: 52 | round: 2 -%}
+    {%- if m == 11 -%}{%- assign nxt = 53 -%}{%- else -%}{%- assign nm = m | plus: 1 -%}{%- assign nxt = month_starts[nm] | plus: 0 -%}{%- endif -%}
+    {%- assign end_deg = nxt | minus: 1 | times: 360.0 | divided_by: 52 -%}
+    {%- assign mid_deg = deg | plus: end_deg | divided_by: 2 | round: 2 -%}
+    <line class="spoke" x1="{{ C }}" y1="{{ C | minus: R0 | plus: 1 }}" x2="{{ C }}" y2="{{ C | minus: R | minus: 1 }}" transform="rotate({{ deg }} {{ C }} {{ C }})" />
+    {%- assign ly = C | minus: R | minus: 14 -%}
+    {%- if mid_deg > 90 and mid_deg < 270 -%}
+    <text class="month" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }}) rotate(180 {{ C }} {{ ly }})">{{ month_names[m] }}</text>
+    {%- else -%}
+    <text class="month" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }})">{{ month_names[m] }}</text>
+    {%- endif -%}
+  {%- endfor -%}
+  <text class="today-label" x="{{ C }}" y="{{ C }}" hidden><tspan x="{{ C }}" dy="-0.5em">today</tspan><tspan class="date" x="{{ C }}" dy="1.3em"></tspan></text>
+  <g transform="translate({{ C }} {{ C }})">
+    <g class="hand">
+      <line x1="0" y1="{{ 0 | minus: R0 | plus: 4 }}" x2="0" y2="{{ 0 | minus: R | minus: 4 }}" />
+      <circle cx="0" cy="{{ 0 | minus: R | minus: 6 }}" r="3.5" />
+    </g>
+  </g>
+</svg>
+{%- if n > 1 -%}
+<figcaption>
+  <ol class="rings">
+    {%- for v in food.varieties -%}
+    <li><span class="swatch" style="--c: {{ v.colour | default: food.colour }}"></span>{{ v.name }}{% if forloop.first %} (outer){% elsif forloop.last %} (inner){% endif %}</li>
+    {%- endfor -%}
+  </ol>
+</figcaption>
+{%- endif -%}
+</figure>

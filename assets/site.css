@@ -8,6 +8,7 @@
   --muted: #6b6b60;
   --rule: #e4e0d4;
   --band: rgba(0, 0, 0, 0.018);
+  --off: #ebe7dc;
   --accent: #d6336c;
   --yes: #2f8f3a;
   --nearly: #c98a1a;
@@ -21,6 +22,7 @@
     --muted: #a09d8f;
     --rule: #33352a;
     --band: rgba(255, 255, 255, 0.025);
+    --off: #2a2c22;
     --yes: #5fc06a;
     --nearly: #e0a63a;
   }
@@ -96,6 +98,31 @@ article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
 .verdict.nearly { color: var(--nearly); }
 .verdict.no { color: var(--accent); }
 .answer { font-size: 1.4rem; font-weight: 500; margin: 0 0 2rem; max-width: 36rem; }
+/* The season wheel. Arcs are dashed circles whose stroke is the ring's
+   --c; a fading day mixes --c into the off-season grey by --t (0 to 1),
+   and a shaded week mixes --a into --b. The mix runs in oklab so the
+   fade stays even to the eye; change the easing by shaping --t here,
+   e.g. calc(var(--t) * var(--t)) for a slow start. The hand is hidden
+   until JavaScript points it at today, then sweeps round from January. */
+.wheel { width: min(24rem, 100%); margin: 0 0 2rem; }
+.wheel svg { display: block; width: 100%; height: auto; overflow: visible; }
+.wheel .off { stroke: var(--off); }
+.wheel .in { stroke: var(--c); }
+.wheel .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), var(--off)); }
+.wheel .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
+.wheel .spoke { stroke: var(--bg); stroke-width: 2; }
+.wheel .month { fill: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.wheel .hand { opacity: 0; transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s; }
+.wheel .hand.on { opacity: 1; }
+.wheel .hand line { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
+.wheel .hand circle { fill: var(--accent); }
+.wheel .today-label { fill: var(--muted); font-size: 11px; text-anchor: middle; }
+.wheel .today-label[hidden] { display: none; }
+.wheel .today-label .date { fill: var(--fg); font-size: 15px; font-weight: 700; }
+.wheel figcaption { color: var(--muted); font-size: 0.9rem; }
+.rings { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
+@media (prefers-reduced-motion: reduce) { .wheel .hand { transition: opacity 0.4s; } }
+
 .fine { margin: 2rem 0; color: var(--muted); }
 .fine summary { cursor: pointer; }
 .note, .source { color: var(--muted); font-size: 0.95rem; max-width: 40rem; }

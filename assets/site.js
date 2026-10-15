@@ -94,6 +94,26 @@
     line.removeAttribute("hidden");
   }
 
+  // --- Season wheels: the hand and the date in the hole --------------------
+  // The wheel's dashes put week w at (w-1)*7 of 364 day units, so the hand
+  // uses the same scale rather than the true length of the year.
+  function markWheel(figure, today) {
+    var hand = figure.querySelector(".hand");
+    var label = figure.querySelector(".today-label");
+    var doy = Math.floor((today - startOfYear(today)) / MS_PER_DAY);
+    var deg = Math.min(doy, 364) / 364 * 360;
+    if (label) {
+      label.querySelector(".date").textContent = fmt(today);
+      label.removeAttribute("hidden");
+    }
+    if (!hand) return;
+    hand.getBoundingClientRect();
+    requestAnimationFrame(function () {
+      hand.style.transform = "rotate(" + deg.toFixed(2) + "deg)";
+      hand.classList.add("on");
+    });
+  }
+
   // --- This week ------------------------------------------------------------
   function showWeek(week, year) {
     document.querySelectorAll("section.week").forEach(function (s) {
@@ -177,6 +197,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     var week = weekOf(new Date());
     document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, week); });
+    document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, new Date()); });
     initNow();
     initFood();
   });

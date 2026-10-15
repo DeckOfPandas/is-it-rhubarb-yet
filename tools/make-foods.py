@@ -41,10 +41,11 @@ def months(pattern):
     return ("months", pattern, "")
 
 
-def v(label, lookup, colour=None):
+def v(label, lookup, colour=None, shades=None):
     """A variety: label "" means the food has one season. A colour here
-    overrides the food's colour for this row."""
-    return (label, lookup, colour)
+    overrides the food's colour for this row. Shades are two or three
+    colours the season wheel sweeps through over the in-season run."""
+    return (label, lookup, colour, shades)
 
 
 # Curated list. Each food: name, group, colour, source, note, varieties.
@@ -180,7 +181,7 @@ FOODS = [
     ("Squash", "fruiting", "#d9a21a", "ncgm", "",
      [v("", ncgm("Squash"))]),
     ("Tomatoes", "fruiting", "#e03a2a", "ncgm", "",
-     [v("", ncgm("Tomatoes"))]),
+     [v("", ncgm("Tomatoes"), shades=["#8ab83a", "#e03a2a", "#8a1e1e"])]),
 
     # ---- Orchard fruit ----------------------------------------------------
     ("Apples", "orchard", "#c8302a", "ncgm",
@@ -293,6 +294,9 @@ def main() -> None:
            "# weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).",
            "# state: in = in season, avail = just coming in or going out.",
            "# colour: per food; a variety may carry its own colour to stand apart.",
+           "# shades: optional, two or three colours the season wheel sweeps through",
+           "#         across the in-season run (unripe, ripe, over), on a food or a",
+           "#         variety. The calendar keeps using colour.",
            "# source: ncgm = New Covent Garden Market calendar, bbc = BBC Good Food,",
            "#         general = common knowledge, please check.",
            ""]
@@ -313,13 +317,15 @@ def main() -> None:
         if note:
             out.append(f"  note: {yaml_str(note)}")
         out.append("  varieties:")
-        for label, lookup, vcolour in varieties:
+        for label, lookup, vcolour, shades in varieties:
             ranges = week_ranges(month_states(lookup, rows))
             if not ranges:
                 raise SystemExit(f"{name} / {label}: no season at all")
             out.append(f"    - name: {yaml_str(label)}")
             if vcolour:
                 out.append(f"      colour: {yaml_str(vcolour)}")
+            if shades:
+                out.append(f"      shades: [{', '.join(yaml_str(s) for s in shades)}]")
             out.append("      weeks:")
             for r in ranges:
                 out.append(f"        - [{r[0]}, {r[1]}, {r[2]}]")

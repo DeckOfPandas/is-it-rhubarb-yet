@@ -29,6 +29,19 @@ def load(path):
     return json.loads(subprocess.check_output(ruby, text=True))
 
 
+def check_shades(item, label, problems):
+    """`shades`, when present, is two or three #rrggbb colours."""
+    if "shades" not in item:
+        return
+    shades = item["shades"]
+    if not isinstance(shades, list) or not 2 <= len(shades) <= 3:
+        problems.append(f"{label}: shades must be a list of two or three colours")
+        return
+    for s in shades:
+        if not COLOUR.match(str(s)):
+            problems.append(f"{label}: shade {s!r} must be #rrggbb lowercase")
+
+
 def main() -> int:
     foods = load(DATA)
     groups = {g["key"] for g in load(GROUPS_FILE)}
@@ -53,6 +66,7 @@ def main() -> int:
             problems.append(f"{where}: unknown source {f.get('source')!r}")
         if not COLOUR.match(str(f.get("colour", ""))):
             problems.append(f"{where}: colour must be #rrggbb lowercase")
+        check_shades(f, where, problems)
         if f.get("slug") not in stubs:
             problems.append(f"{where}: no _foods/{f.get('slug')}.md stub")
         if not f.get("varieties"):
@@ -64,6 +78,7 @@ def main() -> int:
                 continue
             if "colour" in v and not COLOUR.match(str(v["colour"])):
                 problems.append(f"{label}: colour must be #rrggbb lowercase")
+            check_shades(v, label, problems)
             row_colour = v.get("colour", f.get("colour"))
             if row_colour in colours:
                 problems.append(f"{label}: same colour as {colours[row_colour]}")
