@@ -4,12 +4,14 @@ description: Where every UK food's season begins, one dial per kind of food.
 permalink: /year/
 ---
 {%- comment -%}
-One arrivals dial per kind of food. The switch is a radio group shown by
-CSS alone; JavaScript only remembers the choice and points the hands.
+One arrivals dial per kind of food. Both switches are radio groups shown
+by CSS alone; JavaScript only remembers the choices and points the
+hands. The arcs switch hides or shows the season arcs on every dial.
 {%- endcomment -%}
 <h1>The shape of the year</h1>
 <p class="lede">Each food sits where its season begins, and the further from the centre, the longer it lasts. Read clockwise from the hand for what comes next, and see where the year is crowded and where it is bare.</p>
 
+<div class="switches">
 <fieldset class="switch" data-remember="kind">
   <legend>Kind</legend>
   <input type="radio" name="kind" id="kind-veg" value="veg" checked><label for="kind-veg">Veg</label>
@@ -19,6 +21,12 @@ CSS alone; JavaScript only remembers the choice and points the hands.
   <input type="radio" name="kind" id="kind-fish" value="fish"><label for="kind-fish">Fish</label>
   <input type="radio" name="kind" id="kind-meat" value="meat"><label for="kind-meat">Meat</label>
 </fieldset>
+<fieldset class="switch" data-remember="arcs">
+  <legend>Season length</legend>
+  <input type="radio" name="arcs" id="arcs-on" value="on" checked><label for="arcs-on">Arcs</label>
+  <input type="radio" name="arcs" id="arcs-off" value="off"><label for="arcs-off">Dots</label>
+</fieldset>
+</div>
 
 <div class="ordered">
   <figure class="wheel dial by-veg">{% include arrivals-dial.html kind="veg" id="dial-veg" %}</figure>
