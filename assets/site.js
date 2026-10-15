@@ -223,15 +223,18 @@
       if (s === "avail" && !nearly) nearly = v;
     });
 
-    var word, key, line, cls;
+    // The page takes the colour of the variety the verdict is about.
+    var word, key, line, cls, about = null;
     if (inNow) {
       var until = lastWeekOfRun(inNow, week);
+      about = inNow;
       word = "YES."; key = "yes"; cls = "yes";
       line = (inNow.name ? inNow.name + ". " : "") +
         (until.allYear ? "All year round." :
           "Until " + fmt(dateOfWeek(until.week + 1, year + until.yearsAhead)) + ".");
     } else {
       var next = nextIn(food, week);
+      about = nearly || (next && next.variety);
       if (nearly && goingOut(nearly, week)) {
         word = "JUST."; key = "just"; cls = "nearly";
         line = "On its way out.";
@@ -248,6 +251,7 @@
         line = "Never, apparently. Check the data.";
       }
     }
+    if (about && about.colour) article.style.setProperty("--c", about.colour);
     verdict.textContent = word;
     verdict.classList.add(cls);
     verdict.hidden = false;

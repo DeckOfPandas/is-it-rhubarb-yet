@@ -1,26 +1,32 @@
 {% comment %}
-A whole-table wheel for one kind of food (veg, fruit, herbs, fish, meat).
-Expects: kind, id.
+A whole-table wheel for one kind of food (veg, fruit, wild, herbs, fish,
+meat). Expects: kind, id.
 
-Every food sits at the angle where its season begins, so the dial shows
-the shape of the year at a glance: where arrivals crowd and where the
-hungry gap is. Read clockwise from the hand for what comes next. Foods
-in season all year have no beginning and are listed in the hole.
+Every food sits at the angle where its season begins and at a distance
+from the centre set by how long that season lasts: the shortest seasons
+hug the month ring, the longest reach the rim. Faint guide rings at one,
+three, six and nine months carry their own labels, so the chart needs no
+key. Read clockwise from the hand for what comes next. Foods in season
+all year have no beginning and are listed in the hole.
 
 A season "begins" at the first in-season week not joined to an in-season
 week before it (the year end counts as adjacent), so a season that wraps
-December into January begins in the autumn, not on 1 January.
+December into January begins in the autumn, not on 1 January. Its length
+is the longest variety's in-season weeks.
 
-Labels radiate from a month ring. Within a month, foods are spread
-evenly across the month's arc and dealt round three tiers of radius so
-neighbours do not collide; the longest names go outermost. Entries are
-"m<month index + 10> <200 - name length>|slug" strings, so sorting as
-text orders by month, then longest name first.
+Layout: foods are spread evenly across their month's arc (the data is
+month-grained, so the angle within a month carries no information). They
+are dealt into three angular passes by rank of length, so that labels
+next to each other differ in radius; foods of the same length that still
+land side by side are nudged 12 units outward, about two weeks. Entries
+are "m<month index + 10> <length + 100> <name>|slug|length" strings, so
+sorting as text orders by month, then length, then name.
 {% endcomment %}
-{%- assign C = 440 -%}{%- assign RING = 100 -%}{%- assign THICK = 16 -%}
+{%- assign C = 440 -%}{%- assign RING = 100 -%}{%- assign THICK = 16 -%}{%- assign R0 = 118 -%}{%- assign PER_WEEK = 5 -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
-{%- assign tiers = "122,196,270" | split: "," -%}
+{%- assign guides = "4,13,26,39" | split: "," -%}
+{%- assign guide_names = "1 month,3 months,6 months,9 months" | split: "," -%}
 {%- assign kind_groups = site.data.groups | where: "kind", include.kind -%}
 {%- assign keys = kind_groups | map: "key" -%}
 {%- assign starters = "" | split: "" -%}
@@ -28,27 +34,39 @@ text orders by month, then longest name first.
 {%- for food in site.data.foods -%}
   {%- if keys contains food.group -%}
     {%- assign start = 99 -%}
-    {%- for v in food.varieties -%}{%- for r in v.weeks -%}
-      {%- if r[2] == "in" -%}
-        {%- assign prev = r[0] | minus: 1 -%}{%- if prev == 0 -%}{%- assign prev = 52 -%}{%- endif -%}
-        {%- assign joined = false -%}
-        {%- for o in v.weeks -%}{%- if o[2] == "in" and o[1] == prev -%}{%- assign joined = true -%}{%- endif -%}{%- endfor -%}
-        {%- if joined == false and r[0] < start -%}{%- assign start = r[0] -%}{%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}{%- endfor -%}
+    {%- assign length = 0 -%}
+    {%- for v in food.varieties -%}
+      {%- assign vlen = 0 -%}
+      {%- for r in v.weeks -%}
+        {%- if r[2] == "in" -%}
+          {%- assign vlen = r[1] | minus: r[0] | plus: 1 | plus: vlen -%}
+          {%- assign prev = r[0] | minus: 1 -%}{%- if prev == 0 -%}{%- assign prev = 52 -%}{%- endif -%}
+          {%- assign joined = false -%}
+          {%- for o in v.weeks -%}{%- if o[2] == "in" and o[1] == prev -%}{%- assign joined = true -%}{%- endif -%}{%- endfor -%}
+          {%- if joined == false and r[0] < start -%}{%- assign start = r[0] -%}{%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if vlen > length -%}{%- assign length = vlen -%}{%- endif -%}
+    {%- endfor -%}
     {%- if start == 99 -%}
       {%- assign allyear = allyear | push: food.name -%}
     {%- else -%}
       {%- assign m = 0 -%}
       {%- for ms in month_starts -%}{%- assign msn = ms | plus: 0 -%}{%- if start >= msn -%}{%- assign m = forloop.index0 -%}{%- endif -%}{%- endfor -%}
-      {%- assign lenkey = 200 | minus: food.name.size -%}
-      {%- assign entry = m | plus: 10 | prepend: "m" | append: " " | append: lenkey | append: "|" | append: food.slug -%}
+      {%- assign lenkey = length | plus: 100 -%}
+      {%- assign entry = m | plus: 10 | prepend: "m" | append: " " | append: lenkey | append: " " | append: food.name | append: "|" | append: food.slug | append: "|" | append: length -%}
       {%- assign starters = starters | push: entry -%}
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
 {%- assign starters = starters | sort -%}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" role="img" aria-label="When each {{ include.kind }} season begins">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" role="img" aria-label="When each {{ include.kind }} season begins, and how long it lasts">
+  {%- for g in guides -%}
+    {%- assign gw = g | plus: 0 -%}
+    {%- assign gr = gw | times: PER_WEEK | plus: R0 -%}
+    <circle class="guide" fill="none" cx="{{ C }}" cy="{{ C }}" r="{{ gr }}" />
+    <text class="guide-label" x="{{ C }}" y="{{ C | minus: gr | plus: 10 }}" text-anchor="middle" transform="rotate(351 {{ C }} {{ C }})">{{ guide_names[forloop.index0] }}</text>
+  {%- endfor -%}
   <g transform="rotate(-90 {{ C }} {{ C }})">
     <circle class="arc off" fill="none" stroke-width="{{ THICK }}" cx="{{ C }}" cy="{{ C }}" r="{{ RING }}" />
   </g>
@@ -70,13 +88,22 @@ text orders by month, then longest name first.
     {%- assign mine = "" | split: "" -%}
     {%- for e in starters -%}{%- if e contains prefix -%}{%- assign mine = mine | push: e -%}{%- endif -%}{%- endfor -%}
     {%- assign n = mine.size -%}
+    {%- assign third0 = n | plus: 2 | divided_by: 3 -%}
+    {%- assign third1 = n | plus: 1 | divided_by: 3 -%}
+    {%- assign prev_len = -1 -%}{%- assign ties = 0 -%}
     {%- for e in mine -%}
-      {%- assign slug = e | split: "|" | last -%}
-      {%- assign food = site.data.foods | where: "slug", slug | first -%}
+      {%- assign parts = e | split: "|" -%}
+      {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+      {%- assign length = parts[2] | plus: 0 -%}
+      {%- if length == prev_len -%}{%- assign ties = ties | plus: 1 -%}{%- else -%}{%- assign ties = 0 -%}{%- assign prev_len = length -%}{%- endif -%}
       {%- assign k = forloop.index0 -%}
-      {%- assign angle = k | plus: 0.5 | times: span | divided_by: n | plus: deg | round: 2 -%}
-      {%- assign tier = k | modulo: 3 -%}{%- assign tier = 2 | minus: tier -%}
-      {%- assign r = tiers[tier] | plus: 0 -%}
+      {%- assign pass = k | modulo: 3 -%}
+      {%- assign j = k | divided_by: 3 -%}
+      {%- if pass >= 1 -%}{%- assign j = j | plus: third0 -%}{%- endif -%}
+      {%- if pass == 2 -%}{%- assign j = j | plus: third1 -%}{%- endif -%}
+      {%- assign angle = j | plus: 0.5 | times: span | divided_by: n | plus: deg | round: 2 -%}
+      {%- assign nudge = ties | divided_by: 3 | times: 12 -%}
+      {%- assign r = length | times: PER_WEEK | plus: R0 | plus: nudge -%}
       <a class="label" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ food.colour }}">
       {%- if angle < 180 -%}
         <g transform="rotate({{ angle | minus: 90 | round: 2 }} {{ C }} {{ C }})">

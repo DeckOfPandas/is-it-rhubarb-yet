@@ -145,9 +145,13 @@ article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
   font-size: clamp(6rem, 24vw, 18rem); font-weight: 900; line-height: 0.9;
   letter-spacing: -0.04em; margin: 0.5rem 0 1rem -0.06em;
 }
-.verdict.yes { color: var(--yes); }
-.verdict.nearly { color: var(--nearly); }
-.verdict.no { color: var(--accent); }
+/* The verdict takes the food's colour, with its lightness clamped so a
+   parsnip or a cod still shows on cream and a damson on dark. */
+.verdict { color: var(--c); color: oklch(from var(--c) clamp(0.3, l, 0.72) c h); }
+:root[data-theme="dark"] .verdict { color: oklch(from var(--c) clamp(0.62, l, 0.92) c h); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .verdict { color: oklch(from var(--c) clamp(0.62, l, 0.92) c h); }
+}
 .answer { font-size: 1.4rem; font-weight: 500; margin: 0 0 2rem; max-width: 36rem; }
 .answer.quote { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; line-height: 1.35; }
 .answer.quote cite { display: block; font-family: system-ui, sans-serif; font-style: normal; font-size: 0.95rem; color: var(--muted); margin-top: 0.4rem; }
@@ -185,6 +189,8 @@ article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
 .dial .label text { font-size: 10px; fill: var(--fg); }
 .dial .label .dot { fill: var(--c); }
 .dial .label:hover text { fill: var(--accent); font-weight: 600; }
+.dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
+.dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
 .dial .allyear { font-size: 9px; fill: var(--muted); }
 .dial .allyear .head { font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; fill: var(--muted); }
 

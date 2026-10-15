@@ -1268,6 +1268,7 @@
   group: fish
   colour: "#4a7a9a"
   source: general
+  note: "The summer mackerel of common knowledge. Flying Fish Seafoods have Cornish handline mackerel poor in June and July and better in winter, so this row may be wrong."
   buy: "Handline-caught from the South West is the good choice, and most UK mackerel is."
   varieties:
     - name: ""
@@ -1280,26 +1281,29 @@
   group: fish
   colour: "#8a9aaa"
   source: general
-  note: "Wild; closed to fishing in spring while it spawns."
+  note: "Wild, line-caught. Flying Fish Seafoods have Cornish bass good from January to March and poor in early summer."
   buy: "Wild bass is line-caught in small numbers; farmed is the everyday fish. Ask which you are getting."
   varieties:
     - name: ""
       weeks:
-        - [23, 26, avail]
-        - [27, 48, in]
-        - [49, 52, avail]
+        - [1, 13, in]
+        - [14, 17, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
 
 - name: "Sardines"
   slug: sardines
   group: fish
   colour: "#5a8aa8"
   source: general
-  note: "Cornish sardines."
+  note: "Cornish sardines; Flying Fish Seafoods mark January to April as the best quality."
   buy: "Cornish sardines are ring-netted from a well-managed stock."
   varieties:
     - name: ""
       weeks:
-        - [27, 43, in]
+        - [1, 17, in]
+        - [31, 35, avail]
+        - [36, 52, in]
 
 - name: "Herring"
   slug: herring
@@ -1333,12 +1337,13 @@
   group: fish
   colour: "#b8c0c8"
   source: general
+  note: "Flying Fish Seafoods mark February to April as the best quality."
   buy: "North Sea and Icelandic haddock are in good shape; look for the MSC label."
   varieties:
     - name: ""
       weeks:
-        - [1, 8, in]
-        - [9, 13, avail]
+        - [1, 17, in]
+        - [18, 22, avail]
         - [36, 39, avail]
         - [40, 52, in]
 
@@ -1373,26 +1378,27 @@
   group: fish
   colour: "#c0b090"
   source: general
+  note: "Poor in January and February after spawning; Flying Fish Seafoods mark March, April and July as the best quality."
   buy: "Ask where it was landed; the Channel and North Sea stocks are the better-managed ones."
   varieties:
     - name: ""
       weeks:
-        - [18, 22, avail]
-        - [23, 43, in]
-        - [44, 48, avail]
+        - [9, 39, in]
+        - [40, 43, avail]
 
 - name: "Pollock"
   slug: pollock
   group: fish
   colour: "#6a7a8a"
   source: general
+  note: "Flying Fish Seafoods have Cornish pollack poor in January and February and good from March."
   buy: "A good swap for cod. Line-caught Cornish pollack is the best choice."
   varieties:
     - name: ""
       weeks:
-        - [1, 4, in]
-        - [5, 8, avail]
-        - [36, 52, in]
+        - [9, 22, in]
+        - [23, 26, avail]
+        - [40, 52, in]
 
 - name: "Whiting"
   slug: whiting
@@ -1440,24 +1446,28 @@
   group: fish
   colour: "#e8e0e8"
   source: general
+  note: "Flying Fish Seafoods mark January to March as the best quality for Cornish squid."
   buy: "Jig-caught squid from the South West is the choice."
   varieties:
     - name: ""
       weeks:
-        - [27, 43, in]
-        - [44, 48, avail]
+        - [1, 13, in]
+        - [14, 17, avail]
+        - [31, 35, avail]
+        - [36, 52, in]
 
 - name: "Brown crab"
   slug: brown-crab
   group: fish
   colour: "#c05a2a"
   source: general
+  note: "Poor in January; Flying Fish Seafoods mark March to June as the best quality."
   buy: "Pot-caught is the usual method and the good one."
   varieties:
     - name: ""
       weeks:
-        - [14, 17, avail]
-        - [18, 48, in]
+        - [9, 13, avail]
+        - [14, 48, in]
 
 - name: "Lobster"
   slug: lobster
