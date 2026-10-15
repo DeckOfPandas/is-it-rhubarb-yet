@@ -28,7 +28,19 @@ for arcs that can be told apart. Entries are "m<month index + 10>
 <length + 100> <name>|slug|length" strings, so sorting as text orders by
 month, then length, then name.
 {% endcomment %}
-{%- assign C = 440 -%}{%- assign RING = 100 -%}{%- assign THICK = 16 -%}{%- assign R0 = 118 -%}{%- assign PER_WEEK = 5 -%}
+{%- comment -%}
+Optional tuning, used by the candidates page: ring (month ring radius,
+100), scale ("linear": 5 units a week, or "log": 46 units per doubling,
+from a table so Liquid needs no logarithm), arc_w and arc_o (arc stroke
+width and opacity), dot (dot radius), arcs (false draws dots only).
+{%- endcomment -%}
+{%- assign C = 440 -%}{%- assign THICK = 16 -%}{%- assign PER_WEEK = 5 -%}
+{%- assign RING = include.ring | default: 100 -%}
+{%- assign R0 = RING | plus: 18 -%}
+{%- assign scale = include.scale | default: "linear" -%}
+{%- assign dot = include.dot | default: 3.5 -%}
+{%- assign arcs = true -%}{%- if include.arcs == false -%}{%- assign arcs = false -%}{%- endif -%}
+{%- assign logtable = "46,73,92,107,119,129,138,146,153,159,165,170,175,180,184,188,192,195,199,202,205,208,211,214,216,219,221,223,226,228,230,232,234,236,238,240,241,243,245,246,248,250,251,253,254,256,257,258,260,261,262,263" | split: "," -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
 {%- assign guides = "4,13,26,39" | split: "," -%}
@@ -90,10 +102,11 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
   {%- assign jitter = jitter | push: j -%}
 {%- endfor -%}
 {%- assign labels = "" | split: "" -%}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" role="img" aria-label="When each {{ include.kind }} season begins, and how long it lasts">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" role="img" aria-label="When each {{ include.kind }} season begins, and how long it lasts" style="--arc-w: {{ include.arc_w | default: 2.5 }}; --arc-o: {{ include.arc_o | default: 0.75 }}">
   {%- for g in guides -%}
     {%- assign gw = g | plus: 0 -%}
-    {%- assign gr = gw | times: PER_WEEK | plus: R0 -%}
+    {%- if scale == "log" -%}{%- assign gi = gw | minus: 1 -%}{%- assign gr = logtable[gi] | plus: R0 -%}
+    {%- else -%}{%- assign gr = gw | times: PER_WEEK | plus: R0 -%}{%- endif -%}
     <circle class="guide" fill="none" cx="{{ C }}" cy="{{ C }}" r="{{ gr }}" />
     <text class="guide-label" x="{{ C }}" y="{{ C | minus: gr | plus: 10 }}" text-anchor="middle" transform="rotate(351 {{ C }} {{ C }})">{{ guide_names[forloop.index0] }}</text>
   {%- endfor -%}
@@ -133,21 +146,24 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
       {%- assign needle = food.slug | append: "=" -%}
       {%- assign off = 0 -%}
       {%- for jj in jitter -%}{%- if jj contains needle -%}{%- assign off = jj | split: "=" | last | plus: 0 -%}{%- endif -%}{%- endfor -%}
-      {%- assign r = length | times: PER_WEEK | plus: R0 | plus: off -%}
+      {%- if scale == "log" -%}{%- assign li = length | minus: 1 -%}{%- assign r = logtable[li] | plus: R0 | plus: off -%}
+      {%- else -%}{%- assign r = length | times: PER_WEEK | plus: R0 | plus: off -%}{%- endif -%}
       {%- assign wk = angle | times: 52 | divided_by: 360.0 | round: 2 -%}
       {%- comment -%} The gap makes the dash pattern exactly one lap, so an arc that passes December carries on into January. {%- endcomment -%}
+      {%- if arcs -%}
       <circle class="season" fill="none" cx="{{ C }}" cy="{{ C }}" r="{{ r }}" pathLength="52" stroke-dasharray="{{ length }} {{ 52 | minus: length }}" stroke-dashoffset="{{ 0 | minus: wk }}" transform="rotate(-90 {{ C }} {{ C }})" style="--c: {{ food.colour }}" />
+      {%- endif -%}
       {%- capture label -%}
       <a class="label" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ food.colour }}">
       {%- if angle < 180 -%}
         <g transform="rotate({{ angle | minus: 90 | round: 2 }} {{ C }} {{ C }})">
-          <circle class="dot" cx="{{ C | plus: r }}" cy="{{ C }}" r="3.5" />
-          <text x="{{ C | plus: r | plus: 7 }}" y="{{ C }}" dominant-baseline="middle">{{ food.name }}</text>
+          <circle class="dot" cx="{{ C | plus: r }}" cy="{{ C }}" r="{{ dot }}" />
+          <text x="{{ C | plus: r | plus: dot | plus: 4 }}" y="{{ C }}" dominant-baseline="middle">{{ food.name }}</text>
         </g>
       {%- else -%}
         <g transform="rotate({{ angle | plus: 90 | round: 2 }} {{ C }} {{ C }})">
-          <circle class="dot" cx="{{ C | minus: r }}" cy="{{ C }}" r="3.5" />
-          <text x="{{ C | minus: r | minus: 7 }}" y="{{ C }}" text-anchor="end" dominant-baseline="middle">{{ food.name }}</text>
+          <circle class="dot" cx="{{ C | minus: r }}" cy="{{ C }}" r="{{ dot }}" />
+          <text x="{{ C | minus: r | minus: dot | minus: 4 }}" y="{{ C }}" text-anchor="end" dominant-baseline="middle">{{ food.name }}</text>
         </g>
       {%- endif -%}
       </a>
