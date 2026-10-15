@@ -4,6 +4,7 @@ tmp/
 .env.*
 __pycache__/
 .pytest_cache/
-_site/
+_site
+.claude/worktrees
 .jekyll-cache/
 vendor/
