@@ -6,33 +6,37 @@ permalink: /candidates/
 {%- comment -%}
 A working page, not linked from the navigation: the veg dial drawn
 several ways so the variations can be compared on one scroll. Delete
-the page when a winner is chosen.
+the page when the choosing is done.
 {%- endcomment -%}
 <article class="candidates">
 <h1>Dial candidates</h1>
-<p class="lede">The veg dial, which is the busiest, drawn six ways. Same data every time.</p>
+<p class="lede">The veg dial, which is the busiest, drawn seven ways. Same data every time.</p>
 
-<h2>A. As it stands</h2>
-<p class="lede">Linear: five units a week. Arcs 2.5 wide at three-quarter strength. Dots 3.5.</p>
-<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-a" %}</figure>
+<h2>A. The first version</h2>
+<p class="lede">Linear: five units a week. Month ring at 100. Arcs 2.5 wide at three-quarter strength. Dots 3.5.</p>
+<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-a" ring=100 arc_w=2.5 arc_o=0.75 dot=3.5 %}</figure>
 
 <h2>B. Lighter touch</h2>
 <p class="lede">Thinner, paler arcs and bigger dots, so the dots lead and the arcs follow.</p>
-<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-b" arc_w=1.2 arc_o=0.4 dot=5 %}</figure>
+<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-b" ring=100 %}</figure>
 
 <h2>C. Log time</h2>
 <p class="lede">Radius grows with the logarithm of the season: a month, three months and a year are evenly spaced, so the crowd of short seasons gets the room and the year-long ones give some up. Lighter arcs as in B.</p>
-<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-c" scale="log" arc_w=1.2 arc_o=0.4 dot=5 %}</figure>
+<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-c" ring=100 scale="log" %}</figure>
 
-<h2>D. Roomier</h2>
+<h2>D. Roomier (now the default on The year)</h2>
 <p class="lede">The month ring shrinks to 70 so the one-month line sits closer to the centre and everything outside it gets more space. Lighter arcs as in B.</p>
-<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-d" ring=70 arc_w=1.2 arc_o=0.4 dot=5 %}</figure>
+<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-d" %}</figure>
 
 <h2>E. Log time, roomier</h2>
 <p class="lede">C and D together.</p>
-<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-e" ring=70 scale="log" arc_w=1.2 arc_o=0.4 dot=5 %}</figure>
+<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-e" scale="log" %}</figure>
 
 <h2>F. Dots only</h2>
 <p class="lede">No arcs: distance from the centre is the only measure of length. What the Dots setting on The year shows.</p>
-<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-f" arcs=false dot=5 %}</figure>
+<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-f" arcs=false %}</figure>
+
+<h2>G. Exponential time</h2>
+<p class="lede">The reverse of C: radius grows exponentially with the season, two e-foldings across the year, so the long seasons fan out at the rim and the short ones gather near the ring. Roomier as in D.</p>
+<figure class="wheel dial">{% include arrivals-dial.html kind="veg" id="cand-g" scale="exp" %}</figure>
 </article>

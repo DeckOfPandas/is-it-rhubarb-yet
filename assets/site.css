@@ -197,8 +197,8 @@ main:has(#arcs-off:checked) .dial .season { display: none; }
 .dial .label:hover text { fill: var(--accent); font-weight: 600; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
-.dial .allyear { font-size: 9px; fill: var(--muted); }
-.dial .allyear .head { font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; fill: var(--muted); }
+.dial .allyear { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: -0.5rem; }
+.dial .allyear .head { font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
 
 .fine { margin: 2rem 0; color: var(--muted); }
 .fine summary { cursor: pointer; }
