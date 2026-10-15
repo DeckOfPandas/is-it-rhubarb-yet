@@ -123,8 +123,6 @@ FOODS = [
      [v("", ncgm("Shallot"))]),
     ("Spring onions", "alliums", "#7fc04a", "ncgm", "",
      [v("", ncgm("Spring onions"))]),
-    ("Wild garlic", "alliums", "#5fa83a", "general", "",
-     [v("", months("..+##......."))]),
 
     # ---- Leaves & salad ---------------------------------------------------
     ("Chard", "leaves", "#2f8f4a", "ncgm", "",
@@ -162,8 +160,6 @@ FOODS = [
      [v("", months(".....###...."))]),
     ("Peas", "shoots", "#6fbf3a", "ncgm", "",
      [v("", ncgm("Peas"))]),
-    ("Samphire", "shoots", "#3fa07a", "ncgm", "",
-     [v("", ncgm("Samphire"))]),
     ("Sweetcorn", "shoots", "#f2c31a", "ncgm", "",
      [v("", ncgm("Sweetcorn"))]),
 
@@ -220,10 +216,6 @@ FOODS = [
      [v("", ncgm("Black/White/Redcurrants", "Maincrop"))]),
     ("Blueberries", "soft", "#3a4a8a", "ncgm", "",
      [v("", ncgm("Blueberries"))]),
-    ("Elderflower", "soft", "#f3e9b5", "general", "",
-     [v("", months("....+#......"))]),
-    ("Elderberries", "soft", "#2a1a3a", "general", "",
-     [v("", months(".......+#..."))]),
     ("Gooseberries", "soft", "#a8c84a", "ncgm", "",
      [v("", ncgm("Gooseberries"))]),
     ("Loganberries & tayberries", "soft", "#9a2a4a", "bbc", "",
@@ -234,24 +226,59 @@ FOODS = [
      "BBC Good Food has rhubarb January to June with no forced/outdoor split.",
      [v("Forced", ncgm("Rhubarb", "Forced"), "#ff5c9a"),
       v("Outdoor", ncgm("Rhubarb", "Outdoor"), "#c8285f")]),
-    ("Sloes", "soft", "#2a2a5a", "general", "",
-     [v("", months(".........##."))]),
     ("Strawberries", "soft", "#e8203a", "ncgm", "",
      [v("", ncgm("Strawberries"))]),
 
     # ---- Nuts -------------------------------------------------------------
     ("Cobnuts", "nuts", "#a67c52", "ncgm", "",
      [v("", ncgm("Cobnuts"))]),
-    ("Sweet chestnuts", "nuts", "#6a3a1a", "general", "",
-     [v("", months(".........##+"))]),
     ("Walnuts", "nuts", "#7a5a3a", "ncgm", "Fresh (wet) walnuts.",
      [v("", ncgm("Walnuts", "Fresh"))]),
 
-    # ---- Mushrooms --------------------------------------------------------
-    ("Girolles", "mushrooms", "#e8a21a", "ncgm", "",
+    # ---- Foraged & wild (hedgerow, shore and woodland; months are when
+    # they are found, not when a shop has them) ------------------------------
+    ("Wild garlic", "foraged", "#5fa83a", "general", "",
+     [v("", months("..+##......."))]),
+    ("Nettles", "foraged", "#4a7a2a", "general", "Young tops only; tough and gritty once they flower.",
+     [v("", months("..##+......."))]),
+    ("Dandelion", "foraged", "#f0d020", "general", "Leaves before the flowers open.",
+     [v("", months("..##+......."))]),
+    ("Sea beet", "foraged", "#2a6a3a", "general", "",
+     [v("", months("..+#####+..."))]),
+    ("Samphire", "foraged", "#3fa07a", "ncgm", "Marsh samphire.",
+     [v("", ncgm("Samphire"))]),
+    ("Elderflower", "foraged", "#f3e9b5", "general", "",
+     [v("", months("....+#......"))]),
+    ("Meadowsweet", "foraged", "#f0e8c0", "general", "",
+     [v("", months(".....###...."))]),
+    ("Wild strawberries", "foraged", "#e04a60", "general", "",
+     [v("", months(".....##....."))]),
+    ("Bilberries", "foraged", "#3a2a6a", "general", "",
+     [v("", months("......##...."))]),
+    ("Elderberries", "foraged", "#2a1a3a", "general", "",
+     [v("", months(".......+#..."))]),
+    ("Ceps", "foraged", "#a07040", "general", "Penny buns.",
+     [v("", months(".......###.."))]),
+    ("Field mushrooms", "foraged", "#c8b8a8", "general", "",
+     [v("", months(".......###.."))]),
+    ("Giant puffball", "foraged", "#e8e0c8", "general", "",
+     [v("", months(".......###.."))]),
+    ("Girolles", "foraged", "#e8a21a", "ncgm", "Chanterelles.",
      [v("", ncgm("Girolle", "Scottish, wild"))]),
-    ("Morels", "mushrooms", "#8a6a4a", "ncgm", "",
+    ("Hedgehog fungus", "foraged", "#d8b878", "general", "",
+     [v("", months("........###."))]),
+    ("Morels", "foraged", "#8a6a4a", "ncgm", "",
      [v("", ncgm("Morel", "Wild"))]),
+    ("Rosehips", "foraged", "#d0402a", "general", "Best after the first frost.",
+     [v("", months("........##+."))]),
+    ("Crab apples", "foraged", "#c8a030", "general", "",
+     [v("", months("........##.."))]),
+    ("Sea buckthorn", "foraged", "#f0a020", "general", "",
+     [v("", months("........##.."))]),
+    ("Sloes", "foraged", "#2a2a5a", "general", "",
+     [v("", months(".........##."))]),
+    ("Sweet chestnuts", "foraged", "#6a3a1a", "general", "",
+     [v("", months(".........##+"))]),
 
     # ---- Herbs (outdoor-grown; most are sold all year from glass) -----------
     ("Basil", "herbs", "#3f9a3f", "general", "",
@@ -333,38 +360,73 @@ FOODS = [
     ("Brown shrimp", "fish", "#d8a878", "general", "",
      [v("", months("....+#####+."))]),
 
-    # ---- Meat & game (game months follow the English shooting seasons;
-    # Scotland and Northern Ireland differ, check gov.uk) --------------------
+    # ---- Meat & game (game months are the English and Welsh shooting
+    # seasons from BASC; Scotland and Northern Ireland differ. "Best" months
+    # for the rest follow the Thyme & Envy meat and game chart) --------------
     ("Lamb", "meat", "#b05050", "general", "",
-     [v("Spring lamb", months("...+#####+.."), "#d06868"),
+     [v("New season", months("....+######+"), "#d06868"),
       v("Mutton", months("##+.....+###"), "#7a3030")]),
     ("Beef", "meat", "#6a2a2a", "general", "All year.",
      [v("", months("############"))]),
     ("Pork", "meat", "#e8a8a0", "general", "All year.",
      [v("", months("############"))]),
     ("Goose", "meat", "#8a8070", "general", "Michaelmas to Christmas.",
-     [v("", months("........+###"))]),
+     [v("", months(".........+##"))]),
     ("Turkey", "meat", "#a08060", "general", "",
      [v("", months("..........+#"))]),
-    ("Grouse", "meat", "#6a4a2a", "general", "12 August to 10 December.",
+    ("Grouse", "meat", "#6a4a2a", "basc", "12 August to 10 December.",
      [v("", months(".......+###+"))]),
-    ("Pheasant", "meat", "#b06a2a", "general", "1 October to 1 February.",
+    ("Pheasant", "meat", "#b06a2a", "basc", "1 October to 1 February.",
      [v("", months("#........###"))]),
-    ("Partridge", "meat", "#9a7a4a", "general", "1 September to 1 February.",
+    ("Partridge", "meat", "#9a7a4a", "basc", "1 September to 1 February.",
      [v("", months("#.......####"))]),
-    ("Wild duck", "meat", "#4a6a4a", "general", "1 September to 31 January inland.",
+    ("Wild duck", "meat", "#4a6a4a", "basc", "Mallard, teal and wigeon: 1 September to 31 January inland, to 20 February on the foreshore.",
      [v("", months("#.......####"))]),
-    ("Woodcock", "meat", "#7a6a5a", "general", "1 October to 31 January.",
+    ("Snipe", "meat", "#6a5a3a", "basc", "12 August to 31 January.",
+     [v("", months("#......+####"))]),
+    ("Woodcock", "meat", "#7a6a5a", "basc", "1 October to 31 January.",
      [v("", months("#........###"))]),
-    ("Venison", "meat", "#5a2a1a", "general", "Seasons differ by species and sex; wild venison is at its best in autumn and winter.",
-     [v("", months("###+....+###"))]),
-    ("Wood pigeon", "meat", "#7a7a8a", "general", "All year.",
+    ("Venison", "meat", "#5a2a1a", "basc",
+     "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season.",
+     [v("Red & fallow", months("####...#####"), "#5a2a1a"),
+      v("Roe & muntjac", months("############"), "#8a4a3a")]),
+    ("Wood pigeon", "meat", "#7a7a8a", "general", "No closed season; at its best from spring to autumn.",
+     [v("", months("...+#######+"))]),
+    ("Rabbit", "meat", "#a89a8a", "general", "No closed season; young rabbits from late summer are the ones to buy.",
+     [v("", months("......+####+"))]),
+    ("Hare", "meat", "#9a7050", "basc", "No closed season in England and Wales, but hare may only be sold from 1 August to 28 February.",
+     [v("", months("##.....+####"))]),
+    ("Grey squirrel", "meat", "#9a9a9a", "basc", "No closed season; sold by a few game dealers.",
      [v("", months("############"))]),
-    ("Rabbit", "meat", "#a89a8a", "general", "All year.",
-     [v("", months("############"))]),
-    ("Hare", "meat", "#9a7050", "general", "No close season in England, but not sold in spring and summer.",
-     [v("", months("##......+###"))]),
 ]
+
+# What to ask for at the counter, by slug: the better-managed stock or
+# gentler catch method in a sentence, for fish and shellfish. Shown on
+# the food's page. Helen's steer: useful, not preachy.
+BUY = {
+    "mackerel": "Handline-caught from the South West is the good choice, and most UK mackerel is.",
+    "sea-bass": "Wild bass is line-caught in small numbers; farmed is the everyday fish. Ask which you are getting.",
+    "sardines": "Cornish sardines are ring-netted from a well-managed stock.",
+    "herring": "North Sea and Norwegian herring are in good shape; the MSC label is easy to find.",
+    "cod": "Icelandic, Norwegian and Barents Sea cod are the well-managed stocks; the North Sea stock is still rebuilding. Look for the MSC label.",
+    "haddock": "North Sea and Icelandic haddock are in good shape; look for the MSC label.",
+    "hake": "Cornish hake is MSC-certified and plentiful.",
+    "plaice": "North Sea plaice is well managed; otter-trawled or line-caught over beam-trawled if you can choose.",
+    "dover-sole": "Ask where it was landed; the Channel and North Sea stocks are the better-managed ones.",
+    "pollock": "A good swap for cod. Line-caught Cornish pollack is the best choice.",
+    "whiting": "Line-caught is the choice; whiting is cheap and underused.",
+    "wild-salmon": "Wild Atlantic salmon is endangered, so rod-caught is a rare treat. Organic farmed salmon or sea trout are the everyday choices.",
+    "sea-trout": "Wild sea trout is scarce; farmed sea trout is widely sold.",
+    "squid": "Jig-caught squid from the South West is the choice.",
+    "brown-crab": "Pot-caught is the usual method and the good one.",
+    "lobster": "Pot-caught native lobster is the choice; Canadian lobster is the cheaper import.",
+    "langoustines": "Creel-caught is the best choice; trawled is what most scampi is.",
+    "mussels": "Rope-grown mussels are about as sustainable as seafood gets.",
+    "oysters": "Farmed rock oysters are a best choice; wild natives are the rarer treat.",
+    "scallops": "Hand-dived scallops; dredging damages the seabed.",
+    "cockles": "Hand-raked from a managed bed is the good choice.",
+    "brown-shrimp": "Ask for shrimp from a certified fishery; Morecambe Bay and the Wash are the UK ones.",
+}
 
 
 def slugify(name: str) -> str:
@@ -415,7 +477,9 @@ def main() -> None:
            "#         across the in-season run (unripe, ripe, over), on a food or a",
            "#         variety. The calendar keeps using colour.",
            "# source: ncgm = New Covent Garden Market calendar, bbc = BBC Good Food,",
-           "#         general = common knowledge, please check.",
+           "#         basc = BASC shooting seasons, general = common knowledge,",
+           "#         please check.",
+           "# buy: optional, what to ask for at the counter (fish and shellfish).",
            ""]
     slugs = set()
     OUT_PAGES.mkdir(exist_ok=True)
@@ -438,6 +502,8 @@ def main() -> None:
         out.append(f"  source: {source}")
         if note:
             out.append(f"  note: {yaml_str(note)}")
+        if slug in BUY:
+            out.append(f"  buy: {yaml_str(BUY[slug])}")
         out.append("  varieties:")
         for label, lookup, vcolour, shades in varieties:
             ranges = week_ranges(month_states(lookup, rows))

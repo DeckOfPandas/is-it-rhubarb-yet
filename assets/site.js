@@ -176,15 +176,45 @@
   }
 
   // --- Is it X yet? ---------------------------------------------------------
-  // One giant word, then one flat sentence. Nothing else.
+  // One giant word, then a quotation to match it. The practical line
+  // (dates, variety) goes under "Fine, show me the data".
+  //
+  // The quotation is stable for a food for a week and differs between
+  // foods: a small hash of slug and week picks from the verdict's pool,
+  // preferring quotations pinned to the food.
+  function pickQuote(quotes, verdict, slug, week) {
+    var pool = (quotes && quotes[verdict]) || [];
+    var pinned = pool.filter(function (q) { return q.foods && q.foods.indexOf(slug) >= 0; });
+    var general = pool.filter(function (q) { return !q.foods; });
+    var from = pinned.length ? pinned : general;
+    if (!from.length) return null;
+    var h = week * 7919;
+    for (var i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) % 1000003;
+    return from[h % from.length];
+  }
+
+  function showQuote(el, q) {
+    el.textContent = "";
+    var lines = q.text.split(" / ");
+    lines.forEach(function (line, i) {
+      if (i) el.appendChild(document.createElement("br"));
+      el.appendChild(document.createTextNode(line));
+    });
+    var cite = document.createElement("cite");
+    cite.textContent = q.by;
+    el.appendChild(cite);
+  }
+
   function initFood() {
     var article = document.querySelector("article.food");
     if (!article) return;
     var food = JSON.parse(article.dataset.food);
+    var quotes = JSON.parse(article.dataset.quotes || "null");
     var today = new Date();
     var week = weekOf(today), year = today.getFullYear();
     var verdict = document.getElementById("verdict");
     var answer = document.getElementById("answer");
+    var when = document.getElementById("when");
 
     var inNow = null, nearly = null;
     food.varieties.forEach(function (v) {
@@ -193,36 +223,39 @@
       if (s === "avail" && !nearly) nearly = v;
     });
 
-    var word, line, cls;
+    var word, key, line, cls;
     if (inNow) {
       var until = lastWeekOfRun(inNow, week);
-      word = "YES."; cls = "yes";
+      word = "YES."; key = "yes"; cls = "yes";
       line = (inNow.name ? inNow.name + ". " : "") +
-        (until.allYear ? "All year round. Relax." :
-          "Until " + fmt(dateOfWeek(until.week + 1, year + until.yearsAhead)) + ". Go.");
+        (until.allYear ? "All year round." :
+          "Until " + fmt(dateOfWeek(until.week + 1, year + until.yearsAhead)) + ".");
     } else {
       var next = nextIn(food, week);
       if (nearly && goingOut(nearly, week)) {
-        word = "JUST."; cls = "nearly";
-        line = "It's on its way out. Be quick.";
+        word = "JUST."; key = "just"; cls = "nearly";
+        line = "On its way out.";
       } else if (nearly) {
-        word = "NEARLY."; cls = "nearly";
-        line = next ? "Properly in from " + fmt(dateOfWeek(next.week, year + next.yearsAhead)) + ". Patience." : "Patience.";
+        word = "NEARLY."; key = "nearly"; cls = "nearly";
+        line = next ? "Properly in from " + fmt(dateOfWeek(next.week, year + next.yearsAhead)) + "." : "";
       } else if (next) {
-        word = "NO."; cls = "no";
-        line = "Come back in week " + next.week + ". That's " +
+        word = "NO."; key = "no"; cls = "no";
+        line = "Back in week " + next.week + ", from " +
           fmt(dateOfWeek(next.week, year + next.yearsAhead)) +
           (next.variety.name ? ", for " + next.variety.name.toLowerCase() : "") + ".";
       } else {
-        word = "NO."; cls = "no";
+        word = "NO."; key = "no"; cls = "no";
         line = "Never, apparently. Check the data.";
       }
     }
     verdict.textContent = word;
     verdict.classList.add(cls);
     verdict.hidden = false;
-    answer.textContent = line;
     answer.classList.add(cls);
+    var q = pickQuote(quotes, key, food.slug, week);
+    if (q) { showQuote(answer, q); answer.classList.add("quote"); }
+    else answer.textContent = line;
+    if (when) { when.textContent = line; when.hidden = false; }
   }
 
   document.addEventListener("DOMContentLoaded", function () {

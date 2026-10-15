@@ -79,6 +79,7 @@ main:has(#order-group:checked) .ordered > .by-group,
 main:has(#order-alpha:checked) .ordered > .by-alpha,
 main:has(#kind-veg:checked) .ordered > .by-veg,
 main:has(#kind-fruit:checked) .ordered > .by-fruit,
+main:has(#kind-wild:checked) .ordered > .by-wild,
 main:has(#kind-herbs:checked) .ordered > .by-herbs,
 main:has(#kind-fish:checked) .ordered > .by-fish,
 main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
@@ -98,8 +99,6 @@ main:has(#order-group:checked) .in-season .heading { display: block; }
    whose stops read the row's --c. */
 .chart { margin: 0 0 1.5rem; overflow-x: auto; }
 .chart svg { display: block; max-width: 100%; height: auto; }
-.chart .month { fill: transparent; }
-.chart .month.odd { fill: var(--band); }
 .chart text { fill: var(--fg); font-size: 12px; }
 .chart .month-label { font-weight: 600; }
 .chart .week-label { fill: var(--muted); font-size: 8px; }
@@ -114,7 +113,8 @@ main:has(#order-group:checked) .in-season .heading { display: block; }
 .chart a.row { cursor: pointer; }
 .chart a.row:hover .row-label { fill: var(--accent); font-weight: 600; }
 .chart a.row:hover .cell.in { fill: color-mix(in oklab, var(--c) 78%, white); }
-.chart a.row:hover .cell.ramp, .chart a.row:hover .cell.avail { opacity: 0.75; }
+.chart a.row:hover .stop-c { stop-color: color-mix(in oklab, var(--c) 78%, white); }
+.chart a.row:hover .cell.avail { fill: color-mix(in oklab, var(--c) 45%, white); }
 .chart a.row:hover .row-hit { fill: var(--band); }
 .chart .month-line { stroke: var(--rule); }
 .chart .today { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 3 3; }
@@ -149,6 +149,11 @@ article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
 .verdict.nearly { color: var(--nearly); }
 .verdict.no { color: var(--accent); }
 .answer { font-size: 1.4rem; font-weight: 500; margin: 0 0 2rem; max-width: 36rem; }
+.answer.quote { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; line-height: 1.35; }
+.answer.quote cite { display: block; font-family: system-ui, sans-serif; font-style: normal; font-size: 0.95rem; color: var(--muted); margin-top: 0.4rem; }
+.answer.quote cite::before { content: "— "; }
+.buy { max-width: 36rem; margin: 0 0 1.5rem; padding: 0.6rem 0.9rem; border-left: 3px solid var(--rule); color: var(--fg); }
+.when { color: var(--fg); margin: 0.5rem 0 0; }
 /* The season wheel. Arcs are dashed circles whose stroke is the ring's
    --c; a fading day mixes --c into the off-season grey by --t (0 to 1),
    and a shaded week mixes --a into --b. The mix runs in oklab so the

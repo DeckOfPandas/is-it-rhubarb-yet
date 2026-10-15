@@ -65,8 +65,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- assign start = month_starts[m] | plus: 0 -%}
     {%- if m == 11 -%}{%- assign next = 53 -%}{%- else -%}{%- assign n1 = m | plus: 1 -%}{%- assign next = month_starts[n1] | plus: 0 -%}{%- endif -%}
     {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
-    {%- assign mw = next | minus: start | times: cw -%}
-    <rect class="month{% cycle ' odd', '' %}" x="{{ mx }}" y="0" width="{{ mw }}" height="{{ height }}" />
+    <line class="month-line" x1="{{ mx }}" y1="4" x2="{{ mx }}" y2="{{ height }}" />
     <text class="month-label" x="{{ mx | plus: 4 }}" y="16">{{ month_names[m] }}</text>
   {%- endfor -%}
   {%- for w in (1..52) -%}
@@ -97,5 +96,6 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- assign y = y | plus: rh -%}
   {%- endfor -%}
 
+  <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="4" x2="{{ x0 | plus: 728 }}" y2="{{ height }}" />
   <line class="today" x1="0" y1="{{ header }}" x2="0" y2="{{ height }}" hidden />
 </svg>

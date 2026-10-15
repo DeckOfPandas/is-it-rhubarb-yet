@@ -1,6 +1,6 @@
 # Culinary families, in display order. Every food's `group` must be a key
-# here; tools/check-foods.py enforces it. `kind` is the broad class a
-# whole-table wheel would be drawn for: veg, fruit, meat, fish or herbs.
+# here; tools/check-foods.py enforces it. `kind` is the broad class the
+# arrivals dial is drawn for: veg, fruit, wild, herbs, fish or meat.
 - key: roots
   name: Roots & tubers
   kind: veg
@@ -19,9 +19,6 @@
 - key: fruiting
   name: Squash & fruiting veg
   kind: veg
-- key: mushrooms
-  name: Mushrooms
-  kind: veg
 - key: orchard
   name: Orchard fruit
   kind: fruit
@@ -31,6 +28,9 @@
 - key: nuts
   name: Nuts
   kind: fruit
+- key: foraged
+  name: Foraged & wild
+  kind: wild
 - key: herbs
   name: Herbs
   kind: herbs

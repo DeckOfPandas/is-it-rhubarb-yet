@@ -17,7 +17,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "_data" / "foods.yml"
 GROUPS_FILE = ROOT / "_data" / "groups.yml"
 STUBS = ROOT / "_foods"
-SOURCES = {"ncgm", "bbc", "general"}
+SOURCES = {"ncgm", "bbc", "basc", "general"}
+QUOTES_FILE = ROOT / "_data" / "quotes.yml"
+VERDICTS = {"yes", "nearly", "just", "no"}
 STATES = {"in", "avail"}
 COLOUR = re.compile(r"^#[0-9a-f]{6}$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
@@ -98,6 +100,22 @@ def main() -> int:
 
     for extra in sorted(stubs - slugs):
         problems.append(f"_foods/{extra}.md: no such food in the data file")
+
+    # Quotations: every verdict has a general pool, and a quote pinned to
+    # foods names real slugs.
+    quotes = load(QUOTES_FILE)
+    for verdict in VERDICTS:
+        pool = quotes.get(verdict) or []
+        if not any(not q.get("foods") for q in pool):
+            problems.append(f"quotes: no general quotation for {verdict}")
+        for q in pool:
+            if not q.get("text") or not q.get("by"):
+                problems.append(f"quotes/{verdict}: a quotation needs text and by: {q}")
+            for slug in q.get("foods") or []:
+                if slug not in slugs:
+                    problems.append(f"quotes/{verdict}: unknown food {slug!r} in {q.get('text')!r}")
+    for extra in sorted(set(quotes) - VERDICTS):
+        problems.append(f"quotes: unknown verdict {extra!r}")
 
     for p in problems:
         print(p)

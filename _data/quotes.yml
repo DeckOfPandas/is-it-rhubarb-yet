@@ -1,0 +1,272 @@
+# The line under the giant verdict. One pool per verdict; a quotation
+# with `foods` is kept for those foods and preferred over the general
+# pool when one of them gets that verdict. Everything here is out of
+# copyright (authors dead before 1956, scripture, proverbs, traditional
+# rhymes) or a stock phrase. Verse line breaks are written " / ".
+#
+# yes: seize the day, abundance.  nearly: a bright horizon.
+# just: the nick of time.  no: patience, hard as it is.
+#
+# "yes" and "no" are quoted because YAML would otherwise read them as
+# booleans.
+
+"yes":
+  - text: "Ripeness is all."
+    by: "Shakespeare, King Lear"
+  - text: "Present mirth hath present laughter; / What's to come is still unsure."
+    by: "Shakespeare, Twelfth Night"
+  - text: "'It must come sometimes to jam to-day,' Alice objected."
+    by: "Lewis Carroll, Through the Looking-Glass"
+  - text: "Forever is composed of nows."
+    by: "Emily Dickinson"
+  - text: "Seize the day, and trust tomorrow as little as you can."
+    by: "Horace, Odes I.11"
+  - text: "Let us eat and drink; for to morrow we shall die."
+    by: "Isaiah 22:13"
+  - text: "A man hath no better thing under the sun, than to eat, and to drink, and to be merry."
+    by: "Ecclesiastes 8:15"
+  - text: "I can resist everything except temptation."
+    by: "Oscar Wilde, Lady Windermere's Fan"
+  - text: "The only way to get rid of a temptation is to yield to it."
+    by: "Oscar Wilde, The Picture of Dorian Gray"
+  - text: "He who does not mind his belly will hardly mind anything else."
+    by: "Samuel Johnson"
+  - text: "Make hay while the sun shines."
+    by: "proverb"
+  - text: "Strike while the iron is hot."
+    by: "proverb"
+  - text: "There is a tide in the affairs of men / Which, taken at the flood, leads on to fortune."
+    by: "Shakespeare, Julius Caesar"
+  - text: "If not now, when?"
+    by: "Hillel the Elder"
+  - text: "A little of what you fancy does you good."
+    by: "Marie Lloyd's song, 1915"
+  - text: "Dum vivimus vivamus: while we live, let us live."
+    by: "Latin motto"
+  - text: "You must live in the present, launch yourself on every wave, find your eternity in each moment."
+    by: "Henry David Thoreau"
+  - text: "Now let us sport us while we may."
+    by: "Andrew Marvell, To His Coy Mistress"
+  - text: "Season of mists and mellow fruitfulness."
+    by: "John Keats, To Autumn"
+  - text: "Delay not, Caesar. Read it instantly."
+    by: "Shakespeare, Julius Caesar"
+  - text: "They dined on mince, and slices of quince, / Which they ate with a runcible spoon."
+    by: "Edward Lear, The Owl and the Pussy-Cat"
+    foods: [quince]
+  - text: "Stay me with flagons, comfort me with apples."
+    by: "Song of Solomon 2:5"
+    foods: [apples]
+  - text: "An apple a day keeps the doctor away."
+    by: "proverb"
+    foods: [apples]
+  - text: "Cherry-ripe, ripe, ripe, I cry, / Full and fair ones; come and buy."
+    by: "Robert Herrick"
+    foods: [cherries]
+  - text: "He was a bold man that first ate an oyster."
+    by: "Jonathan Swift"
+    foods: [oysters]
+  - text: "'O Oysters, come and walk with us!' / The Walrus did beseech."
+    by: "Lewis Carroll, The Walrus and the Carpenter"
+    foods: [oysters]
+  - text: "Doubtless God could have made a better berry, but doubtless God never did."
+    by: "William Butler, quoted by Izaak Walton"
+    foods: [strawberries, wild-strawberries]
+  - text: "I eat my peas with honey; / I've done it all my life."
+    by: "anonymous"
+    foods: [peas]
+  - text: "Cauliflower is nothing but cabbage with a college education."
+    by: "Mark Twain"
+    foods: [cauliflower]
+  - text: "If the man who turnips cries, / Cry not when his father dies, / 'Tis a proof that he had rather / Have a turnip than his father."
+    by: "Samuel Johnson"
+    foods: [turnips]
+  - text: "I dropped the berry in a stream / And caught a little silver trout."
+    by: "W. B. Yeats, The Song of Wandering Aengus"
+    foods: [sea-trout]
+  - text: "Half way down / Hangs one that gathers samphire, dreadful trade!"
+    by: "Shakespeare, King Lear"
+    foods: [samphire]
+  - text: "Out of this nettle, danger, we pluck this flower, safety."
+    by: "Shakespeare, Henry IV Part 1"
+    foods: [nettles]
+  - text: "If you can mock a leek, you can eat a leek."
+    by: "Shakespeare, Henry V"
+    foods: [leeks]
+  - text: "Let the sky rain potatoes."
+    by: "Falstaff, The Merry Wives of Windsor"
+    foods: [potatoes]
+  - text: "I am a great eater of beef, and I believe that does harm to my wit."
+    by: "Sir Andrew Aguecheek, Twelfth Night"
+    foods: [beef]
+  - text: "For all the world, like a forked radish."
+    by: "Falstaff, Henry IV Part 2"
+    foods: [radishes]
+  - text: "The pumpkin was instantly turned into a fine coach, gilded all over with gold."
+    by: "Charles Perrault, Cinderella"
+    foods: [pumpkin]
+  - text: "'Not the little prize Turkey: the big one?' 'What, the one as big as me?'"
+    by: "Charles Dickens, A Christmas Carol"
+    foods: [turkey]
+  - text: "'Will you walk a little faster?' said a whiting to a snail."
+    by: "Lewis Carroll, The Lobster Quadrille"
+    foods: [whiting]
+  - text: "'Tis the voice of the Lobster; I heard him declare, / 'You have baked me too brown, I must sugar my hair.'"
+    by: "Lewis Carroll, Alice's Adventures in Wonderland"
+    foods: [lobster]
+  - text: "Cockles and mussels, alive, alive, oh!"
+    by: "Molly Malone, traditional"
+    foods: [cockles, mussels]
+  - text: "Parsley, sage, rosemary and thyme."
+    by: "Scarborough Fair, traditional"
+    foods: [parsley, sage, rosemary, thyme]
+  - text: "There's rosemary, that's for remembrance."
+    by: "Ophelia, Hamlet"
+    foods: [rosemary]
+  - text: "There's fennel for you, and columbines."
+    by: "Ophelia, Hamlet"
+    foods: [fennel]
+  - text: "Peter Piper picked a peck of pickled peppers."
+    by: "traditional"
+    foods: [peppers]
+  - text: "A cucumber should be well sliced, and dressed with pepper and vinegar, and then thrown out, as good for nothing."
+    by: "Samuel Johnson"
+    foods: [cucumber]
+  - text: "It is said that the effect of eating too much lettuce is 'soporific'."
+    by: "Beatrix Potter, The Tale of the Flopsy Bunnies"
+    foods: [lettuce]
+  - text: "Of shoes, and ships, and sealing-wax, / Of cabbages, and kings."
+    by: "Lewis Carroll, The Walrus and the Carpenter"
+    foods: [cabbage]
+  - text: "Fine words butter no parsnips."
+    by: "proverb"
+    foods: [parsnips]
+  - text: "You'll be rotten ere you be half ripe, and that's the right virtue of the medlar."
+    by: "Rosalind, As You Like It"
+    foods: [medlars]
+  - text: "He put in his thumb, / And pulled out a plum."
+    by: "Little Jack Horner"
+    foods: [plums]
+  - text: "Under a spreading chestnut-tree / The village smithy stands."
+    by: "Henry Wadsworth Longfellow"
+    foods: [sweet-chestnuts]
+  - text: "I had a little nut tree, / Nothing would it bear / But a silver nutmeg / And a golden pear."
+    by: "traditional"
+    foods: [cobnuts, pears]
+  - text: "And a partridge in a pear tree."
+    by: "The Twelve Days of Christmas"
+    foods: [partridge, pears]
+  - text: "Rhubarb, rhubarb, rhubarb."
+    by: "the crowd, in every theatre"
+    foods: [rhubarb]
+
+"nearly":
+  - text: "If Winter comes, can Spring be far behind?"
+    by: "Percy Bysshe Shelley, Ode to the West Wind"
+  - text: "Hope springs eternal in the human breast."
+    by: "Alexander Pope, An Essay on Man"
+  - text: "To-morrow to fresh woods, and pastures new."
+    by: "John Milton, Lycidas"
+  - text: "Grow old along with me! / The best is yet to be."
+    by: "Robert Browning, Rabbi Ben Ezra"
+  - text: "All things come to those who wait."
+    by: "Violet Fane"
+  - text: "Though patience be a tired mare, yet she will plod."
+    by: "Nym, Henry V"
+  - text: "The darkest hour is that before the dawn."
+    by: "Thomas Fuller"
+  - text: "Hope is the thing with feathers / That perches in the soul."
+    by: "Emily Dickinson"
+  - text: "Oh, to be in England / Now that April's there."
+    by: "Robert Browning, Home-Thoughts, from Abroad"
+  - text: "The readiness is all."
+    by: "Shakespeare, Hamlet"
+  - text: "In the Spring a young man's fancy lightly turns to thoughts of love."
+    by: "Alfred, Lord Tennyson, Locksley Hall"
+  - text: "Nothing is so good as it seems beforehand."
+    by: "George Eliot, Silas Marner"
+  - text: "Wait and see."
+    by: "H. H. Asquith"
+  - text: "Loveliest of trees, the cherry now / Is hung with bloom along the bough."
+    by: "A. E. Housman, A Shropshire Lad"
+    foods: [cherries]
+  - text: "Christmas is coming, the geese are getting fat."
+    by: "traditional"
+    foods: [goose, turkey]
+
+"just":
+  - text: "But at my back I always hear / Time's wingèd chariot hurrying near."
+    by: "Andrew Marvell, To His Coy Mistress"
+  - text: "Gather ye rosebuds while ye may, / Old Time is still a-flying."
+    by: "Robert Herrick"
+  - text: "The Bird of Time has but a little way / To fly, and Lo! the Bird is on the Wing."
+    by: "Omar Khayyám, translated by Edward FitzGerald"
+  - text: "'Tis the last rose of summer, / Left blooming alone."
+    by: "Thomas Moore"
+  - text: "Late, late, so late! but we can enter still."
+    by: "Alfred, Lord Tennyson, Idylls of the King"
+  - text: "Oh dear! Oh dear! I shall be too late!"
+    by: "the White Rabbit, Alice's Adventures in Wonderland"
+  - text: "Catch, then, O catch the transient hour; / Improve each moment as it flies."
+    by: "Samuel Johnson"
+  - text: "The way to love anything is to realize that it might be lost."
+    by: "G. K. Chesterton"
+  - text: "Time, gentlemen, please."
+    by: "every landlord, ever"
+  - text: "Eheu fugaces, Postume, Postume, labuntur anni: alas, Postumus, the fleeting years slip by."
+    by: "Horace, Odes II.14"
+  - text: "And since to look at things in bloom / Fifty springs are little room."
+    by: "A. E. Housman, A Shropshire Lad"
+  - text: "Make use of time, let not advantage slip."
+    by: "Shakespeare, Venus and Adonis"
+  - text: "Time and tide wait for no man."
+    by: "proverb"
+  - text: "Then come kiss me, sweet and twenty, / Youth's a stuff will not endure."
+    by: "Shakespeare, Twelfth Night"
+
+"no":
+  - text: "The rule is, jam to-morrow and jam yesterday, but never jam to-day."
+    by: "Lewis Carroll, Through the Looking-Glass"
+  - text: "They also serve who only stand and wait."
+    by: "John Milton"
+  - text: "Patience, and shuffle the cards."
+    by: "Cervantes, Don Quixote"
+  - text: "How poor are they that have not patience! / What wound did ever heal but by degrees?"
+    by: "Iago, Othello"
+  - text: "Hope deferred maketh the heart sick: but when the desire cometh, it is a tree of life."
+    by: "Proverbs 13:12"
+  - text: "Our patience will achieve more than our force."
+    by: "Edmund Burke"
+  - text: "Adopt the pace of nature: her secret is patience."
+    by: "Ralph Waldo Emerson"
+  - text: "To every thing there is a season, and a time to every purpose under the heaven."
+    by: "Ecclesiastes 3:1"
+  - text: "How slow / This old moon wanes! She lingers my desires."
+    by: "Theseus, A Midsummer Night's Dream"
+  - text: "The waiting time, my brothers, / Is the hardest time of all."
+    by: "Sarah Doudney"
+  - text: "Absence makes the heart grow fonder."
+    by: "Thomas Haynes Bayly"
+  - text: "I am sure they are sour."
+    by: "the fox, in Aesop"
+  - text: "Never put off till tomorrow what may be done day after tomorrow just as well."
+    by: "attributed to Mark Twain"
+  - text: "Let patience have her perfect work."
+    by: "James 1:4"
+  - text: "Rome was not built in a day."
+    by: "proverb"
+  - text: "A watched pot never boils."
+    by: "proverb"
+  - text: "Hope is a good breakfast, but it is a bad supper."
+    by: "Francis Bacon"
+  - text: "I wasted time, and now doth time waste me."
+    by: "Shakespeare, Richard II"
+  - text: "Mad as a March hare."
+    by: "proverb"
+    foods: [hare]
+  - text: "Eat no onions nor garlic, for we are to utter sweet breath."
+    by: "Bottom, A Midsummer Night's Dream"
+    foods: [garlic, onions]
+  - text: "It is unseasonable and unwholesome in all months that have not an R in their name to eat an oyster."
+    by: "William Butler, 1599"
+    foods: [oysters]

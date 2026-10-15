@@ -8,12 +8,13 @@ layout: default
 {%- assign height = food.varieties.size | times: rh | plus: 30 -%}
 {%- assign width = cw | times: 52 | plus: x0 | plus: 4 -%}
 
-<article class="food" style="--c: {{ food.colour }}" data-food='{{ food | jsonify | escape }}'>
+<article class="food" style="--c: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ site.data.quotes | jsonify | escape }}'>
   <h1 class="ask">Is it {{ food.name | downcase }} yet?</h1>
 
   {%- comment -%}
-  JavaScript fills the verdict (one giant word) and the line under it.
-  Without JavaScript the season is given in words instead.
+  JavaScript fills the verdict (one giant word), a quotation to match it,
+  and the practical line under "Fine, show me the data". Without
+  JavaScript the season is given in words instead.
   {%- endcomment -%}
   <p class="verdict" id="verdict" hidden></p>
   <p class="answer" id="answer">
@@ -27,8 +28,11 @@ layout: default
 
   {%- include season-wheel.html food=food -%}
 
+  {%- if food.buy -%}<p class="buy">At the counter: {{ food.buy }}</p>{%- endif -%}
+
   <details class="fine">
     <summary>Fine, show me the data</summary>
+    <p class="when" id="when" hidden></p>
     <figure class="chart mini">
     <svg viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-label="Season of {{ food.name }} by week" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="26">
       {%- for m in (0..11) -%}
@@ -51,7 +55,7 @@ layout: default
     </svg>
     </figure>
     {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
-    <p class="source">Source: {% case food.source %}{% when "ncgm" %}New Covent Garden Market seasonal calendar{% when "bbc" %}BBC Good Food seasonal calendar{% else %}general knowledge, please check{% endcase %}.</p>
+    <p class="source">Source: {% case food.source %}{% when "ncgm" %}New Covent Garden Market seasonal calendar{% when "bbc" %}BBC Good Food seasonal calendar{% when "basc" %}BASC shooting seasons for England and Wales{% else %}general knowledge, please check{% endcase %}.</p>
   </details>
 
   <p class="onwards"><a href="{{ '/is-it/' | relative_url }}">Ask about something else</a> · <a href="{{ '/' | relative_url }}">See the whole year</a></p>

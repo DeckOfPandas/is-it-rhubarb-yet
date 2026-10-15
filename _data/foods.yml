@@ -9,7 +9,9 @@
 #         across the in-season run (unripe, ripe, over), on a food or a
 #         variety. The calendar keeps using colour.
 # source: ncgm = New Covent Garden Market calendar, bbc = BBC Good Food,
-#         general = common knowledge, please check.
+#         basc = BASC shooting seasons, general = common knowledge,
+#         please check.
+# buy: optional, what to ask for at the counter (fish and shellfish).
 
 - name: "Beetroot"
   slug: beetroot
@@ -342,17 +344,6 @@
         - [23, 43, in]
         - [44, 48, avail]
 
-- name: "Wild garlic"
-  slug: wild-garlic
-  group: alliums
-  colour: "#5fa83a"
-  source: general
-  varieties:
-    - name: ""
-      weeks:
-        - [9, 13, avail]
-        - [14, 22, in]
-
 - name: "Chard"
   slug: chard
   group: leaves
@@ -531,17 +522,6 @@
         - [18, 22, avail]
         - [23, 39, in]
         - [40, 43, avail]
-
-- name: "Samphire"
-  slug: samphire
-  group: shoots
-  colour: "#3fa07a"
-  source: ncgm
-  varieties:
-    - name: ""
-      weeks:
-        - [23, 26, avail]
-        - [27, 35, in]
 
 - name: "Sweetcorn"
   slug: sweetcorn
@@ -797,28 +777,6 @@
       weeks:
         - [27, 35, in]
 
-- name: "Elderflower"
-  slug: elderflower
-  group: soft
-  colour: "#f3e9b5"
-  source: general
-  varieties:
-    - name: ""
-      weeks:
-        - [18, 22, avail]
-        - [23, 26, in]
-
-- name: "Elderberries"
-  slug: elderberries
-  group: soft
-  colour: "#2a1a3a"
-  source: general
-  varieties:
-    - name: ""
-      weeks:
-        - [31, 35, avail]
-        - [36, 39, in]
-
 - name: "Gooseberries"
   slug: gooseberries
   group: soft
@@ -867,16 +825,6 @@
       weeks:
         - [18, 30, in]
 
-- name: "Sloes"
-  slug: sloes
-  group: soft
-  colour: "#2a2a5a"
-  source: general
-  varieties:
-    - name: ""
-      weeks:
-        - [40, 48, in]
-
 - name: "Strawberries"
   slug: strawberries
   group: soft
@@ -900,17 +848,6 @@
         - [31, 35, avail]
         - [36, 43, in]
 
-- name: "Sweet chestnuts"
-  slug: sweet-chestnuts
-  group: nuts
-  colour: "#6a3a1a"
-  source: general
-  varieties:
-    - name: ""
-      weeks:
-        - [40, 48, in]
-        - [49, 52, avail]
-
 - name: "Walnuts"
   slug: walnuts
   group: nuts
@@ -922,19 +859,172 @@
       weeks:
         - [40, 43, in]
 
+- name: "Wild garlic"
+  slug: wild-garlic
+  group: foraged
+  colour: "#5fa83a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 22, in]
+
+- name: "Nettles"
+  slug: nettles
+  group: foraged
+  colour: "#4a7a2a"
+  source: general
+  note: "Young tops only; tough and gritty once they flower."
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 17, in]
+        - [18, 22, avail]
+
+- name: "Dandelion"
+  slug: dandelion
+  group: foraged
+  colour: "#f0d020"
+  source: general
+  note: "Leaves before the flowers open."
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 17, in]
+        - [18, 22, avail]
+
+- name: "Sea beet"
+  slug: sea-beet
+  group: foraged
+  colour: "#2a6a3a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 35, in]
+        - [36, 39, avail]
+
+- name: "Samphire"
+  slug: samphire
+  group: foraged
+  colour: "#3fa07a"
+  source: ncgm
+  note: "Marsh samphire."
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 35, in]
+
+- name: "Elderflower"
+  slug: elderflower
+  group: foraged
+  colour: "#f3e9b5"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 26, in]
+
+- name: "Meadowsweet"
+  slug: meadowsweet
+  group: foraged
+  colour: "#f0e8c0"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 35, in]
+
+- name: "Wild strawberries"
+  slug: wild-strawberries
+  group: foraged
+  colour: "#e04a60"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 30, in]
+
+- name: "Bilberries"
+  slug: bilberries
+  group: foraged
+  colour: "#3a2a6a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 35, in]
+
+- name: "Elderberries"
+  slug: elderberries
+  group: foraged
+  colour: "#2a1a3a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 35, avail]
+        - [36, 39, in]
+
+- name: "Ceps"
+  slug: ceps
+  group: foraged
+  colour: "#a07040"
+  source: general
+  note: "Penny buns."
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 43, in]
+
+- name: "Field mushrooms"
+  slug: field-mushrooms
+  group: foraged
+  colour: "#c8b8a8"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 43, in]
+
+- name: "Giant puffball"
+  slug: giant-puffball
+  group: foraged
+  colour: "#e8e0c8"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 43, in]
+
 - name: "Girolles"
   slug: girolles
-  group: mushrooms
+  group: foraged
   colour: "#e8a21a"
   source: ncgm
+  note: "Chanterelles."
   varieties:
     - name: ""
       weeks:
         - [27, 48, in]
 
+- name: "Hedgehog fungus"
+  slug: hedgehog-fungus
+  group: foraged
+  colour: "#d8b878"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [36, 48, in]
+
 - name: "Morels"
   slug: morels
-  group: mushrooms
+  group: foraged
   colour: "#8a6a4a"
   source: ncgm
   varieties:
@@ -942,6 +1032,59 @@
       weeks:
         - [9, 13, avail]
         - [14, 22, in]
+
+- name: "Rosehips"
+  slug: rosehips
+  group: foraged
+  colour: "#d0402a"
+  source: general
+  note: "Best after the first frost."
+  varieties:
+    - name: ""
+      weeks:
+        - [36, 43, in]
+        - [44, 48, avail]
+
+- name: "Crab apples"
+  slug: crab-apples
+  group: foraged
+  colour: "#c8a030"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [36, 43, in]
+
+- name: "Sea buckthorn"
+  slug: sea-buckthorn
+  group: foraged
+  colour: "#f0a020"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [36, 43, in]
+
+- name: "Sloes"
+  slug: sloes
+  group: foraged
+  colour: "#2a2a5a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [40, 48, in]
+
+- name: "Sweet chestnuts"
+  slug: sweet-chestnuts
+  group: foraged
+  colour: "#6a3a1a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [40, 48, in]
+        - [49, 52, avail]
 
 - name: "Basil"
   slug: basil
@@ -1125,6 +1268,7 @@
   group: fish
   colour: "#4a7a9a"
   source: general
+  buy: "Handline-caught from the South West is the good choice, and most UK mackerel is."
   varieties:
     - name: ""
       weeks:
@@ -1137,6 +1281,7 @@
   colour: "#8a9aaa"
   source: general
   note: "Wild; closed to fishing in spring while it spawns."
+  buy: "Wild bass is line-caught in small numbers; farmed is the everyday fish. Ask which you are getting."
   varieties:
     - name: ""
       weeks:
@@ -1150,6 +1295,7 @@
   colour: "#5a8aa8"
   source: general
   note: "Cornish sardines."
+  buy: "Cornish sardines are ring-netted from a well-managed stock."
   varieties:
     - name: ""
       weeks:
@@ -1160,6 +1306,7 @@
   group: fish
   colour: "#7a8a9a"
   source: general
+  buy: "North Sea and Norwegian herring are in good shape; the MSC label is easy to find."
   varieties:
     - name: ""
       weeks:
@@ -1172,6 +1319,7 @@
   group: fish
   colour: "#dcdccc"
   source: general
+  buy: "Icelandic, Norwegian and Barents Sea cod are the well-managed stocks; the North Sea stock is still rebuilding. Look for the MSC label."
   varieties:
     - name: ""
       weeks:
@@ -1185,6 +1333,7 @@
   group: fish
   colour: "#b8c0c8"
   source: general
+  buy: "North Sea and Icelandic haddock are in good shape; look for the MSC label."
   varieties:
     - name: ""
       weeks:
@@ -1198,6 +1347,7 @@
   group: fish
   colour: "#9aa8b8"
   source: general
+  buy: "Cornish hake is MSC-certified and plentiful."
   varieties:
     - name: ""
       weeks:
@@ -1210,6 +1360,7 @@
   colour: "#c8a070"
   source: general
   note: "Thin and poor until it recovers from spawning in spring."
+  buy: "North Sea plaice is well managed; otter-trawled or line-caught over beam-trawled if you can choose."
   varieties:
     - name: ""
       weeks:
@@ -1222,6 +1373,7 @@
   group: fish
   colour: "#c0b090"
   source: general
+  buy: "Ask where it was landed; the Channel and North Sea stocks are the better-managed ones."
   varieties:
     - name: ""
       weeks:
@@ -1234,6 +1386,7 @@
   group: fish
   colour: "#6a7a8a"
   source: general
+  buy: "A good swap for cod. Line-caught Cornish pollack is the best choice."
   varieties:
     - name: ""
       weeks:
@@ -1246,6 +1399,7 @@
   group: fish
   colour: "#d0d8e0"
   source: general
+  buy: "Line-caught is the choice; whiting is cheap and underused."
   varieties:
     - name: ""
       weeks:
@@ -1260,6 +1414,7 @@
   colour: "#f08070"
   source: general
   note: "Rod-caught Scottish; most salmon sold is farmed all year."
+  buy: "Wild Atlantic salmon is endangered, so rod-caught is a rare treat. Organic farmed salmon or sea trout are the everyday choices."
   varieties:
     - name: ""
       weeks:
@@ -1272,6 +1427,7 @@
   group: fish
   colour: "#e89a8a"
   source: general
+  buy: "Wild sea trout is scarce; farmed sea trout is widely sold."
   varieties:
     - name: ""
       weeks:
@@ -1284,6 +1440,7 @@
   group: fish
   colour: "#e8e0e8"
   source: general
+  buy: "Jig-caught squid from the South West is the choice."
   varieties:
     - name: ""
       weeks:
@@ -1295,6 +1452,7 @@
   group: fish
   colour: "#c05a2a"
   source: general
+  buy: "Pot-caught is the usual method and the good one."
   varieties:
     - name: ""
       weeks:
@@ -1306,6 +1464,7 @@
   group: fish
   colour: "#1a3a6a"
   source: general
+  buy: "Pot-caught native lobster is the choice; Canadian lobster is the cheaper import."
   varieties:
     - name: ""
       weeks:
@@ -1318,6 +1477,7 @@
   group: fish
   colour: "#e87a5a"
   source: general
+  buy: "Creel-caught is the best choice; trawled is what most scampi is."
   varieties:
     - name: ""
       weeks:
@@ -1331,6 +1491,7 @@
   colour: "#1a2a3a"
   source: general
   note: "Rope-grown mussels are sold all year; wild ones are best in the cold months."
+  buy: "Rope-grown mussels are about as sustainable as seafood gets."
   varieties:
     - name: ""
       weeks:
@@ -1345,6 +1506,7 @@
   colour: "#8a8a7a"
   source: general
   note: "Natives in the months with an R; rock oysters all year."
+  buy: "Farmed rock oysters are a best choice; wild natives are the rarer treat."
   varieties:
     - name: ""
       weeks:
@@ -1356,6 +1518,7 @@
   group: fish
   colour: "#f0c8a0"
   source: general
+  buy: "Hand-dived scallops; dredging damages the seabed."
   varieties:
     - name: ""
       weeks:
@@ -1369,6 +1532,7 @@
   group: fish
   colour: "#c8b898"
   source: general
+  buy: "Hand-raked from a managed bed is the good choice."
   varieties:
     - name: ""
       weeks:
@@ -1380,6 +1544,7 @@
   group: fish
   colour: "#d8a878"
   source: general
+  buy: "Ask for shrimp from a certified fishery; Morecambe Bay and the Wash are the UK ones."
   varieties:
     - name: ""
       weeks:
@@ -1393,12 +1558,12 @@
   colour: "#b05050"
   source: general
   varieties:
-    - name: "Spring lamb"
+    - name: "New season"
       colour: "#d06868"
       weeks:
-        - [14, 17, avail]
-        - [18, 39, in]
-        - [40, 43, avail]
+        - [18, 22, avail]
+        - [23, 48, in]
+        - [49, 52, avail]
     - name: "Mutton"
       colour: "#7a3030"
       weeks:
@@ -1438,8 +1603,8 @@
   varieties:
     - name: ""
       weeks:
-        - [36, 39, avail]
-        - [40, 52, in]
+        - [40, 43, avail]
+        - [44, 52, in]
 
 - name: "Turkey"
   slug: turkey
@@ -1456,7 +1621,7 @@
   slug: grouse
   group: meat
   colour: "#6a4a2a"
-  source: general
+  source: basc
   note: "12 August to 10 December."
   varieties:
     - name: ""
@@ -1469,7 +1634,7 @@
   slug: pheasant
   group: meat
   colour: "#b06a2a"
-  source: general
+  source: basc
   note: "1 October to 1 February."
   varieties:
     - name: ""
@@ -1481,7 +1646,7 @@
   slug: partridge
   group: meat
   colour: "#9a7a4a"
-  source: general
+  source: basc
   note: "1 September to 1 February."
   varieties:
     - name: ""
@@ -1493,19 +1658,32 @@
   slug: wild-duck
   group: meat
   colour: "#4a6a4a"
-  source: general
-  note: "1 September to 31 January inland."
+  source: basc
+  note: "Mallard, teal and wigeon: 1 September to 31 January inland, to 20 February on the foreshore."
   varieties:
     - name: ""
       weeks:
         - [1, 4, in]
         - [36, 52, in]
 
+- name: "Snipe"
+  slug: snipe
+  group: meat
+  colour: "#6a5a3a"
+  source: basc
+  note: "12 August to 31 January."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, in]
+        - [31, 35, avail]
+        - [36, 52, in]
+
 - name: "Woodcock"
   slug: woodcock
   group: meat
   colour: "#7a6a5a"
-  source: general
+  source: basc
   note: "1 October to 31 January."
   varieties:
     - name: ""
@@ -1517,47 +1695,65 @@
   slug: venison
   group: meat
   colour: "#5a2a1a"
-  source: general
-  note: "Seasons differ by species and sex; wild venison is at its best in autumn and winter."
+  source: basc
+  note: "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season."
   varieties:
-    - name: ""
+    - name: "Red & fallow"
+      colour: "#5a2a1a"
       weeks:
-        - [1, 13, in]
-        - [14, 17, avail]
-        - [36, 39, avail]
-        - [40, 52, in]
+        - [1, 17, in]
+        - [31, 52, in]
+    - name: "Roe & muntjac"
+      colour: "#8a4a3a"
+      weeks:
+        - [1, 52, in]
 
 - name: "Wood pigeon"
   slug: wood-pigeon
   group: meat
   colour: "#7a7a8a"
   source: general
-  note: "All year."
+  note: "No closed season; at its best from spring to autumn."
   varieties:
     - name: ""
       weeks:
-        - [1, 52, in]
+        - [14, 17, avail]
+        - [18, 48, in]
+        - [49, 52, avail]
 
 - name: "Rabbit"
   slug: rabbit
   group: meat
   colour: "#a89a8a"
   source: general
-  note: "All year."
+  note: "No closed season; young rabbits from late summer are the ones to buy."
   varieties:
     - name: ""
       weeks:
-        - [1, 52, in]
+        - [27, 30, avail]
+        - [31, 48, in]
+        - [49, 52, avail]
 
 - name: "Hare"
   slug: hare
   group: meat
   colour: "#9a7050"
-  source: general
-  note: "No close season in England, but not sold in spring and summer."
+  source: basc
+  note: "No closed season in England and Wales, but hare may only be sold from 1 August to 28 February."
   varieties:
     - name: ""
       weeks:
         - [1, 8, in]
-        - [36, 39, avail]
-        - [40, 52, in]
+        - [31, 35, avail]
+        - [36, 52, in]
+
+- name: "Grey squirrel"
+  slug: grey-squirrel
+  group: meat
+  colour: "#9a9a9a"
+  source: basc
+  note: "No closed season; sold by a few game dealers."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
