@@ -14,7 +14,7 @@ A website that answers the question. Also the same question about
 - **This week.** What is in season now, newest arrivals first, with what's going out and what's coming in.
 - **The year.** One dial per kind of food. Each food appears clockwise where its
   season starts, with longer seasons sitting further out. There is no key,
-  because an infographic that needs a key is a pretty selection of shapes and colours. Here's a reminder to ask Gemma about an escape room birds-eye-view "map" of a harbour, where downwards on the map apparently meant "the sea is deeper here".
+  because an infographic that needs a key is a pretty selection of shapes and colours. Here's a reminder to ask Gemma about an escape room birds-eye-view "map" of a harbour, where downwards meant deeper sea.
 - A calendar feed of season starts you can subscribe to.
 - The whole dataset as JSON, if you think you can do it better yourself.
 
@@ -31,7 +31,7 @@ nothing much happens in February.
 did not already know about aubergines.
 
 **No dependencies!** The site is Jekyll with no plugins, plain CSS and
-a tiny amount of JavaScript. Everything is self-hosted. More cool points please.
+a tiny amount of JavaScript. Everything is hosted here, nothing fetched from anywhere else. Ultracool.
 
 **Hand-curated data, from named sources.** The seasons come from the
 New Covent Garden Market calendar, cross-checked against BBC Good Food,
