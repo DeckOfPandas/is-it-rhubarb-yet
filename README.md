@@ -42,8 +42,9 @@ every chart and every week. A build has nothing in it that can rot.
 
 **Hand-curated data, from named sources.** The seasons come from the
 New Covent Garden Market calendar, cross-checked against BBC Good Food,
-with the shooting seasons from BASC, and a good deal of general
-knowledge for the fish, herbs and foraged things, each marked as such.
+with the shooting seasons from BASC, the fish from a Cornish
+wholesaler's chart, and a good deal of general knowledge for the herbs
+and foraged things, each marked as such.
 Every row says where it came from. Where sources disagree, the note on
 the food's page says so, rather than quietly picking one.
 

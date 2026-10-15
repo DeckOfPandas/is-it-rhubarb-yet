@@ -1,9 +1,11 @@
 # The line under the giant verdict. One pool per verdict; a quotation
 # with `foods` is kept for those foods and preferred over the general
-# pool when one of them gets that verdict. Everything here is out of
-# copyright (authors dead before 1956, proverbs, traditional rhymes) or a
-# stock phrase; foreign lines are our own translations. No scripture.
-# Verse line breaks are written " / ".
+# pool when one of them gets that verdict. Most lines are out of
+# copyright (authors dead before 1956, proverbs, traditional rhymes);
+# the rest are single attributed lines from twentieth-century authors,
+# relied on as fair dealing for quotation, which is Helen's call. No
+# scripture, nothing from franchises. Foreign lines are our own
+# translations. Verse line breaks are written " / ".
 #
 # yes: seize the day, abundance.  nearly: a bright horizon.
 # just: the nick of time.  no: patience, hard as it is.
@@ -92,6 +94,45 @@
     by: "Lewis Carroll, The Walrus and the Carpenter"
   - text: "Come buy our orchard fruits, / Come buy, come buy."
     by: "Christina Rossetti, Goblin Market"
+  - text: "Life is sometimes sad and often dull, but there are currants in the cake, and here is one of them."
+    by: "Nancy Mitford, The Pursuit of Love"
+  - text: "I took a deep breath and listened to the old brag of my heart. I am, I am, I am."
+    by: "Sylvia Plath, The Bell Jar"
+  - text: "Kiss me, and you will see how important I am."
+    by: "Sylvia Plath, journals"
+  - text: "Man is condemned to be free."
+    by: "Jean-Paul Sartre"
+  - text: "Let us not waste our time in idle discourse! Let us do something, while we have the chance!"
+    by: "Samuel Beckett, Waiting for Godot"
+  - text: "I like to have a martini, / Two at the very most. / After three I'm under the table, / After four I'm under my host."
+    by: "Dorothy Parker"
+  - text: "Take care of the luxuries and the necessities will take care of themselves."
+    by: "Dorothy Parker"
+  - text: "It was my Uncle George who discovered that alcohol was a food well in advance of modern medical thought."
+    by: "P. G. Wodehouse"
+  - text: "First we eat, then we do everything else."
+    by: "M. F. K. Fisher"
+  - text: "People who love to eat are always the best people."
+    by: "Julia Child"
+  - text: "Days are where we live."
+    by: "Philip Larkin, Days"
+  - text: "Do I dare to eat a peach?"
+    by: "T. S. Eliot, The Love Song of J. Alfred Prufrock"
+  - text: "Time is an illusion. Lunchtime doubly so."
+    by: "Douglas Adams"
+  - text: "'What day is it?' asked Pooh. 'It's today,' squeaked Piglet. 'My favourite day,' said Pooh."
+    by: "A. A. Milne"
+  - text: "A pint of plain is your only man."
+    by: "Flann O'Brien, At Swim-Two-Birds"
+  - text: "Unlike the male codfish, which, suddenly finding itself the parent of three million five hundred thousand little codfish, cheerfully resolves to love them all."
+    by: "P. G. Wodehouse, Uncle Fred in the Springtime"
+    foods: [cod]
+  - text: "The fascination of shooting as a sport depends almost wholly on whether you are at the right or wrong end of the gun."
+    by: "P. G. Wodehouse"
+    foods: [grouse, pheasant, partridge, wild-duck, snipe, woodcock, wood-pigeon]
+  - text: "Ducking for apples. Change one letter and it's the story of my life."
+    by: "Dorothy Parker"
+    foods: [apples, crab-apples]
   - text: "Cabbage, n. A familiar kitchen-garden vegetable about as large and wise as a man's head."
     by: "Ambrose Bierce, The Devil's Dictionary"
     foods: [cabbage]
@@ -109,7 +150,7 @@
     foods: [rhubarb]
   - text: "No wise fish would go anywhere without a porpoise."
     by: "the Mock Turtle, Alice's Adventures in Wonderland"
-    foods: [cod, haddock, hake, pollock, whiting, plaice, dover-sole, mackerel, herring, sardines, sea-bass]
+    foods: [cod, haddock, hake, pollock, whiting, plaice, dover-sole, lemon-sole, mackerel, herring, sardines, sea-bass, monkfish, gurnard, brill]
   - text: "Glory be to God for dappled things, / For rose-moles all in stipple upon trout that swim."
     by: "Gerard Manley Hopkins, Pied Beauty"
     foods: [sea-trout]
@@ -270,6 +311,16 @@
     by: "proverb"
   - text: "I had woken up early, and I took a long time getting ready to exist."
     by: "Fernando Pessoa, The Book of Disquiet"
+  - text: "In the depth of winter, I finally learned that within me there lay an invincible summer."
+    by: "Albert Camus, Return to Tipasa"
+  - text: "Life begins on the other side of despair."
+    by: "Jean-Paul Sartre, The Flies"
+  - text: "I shut my eyes and all the world drops dead; / I lift my lids and all is born again."
+    by: "Sylvia Plath, Mad Girl's Love Song"
+  - text: "Ever tried. Ever failed. No matter. Try again. Fail again. Fail better."
+    by: "Samuel Beckett, Worstward Ho"
+  - text: "Nobody realises that some people expend tremendous energy merely to be normal."
+    by: "Albert Camus, notebooks"
   - text: "Loveliest of trees, the cherry now / Is hung with bloom along the bough."
     by: "A. E. Housman, A Shropshire Lad"
     foods: [cherries]
@@ -324,6 +375,18 @@
     by: "proverb"
   - text: "Punctuality is the thief of time."
     by: "Oscar Wilde, The Picture of Dorian Gray"
+  - text: "Dying / Is an art, like everything else. / I do it exceptionally well."
+    by: "Sylvia Plath, Lady Lazarus"
+  - text: "Three o'clock is always too late or too early for anything you want to do."
+    by: "Jean-Paul Sartre, Nausea"
+  - text: "I love deadlines. I love the whooshing noise they make as they go by."
+    by: "Douglas Adams"
+  - text: "It's always just when a fellow is feeling particularly braced with things in general that Fate sneaks up behind him with the bit of lead piping."
+    by: "P. G. Wodehouse"
+  - text: "So it goes."
+    by: "Kurt Vonnegut, Slaughterhouse-Five"
+  - text: "Punctuality is the virtue of the bored."
+    by: "Evelyn Waugh"
 
 "no":
   - text: "The rule is, jam to-morrow and jam yesterday, but never jam to-day."
@@ -380,6 +443,36 @@
     by: "Italian proverb"
   - text: "Everything comes in time to those who know how to wait."
     by: "French proverb"
+  - text: "The great advantage of living in a large family is that early lesson of life's essential unfairness."
+    by: "Nancy Mitford, The Pursuit of Love"
+  - text: "Is there no way out of the mind?"
+    by: "Sylvia Plath, Apprehensions"
+  - text: "Perhaps when we find ourselves wanting everything, it is because we are dangerously close to wanting nothing."
+    by: "Sylvia Plath, journals"
+  - text: "One must imagine Sisyphus happy."
+    by: "Albert Camus, The Myth of Sisyphus"
+  - text: "There is no love of life without despair of life."
+    by: "Albert Camus"
+  - text: "Hell is other people."
+    by: "Jean-Paul Sartre, No Exit"
+  - text: "Nothing to be done."
+    by: "Samuel Beckett, Waiting for Godot"
+  - text: "The sun shone, having no alternative, on the nothing new."
+    by: "Samuel Beckett, Murphy"
+  - text: "What fresh hell is this?"
+    by: "Dorothy Parker"
+  - text: "He had the look of one who had drunk the cup of life and found a dead beetle at the bottom."
+    by: "P. G. Wodehouse"
+  - text: "April is the cruellest month."
+    by: "T. S. Eliot, The Waste Land"
+  - text: "I have measured out my life with coffee spoons."
+    by: "T. S. Eliot, The Love Song of J. Alfred Prufrock"
+  - text: "Nothing, like something, happens anywhere."
+    by: "Philip Larkin, I Remember, I Remember"
+  - text: "Not waving but drowning."
+    by: "Stevie Smith"
+  - text: "Rivers know this: there is no hurry. We shall get there some day."
+    by: "A. A. Milne"
   - text: "Mad as a March hare."
     by: "proverb"
     foods: [hare]

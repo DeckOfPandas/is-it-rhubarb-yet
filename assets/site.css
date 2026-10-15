@@ -186,7 +186,8 @@ article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
 /* The arrivals dial: a month ring with food labels radiating from it. */
 .dial { width: min(54rem, 100%); }
 .dial .month { font-size: 9px; fill: var(--fg); }
-.dial .label text { font-size: 10px; fill: var(--fg); }
+.dial .label text { font-size: 10px; fill: var(--fg); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.dial .season { stroke: var(--c); stroke-width: 2.5; opacity: 0.75; }
 .dial .label .dot { fill: var(--c); }
 .dial .label:hover text { fill: var(--accent); font-weight: 600; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
