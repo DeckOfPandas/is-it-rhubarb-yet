@@ -4,3 +4,5 @@ tmp/
 .env.*
 __pycache__/
 .pytest_cache/
+_site
+.claude/worktrees
