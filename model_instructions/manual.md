@@ -49,7 +49,18 @@ in `CLAUDE.md`; this is the map.
   slicing to be legible.
 - Helen's instructions win over this file. Hooks reject chained,
   nested or variable-expanding shell commands: one plain command per
-  call, or a script in `tmp/`.
+  call, or a script in `tmp/`. A command that must reach outside the
+  working directory becomes a script in `scripts/` with a fixed
+  action and validated arguments, so it can be allowed on sight.
+- Commit messages start with a prefix in parentheses: `(feature)`,
+  `(fix)`, `(styling)`, `(design)`, `(data)`, `(docs)`, `(refactor)`,
+  `(test)`, `(chore)`. Design is not styling.
+- From a worktree, `sh scripts/git-diff-main-checkout.sh` shows the
+  uncommitted changes in the main checkout; `--stat` summarises,
+  `--patch tmp/<name>.patch` writes them for `git apply`.
+- Issues and labels go through `scripts/gh-write.sh` (`issue-create`,
+  `label-create`), one label per issue, never a burst. Parked work is
+  labelled `parked`.
 
 ## Not yet explored
 
