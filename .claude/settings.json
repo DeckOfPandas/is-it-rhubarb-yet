@@ -1,6 +1,9 @@
 {
   "permissions": {
     "blockReadsOutsideWorkingDirectories": true,
+    "additionalDirectories": [
+      "/opt"
+    ],
     "allow": [
       "Bash(git status *)",
       "Bash(git diff *)",

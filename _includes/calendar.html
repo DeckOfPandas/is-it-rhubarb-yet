@@ -1,0 +1,101 @@
+{% comment %}
+The whole-year chart as one inline SVG. Expects: order, id.
+
+order "start": one row per variety, sorted by the first week it is in
+season, so the chart reads top to bottom as the year unfolds.
+order "group": rows gathered by culinary family, each family sorted by the
+food's first in-season week, a food's varieties together.
+order "alpha": by food name, a food's varieties together.
+
+Every row is a link to its food's page. JavaScript adds only the "today"
+marker. The id prefixes the gradient ids, which must be unique on a page
+that carries several charts.
+{% endcomment %}
+{%- assign x0 = 190 -%}
+{%- assign cw = 14 -%}
+{%- assign rh = 18 -%}
+{%- assign header = 44 -%}
+{%- assign group_gap = 28 -%}
+{%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
+{%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
+
+{%- comment -%}
+Rows are "sortkey|slug|variety index" strings, sorted as text, so every
+number in a key is padded to a fixed width by adding 100 or 10.
+{%- endcomment -%}
+{%- assign keyed = "" | split: "" -%}
+{%- assign groups_present = 0 -%}
+{%- for food in site.data.foods -%}
+  {%- assign food_first = 99 -%}
+  {%- for v in food.varieties -%}{%- for r in v.weeks -%}
+    {%- if r[2] == "in" and r[0] < food_first -%}{%- assign food_first = r[0] -%}{%- endif -%}
+  {%- endfor -%}{%- endfor -%}
+  {%- assign gi = 0 -%}
+  {%- for g in site.data.groups -%}{%- if g.key == food.group -%}{%- assign gi = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+  {%- for v in food.varieties -%}
+    {%- assign vi = forloop.index0 | plus: 10 -%}
+    {%- if include.order == "start" -%}
+      {%- assign first = 99 -%}
+      {%- for r in v.weeks -%}{%- if r[2] == "in" and r[0] < first -%}{%- assign first = r[0] -%}{%- endif -%}{%- endfor -%}
+      {%- assign key = first | plus: 100 | append: " " | append: food.name | append: " " | append: vi -%}
+    {%- elsif include.order == "group" -%}
+      {%- assign key = gi | plus: 10 | append: " " | append: food_first | plus: 100 | append: " " | append: food.name | append: " " | append: vi -%}
+    {%- else -%}
+      {%- assign key = food.name | downcase | append: " " | append: vi -%}
+    {%- endif -%}
+    {%- assign key = key | append: "|" | append: food.slug | append: "|" | append: forloop.index0 -%}
+    {%- assign keyed = keyed | push: key -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign keyed = keyed | sort -%}
+{%- if include.order == "group" -%}
+  {%- for g in site.data.groups -%}
+    {%- assign in_group = site.data.foods | where: "group", g.key -%}
+    {%- if in_group.size > 0 -%}{%- assign groups_present = groups_present | plus: 1 -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign height = keyed.size | times: rh | plus: header | plus: 10 -%}
+{%- assign height = groups_present | times: group_gap | plus: height -%}
+{%- assign width = cw | times: 52 | plus: x0 | plus: 8 -%}
+
+<svg id="{{ include.id }}" viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-labelledby="{{ include.id }}-title" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="{{ header }}">
+  <title id="{{ include.id }}-title">Seasonality of UK food by week</title>
+
+  {%- for m in (0..11) -%}
+    {%- assign start = month_starts[m] | plus: 0 -%}
+    {%- if m == 11 -%}{%- assign next = 53 -%}{%- else -%}{%- assign n1 = m | plus: 1 -%}{%- assign next = month_starts[n1] | plus: 0 -%}{%- endif -%}
+    {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
+    <line class="month-line" x1="{{ mx }}" y1="4" x2="{{ mx }}" y2="{{ height }}" />
+    <text class="month-label" x="{{ mx | plus: 4 }}" y="16">{{ month_names[m] }}</text>
+  {%- endfor -%}
+  {%- for w in (1..52) -%}
+    {%- assign wx = w | minus: 1 | times: cw | plus: x0 -%}
+    <text class="week-label" x="{{ wx | plus: 7 }}" y="34" text-anchor="middle">{{ w }}</text>
+  {%- endfor -%}
+
+  {%- assign y = header -%}
+  {%- assign current_group = "" -%}
+  {%- for key in keyed -%}
+    {%- assign parts = key | split: "|" -%}
+    {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+    {%- assign vi = parts[2] | plus: 0 -%}
+    {%- assign v = food.varieties[vi] -%}
+    {%- if include.order == "group" and food.group != current_group -%}
+      {%- assign current_group = food.group -%}
+      {%- assign g = site.data.groups | where: "key", current_group | first -%}
+      {%- assign y = y | plus: group_gap -%}
+      <text class="group-label" x="0" y="{{ y | minus: 9 }}">{{ g.name }}</text>
+    {%- endif -%}
+    {%- if v.name != "" -%}{%- assign label = food.name | append: " · " | append: v.name -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
+    {%- assign gid = include.id | append: "-" | append: food.slug | append: "-" | append: vi -%}
+    <a class="row" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
+      <rect class="row-hit" x="0" y="{{ y }}" width="{{ width }}" height="{{ rh }}" />
+      <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end">{{ label }}</text>
+      {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}
+    </a>
+    {%- assign y = y | plus: rh -%}
+  {%- endfor -%}
+
+  <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="4" x2="{{ x0 | plus: 728 }}" y2="{{ height }}" />
+  <line class="today" x1="0" y1="{{ header }}" x2="0" y2="{{ height }}" hidden />
+</svg>

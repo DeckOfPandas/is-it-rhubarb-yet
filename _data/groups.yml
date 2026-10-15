@@ -1,0 +1,42 @@
+# Culinary families, in display order. Every food's `group` must be a key
+# here; tools/check-foods.py enforces it. `kind` is the broad class the
+# arrivals dial is drawn for: veg, fruit, wild, herbs, fish or meat.
+- key: roots
+  name: Roots & tubers
+  kind: veg
+- key: brassicas
+  name: Brassicas
+  kind: veg
+- key: alliums
+  name: Alliums
+  kind: veg
+- key: leaves
+  name: Leaves & salad
+  kind: veg
+- key: shoots
+  name: Shoots, pods & stems
+  kind: veg
+- key: fruiting
+  name: Squash & fruiting veg
+  kind: veg
+- key: orchard
+  name: Orchard fruit
+  kind: fruit
+- key: soft
+  name: Soft fruit & rhubarb
+  kind: fruit
+- key: nuts
+  name: Nuts
+  kind: fruit
+- key: foraged
+  name: Foraged & wild
+  kind: wild
+- key: herbs
+  name: Herbs
+  kind: herbs
+- key: fish
+  name: Fish & shellfish
+  kind: fish
+- key: meat
+  name: Meat & game
+  kind: meat

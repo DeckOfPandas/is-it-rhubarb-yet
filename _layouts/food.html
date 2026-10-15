@@ -1,0 +1,62 @@
+---
+layout: default
+---
+{%- assign food = site.data.foods | where: "slug", page.slug | first -%}
+{%- assign x0 = 110 -%}{%- assign cw = 14 -%}{%- assign rh = 22 -%}
+{%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
+{%- assign month_names = "J,F,M,A,M,J,J,A,S,O,N,D" | split: "," -%}
+{%- assign height = food.varieties.size | times: rh | plus: 30 -%}
+{%- assign width = cw | times: 52 | plus: x0 | plus: 4 -%}
+
+<article class="food" style="--c: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ site.data.quotes | jsonify | escape }}'>
+  <h1 class="ask">Is it {{ food.name | downcase }} yet?</h1>
+
+  {%- comment -%}
+  JavaScript fills the verdict (one giant word), a quotation to match it,
+  and the practical line under "Fine, show me the data". Without
+  JavaScript the season is given in words instead.
+  {%- endcomment -%}
+  <p class="verdict" id="verdict" hidden></p>
+  <p class="answer" id="answer">
+    {%- for v in food.varieties -%}
+      {%- if v.name != "" %}{{ v.name }}: {% endif -%}
+      {%- for r in v.weeks -%}
+        {%- if r[2] == "in" %}in season{% else %}just about{% endif %} weeks {{ r[0] }} to {{ r[1] }}{% unless forloop.last %}, {% endunless -%}
+      {%- endfor -%}.
+    {%- endfor -%}
+  </p>
+
+  {%- include season-wheel.html food=food -%}
+
+  {%- if food.buy -%}<p class="buy">At the counter: {{ food.buy }}</p>{%- endif -%}
+
+  <details class="fine">
+    <summary>Fine, show me the data</summary>
+    <p class="when" id="when" hidden></p>
+    <figure class="chart mini">
+    <svg viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-label="Season of {{ food.name }} by week" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="26">
+      {%- for m in (0..11) -%}
+        {%- assign start = month_starts[m] | plus: 0 -%}
+        {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
+        <line class="month-line" x1="{{ mx }}" y1="20" x2="{{ mx }}" y2="{{ height }}" />
+        <text class="month-label" x="{{ mx | plus: 3 }}" y="14">{{ month_names[m] }}</text>
+      {%- endfor -%}
+      {%- assign y = 26 -%}
+      {%- for v in food.varieties -%}
+        {%- assign label = v.name | default: food.name -%}
+        <g class="row" style="--c: {{ v.colour | default: food.colour }}">
+          <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end">{{ label }}</text>
+          {%- assign gid = "mini-" | append: forloop.index0 -%}
+          {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}
+        </g>
+        {%- assign y = y | plus: rh -%}
+      {%- endfor -%}
+      <line class="today" x1="0" y1="20" x2="0" y2="{{ height }}" hidden />
+    </svg>
+    </figure>
+    {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
+    <p class="source">Source: {% case food.source %}{% when "ncgm" %}New Covent Garden Market seasonal calendar{% when "bbc" %}BBC Good Food seasonal calendar{% when "basc" %}BASC shooting seasons for England and Wales{% when "ffs" %}Flying Fish Seafoods' Cornish seasonality chart{% else %}general knowledge, please check{% endcase %}.</p>
+  </details>
+
+  <p class="onwards"><a href="{{ '/is-it/' | relative_url }}">Ask about something else</a> · <a href="{{ '/' | relative_url }}">See the whole year</a></p>
+</article>
