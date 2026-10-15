@@ -1,0 +1,107 @@
+{% comment %}
+A whole-table wheel for one kind of food (veg, fruit, herbs, fish, meat).
+Expects: kind, id.
+
+Every food sits at the angle where its season begins, so the dial shows
+the shape of the year at a glance: where arrivals crowd and where the
+hungry gap is. Read clockwise from the hand for what comes next. Foods
+in season all year have no beginning and are listed in the hole.
+
+A season "begins" at the first in-season week not joined to an in-season
+week before it (the year end counts as adjacent), so a season that wraps
+December into January begins in the autumn, not on 1 January.
+
+Labels radiate from a month ring. Within a month, foods are spread
+evenly across the month's arc and dealt round three tiers of radius so
+neighbours do not collide; the longest names go outermost. Entries are
+"m<month index + 10> <200 - name length>|slug" strings, so sorting as
+text orders by month, then longest name first.
+{% endcomment %}
+{%- assign C = 440 -%}{%- assign RING = 100 -%}{%- assign THICK = 16 -%}
+{%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
+{%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
+{%- assign tiers = "122,196,270" | split: "," -%}
+{%- assign kind_groups = site.data.groups | where: "kind", include.kind -%}
+{%- assign keys = kind_groups | map: "key" -%}
+{%- assign starters = "" | split: "" -%}
+{%- assign allyear = "" | split: "" -%}
+{%- for food in site.data.foods -%}
+  {%- if keys contains food.group -%}
+    {%- assign start = 99 -%}
+    {%- for v in food.varieties -%}{%- for r in v.weeks -%}
+      {%- if r[2] == "in" -%}
+        {%- assign prev = r[0] | minus: 1 -%}{%- if prev == 0 -%}{%- assign prev = 52 -%}{%- endif -%}
+        {%- assign joined = false -%}
+        {%- for o in v.weeks -%}{%- if o[2] == "in" and o[1] == prev -%}{%- assign joined = true -%}{%- endif -%}{%- endfor -%}
+        {%- if joined == false and r[0] < start -%}{%- assign start = r[0] -%}{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}{%- endfor -%}
+    {%- if start == 99 -%}
+      {%- assign allyear = allyear | push: food.name -%}
+    {%- else -%}
+      {%- assign m = 0 -%}
+      {%- for ms in month_starts -%}{%- assign msn = ms | plus: 0 -%}{%- if start >= msn -%}{%- assign m = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+      {%- assign lenkey = 200 | minus: food.name.size -%}
+      {%- assign entry = m | plus: 10 | prepend: "m" | append: " " | append: lenkey | append: "|" | append: food.slug -%}
+      {%- assign starters = starters | push: entry -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign starters = starters | sort -%}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" role="img" aria-label="When each {{ include.kind }} season begins">
+  <g transform="rotate(-90 {{ C }} {{ C }})">
+    <circle class="arc off" fill="none" stroke-width="{{ THICK }}" cx="{{ C }}" cy="{{ C }}" r="{{ RING }}" />
+  </g>
+  {%- for mi in (0..11) -%}
+    {%- assign ms = month_starts[mi] | plus: 0 -%}
+    {%- assign deg = ms | minus: 1 | times: 360.0 | divided_by: 52 -%}
+    {%- if mi == 11 -%}{%- assign nxt = 53 -%}{%- else -%}{%- assign nm = mi | plus: 1 -%}{%- assign nxt = month_starts[nm] | plus: 0 -%}{%- endif -%}
+    {%- assign end_deg = nxt | minus: 1 | times: 360.0 | divided_by: 52 -%}
+    {%- assign span = end_deg | minus: deg -%}
+    {%- assign mid_deg = deg | plus: end_deg | divided_by: 2 | round: 2 -%}
+    <line class="spoke" x1="{{ C }}" y1="{{ C | minus: RING | plus: 9 }}" x2="{{ C }}" y2="{{ C | minus: RING | minus: 9 }}" transform="rotate({{ deg | round: 2 }} {{ C }} {{ C }})" />
+    {%- assign ly = C | minus: RING -%}
+    {%- if mid_deg > 90 and mid_deg < 270 -%}
+    <text class="month" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }}) rotate(180 {{ C }} {{ ly }})">{{ month_names[mi] }}</text>
+    {%- else -%}
+    <text class="month" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }})">{{ month_names[mi] }}</text>
+    {%- endif -%}
+    {%- assign prefix = mi | plus: 10 | prepend: "m" | append: " " -%}
+    {%- assign mine = "" | split: "" -%}
+    {%- for e in starters -%}{%- if e contains prefix -%}{%- assign mine = mine | push: e -%}{%- endif -%}{%- endfor -%}
+    {%- assign n = mine.size -%}
+    {%- for e in mine -%}
+      {%- assign slug = e | split: "|" | last -%}
+      {%- assign food = site.data.foods | where: "slug", slug | first -%}
+      {%- assign k = forloop.index0 -%}
+      {%- assign angle = k | plus: 0.5 | times: span | divided_by: n | plus: deg | round: 2 -%}
+      {%- assign tier = k | modulo: 3 -%}{%- assign tier = 2 | minus: tier -%}
+      {%- assign r = tiers[tier] | plus: 0 -%}
+      <a class="label" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ food.colour }}">
+      {%- if angle < 180 -%}
+        <g transform="rotate({{ angle | minus: 90 | round: 2 }} {{ C }} {{ C }})">
+          <circle class="dot" cx="{{ C | plus: r | minus: 7 }}" cy="{{ C }}" r="3" />
+          <text x="{{ C | plus: r }}" y="{{ C }}" dominant-baseline="middle">{{ food.name }}</text>
+        </g>
+      {%- else -%}
+        <g transform="rotate({{ angle | plus: 90 | round: 2 }} {{ C }} {{ C }})">
+          <circle class="dot" cx="{{ C | minus: r | plus: 7 }}" cy="{{ C }}" r="3" />
+          <text x="{{ C | minus: r }}" y="{{ C }}" text-anchor="end" dominant-baseline="middle">{{ food.name }}</text>
+        </g>
+      {%- endif -%}
+      </a>
+    {%- endfor -%}
+  {%- endfor -%}
+  <text class="today-label" x="{{ C }}" y="{{ C | minus: 52 }}" hidden><tspan x="{{ C }}">today</tspan><tspan class="date" x="{{ C }}" dy="1.3em"></tspan></text>
+  {%- if allyear.size > 0 -%}
+  <text class="allyear" x="{{ C }}" y="{{ C | plus: 4 }}" text-anchor="middle"><tspan class="head" x="{{ C }}">all year</tspan>
+    {%- for name in allyear -%}<tspan x="{{ C }}" dy="1.25em">{{ name }}</tspan>{%- endfor -%}
+  </text>
+  {%- endif -%}
+  <g transform="translate({{ C }} {{ C }})">
+    <g class="hand">
+      <line x1="0" y1="{{ 0 | minus: RING | plus: 14 }}" x2="0" y2="{{ 0 | minus: RING | minus: 14 }}" />
+      <circle cx="0" cy="{{ 0 | minus: RING | minus: 16 }}" r="3.5" />
+    </g>
+  </g>
+</svg>

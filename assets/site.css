@@ -76,7 +76,12 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
-main:has(#order-alpha:checked) .ordered > .by-alpha { display: block; }
+main:has(#order-alpha:checked) .ordered > .by-alpha,
+main:has(#kind-veg:checked) .ordered > .by-veg,
+main:has(#kind-fruit:checked) .ordered > .by-fruit,
+main:has(#kind-herbs:checked) .ordered > .by-herbs,
+main:has(#kind-fish:checked) .ordered > .by-fish,
+main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 /* The weekly in-season list is one grid whose items carry a rank per
    order as --os, --oa and --og; the switch picks which rank lays it out.
    Group headings are items that only show in group order. */
@@ -168,6 +173,15 @@ article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
 .wheel figcaption { color: var(--muted); font-size: 0.9rem; }
 .rings { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
 @media (prefers-reduced-motion: reduce) { .wheel .hand { transition: opacity 0.4s; } }
+
+/* The arrivals dial: a month ring with food labels radiating from it. */
+.dial { width: min(54rem, 100%); }
+.dial .month { font-size: 9px; fill: var(--fg); }
+.dial .label text { font-size: 10px; fill: var(--fg); }
+.dial .label .dot { fill: var(--c); }
+.dial .label:hover text { fill: var(--accent); font-weight: 600; }
+.dial .allyear { font-size: 9px; fill: var(--muted); }
+.dial .allyear .head { font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; fill: var(--muted); }
 
 .fine { margin: 2rem 0; color: var(--muted); }
 .fine summary { cursor: pointer; }

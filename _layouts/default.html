@@ -19,6 +19,7 @@
     <nav>
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Calendar</a>
       <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>This week</a>
+      <a href="{{ '/year/' | relative_url }}"{% if page.url == '/year/' %} aria-current="page"{% endif %}>The year</a>
       <a href="{{ '/is-it/' | relative_url }}"{% if page.url contains '/is-it/' %} aria-current="page"{% endif %}>Is it … yet?</a>
     </nav>
     <fieldset class="switch theme" data-remember="theme">
