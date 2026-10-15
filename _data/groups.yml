@@ -1,0 +1,22 @@
+# Culinary families, in display order. Every food's `group` must be a key
+# here; tools/check-foods.py enforces it.
+- key: roots
+  name: Roots & tubers
+- key: brassicas
+  name: Brassicas
+- key: alliums
+  name: Alliums
+- key: leaves
+  name: Leaves & salad
+- key: shoots
+  name: Shoots, pods & stems
+- key: fruiting
+  name: Squash & fruiting veg
+- key: orchard
+  name: Orchard fruit
+- key: soft
+  name: Soft fruit & rhubarb
+- key: nuts
+  name: Nuts
+- key: mushrooms
+  name: Mushrooms

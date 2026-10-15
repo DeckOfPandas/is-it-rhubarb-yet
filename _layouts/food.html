@@ -12,9 +12,10 @@ layout: default
   <h1 class="ask">Is it {{ food.name | downcase }} yet?</h1>
 
   {%- comment -%}
-  The no-JavaScript answer is the season in words. JavaScript replaces it
-  with yes / nearly / no-come-back-in-week-N for today.
+  JavaScript fills the verdict (one giant word) and the line under it.
+  Without JavaScript the season is given in words instead.
   {%- endcomment -%}
+  <p class="verdict" id="verdict" hidden></p>
   <p class="answer" id="answer">
     {%- for v in food.varieties -%}
       {%- if v.name != "" %}{{ v.name }}: {% endif -%}
@@ -24,26 +25,31 @@ layout: default
     {%- endfor -%}
   </p>
 
-  <figure class="chart mini">
-  <svg viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-label="Season of {{ food.name }} by week" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="26">
-    {%- for m in (0..11) -%}
-      {%- assign start = month_starts[m] | plus: 0 -%}
-      {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
-      <line class="month-line" x1="{{ mx }}" y1="20" x2="{{ mx }}" y2="{{ height }}" />
-      <text class="month-label" x="{{ mx | plus: 3 }}" y="14">{{ month_names[m] }}</text>
-    {%- endfor -%}
-    {%- assign y = 26 -%}
-    {%- for v in food.varieties -%}
-      {%- assign label = v.name | default: food.name -%}
-      <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end">{{ label }}</text>
-      {%- include season-cells.html variety=v colour=food.colour label=label y=y x0=x0 cw=cw rh=rh -%}
-      {%- assign y = y | plus: rh -%}
-    {%- endfor -%}
-    <line class="today" x1="0" y1="20" x2="0" y2="{{ height }}" hidden />
-  </svg>
-  </figure>
+  <details class="fine">
+    <summary>Fine, show me the data</summary>
+    <figure class="chart mini">
+    <svg viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-label="Season of {{ food.name }} by week" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="26">
+      {%- for m in (0..11) -%}
+        {%- assign start = month_starts[m] | plus: 0 -%}
+        {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
+        <line class="month-line" x1="{{ mx }}" y1="20" x2="{{ mx }}" y2="{{ height }}" />
+        <text class="month-label" x="{{ mx | plus: 3 }}" y="14">{{ month_names[m] }}</text>
+      {%- endfor -%}
+      {%- assign y = 26 -%}
+      {%- for v in food.varieties -%}
+        {%- assign label = v.name | default: food.name -%}
+        <g class="row" style="--c: {{ v.colour | default: food.colour }}">
+          <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end">{{ label }}</text>
+          {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh -%}
+        </g>
+        {%- assign y = y | plus: rh -%}
+      {%- endfor -%}
+      <line class="today" x1="0" y1="20" x2="0" y2="{{ height }}" hidden />
+    </svg>
+    </figure>
+    {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
+    <p class="source">Source: {% case food.source %}{% when "ncgm" %}New Covent Garden Market seasonal calendar{% when "bbc" %}BBC Good Food seasonal calendar{% else %}general knowledge, please check{% endcase %}.</p>
+  </details>
 
-  {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
-  <p class="source">Source: {% case food.source %}{% when "ncgm" %}New Covent Garden Market seasonal calendar{% when "bbc" %}BBC Good Food seasonal calendar{% else %}general knowledge, please check{% endcase %}.</p>
-  <p><a href="{{ '/is-it/' | relative_url }}">Ask about something else</a> · <a href="{{ '/' | relative_url }}">See the whole year</a></p>
+  <p class="onwards"><a href="{{ '/is-it/' | relative_url }}">Ask about something else</a> · <a href="{{ '/' | relative_url }}">See the whole year</a></p>
 </article>

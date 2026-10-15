@@ -7,6 +7,10 @@ permalink: /now/
 All 52 weekly lists are rendered at build time. JavaScript reveals the one
 for today (or ?week=N) and wires the previous/next buttons. Without
 JavaScript every week shows, in order.
+
+For each food and week: "in" if any variety is fully in season; otherwise
+"out" (going out) if a variety's just-about range follows its in-season
+range, or "coming" if it precedes one. Year ends count as adjacent.
 {%- endcomment -%}
 <h1>In season <span id="week-title">this week</span></h1>
 <p class="controls" hidden>
@@ -17,41 +21,73 @@ JavaScript every week shows, in order.
 
 {%- for w in (1..52) -%}
   {%- assign in_now = "" | split: "" -%}
-  {%- assign nearly = "" | split: "" -%}
+  {%- assign going = "" | split: "" -%}
+  {%- assign coming = "" | split: "" -%}
   {%- for food in site.data.foods -%}
     {%- assign best = "" -%}
     {%- assign which = "" -%}
+    {%- assign vcolour = food.colour -%}
     {%- for v in food.varieties -%}
       {%- for r in v.weeks -%}
         {%- if w >= r[0] and w <= r[1] -%}
           {%- if r[2] == "in" -%}
-            {%- assign best = "in" -%}{%- assign which = v.name -%}
-          {%- elsif best == "" -%}
-            {%- assign best = "avail" -%}{%- assign which = v.name -%}
+            {%- assign best = "in" -%}{%- assign which = v.name -%}{%- assign vcolour = v.colour | default: food.colour -%}
+          {%- elsif best != "in" -%}
+            {%- assign before = r[0] | minus: 1 -%}{%- if before == 0 -%}{%- assign before = 52 -%}{%- endif -%}
+            {%- assign after = r[1] | plus: 1 -%}{%- if after == 53 -%}{%- assign after = 1 -%}{%- endif -%}
+            {%- assign dir = "coming" -%}
+            {%- for o in v.weeks -%}
+              {%- if o[2] == "in" and o[1] == before -%}{%- assign dir = "going" -%}{%- endif -%}
+            {%- endfor -%}
+            {%- for o in v.weeks -%}
+              {%- if o[2] == "in" and o[0] == after -%}{%- assign dir = "coming" -%}{%- endif -%}
+            {%- endfor -%}
+            {%- assign best = dir -%}{%- assign which = v.name -%}{%- assign vcolour = v.colour | default: food.colour -%}
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
     {%- endfor -%}
-    {%- if which != "" -%}{%- assign entry = food.slug | append: "|" | append: food.name | append: " (" | append: which | append: ")" | append: "|" | append: food.colour -%}
-    {%- else -%}{%- assign entry = food.slug | append: "|" | append: food.name | append: "|" | append: food.colour -%}{%- endif -%}
+    {%- assign shown = food.name -%}
+    {%- if which != "" -%}{%- assign which = which | downcase -%}{%- assign shown = food.name | append: " (" | append: which | append: ")" -%}{%- endif -%}
+    {%- assign entry = food.group | append: "|" | append: food.slug | append: "|" | append: shown | append: "|" | append: vcolour -%}
     {%- if best == "in" -%}{%- assign in_now = in_now | push: entry -%}
-    {%- elsif best == "avail" -%}{%- assign nearly = nearly | push: entry -%}{%- endif -%}
+    {%- elsif best == "going" -%}{%- assign going = going | push: entry -%}
+    {%- elsif best == "coming" -%}{%- assign coming = coming | push: entry -%}{%- endif -%}
   {%- endfor -%}
   <section class="week" data-week="{{ w }}">
     <h2 class="week-heading">Week {{ w }}</h2>
-    <h3>In season</h3>
-    <ul class="food-list">
-      {%- for e in in_now -%}{%- assign p = e | split: "|" -%}
-      <li><a href="{{ '/is-it/' | append: p[0] | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ p[2] }}"></span>{{ p[1] }}</a></li>
-      {%- endfor -%}
-    </ul>
-    {%- if nearly.size > 0 -%}
-    <h3>Just about</h3>
-    <ul class="food-list nearly">
-      {%- for e in nearly -%}{%- assign p = e | split: "|" -%}
-      <li><a href="{{ '/is-it/' | append: p[0] | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ p[2] }}"></span>{{ p[1] }}</a></li>
-      {%- endfor -%}
-    </ul>
+    {%- for g in site.data.groups -%}
+      {%- assign prefix = g.key | append: "|" -%}
+      {%- assign members = "" | split: "" -%}
+      {%- for e in in_now -%}{%- if e contains prefix -%}{%- assign members = members | push: e -%}{%- endif -%}{%- endfor -%}
+      {%- if members.size > 0 -%}
+      <h3>{{ g.name }}</h3>
+      <ul class="food-list">
+        {%- for e in members -%}{%- assign p = e | split: "|" -%}
+        <li><a href="{{ '/is-it/' | append: p[1] | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ p[3] }}"></span>{{ p[2] }}</a></li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if going.size > 0 or coming.size > 0 -%}
+    <div class="just-about">
+      <div>
+        <h3>Going out</h3>
+        <ul class="food-list nearly">
+          {%- for e in going -%}{%- assign p = e | split: "|" -%}
+          <li><a href="{{ '/is-it/' | append: p[1] | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ p[3] }}"></span>{{ p[2] }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div>
+        <h3>Coming in</h3>
+        <ul class="food-list nearly">
+          {%- for e in coming -%}{%- assign p = e | split: "|" -%}
+          <li><a href="{{ '/is-it/' | append: p[1] | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ p[3] }}"></span>{{ p[2] }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
     {%- endif -%}
   </section>
 {%- endfor -%}

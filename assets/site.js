@@ -63,6 +63,26 @@
     return w;
   }
 
+  // Is a "just about" week on the way out of a season (true) or into one
+  // (false)? Out if the week's range follows an in-season range directly;
+  // year ends count as adjacent. Dips between two seasons count as in.
+  function goingOut(variety, week) {
+    var range = null;
+    variety.weeks.forEach(function (r) {
+      if (r[2] === "avail" && week >= r[0] && week <= r[1]) range = r;
+    });
+    if (!range) return false;
+    var before = range[0] === 1 ? 52 : range[0] - 1;
+    var after = range[1] === 52 ? 1 : range[1] + 1;
+    var follows = false, precedes = false;
+    variety.weeks.forEach(function (o) {
+      if (o[2] !== "in") return;
+      if (o[1] === before) follows = true;
+      if (o[0] === after) precedes = true;
+    });
+    return follows && !precedes;
+  }
+
   // --- Calendar and mini charts: the "today" line --------------------------
   function markToday(svg, week) {
     var line = svg.querySelector(".today");
@@ -106,12 +126,14 @@
   }
 
   // --- Is it X yet? ---------------------------------------------------------
+  // One giant word, then one flat sentence. Nothing else.
   function initFood() {
     var article = document.querySelector("article.food");
     if (!article) return;
     var food = JSON.parse(article.dataset.food);
     var today = new Date();
     var week = weekOf(today), year = today.getFullYear();
+    var verdict = document.getElementById("verdict");
     var answer = document.getElementById("answer");
 
     var inNow = null, nearly = null;
@@ -121,26 +143,35 @@
       if (s === "avail" && !nearly) nearly = v;
     });
 
-    var text;
+    var word, line, cls;
     if (inNow) {
       var until = lastWeekOfRun(inNow, week);
-      text = "Yes." + (inNow.name ? " " + inNow.name + " is in." : "") +
-        " Until week " + until + " (" + fmt(dateOfWeek(until, year)) + ").";
+      word = "YES."; cls = "yes";
+      line = (inNow.name ? inNow.name + ". " : "") +
+        (until === 52 ? "Until the end of the year." : "Until " + fmt(dateOfWeek(until + 1, year)) + ". Go.");
     } else {
       var next = nextIn(food, week);
-      if (nearly) {
-        text = "Nearly." + (next ? " Properly in from week " + next.week +
-          " (" + fmt(dateOfWeek(next.week, year + next.yearsAhead)) + ")." : "");
+      if (nearly && goingOut(nearly, week)) {
+        word = "JUST."; cls = "nearly";
+        line = "It's on its way out. Be quick.";
+      } else if (nearly) {
+        word = "NEARLY."; cls = "nearly";
+        line = next ? "Properly in from " + fmt(dateOfWeek(next.week, year + next.yearsAhead)) + ". Patience." : "Patience.";
       } else if (next) {
-        text = "No. Come back in week " + next.week + " (" +
+        word = "NO."; cls = "no";
+        line = "Come back in week " + next.week + ". That's " +
           fmt(dateOfWeek(next.week, year + next.yearsAhead)) +
-          (next.variety.name ? ", for " + next.variety.name.toLowerCase() : "") + ").";
+          (next.variety.name ? ", for " + next.variety.name.toLowerCase() : "") + ".";
       } else {
-        text = "No, and the data has no season for it at all.";
+        word = "NO."; cls = "no";
+        line = "Never, apparently. Check the data.";
       }
     }
-    answer.textContent = text;
-    answer.classList.add(inNow ? "yes" : nearly ? "nearly" : "no");
+    verdict.textContent = word;
+    verdict.classList.add(cls);
+    verdict.hidden = false;
+    answer.textContent = line;
+    answer.classList.add(cls);
   }
 
   document.addEventListener("DOMContentLoaded", function () {

@@ -1,5 +1,5 @@
 /* Plain, system-font styling. Colours per food come from the data file as
-   a --c custom property; everything else is here. */
+   a --c custom property on the row or swatch; everything else is here. */
 
 :root {
   color-scheme: light dark;
@@ -7,8 +7,10 @@
   --fg: #1e1e1a;
   --muted: #6b6b60;
   --rule: #e4e0d4;
-  --band: rgba(0, 0, 0, 0.035);
+  --band: rgba(0, 0, 0, 0.018);
   --accent: #d6336c;
+  --yes: #2f8f3a;
+  --nearly: #c98a1a;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.45;
 }
@@ -18,7 +20,9 @@
     --fg: #ece8dc;
     --muted: #a09d8f;
     --rule: #33352a;
-    --band: rgba(255, 255, 255, 0.05);
+    --band: rgba(255, 255, 255, 0.025);
+    --yes: #5fc06a;
+    --nearly: #e0a63a;
   }
 }
 
@@ -39,25 +43,31 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .site-header nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
 .site-footer { padding: 1.5rem 1.25rem; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--rule); }
 
-/* Charts */
+/* Charts. A row's colour is --c; in-season bars take it as is, "just
+   about" ramps are the same hue pulled most of the way to black. */
 .chart { margin: 1.5rem 0; overflow-x: auto; }
 .chart svg { display: block; max-width: 100%; height: auto; }
-.chart .month.odd { fill: var(--band); }
 .chart .month { fill: transparent; }
+.chart .month.odd { fill: var(--band); }
 .chart text { fill: var(--fg); font-size: 12px; }
 .chart .month-label { font-weight: 600; }
 .chart .week-label { fill: var(--muted); font-size: 8px; }
 .chart .group-label { font-weight: 700; font-size: 13px; fill: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
 .chart .row-label { font-size: 11px; }
-.chart .row a:hover text { fill: var(--accent); }
-.chart .cell.avail { fill-opacity: 0.35; }
 .chart .cell { shape-rendering: crispEdges; }
+.chart .cell.in { fill: var(--c); }
+.chart .cell.avail { fill: color-mix(in oklab, var(--c) 45%, #1a1a14); }
+.chart .row-hit { fill: transparent; }
+.chart a.row { cursor: pointer; }
+.chart a.row:hover .row-label { fill: var(--accent); font-weight: 600; }
+.chart a.row:hover .cell.in { fill: color-mix(in oklab, var(--c) 78%, white); }
+.chart a.row:hover .cell.avail { fill: color-mix(in oklab, var(--c) 60%, #1a1a14); }
+.chart a.row:hover .row-hit { fill: var(--band); }
 .chart .month-line { stroke: var(--rule); }
 .chart .today { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 3 3; }
-.chart.mini svg { max-width: 100%; }
 
 /* Lists */
-.food-list, .ask-list { list-style: none; padding: 0; columns: 14rem; column-gap: 2rem; }
+.food-list, .ask-list { list-style: none; padding: 0; margin: 0.25rem 0 1rem; columns: 14rem; column-gap: 2rem; }
 .food-list li, .ask-list li { break-inside: avoid; padding: 0.15rem 0; }
 .food-list a, .ask-list a { text-decoration: none; }
 .food-list a:hover, .ask-list a:hover { text-decoration: underline; }
@@ -65,18 +75,27 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
   display: inline-block; width: 0.8em; height: 0.8em; margin-right: 0.5em;
   background: var(--c); border-radius: 2px; vertical-align: baseline;
 }
-.nearly .swatch { opacity: 0.4; }
+.nearly .swatch { background: color-mix(in oklab, var(--c) 45%, #1a1a14); }
+h3, .group-heading { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 1.25rem 0 0.25rem; }
+.just-about { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
+.just-about .food-list { columns: 1; }
 .controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
 .controls button { font: inherit; padding: 0.3rem 0.7rem; }
 .week-heading { color: var(--muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .js section.week { display: none; }
 .js section.week:not([hidden]) { display: block; }
 
-/* Is it X yet? */
+/* Is it X yet? One giant word, one flat line. */
 article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
-.ask { font-size: 2.6rem; }
-.answer { font-size: 1.6rem; font-weight: 600; margin: 0.5rem 0 1.5rem; max-width: 36rem; }
-.answer.yes { color: #2f8f3a; }
-.answer.nearly { color: #c98a1a; }
-.answer.no { color: var(--accent); }
+.ask { font-size: 1.5rem; color: var(--muted); font-weight: 500; }
+.verdict {
+  font-size: clamp(6rem, 24vw, 18rem); font-weight: 900; line-height: 0.9;
+  letter-spacing: -0.04em; margin: 0.5rem 0 1rem -0.06em;
+}
+.verdict.yes { color: var(--yes); }
+.verdict.nearly { color: var(--nearly); }
+.verdict.no { color: var(--accent); }
+.answer { font-size: 1.4rem; font-weight: 500; margin: 0 0 2rem; max-width: 36rem; }
+.fine { margin: 2rem 0; color: var(--muted); }
+.fine summary { cursor: pointer; }
 .note, .source { color: var(--muted); font-size: 0.95rem; max-width: 40rem; }

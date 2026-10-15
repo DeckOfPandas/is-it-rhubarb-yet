@@ -4,33 +4,32 @@ description: Every UK-grown fruit and vegetable on one chart, week by week.
 ---
 {%- comment -%}
 The whole chart is one inline SVG built at build time. Rows are varieties,
-grouped by food group and sorted by the first week they are in season so the
-year reads as a wave. JavaScript adds only the "today" marker.
+grouped by culinary family and sorted by the first week they are in season
+so each group reads as a wave. Every row is a link to its food's page.
+JavaScript adds only the "today" marker.
 {%- endcomment -%}
 {%- assign x0 = 190 -%}
 {%- assign cw = 14 -%}
 {%- assign rh = 18 -%}
 {%- assign header = 44 -%}
-{%- assign group_gap = 26 -%}
+{%- assign group_gap = 28 -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
-{%- assign groups = "veg:Vegetables,salad:Salad,fruit:Fruit,nuts:Nuts,wild:Wild & foraged" | split: "," -%}
 
 {%- comment -%} Count rows first so the SVG can declare its height. {%- endcomment -%}
 {%- assign rows = 0 -%}
 {%- for food in site.data.foods -%}{%- assign rows = rows | plus: food.varieties.size -%}{%- endfor -%}
 {%- assign height = rows | times: rh | plus: header | plus: 10 -%}
-{%- assign height = groups.size | times: group_gap | plus: height -%}
+{%- assign height = site.data.groups.size | times: group_gap | plus: height -%}
 {%- assign width = cw | times: 52 | plus: x0 | plus: 8 -%}
 
 <h1>What's in season</h1>
-<p class="lede">Rows are foods, columns are weeks of the year. A full cell means in season; a pale cell means just coming in or going out.</p>
+<p class="lede">Rows are foods, columns are weeks of the year. A full bar means in season; a dark ramp means coming in or going out. Click a row for the food.</p>
 
 <figure class="chart">
 <svg id="calendar" viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-labelledby="calendar-title" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="{{ header }}">
   <title id="calendar-title">Seasonality of UK fruit and vegetables by week</title>
 
-  {%- comment -%} Month bands and labels {%- endcomment -%}
   {%- for m in (0..11) -%}
     {%- assign start = month_starts[m] | plus: 0 -%}
     {%- if m == 11 -%}{%- assign next = 53 -%}{%- else -%}{%- assign n1 = m | plus: 1 -%}{%- assign next = month_starts[n1] | plus: 0 -%}{%- endif -%}
@@ -45,12 +44,11 @@ year reads as a wave. JavaScript adds only the "today" marker.
   {%- endfor -%}
 
   {%- assign y = header -%}
-  {%- for g in groups -%}
-    {%- assign pair = g | split: ":" -%}
-    {%- assign in_group = site.data.foods | where: "group", pair[0] -%}
+  {%- for g in site.data.groups -%}
+    {%- assign in_group = site.data.foods | where: "group", g.key -%}
     {%- if in_group.size > 0 -%}
       {%- assign y = y | plus: group_gap -%}
-      <text class="group-label" x="0" y="{{ y | minus: 8 }}">{{ pair[1] }}</text>
+      <text class="group-label" x="0" y="{{ y | minus: 9 }}">{{ g.name }}</text>
       {%- comment -%} Sort foods by their first in-season week. {%- endcomment -%}
       {%- assign keyed = "" | split: "" -%}
       {%- for food in in_group -%}
@@ -67,10 +65,11 @@ year reads as a wave. JavaScript adds only the "today" marker.
         {%- assign food = site.data.foods | where: "slug", slug | first -%}
         {%- for v in food.varieties -%}
           {%- if v.name != "" -%}{%- assign label = food.name | append: " · " | append: v.name -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
-          <g class="row" data-slug="{{ food.slug }}">
-            <a href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}"><text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end">{{ label }}</text></a>
-            {%- include season-cells.html variety=v colour=food.colour label=label y=y x0=x0 cw=cw rh=rh -%}
-          </g>
+          <a class="row" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
+            <rect class="row-hit" x="0" y="{{ y }}" width="{{ width }}" height="{{ rh }}" />
+            <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end">{{ label }}</text>
+            {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh -%}
+          </a>
           {%- assign y = y | plus: rh -%}
         {%- endfor -%}
       {%- endfor -%}

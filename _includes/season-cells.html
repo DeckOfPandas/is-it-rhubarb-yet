@@ -1,15 +1,37 @@
 {% comment %}
-One chart row of 52 cells for a variety. Expects: variety, colour, y, x0, cw, rh.
-A week's state is the state of the first range covering it, so overlapping
-ranges in the data file resolve in file order.
+The shapes for one chart row (one variety). Expects: variety, label, y, x0,
+cw, rh. Colour comes from the enclosing element's --c custom property.
+
+A fully in-season range is a full-height bar. A "just about" range tapers:
+rising into an in-season range that follows it, falling out of one that
+precedes it, and a low band when it touches neither or both. Year ends
+count as adjacent, so a December ramp can lead into a January season.
 {% endcomment %}
-{%- for w in (1..52) -%}
-  {%- assign state = "" -%}
-  {%- for r in include.variety.weeks -%}
-    {%- if state == "" and w >= r[0] and w <= r[1] -%}{%- assign state = r[2] -%}{%- endif -%}
-  {%- endfor -%}
-  {%- if state != "" -%}
-    {%- assign x = w | minus: 1 | times: include.cw | plus: include.x0 -%}
-    <rect class="cell {{ state }}" x="{{ x }}" y="{{ include.y }}" width="{{ include.cw }}" height="{{ include.rh }}" fill="{{ include.colour }}"><title>{{ include.label }}: week {{ w }}{% if state == "avail" %} (just about){% endif %}</title></rect>
+{%- assign h = include.rh -%}
+{%- assign low = h | times: 0.4 | round -%}
+{%- assign lowtop = include.y | plus: h | minus: low -%}
+{%- assign bottom = include.y | plus: h -%}
+{%- for r in include.variety.weeks -%}
+  {%- assign x1 = r[0] | minus: 1 | times: include.cw | plus: include.x0 -%}
+  {%- assign x2 = r[1] | times: include.cw | plus: include.x0 -%}
+  {%- if r[2] == "in" -%}
+    <rect class="cell in" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+  {%- else -%}
+    {%- assign before = r[0] | minus: 1 -%}{%- if before == 0 -%}{%- assign before = 52 -%}{%- endif -%}
+    {%- assign after = r[1] | plus: 1 -%}{%- if after == 53 -%}{%- assign after = 1 -%}{%- endif -%}
+    {%- assign rising = false -%}{%- assign falling = false -%}
+    {%- for o in include.variety.weeks -%}
+      {%- if o[2] == "in" -%}
+        {%- if o[0] == after -%}{%- assign rising = true -%}{%- endif -%}
+        {%- if o[1] == before -%}{%- assign falling = true -%}{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if rising and falling == false -%}
+      <polygon class="cell avail rising" points="{{ x1 }},{{ bottom }} {{ x2 }},{{ bottom }} {{ x2 }},{{ include.y }} {{ x1 }},{{ lowtop }}"><title>{{ include.label }}: coming in, weeks {{ r[0] }} to {{ r[1] }}</title></polygon>
+    {%- elsif falling and rising == false -%}
+      <polygon class="cell avail falling" points="{{ x1 }},{{ include.y }} {{ x2 }},{{ lowtop }} {{ x2 }},{{ bottom }} {{ x1 }},{{ bottom }}"><title>{{ include.label }}: going out, weeks {{ r[0] }} to {{ r[1] }}</title></polygon>
+    {%- else -%}
+      <rect class="cell avail" x="{{ x1 }}" y="{{ lowtop }}" width="{{ x2 | minus: x1 }}" height="{{ low }}"><title>{{ include.label }}: just about, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+    {%- endif -%}
   {%- endif -%}
 {%- endfor -%}

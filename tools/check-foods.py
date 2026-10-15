@@ -15,24 +15,26 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "_data" / "foods.yml"
+GROUPS_FILE = ROOT / "_data" / "groups.yml"
 STUBS = ROOT / "_foods"
-GROUPS = {"veg", "salad", "fruit", "nuts", "wild"}
 SOURCES = {"ncgm", "bbc", "general"}
 STATES = {"in", "avail"}
 COLOUR = re.compile(r"^#[0-9a-f]{6}$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
 
-def load():
+def load(path):
     ruby = ["ruby", "-ryaml", "-rjson", "-e",
-            "puts JSON.dump(YAML.load_file(ARGV[0]))", str(DATA)]
+            "puts JSON.dump(YAML.load_file(ARGV[0]))", str(path)]
     return json.loads(subprocess.check_output(ruby, text=True))
 
 
 def main() -> int:
-    foods = load()
+    foods = load(DATA)
+    groups = {g["key"] for g in load(GROUPS_FILE)}
     problems = []
     slugs = set()
+    colours = {}
     stubs = {p.stem for p in STUBS.glob("*.md")}
 
     for f in foods:
@@ -45,7 +47,7 @@ def main() -> int:
         if f.get("slug") in slugs:
             problems.append(f"{where}: duplicate slug")
         slugs.add(f.get("slug"))
-        if f.get("group") not in GROUPS:
+        if f.get("group") not in groups:
             problems.append(f"{where}: unknown group {f.get('group')!r}")
         if f.get("source") not in SOURCES:
             problems.append(f"{where}: unknown source {f.get('source')!r}")
@@ -60,6 +62,12 @@ def main() -> int:
             if "name" not in v or not v.get("weeks"):
                 problems.append(f"{label}: variety needs name and weeks")
                 continue
+            if "colour" in v and not COLOUR.match(str(v["colour"])):
+                problems.append(f"{label}: colour must be #rrggbb lowercase")
+            row_colour = v.get("colour", f.get("colour"))
+            if row_colour in colours:
+                problems.append(f"{label}: same colour as {colours[row_colour]}")
+            colours[row_colour] = label
             for r in v["weeks"]:
                 if (not isinstance(r, list) or len(r) != 3
                         or not all(isinstance(n, int) for n in r[:2])):
