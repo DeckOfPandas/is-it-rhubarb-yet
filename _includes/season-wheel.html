@@ -19,6 +19,10 @@ from the last.
 Each day (or shaded week) dash is two units long so it runs under the
 next one: a dash end that meets the grey through antialiasing shows as a
 hairline seam, so only the last dash of a run is allowed to end.
+
+With standalone=true the SVG is a file of its own, for /wheel/<slug>.svg:
+no figure or legend, an xmlns, its own styles in fixed colours, and a
+script that points the hand at today when the file is opened directly.
 {% endcomment %}
 {%- assign food = include.food -%}
 {%- assign C = 180 -%}{%- assign R = 140 -%}{%- assign R0 = 78 -%}
@@ -27,8 +31,26 @@ hairline seam, so only the last dash of a run is allowed to end.
 {%- assign thick = band | minus: 3 | round: 2 -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," -%}
-<figure class="wheel">
-<svg viewBox="0 0 360 360" role="img" aria-label="Season of {{ food.name }} around the year">
+{%- unless include.standalone -%}<figure class="wheel">{%- endunless -%}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-label="Season of {{ food.name }} around the year">
+  {%- if include.standalone -%}
+  <style>
+    .arc { fill: none; }
+    .off { stroke: #ebe7dc; }
+    .in { stroke: var(--c); }
+    .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), #ebe7dc); }
+    .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
+    .spoke { stroke: #fffdf8; stroke-width: 2; }
+    .month { fill: #6b6b60; font: 600 10px system-ui, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hand { display: none; }
+    .hand.on { display: inline; }
+    .hand line { stroke: #d6336c; stroke-width: 2.5; stroke-linecap: round; }
+    .hand circle { fill: #d6336c; }
+    .today-label { fill: #6b6b60; font: 11px system-ui, sans-serif; text-anchor: middle; }
+    .today-label[hidden] { display: none; }
+    .today-label .date { fill: #1e1e1a; font-size: 15px; font-weight: 700; }
+  </style>
+  {%- endif -%}
   <g transform="rotate(-90 {{ C }} {{ C }})">
   {%- for v in food.varieties -%}
     {%- assign k = forloop.index0 -%}
@@ -106,7 +128,22 @@ hairline seam, so only the last dash of a run is allowed to end.
       <circle cx="0" cy="{{ 0 | minus: R | minus: 6 }}" r="3.5" />
     </g>
   </g>
+  {%- if include.standalone -%}
+  <script><![CDATA[
+    (function () {
+      var d = new Date(), y = new Date(d.getFullYear(), 0, 1);
+      var doy = Math.floor((d - y) / 86400000), deg = Math.min(doy, 364) / 364 * 360;
+      var hand = document.querySelector(".hand");
+      hand.setAttribute("transform", "rotate(" + deg.toFixed(2) + ")");
+      hand.classList.add("on");
+      var label = document.querySelector(".today-label");
+      label.querySelector(".date").textContent = d.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
+      label.removeAttribute("hidden");
+    })();
+  ]]></script>
+  {%- endif -%}
 </svg>
+{%- if include.standalone -%}{%- assign n = 0 -%}{%- endif -%}
 {%- if n > 1 -%}
 <figcaption>
   <ol class="rings">
@@ -116,4 +153,4 @@ hairline seam, so only the last dash of a run is allowed to end.
   </ol>
 </figcaption>
 {%- endif -%}
-</figure>
+{%- unless include.standalone -%}</figure>{%- endunless -%}

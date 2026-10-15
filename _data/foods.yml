@@ -942,3 +942,622 @@
       weeks:
         - [9, 13, avail]
         - [14, 22, in]
+
+- name: "Basil"
+  slug: basil
+  group: herbs
+  colour: "#3f9a3f"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 39, in]
+        - [40, 43, avail]
+
+- name: "Bay"
+  slug: bay
+  group: herbs
+  colour: "#4a6a3a"
+  source: general
+  note: "Evergreen, picked all year."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Chervil"
+  slug: chervil
+  group: herbs
+  colour: "#9ad07a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 30, in]
+        - [31, 35, avail]
+
+- name: "Chives"
+  slug: chives
+  group: herbs
+  colour: "#6aa05a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 35, in]
+        - [36, 39, avail]
+
+- name: "Coriander"
+  slug: coriander
+  group: herbs
+  colour: "#78b86a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Dill"
+  slug: dill
+  group: herbs
+  colour: "#a9c93a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Lovage"
+  slug: lovage
+  group: herbs
+  colour: "#5a8a2a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 35, in]
+        - [36, 39, avail]
+
+- name: "Marjoram & oregano"
+  slug: marjoram-oregano
+  group: herbs
+  colour: "#7a9a4a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Mint"
+  slug: mint
+  group: herbs
+  colour: "#2fae7a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 39, in]
+        - [40, 43, avail]
+
+- name: "Parsley"
+  slug: parsley
+  group: herbs
+  colour: "#3a8a4a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 43, in]
+        - [44, 48, avail]
+
+- name: "Rosemary"
+  slug: rosemary
+  group: herbs
+  colour: "#5a7a6a"
+  source: general
+  note: "Evergreen, picked all year."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Sage"
+  slug: sage
+  group: herbs
+  colour: "#8a9a8a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 43, in]
+        - [44, 48, avail]
+
+- name: "Sorrel"
+  slug: sorrel
+  group: herbs
+  colour: "#6fbf4f"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 30, in]
+        - [31, 35, avail]
+
+- name: "Tarragon"
+  slug: tarragon
+  group: herbs
+  colour: "#8ab07a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Thyme"
+  slug: thyme
+  group: herbs
+  colour: "#7a8a5a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 43, in]
+        - [44, 48, avail]
+
+- name: "Mackerel"
+  slug: mackerel
+  group: fish
+  colour: "#4a7a9a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Sea bass"
+  slug: sea-bass
+  group: fish
+  colour: "#8a9aaa"
+  source: general
+  note: "Wild; closed to fishing in spring while it spawns."
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 48, in]
+        - [49, 52, avail]
+
+- name: "Sardines"
+  slug: sardines
+  group: fish
+  colour: "#5a8aa8"
+  source: general
+  note: "Cornish sardines."
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 43, in]
+
+- name: "Herring"
+  slug: herring
+  group: fish
+  colour: "#7a8a9a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 26, avail]
+        - [27, 43, in]
+        - [44, 48, avail]
+
+- name: "Cod"
+  slug: cod
+  group: fish
+  colour: "#dcdccc"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [9, 13, avail]
+        - [40, 43, avail]
+        - [44, 52, in]
+
+- name: "Haddock"
+  slug: haddock
+  group: fish
+  colour: "#b8c0c8"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [9, 13, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Hake"
+  slug: hake
+  group: fish
+  colour: "#9aa8b8"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [23, 48, in]
+        - [49, 52, avail]
+
+- name: "Plaice"
+  slug: plaice
+  group: fish
+  colour: "#c8a070"
+  source: general
+  note: "Thin and poor until it recovers from spawning in spring."
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 39, in]
+        - [40, 43, avail]
+
+- name: "Dover sole"
+  slug: dover-sole
+  group: fish
+  colour: "#c0b090"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 43, in]
+        - [44, 48, avail]
+
+- name: "Pollock"
+  slug: pollock
+  group: fish
+  colour: "#6a7a8a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, in]
+        - [5, 8, avail]
+        - [36, 52, in]
+
+- name: "Whiting"
+  slug: whiting
+  group: fish
+  colour: "#d0d8e0"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [9, 13, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Wild salmon"
+  slug: wild-salmon
+  group: fish
+  colour: "#f08070"
+  source: general
+  note: "Rod-caught Scottish; most salmon sold is farmed all year."
+  varieties:
+    - name: ""
+      weeks:
+        - [9, 13, avail]
+        - [14, 35, in]
+        - [36, 39, avail]
+
+- name: "Sea trout"
+  slug: sea-trout
+  group: fish
+  colour: "#e89a8a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 35, in]
+        - [36, 39, avail]
+
+- name: "Squid"
+  slug: squid
+  group: fish
+  colour: "#e8e0e8"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [27, 43, in]
+        - [44, 48, avail]
+
+- name: "Brown crab"
+  slug: brown-crab
+  group: fish
+  colour: "#c05a2a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 48, in]
+
+- name: "Lobster"
+  slug: lobster
+  group: fish
+  colour: "#1a3a6a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 43, in]
+        - [44, 48, avail]
+
+- name: "Langoustines"
+  slug: langoustines
+  group: fish
+  colour: "#e87a5a"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [14, 17, avail]
+        - [18, 43, in]
+        - [44, 48, avail]
+
+- name: "Mussels"
+  slug: mussels
+  group: fish
+  colour: "#1a2a3a"
+  source: general
+  note: "Rope-grown mussels are sold all year; wild ones are best in the cold months."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 17, in]
+        - [18, 22, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Oysters"
+  slug: oysters
+  group: fish
+  colour: "#8a8a7a"
+  source: general
+  note: "Natives in the months with an R; rock oysters all year."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 17, in]
+        - [36, 52, in]
+
+- name: "Scallops"
+  slug: scallops
+  group: fish
+  colour: "#f0c8a0"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 13, in]
+        - [14, 17, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Cockles"
+  slug: cockles
+  group: fish
+  colour: "#c8b898"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 48, in]
+
+- name: "Brown shrimp"
+  slug: brown-shrimp
+  group: fish
+  colour: "#d8a878"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [18, 22, avail]
+        - [23, 43, in]
+        - [44, 48, avail]
+
+- name: "Lamb"
+  slug: lamb
+  group: meat
+  colour: "#b05050"
+  source: general
+  varieties:
+    - name: "Spring lamb"
+      colour: "#d06868"
+      weeks:
+        - [14, 17, avail]
+        - [18, 39, in]
+        - [40, 43, avail]
+    - name: "Mutton"
+      colour: "#7a3030"
+      weeks:
+        - [1, 8, in]
+        - [9, 13, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Beef"
+  slug: beef
+  group: meat
+  colour: "#6a2a2a"
+  source: general
+  note: "All year."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Pork"
+  slug: pork
+  group: meat
+  colour: "#e8a8a0"
+  source: general
+  note: "All year."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Goose"
+  slug: goose
+  group: meat
+  colour: "#8a8070"
+  source: general
+  note: "Michaelmas to Christmas."
+  varieties:
+    - name: ""
+      weeks:
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Turkey"
+  slug: turkey
+  group: meat
+  colour: "#a08060"
+  source: general
+  varieties:
+    - name: ""
+      weeks:
+        - [44, 48, avail]
+        - [49, 52, in]
+
+- name: "Grouse"
+  slug: grouse
+  group: meat
+  colour: "#6a4a2a"
+  source: general
+  note: "12 August to 10 December."
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 35, avail]
+        - [36, 48, in]
+        - [49, 52, avail]
+
+- name: "Pheasant"
+  slug: pheasant
+  group: meat
+  colour: "#b06a2a"
+  source: general
+  note: "1 October to 1 February."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, in]
+        - [40, 52, in]
+
+- name: "Partridge"
+  slug: partridge
+  group: meat
+  colour: "#9a7a4a"
+  source: general
+  note: "1 September to 1 February."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, in]
+        - [36, 52, in]
+
+- name: "Wild duck"
+  slug: wild-duck
+  group: meat
+  colour: "#4a6a4a"
+  source: general
+  note: "1 September to 31 January inland."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, in]
+        - [36, 52, in]
+
+- name: "Woodcock"
+  slug: woodcock
+  group: meat
+  colour: "#7a6a5a"
+  source: general
+  note: "1 October to 31 January."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 4, in]
+        - [40, 52, in]
+
+- name: "Venison"
+  slug: venison
+  group: meat
+  colour: "#5a2a1a"
+  source: general
+  note: "Seasons differ by species and sex; wild venison is at its best in autumn and winter."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 13, in]
+        - [14, 17, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
+
+- name: "Wood pigeon"
+  slug: wood-pigeon
+  group: meat
+  colour: "#7a7a8a"
+  source: general
+  note: "All year."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Rabbit"
+  slug: rabbit
+  group: meat
+  colour: "#a89a8a"
+  source: general
+  note: "All year."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Hare"
+  slug: hare
+  group: meat
+  colour: "#9a7050"
+  source: general
+  note: "No close season in England, but not sold in spring and summer."
+  varieties:
+    - name: ""
+      weeks:
+        - [1, 8, in]
+        - [36, 39, avail]
+        - [40, 52, in]

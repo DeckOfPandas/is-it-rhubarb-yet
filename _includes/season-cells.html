@@ -1,16 +1,19 @@
 {% comment %}
 The shapes for one chart row (one variety). Expects: variety, label, y, x0,
-cw, rh. Colour comes from the enclosing element's --c custom property.
+cw, rh, gid (an id unique to this row on the page). Colour comes from the
+enclosing element's --c custom property.
 
-A fully in-season range is a full-height bar. A "just about" range tapers:
-rising into an in-season range that follows it, falling out of one that
-precedes it, and a low band when it touches neither or both. Year ends
-count as adjacent, so a December ramp can lead into a January season.
+A fully in-season range is a bar in the row's colour. A "just about" range
+is a bar of the same height fading between the off-season grey and the
+colour, as on the season wheel: rising into an in-season range that
+follows it, falling out of one that precedes it, and a flat mix when it
+touches neither or both. Year ends count as adjacent, so a December ramp
+can lead into a January season. The two gradients sit inside the row so
+that they inherit its --c.
 {% endcomment %}
 {%- assign h = include.rh -%}
-{%- assign low = h | times: 0.4 | round -%}
-{%- assign lowtop = include.y | plus: h | minus: low -%}
-{%- assign bottom = include.y | plus: h -%}
+<linearGradient id="{{ include.gid }}-up"><stop offset="0" class="stop-off" /><stop offset="1" class="stop-c" /></linearGradient>
+<linearGradient id="{{ include.gid }}-down"><stop offset="0" class="stop-c" /><stop offset="1" class="stop-off" /></linearGradient>
 {%- for r in include.variety.weeks -%}
   {%- assign x1 = r[0] | minus: 1 | times: include.cw | plus: include.x0 -%}
   {%- assign x2 = r[1] | times: include.cw | plus: include.x0 -%}
@@ -27,11 +30,11 @@ count as adjacent, so a December ramp can lead into a January season.
       {%- endif -%}
     {%- endfor -%}
     {%- if rising and falling == false -%}
-      <polygon class="cell avail rising" points="{{ x1 }},{{ bottom }} {{ x2 }},{{ bottom }} {{ x2 }},{{ include.y }} {{ x1 }},{{ lowtop }}"><title>{{ include.label }}: coming in, weeks {{ r[0] }} to {{ r[1] }}</title></polygon>
+      <rect class="cell ramp" fill="url(#{{ include.gid }}-up)" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: coming in, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
     {%- elsif falling and rising == false -%}
-      <polygon class="cell avail falling" points="{{ x1 }},{{ include.y }} {{ x2 }},{{ lowtop }} {{ x2 }},{{ bottom }} {{ x1 }},{{ bottom }}"><title>{{ include.label }}: going out, weeks {{ r[0] }} to {{ r[1] }}</title></polygon>
+      <rect class="cell ramp" fill="url(#{{ include.gid }}-down)" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: going out, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
     {%- else -%}
-      <rect class="cell avail" x="{{ x1 }}" y="{{ lowtop }}" width="{{ x2 | minus: x1 }}" height="{{ low }}"><title>{{ include.label }}: just about, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+      <rect class="cell avail" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: just about, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}

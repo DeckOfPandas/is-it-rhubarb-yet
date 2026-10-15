@@ -57,10 +57,17 @@
     return null;
   }
 
+  // Last week of the in-season run that `week` sits in, following it over
+  // the year end if need be. Returns {week, yearsAhead, allYear}.
   function lastWeekOfRun(variety, week) {
-    var w = week;
-    while (w < 52 && stateAt(variety, w + 1) === "in") w++;
-    return w;
+    var w = week, years = 0, steps = 0;
+    while (steps < 51) {
+      var next = w === 52 ? 1 : w + 1;
+      if (stateAt(variety, next) !== "in") break;
+      if (next === 1) years = 1;
+      w = next; steps++;
+    }
+    return { week: w, yearsAhead: years, allYear: steps === 51 };
   }
 
   // Is a "just about" week on the way out of a season (true) or into one
@@ -111,6 +118,29 @@
     requestAnimationFrame(function () {
       hand.style.transform = "rotate(" + deg.toFixed(2) + "deg)";
       hand.classList.add("on");
+    });
+  }
+
+  // --- Switches: remember a radio group's choice under its data-remember
+  // key. The theme switch also sets data-theme on <html>; "auto" clears it
+  // so the system preference shows through.
+  function initSwitches() {
+    document.querySelectorAll(".switch[data-remember]").forEach(function (box) {
+      var key = box.dataset.remember;
+      var saved = null;
+      try { saved = localStorage.getItem(key); } catch (e) {}
+      var radios = box.querySelectorAll("input[type=radio]");
+      radios.forEach(function (r) {
+        if (saved !== null && r.value === saved) r.checked = true;
+        r.addEventListener("change", function () {
+          if (!r.checked) return;
+          try { localStorage.setItem(key, r.value); } catch (e) {}
+          if (key === "theme") {
+            if (r.value === "auto") delete document.documentElement.dataset.theme;
+            else document.documentElement.dataset.theme = r.value;
+          }
+        });
+      });
     });
   }
 
@@ -168,7 +198,8 @@
       var until = lastWeekOfRun(inNow, week);
       word = "YES."; cls = "yes";
       line = (inNow.name ? inNow.name + ". " : "") +
-        (until === 52 ? "Until the end of the year." : "Until " + fmt(dateOfWeek(until + 1, year)) + ". Go.");
+        (until.allYear ? "All year round. Relax." :
+          "Until " + fmt(dateOfWeek(until.week + 1, year + until.yearsAhead)) + ". Go.");
     } else {
       var next = nextIn(food, week);
       if (nearly && goingOut(nearly, week)) {
@@ -198,6 +229,7 @@
     var week = weekOf(new Date());
     document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, week); });
     document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, new Date()); });
+    initSwitches();
     initNow();
     initFood();
   });

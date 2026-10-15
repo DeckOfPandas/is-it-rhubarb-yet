@@ -1,5 +1,5 @@
 title: Is It Rhubarb Yet?
-description: What UK-grown fruit and veg is in season, week by week.
+description: What UK food is in season, week by week.
 url: "https://deckofpandas.github.io"
 baseurl: "/is-it-rhubarb-yet"
 lang: en-GB
@@ -7,10 +7,15 @@ timezone: Europe/London
 
 # One page per food, written as a stub under _foods/ by tools/make-foods.py.
 # The food's data lives in _data/foods.yml; the stub only names the slug.
+# A stub under _wheels/ (make-foods.py --wheels) becomes a standalone SVG
+# of the food's season wheel.
 collections:
   foods:
     output: true
     permalink: /is-it/:name/
+  wheels:
+    output: true
+    permalink: /wheel/:name:output_ext
 
 defaults:
   - scope:
@@ -22,6 +27,11 @@ defaults:
       type: foods
     values:
       layout: food
+  - scope:
+      path: ""
+      type: wheels
+    values:
+      layout: wheel
 
 exclude:
   - Gemfile

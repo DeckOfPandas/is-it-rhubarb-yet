@@ -15,8 +15,11 @@
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.45;
 }
+/* Dark follows the system unless the header switch has set data-theme.
+   The dark palette appears twice because CSS cannot share a block between
+   a media query and a selector; keep the two the same. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #15160f;
     --fg: #ece8dc;
     --muted: #a09d8f;
@@ -27,6 +30,18 @@
     --nearly: #e0a63a;
   }
 }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #15160f;
+  --fg: #ece8dc;
+  --muted: #a09d8f;
+  --rule: #33352a;
+  --band: rgba(255, 255, 255, 0.025);
+  --off: #2a2c22;
+  --yes: #5fc06a;
+  --nearly: #e0a63a;
+}
+:root[data-theme="light"] { color-scheme: light; }
 
 html { background: var(--bg); color: var(--fg); }
 body { margin: 0; }
@@ -43,11 +58,40 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .site-header nav { display: flex; gap: 1.25rem; }
 .site-header nav a { text-decoration: none; color: var(--muted); }
 .site-header nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
+.site-header .theme { margin-left: auto; }
 .site-footer { padding: 1.5rem 1.25rem; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--rule); }
 
+/* Switches: a radio group drawn as a pill. The theme switch needs
+   JavaScript to do anything, so it only appears with it. The order
+   switches work by CSS alone: .ordered shows the child whose radio is
+   checked, and JavaScript only remembers the choice. */
+.switch { display: inline-flex; gap: 2px; padding: 2px; margin: 0 0 1rem; border: 1px solid var(--rule); border-radius: 999px; position: relative; }
+.switch legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch label { padding: 0.2rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+.switch input:checked + label { background: var(--fg); color: var(--bg); }
+.switch input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 1px; }
+.theme { display: none; }
+.js .theme { display: inline-flex; margin-bottom: 0; }
+.ordered > * { display: none; }
+main:has(#order-start:checked) .ordered > .by-start,
+main:has(#order-group:checked) .ordered > .by-group,
+main:has(#order-alpha:checked) .ordered > .by-alpha { display: block; }
+/* The weekly in-season list is one grid whose items carry a rank per
+   order as --os, --oa and --og; the switch picks which rank lays it out.
+   Group headings are items that only show in group order. */
+.food-list.in-season { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 0.15rem 2rem; columns: auto; }
+.in-season li { order: var(--oa); }
+main:has(#order-start:checked) .in-season li { order: var(--os); }
+main:has(#order-group:checked) .in-season li { order: var(--og); }
+.in-season .heading { display: none; grid-column: 1 / -1; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1rem; }
+main:has(#order-group:checked) .in-season .heading { display: block; }
+.tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 700; margin-left: 0.3em; }
+
 /* Charts. A row's colour is --c; in-season bars take it as is, "just
-   about" ramps are the same hue pulled most of the way to black. */
-.chart { margin: 1.5rem 0; overflow-x: auto; }
+   about" bars fade between the off-season grey and it through a gradient
+   whose stops read the row's --c. */
+.chart { margin: 0 0 1.5rem; overflow-x: auto; }
 .chart svg { display: block; max-width: 100%; height: auto; }
 .chart .month { fill: transparent; }
 .chart .month.odd { fill: var(--band); }
@@ -58,12 +102,14 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .chart .row-label { font-size: 11px; }
 .chart .cell { shape-rendering: crispEdges; }
 .chart .cell.in { fill: var(--c); }
-.chart .cell.avail { fill: color-mix(in oklab, var(--c) 45%, #1a1a14); }
+.chart .cell.avail { fill: color-mix(in oklab, var(--c) 45%, var(--off)); }
+.chart .stop-off { stop-color: var(--off); }
+.chart .stop-c { stop-color: var(--c); }
 .chart .row-hit { fill: transparent; }
 .chart a.row { cursor: pointer; }
 .chart a.row:hover .row-label { fill: var(--accent); font-weight: 600; }
 .chart a.row:hover .cell.in { fill: color-mix(in oklab, var(--c) 78%, white); }
-.chart a.row:hover .cell.avail { fill: color-mix(in oklab, var(--c) 60%, #1a1a14); }
+.chart a.row:hover .cell.ramp, .chart a.row:hover .cell.avail { opacity: 0.75; }
 .chart a.row:hover .row-hit { fill: var(--band); }
 .chart .month-line { stroke: var(--rule); }
 .chart .today { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 3 3; }
@@ -77,7 +123,7 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
   display: inline-block; width: 0.8em; height: 0.8em; margin-right: 0.5em;
   background: var(--c); border-radius: 2px; vertical-align: baseline;
 }
-.nearly .swatch { background: color-mix(in oklab, var(--c) 45%, #1a1a14); }
+.nearly .swatch { background: color-mix(in oklab, var(--c) 45%, var(--off)); }
 h3, .group-heading { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 1.25rem 0 0.25rem; }
 .just-about { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
 .just-about .food-list { columns: 1; }

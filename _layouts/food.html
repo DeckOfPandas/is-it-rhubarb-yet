@@ -42,7 +42,8 @@ layout: default
         {%- assign label = v.name | default: food.name -%}
         <g class="row" style="--c: {{ v.colour | default: food.colour }}">
           <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end">{{ label }}</text>
-          {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh -%}
+          {%- assign gid = "mini-" | append: forloop.index0 -%}
+          {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}
         </g>
         {%- assign y = y | plus: rh -%}
       {%- endfor -%}
