@@ -9,7 +9,7 @@
   --rule: #e4e0d4;
   --band: rgba(0, 0, 0, 0.018);
   --off: #ebe7dc;
-  --accent: #d6336c;
+  --accent: #ff00c8;
   --yes: #2f8f3a;
   --nearly: #c98a1a;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -54,7 +54,7 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
   display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline;
   padding: 1rem 1.25rem; border-bottom: 1px solid var(--rule);
 }
-.brand { font-weight: 700; text-decoration: none; font-size: 1.1rem; }
+.brand { font-weight: 700; text-decoration: none; font-size: 1.1rem; color: var(--accent); }
 .site-header nav { display: flex; gap: 1.25rem; }
 .site-header nav a { text-decoration: none; color: var(--muted); }
 .site-header nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
@@ -190,9 +190,6 @@ article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
 .dial .season { stroke: var(--c); stroke-width: var(--arc-w, 2.5); opacity: var(--arc-o, 0.75); }
 main:has(#arcs-off:checked) .dial .season { display: none; }
 .switches { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
-.candidates .dial { width: min(44rem, 100%); margin-bottom: 0.5rem; }
-.candidates h2 { margin: 3rem 0 0.25rem; }
-.candidates .lede { margin-top: 0; }
 .dial .label .dot { fill: var(--c); }
 .dial .label:hover text { fill: var(--accent); font-weight: 600; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
