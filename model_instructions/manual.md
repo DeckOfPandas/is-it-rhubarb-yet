@@ -18,8 +18,9 @@ in `CLAUDE.md`; this is the map.
   not in the YAML, or the next run loses the edit. `--wheels` also
   writes `_wheels/` stubs, one standalone SVG per food.
 - Pages: `index.html` (calendar, three orderings), `now/` (weekly
-  list, three orderings), `year/` (arrivals dials), `is-it/` (index)
-  and `_layouts/food.html` (one food). Includes: `calendar.html`,
+  list, three orderings), `year/` (arrivals dials), `is-it/` (index),
+  `_layouts/food.html` (one food), `about.html` (the `??` page, in
+  Helen's voice) and `404.html`. Includes: `calendar.html`,
   `season-cells.html` (one chart row), `season-wheel.html` (one food's
   wheel), `arrivals-dial.html` (one kind's dial).
 - Switches are radio groups. CSS `:has()` shows the chosen variant;

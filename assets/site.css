@@ -278,6 +278,15 @@ main:has(#arcs-off:checked) .dial .season { display: none; }
 .dial .allyear { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: -0.5rem; }
 .dial .allyear .head { font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
 
+/* The about page and the 404: prose in one column. */
+.about { max-width: 40rem; }
+.about h2 { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 2rem 0 0.5rem; }
+.about h3 { font-size: 1.05rem; color: var(--fg); text-transform: none; letter-spacing: 0; margin: 1.5rem 0 0.25rem; }
+.about h3 + p { margin-top: 0; }
+.about hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
+.about-ways { padding-left: 1.2rem; }
+.about-ways li { margin: 0.35rem 0; }
+
 .fine { margin: 2rem 0; color: var(--muted); }
 .fine summary { cursor: pointer; }
 .note, .source { color: var(--muted); font-size: 0.95rem; max-width: 40rem; }
