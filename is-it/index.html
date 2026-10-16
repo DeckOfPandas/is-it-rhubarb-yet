@@ -5,11 +5,13 @@ permalink: /is-it/
 ---
 <h1>Is it … yet?</h1>
 <p class="lede">Pick a food. You will get a yes, a no, or a date.</p>
-{%- comment -%} None checked to start, so the whole list shows. site.js
-    narrows the list to the chosen state for this week, needing the
-    season data, so without it the switch does nothing. {%- endcomment -%}
+{%- comment -%} site.js narrows the list to the chosen state for this
+    week, needing the season data, so without it the switch does nothing
+    and the whole list shows. "In season" is the three states together. {%- endcomment -%}
 <fieldset class="switch" id="ask-state">
   <legend>Narrow to</legend>
+  <input type="radio" name="state" id="state-all" value="" checked><label for="state-all">All</label>
+  <input type="radio" name="state" id="state-any" value="any"><label for="state-any">In season</label>
   <input type="radio" name="state" id="state-out" value="out"><label for="state-out">Going out</label>
   <input type="radio" name="state" id="state-in" value="in"><label for="state-in">Perfect now</label>
   <input type="radio" name="state" id="state-coming" value="coming"><label for="state-coming">Coming in</label>

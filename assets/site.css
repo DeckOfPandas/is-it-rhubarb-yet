@@ -124,7 +124,6 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
   display: grid; justify-items: center; gap: 0.6rem; text-align: center; color: var(--muted); font-size: 0.85rem;
 }
 .site-footer p { margin: 0; }
-.site-footer .sources { max-width: 40rem; }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.25rem; }
 .site-footer a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 .site-footer a:hover, .site-footer a:focus-visible { color: var(--accent); }

@@ -371,8 +371,9 @@
 
   // --- The ask index --------------------------------------------------------
   // Narrowed two ways at once: by the words in the header box (or ?q=),
-  // and by the state switch at the top (going out, perfect now, coming
-  // in), which needs this week's season data, fetched from the JSON API.
+  // and by the state switch at the top (in season, going out, perfect
+  // now, coming in; "" is all), which needs this week's season data,
+  // fetched from the JSON API.
   // A family heading goes when nothing is left under it. The note says
   // what is showing and offers the whole list back.
   var ask = null;
@@ -401,13 +402,15 @@
     var query = url.searchParams.get("q") || "";
     var state = url.searchParams.get("state") || "";
     var states = null;
-    var SAID = { out: "going out", in: "perfect now", coming: "coming in" };
+    var SAID = { any: "in season", out: "going out", in: "perfect now", coming: "coming in" };
 
     if (input && query) input.value = query;
-    if (box) {
-      var chosen = box.querySelector('input[value="' + state + '"]');
-      if (chosen) chosen.checked = true; else state = "";
+    function showState() {
+      if (!box) return;
+      if (!box.querySelector('input[value="' + state + '"]')) state = "";
+      box.querySelectorAll("input").forEach(function (r) { r.checked = r.value === state; });
     }
+    showState();
 
     function apply() {
       var q = foldQuery(query), shown = 0, total = 0;
@@ -418,7 +421,8 @@
           total++;
           var hide = q.length >= MIN_CHARS &&
             !tierOf(fold(li.dataset.name + " " + (li.dataset.varieties || "")), q);
-          if (byState && states[li.dataset.slug] !== state) hide = true;
+          var s = byState ? states[li.dataset.slug] : "";
+          if (byState && (state === "any" ? !s : s !== state)) hide = true;
           li.hidden = hide;
           if (!hide) { any = true; shown++; }
         });
@@ -444,7 +448,7 @@
         e.preventDefault();
         query = ""; state = "";
         if (input) input.value = "";
-        if (box) box.querySelectorAll("input").forEach(function (r) { r.checked = false; });
+        showState();
         apply();
       });
       note.appendChild(all);
