@@ -33,9 +33,21 @@
     {{ content }}
   </main>
   <footer class="site-footer">
-    <p>UK seasons from the New Covent Garden Market calendar, BBC Good Food, Flying Fish Seafoods and the BASC shooting seasons, with wild and foraged extras from general knowledge.
-       <a href="{{ '/seasons.ics' | relative_url }}">Subscribe to season starts</a> ·
-       <a href="{{ '/api/foods.json' | relative_url }}">Data as JSON</a></p>
+    <p class="sources">UK seasons from the New Covent Garden Market calendar, BBC Good Food, Flying Fish Seafoods and the BASC shooting seasons, with wild and foraged extras from general knowledge.</p>
+    <nav class="footer-links" aria-label="About this site">
+      <a href="{{ '/seasons.ics' | relative_url }}">Subscribe to season starts</a>
+      <a href="{{ '/api/foods.json' | relative_url }}">Data as JSON</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+    </nav>
+    <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="Source on GitHub">{% include icons/github.svg %}</a>
+    <p class="copyright">&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+    {% comment %} Two sentences in two spans, so a narrow screen breaks
+       between them and never inside one. {% endcomment %}
+    <p class="licence">
+      <span>Code: <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/blob/main/LICENSE">MIT</a>.</span>
+      <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span>
+    </p>
+    <div class="hearts" aria-hidden="true">{% include icons/hearts.svg %}</div>
   </footer>
   <script src="{{ '/assets/site.js' | relative_url }}"></script>
 </body>
