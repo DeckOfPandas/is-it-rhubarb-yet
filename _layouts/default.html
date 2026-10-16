@@ -15,27 +15,57 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <nav>
-      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Calendar</a>
-      <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>This week</a>
-      <a href="{{ '/year/' | relative_url }}"{% if page.url == '/year/' %} aria-current="page"{% endif %}>The year</a>
-      <a href="{{ '/is-it/' | relative_url }}"{% if page.url contains '/is-it/' %} aria-current="page"{% endif %}>Is it … yet?</a>
-    </nav>
     <fieldset class="switch theme" data-remember="theme">
       <legend>Theme</legend>
-      <input type="radio" name="theme" id="theme-dark" value="dark"><label for="theme-dark">Dark</label>
-      <input type="radio" name="theme" id="theme-auto" value="auto" checked><label for="theme-auto">Auto</label>
-      <input type="radio" name="theme" id="theme-light" value="light"><label for="theme-light">Light</label>
+      <input type="radio" name="theme" id="theme-dark" value="dark"><label for="theme-dark">dark</label>
+      <input type="radio" name="theme" id="theme-auto" value="auto" checked><label for="theme-auto">auto</label>
+      <input type="radio" name="theme" id="theme-light" value="light"><label for="theme-light">light</label>
     </fieldset>
+    {% comment %} A three-track grid, the wordmark and the search box in
+       the middle track so the nav cannot push them off centre. The nav is
+       first in the markup for the tab order; the grid places every child
+       by hand. The nav's letters stand in for icons not yet drawn. {% endcomment %}
+    <div class="site-header-inner">
+      <nav class="site-nav" aria-label="Site">
+        <a href="{{ '/now/' | relative_url }}" aria-label="This week"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>
+        <a href="{{ '/' | relative_url }}" aria-label="Calendar"{% if page.url == '/' %} aria-current="page"{% endif %}>Call</a>
+        <a href="{{ '/year/' | relative_url }}" aria-label="The year"{% if page.url == '/year/' %} aria-current="page"{% endif %}>Clock</a>
+        <a href="{{ '/is-it/' | relative_url }}" aria-label="All the foods"{% if page.url contains '/is-it/' %} aria-current="page"{% endif %}>All</a>
+      </nav>
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      {% comment %} The search for a food. A plain GET to the ask index with
+         `q=`, which works with no JavaScript; site.js upgrades it with a
+         dropdown fed from the JSON API named in data-index, and the family
+         names in data-groups so a family is findable too. {% endcomment %}
+      <form class="search" role="search" method="get" action="{{ '/is-it/' | relative_url }}"
+            data-index="{{ '/api/foods.json' | relative_url }}" data-ask="{{ '/is-it/' | relative_url }}"
+            data-groups="{{ site.data.groups | jsonify | escape }}">
+        <input type="search" name="q" class="search-input" autocomplete="off"
+               placeholder="Is it … yet?" aria-label="Is it … yet? Search the foods"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results">
+        <button type="submit" class="search-go" aria-label="Search">{% include icons/search.svg class="search-mark" %}</button>
+        <div class="search-results" id="search-results" role="listbox" hidden></div>
+      </form>
+    </div>
   </header>
   <main>
     {{ content }}
   </main>
   <footer class="site-footer">
-    <p>UK seasons from the New Covent Garden Market calendar, BBC Good Food, Flying Fish Seafoods and the BASC shooting seasons, with wild and foraged extras from general knowledge.
-       <a href="{{ '/seasons.ics' | relative_url }}">Subscribe to season starts</a> ·
-       <a href="{{ '/api/foods.json' | relative_url }}">Data as JSON</a></p>
+    <nav class="footer-links" aria-label="About this site">
+      <a href="{{ '/sources/' | relative_url }}">Source data</a>
+      <a href="{{ '/seasons.ics' | relative_url }}">Subscribe to season starts</a>
+      <a href="{{ '/api/foods.json' | relative_url }}">Data as JSON</a>
+    </nav>
+    <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="Source on GitHub">{% include icons/github.svg %}</a>
+    <p class="copyright">&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+    {% comment %} Two sentences in two spans, so a narrow screen breaks
+       between them and never inside one. {% endcomment %}
+    <p class="licence">
+      <span>Code: <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/blob/main/LICENSE">MIT</a>.</span>
+      <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span>
+    </p>
+    <div class="hearts" aria-hidden="true">{% include icons/hearts.svg %}</div>
   </footer>
   <script src="{{ '/assets/site.js' | relative_url }}"></script>
 </body>

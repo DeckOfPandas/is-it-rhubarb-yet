@@ -18,13 +18,31 @@ in `CLAUDE.md`; this is the map.
   not in the YAML, or the next run loses the edit. `--wheels` also
   writes `_wheels/` stubs, one standalone SVG per food.
 - Pages: `index.html` (calendar, three orderings), `now/` (weekly
-  list, three orderings), `year/` (arrivals dials), `is-it/` (index)
-  and `_layouts/food.html` (one food). Includes: `calendar.html`,
+  list, three orderings), `year/` (arrivals dials), `is-it/` (index),
+  `_layouts/food.html` (one food), `sources/` (where the data is
+  from, linked from the footer), `404.html`, and `about.html` (the
+  `??` page, in Helen's voice), drafted but `published: false` and
+  linked from nowhere until it is. Includes: `calendar.html`,
   `season-cells.html` (one chart row), `season-wheel.html` (one food's
   wheel), `arrivals-dial.html` (one kind's dial).
 - Switches are radio groups. CSS `:has()` shows the chosen variant;
   JavaScript only remembers the choice in localStorage. Nothing on the
   site needs JavaScript to be readable.
+- The header's search box is a plain GET form to `is-it/` with `q=`.
+  `site.js` adds the dropdown, fetching `api/foods.json` on first
+  focus. On `is-it/` itself the box narrows the list in place, from
+  the box or `?q=`, and so does the state switch at the top (all, in
+  season, going out, perfect now, coming in; `?state=`), which classifies each food
+  for this week from the same JSON. The list is one grid in `now/`'s
+  shape, with the same three orders; "newest first" ranks are set by
+  `site.js` from that JSON, the other two at build time. Matching is whole-word prefix only: every typed
+  word must begin a word of the food, a variety or a family name. A
+  variety is offered as it is said in full: its `said`, else its name
+  then the food's ("Bramley apples"); `foods.yml`'s header says when
+  to set `said`.
+- The footer is one centred stack in `_layouts/default.html`; the
+  GitHub mark, hearts and magnifying glass are includes under
+  `_includes/icons/`, copied from helen-triages.
 
 ## Drawing rules
 

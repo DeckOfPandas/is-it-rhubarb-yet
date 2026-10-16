@@ -50,16 +50,90 @@ a { color: inherit; }
 h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .lede { color: var(--muted); max-width: 40rem; }
 
-.site-header {
-  display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline;
-  padding: 1rem 1.25rem; border-bottom: 1px solid var(--rule);
+/* Header: the wordmark dead centre on row 1 of a `1fr auto 1fr` grid,
+   so neither side can push it; the search box under it in the same
+   track, with the nav at row 2's right end. The theme switch sits
+   outside the grid, in the header's top right corner. Every child is
+   placed by hand: the nav is first in the markup for the tab order and
+   would otherwise take column 1. */
+.site-header { position: relative; padding: 1.5rem 1.25rem 0.3rem; border-bottom: 1px solid var(--rule); }
+.site-header-inner {
+  display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto auto;
+  align-items: end; max-width: 64rem; margin: 0 auto;
 }
-.brand { font-weight: 700; text-decoration: none; font-size: 1.1rem; color: var(--accent); }
-.site-header nav { display: flex; gap: 1.25rem; }
-.site-header nav a { text-decoration: none; color: var(--muted); }
-.site-header nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
-.site-header .theme { margin-left: auto; }
-.site-footer { padding: 1.5rem 1.25rem; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--rule); }
+.brand {
+  grid-row: 1; grid-column: 2; justify-self: center;
+  font-weight: 900; font-size: 1.7rem; line-height: 1.1; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); text-decoration: none; margin-right: -0.12em; text-align: center;
+}
+.site-nav { grid-row: 2; grid-column: 3; justify-self: end; align-self: start; display: flex; gap: 1.4rem; margin-top: 0.4rem; }
+.site-nav a { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--muted); padding: 0.3rem 0; }
+.site-nav a:hover, .site-nav a:focus-visible { color: var(--accent); }
+.site-nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
+.site-header .search { grid-row: 2; grid-column: 2; justify-self: center; margin-top: 0.5rem; }
+.site-header .theme { position: absolute; top: 0.5rem; right: 0.9rem; }
+
+/* Narrow: one column. The nav takes the right end of row 2 and the
+   search is centred on row 3. The wordmark steps down. */
+@media (max-width: 640px) {
+  .site-header { padding-top: 2rem; }
+  .site-header-inner { grid-template-columns: minmax(0, 1fr); }
+  .brand { grid-column: 1; font-size: 1.15rem; }
+  .site-nav { grid-column: 1; }
+  .site-header .search { grid-row: 3; grid-column: 1; }
+  .site-header .theme { top: 0.35rem; right: 0.6rem; }
+}
+
+/* The search box: a hairline input with the glass on its right, so a
+   typed word grows leftwards from the glass and a long one scrolls its
+   start off, never the letters being typed. Focus is the underline
+   taking the accent, not a ring. The dropdown hangs centred under the
+   box, capped to the viewport. */
+.search { position: relative; display: flex; align-items: center; gap: 0.5rem; margin: 0; }
+.search-input {
+  font: inherit; font-size: 0.95rem; width: 13ch; max-width: 100%; box-sizing: content-box;
+  text-align: right; background: transparent; border: 0; border-bottom: 1px solid var(--rule);
+  border-radius: 0; padding: 0 0 2px; margin: 0; color: var(--fg); -webkit-appearance: none; appearance: none;
+}
+.search-input:focus { outline: none; border-bottom-color: var(--accent); box-shadow: inset 0 -1px 0 var(--accent); }
+.search-input::placeholder { color: var(--muted); opacity: 1; }
+.search-input:focus::placeholder { color: transparent; }
+.search-input::-webkit-search-cancel-button { display: none; }
+.search-go { background: none; border: 0; padding: 0; margin: 0; line-height: 0; color: var(--muted); cursor: pointer; }
+.search-go:hover, .search-go:focus-visible { color: var(--accent); }
+.search-mark { display: block; width: 1.15rem; height: 1.15rem; }
+.search-results {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 20; margin-top: 0.4rem;
+  min-width: 100%; width: max-content; max-width: min(24rem, calc(100vw - 2.5rem)); box-sizing: border-box;
+  padding: 0.4rem 0; background: var(--bg); border: 1px solid var(--rule); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+  text-align: left; font-size: 0.95rem;
+}
+.search-group + .search-group { margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--rule); }
+.search-group-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 0.2rem 0.8rem; }
+.search-option { display: block; padding: 0.2rem 0.8rem; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.search-option:hover, .search-option:focus-visible, .search-option.is-active { background: color-mix(in oklab, var(--accent) 14%, var(--bg)); outline: none; }
+.search-hit { color: var(--accent); font-weight: 600; }
+.search-more, .search-none { margin: 0; padding: 0.2rem 0.8rem 0; font-size: 0.8rem; color: var(--muted); }
+.search-all { display: block; margin: 0.4rem 0 0; padding: 0.4rem 0.8rem 0; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--muted); }
+.search-all:hover, .search-all:focus-visible, .search-all.is-active { color: var(--accent); outline: none; }
+.filter-note { color: var(--muted); }
+
+/* Footer: one centred stack, hearts last. */
+.site-footer {
+  max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; border-top: 1px solid var(--rule);
+  display: grid; justify-items: center; gap: 0.6rem; text-align: center; color: var(--muted); font-size: 0.85rem;
+}
+.site-footer p { margin: 0; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.25rem; }
+.site-footer a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.site-footer a:hover, .site-footer a:focus-visible { color: var(--accent); }
+.footer-github { display: inline-flex; margin-top: 0.4rem; opacity: 0.65; }
+.footer-github:hover, .footer-github:focus-visible { opacity: 1; color: inherit; }
+.footer-icon { width: 2rem; height: 2rem; fill: currentColor; }
+.licence { margin-top: -0.4rem; }
+.licence span { display: inline-block; white-space: nowrap; }
+.hearts { color: var(--accent); line-height: 0; margin-top: 0.75rem; }
+.hearts svg { display: block; width: min(240px, 45vw); height: auto; }
 
 /* Switches: a radio group drawn as a pill. The theme switch needs
    JavaScript to do anything, so it only appears with it. The order
@@ -71,8 +145,13 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .switch label { padding: 0.2rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
 .switch input:checked + label { background: var(--fg); color: var(--bg); }
 .switch input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* The theme switch is a quieter pill than the order switches: no
+   border, lowercase, small; the chosen word is underlined in the accent
+   as the nav's current page is. */
 .theme { display: none; }
-.js .theme { display: inline-flex; margin-bottom: 0; }
+.js .theme { display: inline-flex; margin-bottom: 0; border: 0; padding: 0; gap: 0.6rem; }
+.theme label { padding: 0.1rem 0; font-size: 0.72rem; border-radius: 0; letter-spacing: 0.04em; }
+.theme input:checked + label { background: none; color: var(--fg); box-shadow: 0 2px 0 var(--accent); }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
@@ -92,6 +171,7 @@ main:has(#order-start:checked) .in-season li { order: var(--os); }
 main:has(#order-group:checked) .in-season li { order: var(--og); }
 .in-season .heading { display: none; grid-column: 1 / -1; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1rem; }
 main:has(#order-group:checked) .in-season .heading { display: block; }
+.in-season .heading[hidden] { display: none; }
 .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 700; margin-left: 0.3em; }
 
 /* Charts. A row's colour is --c; in-season bars take it as is, "just
@@ -120,10 +200,10 @@ main:has(#order-group:checked) .in-season .heading { display: block; }
 .chart .today { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 3 3; }
 
 /* Lists */
-.food-list, .ask-list { list-style: none; padding: 0; margin: 0.25rem 0 1rem; columns: 14rem; column-gap: 2rem; }
-.food-list li, .ask-list li { break-inside: avoid; padding: 0.15rem 0; }
-.food-list a, .ask-list a { text-decoration: none; }
-.food-list a:hover, .ask-list a:hover { text-decoration: underline; }
+.food-list { list-style: none; padding: 0; margin: 0.25rem 0 1rem; columns: 14rem; column-gap: 2rem; }
+.food-list li { break-inside: avoid; padding: 0.15rem 0; }
+.food-list a { text-decoration: none; }
+.food-list a:hover { text-decoration: underline; }
 .swatch {
   display: inline-block; width: 0.8em; height: 0.8em; margin-right: 0.5em;
   background: var(--c); border-radius: 2px; vertical-align: baseline;
@@ -196,6 +276,15 @@ main:has(#arcs-off:checked) .dial .season { display: none; }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
 .dial .allyear { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: -0.5rem; }
 .dial .allyear .head { font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
+
+/* The about page and the 404: prose in one column. */
+.about { max-width: 40rem; }
+.about h2 { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 2rem 0 0.5rem; }
+.about h3 { font-size: 1.05rem; color: var(--fg); text-transform: none; letter-spacing: 0; margin: 1.5rem 0 0.25rem; }
+.about h3 + p { margin-top: 0; }
+.about hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
+.about-ways { padding-left: 1.2rem; }
+.about-ways li { margin: 0.35rem 0; }
 
 .fine { margin: 2rem 0; color: var(--muted); }
 .fine summary { cursor: pointer; }

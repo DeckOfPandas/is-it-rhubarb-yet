@@ -37,6 +37,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - LICENSE
   - CLAUDE.md
   - pytest.ini
   - tests/
