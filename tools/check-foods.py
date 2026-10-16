@@ -80,6 +80,10 @@ def main() -> int:
                 continue
             if "colour" in v and not COLOUR.match(str(v["colour"])):
                 problems.append(f"{label}: colour must be #rrggbb lowercase")
+            if "said" in v and not (isinstance(v["said"], str) and v["said"].strip()):
+                problems.append(f"{label}: said must be a phrase")
+            if "said" in v and not v.get("name"):
+                problems.append(f"{label}: said needs a named variety")
             check_shades(v, label, problems)
             row_colour = v.get("colour", f.get("colour"))
             if row_colour in colours:

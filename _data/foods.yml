@@ -12,6 +12,10 @@
 #         basc = BASC shooting seasons, ffs = Flying Fish Seafoods'
 #         Cornish chart, general = common knowledge, please check.
 # buy: optional, what to ask for at the counter (fish and shellfish).
+# said: optional on a variety, how it is said in full. Unset, a variety
+#       is its name then the food's: "Bramley apples", "Forced rhubarb".
+#       Set it when the name is a noun on its own (Mooli, Calabrese,
+#       Mutton) or the phrase hyphenates (New-season lamb).
 
 - name: "Beetroot"
   slug: beetroot
@@ -111,6 +115,7 @@
       weeks:
         - [14, 48, in]
     - name: "Mooli"
+      said: "Mooli"
       colour: "#ece6d6"
       weeks:
         - [18, 22, avail]
@@ -160,6 +165,7 @@
   note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
   varieties:
     - name: "Calabrese"
+      said: "Calabrese"
       colour: "#3a8a3a"
       weeks:
         - [18, 22, avail]
@@ -1634,12 +1640,14 @@
   source: general
   varieties:
     - name: "New season"
+      said: "New-season lamb"
       colour: "#d06868"
       weeks:
         - [18, 22, avail]
         - [23, 48, in]
         - [49, 52, avail]
     - name: "Mutton"
+      said: "Mutton"
       colour: "#7a3030"
       weeks:
         - [1, 8, in]

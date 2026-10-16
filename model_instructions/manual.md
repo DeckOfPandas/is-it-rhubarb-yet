@@ -29,7 +29,10 @@ in `CLAUDE.md`; this is the map.
   `site.js` adds the dropdown, fetching `api/foods.json` on first
   focus, and on `is-it/` itself filters the list in place from the
   box or from `?q=`. Matching is whole-word prefix only: every typed
-  word must begin a word of the food, a variety or a family name.
+  word must begin a word of the food, a variety or a family name. A
+  variety is offered as it is said in full: its `said`, else its name
+  then the food's ("Bramley apples"); `foods.yml`'s header says when
+  to set `said`.
 - The footer is one centred stack in `_layouts/default.html`; the
   GitHub mark, hearts and magnifying glass are includes under
   `_includes/icons/`, copied from helen-triages.

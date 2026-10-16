@@ -87,7 +87,6 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .search-group + .search-group { margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--rule); }
 .search-group-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 0.2rem 0.8rem; }
 .search-option { display: block; padding: 0.2rem 0.8rem; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.search-option .of { color: var(--muted); }
 .search-option:hover, .search-option:focus-visible, .search-option.is-active { background: color-mix(in oklab, var(--accent) 14%, var(--bg)); outline: none; }
 .search-hit { color: var(--accent); font-weight: 600; }
 .search-more, .search-none { margin: 0; padding: 0.2rem 0.8rem 0; font-size: 0.8rem; color: var(--muted); }

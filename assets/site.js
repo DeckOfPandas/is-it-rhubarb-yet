@@ -328,8 +328,9 @@
     return frag;
   }
 
-  // Candidates from the data: a food by its name, a named variety under
-  // its food, a family by its name. `of` is the grey word after a variety.
+  // Candidates from the data: a food by its name, a named variety as it is
+  // said in full (its `said`, else its name then the food's: "Bramley
+  // apples"), a family by its name.
   function buildIndex(foods, groups, askUrl) {
     var items = { food: [], variety: [], family: [] };
     foods.forEach(function (f) {
@@ -337,7 +338,8 @@
       items.food.push({ label: f.name, folded: fold(f.name), href: href, slug: f.slug });
       (f.varieties || []).forEach(function (v) {
         if (!v.name) return;
-        items.variety.push({ label: v.name, folded: fold(v.name), of: f.name.toLowerCase(), href: href });
+        var said = v.said || (v.name + " " + f.name.toLowerCase());
+        items.variety.push({ label: said, folded: fold(said), href: href });
       });
     });
     (groups || []).forEach(function (g) {
@@ -360,7 +362,7 @@
       out.push({
         kind: g[0], label: g[1], total: found.length, hidden: Math.max(0, found.length - g[2]),
         results: found.slice(0, g[2]).map(function (it) {
-          return { label: it.label, of: it.of, href: it.href, hit: hitOf(it.folded, query) };
+          return { label: it.label, href: it.href, hit: hitOf(it.folded, query) };
         })
       });
     });
@@ -442,9 +444,7 @@
         section.setAttribute("role", "group");
         section.appendChild(el("div", "search-group-label", g.label));
         g.results.forEach(function (r) {
-          var node = labelNode(r.label, r.hit);
-          if (r.of) node.appendChild(el("span", "of", " · " + r.of));
-          section.appendChild(option("search-option", r.href, node));
+          section.appendChild(option("search-option", r.href, labelNode(r.label, r.hit)));
         });
         if (g.hidden > 0) section.appendChild(el("p", "search-more", "+" + g.hidden + " more"));
         panel.appendChild(section);
