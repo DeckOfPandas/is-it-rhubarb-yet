@@ -70,3 +70,8 @@ overwrites `_data/foods.yml`.
 The dev container, hooks and agent setup are from
 [helen-contains-claude](https://github.com/DeckOfPandas/helen-contains-claude),
 which explains them so this file does not have to.
+
+## Licence
+
+Code: [MIT](LICENSE). Data and writing:
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
