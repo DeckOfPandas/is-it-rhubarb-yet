@@ -20,8 +20,20 @@
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Calendar</a>
       <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>This week</a>
       <a href="{{ '/year/' | relative_url }}"{% if page.url == '/year/' %} aria-current="page"{% endif %}>The year</a>
-      <a href="{{ '/is-it/' | relative_url }}"{% if page.url contains '/is-it/' %} aria-current="page"{% endif %}>Is it … yet?</a>
     </nav>
+    {% comment %} The search for a food. A plain GET to the ask index with
+       `q=`, which works with no JavaScript; site.js upgrades it with a
+       dropdown fed from the JSON API named in data-index, and the family
+       names in data-groups so a family is findable too. {% endcomment %}
+    <form class="search" role="search" method="get" action="{{ '/is-it/' | relative_url }}"
+          data-index="{{ '/api/foods.json' | relative_url }}" data-ask="{{ '/is-it/' | relative_url }}"
+          data-groups="{{ site.data.groups | jsonify | escape }}">
+      <input type="search" name="q" class="search-input" autocomplete="off"
+             placeholder="Is it … yet?" aria-label="Is it … yet? Search the foods"
+             role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results">
+      <button type="submit" class="search-go" aria-label="Search">{% include icons/search.svg class="search-mark" %}</button>
+      <div class="search-results" id="search-results" role="listbox" hidden></div>
+    </form>
     <fieldset class="switch theme" data-remember="theme">
       <legend>Theme</legend>
       <input type="radio" name="theme" id="theme-dark" value="dark"><label for="theme-dark">Dark</label>

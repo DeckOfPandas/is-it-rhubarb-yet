@@ -25,6 +25,14 @@ in `CLAUDE.md`; this is the map.
 - Switches are radio groups. CSS `:has()` shows the chosen variant;
   JavaScript only remembers the choice in localStorage. Nothing on the
   site needs JavaScript to be readable.
+- The header's search box is a plain GET form to `is-it/` with `q=`.
+  `site.js` adds the dropdown, fetching `api/foods.json` on first
+  focus, and on `is-it/` itself filters the list in place from the
+  box or from `?q=`. Matching is whole-word prefix only: every typed
+  word must begin a word of the food, a variety or a family name.
+- The footer is one centred stack in `_layouts/default.html`; the
+  GitHub mark, hearts and magnifying glass are includes under
+  `_includes/icons/`, copied from helen-triages.
 
 ## Drawing rules
 

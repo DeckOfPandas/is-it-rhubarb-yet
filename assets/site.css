@@ -60,6 +60,41 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .site-header nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
 .site-header .theme { margin-left: auto; }
 
+/* The search box: a hairline input with the glass on its right, so a
+   typed word grows leftwards from the glass and a long one scrolls its
+   start off, never the letters being typed. Focus is the underline
+   taking the accent, not a ring. The dropdown hangs from the box's
+   left edge: the box sits after the nav, so the room is to its right. */
+.search { position: relative; display: flex; align-items: center; gap: 0.5rem; margin: 0; }
+.search-input {
+  font: inherit; font-size: 0.95rem; width: 13ch; max-width: 100%; box-sizing: content-box;
+  text-align: right; background: transparent; border: 0; border-bottom: 1px solid var(--rule);
+  border-radius: 0; padding: 0 0 2px; margin: 0; color: var(--fg); -webkit-appearance: none; appearance: none;
+}
+.search-input:focus { outline: none; border-bottom-color: var(--accent); box-shadow: inset 0 -1px 0 var(--accent); }
+.search-input::placeholder { color: var(--muted); opacity: 1; }
+.search-input:focus::placeholder { color: transparent; }
+.search-input::-webkit-search-cancel-button { display: none; }
+.search-go { background: none; border: 0; padding: 0; margin: 0; line-height: 0; color: var(--muted); cursor: pointer; }
+.search-go:hover, .search-go:focus-visible { color: var(--accent); }
+.search-mark { display: block; width: 1.15rem; height: 1.15rem; }
+.search-results {
+  position: absolute; top: 100%; left: 0; z-index: 20; margin-top: 0.4rem;
+  min-width: 100%; width: max-content; max-width: min(24rem, calc(100vw - 2.5rem)); box-sizing: border-box;
+  padding: 0.4rem 0; background: var(--bg); border: 1px solid var(--rule); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+  text-align: left; font-size: 0.95rem;
+}
+.search-group + .search-group { margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--rule); }
+.search-group-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 0.2rem 0.8rem; }
+.search-option { display: block; padding: 0.2rem 0.8rem; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.search-option .of { color: var(--muted); }
+.search-option:hover, .search-option:focus-visible, .search-option.is-active { background: color-mix(in oklab, var(--accent) 14%, var(--bg)); outline: none; }
+.search-hit { color: var(--accent); font-weight: 600; }
+.search-more, .search-none { margin: 0; padding: 0.2rem 0.8rem 0; font-size: 0.8rem; color: var(--muted); }
+.search-all { display: block; margin: 0.4rem 0 0; padding: 0.4rem 0.8rem 0; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--muted); }
+.search-all:hover, .search-all:focus-visible, .search-all.is-active { color: var(--accent); outline: none; }
+.filter-note { color: var(--muted); }
+
 /* Footer: one centred stack, hearts last. */
 .site-footer {
   max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; border-top: 1px solid var(--rule);
