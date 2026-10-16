@@ -5,10 +5,20 @@ permalink: /is-it/
 ---
 <h1>Is it … yet?</h1>
 <p class="lede">Pick a food. You will get a yes, a no, or a date.</p>
-{%- comment -%} Filled by site.js when the header's search box, or ?q=,
-    narrows the list; each item's data-name and data-varieties are what the
-    typed words are matched against. A family heading with nothing left
-    under it is hidden too. {%- endcomment -%}
+{%- comment -%} None checked to start, so the whole list shows. site.js
+    narrows the list to the chosen state for this week, needing the
+    season data, so without it the switch does nothing. {%- endcomment -%}
+<fieldset class="switch" id="ask-state">
+  <legend>Narrow to</legend>
+  <input type="radio" name="state" id="state-out" value="out"><label for="state-out">Going out</label>
+  <input type="radio" name="state" id="state-in" value="in"><label for="state-in">Perfect now</label>
+  <input type="radio" name="state" id="state-coming" value="coming"><label for="state-coming">Coming in</label>
+</fieldset>
+{%- comment -%} Filled by site.js when the header's search box, ?q=, or the
+    switch narrows the list; each item's data-name and data-varieties are
+    what the typed words are matched against, and data-slug is how its
+    state is looked up. A family heading with nothing left under it is
+    hidden too. {%- endcomment -%}
 <p class="filter-note" id="filter-note" hidden></p>
 {%- for g in site.data.groups -%}
   {%- assign members = site.data.foods | where: "group", g.key | sort: "name" -%}
@@ -17,7 +27,7 @@ permalink: /is-it/
   <ul class="ask-list" data-group="{{ g.key }}">
   {%- for food in members -%}
     {%- assign vnames = food.varieties | map: "name" | join: " " | strip -%}
-    <li data-name="{{ food.name | escape }}" data-varieties="{{ vnames | escape }}"><a href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ food.colour }}"></span>Is it {{ food.name | downcase }} yet?</a></li>
+    <li data-slug="{{ food.slug }}" data-name="{{ food.name | escape }}" data-varieties="{{ vnames | escape }}"><a href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}"><span class="swatch" style="--c: {{ food.colour }}"></span>Is it {{ food.name | downcase }} yet?</a></li>
   {%- endfor -%}
   </ul>
   {%- endif -%}

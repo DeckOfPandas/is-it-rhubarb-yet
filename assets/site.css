@@ -51,11 +51,11 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .lede { color: var(--muted); max-width: 40rem; }
 
 /* Header: the wordmark dead centre on row 1 of a `1fr auto 1fr` grid,
-   so neither side can push it; `??` at row 2's left end and the nav at
-   its right; the search under the nav. The theme switch sits outside
-   the grid, in the header's top right corner. Every child is placed by
-   hand: the nav is first in the markup for the tab order and would
-   otherwise take column 1. */
+   so neither side can push it; the search box under it in the same
+   track, with the nav at row 2's right end. The theme switch sits
+   outside the grid, in the header's top right corner. Every child is
+   placed by hand: the nav is first in the markup for the tab order and
+   would otherwise take column 1. */
 .site-header { position: relative; padding: 1.5rem 1.25rem 0.3rem; border-bottom: 1px solid var(--rule); }
 .site-header-inner {
   display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto auto;
@@ -66,30 +66,29 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
   font-weight: 900; font-size: 1.7rem; line-height: 1.1; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--accent); text-decoration: none; margin-right: -0.12em; text-align: center;
 }
-.about-link { grid-row: 2; grid-column: 1; justify-self: start; align-self: center; margin-top: 0.4rem; font-size: 1.05rem; color: var(--muted); text-decoration: none; }
-.about-link:hover, .about-link:focus-visible { color: var(--accent); }
 .site-nav { grid-row: 2; grid-column: 3; justify-self: end; align-self: start; display: flex; gap: 1.4rem; margin-top: 0.4rem; }
 .site-nav a { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--muted); padding: 0.3rem 0; }
 .site-nav a:hover, .site-nav a:focus-visible { color: var(--accent); }
 .site-nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
-.site-header .search { grid-row: 3; grid-column: 3; justify-self: end; margin-top: 0.3rem; }
+.site-header .search { grid-row: 2; grid-column: 2; justify-self: center; margin-top: 0.5rem; }
 .site-header .theme { position: absolute; top: 0.5rem; right: 0.9rem; }
 
-/* Narrow: one column. `??` and the nav share row 2 at its two ends; the
-   search takes the right end of row 3. The wordmark steps down. */
+/* Narrow: one column. The nav takes the right end of row 2 and the
+   search is centred on row 3. The wordmark steps down. */
 @media (max-width: 640px) {
   .site-header { padding-top: 2rem; }
   .site-header-inner { grid-template-columns: minmax(0, 1fr); }
   .brand { grid-column: 1; font-size: 1.15rem; }
-  .about-link, .site-nav, .site-header .search { grid-column: 1; }
+  .site-nav { grid-column: 1; }
+  .site-header .search { grid-row: 3; grid-column: 1; }
   .site-header .theme { top: 0.35rem; right: 0.6rem; }
 }
 
 /* The search box: a hairline input with the glass on its right, so a
    typed word grows leftwards from the glass and a long one scrolls its
    start off, never the letters being typed. Focus is the underline
-   taking the accent, not a ring. The dropdown hangs from the box's
-   right edge, which the box sits on. */
+   taking the accent, not a ring. The dropdown hangs centred under the
+   box, capped to the viewport. */
 .search { position: relative; display: flex; align-items: center; gap: 0.5rem; margin: 0; }
 .search-input {
   font: inherit; font-size: 0.95rem; width: 13ch; max-width: 100%; box-sizing: content-box;
@@ -104,7 +103,7 @@ h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
 .search-go:hover, .search-go:focus-visible { color: var(--accent); }
 .search-mark { display: block; width: 1.15rem; height: 1.15rem; }
 .search-results {
-  position: absolute; top: 100%; right: 0; z-index: 20; margin-top: 0.4rem;
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 20; margin-top: 0.4rem;
   min-width: 100%; width: max-content; max-width: min(24rem, calc(100vw - 2.5rem)); box-sizing: border-box;
   padding: 0.4rem 0; background: var(--bg); border: 1px solid var(--rule); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
   text-align: left; font-size: 0.95rem;

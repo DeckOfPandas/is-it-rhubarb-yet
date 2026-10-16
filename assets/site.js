@@ -369,33 +369,102 @@
     return { query: typed, groups: out, all: askUrl + "?q=" + encodeURIComponent(typed) };
   }
 
-  // The ask index narrows its own list: an item stays if its food or any
-  // variety matches; a family heading goes when nothing is left under it.
-  function filterAsk(query, note, askUrl) {
-    var q = foldQuery(query), shown = 0, total = 0;
-    document.querySelectorAll(".ask-list").forEach(function (list) {
-      var any = false;
-      list.querySelectorAll("li").forEach(function (li) {
-        total++;
-        var cand = fold(li.dataset.name + " " + (li.dataset.varieties || ""));
-        var hide = q.length >= MIN_CHARS && !tierOf(cand, q);
-        li.hidden = hide;
-        if (!hide) { any = true; shown++; }
-      });
-      list.hidden = !any;
-      var heading = document.getElementById(list.dataset.group);
-      if (heading) heading.hidden = !any;
+  // --- The ask index --------------------------------------------------------
+  // Narrowed two ways at once: by the words in the header box (or ?q=),
+  // and by the state switch at the top (going out, perfect now, coming
+  // in), which needs this week's season data, fetched from the JSON API.
+  // A family heading goes when nothing is left under it. The note says
+  // what is showing and offers the whole list back.
+  var ask = null;
+
+  // A food's state this week: "in" if any variety is in season, else the
+  // direction of the first "just about" variety, else "".
+  function stateOfFood(food, week) {
+    var best = "";
+    food.varieties.forEach(function (v) {
+      var s = stateAt(v, week);
+      if (s === "in") best = "in";
+      else if (s === "avail" && best === "") best = goingOut(v, week) ? "out" : "coming";
     });
-    if (!note) return;
-    if (q.length < MIN_CHARS) { note.hidden = true; return; }
-    note.textContent = "";
-    note.appendChild(document.createTextNode(
-      (shown ? shown : "Nothing") + (shown ? " of " + total : "") + " for “" + query.trim() + "”. "));
-    var all = el("a", null, "See all");
-    all.href = askUrl;
-    note.appendChild(all);
-    note.appendChild(document.createTextNode("."));
-    note.hidden = false;
+    return best;
+  }
+
+  function initAsk() {
+    var lists = document.querySelectorAll(".ask-list");
+    if (!lists.length) return;
+    var note = document.getElementById("filter-note");
+    var form = document.querySelector("form.search");
+    var input = form ? form.querySelector(".search-input") : null;
+    var askUrl = form ? form.dataset.ask : location.pathname;
+    var box = document.getElementById("ask-state");
+    var url = new URL(location.href);
+    var query = url.searchParams.get("q") || "";
+    var state = url.searchParams.get("state") || "";
+    var states = null;
+    var SAID = { out: "going out", in: "perfect now", coming: "coming in" };
+
+    if (input && query) input.value = query;
+    if (box) {
+      var chosen = box.querySelector('input[value="' + state + '"]');
+      if (chosen) chosen.checked = true; else state = "";
+    }
+
+    function apply() {
+      var q = foldQuery(query), shown = 0, total = 0;
+      var byState = !!(state && states);
+      lists.forEach(function (list) {
+        var any = false;
+        list.querySelectorAll("li").forEach(function (li) {
+          total++;
+          var hide = q.length >= MIN_CHARS &&
+            !tierOf(fold(li.dataset.name + " " + (li.dataset.varieties || "")), q);
+          if (byState && states[li.dataset.slug] !== state) hide = true;
+          li.hidden = hide;
+          if (!hide) { any = true; shown++; }
+        });
+        list.hidden = !any;
+        var heading = document.getElementById(list.dataset.group);
+        if (heading) heading.hidden = !any;
+      });
+      url = new URL(location.href);
+      if (query.trim()) url.searchParams.set("q", query.trim()); else url.searchParams.delete("q");
+      if (state) url.searchParams.set("state", state); else url.searchParams.delete("state");
+      history.replaceState(null, "", url);
+      if (!note) return;
+      var what = [];
+      if (byState) what.push(SAID[state]);
+      if (q.length >= MIN_CHARS) what.push("for “" + query.trim() + "”");
+      if (!what.length) { note.hidden = true; return; }
+      note.textContent = "";
+      note.appendChild(document.createTextNode(
+        (shown ? shown + " of " + total : "Nothing") + " " + what.join(", ") + ". "));
+      var all = el("a", null, "See all");
+      all.href = askUrl;
+      all.addEventListener("click", function (e) {
+        e.preventDefault();
+        query = ""; state = "";
+        if (input) input.value = "";
+        if (box) box.querySelectorAll("input").forEach(function (r) { r.checked = false; });
+        apply();
+      });
+      note.appendChild(all);
+      note.appendChild(document.createTextNode("."));
+      note.hidden = false;
+    }
+
+    if (box && form) {
+      fetch(form.dataset.index).then(function (r) { return r.json(); }).then(function (foods) {
+        var week = weekOf(new Date());
+        states = {};
+        foods.forEach(function (f) { states[f.slug] = stateOfFood(f, week); });
+        apply();
+      }).catch(function () {});
+      box.querySelectorAll("input").forEach(function (r) {
+        r.addEventListener("change", function () { if (r.checked) { state = r.value; apply(); } });
+      });
+    }
+    apply();
+    ask = { setQuery: function (q) { query = q; apply(); } };
   }
 
   function initSearch() {
@@ -405,8 +474,6 @@
     var panel = form.querySelector(".search-results");
     var askUrl = form.dataset.ask;
     var groups = JSON.parse(form.dataset.groups || "[]");
-    var note = document.getElementById("filter-note");
-    var onAsk = !!document.querySelector(".ask-list");
     var index = null, loading = false, flat = [], active = -1;
 
     function load(then) {
@@ -464,21 +531,13 @@
     }
 
     function refresh() {
-      if (onAsk) {
-        filterAsk(input.value, note, askUrl);
-        var url = new URL(location.href);
-        if (input.value.trim()) url.searchParams.set("q", input.value.trim()); else url.searchParams.delete("q");
-        history.replaceState(null, "", url);
-        return;
-      }
       if (index && document.activeElement === input) paint(search(index, input.value, askUrl));
     }
 
-    if (onAsk) {
-      var q = new URL(location.href).searchParams.get("q") || "";
-      if (q) input.value = q;
-      filterAsk(q, note, askUrl);
-      input.addEventListener("input", refresh);
+    // On the ask index the box narrows the list below instead of
+    // opening a dropdown.
+    if (ask) {
+      input.addEventListener("input", function () { ask.setQuery(input.value); });
       return;
     }
 
@@ -506,6 +565,7 @@
     initSwitches();
     initNow();
     initFood();
+    initAsk();
     initSearch();
   });
 })();

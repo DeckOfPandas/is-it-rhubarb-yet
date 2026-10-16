@@ -19,8 +19,9 @@ in `CLAUDE.md`; this is the map.
   writes `_wheels/` stubs, one standalone SVG per food.
 - Pages: `index.html` (calendar, three orderings), `now/` (weekly
   list, three orderings), `year/` (arrivals dials), `is-it/` (index),
-  `_layouts/food.html` (one food), `about.html` (the `??` page, in
-  Helen's voice) and `404.html`. Includes: `calendar.html`,
+  `_layouts/food.html` (one food), `404.html`, and `about.html` (the
+  `??` page, in Helen's voice), drafted but `published: false` and
+  linked from nowhere until it is. Includes: `calendar.html`,
   `season-cells.html` (one chart row), `season-wheel.html` (one food's
   wheel), `arrivals-dial.html` (one kind's dial).
 - Switches are radio groups. CSS `:has()` shows the chosen variant;
@@ -28,8 +29,10 @@ in `CLAUDE.md`; this is the map.
   site needs JavaScript to be readable.
 - The header's search box is a plain GET form to `is-it/` with `q=`.
   `site.js` adds the dropdown, fetching `api/foods.json` on first
-  focus, and on `is-it/` itself filters the list in place from the
-  box or from `?q=`. Matching is whole-word prefix only: every typed
+  focus. On `is-it/` itself the box narrows the list in place, from
+  the box or `?q=`, and so does the state switch at the top (going
+  out, perfect now, coming in; `?state=`), which classifies each food
+  for this week from the same JSON. Matching is whole-word prefix only: every typed
   word must begin a word of the food, a variety or a family name. A
   variety is offered as it is said in full: its `said`, else its name
   then the food's ("Bramley apples"); `foods.yml`'s header says when
