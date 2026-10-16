@@ -33,7 +33,9 @@ in `CLAUDE.md`; this is the map.
   focus. On `is-it/` itself the box narrows the list in place, from
   the box or `?q=`, and so does the state switch at the top (all, in
   season, going out, perfect now, coming in; `?state=`), which classifies each food
-  for this week from the same JSON. Matching is whole-word prefix only: every typed
+  for this week from the same JSON. The list is one grid in `now/`'s
+  shape, with the same three orders; "newest first" ranks are set by
+  `site.js` from that JSON, the other two at build time. Matching is whole-word prefix only: every typed
   word must begin a word of the food, a variety or a family name. A
   variety is offered as it is said in full: its `said`, else its name
   then the food's ("Bramley apples"); `foods.yml`'s header says when

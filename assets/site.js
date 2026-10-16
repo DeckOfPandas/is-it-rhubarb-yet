@@ -390,9 +390,36 @@
     return best;
   }
 
+  // The food's rank under "newest first", over every food: in season by
+  // weeks since the run began, then coming in and going out by weeks
+  // until the next in-season week, then the rest after them A to Z.
+  function newestRank(food, week, state, alpha) {
+    if (state === "in") {
+      var best = 52;
+      food.varieties.forEach(function (v) {
+        if (stateAt(v, week) !== "in") return;
+        var w = week, n = 0;
+        while (n < 51) {
+          var prev = w === 1 ? 52 : w - 1;
+          if (stateAt(v, prev) !== "in") break;
+          w = prev; n++;
+        }
+        if (n < best) best = n;
+      });
+      return best;
+    }
+    var next = nextIn(food, week);
+    var until = next ? (next.week - week + 52) % 52 + next.yearsAhead * 52 : 999;
+    if (state === "coming") return 100 + until;
+    if (state === "out") return 200 + until;
+    return 1000 + alpha;
+  }
+
   function initAsk() {
-    var lists = document.querySelectorAll(".ask-list");
-    if (!lists.length) return;
+    var list = document.getElementById("ask-list");
+    if (!list) return;
+    var items = list.querySelectorAll("li:not(.heading)");
+    var headings = list.querySelectorAll("li.heading");
     var note = document.getElementById("filter-note");
     var form = document.querySelector("form.search");
     var input = form ? form.querySelector(".search-input") : null;
@@ -413,23 +440,17 @@
     showState();
 
     function apply() {
-      var q = foldQuery(query), shown = 0, total = 0;
+      var q = foldQuery(query), shown = 0, total = items.length, left = {};
       var byState = !!(state && states);
-      lists.forEach(function (list) {
-        var any = false;
-        list.querySelectorAll("li").forEach(function (li) {
-          total++;
-          var hide = q.length >= MIN_CHARS &&
-            !tierOf(fold(li.dataset.name + " " + (li.dataset.varieties || "")), q);
-          var s = byState ? states[li.dataset.slug] : "";
-          if (byState && (state === "any" ? !s : s !== state)) hide = true;
-          li.hidden = hide;
-          if (!hide) { any = true; shown++; }
-        });
-        list.hidden = !any;
-        var heading = document.getElementById(list.dataset.group);
-        if (heading) heading.hidden = !any;
+      items.forEach(function (li) {
+        var hide = q.length >= MIN_CHARS &&
+          !tierOf(fold(li.dataset.name + " " + (li.dataset.varieties || "")), q);
+        var s = byState ? states[li.dataset.slug] : "";
+        if (byState && (state === "any" ? !s : s !== state)) hide = true;
+        li.hidden = hide;
+        if (!hide) { shown++; left[li.dataset.group] = true; }
       });
+      headings.forEach(function (h) { h.hidden = !left[h.dataset.group]; });
       url = new URL(location.href);
       if (query.trim()) url.searchParams.set("q", query.trim()); else url.searchParams.delete("q");
       if (state) url.searchParams.set("state", state); else url.searchParams.delete("state");
@@ -459,8 +480,15 @@
     if (box && form) {
       fetch(form.dataset.index).then(function (r) { return r.json(); }).then(function (foods) {
         var week = weekOf(new Date());
+        var bySlug = {};
+        foods.forEach(function (f) { bySlug[f.slug] = f; });
         states = {};
-        foods.forEach(function (f) { states[f.slug] = stateOfFood(f, week); });
+        items.forEach(function (li, i) {
+          var f = bySlug[li.dataset.slug];
+          if (!f) return;
+          states[f.slug] = stateOfFood(f, week);
+          li.style.setProperty("--os", newestRank(f, week, states[f.slug], i));
+        });
         apply();
       }).catch(function () {});
       box.querySelectorAll("input").forEach(function (r) {

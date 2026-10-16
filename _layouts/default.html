@@ -27,9 +27,9 @@
        by hand. The nav's letters stand in for icons not yet drawn. {% endcomment %}
     <div class="site-header-inner">
       <nav class="site-nav" aria-label="Site">
-        <a href="{{ '/now/' | relative_url }}" aria-label="This week"{% if page.url == '/now/' %} aria-current="page"{% endif %}>N</a>
-        <a href="{{ '/' | relative_url }}" aria-label="Calendar"{% if page.url == '/' %} aria-current="page"{% endif %}>Ca</a>
-        <a href="{{ '/year/' | relative_url }}" aria-label="The year"{% if page.url == '/year/' %} aria-current="page"{% endif %}>Cl</a>
+        <a href="{{ '/now/' | relative_url }}" aria-label="This week"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>
+        <a href="{{ '/' | relative_url }}" aria-label="Calendar"{% if page.url == '/' %} aria-current="page"{% endif %}>Call</a>
+        <a href="{{ '/year/' | relative_url }}" aria-label="The year"{% if page.url == '/year/' %} aria-current="page"{% endif %}>Clock</a>
         <a href="{{ '/is-it/' | relative_url }}" aria-label="All the foods"{% if page.url contains '/is-it/' %} aria-current="page"{% endif %}>All</a>
       </nav>
       <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>

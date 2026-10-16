@@ -171,6 +171,7 @@ main:has(#order-start:checked) .in-season li { order: var(--os); }
 main:has(#order-group:checked) .in-season li { order: var(--og); }
 .in-season .heading { display: none; grid-column: 1 / -1; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1rem; }
 main:has(#order-group:checked) .in-season .heading { display: block; }
+.in-season .heading[hidden] { display: none; }
 .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 700; margin-left: 0.3em; }
 
 /* Charts. A row's colour is --c; in-season bars take it as is, "just
@@ -199,10 +200,10 @@ main:has(#order-group:checked) .in-season .heading { display: block; }
 .chart .today { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 3 3; }
 
 /* Lists */
-.food-list, .ask-list { list-style: none; padding: 0; margin: 0.25rem 0 1rem; columns: 14rem; column-gap: 2rem; }
-.food-list li, .ask-list li { break-inside: avoid; padding: 0.15rem 0; }
-.food-list a, .ask-list a { text-decoration: none; }
-.food-list a:hover, .ask-list a:hover { text-decoration: underline; }
+.food-list { list-style: none; padding: 0; margin: 0.25rem 0 1rem; columns: 14rem; column-gap: 2rem; }
+.food-list li { break-inside: avoid; padding: 0.15rem 0; }
+.food-list a { text-decoration: none; }
+.food-list a:hover { text-decoration: underline; }
 .swatch {
   display: inline-block; width: 0.8em; height: 0.8em; margin-right: 0.5em;
   background: var(--c); border-radius: 2px; vertical-align: baseline;
