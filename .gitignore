@@ -4,7 +4,9 @@ tmp/
 .env.*
 __pycache__/
 .pytest_cache/
+.claude/worktrees/
+scripts/github.local.conf
+.devcontainer/kit.local.env
 _site
-.claude/worktrees
 .jekyll-cache/
 vendor/

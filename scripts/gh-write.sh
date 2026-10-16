@@ -10,7 +10,7 @@
 #   sh scripts/gh-write.sh issue-create <repo> "<title>" tmp/<body>.md [<label>]
 #   sh scripts/gh-write.sh label-create <repo> <label> <rrggbb>
 #
-# <repo> is a bare name from GH_REPOS in scripts/github.conf. A PR's base is
+# <repo> is a bare name from GH_REPOS in the GitHub config. A PR's base is
 # always main and its head never is. `comment` takes an issue or PR number. A
 # label is letters, digits, dots, dashes and underscores; a colour is six hex
 # digits with no #. One label per issue, and never issues in a burst.
