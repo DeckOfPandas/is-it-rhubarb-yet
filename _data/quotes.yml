@@ -7,8 +7,18 @@
 # scripture, nothing from franchises. Foreign lines are our own
 # translations. Verse line breaks are written " / ".
 #
-# yes: seize the day, abundance.  nearly: a bright horizon.
-# just: the nick of time.  no: patience, hard as it is.
+# Every line passes the vetting tests in the scope document: it speaks
+# to the verdict's feeling; it is about the food, the waiting or the
+# appetite, never the reader's inner life; it would make someone smile
+# who only wanted to know about leeks; its attribution can be checked
+# in one search, and a line that cannot be traced says "attributed to";
+# it is short; it is a whole sentence or a deliberate fragment.
+#
+# yes: indulge.  nearly: anticipation.  just: hurry.  no: patience.
+# never: resignation, played for laughs.
+#
+# A food's page picks from the pool by a hash of its slug and the week,
+# so a shared link shows the same line all week (assets/verdict.js).
 #
 # "yes" and "no" are quoted because YAML would otherwise read them as
 # booleans.
@@ -55,13 +65,13 @@
   - text: "Moderation is a fatal thing. Nothing succeeds like excess."
     by: "Oscar Wilde, A Woman of No Importance"
   - text: "I have the simplest tastes. I am always satisfied with the best."
-    by: "Oscar Wilde"
+    by: "Oscar Wilde, as reported by Edgar Saltus"
   - text: "After a good dinner one can forgive anybody, even one's own relations."
     by: "Oscar Wilde, A Woman of No Importance"
   - text: "One cannot think well, love well, sleep well, if one has not dined well."
     by: "Virginia Woolf, A Room of One's Own"
   - text: "Part of the secret of success in life is to eat what you like and let the food fight it out inside."
-    by: "Mark Twain"
+    by: "attributed to Mark Twain"
   - text: "Appetite, n. An instinct thoughtfully implanted by Providence as a solution to the labour question."
     by: "Ambrose Bierce, The Devil's Dictionary"
   - text: "Edible, adj. Good to eat, and wholesome to digest, as a worm to a toad, a toad to a snake, a snake to a pig, a pig to a man, and a man to a worm."
@@ -79,7 +89,7 @@
   - text: "Let us live, my Lesbia, and let us love."
     by: "Catullus"
   - text: "The best is the enemy of the good."
-    by: "Voltaire"
+    by: "Italian proverb, by way of Voltaire"
   - text: "Hunger is the best sauce."
     by: "proverb"
   - text: "A bird in the hand is worth two in the bush."
@@ -96,8 +106,6 @@
     by: "Christina Rossetti, Goblin Market"
   - text: "Life is sometimes sad and often dull, but there are currants in the cake, and here is one of them."
     by: "Nancy Mitford, The Pursuit of Love"
-  - text: "I took a deep breath and listened to the old brag of my heart. I am, I am, I am."
-    by: "Sylvia Plath, The Bell Jar"
   - text: "Kiss me, and you will see how important I am."
     by: "Sylvia Plath, journals"
   - text: "Man is condemned to be free."
@@ -105,33 +113,31 @@
   - text: "Let us not waste our time in idle discourse! Let us do something, while we have the chance!"
     by: "Samuel Beckett, Waiting for Godot"
   - text: "I like to have a martini, / Two at the very most. / After three I'm under the table, / After four I'm under my host."
-    by: "Dorothy Parker"
+    by: "attributed to Dorothy Parker"
   - text: "Take care of the luxuries and the necessities will take care of themselves."
-    by: "Dorothy Parker"
+    by: "attributed to Dorothy Parker"
   - text: "It was my Uncle George who discovered that alcohol was a food well in advance of modern medical thought."
-    by: "P. G. Wodehouse"
+    by: "P. G. Wodehouse, The Inimitable Jeeves"
   - text: "First we eat, then we do everything else."
-    by: "M. F. K. Fisher"
+    by: "attributed to M. F. K. Fisher"
   - text: "People who love to eat are always the best people."
-    by: "Julia Child"
+    by: "attributed to Julia Child"
   - text: "Days are where we live."
     by: "Philip Larkin, Days"
   - text: "Do I dare to eat a peach?"
     by: "T. S. Eliot, The Love Song of J. Alfred Prufrock"
   - text: "Time is an illusion. Lunchtime doubly so."
     by: "Douglas Adams"
-  - text: "'What day is it?' asked Pooh. 'It's today,' squeaked Piglet. 'My favourite day,' said Pooh."
-    by: "A. A. Milne"
   - text: "A pint of plain is your only man."
     by: "Flann O'Brien, At Swim-Two-Birds"
-  - text: "Unlike the male codfish, which, suddenly finding itself the parent of three million five hundred thousand little codfish, cheerfully resolves to love them all."
-    by: "P. G. Wodehouse, Uncle Fred in the Springtime"
+  - text: "The male codfish, suddenly finding itself the parent of three million five hundred thousand little codfish, cheerfully resolves to love them all."
+    by: "after P. G. Wodehouse, The Custody of the Pumpkin"
     foods: [cod]
   - text: "The fascination of shooting as a sport depends almost wholly on whether you are at the right or wrong end of the gun."
     by: "P. G. Wodehouse"
     foods: [grouse, pheasant, partridge, wild-duck, snipe, woodcock, wood-pigeon]
   - text: "Ducking for apples. Change one letter and it's the story of my life."
-    by: "Dorothy Parker"
+    by: "Dorothy Parker, as reported by Alexander Woollcott"
     foods: [apples, crab-apples]
   - text: "Cabbage, n. A familiar kitchen-garden vegetable about as large and wise as a man's head."
     by: "Ambrose Bierce, The Devil's Dictionary"
@@ -176,7 +182,7 @@
     by: "anonymous"
     foods: [peas]
   - text: "Cauliflower is nothing but cabbage with a college education."
-    by: "Mark Twain"
+    by: "Mark Twain, Pudd'nhead Wilson"
     foods: [cauliflower]
   - text: "If the man who turnips cries, / Cry not when his father dies, / 'Tis a proof that he had rather / Have a turnip than his father."
     by: "Samuel Johnson"
@@ -313,14 +319,8 @@
     by: "Fernando Pessoa, The Book of Disquiet"
   - text: "In the depth of winter, I finally learned that within me there lay an invincible summer."
     by: "Albert Camus, Return to Tipasa"
-  - text: "Life begins on the other side of despair."
-    by: "Jean-Paul Sartre, The Flies"
-  - text: "I shut my eyes and all the world drops dead; / I lift my lids and all is born again."
-    by: "Sylvia Plath, Mad Girl's Love Song"
   - text: "Ever tried. Ever failed. No matter. Try again. Fail again. Fail better."
     by: "Samuel Beckett, Worstward Ho"
-  - text: "Nobody realises that some people expend tremendous energy merely to be normal."
-    by: "Albert Camus, notebooks"
   - text: "Loveliest of trees, the cherry now / Is hung with bloom along the bough."
     by: "A. E. Housman, A Shropshire Lad"
     foods: [cherries]
@@ -375,8 +375,6 @@
     by: "proverb"
   - text: "Punctuality is the thief of time."
     by: "Oscar Wilde, The Picture of Dorian Gray"
-  - text: "Dying / Is an art, like everything else. / I do it exceptionally well."
-    by: "Sylvia Plath, Lady Lazarus"
   - text: "Three o'clock is always too late or too early for anything you want to do."
     by: "Jean-Paul Sartre, Nausea"
   - text: "I love deadlines. I love the whooshing noise they make as they go by."
@@ -423,8 +421,6 @@
     by: "Ambrose Bierce, The Devil's Dictionary"
   - text: "Day, n. A period of twenty-four hours, mostly misspent."
     by: "Ambrose Bierce, The Devil's Dictionary"
-  - text: "There is plenty of hope, an infinite amount of hope. Only not for us."
-    by: "Franz Kafka, to Max Brod"
   - text: "It's no use going back to yesterday, because I was a different person then."
     by: "Alice, Alice's Adventures in Wonderland"
   - text: "If you can wait and not be tired by waiting."
@@ -445,14 +441,8 @@
     by: "French proverb"
   - text: "The great advantage of living in a large family is that early lesson of life's essential unfairness."
     by: "Nancy Mitford, The Pursuit of Love"
-  - text: "Is there no way out of the mind?"
-    by: "Sylvia Plath, Apprehensions"
-  - text: "Perhaps when we find ourselves wanting everything, it is because we are dangerously close to wanting nothing."
-    by: "Sylvia Plath, journals"
   - text: "One must imagine Sisyphus happy."
     by: "Albert Camus, The Myth of Sisyphus"
-  - text: "There is no love of life without despair of life."
-    by: "Albert Camus"
   - text: "Hell is other people."
     by: "Jean-Paul Sartre, No Exit"
   - text: "Nothing to be done."
@@ -469,10 +459,8 @@
     by: "T. S. Eliot, The Love Song of J. Alfred Prufrock"
   - text: "Nothing, like something, happens anywhere."
     by: "Philip Larkin, I Remember, I Remember"
-  - text: "Not waving but drowning."
-    by: "Stevie Smith"
-  - text: "Rivers know this: there is no hurry. We shall get there some day."
-    by: "A. A. Milne"
+  - text: "There is no hurry. We shall get there some day."
+    by: "the river, The House at Pooh Corner"
   - text: "Mad as a March hare."
     by: "proverb"
     foods: [hare]
@@ -482,3 +470,43 @@
   - text: "It is unseasonable and unwholesome in all months that have not an R in their name to eat an oyster."
     by: "William Butler, 1599"
     foods: [oysters]
+
+"never":
+  - text: "Never, never, never, never, never."
+    by: "Shakespeare, King Lear"
+  - text: "Quoth the Raven, 'Nevermore.'"
+    by: "Edgar Allan Poe, The Raven"
+  - text: "East is East, and West is West, and never the twain shall meet."
+    by: "Rudyard Kipling, The Ballad of East and West"
+  - text: "Of all sad words of tongue or pen, / The saddest are these: 'It might have been!'"
+    by: "John Greenleaf Whittier, Maud Muller"
+  - text: "Blessed is he who expects nothing, for he shall never be disappointed."
+    by: "Alexander Pope, in a letter"
+  - text: "Abandon all hope, you who enter here."
+    by: "Dante, Inferno"
+  - text: "I would prefer not to."
+    by: "Herman Melville, Bartleby, the Scrivener"
+  - text: "Man wants but little here below, / Nor wants that little long."
+    by: "Oliver Goldsmith, The Hermit"
+  - text: "'Tis better to have loved and lost / Than never to have loved at all."
+    by: "Alfred, Lord Tennyson, In Memoriam"
+  - text: "Nothing will come of nothing."
+    by: "Shakespeare, King Lear"
+  - text: "Yes, we have no bananas."
+    by: "Frank Silver and Irving Cohn, 1923"
+    foods: [bananas]
+  - text: "Oranges and lemons, say the bells of St Clement's."
+    by: "traditional"
+    foods: [oranges, lemons]
+  - text: "He picked up the lemons that Fate had sent him and started a lemonade-stand."
+    by: "Elbert Hubbard, 1915"
+    foods: [lemons]
+  - text: "Coffee, which makes the politician wise, / And see through all things with his half-shut eyes."
+    by: "Alexander Pope, The Rape of the Lock"
+    foods: [coffee]
+  - text: "He is the very pineapple of politeness!"
+    by: "Mrs Malaprop, The Rivals"
+    foods: [pineapples]
+  - text: "Yes, by Saint Anne, and ginger shall be hot i' the mouth too."
+    by: "Sir Toby Belch, Twelfth Night"
+    foods: [ginger]
