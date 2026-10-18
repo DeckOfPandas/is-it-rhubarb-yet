@@ -29,9 +29,9 @@ family headings are items that only show in family order, the default.
   </form>
   {%- comment -%} This week in three lines, from the baked digest: a
      random handful from just arrived, great now and last chance, each
-     food in its own colour, and how many more there are. site.js draws
-     the same lines, with the same handful of five, when the visitor's
-     week differs. {%- endcomment -%}
+     food in its own colour, and how many more there are. Just arrived
+     is always said, even when it is nothing. site.js and tools/cards.js
+     draw the same lines, with the same handful of five. {%- endcomment -%}
   <div class="this-week" id="this-week">
     {%- assign lines = "arrived|Just arrived,still|Great now,last|Last chance" | split: "," -%}
     {%- for entry in lines -%}
@@ -39,7 +39,9 @@ family headings are items that only show in family order, the default.
       {%- assign key = parts[0] -%}
       {%- assign all = "" | split: "" -%}
       {%- for k in baked.now[key] -%}{%- assign all = all | concat: k.items -%}{%- endfor -%}
-      {%- if all.size > 0 -%}
+      {%- if all.size == 0 and key == "arrived" -%}
+      <p class="this-week-line"><strong>Just arrived:</strong> nothing new this week.</p>
+      {%- elsif all.size > 0 -%}
       {%- assign pick = all | sample: 5 -%}
       {%- assign more = all.size | minus: pick.size -%}
       <p class="this-week-line"><strong>{{ parts[1] }}:</strong> {% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} and {{ more }} more{% endif %}.</p>

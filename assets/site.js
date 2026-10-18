@@ -412,11 +412,12 @@
       if (strip) loadFoods().then(function (foods) {
         var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
         strip.textContent = "";
-        function part(label, list) {
+        function part(label, list, empty) {
           var items = V.flatten(list);
-          if (!items.length) return;
+          if (!items.length && !empty) return;
           var p = el("p", "this-week-line");
           p.appendChild(el("strong", null, label + ": "));
+          if (!items.length) { p.appendChild(document.createTextNode(empty)); strip.appendChild(p); return; }
           var pick = items.slice().sort(function () { return Math.random() - 0.5; }).slice(0, STRIP_PICK);
           pick.forEach(function (i, n) {
             if (n) p.appendChild(document.createTextNode(", "));
@@ -429,7 +430,7 @@
           p.appendChild(document.createTextNode((more > 0 ? " and " + more + " more" : "") + "."));
           strip.appendChild(p);
         }
-        part("Just arrived", now.arrived);
+        part("Just arrived", now.arrived, "nothing new this week.");
         part("Great now", now.still);
         part("Last chance", now.last);
         var p = el("p", "this-week-more");

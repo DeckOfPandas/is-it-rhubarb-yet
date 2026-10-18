@@ -32,9 +32,10 @@ drops it in `tmp/inbox/`); this is the map.
   kind of food, `[{kind, items}]`; `flatten` gives one array. The home
   strip and `_includes/band.html` read that shape.
 - **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
-  and never-food, plus `home.png` (the wordmark and tagline, undated,
-  which every page without a card of its own uses), into
-  `_site/cards/` after Jekyll: each is a small HTML page with the fonts inlined,
+  and never-food, plus `home.png` and `now.png` (the wordmark or the
+  Now title, then the week's three lines as the home strip has them,
+  dated; every other page uses the home card), into `_site/cards/`
+  after Jekyll: each is a small HTML page with the fonts inlined,
   screenshotted in headless Chromium through the Playwright the
   container and the deploy both have (never committed: the site has no
   raster files in the repository). Every page's `og:image` and

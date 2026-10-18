@@ -2,13 +2,14 @@
 The page chrome. A food or never-food page gets its title and description
 from the baked verdict ("Is it rhubarb yet? Nearly."), so a link preview
 or a search result carries the answer and the date it was true for, and
-its share card, drawn by tools/cards.js into /cards/<slug>.png. Every
-other page shows the home card.
+its share card, drawn by tools/cards.js into /cards/<slug>.png. Home and
+Now have cards of their own; every other page shows the home card.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign title = page.title -%}
 {%- assign description = page.description | default: site.description -%}
 {%- assign card = "home" -%}
+{%- if page.url == "/now/" -%}{%- assign card = "now" -%}{%- endif -%}
 {%- if page.collection == "foods" or page.collection == "never" -%}
   {%- assign card = page.slug -%}
   {%- if page.collection == "foods" -%}
@@ -101,7 +102,9 @@ other page shows the home card.
       <a href="{{ '/season-starts.ics' | relative_url }}">Subscribe to season starts</a>
       <a href="{{ '/foods.json' | relative_url }}">Data as JSON</a>
     </nav>
+    <p class="footer-about"><a href="{{ '/about/' | relative_url }}">About</a></p>
     <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="Source on GitHub">{% include icons/github.svg %}</a>
+    <p class="copyright">&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
     {%- comment -%} Two sentences in two spans, so a narrow screen breaks
        between them and never inside one. {%- endcomment -%}
     <p class="licence">
