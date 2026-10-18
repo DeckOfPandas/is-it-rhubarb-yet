@@ -1,10 +1,11 @@
-// Draw the share cards: one 1200 by 630 PNG per food and never-food, one
-// for home and one for the Now page, from the baked verdicts, so a link
-// pasted into a chat shows the answer and the day it was true for. Chat
-// apps keep the first preview they fetch, so the date on the card lets an
-// old preview read like a dated newspaper rather than a wrong answer.
+// Draw the share cards: one 1200 by 630 PNG per food and never-food, and
+// one for home, from the baked verdicts, so a link pasted into a chat
+// shows the answer and the day it was true for. Chat apps keep the first
+// preview they fetch, so the date on the card lets an old preview read
+// like a dated newspaper rather than a wrong answer. The home card is
+// the wordmark and the tagline, undated.
 //
-// usage: node tools/cards.js [--out _site/cards] [--only rhubarb,now,home]
+// usage: node tools/cards.js [--out _site/cards] [--only rhubarb,home]
 //
 // Each card is a small HTML page with the site's fonts inlined, opened in
 // headless Chromium (Playwright, which the container and the deploy both
@@ -14,7 +15,6 @@
 "use strict";
 const fs = require("fs");
 const path = require("path");
-const V = require("../assets/verdict.js");
 const { loadYaml } = require("./yaml.js");
 
 const ROOT = path.resolve(__dirname, "..");
@@ -58,12 +58,8 @@ const CSS = [
   .asof { font-size: 26px; color: ${MUTED}; margin: 0; }
   .brand { font-size: 36px; line-height: 1; color: ${INK}; }
   .pink { color: ${RHUBARB}; }
-  .hook { font-size: 128px; line-height: 1.05; margin: 60px 0 0; white-space: nowrap; }
-  .slot { color: ${MUTED}; opacity: 0.6; border-bottom: 0.06em solid ${RHUBARB}; padding: 0 0.08em; }
-  .strap { font-size: 44px; font-weight: 700; line-height: 1.25; margin: 48px 0 0; max-width: 1000px; }
-  .title { font-size: 120px; line-height: 1; margin: 20px 0 0; }
-  .week { font-weight: 700; font-size: 60px; margin: 36px 0 0; }
-  .counts { font-size: 44px; color: ${MUTED}; margin: 20px 0 0; }
+  .hook { font-size: 128px; line-height: 1.05; margin: 110px 0 0; white-space: nowrap; }
+  .strap { font-size: 48px; font-weight: 700; line-height: 1.25; margin: 36px 0 0; max-width: 1000px; }
   `
 ].join("\n");
 
@@ -84,23 +80,10 @@ function verdictCard(name, colour, word, line, asofText) {
     `<p class="line">${esc(line)}</p>` + foot(asofText), colour);
 }
 
-function homeCard(asofText) {
+function homeCard() {
   return page(
-    `<div class="display hook">Is it <span class="slot">rhubarb</span> yet?</div>` +
-    `<p class="strap">What is in season in the UK, this week. Ask about any food.</p>` +
-    `<div class="foot"><p class="asof">as of ${esc(asofText)}</p></div>`);
-}
-
-function nowCard(baked) {
-  const n = (list) => V.flatten(list || []).length;
-  const counts = [
-    [n(baked.now.arrived), "just arrived"], [n(baked.now.last), "last chance"],
-    [n(baked.now.onway), "on the way"], [n(baked.now.still), "great now"]
-  ].filter((c) => c[0] > 0).map((c) => `${c[0]} ${c[1]}`).join(" · ");
-  return page(
-    `<p class="display title">In season this week</p>` +
-    `<p class="week">Week ${baked.week}: ${esc(baked.range)}</p>` +
-    `<p class="counts">${esc(counts)}</p>` + foot(baked.asofText));
+    `<div class="display hook">Is it <span class="pink">rhubarb</span> yet?</div>` +
+    `<p class="strap">Cook food when it's at its best.</p>`);
 }
 
 async function main() {
@@ -122,8 +105,7 @@ async function main() {
   never.forEach((n) => {
     cards.push({ slug: n.slug, html: verdictCard(n.name, RHUBARB, "NEVER", n.line, baked.asofText) });
   });
-  cards.push({ slug: "home", html: homeCard(baked.asofText) });
-  cards.push({ slug: "now", html: nowCard(baked) });
+  cards.push({ slug: "home", html: homeCard() });
 
   let chromium;
   try { ({ chromium } = require("playwright")); } catch (e) {
