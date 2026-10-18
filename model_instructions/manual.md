@@ -156,19 +156,19 @@ drops it in `tmp/inbox/`); this is the map.
 
 ## Not yet done
 
-Phase 2 and 3 of the scope document, in short:
+Phase 2 and 3 of the scope document, each an open issue:
 
-- Per-food reminder `.ics` at `/remind/<slug>.ics`, and the "Remind me
-  when it's back" line on NO, NEARLY and JUST pages that links to it.
-- Calendar: a mobile plan. Rows already link, `#<slug>` marks and
+- #41 Per-food reminder `.ics` at `/remind/<slug>.ics`, and the "Remind
+  me when it's back" line on NO, NEARLY and JUST pages that links to it.
+- #42 Calendar: a mobile plan. Rows already link, `#<slug>` marks and
   scrolls to a food, and the month header sticks.
-- `foods/<slug>.json`, and the JSON shape on the sources page.
-- Wheel: the Veg view is still unreadable in June, and unreadable on a
-  phone. Cut it or fix it.
-- Data quality: every `source: general` row (the checker warns on each),
-  the pollock/pollack spelling, stored crops, long `avail` tails, the
-  BBC/NCGM disagreements in the `note` fields.
-- Easter eggs.
+- #43 `foods/<slug>.json`, and the JSON shape on the sources page.
+- #44 Wheel: the Veg view is still unreadable in June, and unreadable
+  on a phone. Cut it or fix it.
+- #45 Data quality: every `source: general` row (the checker warns on
+  each), the pollock/pollack spelling, stored crops, long `avail` tails,
+  the BBC/NCGM disagreements in the `note` fields.
+- #46 Easter eggs.
 
 ## Ways this goes wrong
 
