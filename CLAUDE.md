@@ -13,15 +13,17 @@ is the only enforcement.
   Tell me which.
 - **Scratch files go in this project's `tmp/`** (gitignored), never the system
   `/tmp`, never `~`.
-- Build: `bundle exec jekyll build`. Check the data file:
-  `python3 -I tools/check-foods.py`. Kit tests: `python3 -m pytest`.
+- Build: `sh tools/build.sh` (bakes today's verdicts with Node, then
+  Jekyll; `bundle exec jekyll build` alone leaves them empty). Check the
+  data file: `python3 -I tools/check-foods.py`. Kit tests:
+  `python3 -m pytest`. Verdict tests: `node --test tests/verdict/verdict.test.js`.
 - **Serving for me to look at:** read `PORTS` in `.devcontainer/kit.env`
   (`host:container` pairs), listen on `0.0.0.0:<container port>`
   (`bundle exec jekyll serve --host 0.0.0.0 --port 9000`), and give me
   `http://localhost:<host port>/`, plus the `baseurl` from `_config.yml`.
   No pair in `PORTS` means I can't reach it: ask me to add one.
 - Visual checks: `node tools/dev/shoot.js <base-url> <label>
-  [--scheme dark] [--click <text>] <page>...` writes `tmp/shots/`, and
+  [--scheme dark] [--click <text>] [--type <text>] <page>...` writes `tmp/shots/`, and
   `node tools/dev/slice-png.js tmp/shots/<file>.png` cuts a tall one. Use these
   rather than writing new ones in `tmp/`. A page is relative to the base URL
   (`.`, `calendar/`), never `/calendar/`: a leading `/` reads as a file path
