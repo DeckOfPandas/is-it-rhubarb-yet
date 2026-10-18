@@ -279,14 +279,14 @@
     }
   }
 
-  // A short phrase for one variety in a list: "in until about 2nd
-  // December", "back about 30th April".
+  // A short phrase for one variety in a list: "In until about 2nd
+  // December", "Back about 30th April".
   function shortLine(r, year) {
     switch (r.verdict) {
-      case "YES": return r.allYear ? "in all year" : "in until about " + fmtDate(endDate(r.until, year));
-      case "JUST": return "going out, until about " + fmtDate(endDate(r.until, year));
-      case "NEARLY": return "from about " + fmtDate(startDate(r.from, year));
-      case "NO": return r.never ? "never" : "back about " + fmtDate(startDate(r.from, year));
+      case "YES": return r.allYear ? "In all year" : "In until about " + fmtDate(endDate(r.until, year));
+      case "JUST": return "Going out, until about " + fmtDate(endDate(r.until, year));
+      case "NEARLY": return "From about " + fmtDate(startDate(r.from, year));
+      case "NO": return r.never ? "Never" : "Back about " + fmtDate(startDate(r.from, year));
       default: return "";
     }
   }
@@ -298,7 +298,10 @@
     if (!fv.variety || food.varieties.length < 2) return "";
     var others = fv.varieties.filter(function (r) { return r !== fv.variety; });
     var head = (fv.variety.name || food.name) + ", " + fv.verdict.toLowerCase() + ".";
-    var rest = others.map(function (r) { return (r.name || food.name) + ": " + shortLine(r, year) + "."; });
+    var rest = others.map(function (r) {
+      var s = shortLine(r, year);
+      return (r.name || food.name) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".";
+    });
     return [head].concat(rest).join(" ");
   }
 

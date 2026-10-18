@@ -1,0 +1,23 @@
+---
+layout: default
+---
+{%- comment -%}
+A food that is never in season here: the question, NEVER, its line
+where the date would be, a quotation, and no dial. The page is in the
+brand pink, which is the only colour that is nobody's.
+{%- endcomment -%}
+{%- assign baked = site.data.baked -%}
+{%- assign thing = site.data.never | where: "slug", page.slug | first -%}
+{%- assign b = baked.foods[page.slug] -%}
+<article class="food never" data-never='{{ thing | jsonify | escape }}'>
+  <p class="ask">Is it {{ thing.name | downcase }} yet?</p>
+  <h1 class="verdict"><span class="verdict-word" id="verdict">Never.</span></h1>
+  <p class="date-line">{{ thing.line }}</p>
+  <blockquote class="quote" id="quote"{% unless b.quote %} hidden{% endunless %}>
+    {%- if b.quote -%}
+    <p>{{ b.quote.text | replace: " / ", "<br>" }}</p>
+    <cite>{{ b.quote.by }}</cite>
+    {%- endif -%}
+  </blockquote>
+  <p class="onwards"><a href="{{ '/' | relative_url }}#hook-input">Ask about something that grows here</a> · <a href="{{ '/now/' | relative_url }}">What is in season this week</a></p>
+</article>

@@ -1,6 +1,6 @@
 ---
 layout: null
-permalink: /seasons.ics
+permalink: /season-starts.ics
 ---
 {%- comment -%}
 A subscribable calendar with one all-day event per variety on the first day
@@ -29,7 +29,7 @@ DTSTART;VALUE=DATE:{{ start }}
 DTEND;VALUE=DATE:{{ stop }}
 RRULE:FREQ=YEARLY
 SUMMARY:In season: {{ food.name }}{% if v.name != "" %} ({{ v.name | downcase }}){% endif %}
-DESCRIPTION:Week {{ r[0] }} to {{ r[1] }}. {{ site.url }}{{ site.baseurl }}/is-it/{{ food.slug }}/
+DESCRIPTION:Week {{ r[0] }} to {{ r[1] }}. {{ site.url }}{{ site.baseurl }}/{{ food.slug }}/
 END:VEVENT
 {% endif -%}
 {% endfor -%}

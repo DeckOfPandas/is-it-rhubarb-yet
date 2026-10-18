@@ -88,7 +88,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- endif -%}
     {%- if v.name != "" -%}{%- assign label = food.name | append: " · " | append: v.name -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
     {%- assign gid = include.id | append: "-" | append: food.slug | append: "-" | append: vi -%}
-    <a class="row" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
+    <a class="row" id="{{ include.id }}-{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
       <rect class="row-hit" x="0" y="{{ y }}" width="{{ width }}" height="{{ rh }}" />
       <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end">{{ label }}</text>
       {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}

@@ -1,21 +1,65 @@
 ---
-layout: null
+title: In season now
+description: What is in season in the UK this week, what has just arrived, what is on its way out, and what is on the way.
 permalink: /now/
 ---
 {%- comment -%}
-The weekly page is the home page; this keeps old /now/ links working and
-carries ?week=N across. Jekyll has no redirect without a plugin.
+The weekly digest, four lists in the order a cook reads them: just
+arrived, last chance, on the way, still good (by kind). The build-day
+week is baked here from _data/baked.json; site.js redraws the lists from
+foods.json for the visitor's own week and for the previous/next buttons,
+building the same markup as food-row.html. Without JavaScript the baked
+week shows, dated.
 {%- endcomment -%}
-<!doctype html>
-<html lang="{{ site.lang }}">
-<head>
-  <meta charset="utf-8">
-  <title>{{ site.title }}</title>
-  <link rel="canonical" href="{{ '/' | relative_url }}">
-  <meta http-equiv="refresh" content="0; url={{ '/' | relative_url }}">
-  <script>location.replace("{{ '/' | relative_url }}" + location.search);</script>
-</head>
-<body>
-  <p><a href="{{ '/' | relative_url }}">In season now</a></p>
-</body>
-</html>
+{%- assign baked = site.data.baked -%}
+{%- assign now = baked.now -%}
+<header class="page-head">
+  <h1>In season <span id="week-title">this week</span></h1>
+  <p class="week-dates" id="week-dates">Week {{ baked.week }}: {{ baked.range }}</p>
+  <p class="controls" hidden>
+    <button type="button" id="prev-week">← Previous week</button>
+    <button type="button" id="next-week">Next week →</button>
+  </p>
+</header>
+
+<div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
+  <section class="band arrived">
+    <h2>Just arrived <span class="count">{{ now.arrived.size }}</span></h2>
+    {%- if now.arrived.size > 0 -%}
+    <ul class="food-list">
+      {%- for item in now.arrived -%}{%- include food-row.html item=item tag="new" -%}{%- endfor -%}
+    </ul>
+    {%- else -%}
+    <p class="empty">Nothing new this week.</p>
+    {%- endif -%}
+  </section>
+  <section class="band last">
+    <h2>Last chance <span class="count">{{ now.last.size }}</span></h2>
+    {%- if now.last.size > 0 -%}
+    <ul class="food-list">
+      {%- for item in now.last -%}{%- include food-row.html item=item -%}{%- endfor -%}
+    </ul>
+    {%- else -%}
+    <p class="empty">Nothing on its way out.</p>
+    {%- endif -%}
+  </section>
+  <section class="band onway">
+    <h2>On the way <span class="count">{{ now.onway.size }}</span></h2>
+    {%- if now.onway.size > 0 -%}
+    <ul class="food-list">
+      {%- for item in now.onway -%}{%- include food-row.html item=item -%}{%- endfor -%}
+    </ul>
+    {%- else -%}
+    <p class="empty">Nothing due in the next few weeks.</p>
+    {%- endif -%}
+  </section>
+  <section class="band still">
+    <h2>Still good</h2>
+    {%- for k in now.still -%}
+    <h3 class="kind">{{ k.kind | capitalize }}</h3>
+    <ul class="food-list">
+      {%- for item in k.items -%}{%- include food-row.html item=item -%}{%- endfor -%}
+    </ul>
+    {%- endfor -%}
+  </section>
+</div>

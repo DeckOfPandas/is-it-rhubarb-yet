@@ -159,7 +159,7 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
       <circle class="season" fill="none" cx="{{ C }}" cy="{{ C }}" r="{{ r }}" pathLength="52" stroke-dasharray="{{ length }} {{ 52 | minus: length }}" stroke-dashoffset="{{ 0 | minus: wk }}" transform="rotate(-90 {{ C }} {{ C }})" style="--c: {{ food.colour }}" />
       {%- endif -%}
       {%- capture label -%}
-      <a class="label" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ food.colour }}">
+      <a class="label" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ food.colour }}">
       {%- if angle < 180 -%}
         <g transform="rotate({{ angle | minus: 90 | round: 2 }} {{ C }} {{ C }})">
           <circle class="dot" cx="{{ C | plus: r }}" cy="{{ C }}" r="{{ dot }}" />

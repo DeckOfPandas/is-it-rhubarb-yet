@@ -6,15 +6,18 @@ permalink: /calendar/
 {%- comment -%}
 Three copies of the chart, one per ordering, built at build time. The
 switch is a radio group; CSS shows the chart whose radio is checked, so
-it works without JavaScript, which only remembers the choice.
+it works without JavaScript, which only remembers the choice and draws
+the today line.
 {%- endcomment -%}
-<h1>What's in season</h1>
-<p class="lede">Rows are foods, columns are weeks of the year. A full bar means in season; a fade means coming in or going out. Click a row for the food.</p>
+<header class="page-head">
+  <h1>The whole year</h1>
+  <p class="lede">Rows are foods, columns are weeks. A full bar means in season; a fade means coming in or going out. Click a row for the food.</p>
+</header>
 
 <fieldset class="switch" data-remember="order">
   <legend>Order</legend>
   <input type="radio" name="order" id="order-start" value="start" checked><label for="order-start">By start</label>
-  <input type="radio" name="order" id="order-group" value="group"><label for="order-group">By group</label>
+  <input type="radio" name="order" id="order-group" value="group"><label for="order-group">By family</label>
   <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
 </fieldset>
 

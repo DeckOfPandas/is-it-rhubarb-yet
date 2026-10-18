@@ -36,19 +36,19 @@ script that points the hand at today when the file is opened directly.
   {%- if include.standalone -%}
   <style>
     .arc { fill: none; }
-    .off { stroke: #ebe7dc; }
+    .off { stroke: #e5dec6; }
     .in { stroke: var(--c); }
-    .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), #ebe7dc); }
+    .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), #e5dec6); }
     .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
-    .spoke { stroke: #fffdf8; stroke-width: 2; }
-    .month { fill: #6b6b60; font: 600 10px system-ui, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+    .spoke { stroke: #fbf3d9; stroke-width: 2; }
+    .month { fill: #5e544b; font: 600 10px system-ui, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
     .hand { display: none; }
     .hand.on { display: inline; }
-    .hand line { stroke: #ff00c8; stroke-width: 2.5; stroke-linecap: round; }
-    .hand circle { fill: #ff00c8; }
-    .today-label { fill: #6b6b60; font: 11px system-ui, sans-serif; text-anchor: middle; }
+    .hand line { stroke: #1c1714; stroke-width: 2.5; stroke-linecap: round; }
+    .hand circle { fill: #1c1714; }
+    .today-label { fill: #5e544b; font: 11px system-ui, sans-serif; text-anchor: middle; }
     .today-label[hidden] { display: none; }
-    .today-label .date { fill: #1e1e1a; font-size: 15px; font-weight: 700; }
+    .today-label .date { fill: #1c1714; font-size: 15px; font-weight: 700; }
   </style>
   {%- endif -%}
   <g transform="rotate(-90 {{ C }} {{ C }})">
@@ -148,7 +148,7 @@ script that points the hand at today when the file is opened directly.
 <figcaption>
   <ol class="rings">
     {%- for v in food.varieties -%}
-    <li><span class="swatch" style="--c: {{ v.colour | default: food.colour }}"></span>{{ v.name }}{% if forloop.first %} (outer){% elsif forloop.last %} (inner){% endif %}</li>
+    <li><span class="swatch" style="--food: {{ v.colour | default: food.colour }}"></span>{{ v.name }}{% if forloop.first %} (outer){% elsif forloop.last %} (inner){% endif %}</li>
     {%- endfor -%}
   </ol>
 </figcaption>

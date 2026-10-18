@@ -1,0 +1,17 @@
+{%- comment -%}
+One food in a list: swatch, name, the variety that gave the verdict, the
+verdict word as a small Anton tag in the food's colour, and an optional
+line under it. Expects: item (slug, name, colour, verdict, and optionally
+variety and line), and tag ("new" marks a just-arrived food). site.js
+builds the same markup when it redraws a list for another day.
+{%- endcomment -%}
+{%- assign item = include.item -%}
+<li class="food-row" data-slug="{{ item.slug }}" data-verdict="{{ item.verdict }}" style="--food: {{ item.colour }}">
+  <a href="{{ '/' | append: item.slug | append: '/' | relative_url }}">
+    <span class="swatch" aria-hidden="true"></span>
+    <span class="food-name">{{ item.name }}{% if item.variety and item.variety != "" %} <span class="variety">{{ item.variety | downcase }}</span>{% endif %}</span>
+    <span class="verdict-tag">{{ item.verdict }}</span>
+    {%- if include.tag == "new" %} <span class="tag-new">New</span>{% endif -%}
+  </a>
+  {%- if item.line and item.line != "" %}<span class="row-line">{{ item.line }}</span>{% endif -%}
+</li>

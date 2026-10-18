@@ -1,93 +1,143 @@
-// Everything date-dependent on the site happens here, in the visitor's
-// browser: the build cannot know what "today" is. No dependencies.
-//
-// Weeks: week 1 starts on 1 January; each week starts 7 days after the
-// last; week 52 absorbs the final day or two. tools/make-foods.py and the
-// Liquid templates use the same grid.
-
+// Everything on the site that needs today's date or a typed word happens
+// here, in the visitor's browser, on top of HTML that was baked for the
+// build day. The rules themselves live in assets/verdict.js, loaded first.
+// No dependencies.
 (function () {
   "use strict";
+  var V = window.Verdict;
+  var html = document.documentElement;
+  var TODAY = new Date();
+  var WEEK = V.weekOf(TODAY), YEAR = TODAY.getFullYear();
+  var BAKED_WEEK = parseInt(html.dataset.bakedWeek, 10);
+  var BAKED_YEAR = parseInt(html.dataset.bakedYear, 10);
+  var SAME_WEEK = WEEK === BAKED_WEEK && YEAR === BAKED_YEAR;
+  // The site root, from this script's own address, so links built here
+  // honour the baseurl.
+  var script = document.currentScript;
+  var BASE = script ? script.src.replace(/assets\/site\.js(\?.*)?$/, "") : "/";
 
-  var MS_PER_DAY = 86400000;
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function foodUrl(slug) { return BASE + slug + "/"; }
 
-  function startOfYear(d) { return new Date(d.getFullYear(), 0, 1); }
-
-  function weekOf(d) {
-    var doy = Math.floor((d - startOfYear(d)) / MS_PER_DAY) + 1;
-    return Math.min(52, Math.floor((doy - 1) / 7) + 1);
+  // --- Loading the data, once -------------------------------------------
+  var foodsPromise = null, searchPromise = null;
+  function loadFoods() {
+    if (!foodsPromise) foodsPromise = fetch(BASE + "foods.json").then(function (r) { return r.json(); });
+    return foodsPromise;
+  }
+  function loadSearch() {
+    if (!searchPromise) searchPromise = fetch(BASE + "search.json").then(function (r) { return r.json(); });
+    return searchPromise;
   }
 
-  function dateOfWeek(week, year) {
-    return new Date(year, 0, 1 + (week - 1) * 7);
+  // --- Matching what people type --------------------------------------------
+  // Case, accents and punctuation are ignored; "&" reads as "and"; a
+  // trailing s (or ies) is dropped so "leek" finds Leeks and "cherry"
+  // finds Cherries. Every typed word must begin a candidate word, or at
+  // least occur inside one; a word that begins the whole candidate scores
+  // highest, then one that begins a word, then one found inside a word.
+  function fold(s) {
+    return String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ").trim();
   }
+  function stem(w) { return w.replace(/ies$/, "y").replace(/s$/, ""); }
+  function words(s) { return s.split(" ").filter(Boolean); }
 
-  function fmt(d) {
-    return d.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
-  }
-
-  function fmtRange(week, year) {
-    var a = dateOfWeek(week, year);
-    var b = week === 52 ? new Date(year, 11, 31) : new Date(a.getTime() + 6 * MS_PER_DAY);
-    return fmt(a) + " to " + fmt(b);
-  }
-
-  // State of one variety in a given week: "in", "avail" or "".
-  function stateAt(variety, week) {
-    var best = "";
-    variety.weeks.forEach(function (r) {
-      if (week >= r[0] && week <= r[1]) {
-        if (r[2] === "in") best = "in";
-        else if (best === "") best = "avail";
-      }
-    });
-    return best;
-  }
-
-  // Next week at or after `week` (wrapping into next year) in which any
-  // variety is fully in season. Returns {week, variety, yearsAhead}.
-  function nextIn(food, week) {
-    for (var step = 0; step < 52; step++) {
-      var w = ((week - 1 + step) % 52) + 1;
-      for (var i = 0; i < food.varieties.length; i++) {
-        if (stateAt(food.varieties[i], w) === "in") {
-          return { week: w, variety: food.varieties[i], yearsAhead: (week - 1 + step) >= 52 ? 1 : 0 };
+  // Score of a candidate (an array of folded terms) for a typed query; 0
+  // means no match.
+  function score(terms, query) {
+    var qw = words(query).map(stem);
+    if (!qw.length) return 0;
+    var total = 0;
+    for (var i = 0; i < qw.length; i++) {
+      var best = 0;
+      for (var t = 0; t < terms.length && best < 3; t++) {
+        var tw = words(terms[t]).map(stem);
+        if (tw.length && tw[0].indexOf(qw[i]) === 0) { best = Math.max(best, t === 0 ? 3 : 2.5); continue; }
+        for (var k = 0; k < tw.length; k++) {
+          if (tw[k].indexOf(qw[i]) === 0) best = Math.max(best, 2);
+          else if (qw[i].length >= 3 && tw[k].indexOf(qw[i]) >= 0) best = Math.max(best, 1);
         }
       }
+      if (!best) return 0;
+      total += best;
     }
-    return null;
+    return total;
   }
 
-  // Last week of the in-season run that `week` sits in, following it over
-  // the year end if need be. Returns {week, yearsAhead, allYear}.
-  function lastWeekOfRun(variety, week) {
-    var w = week, years = 0, steps = 0;
-    while (steps < 51) {
-      var next = w === 52 ? 1 : w + 1;
-      if (stateAt(variety, next) !== "in") break;
-      if (next === 1) years = 1;
-      w = next; steps++;
-    }
-    return { week: w, yearsAhead: years, allYear: steps === 51 };
+  // Rank an index of {name, terms (folded)} by a query.
+  function rank(index, query) {
+    var q = fold(query);
+    if (!q) return [];
+    return index.map(function (it) { return { item: it, score: score(it.terms, q) }; })
+      .filter(function (r) { return r.score > 0; })
+      .sort(function (a, b) { return (b.score - a.score) || (a.item.name < b.item.name ? -1 : 1); })
+      .map(function (r) { return r.item; });
   }
 
-  // Is a "just about" week on the way out of a season (true) or into one
-  // (false)? Out if the week's range follows an in-season range directly;
-  // year ends count as adjacent. Dips between two seasons count as in.
-  function goingOut(variety, week) {
-    var range = null;
-    variety.weeks.forEach(function (r) {
-      if (r[2] === "avail" && week >= r[0] && week <= r[1]) range = r;
+  // --- A food in a list, the same markup as _includes/food-row.html ------
+  function foodRow(item, tag) {
+    var li = el("li", "food-row" + (item.never ? " never" : ""));
+    li.dataset.slug = item.slug;
+    li.dataset.verdict = item.verdict;
+    if (item.colour) li.style.setProperty("--food", item.colour);
+    var a = el("a");
+    a.href = foodUrl(item.slug);
+    var sw = el("span", "swatch"); sw.setAttribute("aria-hidden", "true");
+    a.appendChild(sw);
+    var name = el("span", "food-name", item.name);
+    if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", item.variety.toLowerCase())); }
+    a.appendChild(name);
+    a.appendChild(document.createTextNode(" "));
+    a.appendChild(el("span", "verdict-tag", item.verdict));
+    if (tag === "new") { a.appendChild(document.createTextNode(" ")); a.appendChild(el("span", "tag-new", "New")); }
+    li.appendChild(a);
+    if (item.line) li.appendChild(el("span", "row-line", item.line));
+    return li;
+  }
+
+  // Verdicts baked for another week are replaced on every row that shows
+  // one, from the data.
+  function refreshRows(scope) {
+    if (SAME_WEEK) return Promise.resolve();
+    return loadFoods().then(function (foods) {
+      var bySlug = {};
+      foods.forEach(function (f) { bySlug[f.slug] = f; });
+      (scope || document).querySelectorAll(".food-row[data-slug]").forEach(function (li) {
+        var f = bySlug[li.dataset.slug];
+        if (!f) return;
+        var fv = V.foodVerdict(f, WEEK);
+        li.dataset.verdict = fv.verdict;
+        var tagEl = li.querySelector(".verdict-tag");
+        if (tagEl) tagEl.textContent = fv.verdict;
+      });
     });
-    if (!range) return false;
-    var before = range[0] === 1 ? 52 : range[0] - 1;
-    var after = range[1] === 52 ? 1 : range[1] + 1;
-    var follows = false, precedes = false;
-    variety.weeks.forEach(function (o) {
-      if (o[2] !== "in") return;
-      if (o[1] === before) follows = true;
-      if (o[0] === after) precedes = true;
-    });
-    return follows && !precedes;
+  }
+
+  // --- The verdict word fills the line --------------------------------------
+  // Measured after the fonts are in, so that YES and NEARLY both reach the
+  // right edge; CSS's clamp() stands in before that and without JavaScript.
+  function fitVerdict(word) {
+    if (!word) return;
+    var box = word.parentElement;
+    function fit() {
+      word.style.fontSize = "";
+      var avail = box.clientWidth;
+      var width = word.getBoundingClientRect().width;
+      if (!width || !avail) return;
+      var size = parseFloat(getComputedStyle(word).fontSize) * (avail / width);
+      size = Math.max(32, Math.min(size, avail * 0.9));
+      word.style.fontSize = size + "px";
+    }
+    var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    ready.then(fit);
+    var timer = null;
+    window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(fit, 80); });
   }
 
   // --- Calendar and mini charts: the "today" line --------------------------
@@ -101,16 +151,29 @@
     line.removeAttribute("hidden");
   }
 
+  // A food page links to the calendar with #<slug>: the rows of that food
+  // are marked and the chart scrolls to the first visible one.
+  function targetRow() {
+    var slug = location.hash.replace(/^#/, "");
+    if (!slug || !document.querySelector(".chart")) return;
+    var rows = document.querySelectorAll('.chart a.row[data-slug="' + slug + '"]');
+    if (!rows.length) return;
+    rows.forEach(function (r) { r.classList.add("is-target"); });
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].getClientRects().length) { rows[i].scrollIntoView({ block: "center" }); break; }
+    }
+  }
+
   // --- Season wheels: the hand and the date in the hole --------------------
   // The wheel's dashes put week w at (w-1)*7 of 364 day units, so the hand
   // uses the same scale rather than the true length of the year.
   function markWheel(figure, today) {
     var hand = figure.querySelector(".hand");
     var label = figure.querySelector(".today-label");
-    var doy = Math.floor((today - startOfYear(today)) / MS_PER_DAY);
+    var doy = V.dayOfYear(today) - 1;
     var deg = Math.min(doy, 364) / 364 * 360;
     if (label) {
-      label.querySelector(".date").textContent = fmt(today);
+      label.querySelector(".date").textContent = V.fmtDate(today);
       label.removeAttribute("hidden");
     }
     if (!hand) return;
@@ -136,451 +199,258 @@
           if (!r.checked) return;
           try { localStorage.setItem(key, r.value); } catch (e) {}
           if (key === "theme") {
-            if (r.value === "auto") delete document.documentElement.dataset.theme;
-            else document.documentElement.dataset.theme = r.value;
+            if (r.value === "auto") delete html.dataset.theme;
+            else html.dataset.theme = r.value;
           }
         });
       });
     });
   }
 
-  // --- This week ------------------------------------------------------------
-  function showWeek(week, year) {
-    document.querySelectorAll("section.week").forEach(function (s) {
-      s.hidden = parseInt(s.dataset.week, 10) !== week;
+  // --- A food page ----------------------------------------------------------
+  // Recomputed on every load: the relative part of the date line ("in
+  // about two weeks") moves day by day, not just week by week.
+  function showQuote(box, q) {
+    box.textContent = "";
+    if (!q) { box.hidden = true; return; }
+    var p = el("p");
+    q.text.split(" / ").forEach(function (line, i) {
+      if (i) p.appendChild(el("br"));
+      p.appendChild(document.createTextNode(line));
     });
-    var title = document.getElementById("week-title");
-    var dates = document.getElementById("week-dates");
-    var thisWeek = weekOf(new Date());
-    title.textContent = week === thisWeek ? "this week" : "in week " + week;
-    dates.textContent = "Week " + week + ": " + fmtRange(week, year);
-    var url = new URL(location.href);
-    if (week === thisWeek) url.searchParams.delete("week"); else url.searchParams.set("week", week);
-    history.replaceState(null, "", url);
-  }
-
-  function initNow() {
-    var controls = document.querySelector(".controls");
-    if (!controls) return;
-    var year = new Date().getFullYear();
-    var param = parseInt(new URL(location.href).searchParams.get("week"), 10);
-    var week = (param >= 1 && param <= 52) ? param : weekOf(new Date());
-    controls.hidden = false;
-    document.getElementById("prev-week").addEventListener("click", function () {
-      week = week === 1 ? 52 : week - 1; showWeek(week, year);
-    });
-    document.getElementById("next-week").addEventListener("click", function () {
-      week = week === 52 ? 1 : week + 1; showWeek(week, year);
-    });
-    showWeek(week, year);
-  }
-
-  // --- Is it X yet? ---------------------------------------------------------
-  // One giant word, then a quotation to match it. The practical line
-  // (dates, variety) goes under "Fine, show me the data".
-  //
-  // The quotation is stable for a food for a week and differs between
-  // foods: a small hash of slug and week picks from the verdict's pool,
-  // preferring quotations pinned to the food.
-  function pickQuote(quotes, verdict, slug, week) {
-    var pool = (quotes && quotes[verdict]) || [];
-    var pinned = pool.filter(function (q) { return q.foods && q.foods.indexOf(slug) >= 0; });
-    var general = pool.filter(function (q) { return !q.foods; });
-    var from = pinned.length ? pinned : general;
-    if (!from.length) return null;
-    var h = week * 7919;
-    for (var i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) % 1000003;
-    return from[h % from.length];
-  }
-
-  function showQuote(el, q) {
-    el.textContent = "";
-    var lines = q.text.split(" / ");
-    lines.forEach(function (line, i) {
-      if (i) el.appendChild(document.createElement("br"));
-      el.appendChild(document.createTextNode(line));
-    });
-    var cite = document.createElement("cite");
-    cite.textContent = q.by;
-    el.appendChild(cite);
+    box.appendChild(p);
+    box.appendChild(el("cite", null, q.by));
+    box.hidden = false;
   }
 
   function initFood() {
-    var article = document.querySelector("article.food");
+    var article = document.querySelector("article.food[data-food]");
     if (!article) return;
     var food = JSON.parse(article.dataset.food);
-    var quotes = JSON.parse(article.dataset.quotes || "null");
-    var today = new Date();
-    var week = weekOf(today), year = today.getFullYear();
-    var verdict = document.getElementById("verdict");
-    var answer = document.getElementById("answer");
-    var when = document.getElementById("when");
+    var quotes = JSON.parse(article.dataset.quotes || "{}");
+    var fv = V.foodVerdict(food, WEEK);
+    document.getElementById("verdict").textContent = fv.verdict + ".";
+    document.getElementById("date-line").textContent = V.dateLine(fv.variety, YEAR, TODAY);
+    var vl = document.getElementById("variety-line");
+    var vline = V.varietyLine(food, fv, YEAR);
+    vl.textContent = vline; vl.hidden = !vline;
+    showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
+    var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
+    if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
+    document.title = "Is it " + food.name.toLowerCase() + " yet? " +
+      fv.verdict.charAt(0) + fv.verdict.slice(1).toLowerCase() + ".";
+  }
 
-    var inNow = null, nearly = null;
-    food.varieties.forEach(function (v) {
-      var s = stateAt(v, week);
-      if (s === "in" && !inNow) inNow = v;
-      if (s === "avail" && !nearly) nearly = v;
+  // --- Home: the hook ---------------------------------------------------------
+  function initHome() {
+    var input = document.getElementById("hook-input");
+    var list = document.getElementById("food-list");
+    if (!input || !list) return;
+    var rows = Array.prototype.slice.call(list.querySelectorAll(".food-row"));
+    var headings = list.querySelectorAll(".heading");
+    var none = document.getElementById("hook-none");
+    var index = rows.map(function (li) {
+      return { li: li, name: li.querySelector(".food-name").textContent, terms: li.dataset.terms.split("|").filter(Boolean).map(fold), never: li.classList.contains("never") };
     });
+    var shown = [];
 
-    // The page takes the colour of the variety the verdict is about.
-    var word, key, line, cls, about = null;
-    if (inNow) {
-      var until = lastWeekOfRun(inNow, week);
-      about = inNow;
-      word = "YES."; key = "yes"; cls = "yes";
-      line = (inNow.name ? inNow.name + ". " : "") +
-        (until.allYear ? "All year round." :
-          "Until " + fmt(dateOfWeek(until.week + 1, year + until.yearsAhead)) + ".");
-    } else {
-      var next = nextIn(food, week);
-      about = nearly || (next && next.variety);
-      if (nearly && goingOut(nearly, week)) {
-        word = "JUST."; key = "just"; cls = "nearly";
-        line = "On its way out.";
-      } else if (nearly) {
-        word = "NEARLY."; key = "nearly"; cls = "nearly";
-        line = next ? "Properly in from " + fmt(dateOfWeek(next.week, year + next.yearsAhead)) + "." : "";
-      } else if (next) {
-        word = "NO."; key = "no"; cls = "no";
-        line = "Back in week " + next.week + ", from " +
-          fmt(dateOfWeek(next.week, year + next.yearsAhead)) +
-          (next.variety.name ? ", for " + next.variety.name.toLowerCase() : "") + ".";
-      } else {
-        word = "NO."; key = "no"; cls = "no";
-        line = "Never, apparently. Check the data.";
-      }
+    // The input is as wide as its word: a hidden span in the same font
+    // measures the value, or the placeholder when there is none.
+    var ruler = el("span", "hook-ruler");
+    ruler.setAttribute("aria-hidden", "true");
+    input.parentElement.appendChild(ruler);
+    function size() {
+      ruler.textContent = input.value || input.placeholder;
+      var w = ruler.getBoundingClientRect().width;
+      if (w) input.style.width = (w + 12) + "px";
     }
-    if (about && about.colour) article.style.setProperty("--c", about.colour);
-    verdict.textContent = word;
-    verdict.classList.add(cls);
-    verdict.hidden = false;
-    answer.classList.add(cls);
-    var q = pickQuote(quotes, key, food.slug, week);
-    if (q) { showQuote(answer, q); answer.classList.add("quote"); }
-    else answer.textContent = line;
-    if (when) { when.textContent = line; when.hidden = false; }
-  }
-
-  // --- The search box: "Is it … yet?" in the header -------------------------
-  // The form is a plain GET to the ask index with q=; this adds a dropdown
-  // over foods, varieties and families, fed from the JSON API on first
-  // focus. On the ask index itself the list is filtered in place instead.
-  //
-  // Matching is prefix only, whole words only: every word typed must begin
-  // a whole word of the candidate. No substring fallback. Accents are
-  // folded one character at a time so a hit found in the folded text can
-  // be marked on the real one.
-  var MIN_CHARS = 2, FOOD_CAP = 8, OTHER_CAP = 5;
-
-  function foldChar(ch) {
-    var f = ch.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    f = f.replace(/[-&,.()]/g, " ");
-    return f.length ? f.charAt(0) : ch;
-  }
-  function fold(s) {
-    var out = "";
-    s = String(s == null ? "" : s);
-    for (var i = 0; i < s.length; i++) out += foldChar(s.charAt(i));
-    return out;
-  }
-  function words(s) { return s.split(/\s+/).filter(Boolean); }
-  function foldQuery(q) { return words(fold(q)).join(" "); }
-
-  // 1: starts with the whole query; 2: every query word begins a word; 0: no.
-  function tierOf(folded, query) {
-    if (folded.indexOf(query) === 0) return 1;
-    var cw = words(folded), qw = words(query);
-    if (qw.length && qw.every(function (q) { return cw.some(function (c) { return c.indexOf(q) === 0; }); })) return 2;
-    return 0;
-  }
-
-  // Where to mark the hit: the run beginning a word when there is one,
-  // else the first query word at a word start.
-  function hitOf(folded, query) {
-    var at = -1, parts = folded.split(/(\s+)/), pos = 0, i;
-    for (i = 0; i < parts.length && at < 0; i++) {
-      if (i % 2 === 0 && parts[i].indexOf(query) === 0) at = pos;
-      pos += parts[i].length;
-    }
-    if (at >= 0) return [at, at + query.length];
-    var first = words(query)[0]; pos = 0;
-    for (i = 0; i < parts.length; i++) {
-      if (i % 2 === 0 && parts[i].indexOf(first) === 0) return [pos, pos + first.length];
-      pos += parts[i].length;
-    }
-    return null;
-  }
-
-  function el(tag, cls, text) {
-    var n = document.createElement(tag);
-    if (cls) n.className = cls;
-    if (text != null) n.textContent = text;
-    return n;
-  }
-
-  function labelNode(label, hit) {
-    var frag = document.createDocumentFragment();
-    if (!hit) { frag.appendChild(document.createTextNode(label)); return frag; }
-    if (hit[0] > 0) frag.appendChild(document.createTextNode(label.slice(0, hit[0])));
-    frag.appendChild(el("span", "search-hit", label.slice(hit[0], hit[1])));
-    if (hit[1] < label.length) frag.appendChild(document.createTextNode(label.slice(hit[1])));
-    return frag;
-  }
-
-  // Candidates from the data: a food by its name, a named variety as it is
-  // said in full (its `said`, else its name then the food's: "Bramley
-  // apples"), a family by its name.
-  function buildIndex(foods, groups, askUrl) {
-    var items = { food: [], variety: [], family: [] };
-    foods.forEach(function (f) {
-      var href = askUrl + f.slug + "/";
-      items.food.push({ label: f.name, folded: fold(f.name), href: href, slug: f.slug });
-      (f.varieties || []).forEach(function (v) {
-        if (!v.name) return;
-        var said = v.said || (v.name + " " + f.name.toLowerCase());
-        items.variety.push({ label: said, folded: fold(said), href: href });
-      });
-    });
-    (groups || []).forEach(function (g) {
-      items.family.push({ label: g.name, folded: fold(g.name), href: askUrl + "#" + g.key });
-    });
-    return items;
-  }
-
-  function search(index, raw, askUrl) {
-    var typed = String(raw || "").trim();
-    if (typed.length < MIN_CHARS) return null;
-    var query = foldQuery(typed);
-    if (!query) return null;
-    var out = [];
-    [["food", "Foods", FOOD_CAP], ["variety", "Varieties", OTHER_CAP], ["family", "Families", OTHER_CAP]].forEach(function (g) {
-      var tiers = [[], [], []];
-      index[g[0]].forEach(function (it) { var t = tierOf(it.folded, query); if (t) tiers[t].push(it); });
-      var found = tiers[1].concat(tiers[2]);
-      if (!found.length) return;
-      out.push({
-        kind: g[0], label: g[1], total: found.length, hidden: Math.max(0, found.length - g[2]),
-        results: found.slice(0, g[2]).map(function (it) {
-          return { label: it.label, href: it.href, hit: hitOf(it.folded, query) };
-        })
-      });
-    });
-    return { query: typed, groups: out, all: askUrl + "?q=" + encodeURIComponent(typed) };
-  }
-
-  // --- The ask index --------------------------------------------------------
-  // Narrowed two ways at once: by the words in the header box (or ?q=),
-  // and by the state switch at the top (in season, going out, perfect
-  // now, coming in; "" is all), which needs this week's season data,
-  // fetched from the JSON API.
-  // A family heading goes when nothing is left under it. The note says
-  // what is showing and offers the whole list back.
-  var ask = null;
-
-  // A food's state this week: "in" if any variety is in season, else the
-  // direction of the first "just about" variety, else "".
-  function stateOfFood(food, week) {
-    var best = "";
-    food.varieties.forEach(function (v) {
-      var s = stateAt(v, week);
-      if (s === "in") best = "in";
-      else if (s === "avail" && best === "") best = goingOut(v, week) ? "out" : "coming";
-    });
-    return best;
-  }
-
-  // The food's rank under "newest first", over every food: in season by
-  // weeks since the run began, then coming in and going out by weeks
-  // until the next in-season week, then the rest after them A to Z.
-  function newestRank(food, week, state, alpha) {
-    if (state === "in") {
-      var best = 52;
-      food.varieties.forEach(function (v) {
-        if (stateAt(v, week) !== "in") return;
-        var w = week, n = 0;
-        while (n < 51) {
-          var prev = w === 1 ? 52 : w - 1;
-          if (stateAt(v, prev) !== "in") break;
-          w = prev; n++;
-        }
-        if (n < best) best = n;
-      });
-      return best;
-    }
-    var next = nextIn(food, week);
-    var until = next ? (next.week - week + 52) % 52 + next.yearsAhead * 52 : 999;
-    if (state === "coming") return 100 + until;
-    if (state === "out") return 200 + until;
-    return 1000 + alpha;
-  }
-
-  function initAsk() {
-    var list = document.getElementById("ask-list");
-    if (!list) return;
-    var items = list.querySelectorAll("li:not(.heading)");
-    var headings = list.querySelectorAll("li.heading");
-    var note = document.getElementById("filter-note");
-    var form = document.querySelector("form.search");
-    var input = form ? form.querySelector(".search-input") : null;
-    var askUrl = form ? form.dataset.ask : location.pathname;
-    var box = document.getElementById("ask-state");
-    var url = new URL(location.href);
-    var query = url.searchParams.get("q") || "";
-    var state = url.searchParams.get("state") || "";
-    var states = null;
-    var SAID = { any: "in season", out: "going out", in: "perfect now", coming: "coming in" };
-
-    if (input && query) input.value = query;
-    function showState() {
-      if (!box) return;
-      if (!box.querySelector('input[value="' + state + '"]')) state = "";
-      box.querySelectorAll("input").forEach(function (r) { r.checked = r.value === state; });
-    }
-    showState();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
+    window.addEventListener("resize", size);
 
     function apply() {
-      var q = foldQuery(query), shown = 0, total = items.length, left = {};
-      var byState = !!(state && states);
-      items.forEach(function (li) {
-        var hide = q.length >= MIN_CHARS &&
-          !tierOf(fold(li.dataset.name + " " + (li.dataset.varieties || "")), q);
-        var s = byState ? states[li.dataset.slug] : "";
-        if (byState && (state === "any" ? !s : s !== state)) hide = true;
-        li.hidden = hide;
-        if (!hide) { shown++; left[li.dataset.group] = true; }
-      });
-      headings.forEach(function (h) { h.hidden = !left[h.dataset.group]; });
-      url = new URL(location.href);
-      if (query.trim()) url.searchParams.set("q", query.trim()); else url.searchParams.delete("q");
-      if (state) url.searchParams.set("state", state); else url.searchParams.delete("state");
-      history.replaceState(null, "", url);
-      if (!note) return;
-      var what = [];
-      if (byState) what.push(SAID[state]);
-      if (q.length >= MIN_CHARS) what.push("for “" + query.trim() + "”");
-      if (!what.length) { note.hidden = true; return; }
-      note.textContent = "";
-      note.appendChild(document.createTextNode(
-        (shown ? shown + " of " + total : "Nothing") + " " + what.join(", ") + ". "));
-      var all = el("a", null, "See all");
-      all.href = askUrl;
-      all.addEventListener("click", function (e) {
-        e.preventDefault();
-        query = ""; state = "";
-        if (input) input.value = "";
-        showState();
-        apply();
-      });
-      note.appendChild(all);
-      note.appendChild(document.createTextNode("."));
-      note.hidden = false;
+      var q = input.value.trim();
+      size();
+      if (!q) {
+        list.classList.remove("filtered");
+        index.forEach(function (it) { it.li.hidden = it.never; it.li.style.order = ""; });
+        headings.forEach(function (h) { h.hidden = false; });
+        none.hidden = true; shown = [];
+        return;
+      }
+      list.classList.add("filtered");
+      headings.forEach(function (h) { h.hidden = true; });
+      shown = rank(index, q);
+      index.forEach(function (it) { it.li.hidden = true; it.li.style.order = ""; });
+      shown.forEach(function (it, i) { it.li.hidden = false; it.li.style.order = i; });
+      if (shown.length) { none.hidden = true; return; }
+      none.textContent = "";
+      none.appendChild(document.createTextNode("Is it " + q + " yet? Literally no idea. Not a food we know; try another, or see "));
+      var a = el("a", null, "what is in season this week"); a.href = BASE + "now/";
+      none.appendChild(a);
+      none.appendChild(document.createTextNode("."));
+      none.hidden = false;
     }
 
-    if (box && form) {
-      fetch(form.dataset.index).then(function (r) { return r.json(); }).then(function (foods) {
-        var week = weekOf(new Date());
-        var bySlug = {};
-        foods.forEach(function (f) { bySlug[f.slug] = f; });
-        states = {};
-        items.forEach(function (li, i) {
-          var f = bySlug[li.dataset.slug];
-          if (!f) return;
-          states[f.slug] = stateOfFood(f, week);
-          li.style.setProperty("--os", newestRank(f, week, states[f.slug], i));
-        });
-        apply();
-      }).catch(function () {});
-      box.querySelectorAll("input").forEach(function (r) {
-        r.addEventListener("change", function () { if (r.checked) { state = r.value; apply(); } });
+    input.addEventListener("input", apply);
+    input.form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (shown.length) location.href = shown[0].li.querySelector("a").href;
+    });
+    var q = new URL(location.href).searchParams.get("q");
+    if (q) input.value = q;
+    apply();
+    // Autofocus on a desktop only: on a phone the keyboard would hide the
+    // week's news.
+    if (!q && matchMedia("(pointer: fine) and (min-width: 48rem)").matches) input.focus();
+    if (location.hash === "#hook-input") input.focus();
+    refreshRows(list);
+
+    // The this-week strip for a week other than the baked one.
+    if (!SAME_WEEK) {
+      var strip = document.getElementById("this-week");
+      if (strip) loadFoods().then(function (foods) {
+        var now = V.nowLists(foods, [], WEEK, YEAR);
+        strip.textContent = "";
+        function part(label, items) {
+          if (!items.length) return;
+          strip.appendChild(el("strong", null, label + ": "));
+          strip.appendChild(document.createTextNode(items.slice(0, 6).map(function (i) { return i.name.toLowerCase(); }).join(", ") + (items.length > 6 ? " and more" : "") + ". "));
+        }
+        part("Just arrived", now.arrived);
+        part("Last call", now.last);
+        var a = el("a", null, "This week in full"); a.href = BASE + "now/";
+        strip.appendChild(a); strip.appendChild(document.createTextNode("."));
       });
     }
-    apply();
-    ask = { setQuery: function (q) { query = q; apply(); } };
   }
 
+  // --- Now: the digest for any week ----------------------------------------
+  function initNow() {
+    var digest = document.getElementById("digest");
+    if (!digest) return;
+    var groups = JSON.parse(digest.dataset.groups || "[]");
+    var controls = document.querySelector(".controls");
+    var title = document.getElementById("week-title");
+    var dates = document.getElementById("week-dates");
+    var param = parseInt(new URL(location.href).searchParams.get("week"), 10);
+    var week = (param >= 1 && param <= 52) ? param : WEEK;
+    var KIND = { veg: "Veg", fruit: "Fruit", wild: "Wild", herbs: "Herbs", fish: "Fish", meat: "Meat" };
+
+    function band(cls, heading, items, emptyText, tag) {
+      var s = el("section", "band " + cls);
+      var h = el("h2", null, heading + " ");
+      h.appendChild(el("span", "count", String(items.length)));
+      s.appendChild(h);
+      if (!items.length) { s.appendChild(el("p", "empty", emptyText)); return s; }
+      var ul = el("ul", "food-list");
+      items.forEach(function (i) { ul.appendChild(foodRow(i, tag)); });
+      s.appendChild(ul);
+      return s;
+    }
+
+    function render(w) {
+      title.textContent = w === WEEK ? "this week" : "in week " + w;
+      dates.textContent = "Week " + w + ": " + V.fmtRange(w, YEAR);
+      var url = new URL(location.href);
+      if (w === WEEK) url.searchParams.delete("week"); else url.searchParams.set("week", w);
+      history.replaceState(null, "", url);
+      if (w === BAKED_WEEK && YEAR === BAKED_YEAR) return;
+      loadFoods().then(function (foods) {
+        var now = V.nowLists(foods, groups, w, YEAR);
+        digest.textContent = "";
+        digest.appendChild(band("arrived", "Just arrived", now.arrived, "Nothing new this week.", "new"));
+        digest.appendChild(band("last", "Last chance", now.last, "Nothing on its way out."));
+        digest.appendChild(band("onway", "On the way", now.onway, "Nothing due in the next few weeks."));
+        var still = el("section", "band still");
+        still.appendChild(el("h2", null, "Still good"));
+        now.still.forEach(function (k) {
+          still.appendChild(el("h3", "kind", KIND[k.kind] || k.kind));
+          var ul = el("ul", "food-list");
+          k.items.forEach(function (i) { ul.appendChild(foodRow(i)); });
+          still.appendChild(ul);
+        });
+        digest.appendChild(still);
+      });
+    }
+
+    if (controls) {
+      controls.hidden = false;
+      document.getElementById("prev-week").addEventListener("click", function () { week = week === 1 ? 52 : week - 1; render(week); });
+      document.getElementById("next-week").addEventListener("click", function () { week = week === 52 ? 1 : week + 1; render(week); });
+    }
+    render(week);
+  }
+
+  // --- The header's search box -----------------------------------------------
   function initSearch() {
     var form = document.querySelector("form.search");
     if (!form) return;
     var input = form.querySelector(".search-input");
     var panel = form.querySelector(".search-results");
-    var askUrl = form.dataset.ask;
-    var groups = JSON.parse(form.dataset.groups || "[]");
-    var index = null, loading = false, flat = [], active = -1;
+    var index = null, live = null, options = [], active = -1;
 
     function load(then) {
       if (index) { then(); return; }
-      if (loading) return;
-      loading = true;
-      fetch(form.dataset.index).then(function (r) { return r.json(); }).then(function (foods) {
-        index = buildIndex(foods, groups, askUrl);
+      loadSearch().then(function (items) {
+        index = items.map(function (it) { it.terms = it.terms.map(fold); return it; });
         then();
-      }).catch(function () { loading = false; });
+      }).catch(function () {});
+      if (!SAME_WEEK) loadFoods().then(function (foods) {
+        live = {};
+        foods.forEach(function (f) { live[f.slug] = V.foodVerdict(f, WEEK).verdict; });
+      }).catch(function () {});
     }
 
     function close() {
-      panel.hidden = true; panel.textContent = ""; flat = []; active = -1;
+      panel.hidden = true; panel.textContent = ""; options = []; active = -1;
       input.setAttribute("aria-expanded", "false");
       input.removeAttribute("aria-activedescendant");
     }
 
-    function option(cls, href, node) {
-      var a = el("a", cls);
-      a.href = href; a.setAttribute("role", "option"); a.id = "search-option-" + flat.length;
-      a.appendChild(node);
-      flat.push(a);
-      return a;
-    }
-
-    function paint(found) {
-      panel.textContent = ""; flat = []; active = -1;
-      if (!found) { close(); return; }
-      if (!found.groups.length) panel.appendChild(el("p", "search-none", "nothing to see here"));
-      var foodsFound = 0;
-      found.groups.forEach(function (g) {
-        if (g.kind === "food") foodsFound = g.total;
-        var section = el("div", "search-group search-group-" + g.kind);
-        section.setAttribute("role", "group");
-        section.appendChild(el("div", "search-group-label", g.label));
-        g.results.forEach(function (r) {
-          section.appendChild(option("search-option", r.href, labelNode(r.label, r.hit)));
+    function paint() {
+      var found = index ? rank(index, input.value).slice(0, 8) : [];
+      panel.textContent = ""; options = []; active = -1;
+      if (!input.value.trim()) { close(); return; }
+      if (!found.length) {
+        panel.appendChild(el("p", "search-none", "Literally no idea."));
+      } else {
+        var ul = el("ul", "food-list");
+        found.forEach(function (it, i) {
+          var item = { slug: it.slug, name: it.name, colour: it.colour, never: it.never,
+            verdict: live && live[it.slug] ? live[it.slug] : it.verdict };
+          var li = foodRow(item);
+          li.id = "search-option-" + i;
+          li.setAttribute("role", "option");
+          options.push(li);
+          ul.appendChild(li);
         });
-        if (g.hidden > 0) section.appendChild(el("p", "search-more", "+" + g.hidden + " more"));
-        panel.appendChild(section);
-      });
-      if (foodsFound > 1) panel.appendChild(option("search-all", found.all, document.createTextNode("See all " + foodsFound + " →")));
+        panel.appendChild(ul);
+      }
       panel.hidden = false;
       input.setAttribute("aria-expanded", "true");
     }
 
     function setActive(n) {
-      if (active >= 0 && flat[active]) flat[active].classList.remove("is-active");
+      if (active >= 0 && options[active]) options[active].classList.remove("is-active");
       active = n;
-      if (active >= 0 && flat[active]) {
-        flat[active].classList.add("is-active");
-        input.setAttribute("aria-activedescendant", flat[active].id);
+      if (active >= 0 && options[active]) {
+        options[active].classList.add("is-active");
+        input.setAttribute("aria-activedescendant", options[active].id);
       } else input.removeAttribute("aria-activedescendant");
     }
 
-    function refresh() {
-      if (index && document.activeElement === input) paint(search(index, input.value, askUrl));
-    }
-
-    // On the ask index the box narrows the list below instead of
-    // opening a dropdown.
-    if (ask) {
-      input.addEventListener("input", function () { ask.setQuery(input.value); });
-      return;
-    }
-
-    input.addEventListener("focus", function () { load(refresh); });
-    input.addEventListener("input", function () { load(refresh); });
+    input.addEventListener("focus", function () { load(paint); });
+    input.addEventListener("input", function () { load(paint); });
     input.addEventListener("keydown", function (e) {
-      if (panel.hidden || !flat.length) { if (e.key === "Escape") close(); return; }
-      if (e.key === "ArrowDown") { e.preventDefault(); setActive((active + 1) % flat.length); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); setActive((active - 1 + flat.length) % flat.length); }
-      else if (e.key === "Escape") { e.preventDefault(); close(); }
-      else if (e.key === "Enter" && active >= 0) { e.preventDefault(); location.href = flat[active].href; }
+      if (e.key === "Escape") { close(); return; }
+      if (!options.length) return;
+      if (e.key === "ArrowDown") { e.preventDefault(); setActive((active + 1) % options.length); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); setActive((active - 1 + options.length) % options.length); }
+    });
+    // Enter goes to the active option, or the first match.
+    form.addEventListener("submit", function (e) {
+      var pick = active >= 0 ? options[active] : options[0];
+      if (pick) { e.preventDefault(); location.href = pick.querySelector("a").href; }
     });
     // Closing on blur waits a beat, or a click on an option empties the
     // panel before the click lands on the link.
@@ -590,14 +460,47 @@
     document.addEventListener("click", function (e) { if (!form.contains(e.target)) close(); });
   }
 
+  // --- Not found ---------------------------------------------------------------
+  // The address says what was asked for; the nearest foods are offered.
+  function initNotFound() {
+    var box = document.getElementById("not-found");
+    if (!box) return;
+    var parts = location.pathname.replace(/\/+$/, "").split("/");
+    var last = decodeURIComponent(parts[parts.length - 1] || "").replace(/[-_+]+/g, " ").replace(/\.\w+$/, "").trim();
+    if (!last || last === "404") last = "that";
+    document.getElementById("asked").textContent = last;
+    document.title = "Is it " + last + " yet? Literally no idea.";
+    loadSearch().then(function (items) {
+      var index = items.map(function (it) { it.terms = it.terms.map(fold); return it; });
+      var found = rank(index, last).slice(0, 5);
+      if (!found.length) {
+        // Nothing begins with it: offer anything sharing three letters.
+        var q = fold(last).slice(0, 3);
+        found = q.length === 3 ? index.filter(function (it) {
+          return it.terms.some(function (t) { return t.indexOf(q) >= 0; });
+        }).slice(0, 5) : [];
+      }
+      if (!found.length) return;
+      var ul = document.getElementById("suggest-list");
+      found.forEach(function (it) { ul.appendChild(foodRow(it)); });
+      document.getElementById("suggest").hidden = false;
+      refreshRows(ul);
+    }).catch(function () {});
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    var week = weekOf(new Date());
-    document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, week); });
-    document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, new Date()); });
+    document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, WEEK); });
+    document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, TODAY); });
+    document.querySelectorAll("[data-asof]").forEach(function (n) { n.textContent = V.fmtDateYear(TODAY); });
     initSwitches();
-    initNow();
     initFood();
-    initAsk();
+    fitVerdict(document.querySelector(".verdict-word"));
+    initHome();
+    initNow();
     initSearch();
+    initNotFound();
+    targetRow();
+    window.addEventListener("hashchange", targetRow);
+    refreshRows(document.querySelector(".also"));
   });
 })();
