@@ -1,157 +1,164 @@
-/* Plain, system-font styling. Colours per food come from the data file as
-   a --c custom property on the row or swatch; everything else is here. */
+/* Rhubarb and custard. The chrome is neutral ink on custard (light) or on
+   the forcing shed (dark); the one brand colour is rhubarb pink, which is
+   also rhubarb's own colour and never carries body-size text. Each food's
+   colour arrives as --food on its row or page and every colour in the data
+   passes 3:1 on both backgrounds, so a verdict word can simply be set in it.
+   Charts keep --c for a row's colour. */
 
+/* --- Fonts: three families, one job each, self-hosted, Latin only ------ */
+@font-face {
+  font-family: "Anton";
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url(fonts/anton-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url(fonts/atkinson-hyperlegible-next-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: italic; font-weight: 400; font-display: swap;
+  src: url(fonts/newsreader-italic-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* --- Tokens ---------------------------------------------------------------- */
 :root {
   color-scheme: light dark;
-  --bg: #fffdf8;
-  --fg: #1e1e1a;
-  --muted: #6b6b60;
-  --rule: #e4e0d4;
-  --band: rgba(0, 0, 0, 0.018);
-  --off: #ebe7dc;
-  --accent: #ff00c8;
-  --yes: #2f8f3a;
-  --nearly: #c98a1a;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.45;
+  --shed: #16110e;
+  --custard: #fbf3d9;
+  --rhubarb: #ff2d78;
+  --bg: var(--custard);
+  --ink: #1c1714;
+  --muted: #5e544b;
+  --rule: color-mix(in oklab, var(--ink) 16%, var(--bg));
+  --off: color-mix(in oklab, var(--ink) 11%, var(--bg));
+  --band: color-mix(in oklab, var(--ink) 4%, var(--bg));
+  --food: var(--rhubarb);
+  --display: Anton, Impact, "Arial Narrow", sans-serif;
+  --text: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --quote: Newsreader, Georgia, serif;
+  /* Anton's two letter-spacings, chosen by size: 40px and up, below 40px. */
+  --track-large: 0;
+  --track-small: 0.03em;
 }
-/* Dark follows the system unless the header switch has set data-theme.
-   The dark palette appears twice because CSS cannot share a block between
-   a media query and a selector; keep the two the same. */
+/* Dark follows the system unless the header switch has set data-theme. The
+   dark values appear twice because CSS cannot share a block between a media
+   query and a selector; keep the two the same. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #15160f;
-    --fg: #ece8dc;
-    --muted: #a09d8f;
-    --rule: #33352a;
-    --band: rgba(255, 255, 255, 0.025);
-    --off: #2a2c22;
-    --yes: #5fc06a;
-    --nearly: #e0a63a;
+    --bg: var(--shed);
+    --ink: #f3ede4;
+    --muted: #b9ae9f;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #15160f;
-  --fg: #ece8dc;
-  --muted: #a09d8f;
-  --rule: #33352a;
-  --band: rgba(255, 255, 255, 0.025);
-  --off: #2a2c22;
-  --yes: #5fc06a;
-  --nearly: #e0a63a;
+  --bg: var(--shed);
+  --ink: #f3ede4;
+  --muted: #b9ae9f;
 }
 :root[data-theme="light"] { color-scheme: light; }
 
-html { background: var(--bg); color: var(--fg); }
-body { margin: 0; }
-main { max-width: 64rem; margin: 0 auto; padding: 1rem 1.25rem 3rem; }
-a { color: inherit; }
-h1 { font-size: 2rem; line-height: 1.1; margin: 1.5rem 0 0.75rem; }
+/* --- Base ----------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font: 400 1.0625rem/1.5 var(--text);
+  font-variant-numeric: tabular-nums;
+}
+main { max-width: 64rem; margin: 0 auto; padding: 0.5rem 1rem 3rem; }
+[hidden] { display: none !important; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+p { margin: 0 0 1rem; max-width: 40rem; }
+strong { font-weight: 700; }
+
+/* Links are ink with a pink underline; hover and focus thicken the line
+   and never recolour the words. */
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+a:hover, a:focus-visible { text-decoration-thickness: 3px; }
+:focus-visible { outline: 2px solid var(--rhubarb); outline-offset: 2px; }
+
+/* Titles are Anton, in caps, never sentence-length. */
+h1, h2, h3 { font-weight: 400; margin: 0; }
+h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); margin: 1.5rem 0 0.5rem; }
+@media (min-width: 42rem) { h1 { letter-spacing: var(--track-large); } }
+.page-head { margin-bottom: 1rem; }
 .lede { color: var(--muted); max-width: 40rem; }
 
-/* Header: the wordmark dead centre on row 1 of a `1fr auto 1fr` grid,
-   so neither side can push it; the search box under it in the same
-   track, with the nav at row 2's right end. The theme switch sits
-   outside the grid, in the header's top right corner. Every child is
-   placed by hand: the nav is first in the markup for the tab order and
-   would otherwise take column 1. */
-.site-header { position: relative; padding: 1.5rem 1.25rem 0.3rem; border-bottom: 1px solid var(--rule); }
+/* --- Header ---------------------------------------------------------------- */
+.site-header { padding: 0.75rem 1rem 0; border-bottom: 1px solid var(--rule); }
 .site-header-inner {
-  display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto auto;
-  align-items: end; max-width: 64rem; margin: 0 auto;
+  max-width: 64rem; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr auto; column-gap: 1rem; row-gap: 0.4rem;
+  grid-template-areas: "brand theme" "nav nav" "search search";
+  align-items: center; padding-bottom: 0.6rem;
+}
+@media (min-width: 52rem) {
+  .site-header-inner { grid-template-columns: auto 1fr auto auto; grid-template-areas: "brand nav search theme"; column-gap: 1.5rem; }
 }
 .brand {
-  grid-row: 1; grid-column: 2; justify-self: center;
-  font-weight: 900; font-size: 1.7rem; line-height: 1.1; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--accent); text-decoration: none; margin-right: -0.12em; text-align: center;
+  grid-area: brand; justify-self: start;
+  font: 400 1.5rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
+  color: var(--ink); text-decoration: none; white-space: nowrap;
 }
-.site-nav { grid-row: 2; grid-column: 3; justify-self: end; align-self: start; display: flex; gap: 1.4rem; margin-top: 0.4rem; }
-.site-nav a { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--muted); padding: 0.3rem 0; }
-.site-nav a:hover, .site-nav a:focus-visible { color: var(--accent); }
-.site-nav a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
-.site-header .search { grid-row: 2; grid-column: 2; justify-self: center; margin-top: 0.5rem; }
-.site-header .theme { position: absolute; top: 0.5rem; right: 0.9rem; }
-
-/* Narrow: one column. The nav takes the right end of row 2 and the
-   search is centred on row 3. The wordmark steps down. */
-@media (max-width: 640px) {
-  .site-header { padding-top: 2rem; }
-  .site-header-inner { grid-template-columns: minmax(0, 1fr); }
-  .brand { grid-column: 1; font-size: 1.15rem; }
-  .site-nav { grid-column: 1; }
-  .site-header .search { grid-row: 3; grid-column: 1; }
-  .site-header .theme { top: 0.35rem; right: 0.6rem; }
+.brand-rhubarb { color: var(--rhubarb); }
+.site-nav { grid-area: nav; display: flex; gap: 1.25rem; }
+.site-nav a {
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+  color: var(--muted); padding: 0.3rem 0; border-bottom: 2px solid transparent;
 }
+.site-nav a:hover, .site-nav a:focus-visible { color: var(--ink); border-bottom-color: var(--rhubarb); }
+.site-nav a[aria-current] { color: var(--ink); border-bottom-color: var(--rhubarb); }
+.site-header .search { grid-area: search; }
+.site-header .theme { grid-area: theme; justify-self: end; }
 
-/* The search box: a hairline input with the glass on its right, so a
-   typed word grows leftwards from the glass and a long one scrolls its
-   start off, never the letters being typed. Focus is the underline
-   taking the accent, not a ring. The dropdown hangs centred under the
-   box, capped to the viewport. */
+/* The search box: a hairline input with the glass on its right. Focus is
+   the underline thickening, not a ring. The dropdown hangs under the box. */
 .search { position: relative; display: flex; align-items: center; gap: 0.5rem; margin: 0; }
 .search-input {
-  font: inherit; font-size: 0.95rem; width: 13ch; max-width: 100%; box-sizing: content-box;
-  text-align: right; background: transparent; border: 0; border-bottom: 1px solid var(--rule);
-  border-radius: 0; padding: 0 0 2px; margin: 0; color: var(--fg); -webkit-appearance: none; appearance: none;
+  font: inherit; font-size: 1rem; width: 14ch; max-width: 100%;
+  background: transparent; border: 0; border-bottom: 1px solid var(--rhubarb); border-radius: 0;
+  padding: 0.1rem 0 0.2rem; margin: 0; color: var(--ink); -webkit-appearance: none; appearance: none;
 }
-.search-input:focus { outline: none; border-bottom-color: var(--accent); box-shadow: inset 0 -1px 0 var(--accent); }
+.search-input:focus { outline: none; border-bottom-width: 3px; margin-bottom: -2px; }
 .search-input::placeholder { color: var(--muted); opacity: 1; }
-.search-input:focus::placeholder { color: transparent; }
 .search-input::-webkit-search-cancel-button { display: none; }
 .search-go { background: none; border: 0; padding: 0; margin: 0; line-height: 0; color: var(--muted); cursor: pointer; }
-.search-go:hover, .search-go:focus-visible { color: var(--accent); }
+.search-go:hover, .search-go:focus-visible { color: var(--ink); }
 .search-mark { display: block; width: 1.15rem; height: 1.15rem; }
 .search-results {
-  position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 20; margin-top: 0.4rem;
-  min-width: 100%; width: max-content; max-width: min(24rem, calc(100vw - 2.5rem)); box-sizing: border-box;
-  padding: 0.4rem 0; background: var(--bg); border: 1px solid var(--rule); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
-  text-align: left; font-size: 0.95rem;
+  position: absolute; top: 100%; left: 0; z-index: 20; margin-top: 0.4rem;
+  min-width: 100%; width: max-content; max-width: min(24rem, calc(100vw - 2rem));
+  padding: 0.4rem 0; background: var(--bg); border: 1px solid var(--rule); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  text-align: left; font-size: 1rem;
 }
-.search-group + .search-group { margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--rule); }
-.search-group-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 0.2rem 0.8rem; }
-.search-option { display: block; padding: 0.2rem 0.8rem; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.search-option:hover, .search-option:focus-visible, .search-option.is-active { background: color-mix(in oklab, var(--accent) 14%, var(--bg)); outline: none; }
-.search-hit { color: var(--accent); font-weight: 600; }
-.search-more, .search-none { margin: 0; padding: 0.2rem 0.8rem 0; font-size: 0.8rem; color: var(--muted); }
-.search-all { display: block; margin: 0.4rem 0 0; padding: 0.4rem 0.8rem 0; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--muted); }
-.search-all:hover, .search-all:focus-visible, .search-all.is-active { color: var(--accent); outline: none; }
-.filter-note { color: var(--muted); }
+@media (min-width: 52rem) { .search-results { left: auto; right: 0; } }
+.search-results .food-list { display: block; margin: 0; }
+.search-results .food-row { padding: 0.25rem 0.8rem; }
+.search-results .food-row.is-active, .search-results .food-row:hover { background: var(--band); }
+.search-none { margin: 0; padding: 0.2rem 0.8rem; color: var(--muted); }
 
-/* Footer: one centred stack, hearts last. */
-.site-footer {
-  max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; border-top: 1px solid var(--rule);
-  display: grid; justify-items: center; gap: 0.6rem; text-align: center; color: var(--muted); font-size: 0.85rem;
-}
-.site-footer p { margin: 0; }
-.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.25rem; }
-.site-footer a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
-.site-footer a:hover, .site-footer a:focus-visible { color: var(--accent); }
-.footer-github { display: inline-flex; margin-top: 0.4rem; opacity: 0.65; }
-.footer-github:hover, .footer-github:focus-visible { opacity: 1; color: inherit; }
-.footer-icon { width: 2rem; height: 2rem; fill: currentColor; }
-.licence { margin-top: -0.4rem; }
-.licence span { display: inline-block; white-space: nowrap; }
-.hearts { color: var(--accent); line-height: 0; margin-top: 0.75rem; }
-.hearts svg { display: block; width: min(240px, 45vw); height: auto; }
-
-/* Switches: a radio group drawn as a pill. The theme switch needs
-   JavaScript to do anything, so it only appears with it. The order
-   switches work by CSS alone: .ordered shows the child whose radio is
-   checked, and JavaScript only remembers the choice. */
+/* --- Switches ----------------------------------------------------------- */
+/* A radio group drawn as a pill. The theme switch needs JavaScript to do
+   anything, so it only appears with it. The order switches work by CSS
+   alone: .ordered shows the child whose radio is checked, and JavaScript
+   only remembers the choice. */
 .switch { display: inline-flex; gap: 2px; padding: 2px; margin: 0 0 1rem; border: 1px solid var(--rule); border-radius: 999px; position: relative; }
 .switch legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .switch label { padding: 0.2rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
-.switch input:checked + label { background: var(--fg); color: var(--bg); }
-.switch input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 1px; }
-/* The theme switch is a quieter pill than the order switches: no
-   border, lowercase, small; the chosen word is underlined in the accent
-   as the nav's current page is. */
+.switch input:checked + label { background: var(--ink); color: var(--bg); }
+.switch input:focus-visible + label { outline: 2px solid var(--rhubarb); outline-offset: 1px; }
 .theme { display: none; }
 .js .theme { display: inline-flex; margin-bottom: 0; border: 0; padding: 0; gap: 0.6rem; }
-.theme label { padding: 0.1rem 0; font-size: 0.72rem; border-radius: 0; letter-spacing: 0.04em; }
-.theme input:checked + label { background: none; color: var(--fg); box-shadow: 0 2px 0 var(--accent); }
+.theme label { padding: 0.1rem 0; font-size: 0.75rem; border-radius: 0; letter-spacing: 0.04em; }
+.theme input:checked + label { background: none; color: var(--ink); box-shadow: 0 2px 0 var(--rhubarb); }
+.switches { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
@@ -162,25 +169,122 @@ main:has(#kind-wild:checked) .ordered > .by-wild,
 main:has(#kind-herbs:checked) .ordered > .by-herbs,
 main:has(#kind-fish:checked) .ordered > .by-fish,
 main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
-/* The weekly in-season list is one grid whose items carry a rank per
-   order as --os, --oa and --og; the switch picks which rank lays it out.
-   Group headings are items that only show in group order. */
-.food-list.in-season { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 0.15rem 2rem; columns: auto; }
-.in-season li { order: var(--oa); }
-main:has(#order-start:checked) .in-season li { order: var(--os); }
-main:has(#order-group:checked) .in-season li { order: var(--og); }
-.in-season .heading { display: none; grid-column: 1 / -1; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1rem; }
-main:has(#order-group:checked) .in-season .heading { display: block; }
-.in-season .heading[hidden] { display: none; }
-.tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 700; margin-left: 0.3em; }
 
-/* Charts. A row's colour is --c; in-season bars take it as is, "just
-   about" bars fade between the off-season grey and it through a gradient
-   whose stops read the row's --c. */
+/* --- Shared components ---------------------------------------------------- */
+/* The verdict word, at any size, is Anton in the food's colour. */
+.verdict-tag {
+  font: 400 0.85rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
+  color: var(--food); white-space: nowrap;
+}
+.tag-new {
+  font: 400 0.7rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
+  color: var(--ink); border: 2px solid var(--rhubarb); padding: 0.15em 0.4em 0.1em; white-space: nowrap;
+}
+.swatch { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 2px; background: var(--food); flex: none; transform: translateY(0.02em); }
+
+/* A food in a list: swatch, name, variety, verdict tag, and a line under. */
+.food-list { list-style: none; margin: 0.5rem 0 1rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.4rem 1.5rem; }
+.food-row a { display: flex; align-items: baseline; gap: 0.5em; text-decoration: none; }
+.food-row a:hover .food-name, .food-row a:focus-visible .food-name { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+.food-name { flex: 0 1 auto; }
+.variety { color: var(--muted); font-size: 0.9em; }
+.row-line { display: block; color: var(--muted); font-size: 0.85rem; line-height: 1.3; padding-left: 1.3em; }
+.food-row.never { --food: var(--rhubarb); }
+.food-list .heading {
+  display: none; grid-column: 1 / -1; margin-top: 1rem;
+  font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.ordered-list .food-row { order: var(--oa); }
+main:has(#order-group:checked) .ordered-list .food-row { order: var(--og); }
+main:has(#order-group:checked) .ordered-list .heading { display: block; }
+.ordered-list.filtered .heading { display: none; }
+.empty { color: var(--muted); font-style: italic; }
+
+/* The date line: bold, tabular, the second thing on a verdict page. */
+.date-line { font-weight: 700; font-size: 1.2rem; line-height: 1.35; margin: 0.9rem 0 0.25rem; }
+.variety-line { color: var(--muted); margin: 0 0 1rem; }
+
+/* --- Home: the hook ------------------------------------------------------- */
+.hook { padding: 1.5rem 0 0.5rem; }
+.hook-form { margin: 0; }
+.hook-line {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.28em;
+  font: 400 clamp(2.6rem, 11vw, 6.5rem)/1.05 var(--display); letter-spacing: var(--track-large); text-transform: uppercase;
+  cursor: text;
+}
+.hook-slot { display: inline-flex; max-width: 100%; }
+#hook-input {
+  font: inherit; letter-spacing: inherit; text-transform: inherit; line-height: inherit;
+  color: var(--ink); background: transparent; border: 0; border-bottom: 0.06em solid var(--rhubarb); border-radius: 0;
+  padding: 0 0.08em; margin: 0; min-width: 3ch; max-width: 100%; -webkit-appearance: none; appearance: none;
+}
+#hook-input::placeholder { color: var(--muted); opacity: 0.55; }
+.hook-ruler { position: absolute; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: inherit; padding: 0 0.08em; }
+.hook-slot { position: relative; }
+#hook-input:focus { outline: none; border-bottom-width: 0.1em; margin-bottom: -0.04em; }
+#hook-input::-webkit-search-cancel-button { display: none; }
+.this-week { margin: 1.25rem 0 0.5rem; max-width: 44rem; color: var(--muted); }
+.this-week strong { color: var(--ink); }
+.hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
+.list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+.list-title { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); }
+.list-head .switch { margin: 0; }
+
+/* --- A food page -------------------------------------------------------- */
+article.food { padding-top: 0.5rem; }
+.ask { font-weight: 700; color: var(--muted); margin: 1rem 0 0; }
+.verdict { margin: 0.1em 0 0 -0.03em; line-height: 1; }
+.verdict-word {
+  display: inline-block; font: 400 clamp(4rem, 22vw, 12rem)/0.86 var(--display);
+  letter-spacing: var(--track-large); text-transform: uppercase; color: var(--food); white-space: nowrap;
+  padding-top: 0.08em;
+}
+.never .verdict-word, .not-found .verdict-word { color: var(--rhubarb); }
+.quote { margin: 1.5rem 0 2rem; max-width: 34rem; font: italic 400 1.3rem/1.3 var(--quote); }
+.quote p { margin: 0; max-width: none; }
+.quote cite { display: block; margin-top: 0.5rem; font: 400 0.85rem/1.4 var(--text); font-style: normal; color: var(--muted); }
+.quote cite::before { content: "— "; }
+.buy { max-width: 36rem; margin: 0 0 1.5rem; padding: 0.6rem 0.9rem; border-left: 3px solid var(--food); }
+.also h2, .fine summary, .suggest h2 { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); margin: 1.5rem 0 0.25rem; }
+.also { margin: 1.5rem 0; }
+.fine { margin: 2rem 0; color: var(--muted); }
+.fine summary { cursor: pointer; margin: 0; }
+.fine summary span { display: inline; }
+.runs { list-style: none; padding: 0; margin: 0.75rem 0; }
+.runs li { margin: 0.25rem 0; }
+.runs .swatch { margin-right: 0.5em; }
+.note, .source, .as-of { color: var(--muted); font-size: 0.95rem; max-width: 40rem; }
+.onwards { margin: 2rem 0 0; }
+
+/* --- Now: the digest ----------------------------------------------------- */
+.week-dates { font-weight: 700; font-size: 1.1rem; margin: 0.25rem 0 0.75rem; }
+.controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+.controls button, button.plain {
+  font: inherit; font-size: 0.9rem; padding: 0.3rem 0.9rem; border: 1px solid var(--ink); border-radius: 999px;
+  background: transparent; color: var(--ink); cursor: pointer;
+}
+.controls button:hover, .controls button:focus-visible { background: var(--ink); color: var(--bg); }
+.digest { display: grid; gap: 1.5rem 2rem; }
+@media (min-width: 52rem) {
+  .digest { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .digest .band.still { grid-column: 1 / -1; }
+}
+.band { border-top: 3px solid var(--rule); padding-top: 0.4rem; min-width: 0; }
+.band.arrived { border-top-color: var(--rhubarb); }
+.band h2 { font: 400 1.4rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; margin: 0.3rem 0 0.5rem; }
+.band .count { color: var(--muted); font: 400 0.9rem var(--text); margin-left: 0.3em; }
+.band .food-list { grid-template-columns: 1fr; }
+.band.still .food-list { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+.kind { font: 700 0.8rem/1.4 var(--text); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 1rem 0 0.25rem; }
+
+/* --- Charts ---------------------------------------------------------------- */
+/* A row's colour is --c; in-season bars take it as is, "just about" bars
+   fade between the off-season tint and it through a gradient whose stops
+   read the row's --c. Today is a line of ink. */
 .chart { margin: 0 0 1.5rem; overflow-x: auto; }
 .chart svg { display: block; max-width: 100%; height: auto; }
-.chart text { fill: var(--fg); font-size: 12px; }
-.chart .month-label { font-weight: 600; }
+.chart text { fill: var(--ink); font-family: var(--text); font-size: 12px; }
+.chart .month-label { font-weight: 700; }
 .chart .week-label { fill: var(--muted); font-size: 8px; }
 .chart .group-label { font-weight: 700; font-size: 13px; fill: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
 .chart .row-label { font-size: 11px; }
@@ -190,120 +294,65 @@ main:has(#order-group:checked) .in-season .heading { display: block; }
 .chart .stop-off { stop-color: var(--off); }
 .chart .stop-c { stop-color: var(--c); }
 .chart .row-hit { fill: transparent; }
-.chart a.row { cursor: pointer; }
-.chart a.row:hover .row-label { fill: var(--accent); font-weight: 600; }
-.chart a.row:hover .cell.in { fill: color-mix(in oklab, var(--c) 78%, white); }
-.chart a.row:hover .stop-c { stop-color: color-mix(in oklab, var(--c) 78%, white); }
-.chart a.row:hover .cell.avail { fill: color-mix(in oklab, var(--c) 45%, white); }
-.chart a.row:hover .row-hit { fill: var(--band); }
+.chart a.row, .dial a.label { cursor: pointer; text-decoration: none; }
+.chart a.row:hover .row-label, .chart a.row.is-target .row-label { font-weight: 700; }
+.chart a.row:hover .row-hit, .chart a.row.is-target .row-hit { fill: var(--band); }
 .chart .month-line { stroke: var(--rule); }
-.chart .today { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 3 3; }
+.chart .today { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 3 3; }
+.chart.mini { max-width: 100%; }
 
-/* Lists */
-.food-list { list-style: none; padding: 0; margin: 0.25rem 0 1rem; columns: 14rem; column-gap: 2rem; }
-.food-list li { break-inside: avoid; padding: 0.15rem 0; }
-.food-list a { text-decoration: none; }
-.food-list a:hover { text-decoration: underline; }
-.swatch {
-  display: inline-block; width: 0.8em; height: 0.8em; margin-right: 0.5em;
-  background: var(--c); border-radius: 2px; vertical-align: baseline;
-}
-.nearly .swatch { background: color-mix(in oklab, var(--c) 45%, var(--off)); }
-h3, .group-heading { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 1.25rem 0 0.25rem; }
-/* The home page's week: three bands in time order, coming in, perfect
-   now, going out, joined by an arrow along their top edge that points the
-   way the season moves. On a phone they stack in the same order. */
-.now-line { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 2.6fr) minmax(9rem, 1fr); gap: 0 1.75rem; margin-top: 0.5rem; }
-.band { position: relative; border-top: 2px solid var(--rule); padding-top: 0.25rem; }
-.band:not(.going)::after { content: "→"; position: absolute; top: -0.8rem; right: -1.35rem; color: var(--muted); background: var(--bg); padding: 0 0.15rem; font-size: 0.95rem; line-height: 1.4rem; }
-.band.perfect { border-top-color: var(--accent); }
-.band h3 { margin: 0.6rem 0 0; color: var(--fg); }
-.band .count { color: var(--muted); font-weight: 400; margin-left: 0.3em; }
-.band-note { margin: 0 0 0.5rem; color: var(--muted); font-size: 0.85rem; }
-.band .food-list.nearly { columns: 1; }
-.band .food-list.in-season { grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 0.15rem 1.5rem; }
-.band .empty { color: var(--muted); font-style: italic; }
-@media (max-width: 640px) {
-  .now-line { grid-template-columns: 1fr; }
-  .band { margin-bottom: 1.25rem; }
-  .band:not(.going)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -1.3rem; }
-  .band .food-list.in-season { grid-template-columns: 1fr 1fr; gap: 0.15rem 1rem; font-size: 0.92rem; }
-}
-.controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-.controls button { font: inherit; padding: 0.3rem 0.7rem; }
-.week-heading { color: var(--muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
-.js section.week { display: none; }
-.js section.week:not([hidden]) { display: block; }
-.js .week-heading { display: none; }
-
-/* Is it X yet? One giant word, one flat line. */
-article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }
-.ask { font-size: 1.5rem; color: var(--muted); font-weight: 500; }
-.verdict {
-  font-size: clamp(6rem, 24vw, 18rem); font-weight: 900; line-height: 0.9;
-  letter-spacing: -0.04em; margin: 0.5rem 0 1rem -0.06em;
-}
-/* The verdict takes the food's colour, with its lightness clamped so a
-   parsnip or a cod still shows on cream and a damson on dark. */
-.verdict { color: var(--c); color: oklch(from var(--c) clamp(0.3, l, 0.72) c h); }
-:root[data-theme="dark"] .verdict { color: oklch(from var(--c) clamp(0.62, l, 0.92) c h); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .verdict { color: oklch(from var(--c) clamp(0.62, l, 0.92) c h); }
-}
-.answer { font-size: 1.4rem; font-weight: 500; margin: 0 0 2rem; max-width: 36rem; }
-.answer.quote { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; line-height: 1.35; }
-.answer.quote cite { display: block; font-family: system-ui, sans-serif; font-style: normal; font-size: 0.95rem; color: var(--muted); margin-top: 0.4rem; }
-.answer.quote cite::before { content: "— "; }
-.buy { max-width: 36rem; margin: 0 0 1.5rem; padding: 0.6rem 0.9rem; border-left: 3px solid var(--rule); color: var(--fg); }
-.when { color: var(--fg); margin: 0.5rem 0 0; }
 /* The season wheel. Arcs are dashed circles whose stroke is the ring's
-   --c; a fading day mixes --c into the off-season grey by --t (0 to 1),
-   and a shaded week mixes --a into --b. The mix runs in oklab so the
-   fade stays even to the eye; change the easing by shaping --t here,
-   e.g. calc(var(--t) * var(--t)) for a slow start. The hand is hidden
-   until JavaScript points it at today, then sweeps round from January. */
-.wheel { width: min(24rem, 100%); margin: 0 0 2rem; }
+   --c; a fading day mixes --c into the off-season tint by --t (0 to 1),
+   and a shaded week mixes --a into --b. The hand is hidden until
+   JavaScript points it at today, then sweeps round from January. */
+.wheel { width: min(22rem, 100%); margin: 1rem 0 1.5rem; }
 .wheel svg { display: block; width: 100%; height: auto; overflow: visible; }
 .wheel .off { stroke: var(--off); }
 .wheel .in { stroke: var(--c); }
 .wheel .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), var(--off)); }
 .wheel .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
 .wheel .spoke { stroke: var(--bg); stroke-width: 2; }
-.wheel .month { fill: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.wheel .month { fill: var(--muted); font-family: var(--text); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .wheel .hand { opacity: 0; transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s; }
 .wheel .hand.on { opacity: 1; }
-.wheel .hand line { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
-.wheel .hand circle { fill: var(--accent); }
-.wheel .today-label { fill: var(--muted); font-size: 11px; text-anchor: middle; }
+.wheel .hand line { stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
+.wheel .hand circle { fill: var(--ink); }
+.wheel .today-label { fill: var(--muted); font-family: var(--text); font-size: 11px; text-anchor: middle; }
 .wheel .today-label[hidden] { display: none; }
-.wheel .today-label .date { fill: var(--fg); font-size: 15px; font-weight: 700; }
+.wheel .today-label .date { fill: var(--ink); font-size: 15px; font-weight: 700; }
 .wheel figcaption { color: var(--muted); font-size: 0.9rem; }
 .rings { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
+.rings .swatch { margin-right: 0.4em; }
 @media (prefers-reduced-motion: reduce) { .wheel .hand { transition: opacity 0.4s; } }
 
-/* The arrivals dial: a month ring with food labels radiating from it. */
+/* The arrivals wheel: a month ring with food labels radiating from it. */
 .dial { width: min(54rem, 100%); }
-.dial .month { font-size: 9px; fill: var(--fg); }
-.dial .label text { font-size: 10px; fill: var(--fg); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.dial .month { font-size: 9px; fill: var(--ink); }
+.dial .label text { font-family: var(--text); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
 .dial .season { stroke: var(--c); stroke-width: var(--arc-w, 2.5); opacity: var(--arc-o, 0.75); }
-main:has(#arcs-off:checked) .dial .season { display: none; }
-.switches { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
 .dial .label .dot { fill: var(--c); }
-.dial .label:hover text { fill: var(--accent); font-weight: 600; }
+.dial .label:hover text { font-weight: 700; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
 .dial .allyear { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: -0.5rem; }
-.dial .allyear .head { font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
+.dial .allyear .head { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
 
-/* The about page and the 404: prose in one column. */
+/* --- Prose pages: about, sources ----------------------------------------- */
 .about { max-width: 40rem; }
-.about h2 { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 2rem 0 0.5rem; }
-.about h3 { font-size: 1.05rem; color: var(--fg); text-transform: none; letter-spacing: 0; margin: 1.5rem 0 0.25rem; }
+.about h2 { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); margin: 2rem 0 0.5rem; }
+.about h3 { font: 700 1.05rem/1.3 var(--text); margin: 1.5rem 0 0.25rem; }
 .about h3 + p { margin-top: 0; }
 .about hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
 .about-ways { padding-left: 1.2rem; }
 .about-ways li { margin: 0.35rem 0; }
 
-.fine { margin: 2rem 0; color: var(--muted); }
-.fine summary { cursor: pointer; }
-.note, .source { color: var(--muted); font-size: 0.95rem; max-width: 40rem; }
+/* --- Footer ---------------------------------------------------------------- */
+.site-footer {
+  max-width: 64rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--rule);
+  display: grid; justify-items: center; gap: 0.6rem; text-align: center; color: var(--muted); font-size: 0.9rem;
+}
+.site-footer p { margin: 0; max-width: none; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.25rem; }
+.licence span { display: inline-block; white-space: nowrap; }
+.hearts { color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; }
+.hearts svg { display: block; width: min(240px, 45vw); height: auto; }
