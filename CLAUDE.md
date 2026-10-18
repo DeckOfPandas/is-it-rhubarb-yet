@@ -21,9 +21,11 @@ is the only enforcement.
   `http://localhost:<host port>/`, plus the `baseurl` from `_config.yml`.
   No pair in `PORTS` means I can't reach it: ask me to add one.
 - Visual checks: `node tools/dev/shoot.js <base-url> <label>
-  [--scheme dark] [--click <text>] <path>...` writes `tmp/shots/`, and
+  [--scheme dark] [--click <text>] <page>...` writes `tmp/shots/`, and
   `node tools/dev/slice-png.js tmp/shots/<file>.png` cuts a tall one. Use these
-  rather than writing new ones in `tmp/`.
+  rather than writing new ones in `tmp/`. A page is relative to the base URL
+  (`.`, `calendar/`), never `/calendar/`: a leading `/` reads as a file path
+  outside the project and is blocked.
 - The site is Jekyll with no plugins, vanilla JS and inline SVG only. No
   raster images, no npm, no new gems without asking.
 - `_data/foods.yml` is the source of truth for seasons. `tools/make-foods.py`
