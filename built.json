@@ -1,0 +1,9 @@
+---
+layout: null
+permalink: /built.json
+---
+{%- comment -%}
+Which day the published site was baked for. The stale-build check reads
+this; every page carries the same date in its as-of line.
+{%- endcomment -%}
+{"asof": {{ site.data.baked.asof | jsonify }}, "week": {{ site.data.baked.week | jsonify }}, "year": {{ site.data.baked.year | jsonify }}}

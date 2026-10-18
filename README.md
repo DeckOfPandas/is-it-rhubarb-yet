@@ -56,9 +56,11 @@ Everything is British. Corrections welcome. Ish.
 ## Development
 
 The site is built with Jekyll and deployed to GitHub Pages using the
-workflow in `.github/workflows/pages.yml`. The verdicts in the HTML are
-baked for the day of the build by `tools/bake.js`, from the same
-`assets/verdict.js` the browser runs, so a build is two steps:
+workflow in `.github/workflows/pages.yml`, on every push and every
+morning. The verdicts in the HTML are baked for the day of the build by
+`tools/bake.js`, from the same `assets/verdict.js` the browser runs, so
+a build is two steps (and `stale-check.yml` complains if the live site
+falls more than two days behind):
 
 ```
 bundle install

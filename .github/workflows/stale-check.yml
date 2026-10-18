@@ -1,0 +1,29 @@
+# Is the published site stale? built.json on the live site says which day
+# it was baked for. This runs after the daily deploy should have finished
+# and, when that day is more than two days ago, fails and opens an issue
+# (one, not one a day), so a paused schedule or a broken deploy is seen.
+#
+# It is a schedule itself, so if GitHub pauses schedules for inactivity
+# (60 days without a commit on a public repository) it goes quiet too.
+# GitHub emails the repository owner before pausing; and every page shows
+# its as-of date, so a stale site at least says so.
+name: Stale build check
+
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh tools/stale-check.sh https://deckofpandas.github.io/is-it-rhubarb-yet/built.json 2
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}

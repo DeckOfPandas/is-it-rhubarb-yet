@@ -9,17 +9,28 @@ drops it in `tmp/inbox/`); this is the map.
 - Jekyll, no plugins, vanilla JavaScript, inline SVG, three self-hosted
   fonts. Nothing is fetched from anywhere else.
 - **One verdict function.** `assets/verdict.js` holds the rules: the
-  week grid, the verdict for a variety and for a food, the date line,
-  the variety line, the weekly digest's lists and the quotation pick.
-  Every page loads it as a classic script; `tools/bake.js` requires it
-  under Node and writes `_data/baked.json` (gitignored) with today's
-  verdicts, which the Liquid templates read. So the build is two steps,
-  `sh tools/build.sh`, and the baked HTML is right for link previews,
-  search engines and no-JS visitors, while `assets/site.js` recomputes
-  everything for the visitor's own day. The thresholds (NEARLY within
-  3 weeks, JUST within 2, NEW for 2, isolated "just about" runs read
-  JUST, relative dates within 6 weeks) are constants at the top of
+  week grid, the verdict for a variety and for a food, the phrase under
+  it, the variety line, the weekly digest's lists and the quotation
+  pick. Every page loads it as a classic script; `tools/bake.js`
+  requires it under Node and writes `_data/baked.json` (gitignored)
+  with today's verdicts, which the Liquid templates read. So the build
+  is two steps, `sh tools/build.sh`, and the baked HTML is right for
+  link previews, search engines and no-JS visitors, while
+  `assets/site.js` recomputes everything for the visitor's own day. The
+  thresholds (NEARLY within 3 weeks, JUST within 2, NEW for 2, isolated
+  "just about" runs read JUST) are constants at the top of
   `verdict.js`. Tests: `node --test tests/verdict/verdict.test.js`.
+- **No calendar dates for seasons.** The data is weekly and mostly came
+  from monthly calendars, so a season boundary is said in words chosen
+  by the days from today ("Any day now", "In a week or two", "From
+  early November", "Back in April"; "For a few more days", "Until late
+  December") and names the middle of the data week. The rules are the
+  comment over `phrase` in `verdict.js` and §6.5 of the scope document.
+  The one calendar date is the "as of" date, which is when an answer
+  was true. Lists sort by the same day counts, soonest first.
+- **The digest** (`nowLists`) returns each of its four lists split by
+  kind of food, `[{kind, items}]`; `flatten` gives one array. The home
+  strip and `_includes/band.html` read that shape.
 - `_data/foods.yml` is the truth. `_data/groups.yml` names the culinary
   families and their `kind`. `_data/never.yml` lists the foods that are
   never in season here, each with a line. `_data/quotes.yml` holds the
@@ -43,16 +54,23 @@ drops it in `tmp/inbox/`); this is the map.
   the search box matches against), `season-starts.ics`.
 - Includes: `food-row.html` (one food in a list: swatch, name,
   variety, verdict tag, line; `site.js` builds the same markup),
-  `calendar.html`, `season-cells.html`, `season-wheel.html`,
-  `arrivals-dial.html`.
-- Switches are radio groups. CSS `:has()` shows the chosen variant;
-  JavaScript only remembers the choice. Nothing on the site needs
+  `band.html` (one band of the digest), `calendar.html` (a sticky
+  header SVG over a scrolling body SVG), `season-cells.html`,
+  `season-wheel.html`, `arrivals-dial.html`.
+- Switches are radio groups. CSS `:has()` shows the chosen variant.
+  Only the theme is remembered; the order and kind switches open on
+  their default every visit (home by family, calendar by start, wheel
+  on veg, which is drawn as dots alone). Nothing on the site needs
   JavaScript to be readable; the baked verdicts carry their "as of"
   date in the footer and in each food page's data disclosure.
 - Matching what people type (`site.js`): case, accents and punctuation
   ignored, `&` reads as "and", a trailing s or ies is dropped; every
   typed word must begin a candidate word, or at least occur inside one.
-  Candidates are names, varieties as they are said, and `aliases`.
+  Candidates are names, varieties as they are said, `aliases` (one
+  food's own: zucchini) and `also` (shared broader words: every fungus
+  answers to "mushrooms").
+- Variety names appear as written in the data, mid-sentence too, so
+  proper nouns keep their capitals ("Venison Red & Fallow").
 
 ## Design
 
@@ -71,8 +89,12 @@ drops it in `tmp/inbox/`); this is the map.
   settings by size, `--track-large` at 40px and above and
   `--track-small` below. The WOFF2 files under `assets/fonts/` are
   Google's Latin subsets, 116 KB in all; the budget is 150 KB.
-- The verdict word fills the line: `site.js` measures it after the
-  fonts load. CSS `clamp()` stands in before that.
+- The verdict word fills the line, but stops at half the viewport's
+  height so the date line stays above the fold on a laptop: `site.js`
+  measures it after the fonts load. CSS `clamp()` stands in before
+  that.
+- The question over the verdict is set at the h1's size; the header
+  search box is the home hook in small.
 
 ## Drawing rules
 
@@ -91,6 +113,12 @@ drops it in `tmp/inbox/`); this is the map.
   day: `node tools/bake.js --date 2026-10-29`, then `bundle exec jekyll
   build`. Serve: `bundle exec jekyll serve --host 0.0.0.0 --port 9000`.
   Data check: `python3 -I tools/check-foods.py`.
+- Deploys: `.github/workflows/pages.yml` on push and daily at 03:30
+  UTC; `stale-check.yml` at 07:00 UTC reads the live `/built.json` and
+  opens one "Stale build" issue when the baked date is over two days
+  old (`tools/stale-check.sh`). Both are schedules, which GitHub pauses
+  after 60 days without a commit; the as-of date on every page is the
+  last line of defence.
 - Visual checks: `node tools/dev/shoot.js <base-url> <label> [--scheme
   dark] [--click <text>] [--type <text>] <page>...`; `--type` types
   into the first visible input, for the hook and the search box.
@@ -112,11 +140,9 @@ Phase 2 and 3 of the scope document, in short:
 
 - Per-food reminder `.ics` at `/remind/<slug>.ics`, and the "Remind me
   when it's back" line on NO, NEARLY and JUST pages that links to it.
-- The daily scheduled rebuild (the workflow bakes, but only on push),
-  and the stale-build alarm.
 - Share cards per food with the date on them.
-- Calendar: a mobile plan, a sticky month header. Rows already link
-  and `#<slug>` marks and scrolls to a food.
+- Calendar: a mobile plan. Rows already link, `#<slug>` marks and
+  scrolls to a food, and the month header sticks.
 - About page copy from Helen; the signature link to it.
 - `foods/<slug>.json`, and the JSON shape on the sources page.
 - Wheel: the Veg view is still unreadable in June, and unreadable on a
@@ -138,6 +164,10 @@ Phase 2 and 3 of the scope document, in short:
   verdicts are empty: bake first.
 - Using Liquid's `capitalize` on a phrase with a month in it; it
   lowercases the rest.
+- Writing a calendar date into a season phrase. The as-of date is the
+  only one allowed.
+- Reading a Liquid hash with a nested lookup, `baked.now[parts[0]]`:
+  assign the key first.
 - Letting a "just about" range touch two in-season ranges without
   checking which way the fade should run; the templates decide by
   adjacency, including across the year end.
