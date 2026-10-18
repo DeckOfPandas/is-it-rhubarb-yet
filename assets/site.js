@@ -355,8 +355,8 @@
           strip.appendChild(p);
         }
         part("Just arrived", now.arrived);
-        part("Last call", now.last);
-        part("On the way", now.onway);
+        part("Great now", now.still);
+        part("Last chance", now.last);
         var p = el("p", "this-week-more");
         var a = el("a", null, "This week in full"); a.href = BASE + "now/";
         p.appendChild(a); p.appendChild(document.createTextNode("."));
@@ -410,7 +410,7 @@
         digest.appendChild(band("arrived", "Just arrived", now.arrived, "Nothing new this week.", "new"));
         digest.appendChild(band("last", "Last chance", now.last, "Nothing on its way out."));
         digest.appendChild(band("onway", "On the way", now.onway, "Nothing due in the next few weeks."));
-        digest.appendChild(band("still", "Still good", now.still, "Nothing at all, which cannot be right."));
+        digest.appendChild(band("still", "Great now", now.still, "Nothing at all, which cannot be right."));
       });
     }
 

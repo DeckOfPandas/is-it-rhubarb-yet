@@ -353,9 +353,10 @@ article.food { padding-top: 0.5rem; }
 @media (prefers-reduced-motion: reduce) { .wheel .hand { transition: opacity 0.4s; } }
 
 /* The arrivals wheel: a month ring with food labels radiating from it,
-   centred, as large as the width allows up to a diameter that fits the
-   screen top to bottom. */
-.dial { width: min(100%, calc(100svh - 4rem)); margin: 1rem auto 1.5rem; }
+   centred on the viewport and as wide as it, out past the page gutters,
+   up to a diameter that fits the screen top to bottom. The labels all
+   sit inside the viewBox, so the full width clips nothing. */
+.dial { width: min(100vw, calc(100svh - 4rem)); margin: 1rem 0 1.5rem; position: relative; left: 50%; transform: translateX(-50%); }
 .dial .guide-axis line, .dial .guide-axis path { stroke: var(--rule); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 .dial .guide-axis text { font-family: var(--text); font-size: 9px; fill: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .dial .month { font-size: 9px; fill: var(--ink); }
@@ -385,7 +386,7 @@ article.food { padding-top: 0.5rem; }
 .site-footer p { margin: 0; max-width: none; }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.25rem; }
 .footer-github { display: inline-flex; margin-top: 0.4rem; color: var(--muted); }
-.footer-github:hover, .footer-github:focus-visible { color: var(--ink); }
+.footer-github:hover, .footer-github:focus-visible { color: var(--rhubarb); }
 .footer-icon { width: 2rem; height: 2rem; fill: currentColor; }
 .licence span { display: inline-block; white-space: nowrap; }
 .hearts { color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; }

@@ -60,7 +60,7 @@ drops it in `tmp/inbox/`); this is the map.
 - Switches are radio groups. CSS `:has()` shows the chosen variant.
   Only the theme is remembered; the order and kind switches open on
   their default every visit (home by family, calendar by start, wheel
-  on veg, which is drawn as dots alone). Nothing on the site needs
+  on veg). Nothing on the site needs
   JavaScript to be readable; the baked verdicts carry their "as of"
   date in the footer and in each food page's data disclosure.
 - Matching what people type (`site.js`): case, accents and punctuation

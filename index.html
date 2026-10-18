@@ -28,11 +28,12 @@ family headings are items that only show in family order, the default.
     <button type="submit" class="visually-hidden">Ask</button>
   </form>
   {%- comment -%} This week in three lines, from the baked digest: a
-     random handful from each list, each food in its own colour, and how
-     many more there are. site.js draws the same lines, with the same
-     handful of five, when the visitor's week differs. {%- endcomment -%}
+     random handful from just arrived, great now and last chance, each
+     food in its own colour, and how many more there are. site.js draws
+     the same lines, with the same handful of five, when the visitor's
+     week differs. {%- endcomment -%}
   <div class="this-week" id="this-week">
-    {%- assign lines = "arrived|Just arrived,last|Last call,onway|On the way" | split: "," -%}
+    {%- assign lines = "arrived|Just arrived,still|Great now,last|Last chance" | split: "," -%}
     {%- for entry in lines -%}
       {%- assign parts = entry | split: "|" -%}
       {%- assign key = parts[0] -%}

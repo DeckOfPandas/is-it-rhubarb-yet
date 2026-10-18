@@ -338,15 +338,15 @@
   }
 
   // --- The weekly digest --------------------------------------------------
-  // Four lists for one week: just arrived (YES, in-season run began within
-  // NEW_WEEKS), last chance (JUST), on the way (NEARLY), still good (the
-  // rest of YES). Each list is split by kind of food (veg, fruit, wild,
-  // herbs, fish, meat, in the order of groups.yml) as [{kind, items}],
-  // kinds with nothing in them left out. Within a kind, just arrived is
-  // newest first, and the others go by time left: the soonest to end or
-  // to arrive first, all-year foods last, names breaking ties. Each item
-  // names the variety that produced the verdict and carries its phrase.
-  // `today` defaults to the middle of the week asked about.
+  // Four lists for one week: arrived (YES, in-season run began within
+  // NEW_WEEKS), last (chance: JUST), onway (NEARLY), still (great now:
+  // the rest of YES). Each list is split by kind of food (veg, fruit,
+  // wild, herbs, fish, meat, in the order of groups.yml) as [{kind,
+  // items}], kinds with nothing in them left out. Within a kind, just
+  // arrived is newest first, and the others go by time left: the soonest
+  // to end or to arrive first, all-year foods last, names breaking ties.
+  // Each item names the variety that produced the verdict and carries
+  // its phrase. `today` defaults to the middle of the week asked about.
   function nowLists(foods, groups, week, year, today) {
     today = today || midOfToday(week, year);
     var kindOf = {}, kinds = [];

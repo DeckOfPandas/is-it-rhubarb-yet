@@ -13,7 +13,7 @@ never will.
   to help you take it, and a dial showing where you are in that food's
   year. Every food has a short address: `/rhubarb/`.
 - **Now.** This week: what has just arrived, what is on its last legs,
-  what is on the way, and what is still good, by kind.
+  what is on the way, and what is great now, by kind.
 - **Calendar.** Every food on one chart, week by week, in the order the
   seasons arrive. Or by family, or alphabetically, if for some reason you
   browse a supermarket for squid then immediately for strawberries.

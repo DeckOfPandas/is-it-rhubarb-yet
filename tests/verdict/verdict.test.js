@@ -233,14 +233,14 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
     assert.deepEqual(kinds, order.filter((k) => kinds.includes(k)), name + " is in kind order");
     assert.equal(new Set(kinds).size, kinds.length);
   });
-  // Within a kind, last chance and on the way run soonest first, and still
-  // good puts all-year foods last.
+  // Within a kind, last chance and on the way run soonest first, and great
+  // now puts all-year foods last.
   const ascending = (items) => items.every((it, i) => i === 0 || items[i - 1].days === null ||
     (it.days !== null && items[i - 1].days <= it.days) || it.days === null);
   now.last.forEach((k) => assert.ok(ascending(k.items), "last chance " + k.kind));
   now.onway.forEach((k) => assert.ok(ascending(k.items), "on the way " + k.kind));
   now.still.forEach((k) => {
-    assert.ok(ascending(k.items), "still good " + k.kind);
+    assert.ok(ascending(k.items), "great now " + k.kind);
     const firstAllYear = k.items.findIndex((i) => i.days === null);
     if (firstAllYear >= 0) assert.ok(k.items.slice(firstAllYear).every((i) => i.days === null), "all year last in " + k.kind);
   });
