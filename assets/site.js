@@ -326,6 +326,21 @@
     });
   }
 
+  // --- About: tonight's dinner ---------------------------------------------
+  // The dinner line names a food that has just arrived, or in a quiet
+  // week one that is great now; baked, and redone for the visitor's week.
+  function initAbout() {
+    var a = document.getElementById("dinner");
+    if (!a || SAME_WEEK) return;
+    loadFoods().then(function (foods) {
+      var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
+      var pick = V.flatten(now.arrived)[0] || V.flatten(now.still)[0];
+      if (!pick) return;
+      a.textContent = pick.name.toLowerCase();
+      a.href = foodUrl(pick.slug);
+    });
+  }
+
   // --- Home: the hook ---------------------------------------------------------
   function initHome() {
     var input = document.getElementById("hook-input");
@@ -597,6 +612,7 @@
     initSwitches();
     initFood();
     fitVerdict(document.querySelector(".verdict-word"));
+    initAbout();
     initHome();
     initNow();
     initSearch();

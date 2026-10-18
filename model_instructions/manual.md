@@ -32,8 +32,9 @@ drops it in `tmp/inbox/`); this is the map.
   kind of food, `[{kind, items}]`; `flatten` gives one array. The home
   strip and `_includes/band.html` read that shape.
 - **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
-  and never-food, plus `home.png` and `now.png`, into `_site/cards/`
-  after Jekyll: each is a small HTML page with the fonts inlined,
+  and never-food, plus `home.png` (the wordmark and tagline, undated,
+  which every page without a card of its own uses), into
+  `_site/cards/` after Jekyll: each is a small HTML page with the fonts inlined,
   screenshotted in headless Chromium through the Playwright the
   container and the deploy both have (never committed: the site has no
   raster files in the repository). Every page's `og:image` and
@@ -59,9 +60,10 @@ drops it in `tmp/inbox/`); this is the map.
   `now/` (the weekly digest), `calendar/` (the year chart, three
   orders), `wheel/` (the arrivals wheel per kind), `sources/`,
   `404.html` (the not-found verdict, with suggestions), and
-  `about.html`, drafted in Helen's voice but `published: false` until
-  she signs it off. Data endpoints: `foods.json`, `search.json` (what
-  the search box matches against), `season-starts.ics`.
+  `about.html`, Helen's copy, reached from the signature hearts in the
+  footer; its food count and dinner food come from the data. Data
+  endpoints: `foods.json`, `search.json` (what the search box matches
+  against), `season-starts.ics`.
 - Includes: `food-row.html` (one food in a list: swatch, name,
   variety, verdict tag, line; `site.js` builds the same markup),
   `band.html` (one band of the digest), `calendar.html` (a sticky
@@ -159,7 +161,6 @@ Phase 2 and 3 of the scope document, in short:
   when it's back" line on NO, NEARLY and JUST pages that links to it.
 - Calendar: a mobile plan. Rows already link, `#<slug>` marks and
   scrolls to a food, and the month header sticks.
-- About page copy from Helen; the signature link to it.
 - `foods/<slug>.json`, and the JSON shape on the sources page.
 - Wheel: the Veg view is still unreadable in June, and unreadable on a
   phone. Cut it or fix it.

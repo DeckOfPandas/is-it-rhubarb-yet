@@ -1,64 +1,33 @@
 ---
-title: "??"
-description: What this site is for, and what it is not.
+title: About
+description: What this site is for, by the person who wanted it.
 permalink: /about/
-# Drafted but not yet built: nothing links here until it is published.
-published: false
 ---
+{%- comment -%}
+Helen's copy. Two things are filled from the data: how many foods there
+are besides rhubarb, and a food that has just arrived (or, in a quiet
+week, one that is great now) for the dinner line; site.js refreshes the
+dinner food for the visitor's own week.
+{%- endcomment -%}
+{%- assign baked = site.data.baked -%}
+{%- assign others = site.data.foods | size | minus: 1 -%}
+{%- assign dinner = nil -%}
+{%- for k in baked.now.arrived -%}{%- if dinner == nil -%}{%- assign dinner = k.items | first -%}{%- endif -%}{%- endfor -%}
+{%- for k in baked.now.still -%}{%- if dinner == nil -%}{%- assign dinner = k.items | first -%}{%- endif -%}{%- endfor -%}
 <article class="about">
-<h1>??</h1>
+<h1>Is it rhubarb yet?</h1>
 
-<p>I built this site to answer one question, asked weekly, standing in a kitchen with a bag: of everything this island grows, lands and shoots, what is actually good <em>right now</em>?</p>
+<p>I can cook. I prefer to cook and eat food when it tastes its best. I prefer to cook food grown sustainably, and in the UK.</p>
 
-<p>Not "available". Everything is available. A supermarket will sell you asparagus in November, flown in from Peru, and it will taste of the flight. Available is not the question. The question is what is at its best, from near here, this week, so that I can buy that, cook it, and not think about it again until next week.</p>
+<p>I want a simple way to check what's in season, what's coming up, and what I should get a wiggle on and buy more of, so I can have interesting and tasty food in mind when I'm shopping.</p>
 
-<p>It is a luxurious question. I know. Having the run of a good greengrocer and a fishmonger who talks back is not nothing, and the least I can do with it is not waste it on a January tomato.</p>
+<p>This site answers the important rhubarb question, and the same for {{ others }} other things that grow, swim, run, or fly about in the UK. Each food gets a verdict, and a soothing quotation to help me handle the news.</p>
 
-<hr>
+<p>The weekly and full-year views sort foods by category and season start, or alphabetically if for some reason you browse a supermarket for squid then immediately for strawberries.</p>
 
-<p><strong>The only goal of this site is that I end up with the right vegetable in my hand.</strong> It is a calendar, not a cookbook. It will not tell you what to do with a kohlrabi; it assumes you will find out, or already know, or will manage. If you want recipes, <a href="https://deckofpandas.github.io/helen-triages/">I have another site for that</a>, and it is no more interested in you than this one is.</p>
+<p>The swanky infographics are here because, well, because I can.</p>
 
-<h2>What is here</h2>
+<p>Everything here is British or sassy. <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">Corrections welcome</a>. Ish.</p>
 
-<ul class="about-ways">
-  <li><strong>Is it … yet?</strong> Ask about a food. You get a YES, a NO, a JUST, a NEARLY or a NEVER, very large, with a date and a quotation to help you take it.</li>
-  <li><strong>Now.</strong> This week: what has just arrived, what is on its last legs, what is on the way, and what is still good. The last-chance list is the one to read: a thing on its way out is a thing to buy today.</li>
-  <li><strong>Calendar.</strong> Everything on one chart, week by week, in the order the seasons arrive. A list tells you what is in season. A chart tells you where you are in the year, and that nothing whatsoever happens in February.</li>
-  <li><strong>The wheel.</strong> One per kind of food, seasons as arcs. There is no key. An infographic that needs a key is a pretty selection of shapes.</li>
-</ul>
-
-<h2>Why it is like this</h2>
-
-<p><strong>Weeks.</strong> A day is false precision and a month is useless. "Rhubarb is just about in" is a sentence that means something at the scale of a week and nothing at any other.</p>
-
-<p><strong>No photographs.</strong> A photograph of an aubergine tells you nothing you did not already know about aubergines. Every mark on this site is drawn in code, and recolours itself for dark mode without being asked.</p>
-
-<p><strong>No dependencies.</strong> Jekyll with no plugins, plain CSS, and a small amount of JavaScript for the one thing a build cannot know, which is today's date. Nothing is fetched from anywhere else. The whole site would work printed out, if you were prepared to draw the today line yourself.</p>
-
-<p><strong>Named sources.</strong> The seasons come from the New Covent Garden Market calendar, checked against BBC Good Food; the shooting seasons from BASC; the fish from a Cornish wholesaler's chart. Every food says where its row came from, and a row I am not sure of says that too. Everything is British. Corrections welcome. Ish.</p>
-
-<h2>FAQ</h2>
-
-<h3>Rhubarb is in my shop and your site says no.</h3>
-<p>Forced rhubarb, grown in the dark in a shed in Yorkshire, in January: yes. Outdoor rhubarb in January: no. Your shop has the first and your garden has the second. The site knows the difference and draws you two rings to prove it.</p>
-
-<h3>It says NO, but I can buy it all year round.</h3>
-<p>You can buy anything all year round. That is the thing this site exists to be rude about.</p>
-
-<h3>Sustainably?</h3>
-<p>In the sense that a thing in season near you was not flown, lit or heated into existence. I am not going to audit your fishmonger. The fish rows say what to ask for at the counter; ask for it, and take the Good Fish Guide with you for the rest.</p>
-
-<h3>The dates are wrong for where I live.</h3>
-<p>Possibly. The sources are for England, broadly, and a Scottish strawberry has its own ideas. Week 23 in Kent is not week 23 in Fife. Read the fade: "just about" is the site saying "depends".</p>
-
-<h3>Can I have the data?</h3>
-<p>Yes. <a href="{{ '/foods.json' | relative_url }}">All of it as JSON</a>, and <a href="{{ '/season-starts.ics' | relative_url }}">a calendar feed of season starts</a> you can subscribe to, so your phone can tell you the morning the asparagus arrives. It is <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: say where it came from.</p>
-
-<h3>Did you write any of this code yourself?</h3>
-<p>Absolutely not. Not one line. <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet">The repository</a> has the longer version; the short version is that I have strong opinions and a co-worker who does not mind.</p>
-
-<h3>Why rhubarb?</h3>
-<p>Because it is the first thing. "Is it rhubarb yet?" is a question I had been asking out loud, to nobody, every January for some years before it occurred to me that a website could answer.</p>
-
-<p>Now go and buy something that was growing last week.</p>
+<p>Coolio, I'm off to cook (checks site) <a id="dinner" href="{{ '/' | append: dinner.slug | append: '/' | relative_url }}">{{ dinner.name | downcase }}</a> for dinner now, and it's going to be freaking delicious.</p>
 </article>

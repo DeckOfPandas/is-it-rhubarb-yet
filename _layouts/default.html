@@ -2,14 +2,13 @@
 The page chrome. A food or never-food page gets its title and description
 from the baked verdict ("Is it rhubarb yet? Nearly."), so a link preview
 or a search result carries the answer and the date it was true for, and
-its share card, drawn by tools/cards.js into /cards/<slug>.png. Home and
-Now have cards of their own; every other page shows the home card.
+its share card, drawn by tools/cards.js into /cards/<slug>.png. Every
+other page shows the home card.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign title = page.title -%}
 {%- assign description = page.description | default: site.description -%}
 {%- assign card = "home" -%}
-{%- if page.url == "/now/" -%}{%- assign card = "now" -%}{%- endif -%}
 {%- if page.collection == "foods" or page.collection == "never" -%}
   {%- assign card = page.slug -%}
   {%- if page.collection == "foods" -%}
@@ -110,7 +109,8 @@ Now have cards of their own; every other page shows the home card.
       <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span>
     </p>
     <p class="as-of">Answers as of <span data-asof>{{ baked.asofText }}</span>.</p>
-    <div class="hearts" aria-hidden="true">{% include icons/hearts.svg %}</div>
+    {%- comment -%} The signature is the way to the About page. {%- endcomment -%}
+    <a class="hearts" href="{{ '/about/' | relative_url }}" aria-label="About this site">{% include icons/hearts.svg %}</a>
   </footer>
   <script src="{{ '/assets/verdict.js' | relative_url }}"></script>
   <script src="{{ '/assets/site.js' | relative_url }}"></script>

@@ -389,5 +389,6 @@ article.food { padding-top: 0.5rem; }
 .footer-github:hover, .footer-github:focus-visible { color: var(--rhubarb); }
 .footer-icon { width: 2rem; height: 2rem; fill: currentColor; }
 .licence span { display: inline-block; white-space: nowrap; }
-.hearts { color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; }
+.hearts { display: block; color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; text-decoration: none; }
 .hearts svg { display: block; width: min(240px, 45vw); height: auto; }
+.hearts:hover svg, .hearts:focus-visible svg { transform: translateY(-2px); }
