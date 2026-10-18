@@ -11,9 +11,9 @@ whole list renders and the input is a form that reloads this page.
 
 Verdicts in the list are baked for the build day; site.js recomputes
 them when the visitor's week differs. The list is one grid whose items
-carry a rank under two orders as --oa (A to Z) and --og (by family,
-A to Z within it); the order switch picks which rank lays it out by, and
-family headings are items that only show in family order.
+carry a rank under two orders as --og (by family, A to Z within it) and
+--oa (A to Z); the order switch picks which rank lays it out by, and
+family headings are items that only show in family order, the default.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign foods = site.data.foods | sort: "name" -%}
@@ -27,24 +27,35 @@ family headings are items that only show in family order.
     </label>
     <button type="submit" class="visually-hidden">Ask</button>
   </form>
-  {%- comment -%} This week in a line, from the baked digest. {%- endcomment -%}
-  {%- assign arrived = baked.now.arrived | map: "name" -%}
-  {%- assign last = baked.now.last | map: "name" -%}
-  <p class="this-week" id="this-week">
-    {%- if arrived.size > 0 %}<strong>Just arrived:</strong> {{ arrived | slice: 0, 6 | join: ", " | downcase }}{% if arrived.size > 6 %} and more{% endif %}. {% endif -%}
-    {%- if last.size > 0 %}<strong>Last call:</strong> {{ last | slice: 0, 6 | join: ", " | downcase }}{% if last.size > 6 %} and more{% endif %}. {% endif -%}
-    <a href="{{ '/now/' | relative_url }}">This week in full</a>.
-  </p>
+  {%- comment -%} This week in three lines, from the baked digest: a
+     random handful from each list, each food in its own colour, and how
+     many more there are. site.js draws the same lines, with the same
+     handful of five, when the visitor's week differs. {%- endcomment -%}
+  <div class="this-week" id="this-week">
+    {%- assign lines = "arrived|Just arrived,last|Last call,onway|On the way" | split: "," -%}
+    {%- for entry in lines -%}
+      {%- assign parts = entry | split: "|" -%}
+      {%- assign key = parts[0] -%}
+      {%- assign all = "" | split: "" -%}
+      {%- for k in baked.now[key] -%}{%- assign all = all | concat: k.items -%}{%- endfor -%}
+      {%- if all.size > 0 -%}
+      {%- assign pick = all | sample: 5 -%}
+      {%- assign more = all.size | minus: pick.size -%}
+      <p class="this-week-line"><strong>{{ parts[1] }}:</strong> {% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} and {{ more }} more{% endif %}.</p>
+      {%- endif -%}
+    {%- endfor -%}
+    <p class="this-week-more"><a href="{{ '/now/' | relative_url }}">This week in full</a>.</p>
+  </div>
   <p class="hook-none" id="hook-none" hidden></p>
 </section>
 
 <section class="all-foods" id="all-foods">
   <div class="list-head">
-    <h2 class="list-title">Every food</h2>
-    <fieldset class="switch" data-remember="order-home">
+    <h2 class="list-title">Everything</h2>
+    <fieldset class="switch">
       <legend>Order</legend>
-      <input type="radio" name="order" id="order-alpha" value="alpha" checked><label for="order-alpha">A to Z</label>
-      <input type="radio" name="order" id="order-group" value="group"><label for="order-group">By family</label>
+      <input type="radio" name="order" id="order-group" value="group" checked><label for="order-group">By family</label>
+      <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
     </fieldset>
   </div>
   <ul class="food-list ordered-list" id="food-list">
@@ -56,7 +67,7 @@ family headings are items that only show in family order.
       {%- assign gi = 0 -%}
       {%- for g in site.data.groups -%}{%- if g.key == food.group -%}{%- assign gi = forloop.index0 -%}{%- endif -%}{%- endfor -%}
       {%- assign b = baked.foods[food.slug] -%}
-      {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
+      {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
       <li class="food-row" data-slug="{{ food.slug }}" data-group="{{ food.group }}" data-terms="{{ terms | escape }}" data-verdict="{{ b.verdict }}" style="--food: {{ food.colour }}; --oa: {{ oa }}; --og: {{ gi | times: 300 | plus: oa }}">
         <a href="{{ '/' | append: food.slug | append: '/' | relative_url }}">
           <span class="swatch" aria-hidden="true"></span>

@@ -3,9 +3,9 @@ layout: default
 ---
 {%- comment -%}
 One food, top to bottom: the question, the verdict word, the date line,
-the variety line, the quotation, the dial, the counter note, three to
-five foods from the same family that are perfect now, the data, and the
-way on. Everything date-dependent is baked for the build day and
+the variety line, the quotation, the dial, the counter note, up to six
+foods from the same family that are perfect now, the data, and the way
+on. Everything date-dependent is baked for the build day and
 recomputed by site.js for the visitor's own day from the food's data in
 data-food and the quotations in data-quotes (the general pools plus the
 lines pinned to this food). The whole page keys off --food, the food's
@@ -44,18 +44,18 @@ colour.
 
   {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
 
-  {%- comment -%} Up to five foods of the same family that are perfect now,
+  {%- comment -%} Up to six foods of the same family that are perfect now,
      from the baked verdicts. {%- endcomment -%}
   {%- assign also = "" | split: "" -%}
   {%- for other in site.data.foods -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
       {%- assign ob = baked.foods[other.slug] -%}
-      {%- if ob.verdict == "YES" and also.size < 5 -%}{%- assign also = also | push: other -%}{%- endif -%}
+      {%- if ob.verdict == "YES" and also.size < 6 -%}{%- assign also = also | push: other -%}{%- endif -%}
     {%- endif -%}
   {%- endfor -%}
   {%- if also.size > 0 -%}
   <section class="also">
-    <h2>Also perfect now</h2>
+    <h2>Food this week</h2>
     <ul class="food-list">
       {%- for other in also -%}
         {%- assign ob = baked.foods[other.slug] -%}
@@ -108,5 +108,6 @@ colour.
     <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
   </details>
 
-  <p class="onwards"><a href="{{ '/' | relative_url }}#hook-input">Ask about something else</a> · <a href="{{ '/calendar/' | relative_url }}#{{ food.slug }}">See the whole year</a></p>
+  <p class="onwards"><a href="{{ '/' | relative_url }}#hook-input">Ask about something else</a></p>
+  <p class="onwards"><a href="{{ '/calendar/' | relative_url }}#{{ food.slug }}">See the whole year</a></p>
 </article>

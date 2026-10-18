@@ -52,14 +52,19 @@ or a search result carries the answer and the date it was true for.
       </nav>
       {%- if page.url != '/' -%}
       {%- comment -%} The search for a food, on every page but home, where
-         the hook is the search. A plain GET to home with q=, which the
-         hook reads; site.js adds a dropdown fed from search.json. {%- endcomment -%}
+         the hook is the search: the same "Is it [    ] yet?" in small. A
+         plain GET to home with q=, which the hook reads; site.js adds a
+         dropdown fed from search.json. {%- endcomment -%}
       <form class="search" role="search" method="get" action="{{ '/' | relative_url }}"
             data-index="{{ '/search.json' | relative_url }}">
-        <input type="search" name="q" class="search-input" autocomplete="off"
-               placeholder="Is it … yet?" aria-label="Is it … yet? Search the foods"
-               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results">
-        <button type="submit" class="search-go" aria-label="Search">{% include icons/search.svg class="search-mark" %}</button>
+        <label class="search-line" for="site-search">
+          <span class="hook-word">Is it</span>
+          <span class="hook-slot"><input id="site-search" type="search" name="q" class="search-input" autocomplete="off" autocapitalize="off" spellcheck="false"
+                 placeholder="rhubarb" aria-label="Is it … yet? Which food?" size="7"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results"></span>
+          <span class="hook-word">yet?</span>
+        </label>
+        <button type="submit" class="visually-hidden">Ask</button>
         <div class="search-results" id="search-results" role="listbox" hidden></div>
       </form>
       {%- endif -%}
@@ -79,8 +84,8 @@ or a search result carries the answer and the date it was true for.
       <a href="{{ '/sources/' | relative_url }}">Source data</a>
       <a href="{{ '/season-starts.ics' | relative_url }}">Subscribe to season starts</a>
       <a href="{{ '/foods.json' | relative_url }}">Data as JSON</a>
-      <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet">GitHub</a>
     </nav>
+    <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="Source on GitHub">{% include icons/github.svg %}</a>
     {%- comment -%} Two sentences in two spans, so a narrow screen breaks
        between them and never inside one. {%- endcomment -%}
     <p class="licence">
