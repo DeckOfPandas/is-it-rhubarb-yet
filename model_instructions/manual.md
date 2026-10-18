@@ -31,6 +31,18 @@ drops it in `tmp/inbox/`); this is the map.
 - **The digest** (`nowLists`) returns each of its four lists split by
   kind of food, `[{kind, items}]`; `flatten` gives one array. The home
   strip and `_includes/band.html` read that shape.
+- **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
+  and never-food, plus `home.png` and `now.png` (the wordmark or the
+  Now title, then the week's three lines as the home strip has them,
+  dated; every other page uses the home card), into `_site/cards/`
+  after Jekyll: each is a small HTML page with the fonts inlined,
+  screenshotted in headless Chromium through the Playwright the
+  container and the deploy both have (never committed: the site has no
+  raster files in the repository). Every page's `og:image` and
+  `twitter:image` point at its card; the card carries the as-of date,
+  because chat apps keep the first preview they fetch. `node
+  tools/cards.js --out tmp/cards --only rhubarb,home,now` draws a few
+  to look at.
 - `_data/foods.yml` is the truth. `_data/groups.yml` names the culinary
   families and their `kind`. `_data/never.yml` lists the foods that are
   never in season here, each with a line. `_data/quotes.yml` holds the
@@ -49,9 +61,10 @@ drops it in `tmp/inbox/`); this is the map.
   `now/` (the weekly digest), `calendar/` (the year chart, three
   orders), `wheel/` (the arrivals wheel per kind), `sources/`,
   `404.html` (the not-found verdict, with suggestions), and
-  `about.html`, drafted in Helen's voice but `published: false` until
-  she signs it off. Data endpoints: `foods.json`, `search.json` (what
-  the search box matches against), `season-starts.ics`.
+  `about.html`, Helen's copy, reached from the signature hearts in the
+  footer; its food count and dinner food come from the data. Data
+  endpoints: `foods.json`, `search.json` (what the search box matches
+  against), `season-starts.ics`.
 - Includes: `food-row.html` (one food in a list: swatch, name,
   variety, verdict tag, line; `site.js` builds the same markup),
   `band.html` (one band of the digest), `calendar.html` (a sticky
@@ -114,10 +127,12 @@ drops it in `tmp/inbox/`); this is the map.
 
 ## Working
 
-- Build: `sh tools/build.sh` (bake, then Jekyll). To bake for another
-  day: `node tools/bake.js --date 2026-10-29`, then `bundle exec jekyll
-  build`. Serve: `bundle exec jekyll serve --host 0.0.0.0 --port 9000`.
-  Data check: `python3 -I tools/check-foods.py`.
+- Build: `sh tools/build.sh` (bake, Jekyll, then the share cards). To
+  bake for another day: `node tools/bake.js --date 2026-10-29`, then
+  `bundle exec jekyll build` and `node tools/cards.js`. Serve: `bundle
+  exec jekyll serve --host 0.0.0.0 --port 9000` (`keep_files` keeps the
+  cards through a regeneration). Data check: `python3 -I
+  tools/check-foods.py`.
 - Deploys: `.github/workflows/pages.yml` on push and daily at 03:30
   UTC; `stale-check.yml` at 07:00 UTC reads the live `/built.json` and
   opens one "Stale build" issue when the baked date is over two days
@@ -141,21 +156,19 @@ drops it in `tmp/inbox/`); this is the map.
 
 ## Not yet done
 
-Phase 2 and 3 of the scope document, in short:
+Phase 2 and 3 of the scope document, each an open issue:
 
-- Per-food reminder `.ics` at `/remind/<slug>.ics`, and the "Remind me
-  when it's back" line on NO, NEARLY and JUST pages that links to it.
-- Share cards per food with the date on them.
-- Calendar: a mobile plan. Rows already link, `#<slug>` marks and
+- #41 Per-food reminder `.ics` at `/remind/<slug>.ics`, and the "Remind
+  me when it's back" line on NO, NEARLY and JUST pages that links to it.
+- #42 Calendar: a mobile plan. Rows already link, `#<slug>` marks and
   scrolls to a food, and the month header sticks.
-- About page copy from Helen; the signature link to it.
-- `foods/<slug>.json`, and the JSON shape on the sources page.
-- Wheel: the Veg view is still unreadable in June, and unreadable on a
-  phone. Cut it or fix it.
-- Data quality: every `source: general` row (the checker warns on each),
-  the pollock/pollack spelling, stored crops, long `avail` tails, the
-  BBC/NCGM disagreements in the `note` fields.
-- Easter eggs.
+- #43 `foods/<slug>.json`, and the JSON shape on the sources page.
+- #44 Wheel: the Veg view is still unreadable in June, and unreadable
+  on a phone. Cut it or fix it.
+- #45 Data quality: every `source: general` row (the checker warns on
+  each), the pollock/pollack spelling, stored crops, long `avail` tails,
+  the BBC/NCGM disagreements in the `note` fields.
+- #46 Easter eggs.
 
 ## Ways this goes wrong
 

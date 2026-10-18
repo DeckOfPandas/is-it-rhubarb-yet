@@ -26,6 +26,9 @@
   // How many foods each line of the home page's this-week strip names;
   // index.html samples the same number at build.
   var STRIP_PICK = 5;
+  // How many same-family foods a food page lists; _layouts/food.html bakes
+  // the same number.
+  var ALSO_MAX = 6;
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -300,6 +303,42 @@
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
     document.title = "Is it " + food.name.toLowerCase() + " yet? " +
       fv.verdict.charAt(0) + fv.verdict.slice(1).toLowerCase() + ".";
+    // "Great this week" is baked; for another week, or a page baked with
+    // no data at all, it is rebuilt from foods.json: up to ALSO_MAX foods
+    // of the same family that are YES, in data order, as the template
+    // picks them.
+    if (!SAME_WEEK) loadFoods().then(function (foods) {
+      var picks = foods.filter(function (f) {
+        return f.group === food.group && f.slug !== food.slug && V.foodVerdict(f, WEEK).verdict === "YES";
+      }).slice(0, ALSO_MAX);
+      var section = article.querySelector(".also");
+      if (!picks.length) { if (section) section.hidden = true; return; }
+      if (!section) {
+        section = el("section", "also");
+        section.appendChild(el("h2", null, "Great this week"));
+        section.appendChild(el("ul", "food-list"));
+        article.insertBefore(section, article.querySelector(".fine"));
+      }
+      var ul = section.querySelector("ul");
+      ul.textContent = "";
+      picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" })); });
+      section.hidden = false;
+    });
+  }
+
+  // --- About: tonight's dinner ---------------------------------------------
+  // The dinner line names a food that has just arrived, or in a quiet
+  // week one that is great now; baked, and redone for the visitor's week.
+  function initAbout() {
+    var a = document.getElementById("dinner");
+    if (!a || SAME_WEEK) return;
+    loadFoods().then(function (foods) {
+      var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
+      var pick = V.flatten(now.arrived)[0] || V.flatten(now.still)[0];
+      if (!pick) return;
+      a.textContent = pick.name.toLowerCase();
+      a.href = foodUrl(pick.slug);
+    });
   }
 
   // --- Home: the hook ---------------------------------------------------------
@@ -373,11 +412,12 @@
       if (strip) loadFoods().then(function (foods) {
         var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
         strip.textContent = "";
-        function part(label, list) {
+        function part(label, list, empty) {
           var items = V.flatten(list);
-          if (!items.length) return;
+          if (!items.length && !empty) return;
           var p = el("p", "this-week-line");
           p.appendChild(el("strong", null, label + ": "));
+          if (!items.length) { p.appendChild(document.createTextNode(empty)); strip.appendChild(p); return; }
           var pick = items.slice().sort(function () { return Math.random() - 0.5; }).slice(0, STRIP_PICK);
           pick.forEach(function (i, n) {
             if (n) p.appendChild(document.createTextNode(", "));
@@ -390,7 +430,7 @@
           p.appendChild(document.createTextNode((more > 0 ? " and " + more + " more" : "") + "."));
           strip.appendChild(p);
         }
-        part("Just arrived", now.arrived);
+        part("Just arrived", now.arrived, "nothing new this week.");
         part("Great now", now.still);
         part("Last chance", now.last);
         var p = el("p", "this-week-more");
@@ -573,6 +613,7 @@
     initSwitches();
     initFood();
     fitVerdict(document.querySelector(".verdict-word"));
+    initAbout();
     initHome();
     initNow();
     initSearch();

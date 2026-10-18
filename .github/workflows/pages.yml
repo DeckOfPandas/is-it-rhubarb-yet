@@ -40,6 +40,12 @@ jobs:
           node-version: "24"
       - uses: actions/configure-pages@v5
         id: pages
+      # The share cards are screenshots of small HTML pages, so the deploy
+      # needs the same Playwright the container has, installed outside the
+      # repository (tmp/ is ignored) and reached through NODE_PATH, as the
+      # container does it. The version matches .devcontainer/kit.env.
+      - run: npm install --no-save --no-audit --no-fund --prefix tmp/playwright playwright@1.63.0
+      - run: node tmp/playwright/node_modules/playwright/cli.js install --with-deps chromium
       - run: node --test tests/verdict/verdict.test.js
       - run: node tools/bake.js
         env:
@@ -47,6 +53,9 @@ jobs:
       - run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      - run: node tools/cards.js --out _site/cards
+        env:
+          NODE_PATH: ${{ github.workspace }}/tmp/playwright/node_modules
       - uses: actions/upload-pages-artifact@v3
 
   deploy:
