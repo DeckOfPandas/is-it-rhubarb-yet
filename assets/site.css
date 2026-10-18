@@ -237,7 +237,7 @@ main:has(#order-alpha:checked) .ordered-list .heading { display: none; }
 .this-week { margin: 1.25rem 0 0.5rem; max-width: 44rem; color: var(--muted); }
 .this-week p { margin: 0 0 0.2rem; max-width: none; }
 .this-week strong { color: var(--ink); }
-.this-week-more { margin-top: 1.6rem; }
+.this-week .this-week-more { margin-top: 1.6rem; }
 .food-link { color: var(--food); font-weight: 700; text-decoration-color: currentColor; }
 .hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
 .list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
