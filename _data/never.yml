@@ -4,6 +4,10 @@
 # slugs and aliases unique across this file and foods.yml.
 # A line is one sentence or two, played for laughs, never at anyone's
 # expense.
+#
+# Not on this list because they are grown here: tea, wasabi, saffron,
+# quinoa, lentils, chickpeas, figs, grapes, apricots, peaches, kiwi fruit
+# and sweet potatoes.
 
 - name: "Bananas"
   slug: bananas
@@ -28,11 +32,11 @@
 - name: "Grapefruit"
   slug: grapefruit
   aliases: [grapefruits]
-  line: "No. Think of it as a mercy."
+  line: "Think of it as a mercy."
 - name: "Mangoes"
   slug: mangoes
   aliases: [mango]
-  line: "Wrong hemisphere. Lovely, though."
+  line: "Wrong latitude. Lovely, though."
 - name: "Pineapples"
   slug: pineapples
   aliases: [pineapple]
@@ -44,15 +48,15 @@
 - name: "Passion fruit"
   slug: passion-fruit
   aliases: [passionfruit]
-  line: "The passion is not for our climate."
+  line: "While passion flowers climb half the fences in Surrey, they grow the wrong fruit."
 - name: "Pomegranates"
   slug: pomegranates
   aliases: [pomegranate]
-  line: "Persephone's mistake, and it was imported then as well."
+  line: "Blame Persephone if you want, but it's still a no on the UK pomegranate thing."
 - name: "Dates"
   slug: dates
   aliases: [date, medjool]
-  line: "Palm trees. Actual ones."
+  line: "Torquay's palm trees don't date."
 - name: "Coconuts"
   slug: coconuts
   aliases: [coconut]
@@ -64,7 +68,7 @@
 - name: "Chocolate"
   slug: chocolate
   aliases: [cocoa, cacao]
-  line: "Cacao wants a rainforest. Wales has tried its best."
+  line: "Cacao needs a rainforest, but we only have rainy forests."
 - name: "Rice"
   slug: rice
   aliases: [risotto, basmati]
@@ -72,19 +76,59 @@
 - name: "Olives"
   slug: olives
   aliases: [olive, olive oil]
-  line: "There is an olive tree in a courtyard in Devon. It is a pet."
+  line: "Olive trees are very fashionable in London front gardens, but for their shade, not their olives."
 - name: "Ginger"
   slug: ginger
   aliases: [root ginger]
-  line: "Hot in the mouth, and grown somewhere hot."
+  line: "Ginger root wants a monsoon, but we only offer drizzle."
 - name: "Vanilla"
   slug: vanilla
   aliases: [vanilla pods]
   line: "An orchid from Mexico, pollinated by hand. Not in a polytunnel in Lincolnshire."
 - name: "Cinnamon"
   slug: cinnamon
-  line: "Tree bark from Sri Lanka. Still tree bark from Sri Lanka."
+  line: "Tree bark from Sri Lanka. The UK is not Sri Lanka."
 - name: "Peanuts"
   slug: peanuts
   aliases: [peanut, groundnuts]
-  line: "They need a long hot summer. We have had one, once."
+  line: "They need a long hot summer. We've had, like, two. Sadly we're on for more, but still probably no peanuts for the foreseeable."
+- name: "Lychees"
+  slug: lychees
+  aliases: [lychee, litchi, litchis]
+  line: "Subtropical we are not, even though London in the summer is like walking around under a hot, wet blanket."
+- name: "Dragon fruit"
+  slug: dragon-fruit
+  aliases: [dragonfruit, pitaya, pitahaya]
+  line: "Not the Welsh kind of dragon, sadly."
+- name: "Cashews"
+  slug: cashews
+  aliases: [cashew, cashew nuts]
+  line: "They need tropical heat. We're all still talking about that hot week in September 2023."
+- name: "Brazil nuts"
+  slug: brazil-nuts
+  aliases: [brazil nut, brazils]
+  line: "If you don't know where these are from, you CAN work it out."
+- name: "Pistachios"
+  slug: pistachios
+  aliases: [pistachio]
+  line: "Our winters aren't winter enough and our summers aren't summer enough, thank goodness."
+- name: "Black pepper"
+  slug: black-pepper
+  aliases: [peppercorns, peppercorn]
+  line: "The whole spice trade thing wasn't just to pass the time."
+- name: "Nutmeg"
+  slug: nutmeg
+  aliases: [mace]
+  line: "If nutmeg could survive on drizzle and understatement, the UK would be a global superpower."
+- name: "Cardamom"
+  slug: cardamom
+  aliases: [cardamon, cardamum]
+  line: "We grow saffron, the priciest spice in the world. Cardamom, the third priciest, still declines us."
+- name: "Turmeric"
+  slug: turmeric
+  aliases: [tumeric]
+  line: "Needs endless tropical sunshine, which rules us out immediately."
+- name: "Sugar cane"
+  slug: sugar-cane
+  aliases: [sugarcane, cane sugar]
+  line: "Not the same as sugar beet, as anyone who's ever been within five miles of a sugar beet factory can confirm."
