@@ -44,6 +44,11 @@ defaults:
     values:
       layout: wheel
 
+# The share cards are drawn into _site/cards by tools/cards.js after the
+# build; a regenerating `jekyll serve` must not sweep them away.
+keep_files:
+  - cards
+
 exclude:
   - Gemfile
   - Gemfile.lock

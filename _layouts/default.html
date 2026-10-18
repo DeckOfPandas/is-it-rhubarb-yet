@@ -1,12 +1,17 @@
 {%- comment -%}
 The page chrome. A food or never-food page gets its title and description
 from the baked verdict ("Is it rhubarb yet? Nearly."), so a link preview
-or a search result carries the answer and the date it was true for.
+or a search result carries the answer and the date it was true for, and
+its share card, drawn by tools/cards.js into /cards/<slug>.png. Home and
+Now have cards of their own; every other page shows the home card.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign title = page.title -%}
 {%- assign description = page.description | default: site.description -%}
+{%- assign card = "home" -%}
+{%- if page.url == "/now/" -%}{%- assign card = "now" -%}{%- endif -%}
 {%- if page.collection == "foods" or page.collection == "never" -%}
+  {%- assign card = page.slug -%}
   {%- if page.collection == "foods" -%}
     {%- assign thing = site.data.foods | where: "slug", page.slug | first -%}
   {%- else -%}
@@ -16,8 +21,10 @@ or a search result carries the answer and the date it was true for.
   {%- capture title -%}Is it {{ thing.name | downcase }} yet?{% if b %} {{ b.word }}.{% endif %}{%- endcapture -%}
   {%- if b -%}
     {%- capture description -%}{{ b.word }}. {{ b.line | remove: "." }}{% if b.variety != "" %} ({{ b.variety | downcase }} {{ thing.name | downcase }}){% endif %}. As of {{ baked.asofText }}.{%- endcapture -%}
+    {%- capture alt -%}{{ title }} {{ b.line }} As of {{ baked.asofText }}.{%- endcapture -%}
   {%- endif -%}
 {%- endif -%}
+{%- unless alt -%}{%- assign alt = description | strip -%}{%- endunless -%}
 <!doctype html>
 <html lang="{{ site.lang }}" data-baked-week="{{ baked.week }}" data-baked-year="{{ baked.year }}" data-baked-asof="{{ baked.asof }}">
 <head>
@@ -28,7 +35,17 @@ or a search result carries the answer and the date it was true for.
   <meta property="og:title" content="{{ title | default: site.title | escape }}">
   <meta property="og:description" content="{{ description | strip | escape }}">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ '/cards/' | append: card | append: '.png' | absolute_url }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ alt | escape }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title | default: site.title | escape }}">
+  <meta name="twitter:description" content="{{ description | strip | escape }}">
+  <meta name="twitter:image" content="{{ '/cards/' | append: card | append: '.png' | absolute_url }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="preload" href="{{ '/assets/fonts/anton-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/atkinson-hyperlegible-next-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>

@@ -31,6 +31,16 @@ drops it in `tmp/inbox/`); this is the map.
 - **The digest** (`nowLists`) returns each of its four lists split by
   kind of food, `[{kind, items}]`; `flatten` gives one array. The home
   strip and `_includes/band.html` read that shape.
+- **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
+  and never-food, plus `home.png` and `now.png`, into `_site/cards/`
+  after Jekyll: each is a small HTML page with the fonts inlined,
+  screenshotted in headless Chromium through the Playwright the
+  container and the deploy both have (never committed: the site has no
+  raster files in the repository). Every page's `og:image` and
+  `twitter:image` point at its card; the card carries the as-of date,
+  because chat apps keep the first preview they fetch. `node
+  tools/cards.js --out tmp/cards --only rhubarb,home,now` draws a few
+  to look at.
 - `_data/foods.yml` is the truth. `_data/groups.yml` names the culinary
   families and their `kind`. `_data/never.yml` lists the foods that are
   never in season here, each with a line. `_data/quotes.yml` holds the
@@ -114,10 +124,12 @@ drops it in `tmp/inbox/`); this is the map.
 
 ## Working
 
-- Build: `sh tools/build.sh` (bake, then Jekyll). To bake for another
-  day: `node tools/bake.js --date 2026-10-29`, then `bundle exec jekyll
-  build`. Serve: `bundle exec jekyll serve --host 0.0.0.0 --port 9000`.
-  Data check: `python3 -I tools/check-foods.py`.
+- Build: `sh tools/build.sh` (bake, Jekyll, then the share cards). To
+  bake for another day: `node tools/bake.js --date 2026-10-29`, then
+  `bundle exec jekyll build` and `node tools/cards.js`. Serve: `bundle
+  exec jekyll serve --host 0.0.0.0 --port 9000` (`keep_files` keeps the
+  cards through a regeneration). Data check: `python3 -I
+  tools/check-foods.py`.
 - Deploys: `.github/workflows/pages.yml` on push and daily at 03:30
   UTC; `stale-check.yml` at 07:00 UTC reads the live `/built.json` and
   opens one "Stale build" issue when the baked date is over two days
@@ -145,7 +157,6 @@ Phase 2 and 3 of the scope document, in short:
 
 - Per-food reminder `.ics` at `/remind/<slug>.ics`, and the "Remind me
   when it's back" line on NO, NEARLY and JUST pages that links to it.
-- Share cards per food with the date on them.
 - Calendar: a mobile plan. Rows already link, `#<slug>` marks and
   scrolls to a food, and the month header sticks.
 - About page copy from Helen; the signature link to it.
