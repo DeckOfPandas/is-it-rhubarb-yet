@@ -108,8 +108,10 @@ drops it in `tmp/inbox/`); this is the map.
   height so the date line stays above the fold on a laptop: `site.js`
   measures it after the fonts load. CSS `clamp()` stands in before
   that.
-- The question over the verdict is set at the h1's size; the header
-  search box is the home hook in small.
+- The question over the verdict is set at the h1's size. The header
+  search box is the question in lowercase text, "is it [rhubarb] yet?",
+  with only the food as the input, so it reads as a sentence and not as
+  a second wordmark.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for
   the longest label at any angle; `site.js` tightens each visible
   wheel's viewBox to its drawn extent, so the wheel fills its width.
