@@ -237,7 +237,7 @@ main:has(#order-alpha:checked) .ordered-list .heading { display: none; }
 .this-week { margin: 1.25rem 0 0.5rem; max-width: 44rem; color: var(--muted); }
 .this-week p { margin: 0 0 0.2rem; max-width: none; }
 .this-week strong { color: var(--ink); }
-.this-week-more { margin-top: 0.4rem; }
+.this-week-more { margin-top: 1.6rem; }
 .food-link { color: var(--food); font-weight: 700; text-decoration-color: currentColor; }
 .hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
 .list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
@@ -354,9 +354,9 @@ article.food { padding-top: 0.5rem; }
 
 /* The arrivals wheel: a month ring with food labels radiating from it,
    centred on the viewport and as wide as it, out past the page gutters,
-   up to a diameter that fits the screen top to bottom. The labels all
-   sit inside the viewBox, so the full width clips nothing. */
-.dial { width: min(100vw, calc(100svh - 4rem)); margin: 1rem 0 1.5rem; position: relative; left: 50%; transform: translateX(-50%); }
+   up to a diameter that fits the screen top to bottom. site.js tightens
+   each wheel's viewBox to what it drew, so the width is the drawing's. */
+.dial { width: min(100vw, calc(100svh - 4rem)); margin: 0.5rem 0 1rem; position: relative; left: 50%; transform: translateX(-50%); }
 .dial .guide-axis line, .dial .guide-axis path { stroke: var(--rule); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 .dial .guide-axis text { font-family: var(--text); font-size: 9px; fill: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .dial .month { font-size: 9px; fill: var(--ink); }
@@ -366,7 +366,7 @@ article.food { padding-top: 0.5rem; }
 .dial .label:hover text { font-weight: 700; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
-.dial .allyear { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: -0.5rem; }
+.dial .allyear { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: 0.5rem; }
 .dial .allyear .head { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
 
 /* --- Prose pages: about, sources ----------------------------------------- */

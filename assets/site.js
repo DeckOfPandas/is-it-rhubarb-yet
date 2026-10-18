@@ -47,32 +47,46 @@
   }
 
   // --- Matching what people type --------------------------------------------
-  // Case, accents and punctuation are ignored; "&" reads as "and"; a
-  // trailing s (or ies) is dropped so "leek" finds Leeks and "cherry"
-  // finds Cherries. Every typed word must begin a candidate word, or at
-  // least occur inside one; a word that begins the whole candidate scores
-  // highest, then one that begins a word, then one found inside a word.
+  // Case, accents and punctuation are ignored and "&" reads as "and".
+  // Every word is matched under its forms: itself and, when it ends in s
+  // or ies, its singular, on both sides, so "leek" begins "leeks",
+  // "cherry" begins "cherries" (as "cherry") and "chilli" begins
+  // "chillies" as typed. Every typed word must begin a candidate word, or
+  // at least occur inside one; a word that begins the whole candidate
+  // scores highest, then one that begins a word, then one found inside a
+  // word.
   function fold(s) {
     return String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "")
       .toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ").trim();
   }
-  function stem(w) { return w.replace(/ies$/, "y").replace(/s$/, ""); }
+  function forms(w) {
+    var out = [w];
+    if (/ies$/.test(w)) out.push(w.replace(/ies$/, "y"));
+    if (/s$/.test(w)) out.push(w.replace(/s$/, ""));
+    return out;
+  }
+  function begins(q, t) {
+    for (var i = 0; i < q.length; i++) {
+      for (var k = 0; k < t.length; k++) if (t[k].indexOf(q[i]) === 0) return true;
+    }
+    return false;
+  }
   function words(s) { return s.split(" ").filter(Boolean); }
 
   // Score of a candidate (an array of folded terms) for a typed query; 0
   // means no match.
   function score(terms, query) {
-    var qw = words(query).map(stem);
+    var qw = words(query).map(forms);
     if (!qw.length) return 0;
     var total = 0;
     for (var i = 0; i < qw.length; i++) {
       var best = 0;
       for (var t = 0; t < terms.length && best < 3; t++) {
-        var tw = words(terms[t]).map(stem);
-        if (tw.length && tw[0].indexOf(qw[i]) === 0) { best = Math.max(best, t === 0 ? 3 : 2.5); continue; }
+        var tw = words(terms[t]).map(forms);
+        if (tw.length && begins(qw[i], tw[0])) { best = Math.max(best, t === 0 ? 3 : 2.5); continue; }
         for (var k = 0; k < tw.length; k++) {
-          if (tw[k].indexOf(qw[i]) === 0) best = Math.max(best, 2);
-          else if (qw[i].length >= 3 && tw[k].indexOf(qw[i]) >= 0) best = Math.max(best, 1);
+          if (begins(qw[i], tw[k])) best = Math.max(best, 2);
+          else if (qw[i][0].length >= 3 && tw[k][0].indexOf(qw[i][0]) >= 0) best = Math.max(best, 1);
         }
       }
       if (!best) return 0;
@@ -151,6 +165,28 @@
     ready.then(fit);
     var timer = null;
     window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(fit, 80); });
+  }
+
+  // --- The arrivals wheels fill their frame ----------------------------------
+  // A wheel's viewBox leaves room for the longest label at any angle, but
+  // what is drawn usually fills much less of it, so once a wheel is on
+  // display its viewBox is tightened to what it drew, after the fonts are
+  // in. A hidden wheel has no box to measure, so the kind switch fits the
+  // one it shows.
+  function fitDials() {
+    var svgs = document.querySelectorAll("figure.dial > svg");
+    if (!svgs.length) return;
+    function fit(svg) {
+      if (svg.dataset.fitted || !svg.getClientRects().length) return;
+      var b = svg.getBBox();
+      if (!b.width) return;
+      svg.setAttribute("viewBox", [b.x - 6, b.y - 6, b.width + 12, b.height + 12].join(" "));
+      svg.dataset.fitted = "1";
+    }
+    function all() { svgs.forEach(fit); }
+    var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    ready.then(all);
+    document.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener("change", all); });
   }
 
   // --- Calendar and mini charts: the "today" line --------------------------
@@ -309,8 +345,8 @@
       shown.forEach(function (it, i) { it.li.hidden = false; it.li.style.order = i; });
       if (shown.length) { none.hidden = true; return; }
       none.textContent = "";
-      none.appendChild(document.createTextNode("Is it " + q + " yet? Literally no idea. Not a food we know; try another, or see "));
-      var a = el("a", null, "what is in season this week"); a.href = BASE + "now/";
+      none.appendChild(document.createTextNode("Is it " + q + " yet? Literally no idea. If that's an actual thing, please "));
+      var a = el("a", null, "tell us"); a.href = none.dataset.issues;
       none.appendChild(a);
       none.appendChild(document.createTextNode("."));
       none.hidden = false;
@@ -532,6 +568,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, WEEK); });
     document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, TODAY); });
+    fitDials();
     document.querySelectorAll("[data-asof]").forEach(function (n) { n.textContent = V.fmtDateYear(TODAY); });
     initSwitches();
     initFood();

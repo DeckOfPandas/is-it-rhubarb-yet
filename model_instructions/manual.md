@@ -64,8 +64,10 @@ drops it in `tmp/inbox/`); this is the map.
   JavaScript to be readable; the baked verdicts carry their "as of"
   date in the footer and in each food page's data disclosure.
 - Matching what people type (`site.js`): case, accents and punctuation
-  ignored, `&` reads as "and", a trailing s or ies is dropped; every
-  typed word must begin a candidate word, or at least occur inside one.
+  ignored, `&` reads as "and"; a word is matched under its forms (itself
+  and, after a trailing s or ies, its singular) on both sides, so
+  "chilli" begins "chillies" and "cherry" begins "cherries"; every typed
+  word must begin a candidate word, or at least occur inside one.
   Candidates are names, varieties as they are said, `aliases` (one
   food's own: zucchini) and `also` (shared broader words: every fungus
   answers to "mushrooms").
@@ -95,6 +97,9 @@ drops it in `tmp/inbox/`); this is the map.
   that.
 - The question over the verdict is set at the h1's size; the header
   search box is the home hook in small.
+- The arrivals wheels are drawn in an 880-unit viewBox with room for
+  the longest label at any angle; `site.js` tightens each visible
+  wheel's viewBox to its drawn extent, so the wheel fills its width.
 
 ## Drawing rules
 
