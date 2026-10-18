@@ -17,8 +17,10 @@ in `CLAUDE.md`; this is the map.
   `_data/foods.yml` and the `_foods/` stubs. Edit the food list there,
   not in the YAML, or the next run loses the edit. `--wheels` also
   writes `_wheels/` stubs, one standalone SVG per food.
-- Pages: `index.html` (calendar, three orderings), `now/` (weekly
-  list, three orderings), `year/` (arrivals dials), `is-it/` (index),
+- Pages: `index.html` (the front page: this week as three bands, coming
+  in, perfect now with three orderings, going out), `calendar/`
+  (calendar, three orderings), `now/` (forwards to the front page,
+  keeping `?week=`), `year/` (arrivals dials), `is-it/` (index),
   `_layouts/food.html` (one food), `sources/` (where the data is
   from, linked from the footer), `404.html`, and `about.html` (the
   `??` page, in Helen's voice), drafted but `published: false` and
@@ -33,8 +35,8 @@ in `CLAUDE.md`; this is the map.
   focus. On `is-it/` itself the box narrows the list in place, from
   the box or `?q=`, and so does the state switch at the top (all, in
   season, going out, perfect now, coming in; `?state=`), which classifies each food
-  for this week from the same JSON. The list is one grid in `now/`'s
-  shape, with the same three orders; "newest first" ranks are set by
+  for this week from the same JSON. The list is one grid in the front
+  page's shape, with the same three orders; "newest first" ranks are set by
   `site.js` from that JSON, the other two at build time. Matching is whole-word prefix only: every typed
   word must begin a word of the food, a variety or a family name. A
   variety is offered as it is said in full: its `said`, else its name

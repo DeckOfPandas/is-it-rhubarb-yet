@@ -210,13 +210,31 @@ main:has(#order-group:checked) .in-season .heading { display: block; }
 }
 .nearly .swatch { background: color-mix(in oklab, var(--c) 45%, var(--off)); }
 h3, .group-heading { font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 1.25rem 0 0.25rem; }
-.just-about { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
-.just-about .food-list { columns: 1; }
+/* The home page's week: three bands in time order, coming in, perfect
+   now, going out, joined by an arrow along their top edge that points the
+   way the season moves. On a phone they stack in the same order. */
+.now-line { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 2.6fr) minmax(9rem, 1fr); gap: 0 1.75rem; margin-top: 0.5rem; }
+.band { position: relative; border-top: 2px solid var(--rule); padding-top: 0.25rem; }
+.band:not(.going)::after { content: "→"; position: absolute; top: -0.8rem; right: -1.35rem; color: var(--muted); background: var(--bg); padding: 0 0.15rem; font-size: 0.95rem; line-height: 1.4rem; }
+.band.perfect { border-top-color: var(--accent); }
+.band h3 { margin: 0.6rem 0 0; color: var(--fg); }
+.band .count { color: var(--muted); font-weight: 400; margin-left: 0.3em; }
+.band-note { margin: 0 0 0.5rem; color: var(--muted); font-size: 0.85rem; }
+.band .food-list.nearly { columns: 1; }
+.band .food-list.in-season { grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 0.15rem 1.5rem; }
+.band .empty { color: var(--muted); font-style: italic; }
+@media (max-width: 640px) {
+  .now-line { grid-template-columns: 1fr; }
+  .band { margin-bottom: 1.25rem; }
+  .band:not(.going)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -1.3rem; }
+  .band .food-list.in-season { grid-template-columns: 1fr 1fr; gap: 0.15rem 1rem; font-size: 0.92rem; }
+}
 .controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
 .controls button { font: inherit; padding: 0.3rem 0.7rem; }
 .week-heading { color: var(--muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .js section.week { display: none; }
 .js section.week:not([hidden]) { display: block; }
+.js .week-heading { display: none; }
 
 /* Is it X yet? One giant word, one flat line. */
 article.food { border-left: 6px solid var(--c); padding-left: 1.25rem; }

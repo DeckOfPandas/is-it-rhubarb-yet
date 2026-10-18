@@ -9,9 +9,9 @@ A website that answers the question. Also the same question about
 
 - **Is it … yet?** Pick a food. Get the answer, in time context, emphatically. With a soothing
   quotation to aid understanding and acceptance. 
+- **Now.** The front page. This week in three bands, in the order a season moves: what's coming in, what's perfect now (new arrivals flagged), and what's going out.
 - **Calendar.** Every food on one chart, week by week, in the order the
   seasons arrive. Or by family, or alphabetically, if for some reason you browse a supermarket for squid then immediately for strawberries.
-- **This week.** What is in season now, newest arrivals first, with what's going out and what's coming in.
 - **The year.** One dial per kind of food. Each food appears clockwise where its
   season starts, with longer seasons sitting further out. There is no key,
   because an infographic that needs a key is a pretty selection of shapes and colours. Here's a reminder to ask Gemma about an escape room birds-eye-view "map" of a harbour, where downwards meant deeper sea.

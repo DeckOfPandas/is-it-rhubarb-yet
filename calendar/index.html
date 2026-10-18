@@ -1,0 +1,25 @@
+---
+title: Calendar
+description: Every UK food on one chart, week by week.
+permalink: /calendar/
+---
+{%- comment -%}
+Three copies of the chart, one per ordering, built at build time. The
+switch is a radio group; CSS shows the chart whose radio is checked, so
+it works without JavaScript, which only remembers the choice.
+{%- endcomment -%}
+<h1>What's in season</h1>
+<p class="lede">Rows are foods, columns are weeks of the year. A full bar means in season; a fade means coming in or going out. Click a row for the food.</p>
+
+<fieldset class="switch" data-remember="order">
+  <legend>Order</legend>
+  <input type="radio" name="order" id="order-start" value="start" checked><label for="order-start">By start</label>
+  <input type="radio" name="order" id="order-group" value="group"><label for="order-group">By group</label>
+  <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
+</fieldset>
+
+<div class="ordered">
+  <figure class="chart by-start">{% include calendar.html order="start" id="cal-start" %}</figure>
+  <figure class="chart by-group">{% include calendar.html order="group" id="cal-group" %}</figure>
+  <figure class="chart by-alpha">{% include calendar.html order="alpha" id="cal-alpha" %}</figure>
+</div>

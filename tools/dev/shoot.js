@@ -1,10 +1,14 @@
 // Screenshot pages of a running site, full page, at phone and desktop widths.
 //
 // USAGE:
-//   node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... <path>...
+//   node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... <page>...
 //
-//   node tools/dev/shoot.js http://127.0.0.1:9000/mysite before --scheme dark /now/ /year/
-//   node tools/dev/shoot.js http://127.0.0.1:9000 menu --click "By colour" /
+//   node tools/dev/shoot.js http://127.0.0.1:9000/mysite before --scheme dark . year/
+//   node tools/dev/shoot.js http://127.0.0.1:9000 menu --click "By colour" .
+//
+// A page is relative to the base URL, and `.` is the base itself. A page
+// may not start with `/`: the permission checker reads such an argument as
+// an absolute file path and stops the command to ask.
 //
 // Shots land in tmp/shots/<label>-<width>-<scheme>-<page>.png. Each --click
 // clicks the first visible element with that exact text, in order, before the
@@ -31,17 +35,19 @@ function parse(argv) {
     } else if (rest[i] === '--click') {
       if (rest[i + 1] === undefined) usage('--click needs the text to click');
       opts.clicks.push(rest[++i]);
+    } else if (rest[i].startsWith('/')) {
+      usage(`'${rest[i]}' must be relative to the base URL, with no leading /: '${rest[i].replace(/^\/+/, '') || '.'}'`);
     } else {
-      opts.paths.push(rest[i]);
+      opts.paths.push(rest[i] === '.' ? '' : rest[i]);
     }
   }
   if (!/^[A-Za-z0-9._-]+$/.test(label)) usage(`'${label}' must be letters, digits, . _ -`);
-  if (opts.paths.length === 0) opts.paths.push('/');
+  if (opts.paths.length === 0) opts.paths.push('');
   return opts;
 }
 
 function usage(message) {
-  console.error(`shoot.js: ${message}\nusage: node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... <path>...`);
+  console.error(`shoot.js: ${message}\nusage: node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... <page>...`);
   process.exit(2);
 }
 
@@ -59,10 +65,10 @@ function usage(message) {
     });
     const page = await context.newPage();
     for (const p of opts.paths) {
-      const slug = p.replace(/^\/|\/$/g, '').replace(/[^A-Za-z0-9._-]+/g, '_') || 'root';
+      const slug = p.replace(/\/$/, '').replace(/[^A-Za-z0-9._-]+/g, '_') || 'root';
       const file = path.join(OUT_DIR, `${opts.label}-${name}-${opts.scheme}-${slug}.png`);
       try {
-        await page.goto(opts.base + p, { waitUntil: 'networkidle' });
+        await page.goto(opts.base + '/' + p, { waitUntil: 'networkidle' });
         for (const text of opts.clicks) {
           await page.getByText(text, { exact: true }).locator('visible=true').first().click();
           await page.waitForTimeout(200);
