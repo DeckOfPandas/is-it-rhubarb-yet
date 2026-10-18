@@ -124,21 +124,32 @@ def check_shades(item, label, problems, warnings, slug):
 
 
 def check_aliases(item, label, problems, seen, slug):
-    """Aliases are non-empty strings, unique across the whole data set."""
+    """Aliases are non-empty strings, unique across the whole data set.
+    `also` terms are non-empty strings that foods may share, and none may
+    double as somebody's alias."""
     aliases = item.get("aliases")
-    if aliases is None:
-        return
-    if not isinstance(aliases, list):
-        problems.append(f"{label}: aliases must be a list")
-        return
-    for a in aliases:
-        if not isinstance(a, str) or not a.strip():
-            problems.append(f"{label}: alias {a!r} must be a phrase")
-            continue
-        key = a.strip().lower()
-        if key in seen and seen[key] != slug:
-            problems.append(f"{label}: alias {a!r} already belongs to {seen[key]}")
-        seen[key] = slug
+    if aliases is not None:
+        if not isinstance(aliases, list):
+            problems.append(f"{label}: aliases must be a list")
+        else:
+            for a in aliases:
+                if not isinstance(a, str) or not a.strip():
+                    problems.append(f"{label}: alias {a!r} must be a phrase")
+                    continue
+                key = a.strip().lower()
+                if key in seen and seen[key] != slug:
+                    problems.append(f"{label}: alias {a!r} already belongs to {seen[key]}")
+                seen[key] = slug
+    also = item.get("also")
+    if also is not None:
+        if not isinstance(also, list):
+            problems.append(f"{label}: also must be a list")
+        else:
+            for a in also:
+                if not isinstance(a, str) or not a.strip():
+                    problems.append(f"{label}: also {a!r} must be a phrase")
+                elif a.strip().lower() in seen and seen[a.strip().lower()] != slug:
+                    problems.append(f"{label}: also {a!r} is an alias of {seen[a.strip().lower()]}")
 
 
 def main() -> int:

@@ -20,6 +20,13 @@
 #       is its name then the food's: "Bramley apples", "Forced rhubarb".
 #       Set it when the name is a noun on its own (Mooli, Calabrese,
 #       Mutton) or the phrase hyphenates (New-season lamb).
+# aliases: optional, other names a food is asked for by (zucchini). An
+#          alias belongs to one food; tools/check-foods.py enforces it.
+# also: optional, broader words a food should answer to as well, shared
+#       between foods: every fungus answers to "mushrooms".
+# Variety names appear as written, mid-sentence too ("Venison Red &
+# Fallow"), so proper nouns keep their capitals and the rest are lower-case
+# after the first letter.
 
 - name: "Beetroot"
   slug: beetroot
@@ -364,7 +371,7 @@
       weeks:
         - [18, 43, in]
 
-- name: "Chicory & radicchio"
+- name: "Chicory & Radicchio"
   slug: chicory-radicchio
   group: leaves
   colour: "#b91e7c"
@@ -986,6 +993,8 @@
   colour: "#925c00"
   source: general
   note: "Penny buns."
+  aliases: ["porcini", "penny buns"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -996,6 +1005,7 @@
   group: foraged
   colour: "#867276"
   source: general
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1006,6 +1016,8 @@
   group: foraged
   colour: "#828b89"
   source: general
+  aliases: ["puffballs"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1017,6 +1029,8 @@
   colour: "#bd7b00"
   source: ncgm
   note: "Chanterelles."
+  aliases: ["chanterelles"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1027,6 +1041,8 @@
   group: foraged
   colour: "#a56e28"
   source: general
+  aliases: ["hedgehog mushrooms", "pied de mouton"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1037,6 +1053,7 @@
   group: foraged
   colour: "#83604c"
   source: ncgm
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1785,12 +1802,12 @@
   source: basc
   note: "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season."
   varieties:
-    - name: "Red & fallow"
+    - name: "Red & Fallow"
       colour: "#b83500"
       weeks:
         - [1, 17, in]
         - [31, 52, in]
-    - name: "Roe & muntjac"
+    - name: "Roe & Muntjac"
       colour: "#b06958"
       weeks:
         - [1, 52, in]

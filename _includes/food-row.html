@@ -9,7 +9,7 @@ builds the same markup when it redraws a list for another day.
 <li class="food-row" data-slug="{{ item.slug }}" data-verdict="{{ item.verdict }}" style="--food: {{ item.colour }}">
   <a href="{{ '/' | append: item.slug | append: '/' | relative_url }}">
     <span class="swatch" aria-hidden="true"></span>
-    <span class="food-name">{{ item.name }}{% if item.variety and item.variety != "" %} <span class="variety">{{ item.variety | downcase }}</span>{% endif %}</span>
+    <span class="food-name">{{ item.name }}{% if item.variety and item.variety != "" %} <span class="variety">{{ item.variety }}</span>{% endif %}</span>
     <span class="verdict-tag">{{ item.verdict }}</span>
     {%- if include.tag == "new" %} <span class="tag-new">New</span>{% endif -%}
   </a>

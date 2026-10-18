@@ -4,8 +4,8 @@ permalink: /search.json
 ---
 {%- comment -%}
 What the header's search box matches against: every food and never-food
-with its name, the names its varieties are said by, its aliases, and the
-baked verdict for the build day.
+with its name, the names its varieties are said by, its aliases, the
+broader words it also answers to, and the baked verdict for the build day.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 [
@@ -21,6 +21,7 @@ baked verdict for the build day.
     {%- endif -%}
   {%- endfor -%}
   {%- for a in food.aliases -%}{%- assign terms = terms | push: a -%}{%- endfor -%}
+  {%- for a in food.also -%}{%- assign terms = terms | push: a -%}{%- endfor -%}
   {"slug": {{ food.slug | jsonify }}, "name": {{ food.name | jsonify }}, "colour": {{ food.colour | jsonify }}, "verdict": {{ b.verdict | jsonify }}, "terms": {{ terms | jsonify }}},
 {%- endfor -%}
 {%- for n in site.data.never -%}
