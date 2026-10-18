@@ -1,10 +1,11 @@
 // Screenshot pages of a running site, full page, at phone and desktop widths.
 //
 // USAGE:
-//   node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... <page>...
+//   node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... [--type <text>] <page>...
 //
-//   node tools/dev/shoot.js http://127.0.0.1:9000/mysite before --scheme dark . year/
+//   node tools/dev/shoot.js http://127.0.0.1:9000/mysite before --scheme dark . wheel/
 //   node tools/dev/shoot.js http://127.0.0.1:9000 menu --click "By colour" .
+//   node tools/dev/shoot.js http://127.0.0.1:9000 typed --type leek .
 //
 // A page is relative to the base URL, and `.` is the base itself. A page
 // may not start with `/`: the permission checker reads such an argument as
@@ -12,7 +13,8 @@
 //
 // Shots land in tmp/shots/<label>-<width>-<scheme>-<page>.png. Each --click
 // clicks the first visible element with that exact text, in order, before the
-// shot. Tall pages come out tall: tools/dev/slice-png.js cuts them into
+// shot; --type then types its text into the first visible text or search
+// input. Tall pages come out tall: tools/dev/slice-png.js cuts them into
 // readable pieces.
 //
 // Needs WITH_PLAYWRIGHT=1 in kit.env. The image sets NODE_PATH to
@@ -27,7 +29,7 @@ const OUT_DIR = 'tmp/shots';
 function parse(argv) {
   const [base, label, ...rest] = argv;
   if (!base || !label) usage('give a base URL and a label');
-  const opts = { base: base.replace(/\/$/, ''), label, scheme: 'light', clicks: [], paths: [] };
+  const opts = { base: base.replace(/\/$/, ''), label, scheme: 'light', clicks: [], type: null, paths: [] };
   for (let i = 0; i < rest.length; i++) {
     if (rest[i] === '--scheme') {
       opts.scheme = rest[++i];
@@ -35,6 +37,9 @@ function parse(argv) {
     } else if (rest[i] === '--click') {
       if (rest[i + 1] === undefined) usage('--click needs the text to click');
       opts.clicks.push(rest[++i]);
+    } else if (rest[i] === '--type') {
+      if (rest[i + 1] === undefined) usage('--type needs the text to type');
+      opts.type = rest[++i];
     } else if (rest[i].startsWith('/')) {
       usage(`'${rest[i]}' must be relative to the base URL, with no leading /: '${rest[i].replace(/^\/+/, '') || '.'}'`);
     } else {
@@ -47,7 +52,7 @@ function parse(argv) {
 }
 
 function usage(message) {
-  console.error(`shoot.js: ${message}\nusage: node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... <page>...`);
+  console.error(`shoot.js: ${message}\nusage: node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... [--type <text>] <page>...`);
   process.exit(2);
 }
 
@@ -72,6 +77,12 @@ function usage(message) {
         for (const text of opts.clicks) {
           await page.getByText(text, { exact: true }).locator('visible=true').first().click();
           await page.waitForTimeout(200);
+        }
+        if (opts.type !== null) {
+          const box = page.locator('input[type="search"], input[type="text"], input:not([type])').locator('visible=true').first();
+          await box.click();
+          await box.pressSequentially(opts.type, { delay: 20 });
+          await page.waitForTimeout(400);
         }
         await page.waitForTimeout(300);
         await page.screenshot({ path: file, fullPage: true });

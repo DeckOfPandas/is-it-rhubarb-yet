@@ -1,38 +1,87 @@
 ---
 layout: default
 ---
+{%- comment -%}
+One food, top to bottom: the question, the verdict word, the date line,
+the variety line, the quotation, the dial, the counter note, up to six
+foods from the same family that are perfect now, the data, and the way
+on. Everything date-dependent is baked for the build day and
+recomputed by site.js for the visitor's own day from the food's data in
+data-food and the quotations in data-quotes (the general pools plus the
+lines pinned to this food). The whole page keys off --food, the food's
+colour.
+{%- endcomment -%}
+{%- assign baked = site.data.baked -%}
 {%- assign food = site.data.foods | where: "slug", page.slug | first -%}
+{%- assign b = baked.foods[page.slug] -%}
+{%- capture quotes_json -%}{ {%- for pool in site.data.quotes -%}
+  {%- assign general = pool[1] | where_exp: "q", "q.foods == nil" -%}
+  {%- assign pinned = pool[1] | where_exp: "q", "q.foods contains page.slug" -%}
+  {%- assign both = general | concat: pinned -%}
+  "{{ pool[0] }}": {{ both | jsonify }}{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%} }{%- endcapture -%}
 {%- assign x0 = 110 -%}{%- assign cw = 14 -%}{%- assign rh = 22 -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "J,F,M,A,M,J,J,A,S,O,N,D" | split: "," -%}
 {%- assign height = food.varieties.size | times: rh | plus: 30 -%}
 {%- assign width = cw | times: 52 | plus: x0 | plus: 4 -%}
 
-<article class="food" style="--c: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ site.data.quotes | jsonify | escape }}'>
-  <h1 class="ask">Is it {{ food.name | downcase }} yet?</h1>
+<article class="food" style="--food: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ quotes_json | escape }}'>
+  <p class="ask">Is it {{ food.name | downcase }} yet?</p>
 
-  {%- comment -%}
-  JavaScript fills the verdict (one giant word), a quotation to match it,
-  and the practical line under "Fine, show me the data". Without
-  JavaScript the season is given in words instead.
-  {%- endcomment -%}
-  <p class="verdict" id="verdict" hidden></p>
-  <p class="answer" id="answer">
-    {%- for v in food.varieties -%}
-      {%- if v.name != "" %}{{ v.name }}: {% endif -%}
-      {%- for r in v.weeks -%}
-        {%- if r[2] == "in" %}in season{% else %}just about{% endif %} weeks {{ r[0] }} to {{ r[1] }}{% unless forloop.last %}, {% endunless -%}
-      {%- endfor -%}.
-    {%- endfor -%}
-  </p>
+  <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
+  <p class="date-line" id="date-line">{{ b.line }}</p>
+  <p class="variety-line" id="variety-line"{% if b.varietyLine == "" %} hidden{% endif %}>{{ b.varietyLine }}</p>
+
+  <blockquote class="quote" id="quote"{% unless b.quote %} hidden{% endunless %}>
+    {%- if b.quote -%}
+    <p>{{ b.quote.text | replace: " / ", "<br>" }}</p>
+    <cite>{{ b.quote.by }}</cite>
+    {%- endif -%}
+  </blockquote>
 
   {%- include season-wheel.html food=food -%}
 
-  {%- if food.buy -%}<p class="buy">At the counter: {{ food.buy }}</p>{%- endif -%}
+  {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
+
+  {%- comment -%} Up to six foods of the same family that are perfect now,
+     from the baked verdicts. {%- endcomment -%}
+  {%- assign also = "" | split: "" -%}
+  {%- for other in site.data.foods -%}
+    {%- if other.group == food.group and other.slug != food.slug -%}
+      {%- assign ob = baked.foods[other.slug] -%}
+      {%- if ob.verdict == "YES" and also.size < 6 -%}{%- assign also = also | push: other -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if also.size > 0 -%}
+  <section class="also">
+    <h2>Great this week</h2>
+    <ul class="food-list">
+      {%- for other in also -%}
+        {%- assign ob = baked.foods[other.slug] -%}
+        <li class="food-row" data-slug="{{ other.slug }}" data-verdict="{{ ob.verdict }}" style="--food: {{ other.colour }}">
+          <a href="{{ '/' | append: other.slug | append: '/' | relative_url }}">
+            <span class="swatch" aria-hidden="true"></span>
+            <span class="food-name">{{ other.name }}</span>
+            <span class="verdict-tag">{{ ob.verdict }}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </section>
+  {%- endif -%}
 
   <details class="fine">
-    <summary>Fine, show me the data</summary>
-    <p class="when" id="when" hidden></p>
+    <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the data</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the data.</span></summary>
+    <ul class="runs">
+    {%- for v in food.varieties -%}
+      <li><span class="swatch" style="--food: {{ v.colour | default: food.colour }}" aria-hidden="true"></span>{% if v.name != "" %}<strong>{{ v.name }}:</strong> {% endif -%}
+        {%- for r in v.weeks -%}
+          {%- if r[2] == "in" %}in season{% else %}just about{% endif %} weeks {{ r[0] }} to {{ r[1] }}{% unless forloop.last %}, {% endunless -%}
+        {%- endfor -%}.
+      </li>
+    {%- endfor -%}
+    </ul>
     <figure class="chart mini">
     <svg viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-label="Season of {{ food.name }} by week" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="26">
       {%- for m in (0..11) -%}
@@ -55,8 +104,10 @@ layout: default
     </svg>
     </figure>
     {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
-    <p class="source">Source: {% case food.source %}{% when "ncgm" %}New Covent Garden Market seasonal calendar{% when "bbc" %}BBC Good Food seasonal calendar{% when "basc" %}BASC shooting seasons for England and Wales{% when "ffs" %}Flying Fish Seafoods' Cornish seasonality chart{% else %}general knowledge, please check{% endcase %}.</p>
+    <p class="source">Source: {% case food.source %}{% when "ncgm" %}New Covent Garden Market's seasonal calendar{% when "bbc" %}BBC Good Food's seasonal calendar{% when "basc" %}BASC's shooting seasons for England and Wales{% when "ffs" %}Flying Fish Seafoods' Cornish seasonality chart{% else %}common knowledge, not yet checked against a named source{% endcase %}. <a href="{{ '/sources/' | relative_url }}">About the sources</a>.</p>
+    <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
   </details>
 
-  <p class="onwards"><a href="{{ '/is-it/' | relative_url }}">Ask about something else</a> · <a href="{{ '/calendar/' | relative_url }}">See the whole year</a></p>
+  <p class="onwards"><a href="{{ '/' | relative_url }}#hook-input">Ask about something else</a></p>
+  <p class="onwards"><a href="{{ '/calendar/' | relative_url }}#{{ food.slug }}">See the whole year</a></p>
 </article>

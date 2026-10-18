@@ -7,9 +7,13 @@ order "group": rows gathered by culinary family, each family sorted by the
 food's first in-season week, a food's varieties together.
 order "alpha": by food name, a food's varieties together.
 
-Every row is a link to its food's page. JavaScript adds only the "today"
-marker. The id prefixes the gradient ids, which must be unique on a page
-that carries several charts.
+Every row is a link to its food's page. The month and week labels are a
+second, short SVG above the rows, in a block that sticks to the top of
+the viewport as the page scrolls; the rows' SVG starts its viewBox below
+the header so the two share x coordinates. JavaScript adds only the
+"today" marker and keeps the header level with the rows when they are
+scrolled sideways. The id prefixes the gradient ids, which must be unique
+on a page that carries several charts.
 {% endcomment %}
 {%- assign x0 = 190 -%}
 {%- assign cw = 14 -%}
@@ -58,19 +62,31 @@ number in a key is padded to a fixed width by adding 100 or 10.
 {%- assign height = groups_present | times: group_gap | plus: height -%}
 {%- assign width = cw | times: 52 | plus: x0 | plus: 8 -%}
 
-<svg id="{{ include.id }}" viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-labelledby="{{ include.id }}-title" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="{{ header }}">
-  <title id="{{ include.id }}-title">Seasonality of UK food by week</title>
-
+<div class="chart-head">
+<svg viewBox="0 0 {{ width }} {{ header }}" width="{{ width }}" height="{{ header }}" aria-hidden="true" data-x0="{{ x0 }}" data-cw="{{ cw }}">
   {%- for m in (0..11) -%}
     {%- assign start = month_starts[m] | plus: 0 -%}
-    {%- if m == 11 -%}{%- assign next = 53 -%}{%- else -%}{%- assign n1 = m | plus: 1 -%}{%- assign next = month_starts[n1] | plus: 0 -%}{%- endif -%}
     {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
-    <line class="month-line" x1="{{ mx }}" y1="4" x2="{{ mx }}" y2="{{ height }}" />
+    <line class="month-line" x1="{{ mx }}" y1="4" x2="{{ mx }}" y2="{{ header }}" />
     <text class="month-label" x="{{ mx | plus: 4 }}" y="16">{{ month_names[m] }}</text>
   {%- endfor -%}
   {%- for w in (1..52) -%}
     {%- assign wx = w | minus: 1 | times: cw | plus: x0 -%}
     <text class="week-label" x="{{ wx | plus: 7 }}" y="34" text-anchor="middle">{{ w }}</text>
+  {%- endfor -%}
+  <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="4" x2="{{ x0 | plus: 728 }}" y2="{{ header }}" />
+  <line class="today" x1="0" y1="{{ header | minus: 6 }}" x2="0" y2="{{ header }}" hidden />
+</svg>
+</div>
+<div class="chart-body">
+{%- assign body_height = height | minus: header -%}
+<svg id="{{ include.id }}" viewBox="0 {{ header }} {{ width }} {{ body_height }}" width="{{ width }}" height="{{ body_height }}" role="img" aria-labelledby="{{ include.id }}-title" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="{{ header }}">
+  <title id="{{ include.id }}-title">Seasonality of UK food by week</title>
+
+  {%- for m in (0..11) -%}
+    {%- assign start = month_starts[m] | plus: 0 -%}
+    {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
+    <line class="month-line" x1="{{ mx }}" y1="{{ header }}" x2="{{ mx }}" y2="{{ height }}" />
   {%- endfor -%}
 
   {%- assign y = header -%}
@@ -88,7 +104,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- endif -%}
     {%- if v.name != "" -%}{%- assign label = food.name | append: " · " | append: v.name -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
     {%- assign gid = include.id | append: "-" | append: food.slug | append: "-" | append: vi -%}
-    <a class="row" href="{{ '/is-it/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
+    <a class="row" id="{{ include.id }}-{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
       <rect class="row-hit" x="0" y="{{ y }}" width="{{ width }}" height="{{ rh }}" />
       <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end">{{ label }}</text>
       {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}
@@ -96,6 +112,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- assign y = y | plus: rh -%}
   {%- endfor -%}
 
-  <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="4" x2="{{ x0 | plus: 728 }}" y2="{{ height }}" />
+  <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="{{ header }}" x2="{{ x0 | plus: 728 }}" y2="{{ height }}" />
   <line class="today" x1="0" y1="{{ header }}" x2="0" y2="{{ height }}" hidden />
 </svg>
+</div>

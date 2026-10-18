@@ -5,14 +5,20 @@ baseurl: "/is-it-rhubarb-yet"
 lang: en-GB
 timezone: Europe/London
 
-# One page per food, written as a stub under _foods/ by tools/make-foods.py.
-# The food's data lives in _data/foods.yml; the stub only names the slug.
+# One page per food at /<slug>/, written as a stub under _foods/ by
+# tools/make-foods.py; the food's data lives in _data/foods.yml and the
+# stub only names the slug. _never/ stubs do the same for _data/never.yml,
+# the foods that are never in season here. tools/check-foods.py keeps a
+# food's slug off the page URLs (now, calendar, wheel, about, sources).
 # A stub under _wheels/ (make-foods.py --wheels) becomes a standalone SVG
 # of the food's season wheel.
 collections:
   foods:
     output: true
-    permalink: /is-it/:name/
+    permalink: /:name/
+  never:
+    output: true
+    permalink: /:name/
   wheels:
     output: true
     permalink: /wheel/:name:output_ext
@@ -27,6 +33,11 @@ defaults:
       type: foods
     values:
       layout: food
+  - scope:
+      path: ""
+      type: never
+    values:
+      layout: never
   - scope:
       path: ""
       type: wheels
@@ -44,6 +55,7 @@ exclude:
   - tools/
   - tmp/
   - scripts/
+  - model_instructions/
   - .devcontainer/
   - .claude/
   - vendor/

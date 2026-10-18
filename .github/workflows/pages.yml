@@ -1,11 +1,20 @@
 # Build with the Jekyll in the Gemfile and publish to GitHub Pages.
 # Pages must be set to "GitHub Actions" as its source in the repository
 # settings; the workflow then owns the deploy.
+#
+# The verdicts in the HTML are baked for the day of the build by
+# tools/bake.js, so a build is only as current as its day. The schedule
+# rebuilds every day at 03:30 UTC, which is 04:30 in British Summer Time
+# and 03:30 in winter; daily, not weekly, because data weeks turn over on
+# a different weekday each year. GitHub pauses schedules on a public
+# repository after 60 days without a commit; stale-check.yml notices.
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "30 3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -26,8 +35,15 @@ jobs:
         with:
           ruby-version: "3.3"
           bundler-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
       - uses: actions/configure-pages@v5
         id: pages
+      - run: node --test tests/verdict/verdict.test.js
+      - run: node tools/bake.js
+        env:
+          TZ: Europe/London
       - run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production

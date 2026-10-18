@@ -1,0 +1,23 @@
+{%- comment -%}
+One band of the digest: a heading with the count, then for each kind of
+food a sub-heading and the list, or one line when there is nothing.
+Expects: cls (arrived, last, onway, still), heading, list (the baked
+[{kind, items}] from nowLists), empty (the line for an empty band), and
+tag ("new" marks every row). site.js builds the same markup when it
+redraws the digest for another day.
+{%- endcomment -%}
+{%- assign total = 0 -%}
+{%- for k in include.list -%}{%- assign total = total | plus: k.items.size -%}{%- endfor -%}
+<section class="band {{ include.cls }}">
+  <h2>{{ include.heading }} <span class="count">{{ total }}</span></h2>
+  {%- if total > 0 -%}
+    {%- for k in include.list -%}
+    <h3 class="kind">{{ k.kind | capitalize }}</h3>
+    <ul class="food-list">
+      {%- for item in k.items -%}{%- include food-row.html item=item tag=include.tag -%}{%- endfor -%}
+    </ul>
+    {%- endfor -%}
+  {%- else -%}
+  <p class="empty">{{ include.empty }}</p>
+  {%- endif -%}
+</section>

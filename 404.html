@@ -1,17 +1,20 @@
 ---
-title: "404"
-description: Not here.
+title: Literally no idea
+description: Not a food we know.
 permalink: /404.html
 ---
 {%- comment -%} GitHub Pages serves the built site's root 404.html for any
-    URL it cannot find, so the permalink is the bare filename. {%- endcomment -%}
-<article class="about">
-<h1>404</h1>
-<p>You know the drill.</p>
-<ul class="about-ways">
-  <li><a href="{{ '/is-it/' | relative_url }}">All the foods</a></li>
-  <li><a href="{{ '/' | relative_url }}">In season now</a></li>
-  <li><a href="{{ '/calendar/' | relative_url }}">Calendar</a></li>
-  <li><a href="{{ '/year/' | relative_url }}">The year</a></li>
-</ul>
+    URL it cannot find, so the permalink is the bare filename. site.js
+    reads what was asked for from the address, says so, and suggests the
+    nearest foods from search.json. {%- endcomment -%}
+<article class="food not-found" id="not-found" data-index="{{ '/search.json' | relative_url }}">
+  <p class="ask">Is it <span id="asked">…</span> yet?</p>
+  <h1 class="verdict"><span class="verdict-word">Literally no idea.</span></h1>
+  <p class="date-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</p>
+  <section class="suggest" id="suggest" hidden>
+    <h2>Did you mean</h2>
+    <ul class="food-list" id="suggest-list"></ul>
+  </section>
+  <p class="onwards"><a href="{{ '/' | relative_url }}#hook-input">Ask about something else</a></p>
+  <p class="onwards"><a href="{{ '/now/' | relative_url }}">What is in season this week</a></p>
 </article>

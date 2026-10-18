@@ -1,18 +1,20 @@
 ---
-title: The year
-description: Where every UK food's season begins, one dial per kind of food.
-permalink: /year/
+title: The wheel
+description: Where every UK food's season begins, one wheel per kind of food.
+permalink: /wheel/
 ---
 {%- comment -%}
-One arrivals dial per kind of food. Both switches are radio groups shown
-by CSS alone; JavaScript only remembers the choices and points the
-hands. The arcs switch hides or shows the season arcs on every dial.
+One arrivals wheel per kind of food. The kind switch is a radio group
+shown by CSS alone; JavaScript only points the hands. Every visit opens
+on veg.
 {%- endcomment -%}
-<h1>The shape of the year</h1>
-<p class="lede">Each food sits where its season begins, and the further from the centre, the longer it lasts. Read clockwise from the hand for what comes next, and see where the year is crowded and where it is bare.</p>
+<header class="page-head">
+  <h1>The wheel of the seasons</h1>
+  <p class="lede">Each food sits where its season begins; the further from the centre, the longer it lasts. Read clockwise from the hand for what comes next.</p>
+</header>
 
 <div class="switches">
-<fieldset class="switch" data-remember="kind">
+<fieldset class="switch">
   <legend>Kind</legend>
   <input type="radio" name="kind" id="kind-veg" value="veg" checked><label for="kind-veg">Veg</label>
   <input type="radio" name="kind" id="kind-fruit" value="fruit"><label for="kind-fruit">Fruit</label>
@@ -20,11 +22,6 @@ hands. The arcs switch hides or shows the season arcs on every dial.
   <input type="radio" name="kind" id="kind-herbs" value="herbs"><label for="kind-herbs">Herbs</label>
   <input type="radio" name="kind" id="kind-fish" value="fish"><label for="kind-fish">Fish</label>
   <input type="radio" name="kind" id="kind-meat" value="meat"><label for="kind-meat">Meat</label>
-</fieldset>
-<fieldset class="switch" data-remember="arcs">
-  <legend>Season length</legend>
-  <input type="radio" name="arcs" id="arcs-on" value="on" checked><label for="arcs-on">Arcs</label>
-  <input type="radio" name="arcs" id="arcs-off" value="off"><label for="arcs-off">Dots</label>
 </fieldset>
 </div>
 

@@ -5,6 +5,10 @@
 # weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
 # state: in = in season, avail = just coming in or going out.
 # colour: per food; a variety may carry its own colour to stand apart.
+#         Every colour must reach 3:1 contrast on both backgrounds, forcing
+#         shed #16110E and custard #FBF3D9, because the verdict word is set
+#         in it. Pink belongs to rhubarb alone: forced rhubarb is the brand
+#         pink, and no other food sits near it. Palette redone 18 Oct 2026.
 # shades: optional, two or three colours the season wheel sweeps through
 #         across the in-season run (unripe, ripe, over), on a food or a
 #         variety. The calendar keeps using colour.
@@ -16,11 +20,18 @@
 #       is its name then the food's: "Bramley apples", "Forced rhubarb".
 #       Set it when the name is a noun on its own (Mooli, Calabrese,
 #       Mutton) or the phrase hyphenates (New-season lamb).
+# aliases: optional, other names a food is asked for by (zucchini). An
+#          alias belongs to one food; tools/check-foods.py enforces it.
+# also: optional, broader words a food should answer to as well, shared
+#       between foods: every fungus answers to "mushrooms".
+# Variety names appear as written, mid-sentence too ("Venison Red &
+# Fallow"), so proper nouns keep their capitals and the rest are lower-case
+# after the first letter.
 
 - name: "Beetroot"
   slug: beetroot
   group: roots
-  colour: "#8b1a4a"
+  colour: "#bb0e88"
   source: ncgm
   varieties:
     - name: ""
@@ -31,7 +42,7 @@
 - name: "Carrots"
   slug: carrots
   group: roots
-  colour: "#e8731a"
+  colour: "#c55d00"
   source: ncgm
   varieties:
     - name: ""
@@ -43,7 +54,7 @@
 - name: "Celeriac"
   slug: celeriac
   group: roots
-  colour: "#b9a98a"
+  colour: "#826c54"
   source: ncgm
   varieties:
     - name: ""
@@ -53,7 +64,7 @@
 - name: "Horseradish"
   slug: horseradish
   group: roots
-  colour: "#cfc6a8"
+  colour: "#878a6e"
   source: ncgm
   varieties:
     - name: ""
@@ -66,7 +77,7 @@
 - name: "Jerusalem artichokes"
   slug: jerusalem-artichokes
   group: roots
-  colour: "#9c7a4a"
+  colour: "#885a20"
   source: ncgm
   varieties:
     - name: ""
@@ -78,7 +89,7 @@
 - name: "Parsnips"
   slug: parsnips
   group: roots
-  colour: "#e3d7b8"
+  colour: "#a17f47"
   source: ncgm
   varieties:
     - name: ""
@@ -91,16 +102,16 @@
 - name: "Potatoes"
   slug: potatoes
   group: roots
-  colour: "#b78a5a"
+  colour: "#a56333"
   source: ncgm
   varieties:
     - name: "New"
-      colour: "#e3cf9a"
+      colour: "#8f8334"
       weeks:
         - [18, 22, avail]
         - [23, 39, in]
     - name: "Maincrop"
-      colour: "#a0703f"
+      colour: "#a74d00"
       weeks:
         - [36, 39, avail]
         - [40, 52, in]
@@ -108,7 +119,7 @@
 - name: "Radishes"
   slug: radishes
   group: roots
-  colour: "#e0305a"
+  colour: "#d42819"
   source: ncgm
   varieties:
     - name: ""
@@ -116,7 +127,7 @@
         - [14, 48, in]
     - name: "Mooli"
       said: "Mooli"
-      colour: "#ece6d6"
+      colour: "#718385"
       weeks:
         - [18, 22, avail]
         - [23, 48, in]
@@ -125,7 +136,7 @@
 - name: "Salsify"
   slug: salsify
   group: roots
-  colour: "#8a7a6a"
+  colour: "#706060"
   source: bbc
   note: "BBC Good Food screenshot is cut off after September; October to December assumed."
   varieties:
@@ -138,7 +149,7 @@
 - name: "Swede"
   slug: swede
   group: roots
-  colour: "#c9a04a"
+  colour: "#8f6e00"
   source: ncgm
   varieties:
     - name: ""
@@ -149,7 +160,7 @@
 - name: "Turnips"
   slug: turnips
   group: roots
-  colour: "#d8c7d8"
+  colour: "#8c7ba2"
   source: ncgm
   varieties:
     - name: ""
@@ -160,19 +171,19 @@
 - name: "Broccoli"
   slug: broccoli
   group: brassicas
-  colour: "#2f7a3e"
+  colour: "#007f39"
   source: ncgm
   note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
   varieties:
     - name: "Calabrese"
       said: "Calabrese"
-      colour: "#3a8a3a"
+      colour: "#008944"
       weeks:
         - [18, 22, avail]
         - [23, 43, in]
         - [44, 48, avail]
     - name: "Purple sprouting"
-      colour: "#7a3a8a"
+      colour: "#973fcc"
       weeks:
         - [1, 4, avail]
         - [5, 17, in]
@@ -180,7 +191,7 @@
 - name: "Brussels sprouts"
   slug: brussels-sprouts
   group: brassicas
-  colour: "#4f8a3a"
+  colour: "#5e7f00"
   source: ncgm
   varieties:
     - name: ""
@@ -192,22 +203,22 @@
 - name: "Cabbage"
   slug: cabbage
   group: brassicas
-  colour: "#5a9a5a"
+  colour: "#5f904f"
   source: ncgm
   varieties:
     - name: "Red"
-      colour: "#7a2a6a"
+      colour: "#af249a"
       weeks:
         - [27, 30, avail]
         - [31, 48, in]
     - name: "Savoy"
-      colour: "#3f7f3a"
+      colour: "#556c00"
       weeks:
         - [1, 13, in]
         - [14, 30, avail]
         - [31, 52, in]
     - name: "Winter white"
-      colour: "#cfe0b8"
+      colour: "#709166"
       weeks:
         - [31, 35, avail]
         - [36, 52, in]
@@ -215,7 +226,7 @@
 - name: "Spring greens"
   slug: spring-greens
   group: brassicas
-  colour: "#6fb24a"
+  colour: "#629700"
   source: ncgm
   note: "NCGM has these most of the year; BBC Good Food gives March to June."
   varieties:
@@ -228,7 +239,7 @@
 - name: "Cauliflower"
   slug: cauliflower
   group: brassicas
-  colour: "#e6dcc3"
+  colour: "#968565"
   source: ncgm
   varieties:
     - name: ""
@@ -239,7 +250,7 @@
 - name: "Cavolo nero"
   slug: cavolo-nero
   group: brassicas
-  colour: "#1f3d2b"
+  colour: "#486e70"
   source: bbc
   note: "BBC Good Food screenshot is cut off after September; the autumn months are assumed."
   varieties:
@@ -251,7 +262,7 @@
 - name: "Kale"
   slug: kale
   group: brassicas
-  colour: "#2d5a3a"
+  colour: "#007b65"
   source: ncgm
   varieties:
     - name: ""
@@ -263,7 +274,7 @@
 - name: "Kohlrabi"
   slug: kohlrabi
   group: brassicas
-  colour: "#b7c9a3"
+  colour: "#7c7a33"
   source: ncgm
   varieties:
     - name: ""
@@ -274,7 +285,7 @@
 - name: "Pak choi"
   slug: pak-choi
   group: brassicas
-  colour: "#8fbf7a"
+  colour: "#009c71"
   source: ncgm
   varieties:
     - name: ""
@@ -284,7 +295,7 @@
 - name: "Romanesco"
   slug: romanesco
   group: brassicas
-  colour: "#9fc24a"
+  colour: "#8c8a00"
   source: ncgm
   varieties:
     - name: ""
@@ -294,7 +305,7 @@
 - name: "Garlic"
   slug: garlic
   group: alliums
-  colour: "#d9cfc0"
+  colour: "#8e8676"
   source: ncgm
   varieties:
     - name: ""
@@ -305,7 +316,7 @@
 - name: "Leeks"
   slug: leeks
   group: alliums
-  colour: "#6a9f5a"
+  colour: "#488530"
   source: ncgm
   varieties:
     - name: ""
@@ -318,7 +329,7 @@
 - name: "Onions"
   slug: onions
   group: alliums
-  colour: "#c89a5a"
+  colour: "#ab6813"
   source: ncgm
   varieties:
     - name: ""
@@ -330,7 +341,7 @@
 - name: "Shallots"
   slug: shallots
   group: alliums
-  colour: "#b06a4a"
+  colour: "#b54a21"
   source: ncgm
   varieties:
     - name: ""
@@ -341,7 +352,7 @@
 - name: "Spring onions"
   slug: spring-onions
   group: alliums
-  colour: "#7fc04a"
+  colour: "#738f00"
   source: ncgm
   varieties:
     - name: ""
@@ -353,17 +364,17 @@
 - name: "Chard"
   slug: chard
   group: leaves
-  colour: "#2f8f4a"
+  colour: "#008846"
   source: ncgm
   varieties:
     - name: ""
       weeks:
         - [18, 43, in]
 
-- name: "Chicory & radicchio"
+- name: "Chicory & Radicchio"
   slug: chicory-radicchio
   group: leaves
-  colour: "#a83a5a"
+  colour: "#b91e7c"
   source: ncgm
   varieties:
     - name: ""
@@ -375,7 +386,7 @@
 - name: "Cucumber"
   slug: cucumber
   group: leaves
-  colour: "#5fae3a"
+  colour: "#399100"
   source: ncgm
   varieties:
     - name: ""
@@ -387,7 +398,7 @@
 - name: "Edible flowers"
   slug: edible-flowers
   group: leaves
-  colour: "#e07aa8"
+  colour: "#b343cb"
   source: ncgm
   varieties:
     - name: ""
@@ -397,7 +408,7 @@
 - name: "Lettuce"
   slug: lettuce
   group: leaves
-  colour: "#8fd14a"
+  colour: "#769400"
   source: ncgm
   note: "NCGM lists five types; this row is their union."
   varieties:
@@ -410,7 +421,7 @@
 - name: "Rocket"
   slug: rocket
   group: leaves
-  colour: "#4f9a3a"
+  colour: "#507800"
   source: ncgm
   varieties:
     - name: ""
@@ -420,7 +431,7 @@
 - name: "Spinach"
   slug: spinach
   group: leaves
-  colour: "#2f7a2f"
+  colour: "#00743f"
   source: ncgm
   varieties:
     - name: ""
@@ -430,7 +441,7 @@
 - name: "Watercress"
   slug: watercress
   group: leaves
-  colour: "#2f6a3a"
+  colour: "#048d71"
   source: ncgm
   varieties:
     - name: ""
@@ -442,7 +453,7 @@
 - name: "Asparagus"
   slug: asparagus
   group: shoots
-  colour: "#7fae3f"
+  colour: "#5f7700"
   source: ncgm
   varieties:
     - name: ""
@@ -453,7 +464,7 @@
 - name: "Broad beans"
   slug: broad-beans
   group: shoots
-  colour: "#8fbf5a"
+  colour: "#459a51"
   source: ncgm
   varieties:
     - name: ""
@@ -465,7 +476,7 @@
 - name: "Runner & French beans"
   slug: runner-french-beans
   group: shoots
-  colour: "#3f8f4a"
+  colour: "#00823d"
   source: ncgm
   varieties:
     - name: ""
@@ -477,7 +488,7 @@
 - name: "Celery"
   slug: celery
   group: shoots
-  colour: "#9fcf7a"
+  colour: "#84902c"
   source: ncgm
   varieties:
     - name: ""
@@ -488,7 +499,7 @@
 - name: "Fennel"
   slug: fennel
   group: shoots
-  colour: "#a9c98a"
+  colour: "#887b2e"
   source: ncgm
   varieties:
     - name: ""
@@ -498,7 +509,7 @@
 - name: "Globe artichokes"
   slug: globe-artichokes
   group: shoots
-  colour: "#6a8f5a"
+  colour: "#4b765f"
   source: ncgm
   varieties:
     - name: ""
@@ -510,7 +521,7 @@
 - name: "Mangetout"
   slug: mangetout
   group: shoots
-  colour: "#9ccf6a"
+  colour: "#678a00"
   source: bbc
   varieties:
     - name: ""
@@ -520,7 +531,7 @@
 - name: "Peas"
   slug: peas
   group: shoots
-  colour: "#6fbf3a"
+  colour: "#199200"
   source: ncgm
   varieties:
     - name: ""
@@ -532,7 +543,7 @@
 - name: "Sweetcorn"
   slug: sweetcorn
   group: shoots
-  colour: "#f2c31a"
+  colour: "#b47d00"
   source: ncgm
   varieties:
     - name: ""
@@ -544,7 +555,7 @@
 - name: "Aubergine"
   slug: aubergine
   group: fruiting
-  colour: "#4a2a6a"
+  colour: "#8a39cc"
   source: ncgm
   varieties:
     - name: ""
@@ -555,7 +566,7 @@
 - name: "Chillies"
   slug: chillies
   group: fruiting
-  colour: "#d62828"
+  colour: "#cb0019"
   source: ncgm
   varieties:
     - name: ""
@@ -566,7 +577,7 @@
 - name: "Courgettes"
   slug: courgettes
   group: fruiting
-  colour: "#4a8f2a"
+  colour: "#09812d"
   source: ncgm
   varieties:
     - name: ""
@@ -578,7 +589,7 @@
 - name: "Courgette flowers"
   slug: courgette-flowers
   group: fruiting
-  colour: "#f2b705"
+  colour: "#a48500"
   source: bbc
   varieties:
     - name: ""
@@ -588,7 +599,7 @@
 - name: "Marrow"
   slug: marrow
   group: fruiting
-  colour: "#5f8f3a"
+  colour: "#617f31"
   source: ncgm
   varieties:
     - name: ""
@@ -600,7 +611,7 @@
 - name: "Peppers"
   slug: peppers
   group: fruiting
-  colour: "#e04a1a"
+  colour: "#bd4c00"
   source: ncgm
   varieties:
     - name: ""
@@ -610,7 +621,7 @@
 - name: "Pumpkin"
   slug: pumpkin
   group: fruiting
-  colour: "#e8871a"
+  colour: "#aa6600"
   source: ncgm
   note: "NCGM also marks January to March, presumably stored; kept as given."
   varieties:
@@ -622,7 +633,7 @@
 - name: "Squash"
   slug: squash
   group: fruiting
-  colour: "#d9a21a"
+  colour: "#c47500"
   source: ncgm
   varieties:
     - name: ""
@@ -633,11 +644,11 @@
 - name: "Tomatoes"
   slug: tomatoes
   group: fruiting
-  colour: "#e03a2a"
+  colour: "#db3901"
   source: ncgm
   varieties:
     - name: ""
-      shades: ["#8ab83a", "#e03a2a", "#8a1e1e"]
+      shades: ["#5d8f00", "#e44500", "#b4344e"]
       weeks:
         - [9, 26, avail]
         - [27, 35, in]
@@ -646,30 +657,30 @@
 - name: "Apples"
   slug: apples
   group: orchard
-  colour: "#c8302a"
+  colour: "#cd170f"
   source: ncgm
   note: "NCGM lists eight varieties; three early-eater rows (Early Windsor, Golden Delicious, Royal Gala) are left out. NCGM marks Discovery as only 'available' in August and September; here August is in season, as it is sold."
   varieties:
     - name: "Discovery"
-      colour: "#e85a5a"
+      colour: "#ed5100"
       weeks:
         - [31, 35, in]
         - [36, 39, avail]
     - name: "Bramley"
-      colour: "#8fbf3a"
+      colour: "#50931f"
       weeks:
         - [31, 39, in]
     - name: "Cox"
-      colour: "#d0742a"
+      colour: "#bb7400"
       weeks:
         - [36, 43, in]
     - name: "Egremont Russet"
-      colour: "#a67c3a"
+      colour: "#815e00"
       weeks:
         - [36, 39, avail]
         - [40, 43, in]
     - name: "Braeburn"
-      colour: "#b8302a"
+      colour: "#cb000e"
       weeks:
         - [40, 43, avail]
         - [44, 48, in]
@@ -677,7 +688,7 @@
 - name: "Cherries"
   slug: cherries
   group: orchard
-  colour: "#a8102a"
+  colour: "#c50e4f"
   source: ncgm
   note: "BBC Good Food has cherries June to July; NCGM runs later."
   varieties:
@@ -689,7 +700,7 @@
 - name: "Damsons"
   slug: damsons
   group: orchard
-  colour: "#3f2a7a"
+  colour: "#6d49d2"
   source: ncgm
   varieties:
     - name: ""
@@ -700,7 +711,7 @@
 - name: "Medlars"
   slug: medlars
   group: orchard
-  colour: "#8a6a3a"
+  colour: "#85654f"
   source: ncgm
   varieties:
     - name: ""
@@ -711,28 +722,28 @@
 - name: "Pears"
   slug: pears
   group: orchard
-  colour: "#b8c84a"
+  colour: "#807e06"
   source: ncgm
   varieties:
     - name: "Williams"
-      colour: "#d8e06a"
+      colour: "#869000"
       weeks:
         - [31, 35, avail]
         - [36, 39, in]
         - [40, 43, avail]
     - name: "Conference"
-      colour: "#9fb84a"
+      colour: "#3e781d"
       weeks:
         - [36, 52, in]
     - name: "Comice"
-      colour: "#d8b84a"
+      colour: "#a36522"
       weeks:
         - [40, 52, in]
 
 - name: "Plums"
   slug: plums
   group: orchard
-  colour: "#6a2a8a"
+  colour: "#9a30c1"
   source: ncgm
   varieties:
     - name: ""
@@ -742,7 +753,7 @@
 - name: "Quince"
   slug: quince
   group: orchard
-  colour: "#e8c84a"
+  colour: "#a78500"
   source: ncgm
   varieties:
     - name: ""
@@ -752,7 +763,7 @@
 - name: "Blackberries"
   slug: blackberries
   group: soft
-  colour: "#3a1f4a"
+  colour: "#7e44c7"
   source: ncgm
   varieties:
     - name: ""
@@ -764,7 +775,7 @@
 - name: "Blackcurrants & redcurrants"
   slug: blackcurrants-redcurrants
   group: soft
-  colour: "#5a1a3a"
+  colour: "#a02fb1"
   source: ncgm
   note: "BBC Good Food has blackcurrants from late May to July; NCGM has July to August."
   varieties:
@@ -776,7 +787,7 @@
 - name: "Blueberries"
   slug: blueberries
   group: soft
-  colour: "#3a4a8a"
+  colour: "#4862dc"
   source: ncgm
   varieties:
     - name: ""
@@ -786,7 +797,7 @@
 - name: "Gooseberries"
   slug: gooseberries
   group: soft
-  colour: "#a8c84a"
+  colour: "#6d8d1c"
   source: ncgm
   varieties:
     - name: ""
@@ -797,7 +808,7 @@
 - name: "Loganberries & tayberries"
   slug: loganberries-tayberries
   group: soft
-  colour: "#9a2a4a"
+  colour: "#b31e96"
   source: bbc
   varieties:
     - name: ""
@@ -807,7 +818,7 @@
 - name: "Raspberries"
   slug: raspberries
   group: soft
-  colour: "#d8305a"
+  colour: "#c8007d"
   source: ncgm
   varieties:
     - name: ""
@@ -817,24 +828,24 @@
 - name: "Rhubarb"
   slug: rhubarb
   group: soft
-  colour: "#e0407a"
+  colour: "#ff2d78"
   source: ncgm
   note: "BBC Good Food has rhubarb January to June with no forced/outdoor split."
   varieties:
     - name: "Forced"
-      colour: "#ff5c9a"
+      colour: "#ff2d78"
       weeks:
         - [1, 13, in]
         - [44, 52, in]
     - name: "Outdoor"
-      colour: "#c8285f"
+      colour: "#b92c62"
       weeks:
         - [18, 30, in]
 
 - name: "Strawberries"
   slug: strawberries
   group: soft
-  colour: "#e8203a"
+  colour: "#d6120d"
   source: ncgm
   varieties:
     - name: ""
@@ -846,7 +857,7 @@
 - name: "Cobnuts"
   slug: cobnuts
   group: nuts
-  colour: "#a67c52"
+  colour: "#a56822"
   source: ncgm
   varieties:
     - name: ""
@@ -857,7 +868,7 @@
 - name: "Walnuts"
   slug: walnuts
   group: nuts
-  colour: "#7a5a3a"
+  colour: "#7e604b"
   source: ncgm
   note: "Fresh (wet) walnuts."
   varieties:
@@ -868,7 +879,7 @@
 - name: "Wild garlic"
   slug: wild-garlic
   group: foraged
-  colour: "#5fa83a"
+  colour: "#348f1c"
   source: general
   varieties:
     - name: ""
@@ -879,7 +890,7 @@
 - name: "Nettles"
   slug: nettles
   group: foraged
-  colour: "#4a7a2a"
+  colour: "#457803"
   source: general
   note: "Young tops only; tough and gritty once they flower."
   varieties:
@@ -891,7 +902,7 @@
 - name: "Dandelion"
   slug: dandelion
   group: foraged
-  colour: "#f0d020"
+  colour: "#9f8800"
   source: general
   note: "Leaves before the flowers open."
   varieties:
@@ -903,7 +914,7 @@
 - name: "Sea beet"
   slug: sea-beet
   group: foraged
-  colour: "#2a6a3a"
+  colour: "#007d52"
   source: general
   varieties:
     - name: ""
@@ -915,7 +926,7 @@
 - name: "Samphire"
   slug: samphire
   group: foraged
-  colour: "#3fa07a"
+  colour: "#00926a"
   source: ncgm
   note: "Marsh samphire."
   varieties:
@@ -927,7 +938,7 @@
 - name: "Elderflower"
   slug: elderflower
   group: foraged
-  colour: "#f3e9b5"
+  colour: "#848e5c"
   source: general
   varieties:
     - name: ""
@@ -938,7 +949,7 @@
 - name: "Meadowsweet"
   slug: meadowsweet
   group: foraged
-  colour: "#f0e8c0"
+  colour: "#a07d64"
   source: general
   varieties:
     - name: ""
@@ -948,7 +959,7 @@
 - name: "Wild strawberries"
   slug: wild-strawberries
   group: foraged
-  colour: "#e04a60"
+  colour: "#d93f0d"
   source: general
   varieties:
     - name: ""
@@ -958,7 +969,7 @@
 - name: "Bilberries"
   slug: bilberries
   group: foraged
-  colour: "#3a2a6a"
+  colour: "#5356d6"
   source: general
   varieties:
     - name: ""
@@ -968,7 +979,7 @@
 - name: "Elderberries"
   slug: elderberries
   group: foraged
-  colour: "#2a1a3a"
+  colour: "#8c3fba"
   source: general
   varieties:
     - name: ""
@@ -979,9 +990,11 @@
 - name: "Ceps"
   slug: ceps
   group: foraged
-  colour: "#a07040"
+  colour: "#925c00"
   source: general
   note: "Penny buns."
+  aliases: ["porcini", "penny buns"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -990,8 +1003,9 @@
 - name: "Field mushrooms"
   slug: field-mushrooms
   group: foraged
-  colour: "#c8b8a8"
+  colour: "#867276"
   source: general
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1000,8 +1014,10 @@
 - name: "Giant puffball"
   slug: giant-puffball
   group: foraged
-  colour: "#e8e0c8"
+  colour: "#828b89"
   source: general
+  aliases: ["puffballs"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1010,9 +1026,11 @@
 - name: "Girolles"
   slug: girolles
   group: foraged
-  colour: "#e8a21a"
+  colour: "#bd7b00"
   source: ncgm
   note: "Chanterelles."
+  aliases: ["chanterelles"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1021,8 +1039,10 @@
 - name: "Hedgehog fungus"
   slug: hedgehog-fungus
   group: foraged
-  colour: "#d8b878"
+  colour: "#a56e28"
   source: general
+  aliases: ["hedgehog mushrooms", "pied de mouton"]
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1031,8 +1051,9 @@
 - name: "Morels"
   slug: morels
   group: foraged
-  colour: "#8a6a4a"
+  colour: "#83604c"
   source: ncgm
+  also: ["mushrooms"]
   varieties:
     - name: ""
       weeks:
@@ -1042,7 +1063,7 @@
 - name: "Rosehips"
   slug: rosehips
   group: foraged
-  colour: "#d0402a"
+  colour: "#bf3200"
   source: general
   note: "Best after the first frost."
   varieties:
@@ -1054,7 +1075,7 @@
 - name: "Crab apples"
   slug: crab-apples
   group: foraged
-  colour: "#c8a030"
+  colour: "#807f00"
   source: general
   varieties:
     - name: ""
@@ -1064,7 +1085,7 @@
 - name: "Sea buckthorn"
   slug: sea-buckthorn
   group: foraged
-  colour: "#f0a020"
+  colour: "#d06500"
   source: general
   varieties:
     - name: ""
@@ -1074,7 +1095,7 @@
 - name: "Sloes"
   slug: sloes
   group: foraged
-  colour: "#2a2a5a"
+  colour: "#1e65c3"
   source: general
   varieties:
     - name: ""
@@ -1084,7 +1105,7 @@
 - name: "Sweet chestnuts"
   slug: sweet-chestnuts
   group: foraged
-  colour: "#6a3a1a"
+  colour: "#a14a2c"
   source: general
   varieties:
     - name: ""
@@ -1095,7 +1116,7 @@
 - name: "Basil"
   slug: basil
   group: herbs
-  colour: "#3f9a3f"
+  colour: "#00881d"
   source: general
   varieties:
     - name: ""
@@ -1107,7 +1128,7 @@
 - name: "Bay"
   slug: bay
   group: herbs
-  colour: "#4a6a3a"
+  colour: "#4b6c4e"
   source: general
   note: "Evergreen, picked all year."
   varieties:
@@ -1118,7 +1139,7 @@
 - name: "Chervil"
   slug: chervil
   group: herbs
-  colour: "#9ad07a"
+  colour: "#709500"
   source: general
   varieties:
     - name: ""
@@ -1130,7 +1151,7 @@
 - name: "Chives"
   slug: chives
   group: herbs
-  colour: "#6aa05a"
+  colour: "#008e56"
   source: general
   varieties:
     - name: ""
@@ -1142,7 +1163,7 @@
 - name: "Coriander"
   slug: coriander
   group: herbs
-  colour: "#78b86a"
+  colour: "#189e36"
   source: general
   varieties:
     - name: ""
@@ -1154,7 +1175,7 @@
 - name: "Dill"
   slug: dill
   group: herbs
-  colour: "#a9c93a"
+  colour: "#8f8400"
   source: general
   varieties:
     - name: ""
@@ -1165,7 +1186,7 @@
 - name: "Lovage"
   slug: lovage
   group: herbs
-  colour: "#5a8a2a"
+  colour: "#566e00"
   source: general
   varieties:
     - name: ""
@@ -1177,7 +1198,7 @@
 - name: "Marjoram & oregano"
   slug: marjoram-oregano
   group: herbs
-  colour: "#7a9a4a"
+  colour: "#7d7202"
   source: general
   varieties:
     - name: ""
@@ -1189,7 +1210,7 @@
 - name: "Mint"
   slug: mint
   group: herbs
-  colour: "#2fae7a"
+  colour: "#008b7c"
   source: general
   varieties:
     - name: ""
@@ -1201,7 +1222,7 @@
 - name: "Parsley"
   slug: parsley
   group: herbs
-  colour: "#3a8a4a"
+  colour: "#00783f"
   source: general
   varieties:
     - name: ""
@@ -1213,7 +1234,7 @@
 - name: "Rosemary"
   slug: rosemary
   group: herbs
-  colour: "#5a7a6a"
+  colour: "#51787c"
   source: general
   note: "Evergreen, picked all year."
   varieties:
@@ -1224,7 +1245,7 @@
 - name: "Sage"
   slug: sage
   group: herbs
-  colour: "#8a9a8a"
+  colour: "#738679"
   source: general
   varieties:
     - name: ""
@@ -1236,7 +1257,7 @@
 - name: "Sorrel"
   slug: sorrel
   group: herbs
-  colour: "#6fbf4f"
+  colour: "#5f8300"
   source: general
   varieties:
     - name: ""
@@ -1248,7 +1269,7 @@
 - name: "Tarragon"
   slug: tarragon
   group: herbs
-  colour: "#8ab07a"
+  colour: "#5d955a"
   source: general
   varieties:
     - name: ""
@@ -1260,7 +1281,7 @@
 - name: "Thyme"
   slug: thyme
   group: herbs
-  colour: "#7a8a5a"
+  colour: "#756f4d"
   source: general
   varieties:
     - name: ""
@@ -1272,7 +1293,7 @@
 - name: "Mackerel"
   slug: mackerel
   group: fish
-  colour: "#4a7a9a"
+  colour: "#00818e"
   source: ffs
   note: "Flying Fish Seafoods have Cornish handline mackerel poor from June to September and only fair the rest of the year; the summer mackerel of common knowledge is a different fishery."
   buy: "Handline-caught from the South West is the good choice, and most UK mackerel is."
@@ -1285,7 +1306,7 @@
 - name: "Sea bass"
   slug: sea-bass
   group: fish
-  colour: "#8a9aaa"
+  colour: "#607b97"
   source: ffs
   note: "Wild, line-caught; poor through the summer."
   buy: "Wild bass is line-caught in small numbers; farmed is the everyday fish. Ask which you are getting."
@@ -1300,7 +1321,7 @@
 - name: "Sardines"
   slug: sardines
   group: fish
-  colour: "#5a8aa8"
+  colour: "#0089ba"
   source: ffs
   note: "Cornish sardines, best in the cold months."
   buy: "Cornish sardines are ring-netted from a well-managed stock."
@@ -1314,7 +1335,7 @@
 - name: "Herring"
   slug: herring
   group: fish
-  colour: "#7a8a9a"
+  colour: "#3a72ae"
   source: ffs
   note: "Poor from January to March."
   buy: "North Sea and Norwegian herring are in good shape; the MSC label is easy to find."
@@ -1328,7 +1349,7 @@
 - name: "Cod"
   slug: cod
   group: fish
-  colour: "#b0b0a0"
+  colour: "#5d886f"
   source: ffs
   note: "Cornish cod is at its best from July to October and poor in November and December, which is not what the fish counter will tell you."
   buy: "Icelandic, Norwegian and Barents Sea cod are the well-managed stocks; the North Sea stock is still rebuilding. Look for the MSC label."
@@ -1341,7 +1362,7 @@
 - name: "Haddock"
   slug: haddock
   group: fish
-  colour: "#b8c0c8"
+  colour: "#827d7b"
   source: ffs
   note: "Two peaks: late winter and late summer."
   buy: "North Sea and Icelandic haddock are in good shape; look for the MSC label."
@@ -1357,7 +1378,7 @@
 - name: "Hake"
   slug: hake
   group: fish
-  colour: "#9aa8b8"
+  colour: "#51929f"
   source: ffs
   note: "Consistent all year."
   buy: "Cornish hake is MSC-certified and plentiful."
@@ -1369,7 +1390,7 @@
 - name: "Plaice"
   slug: plaice
   group: fish
-  colour: "#c8a070"
+  colour: "#a76700"
   source: ffs
   note: "Poor in January and February after spawning."
   buy: "North Sea plaice is well managed; otter-trawled or line-caught over beam-trawled if you can choose."
@@ -1383,7 +1404,7 @@
 - name: "Dover sole"
   slug: dover-sole
   group: fish
-  colour: "#c0b090"
+  colour: "#916950"
   source: ffs
   note: "Poor in January and February after spawning; best in spring and again from July."
   buy: "Ask where it was landed; the Channel and North Sea stocks are the better-managed ones."
@@ -1398,7 +1419,7 @@
 - name: "Pollock"
   slug: pollock
   group: fish
-  colour: "#6a7a8a"
+  colour: "#556684"
   source: ffs
   note: "Poor in January and February; good from March."
   buy: "A good swap for cod. Line-caught Cornish pollack is the best choice."
@@ -1411,7 +1432,7 @@
 - name: "Whiting"
   slug: whiting
   group: fish
-  colour: "#d0d8e0"
+  colour: "#8088a8"
   source: ffs
   note: "Consistent all year."
   buy: "Line-caught is the choice; whiting is cheap and underused."
@@ -1423,7 +1444,7 @@
 - name: "Monkfish"
   slug: monkfish
   group: fish
-  colour: "#6a5a4a"
+  colour: "#815a57"
   source: ffs
   buy: "Ask for tail or cheeks from the Cornish inshore boats; beam-trawled is the one to pass over."
   varieties:
@@ -1435,7 +1456,7 @@
 - name: "Lemon sole"
   slug: lemon-sole
   group: fish
-  colour: "#d8c8a0"
+  colour: "#928812"
   source: ffs
   note: "Poor from January to March and from October."
   buy: "Cornish day-boat lemon sole; a cheaper, gentler choice than Dover sole."
@@ -1448,7 +1469,7 @@
 - name: "Gurnard"
   slug: gurnard
   group: fish
-  colour: "#e07050"
+  colour: "#cc2416"
   source: ffs
   buy: "Plentiful, cheap and underused; any gurnard is a good choice."
   varieties:
@@ -1461,7 +1482,7 @@
 - name: "Brill"
   slug: brill
   group: fish
-  colour: "#a8a088"
+  colour: "#6c673f"
   source: ffs
   note: "Poor in January and February."
   buy: "Day-boat brill from the South West; it is turbot at half the price."
@@ -1475,7 +1496,7 @@
 - name: "Cuttlefish"
   slug: cuttlefish
   group: fish
-  colour: "#c8c0b8"
+  colour: "#a2826e"
   source: ffs
   note: "Poor from May to July."
   buy: "Trap-caught Cornish cuttlefish; most of the catch goes abroad, which is their loss."
@@ -1489,7 +1510,7 @@
 - name: "Wild salmon"
   slug: wild-salmon
   group: fish
-  colour: "#f08070"
+  colour: "#b7643c"
   source: general
   note: "Rod-caught Scottish; most salmon sold is farmed all year."
   buy: "Wild Atlantic salmon is endangered, so rod-caught is a rare treat. Organic farmed salmon or sea trout are the everyday choices."
@@ -1503,7 +1524,7 @@
 - name: "Sea trout"
   slug: sea-trout
   group: fish
-  colour: "#e89a8a"
+  colour: "#ca5557"
   source: general
   buy: "Wild sea trout is scarce; farmed sea trout is widely sold."
   varieties:
@@ -1516,7 +1537,7 @@
 - name: "Squid"
   slug: squid
   group: fish
-  colour: "#e8e0e8"
+  colour: "#a17b98"
   source: ffs
   buy: "Jig-caught squid from the South West is the choice."
   varieties:
@@ -1530,7 +1551,7 @@
 - name: "Brown crab"
   slug: brown-crab
   group: fish
-  colour: "#c05a2a"
+  colour: "#9f4d00"
   source: ffs
   note: "Poor in January."
   buy: "Pot-caught is the usual method and the good one."
@@ -1543,7 +1564,7 @@
 - name: "Lobster"
   slug: lobster
   group: fish
-  colour: "#1a3a6a"
+  colour: "#0064ba"
   source: ffs
   note: "Native Cornish lobster is of consistent quality all year; the summer peak is one of supply and price."
   buy: "Pot-caught native lobster is the choice; Canadian lobster is the cheaper import."
@@ -1555,7 +1576,7 @@
 - name: "Langoustines"
   slug: langoustines
   group: fish
-  colour: "#e87a5a"
+  colour: "#b97278"
   source: general
   buy: "Creel-caught is the best choice; trawled is what most scampi is."
   varieties:
@@ -1568,7 +1589,7 @@
 - name: "Mussels"
   slug: mussels
   group: fish
-  colour: "#1a2a3a"
+  colour: "#5157c8"
   source: ffs
   note: "Rope-grown mussels are good all year and at their best from October to March."
   buy: "Rope-grown mussels are about as sustainable as seafood gets."
@@ -1583,7 +1604,7 @@
 - name: "Oysters"
   slug: oysters
   group: fish
-  colour: "#8a8a7a"
+  colour: "#5f736a"
   source: general
   note: "Natives in the months with an R; rock oysters all year."
   buy: "Farmed rock oysters are a best choice; wild natives are the rarer treat."
@@ -1596,7 +1617,7 @@
 - name: "Scallops"
   slug: scallops
   group: fish
-  colour: "#f0c8a0"
+  colour: "#b97c35"
   source: ffs
   note: "Cornish scallops are poor in midwinter and best in September and October; Orkney hand-dived scallops are consistent all year."
   buy: "Hand-dived scallops; dredging damages the seabed."
@@ -1611,7 +1632,7 @@
 - name: "Cockles"
   slug: cockles
   group: fish
-  colour: "#c8b898"
+  colour: "#887d4b"
   source: general
   buy: "Hand-raked from a managed bed is the good choice."
   varieties:
@@ -1623,7 +1644,7 @@
 - name: "Brown shrimp"
   slug: brown-shrimp
   group: fish
-  colour: "#d8a878"
+  colour: "#896800"
   source: general
   buy: "Ask for shrimp from a certified fishery; Morecambe Bay and the Wash are the UK ones."
   varieties:
@@ -1636,19 +1657,19 @@
 - name: "Lamb"
   slug: lamb
   group: meat
-  colour: "#b05050"
+  colour: "#c74650"
   source: general
   varieties:
     - name: "New season"
       said: "New-season lamb"
-      colour: "#d06868"
+      colour: "#d8655d"
       weeks:
         - [18, 22, avail]
         - [23, 48, in]
         - [49, 52, avail]
     - name: "Mutton"
       said: "Mutton"
-      colour: "#7a3030"
+      colour: "#b1384d"
       weeks:
         - [1, 8, in]
         - [9, 13, avail]
@@ -1658,7 +1679,7 @@
 - name: "Beef"
   slug: beef
   group: meat
-  colour: "#6a2a2a"
+  colour: "#ca002e"
   source: general
   note: "All year."
   varieties:
@@ -1669,7 +1690,7 @@
 - name: "Pork"
   slug: pork
   group: meat
-  colour: "#e8a8a0"
+  colour: "#ab7c74"
   source: general
   note: "All year."
   varieties:
@@ -1680,7 +1701,7 @@
 - name: "Goose"
   slug: goose
   group: meat
-  colour: "#8a8070"
+  colour: "#77785c"
   source: general
   note: "Michaelmas to Christmas."
   varieties:
@@ -1692,7 +1713,7 @@
 - name: "Turkey"
   slug: turkey
   group: meat
-  colour: "#a08060"
+  colour: "#9a7f4c"
   source: general
   varieties:
     - name: ""
@@ -1703,7 +1724,7 @@
 - name: "Grouse"
   slug: grouse
   group: meat
-  colour: "#6a4a2a"
+  colour: "#9a4f2f"
   source: basc
   note: "12 August to 10 December."
   varieties:
@@ -1716,7 +1737,7 @@
 - name: "Pheasant"
   slug: pheasant
   group: meat
-  colour: "#b06a2a"
+  colour: "#ae5c00"
   source: basc
   note: "1 October to 1 February."
   varieties:
@@ -1728,7 +1749,7 @@
 - name: "Partridge"
   slug: partridge
   group: meat
-  colour: "#9a7a4a"
+  colour: "#8e6a1a"
   source: basc
   note: "1 September to 1 February."
   varieties:
@@ -1740,7 +1761,7 @@
 - name: "Wild duck"
   slug: wild-duck
   group: meat
-  colour: "#4a6a4a"
+  colour: "#1d7d5c"
   source: basc
   note: "Mallard, teal and wigeon: 1 September to 31 January inland, to 20 February on the foreshore."
   varieties:
@@ -1752,7 +1773,7 @@
 - name: "Snipe"
   slug: snipe
   group: meat
-  colour: "#6a5a3a"
+  colour: "#6b663d"
   source: basc
   note: "12 August to 31 January."
   varieties:
@@ -1765,7 +1786,7 @@
 - name: "Woodcock"
   slug: woodcock
   group: meat
-  colour: "#7a6a5a"
+  colour: "#85625b"
   source: basc
   note: "1 October to 31 January."
   varieties:
@@ -1777,24 +1798,24 @@
 - name: "Venison"
   slug: venison
   group: meat
-  colour: "#5a2a1a"
+  colour: "#b73700"
   source: basc
   note: "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season."
   varieties:
-    - name: "Red & fallow"
-      colour: "#5a2a1a"
+    - name: "Red & Fallow"
+      colour: "#b83500"
       weeks:
         - [1, 17, in]
         - [31, 52, in]
-    - name: "Roe & muntjac"
-      colour: "#8a4a3a"
+    - name: "Roe & Muntjac"
+      colour: "#b06958"
       weeks:
         - [1, 52, in]
 
 - name: "Wood pigeon"
   slug: wood-pigeon
   group: meat
-  colour: "#7a7a8a"
+  colour: "#777198"
   source: general
   note: "No closed season; at its best from spring to autumn."
   varieties:
@@ -1807,7 +1828,7 @@
 - name: "Rabbit"
   slug: rabbit
   group: meat
-  colour: "#a89a8a"
+  colour: "#878580"
   source: general
   note: "No closed season; young rabbits from late summer are the ones to buy."
   varieties:
@@ -1820,7 +1841,7 @@
 - name: "Hare"
   slug: hare
   group: meat
-  colour: "#9a7050"
+  colour: "#be7125"
   source: basc
   note: "No closed season in England and Wales, but hare may only be sold from 1 August to 28 February."
   varieties:
@@ -1833,7 +1854,7 @@
 - name: "Grey squirrel"
   slug: grey-squirrel
   group: meat
-  colour: "#9a9a9a"
+  colour: "#5c7f88"
   source: basc
   note: "No closed season; sold by a few game dealers."
   varieties:

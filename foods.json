@@ -1,5 +1,5 @@
 ---
 layout: null
-permalink: /api/foods.json
+permalink: /foods.json
 ---
 {{ site.data.foods | jsonify }}

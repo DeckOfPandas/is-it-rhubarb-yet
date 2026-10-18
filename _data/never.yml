@@ -1,0 +1,90 @@
+# Foods that are never in season in the UK. Each gets a verdict page at
+# /<slug>/ reading NEVER, with `line` under it instead of a date, and no
+# dial. `aliases` are other things people type for it; the checker keeps
+# slugs and aliases unique across this file and foods.yml.
+# A line is one sentence or two, played for laughs, never at anyone's
+# expense.
+
+- name: "Bananas"
+  slug: bananas
+  aliases: [banana, plantain, plantains]
+  line: "Not in this country. Not in this lifetime."
+- name: "Avocados"
+  slug: avocados
+  aliases: [avocado, guacamole]
+  line: "Grown nowhere near here, and not getting any nearer."
+- name: "Lemons"
+  slug: lemons
+  aliases: [lemon]
+  line: "When life gives you lemons, it did not get them from Kent."
+- name: "Limes"
+  slug: limes
+  aliases: [lime]
+  line: "The clue is in what they called the sailors."
+- name: "Oranges"
+  slug: oranges
+  aliases: [orange, clementines, satsumas, tangerines, mandarins]
+  line: "Nell Gwyn's were imported too."
+- name: "Grapefruit"
+  slug: grapefruit
+  aliases: [grapefruits]
+  line: "No. Think of it as a mercy."
+- name: "Mangoes"
+  slug: mangoes
+  aliases: [mango]
+  line: "Wrong hemisphere. Lovely, though."
+- name: "Pineapples"
+  slug: pineapples
+  aliases: [pineapple]
+  line: "Georgian aristocrats grew them in heated pits and rented them out for dinner parties. That is not a season."
+- name: "Papayas"
+  slug: papayas
+  aliases: [papaya, pawpaw]
+  line: "No."
+- name: "Passion fruit"
+  slug: passion-fruit
+  aliases: [passionfruit]
+  line: "The passion is not for our climate."
+- name: "Pomegranates"
+  slug: pomegranates
+  aliases: [pomegranate]
+  line: "Persephone's mistake, and it was imported then as well."
+- name: "Dates"
+  slug: dates
+  aliases: [date, medjool]
+  line: "Palm trees. Actual ones."
+- name: "Coconuts"
+  slug: coconuts
+  aliases: [coconut]
+  line: "Carried here by swallows, I am told, and even then not in season."
+- name: "Coffee"
+  slug: coffee
+  aliases: [espresso]
+  line: "No. Have a cup anyway."
+- name: "Chocolate"
+  slug: chocolate
+  aliases: [cocoa, cacao]
+  line: "Cacao wants a rainforest. Wales has tried its best."
+- name: "Rice"
+  slug: rice
+  aliases: [risotto, basmati]
+  line: "Paddy fields need a different sort of rain."
+- name: "Olives"
+  slug: olives
+  aliases: [olive, olive oil]
+  line: "There is an olive tree in a courtyard in Devon. It is a pet."
+- name: "Ginger"
+  slug: ginger
+  aliases: [root ginger]
+  line: "Hot in the mouth, and grown somewhere hot."
+- name: "Vanilla"
+  slug: vanilla
+  aliases: [vanilla pods]
+  line: "An orchid from Mexico, pollinated by hand. Not in a polytunnel in Lincolnshire."
+- name: "Cinnamon"
+  slug: cinnamon
+  line: "Tree bark from Sri Lanka. Still tree bark from Sri Lanka."
+- name: "Peanuts"
+  slug: peanuts
+  aliases: [peanut, groundnuts]
+  line: "They need a long hot summer. We have had one, once."
