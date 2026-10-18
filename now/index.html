@@ -5,11 +5,12 @@ permalink: /now/
 ---
 {%- comment -%}
 The weekly digest, four lists in the order a cook reads them: just
-arrived, last chance, on the way, still good (by kind). The build-day
-week is baked here from _data/baked.json; site.js redraws the lists from
-foods.json for the visitor's own week and for the previous/next buttons,
-building the same markup as food-row.html. Without JavaScript the baked
-week shows, dated.
+arrived, last chance, on the way, still good. Each is split by kind of
+food and, within a kind, runs by time left. The build-day week is baked
+here from _data/baked.json; site.js redraws the lists from foods.json
+whenever the page was not baked today, and for the previous/next
+buttons, building the same markup as band.html. Without JavaScript the
+baked week shows, dated.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign now = baked.now -%}
@@ -23,43 +24,8 @@ week shows, dated.
 </header>
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
-  <section class="band arrived">
-    <h2>Just arrived <span class="count">{{ now.arrived.size }}</span></h2>
-    {%- if now.arrived.size > 0 -%}
-    <ul class="food-list">
-      {%- for item in now.arrived -%}{%- include food-row.html item=item tag="new" -%}{%- endfor -%}
-    </ul>
-    {%- else -%}
-    <p class="empty">Nothing new this week.</p>
-    {%- endif -%}
-  </section>
-  <section class="band last">
-    <h2>Last chance <span class="count">{{ now.last.size }}</span></h2>
-    {%- if now.last.size > 0 -%}
-    <ul class="food-list">
-      {%- for item in now.last -%}{%- include food-row.html item=item -%}{%- endfor -%}
-    </ul>
-    {%- else -%}
-    <p class="empty">Nothing on its way out.</p>
-    {%- endif -%}
-  </section>
-  <section class="band onway">
-    <h2>On the way <span class="count">{{ now.onway.size }}</span></h2>
-    {%- if now.onway.size > 0 -%}
-    <ul class="food-list">
-      {%- for item in now.onway -%}{%- include food-row.html item=item -%}{%- endfor -%}
-    </ul>
-    {%- else -%}
-    <p class="empty">Nothing due in the next few weeks.</p>
-    {%- endif -%}
-  </section>
-  <section class="band still">
-    <h2>Still good</h2>
-    {%- for k in now.still -%}
-    <h3 class="kind">{{ k.kind | capitalize }}</h3>
-    <ul class="food-list">
-      {%- for item in k.items -%}{%- include food-row.html item=item -%}{%- endfor -%}
-    </ul>
-    {%- endfor -%}
-  </section>
+  {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived empty="Nothing new this week." tag="new" -%}
+  {%- include band.html cls="last" heading="Last chance" list=now.last empty="Nothing on its way out." -%}
+  {%- include band.html cls="onway" heading="On the way" list=now.onway empty="Nothing due in the next few weeks." -%}
+  {%- include band.html cls="still" heading="Still good" list=now.still empty="Nothing at all, which cannot be right." -%}
 </div>

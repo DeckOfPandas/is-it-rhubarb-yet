@@ -11,10 +11,21 @@
   var BAKED_WEEK = parseInt(html.dataset.bakedWeek, 10);
   var BAKED_YEAR = parseInt(html.dataset.bakedYear, 10);
   var SAME_WEEK = WEEK === BAKED_WEEK && YEAR === BAKED_YEAR;
+  // Verdicts change by the week; the phrases under them ("any day now")
+  // change by the day, so a list that carries phrases is redrawn unless
+  // the page was baked today.
+  var SAME_DAY = html.dataset.bakedAsof === isoDate(TODAY);
+  function isoDate(d) {
+    var p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+  }
   // The site root, from this script's own address, so links built here
   // honour the baseurl.
   var script = document.currentScript;
   var BASE = script ? script.src.replace(/assets\/site\.js(\?.*)?$/, "") : "/";
+  // How many foods each line of the home page's this-week strip names;
+  // index.html samples the same number at build.
+  var STRIP_PICK = 5;
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -91,7 +102,7 @@
     var sw = el("span", "swatch"); sw.setAttribute("aria-hidden", "true");
     a.appendChild(sw);
     var name = el("span", "food-name", item.name);
-    if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", item.variety.toLowerCase())); }
+    if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", item.variety)); }
     a.appendChild(name);
     a.appendChild(document.createTextNode(" "));
     a.appendChild(el("span", "verdict-tag", item.verdict));
@@ -122,6 +133,8 @@
   // --- The verdict word fills the line --------------------------------------
   // Measured after the fonts are in, so that YES and NEARLY both reach the
   // right edge; CSS's clamp() stands in before that and without JavaScript.
+  // The word also stops at half the viewport's height, so on a wide, short
+  // screen the date line under it stays above the fold.
   function fitVerdict(word) {
     if (!word) return;
     var box = word.parentElement;
@@ -131,7 +144,7 @@
       var width = word.getBoundingClientRect().width;
       if (!width || !avail) return;
       var size = parseFloat(getComputedStyle(word).fontSize) * (avail / width);
-      size = Math.max(32, Math.min(size, avail * 0.9));
+      size = Math.max(32, Math.min(size, avail * 0.9, window.innerHeight * 0.5));
       word.style.fontSize = size + "px";
     }
     var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
@@ -149,6 +162,17 @@
     line.setAttribute("x1", x);
     line.setAttribute("x2", x);
     line.removeAttribute("hidden");
+  }
+
+  // The calendar's month header sticks to the top of the page in its own
+  // block, so when the rows are scrolled sideways on a narrow screen the
+  // header is scrolled with them.
+  function syncChartHeads() {
+    document.querySelectorAll(".chart-body").forEach(function (body) {
+      var head = body.previousElementSibling;
+      if (!head || !head.classList.contains("chart-head")) return;
+      body.addEventListener("scroll", function () { head.scrollLeft = body.scrollLeft; }, { passive: true });
+    });
   }
 
   // A food page links to the calendar with #<slug>: the rows of that food
@@ -185,8 +209,9 @@
   }
 
   // --- Switches: remember a radio group's choice under its data-remember
-  // key. The theme switch also sets data-theme on <html>; "auto" clears it
-  // so the system preference shows through.
+  // key. Only the theme switch has one: the order and kind switches open
+  // on their default every visit. The theme switch also sets data-theme
+  // on <html>; "auto" clears it so the system preference shows through.
   function initSwitches() {
     document.querySelectorAll(".switch[data-remember]").forEach(function (box) {
       var key = box.dataset.remember;
@@ -232,7 +257,7 @@
     document.getElementById("verdict").textContent = fv.verdict + ".";
     document.getElementById("date-line").textContent = V.dateLine(fv.variety, YEAR, TODAY);
     var vl = document.getElementById("variety-line");
-    var vline = V.varietyLine(food, fv, YEAR);
+    var vline = V.varietyLine(food, fv, YEAR, TODAY);
     vl.textContent = vline; vl.hidden = !vline;
     showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
     var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
@@ -305,21 +330,37 @@
     if (location.hash === "#hook-input") input.focus();
     refreshRows(list);
 
-    // The this-week strip for a week other than the baked one.
+    // The this-week strip for a week other than the baked one: the same
+    // lines index.html bakes, a few foods picked at random from each list.
     if (!SAME_WEEK) {
       var strip = document.getElementById("this-week");
       if (strip) loadFoods().then(function (foods) {
-        var now = V.nowLists(foods, [], WEEK, YEAR);
+        var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
         strip.textContent = "";
-        function part(label, items) {
+        function part(label, list) {
+          var items = V.flatten(list);
           if (!items.length) return;
-          strip.appendChild(el("strong", null, label + ": "));
-          strip.appendChild(document.createTextNode(items.slice(0, 6).map(function (i) { return i.name.toLowerCase(); }).join(", ") + (items.length > 6 ? " and more" : "") + ". "));
+          var p = el("p", "this-week-line");
+          p.appendChild(el("strong", null, label + ": "));
+          var pick = items.slice().sort(function () { return Math.random() - 0.5; }).slice(0, STRIP_PICK);
+          pick.forEach(function (i, n) {
+            if (n) p.appendChild(document.createTextNode(", "));
+            var a = el("a", "food-link", i.name);
+            a.href = foodUrl(i.slug);
+            a.style.setProperty("--food", i.colour);
+            p.appendChild(a);
+          });
+          var more = items.length - pick.length;
+          p.appendChild(document.createTextNode((more > 0 ? " and " + more + " more" : "") + "."));
+          strip.appendChild(p);
         }
         part("Just arrived", now.arrived);
         part("Last call", now.last);
+        part("On the way", now.onway);
+        var p = el("p", "this-week-more");
         var a = el("a", null, "This week in full"); a.href = BASE + "now/";
-        strip.appendChild(a); strip.appendChild(document.createTextNode("."));
+        p.appendChild(a); p.appendChild(document.createTextNode("."));
+        strip.appendChild(p);
       });
     }
   }
@@ -336,40 +377,40 @@
     var week = (param >= 1 && param <= 52) ? param : WEEK;
     var KIND = { veg: "Veg", fruit: "Fruit", wild: "Wild", herbs: "Herbs", fish: "Fish", meat: "Meat" };
 
-    function band(cls, heading, items, emptyText, tag) {
+    // One band, the same markup as _includes/band.html: a heading with the
+    // count, then a sub-heading and list per kind of food.
+    function band(cls, heading, list, emptyText, tag) {
       var s = el("section", "band " + cls);
       var h = el("h2", null, heading + " ");
-      h.appendChild(el("span", "count", String(items.length)));
+      var total = V.flatten(list).length;
+      h.appendChild(el("span", "count", String(total)));
       s.appendChild(h);
-      if (!items.length) { s.appendChild(el("p", "empty", emptyText)); return s; }
-      var ul = el("ul", "food-list");
-      items.forEach(function (i) { ul.appendChild(foodRow(i, tag)); });
-      s.appendChild(ul);
+      if (!total) { s.appendChild(el("p", "empty", emptyText)); return s; }
+      list.forEach(function (k) {
+        s.appendChild(el("h3", "kind", KIND[k.kind] || k.kind));
+        var ul = el("ul", "food-list");
+        k.items.forEach(function (i) { ul.appendChild(foodRow(i, tag)); });
+        s.appendChild(ul);
+      });
       return s;
     }
 
+    // The digest for another week reads its phrases from the middle of
+    // that week, since it has no today.
     function render(w) {
       title.textContent = w === WEEK ? "this week" : "in week " + w;
       dates.textContent = "Week " + w + ": " + V.fmtRange(w, YEAR);
       var url = new URL(location.href);
       if (w === WEEK) url.searchParams.delete("week"); else url.searchParams.set("week", w);
       history.replaceState(null, "", url);
-      if (w === BAKED_WEEK && YEAR === BAKED_YEAR) return;
+      if (w === WEEK && SAME_DAY) return;
       loadFoods().then(function (foods) {
-        var now = V.nowLists(foods, groups, w, YEAR);
+        var now = V.nowLists(foods, groups, w, YEAR, w === WEEK ? TODAY : V.midOfToday(w, YEAR));
         digest.textContent = "";
         digest.appendChild(band("arrived", "Just arrived", now.arrived, "Nothing new this week.", "new"));
         digest.appendChild(band("last", "Last chance", now.last, "Nothing on its way out."));
         digest.appendChild(band("onway", "On the way", now.onway, "Nothing due in the next few weeks."));
-        var still = el("section", "band still");
-        still.appendChild(el("h2", null, "Still good"));
-        now.still.forEach(function (k) {
-          still.appendChild(el("h3", "kind", KIND[k.kind] || k.kind));
-          var ul = el("ul", "food-list");
-          k.items.forEach(function (i) { ul.appendChild(foodRow(i)); });
-          still.appendChild(ul);
-        });
-        digest.appendChild(still);
+        digest.appendChild(band("still", "Still good", now.still, "Nothing at all, which cannot be right."));
       });
     }
 
@@ -499,6 +540,7 @@
     initNow();
     initSearch();
     initNotFound();
+    syncChartHeads();
     targetRow();
     window.addEventListener("hashchange", targetRow);
     refreshRows(document.querySelector(".also"));

@@ -51,7 +51,7 @@ function main() {
     year: year,
     range: V.fmtRange(week, year),
     foods: {},
-    now: V.nowLists(foods, groups, week, year)
+    now: V.nowLists(foods, groups, week, year, date)
   };
 
   foods.forEach((f) => {
@@ -61,7 +61,7 @@ function main() {
       verdict: fv.verdict,
       word: titleWord(fv.verdict),
       line: V.dateLine(fv.variety, year, date),
-      varietyLine: V.varietyLine(f, fv, year),
+      varietyLine: V.varietyLine(f, fv, year, date),
       variety: fv.variety.name || "",
       since: fv.variety.since === undefined ? null : fv.variety.since,
       quote: q ? { text: q.text, by: q.by } : null

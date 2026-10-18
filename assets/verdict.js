@@ -24,20 +24,16 @@
   //   of its in-season run.
   // ISOLATED_AVAIL: the verdict for a "just about" run touching no
   //   in-season run (scallops in spring).
-  // RELATIVE_WEEKS: a date this near also gets a relative form.
   var C = {
     NEARLY_WEEKS: 3,
     JUST_WEEKS: 2,
     NEW_WEEKS: 2,
-    ISOLATED_AVAIL: "JUST",
-    RELATIVE_WEEKS: 6
+    ISOLATED_AVAIL: "JUST"
   };
   var RANK = { YES: 4, JUST: 3, NEARLY: 2, NO: 1, NEVER: 0 };
   var MS_PER_DAY = 86400000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
-  var SMALL = ["no", "one", "two", "three", "four", "five", "six", "seven",
-    "eight", "nine", "ten", "eleven", "twelve"];
 
   // --- The week grid --------------------------------------------------------
 
@@ -214,92 +210,128 @@
     if (a.getMonth() === b.getMonth()) return ordinal(a.getDate()) + " to " + fmtDate(b);
     return fmtDate(a) + " to " + fmtDate(b);
   }
-  function words(n) { return n >= 0 && n < SMALL.length ? SMALL[n] : String(n); }
-  function weeksWord(n) { return n === 1 ? "a week" : words(n) + " weeks"; }
-
   // The date a {week, years} stands for, given the reference year.
   function startDate(at, year) { return startOfWeek(at.week, year + at.years); }
   function endDate(at, year) { return endOfWeek(at.week, year + at.years); }
 
-  // "in about two weeks", "in four days", "tomorrow"; null beyond
-  // RELATIVE_WEEKS. Weeks from a week out, because the data is weekly and
-  // a day count would claim more than it knows.
-  function relativeFrom(today, date) {
-    var days = daysBetween(today, date);
-    if (days > C.RELATIVE_WEEKS * 7 || days < 0) return null;
-    if (days === 0) return "today";
-    if (days === 1) return "tomorrow";
-    if (days < 7) return "in " + words(days) + " days";
-    return "in about " + weeksWord(Math.round(days / 7));
+  // --- Season dates in words --------------------------------------------
+  // The data is weekly and mostly came from monthly calendars, so a season
+  // boundary is never shown as a calendar date. A phrase is chosen by the
+  // days from today to the boundary and names the middle of the data week
+  // (its start plus three days), so week 18, which starts on 30 April,
+  // reads as May. Phrases get coarser with distance and never finer than
+  // the data: no "next week", because data weeks are not Monday to Sunday.
+  //   Coming in, by days to the first day of the first week:
+  //     1 to 6 "any day now"; 7 to 13 "in a week or two"; 14 to 27 "in two
+  //     or three weeks"; 28 to 62 "from early November"; beyond that the
+  //     month alone, "in April", or "next October" when it is this month
+  //     again.
+  //   Going out, by days to the last day of the last week:
+  //     0 to 6 "for a few more days"; 7 to 13 "for another week or two";
+  //     14 to 27 "for another two or three weeks"; 28 on "until late
+  //     December".
+  // Early is the 1st to the 10th, mid the 11th to the 20th, late the rest.
+  // The one calendar date on the site is the "as of" date, which is when
+  // an answer was true, not a season estimate.
+  function midOfWeek(at, year) {
+    var d = startDate(at, year);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 3);
   }
-  // "about two weeks left", "four days left", "last day tomorrow".
-  function relativeUntil(today, date) {
-    var days = daysBetween(today, date);
-    if (days > C.RELATIVE_WEEKS * 7 || days < 0) return null;
-    if (days === 0) return "last day today";
-    if (days === 1) return "last day tomorrow";
-    if (days < 7) return words(days) + " days left";
-    return "about " + weeksWord(Math.round(days / 7)) + " left";
+  function monthPart(d) {
+    var day = d.getDate();
+    return (day <= 10 ? "early " : day <= 20 ? "mid " : "late ") + MONTHS[d.getMonth()];
+  }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  // The middle of the week `today` falls in, for a week with no real
+  // today: the digest for another week.
+  function midOfToday(week, year) { return midOfWeek({ week: week, years: 0 }, year); }
+
+  // How a start is said: `soon` follows "First ones" or stands alone,
+  // `within` follows "Properly in", `back` follows a NO. All lower-case.
+  function arriving(at, year, today) {
+    var days = daysBetween(today, startDate(at, year));
+    var mid = midOfWeek(at, year), month = MONTHS[mid.getMonth()];
+    if (days <= 6) return { soon: "any day now", within: "any day now", back: "any day now" };
+    if (days <= 13) return { soon: "in a week or two", within: "within a week or two", back: "in a week or two" };
+    if (days <= 27) return { soon: "in two or three weeks", within: "within two or three weeks", back: "in two or three weeks" };
+    if (days <= 62) {
+      var part = "from " + monthPart(mid);
+      return { soon: part, within: part, back: part };
+    }
+    var far = mid.getMonth() === today.getMonth() ? "next " + month : "in " + month;
+    return { soon: far, within: "from " + month, back: "back " + far, farOff: true };
+  }
+  // How an end is said, lower-case: "for a few more days", "until late
+  // December".
+  function leaving(at, year, today) {
+    var days = daysBetween(today, endDate(at, year));
+    if (days <= 6) return "for a few more days";
+    if (days <= 13) return "for another week or two";
+    if (days <= 27) return "for another two or three weeks";
+    return "until " + monthPart(midOfWeek(at, year));
+  }
+  // "First ones in April, properly in May." When both halves would say
+  // the same thing the month is split into parts, and if they still agree
+  // only the first-ones phrase is kept.
+  function firstOnes(r, year, today) {
+    var a = arriving(r.from, year, today), b = arriving(r.inFrom, year, today);
+    var sa = a.soon, sb = b.soon;
+    if (sa === sb && a.farOff) {
+      sa = "in " + monthPart(midOfWeek(r.from, year));
+      sb = "in " + monthPart(midOfWeek(r.inFrom, year));
+    }
+    if (sa === sb) return cap(sa);
+    return "First ones " + sa + ", properly " + sb;
   }
 
-  // The date line under a verdict, per the scope's table. `year` is the
-  // year of the week asked about; `today`, when given and in that week,
-  // adds the relative form for near dates.
-  function dateLine(r, year, today) {
-    var line, rel = null;
+  // The phrase for one variety's verdict, without its full stop: the date
+  // line on a food page, the line under a food in a list. `year` is the
+  // year of the week asked about and `today` the day the question is
+  // asked on; a digest for another week passes the middle of that week.
+  function phrase(r, year, today) {
     switch (r.verdict) {
       case "YES":
-        if (r.allYear) return "All year.";
-        line = "Until about " + fmtDate(endDate(r.until, year)) + ".";
-        return line;
+        if (r.allYear) return "All year";
+        return cap(leaving(r.until, year, today));
       case "JUST":
-        line = "Until about " + fmtDate(endDate(r.until, year));
-        if (today) rel = relativeUntil(today, endDate(r.until, year));
-        return line + (rel ? ", " + rel : "") + ".";
+        return cap(leaving(r.until, year, today));
       case "NEARLY":
-        if (r.state === "avail") {
-          line = "Around already. Properly in from about " + fmtDate(startDate(r.from, year));
-        } else if (r.inFrom && r.inFrom.week !== r.from.week) {
-          line = "First arrivals about " + fmtDate(startDate(r.from, year)) +
-            ", properly in from about " + fmtDate(startDate(r.inFrom, year));
-        } else {
-          line = "From about " + fmtDate(startDate(r.from, year));
-        }
-        if (today) rel = relativeFrom(today, startDate(r.from, year));
-        return line + (rel ? ", " + rel : "") + ".";
+        if (r.state === "avail") return "Properly in " + arriving(r.from, year, today).within;
+        if (r.inFrom && r.inFrom.week !== r.from.week) return firstOnes(r, year, today);
+        return cap(arriving(r.from, year, today).soon);
       case "NO":
-        if (r.never) return "Never, on this data. Check the data.";
-        line = "Back about " + fmtDate(startDate(r.from, year));
-        if (r.inFrom && r.inFrom.week !== r.from.week) {
-          line += ", properly in from about " + fmtDate(startDate(r.inFrom, year));
-        }
-        return line + ".";
+        if (r.never) return "Never, on this data";
+        if (r.inFrom && r.inFrom.week !== r.from.week) return firstOnes(r, year, today);
+        return cap(arriving(r.from, year, today).back);
       default:
         return "";
     }
   }
+  function dateLine(r, year, today) {
+    var p = phrase(r, year, today);
+    return p ? p + "." : "";
+  }
+  var shortLine = phrase;
 
-  // A short phrase for one variety in a list: "In until about 2nd
-  // December", "Back about 30th April".
-  function shortLine(r, year) {
-    switch (r.verdict) {
-      case "YES": return r.allYear ? "In all year" : "In until about " + fmtDate(endDate(r.until, year));
-      case "JUST": return "Going out, until about " + fmtDate(endDate(r.until, year));
-      case "NEARLY": return "From about " + fmtDate(startDate(r.from, year));
-      case "NO": return r.never ? "Never" : "Back about " + fmtDate(startDate(r.from, year));
-      default: return "";
-    }
+  // Days from today to the boundary the phrase is about: the end for YES
+  // and JUST, the start for NEARLY and NO; null for all year and never.
+  // Lists sort by it.
+  function daysTo(r, year, today) {
+    if (r.allYear || r.never) return null;
+    if (r.verdict === "YES" || r.verdict === "JUST") return daysBetween(today, endDate(r.until, year));
+    if (r.from) return daysBetween(today, startDate(r.from, year));
+    return null;
   }
 
   // The variety line for a food with more than one variety: the variety
   // that gave the verdict, then the others in a phrase each.
-  // "Maincrop, yes. New: back about 30th April."
-  function varietyLine(food, fv, year) {
+  // "Maincrop, yes. New: first ones in May, properly in June."
+  function varietyLine(food, fv, year, today) {
     if (!fv.variety || food.varieties.length < 2) return "";
     var others = fv.varieties.filter(function (r) { return r !== fv.variety; });
     var head = (fv.variety.name || food.name) + ", " + fv.verdict.toLowerCase() + ".";
     var rest = others.map(function (r) {
-      var s = shortLine(r, year);
+      var s = phrase(r, year, today);
       return (r.name || food.name) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".";
     });
     return [head].concat(rest).join(" ");
@@ -308,40 +340,63 @@
   // --- The weekly digest --------------------------------------------------
   // Four lists for one week: just arrived (YES, in-season run began within
   // NEW_WEEKS), last chance (JUST), on the way (NEARLY), still good (the
-  // rest of YES, grouped by kind). Each item names the variety that
-  // produced the verdict and carries the short date phrase.
-  function nowLists(foods, groups, week, year) {
-    var kindOf = {}, kinds = [], kindName = {};
+  // rest of YES). Each list is split by kind of food (veg, fruit, wild,
+  // herbs, fish, meat, in the order of groups.yml) as [{kind, items}],
+  // kinds with nothing in them left out. Within a kind, just arrived is
+  // newest first, and the others go by time left: the soonest to end or
+  // to arrive first, all-year foods last, names breaking ties. Each item
+  // names the variety that produced the verdict and carries its phrase.
+  // `today` defaults to the middle of the week asked about.
+  function nowLists(foods, groups, week, year, today) {
+    today = today || midOfToday(week, year);
+    var kindOf = {}, kinds = [];
     (groups || []).forEach(function (g) {
       kindOf[g.key] = g.kind;
-      if (kinds.indexOf(g.kind) < 0) { kinds.push(g.kind); kindName[g.kind] = g.kind; }
+      if (kinds.indexOf(g.kind) < 0) kinds.push(g.kind);
     });
-    var out = { arrived: [], last: [], onway: [], still: [] };
-    var stillByKind = {};
+    var buckets = { arrived: {}, last: {}, onway: {}, still: {} };
     foods.forEach(function (f) {
       var fv = foodVerdict(f, week);
       var v = fv.variety;
       if (!v) return;
+      var kind = kindOf[f.group] || "";
+      if (kinds.indexOf(kind) < 0) kinds.push(kind);
       var item = {
-        slug: f.slug, name: f.name, colour: f.colour, group: f.group,
+        slug: f.slug, name: f.name, colour: f.colour, group: f.group, kind: kind,
         variety: v.name || "", verdict: fv.verdict,
-        line: shortLine(v, year), since: v.since, weeksUntil: v.weeksUntil,
-        untilWeek: v.until ? (v.until.week - week + 52) % 52 : null
+        line: phrase(v, year, today), since: v.since === undefined ? null : v.since,
+        days: daysTo(v, year, today)
       };
-      if (fv.verdict === "YES" && !v.allYear && v.since < C.NEW_WEEKS) out.arrived.push(item);
-      else if (fv.verdict === "YES") (stillByKind[kindOf[f.group]] = stillByKind[kindOf[f.group]] || []).push(item);
-      else if (fv.verdict === "JUST") out.last.push(item);
-      else if (fv.verdict === "NEARLY") out.onway.push(item);
+      var list = null;
+      if (fv.verdict === "YES" && !v.allYear && v.since < C.NEW_WEEKS) list = "arrived";
+      else if (fv.verdict === "YES") list = "still";
+      else if (fv.verdict === "JUST") list = "last";
+      else if (fv.verdict === "NEARLY") list = "onway";
+      if (list) (buckets[list][kind] = buckets[list][kind] || []).push(item);
     });
     var byName = function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; };
-    out.arrived.sort(function (a, b) { return (a.since - b.since) || byName(a, b); });
-    out.last.sort(function (a, b) { return (a.untilWeek - b.untilWeek) || byName(a, b); });
-    out.onway.sort(function (a, b) { return (a.weeksUntil - b.weeksUntil) || byName(a, b); });
-    kinds.forEach(function (k) {
-      if (!stillByKind[k]) return;
-      out.still.push({ kind: k, items: stillByKind[k].sort(byName) });
+    var byDays = function (a, b) {
+      if (a.days === null && b.days === null) return byName(a, b);
+      if (a.days === null) return 1;
+      if (b.days === null) return -1;
+      return (a.days - b.days) || byName(a, b);
+    };
+    var newest = function (a, b) { return (a.since - b.since) || byDays(a, b); };
+    var out = {};
+    Object.keys(buckets).forEach(function (list) {
+      out[list] = [];
+      kinds.forEach(function (k) {
+        var items = buckets[list][k];
+        if (!items) return;
+        items.sort(list === "arrived" ? newest : byDays);
+        out[list].push({ kind: k, items: items });
+      });
     });
     return out;
+  }
+  // One list's items in one array, kinds in order.
+  function flatten(list) {
+    return list.reduce(function (all, k) { return all.concat(k.items); }, []);
   }
 
   // --- Quotations ------------------------------------------------------------
@@ -365,8 +420,8 @@
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,
     ordinal: ordinal, fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange,
-    startDate: startDate, endDate: endDate,
-    dateLine: dateLine, shortLine: shortLine, varietyLine: varietyLine,
-    nowLists: nowLists, pickQuote: pickQuote
+    startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
+    phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLine: varietyLine, daysTo: daysTo,
+    nowLists: nowLists, flatten: flatten, pickQuote: pickQuote
   };
 }));
