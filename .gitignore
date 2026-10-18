@@ -9,4 +9,6 @@ scripts/github.local.conf
 .devcontainer/kit.local.env
 _site
 .jekyll-cache/
+# Written by tools/bake.js before every build.
+_data/baked.json
 vendor/
