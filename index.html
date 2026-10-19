@@ -51,11 +51,11 @@ the matches, best first, in a list of their own.
       {%- assign more = all.size | minus: pick.size -%}
       <section class="teaser">
         <h2 class="teaser-label">{{ parts[1] }}</h2>
-        <p class="teaser-foods">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} and {{ more }} more{% endif %}</p>
+        <p class="teaser-foods">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="more-link" href="{{ '/now/' | relative_url }}">and {{ more }} more</a>{% endif %}</p>
       </section>
       {%- endif -%}
     {%- endfor -%}
-    <p class="this-week-more"><a href="{{ '/now/' | relative_url }}">Everything in season this week →</a></p>
+    <p class="this-week-more"><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
   </div>
   <p class="hook-none" id="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues" hidden></p>
 </section>

@@ -120,7 +120,8 @@
     a.href = foodUrl(item.slug);
     var sw = el("span", "swatch"); sw.setAttribute("aria-hidden", "true");
     a.appendChild(sw);
-    var name = el("span", "food-name", item.name);
+    var name = el("span", "food-name");
+    name.appendChild(el("span", "food-title", item.name));
     if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", "(" + item.variety + ")")); }
     if (item.early) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "early", item.early)); }
     a.appendChild(name);
@@ -134,6 +135,17 @@
     }
     li.appendChild(a);
     return li;
+  }
+
+  // A link with an arrow after its words, the same markup as the templates'
+  // .arrow-link: the words underline on hover, the arrow never does.
+  function arrowLink(href, text) {
+    var a = el("a", "arrow-link");
+    a.href = href;
+    a.appendChild(el("span", "arrow-text", text));
+    var arrow = el("span", "arrow", "→"); arrow.setAttribute("aria-hidden", "true");
+    a.appendChild(arrow);
+    return a;
   }
 
   // A group of foods, the same markup as _includes/food-group.html: an
@@ -329,22 +341,37 @@
     // "Great this week" is baked; for another week, or a page baked with
     // no data at all, it is rebuilt from foods.json: up to ALSO_MAX foods
     // of the same family that are YES, in data order, as the template
-    // picks them.
+    // picks them, then how many more there are. It is "Also great this
+    // week" unless this food is NO.
+    function alsoHeading(h) {
+      h.textContent = fv.verdict === "NO" ? "Great this week" : "Also great this week";
+    }
+    var section = article.querySelector(".also");
+    if (section) alsoHeading(section.querySelector("h2"));
     if (!SAME_WEEK) loadFoods().then(function (foods) {
-      var picks = foods.filter(function (f) {
+      var all = foods.filter(function (f) {
         return f.group === food.group && f.slug !== food.slug && V.foodVerdict(f, WEEK).verdict === "YES";
-      }).slice(0, ALSO_MAX);
-      var section = article.querySelector(".also");
+      });
+      var picks = all.slice(0, ALSO_MAX);
+      section = article.querySelector(".also");
       if (!picks.length) { if (section) section.hidden = true; return; }
       if (!section) {
         section = el("section", "also");
-        section.appendChild(el("h2", null, "Great this week"));
+        section.appendChild(el("h2"));
         section.appendChild(el("ul", "food-list"));
+        var p = el("p", "also-more");
+        var m = el("a", "more-link"); m.href = BASE + "now/";
+        p.appendChild(m);
+        section.appendChild(p);
         article.insertBefore(section, article.querySelector(".fine"));
       }
+      alsoHeading(section.querySelector("h2"));
       var ul = section.querySelector("ul");
       ul.textContent = "";
       picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" }, { tag: false })); });
+      var more = all.length - picks.length;
+      section.querySelector(".also-more").hidden = !more;
+      section.querySelector(".more-link").textContent = "and " + more + " more";
       section.hidden = false;
     });
   }
@@ -385,8 +412,10 @@
     // when there is none. On one line the input is as wide as its word, up to
     // the room "Is it" and "yet?" leave; when the question stacks, the input
     // is the full width. Either way a word too long for its room is set
-    // smaller until it fits. The underline is the word's width and the
-    // resting caret stands just after it.
+    // smaller until it fits. The underline is the word's width; the
+    // resting caret stands at the word's start. The input is a hair wider
+    // than its word, room for the real caret after the last letter, so the
+    // word sits a normal space from "Is it" and from "yet?".
     var slot = input.parentElement;
     var ruler = el("span", "hook-ruler");
     var underline = el("span", "hook-underline");
@@ -394,7 +423,7 @@
     [ruler, underline, caret].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
     var line = input.closest(".hook-line");
     var stacked = matchMedia("(max-width: 37.49rem)");
-    var CARET_ROOM = 12;
+    var CARET_ROOM = 3;
     function size() {
       ruler.textContent = input.value || input.placeholder;
       slot.classList.toggle("has-value", !!input.value);
@@ -415,7 +444,6 @@
       var scale = w > room ? room / w : 1;
       if (scale < 1) input.style.fontSize = (parseFloat(getComputedStyle(input).fontSize) * scale) + "px";
       underline.style.width = (text * scale) + "px";
-      caret.style.left = (text * scale + 2) + "px";
     }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     window.addEventListener("resize", size);
@@ -515,7 +543,11 @@
             p.appendChild(a);
           });
           var more = items.length - pick.length;
-          if (more > 0) p.appendChild(document.createTextNode(" and " + more + " more"));
+          if (more > 0) {
+            p.appendChild(document.createTextNode(" "));
+            var m = el("a", "more-link", "and " + more + " more"); m.href = BASE + "now/";
+            p.appendChild(m);
+          }
           s.appendChild(p);
           strip.appendChild(s);
         }
@@ -524,8 +556,7 @@
         block("Great now", now.still);
         block("Last chance", now.last);
         var p = el("p", "this-week-more");
-        var a = el("a", null, "Everything in season this week →"); a.href = BASE + "now/";
-        p.appendChild(a);
+        p.appendChild(arrowLink(BASE + "now/", "Everything in season this week"));
         strip.appendChild(p);
       });
     }
@@ -561,11 +592,13 @@
     // One band, the same markup as _includes/band.html: a heading with the
     // count (none when it is nothing), then the foods as one A to Z list
     // (plain), a group per timing (phrase) or a group per kind with its
-    // count (kind). No row has a tag.
+    // count (kind). No row has a tag. An empty band shows its emptyText,
+    // or with none is left out.
     function band(cls, heading, kinds, shape, emptyText) {
+      var total = V.flatten(kinds).length;
+      if (!total && !emptyText) return document.createTextNode("");
       var s = el("section", "band " + cls);
       var h = el("h2", null, heading + " ");
-      var total = V.flatten(kinds).length;
       if (total) h.appendChild(el("span", "count", String(total)));
       s.appendChild(h);
       if (!total) { s.appendChild(el("p", "empty", emptyText)); return s; }
@@ -601,7 +634,7 @@
         if (weekAt(offset).week !== w || weekAt(offset).year !== y) return;
         var now = V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y));
         digest.textContent = "";
-        digest.appendChild(band("arrived", "Just arrived", now.arrived, "plain", "Nothing new this week."));
+        digest.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
         digest.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
         digest.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
         digest.appendChild(band("still", "Great now", now.still, "kind", "Nothing at all, which cannot be right."));

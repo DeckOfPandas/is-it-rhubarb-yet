@@ -85,14 +85,13 @@ Now have cards of their own; every other page shows the home card.
   </main>
   {%- comment -%} Every label in the footer is set as the nav is: small
      caps in Atkinson 700, muted, a pink underline only on hover or focus.
-     Top to bottom: the data links and GitHub, About, the theme switch, the
+     Top to bottom: the data links, About, the theme switch, GitHub, the
      licences, the as-of date, the signature. {%- endcomment -%}
   <footer class="site-footer">
     <nav class="footer-links" aria-label="About this site">
       <a href="{{ '/sources/' | relative_url }}">Source data</a>
       <a href="{{ '/sources/' | relative_url }}#calendar-feed">Calendar feed</a>
       <a href="{{ '/foods.json' | relative_url }}">JSON</a>
-      <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="GitHub">{% include icons/github.svg %}</a>
     </nav>
     <p class="footer-about"><a href="{{ '/about/' | relative_url }}">About</a></p>
     {%- comment -%} A radio group, so the current choice is checked and
@@ -104,6 +103,7 @@ Now have cards of their own; every other page shows the home card.
       <input type="radio" name="theme" id="theme-auto" value="auto" aria-label="Follow device" checked><label for="theme-auto">{% include icons/screen.svg %}Auto</label>
       <input type="radio" name="theme" id="theme-dark" value="dark" aria-label="Dark theme"><label for="theme-dark">{% include icons/moon.svg %}</label>
     </fieldset>
+    <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="GitHub">{% include icons/github.svg %}</a>
     {%- comment -%} Three parts in three spans, so a narrow screen breaks
        between them and never inside one. {%- endcomment -%}
     <p class="licence">

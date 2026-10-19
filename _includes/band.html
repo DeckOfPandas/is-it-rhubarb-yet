@@ -11,12 +11,14 @@ row carries a tag.
 A group is food-group.html. Expects: cls (arrived, last, onway, still),
 heading, list (the baked [{kind, items}] from nowLists), shape, phrases
 (the baked [{phrase, items}] for the phrase shape), az (the baked A to Z
-list for the plain shape), and empty (the line for an empty band).
+list for the plain shape), and empty (the line for an empty band; with
+none, an empty band is left out).
 site.js builds the same markup when it redraws the digest for another
 week.
 {%- endcomment -%}
 {%- assign total = 0 -%}
 {%- for k in include.list -%}{%- assign total = total | plus: k.items.size -%}{%- endfor -%}
+{%- if total > 0 or include.empty -%}
 <section class="band {{ include.cls }}">
   <h2>{{ include.heading }}{% if total > 0 %} <span class="count">{{ total }}</span>{% endif %}</h2>
   {%- if total == 0 -%}
@@ -29,3 +31,4 @@ week.
     {%- include food-group.html items=include.az -%}
   {%- endif -%}
 </section>
+{%- endif -%}

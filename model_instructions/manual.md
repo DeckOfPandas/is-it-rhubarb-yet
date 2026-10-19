@@ -150,11 +150,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - The question over the verdict is set at the h1's size.
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
   in pink, the line exactly the word's width, in the header, the hero
-  and the cards.
+  and the cards. It does not change on hover.
 - **Header.** NOW, CALENDAR, WHEEL and a magnifier at the top right of
   every page, home included, in the nav style: Atkinson 700 capitals,
-  13px, +0.07em, muted, the current page in ink, a pink underline only
-  on hover or focus. The wordmark is on the left of the same row, or on
+  13px, +0.07em, muted, the current page in ink and underlined in pink,
+  as the others are on hover or focus. The wordmark is on the left of the same row, or on
   a phone on a row of its own under the nav, so the nav never moves.
   Home has no wordmark and no line under its header. The magnifier
   links to `/#search`, which names no element, so the page does not
@@ -162,7 +162,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   back up to it.
 - **Home hero.** The logo is the input. At rest it reads IS IT RHUBARB
   YET?, the placeholder RHUBARB in pink capitals over its underline with
-  a blinking pink caret after it; on focus the placeholder dims. Typed
+  a blinking pink caret at its start, a normal space either side of the
+  word; on focus the placeholder dims. Typed
   text is capitals in ink; once it names one food, or is one food's name
   or alias in full, the word and its underline take that food's colour.
   `site.js` draws the underline at the word's width and the caret, and
@@ -172,17 +173,30 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   home goes into it.
 - **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
   GREAT NOW and LAST CHANCE, each an Anton label over a random three
-  foods in their colours and "and N more", then "Everything in season
-  this week →".
-- **Footer.** Every label in the nav style: SOURCE DATA, CALENDAR FEED
-  (to the feed's section on Source data), JSON and GitHub; ABOUT; the
-  theme switch; the licences and the as-of date, smaller and fainter;
-  the signature hearts.
+  foods in their colours and "and N more", which links to Now, then
+  "Everything in season this week →".
+- **Arrow links.** A link that leads on ("Everything in season this
+  week", a food page's "Ask about something else" and "See the whole
+  year") has an arrow after it and no underline at rest; on hover its
+  words underline and the arrow, inside the link, does not.
+- **Food page.** Up to six foods of the same family that are YES,
+  headed "Also great this week" ("Great this week" when the food is
+  NO), then "and N more", which links to Now.
+- **Hover.** A food's name underlines in pink on hover, in lists and on
+  the calendar, never its variety or timing, and never changes weight
+  or size. SVG text draws its underline in its own fill, so the
+  calendar turns the name's tspan pink and an inner tspan keeps the
+  words in ink.
+- **Footer.** Every label in the nav style: SOURCE DATA · CALENDAR FEED
+  (to the feed's section on Source data) · JSON; ABOUT; the theme
+  switch; GitHub; the licences and the as-of date, smaller and
+  fainter; the signature hearts, which do not change on hover.
 - **Now.** The title follows the week shown ("this week", "next week",
   "last week", or none), over one muted line, "‹ 15–21 October ›".
   Weeks run through real years, a year either way of this week; the
   address carries `week=` and, in another year, `year=`. Sections are
-  parted by space; groups inside them by a hairline.
+  parted by space; groups inside them by a hairline. Just arrived is
+  left out in a week when nothing has arrived.
 - Atkinson Hyperlegible Next's zero is slashed, and the font has no
   feature to open it.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for

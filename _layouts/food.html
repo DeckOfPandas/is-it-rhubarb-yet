@@ -45,21 +45,28 @@ colour.
   {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
 
   {%- comment -%} Up to six foods of the same family that are perfect now,
-     from the baked verdicts. All are YES, as the heading says, so no row
-     carries a tag. {%- endcomment -%}
+     from the baked verdicts, and how many more there are, which links to
+     Now. All are YES, as the heading says, so no row carries a tag. The
+     heading is "Also great this week" unless this food is NO. {%- endcomment -%}
   {%- assign also = "" | split: "" -%}
+  {%- assign also_all = 0 -%}
   {%- for other in site.data.foods -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
       {%- assign ob = baked.foods[other.slug] -%}
-      {%- if ob.verdict == "YES" and also.size < 6 -%}{%- assign also = also | push: other -%}{%- endif -%}
+      {%- if ob.verdict == "YES" -%}
+        {%- assign also_all = also_all | plus: 1 -%}
+        {%- if also.size < 6 -%}{%- assign also = also | push: other -%}{%- endif -%}
+      {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
   {%- if also.size > 0 -%}
+  {%- assign also_more = also_all | minus: also.size -%}
   <section class="also">
-    <h2>Great this week</h2>
+    <h2><span data-also-no{% if b.verdict != "NO" %} hidden{% endif %}>Great this week</span><span data-also-yes{% if b.verdict == "NO" %} hidden{% endif %}>Also great this week</span></h2>
     <ul class="food-list">
       {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>
+    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="more-link" href="{{ '/now/' | relative_url }}">and {{ also_more }} more</a></p>
   </section>
   {%- endif -%}
 
@@ -100,6 +107,6 @@ colour.
     <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
   </details>
 
-  <p class="onwards"><a href="{{ '/' | relative_url }}#search">Ask about something else</a></p>
-  <p class="onwards"><a href="{{ '/calendar/' | relative_url }}#{{ food.slug }}">See the whole year</a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search"><span class="arrow-text">Ask about something else</span><span class="arrow" aria-hidden="true">→</span></a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}"><span class="arrow-text">See the whole year</span><span class="arrow" aria-hidden="true">→</span></a></p>
 </article>

@@ -7,6 +7,7 @@ joined to the name by a dotted leader when that is on too. A list that
 mixes verdicts shows both; a list whose heading already says the verdict
 shows neither. In a list grouped by timing, a food's earlier timing
 ("first ones in a week or two") follows its name, small and muted.
+Hovering underlines the food's name alone, not its variety or timing.
 Expects: item (slug, name, colour, and optionally verdict, variety and
 early), verdict (when the item has none), tag and leader (each on unless
 false), and for the home list never (true for a never-food) and terms.
@@ -17,7 +18,7 @@ site.js builds the same markup in foodRow.
 <li class="food-row{% if include.never %} never{% endif %}" data-slug="{{ item.slug }}"{% if include.terms %} data-terms="{{ include.terms | escape }}"{% endif %} data-verdict="{{ verdict }}"{% unless include.never %} style="--food: {{ item.colour }}"{% endunless %}{% if include.never %} hidden{% endif %}>
   <a href="{{ '/' | append: item.slug | append: '/' | relative_url }}">
     <span class="swatch" aria-hidden="true"></span>
-    <span class="food-name">{{ item.name }}{% if item.variety and item.variety != "" %} <span class="variety">({{ item.variety }})</span>{% endif %}{% if item.early and item.early != "" %} <span class="early">{{ item.early }}</span>{% endif %}</span>
+    <span class="food-name"><span class="food-title">{{ item.name }}</span>{% if item.variety and item.variety != "" %} <span class="variety">({{ item.variety }})</span>{% endif %}{% if item.early and item.early != "" %} <span class="early">{{ item.early }}</span>{% endif %}</span>
     {%- unless include.tag == false -%}
     {%- unless include.leader == false %} <span class="leader" aria-hidden="true"></span>{% endunless %}
     <span class="verdict-tag">{{ verdict }}</span>

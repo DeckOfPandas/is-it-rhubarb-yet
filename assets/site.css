@@ -120,14 +120,14 @@ h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: upper
   .brand { padding: 0.1rem 0 0.75rem; font-size: 1.5rem; }
 }
 /* The logo's RHUBARB is pink and underlined in pink, the line exactly the
-   word's width; hovering the logo thickens it. */
+   word's width; the logo does not change on hover. */
 .brand-rhubarb {
   color: var(--rhubarb); text-decoration: underline; text-decoration-color: var(--rhubarb);
   text-decoration-thickness: 0.08em; text-underline-offset: 0.12em; text-decoration-skip-ink: none;
 }
-.brand:hover .brand-rhubarb, .brand:focus-visible .brand-rhubarb { text-decoration-thickness: 0.14em; }
-/* The nav: small caps labels in muted ink, the current page in full ink,
-   a pink underline only on hover or focus. Each link is 44px tall. */
+/* The nav: small caps labels in muted ink, the current page in full ink
+   and underlined in pink as the others are on hover or focus. Each link
+   is 44px tall. */
 .site-nav { display: flex; align-items: center; gap: clamp(0.7rem, 3vw, 1.5rem); margin-left: auto; }
 .site-nav a {
   display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap;
@@ -135,7 +135,7 @@ h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: upper
   color: var(--muted); text-decoration: none; text-underline-offset: 0.4em;
 }
 .site-nav a[aria-current] { color: var(--ink); }
-.site-nav a:hover, .site-nav a:focus-visible { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
+.site-nav a:hover, .site-nav a:focus-visible, .site-nav a[aria-current] { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
 .site-nav .search-link { justify-content: center; width: 40px; margin: 0 -10px 0 -0.25rem; color: var(--ink); }
 .site-nav .search-link:hover, .site-nav .search-link:focus-visible { color: var(--rhubarb); }
 .icon { width: 1.4rem; height: 1.4rem; flex: none; }
@@ -188,7 +188,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .food-list { list-style: none; margin: 0; padding: 0; columns: 15rem; column-gap: 2rem; }
 .food-list > li { break-inside: avoid; padding: 0.2rem 0; }
 .food-row a { display: flex; align-items: baseline; gap: 0.5em; text-decoration: none; }
-.food-row a:hover .food-name, .food-row a:focus-visible .food-name { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+.food-row a:hover .food-title, .food-row a:focus-visible .food-title { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .food-name { flex: 0 1 auto; min-width: 0; }
 .variety { color: var(--muted); }
 .early { color: var(--muted); font-size: 0.85em; }
@@ -214,7 +214,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 /* --- Home: the hook ------------------------------------------------------- */
 /* The hero is the logo, and the logo is the input. At rest it reads "IS
    IT RHUBARB YET?": the placeholder is RHUBARB in pink capitals over its
-   pink underline, with a blinking pink caret after it (steady without
+   pink underline, with a blinking pink caret at its start (steady without
    motion) as the only cue to type. On focus the placeholder dims and the
    real caret takes over. What is typed is in capitals and ink; once it
    names one food, the word and its underline take that food's colour.
@@ -226,7 +226,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .hook { padding: 1.5rem 0 0.5rem; }
 .hook-form { margin: 0; }
 .hook-line {
-  display: flex; align-items: baseline; gap: 0 0.28em; white-space: nowrap;
+  display: flex; align-items: baseline; gap: 0 0.23em; white-space: nowrap;
   font: 400 clamp(2.6rem, 11vw, 6.5rem)/1.05 var(--display); letter-spacing: var(--track-large); text-transform: uppercase;
   cursor: text;
 }
@@ -235,7 +235,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   font: inherit; letter-spacing: inherit; text-transform: uppercase; line-height: inherit; text-align: left;
   color: var(--ink); caret-color: var(--rhubarb); transition: color 0.25s;
   background: transparent; border: 0; border-bottom: 0.06em solid var(--rhubarb); border-radius: 0;
-  padding: 0 0.08em; margin: 0; min-width: 3ch; max-width: 100%; -webkit-appearance: none; appearance: none;
+  padding: 0; margin: 0; min-width: 3ch; max-width: 100%; -webkit-appearance: none; appearance: none;
   height: 1.2em; box-sizing: content-box;
 }
 .js #hook-input { border-bottom-color: transparent; }
@@ -250,7 +250,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 }
 #hook-input.is-food ~ .hook-underline { background: var(--food); }
 .hook-caret {
-  position: absolute; top: 0.12em; bottom: 0.16em; width: 0.045em; background: var(--rhubarb);
+  position: absolute; left: -0.06em; top: 0.12em; bottom: 0.16em; width: 0.045em; background: var(--rhubarb);
   pointer-events: none; animation: hook-blink 1.1s steps(1) infinite;
 }
 #hook-input:focus ~ .hook-caret, .hook-slot.has-value .hook-caret { display: none; }
@@ -264,7 +264,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   .hook-slot { display: flex; align-items: flex-end; width: 100%; height: 1.26em; margin-bottom: 0.1em; }
   #hook-input { width: 100%; box-sizing: border-box; }
 }
-.hook-ruler { position: absolute; right: 0; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: uppercase; padding: 0 0.08em; }
+.hook-ruler { position: absolute; right: 0; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: uppercase; padding: 0; }
 /* The this-week blocks: an Anton label, as Now heads its sections, over
    three foods, each a link in its own colour, underlined only on hover or
    focus. */
@@ -273,7 +273,14 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .teaser-label { font: 400 1.1875rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--ink); margin: 0 0 0.3rem; }
 .teaser-foods { margin: 0; max-width: none; }
 .this-week .this-week-more { margin-top: 2rem; }
-.this-week-more a { color: var(--ink); }
+.more-link { color: inherit; text-decoration: none; }
+.more-link:hover, .more-link:focus-visible { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
+/* A link with an arrow after it: the arrow says it is a link, so the
+   words are not underlined until hover or focus, and the arrow, inside the
+   link but an inline block, never is. */
+.arrow-link { color: var(--ink); text-decoration: none; }
+.arrow-link:hover .arrow-text, .arrow-link:focus-visible .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+.arrow-link .arrow { display: inline-block; margin-left: 0.35em; }
 .food-link { color: var(--food); text-decoration: none; }
 .food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 .hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
@@ -306,6 +313,7 @@ article.food { padding-top: 0.5rem; }
 /* The data disclosure's summary is a control, so it is Atkinson, not Anton. */
 .fine summary { font: 700 1rem/1.3 var(--text); color: var(--muted); }
 .also { margin: 1.5rem 0; }
+.also-more { margin: 0.3rem 0 0; color: var(--muted); }
 .fine { margin: 2rem 0; color: var(--muted); }
 .fine summary { cursor: pointer; margin: 0; }
 .fine summary span { display: inline; }
@@ -334,6 +342,7 @@ article.food { padding-top: 0.5rem; }
 .digest { display: grid; gap: 0 2rem; }
 @media (min-width: 52rem) {
   .digest { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .digest:not(:has(.band.arrived)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .digest .band.still { grid-column: 1 / -1; }
 }
 .band { min-width: 0; padding-top: 2.75rem; }
@@ -358,6 +367,7 @@ article.food { padding-top: 0.5rem; }
 .chart .week-label { fill: var(--muted); font-size: 8px; }
 .chart .group-label { font-weight: 700; font-size: 13px; fill: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .chart .row-label { font-size: 11px; }
+.chart .row-ink { fill: var(--ink); }
 .chart .row-variety { fill: var(--muted); }
 .chart .cell { shape-rendering: crispEdges; }
 .chart .cell.in { fill: var(--c); }
@@ -366,7 +376,12 @@ article.food { padding-top: 0.5rem; }
 .chart .stop-c { stop-color: var(--c); }
 .chart .row-hit { fill: transparent; }
 .chart a.row, .dial a.label { cursor: pointer; text-decoration: none; }
-.chart a.row:hover .row-label, .chart a.row.is-target .row-label { font-weight: 700; }
+/* SVG text draws its underline in its own fill, not in a decoration
+   colour, so a hovered row's name turns pink for the line while the
+   tspan inside it keeps the words in ink. The variety is not underlined,
+   as in a food list. */
+.chart a.row:hover .row-name { fill: var(--rhubarb); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.15em; }
+.chart a.row.is-target .row-label { font-weight: 700; }
 .chart a.row:hover .row-hit, .chart a.row.is-target .row-hit { fill: var(--band); }
 .chart .month-line { stroke: var(--rule); }
 .chart .today { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 3 3; }
@@ -433,8 +448,9 @@ article.food { padding-top: 0.5rem; }
 .site-footer p { margin: 0; max-width: none; }
 .site-footer a { color: var(--muted); text-decoration: none; text-underline-offset: 0.4em; }
 .site-footer a:not(.hearts):hover, .site-footer a:not(.hearts):focus-visible { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
-.footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem 1.5rem; }
-.footer-links .footer-github { display: inline-flex; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem 0.6rem; }
+.footer-links a + a::before { content: "·"; display: inline-block; margin-right: 0.6rem; color: var(--muted); }
+.footer-github { display: inline-flex; }
 .footer-github:hover, .footer-github:focus-visible { color: var(--rhubarb); }
 .footer-icon { width: 1.25rem; height: 1.25rem; fill: currentColor; }
 .licence, .footer-asof { font-size: 0.6875rem; color: color-mix(in oklab, var(--muted) 75%, var(--bg)); }
@@ -444,4 +460,3 @@ article.food { padding-top: 0.5rem; }
 .licence a, .footer-asof { color: inherit; }
 .site-footer .hearts { display: block; color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; text-decoration: none; }
 .hearts svg { display: block; width: min(240px, 45vw); height: auto; }
-.hearts:hover svg, .hearts:focus-visible svg { transform: translateY(-2px); }
