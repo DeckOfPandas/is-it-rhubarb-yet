@@ -44,6 +44,23 @@ test("the week grid", () => {
   assert.equal(iso(V.midOfWeek({ week: 18, years: 0 }, 2026)), "2026-05-03", "week 18 starts 30 April and reads as May");
 });
 
+test("every food and every variety has a verdict and a date phrase in every week", () => {
+  const OK = new Set(["YES", "JUST", "NEARLY", "NO"]);
+  const missing = [];
+  for (const f of foods) {
+    for (let w = 1; w <= 52; w++) {
+      const today = V.midOfToday(w, YEAR);
+      const fv = V.foodVerdict(f, w);
+      if (!OK.has(fv.verdict)) missing.push(`${f.slug} week ${w}: verdict ${fv.verdict}`);
+      for (const r of fv.varieties) {
+        if (!OK.has(r.verdict)) missing.push(`${f.slug}/${r.name} week ${w}: verdict ${r.verdict}`);
+        if (!V.phrase(r, YEAR, today)) missing.push(`${f.slug}/${r.name} week ${w}: no phrase`);
+      }
+    }
+  }
+  assert.deepEqual(missing, []);
+});
+
 test("leap years: the grid is by day of year, week 52 takes nine days", () => {
   assert.equal(V.weekOf(new Date(2028, 11, 31)), 52);
   assert.equal(V.weekOf(new Date(2028, 11, 23)), 52);
