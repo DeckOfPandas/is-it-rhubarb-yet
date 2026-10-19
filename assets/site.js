@@ -23,9 +23,9 @@
   // honour the baseurl.
   var script = document.currentScript;
   var BASE = script ? script.src.replace(/assets\/site\.js(\?.*)?$/, "") : "/";
-  // How many foods each line of the home page's this-week strip names;
+  // How many foods each of the home page's this-week blocks names;
   // index.html samples the same number at build.
-  var STRIP_PICK = 5;
+  var STRIP_PICK = 3;
   // How many same-family foods a food page lists; _layouts/food.html bakes
   // the same number.
   var ALSO_MAX = 6;
@@ -493,19 +493,19 @@
     });
     refreshRows(lists).then(function () { if (input.value.trim()) apply(); });
 
-    // The this-week strip for a week other than the baked one: the same
-    // lines index.html bakes, a few foods picked at random from each list.
+    // The this-week blocks for a week other than the baked one: the same
+    // blocks index.html bakes, a few foods picked at random from each list.
     if (!SAME_WEEK) {
       var strip = document.getElementById("this-week");
       if (strip) loadFoods().then(function (foods) {
         var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
         strip.textContent = "";
-        function part(label, list, empty) {
+        function block(label, list) {
           var items = V.flatten(list);
-          if (!items.length && !empty) return;
-          var p = el("p", "this-week-line");
-          p.appendChild(el("strong", null, label + ": "));
-          if (!items.length) { p.appendChild(document.createTextNode(empty)); strip.appendChild(p); return; }
+          if (!items.length) return;
+          var s = el("section", "teaser");
+          s.appendChild(el("h2", "teaser-label", label));
+          var p = el("p", "teaser-foods");
           var pick = items.slice().sort(function () { return Math.random() - 0.5; }).slice(0, STRIP_PICK);
           pick.forEach(function (i, n) {
             if (n) p.appendChild(document.createTextNode(", "));
@@ -515,15 +515,17 @@
             p.appendChild(a);
           });
           var more = items.length - pick.length;
-          p.appendChild(document.createTextNode((more > 0 ? " and " + more + " more" : "") + "."));
-          strip.appendChild(p);
+          if (more > 0) p.appendChild(document.createTextNode(" and " + more + " more"));
+          s.appendChild(p);
+          strip.appendChild(s);
         }
-        part("Just arrived", now.arrived, "nothing new this week.");
-        part("Great now", now.still);
-        part("Last chance", now.last);
+        if (V.flatten(now.arrived).length) block("Just arrived", now.arrived);
+        else block("On the way", now.onway);
+        block("Great now", now.still);
+        block("Last chance", now.last);
         var p = el("p", "this-week-more");
-        var a = el("a", null, "This week in full"); a.href = BASE + "now/";
-        p.appendChild(a); p.appendChild(document.createTextNode("."));
+        var a = el("a", null, "Everything in season this week →"); a.href = BASE + "now/";
+        p.appendChild(a);
         strip.appendChild(p);
       });
     }

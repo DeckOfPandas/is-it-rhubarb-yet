@@ -29,27 +29,33 @@ the matches, best first, in a list of their own.
     </label>
     <button type="submit" class="visually-hidden">Ask</button>
   </form>
-  {%- comment -%} This week in three lines, from the baked digest: a
-     random handful from just arrived, great now and last chance, each
-     food in its own colour, and how many more there are. Just arrived
-     is always said, even when it is nothing. site.js and tools/cards.js
-     draw the same lines, with the same handful of five. {%- endcomment -%}
+  {%- comment -%} This week in three blocks, from the baked digest: just
+     arrived (or, in a week when nothing has, on the way), great now and
+     last chance, each a label over a random three of its foods in their
+     own colours and how many more there are. A block with nothing in it
+     is left out. site.js and tools/cards.js draw the same blocks, with
+     the same three. {%- endcomment -%}
   <div class="this-week" id="this-week">
-    {%- assign lines = "arrived|Just arrived,still|Great now,last|Last chance" | split: "," -%}
-    {%- for entry in lines -%}
+    {%- assign first = "arrived|Just arrived" -%}
+    {%- assign arrived_count = 0 -%}
+    {%- for k in baked.now.arrived -%}{%- assign arrived_count = arrived_count | plus: k.items.size -%}{%- endfor -%}
+    {%- if arrived_count == 0 -%}{%- assign first = "onway|On the way" -%}{%- endif -%}
+    {%- assign blocks = first | append: ",still|Great now,last|Last chance" | split: "," -%}
+    {%- for entry in blocks -%}
       {%- assign parts = entry | split: "|" -%}
       {%- assign key = parts[0] -%}
       {%- assign all = "" | split: "" -%}
       {%- for k in baked.now[key] -%}{%- assign all = all | concat: k.items -%}{%- endfor -%}
-      {%- if all.size == 0 and key == "arrived" -%}
-      <p class="this-week-line"><strong>Just arrived:</strong> nothing new this week.</p>
-      {%- elsif all.size > 0 -%}
-      {%- assign pick = all | sample: 5 -%}
+      {%- if all.size > 0 -%}
+      {%- assign pick = all | sample: 3 -%}
       {%- assign more = all.size | minus: pick.size -%}
-      <p class="this-week-line"><strong>{{ parts[1] }}:</strong> {% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} and {{ more }} more{% endif %}.</p>
+      <section class="teaser">
+        <h2 class="teaser-label">{{ parts[1] }}</h2>
+        <p class="teaser-foods">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} and {{ more }} more{% endif %}</p>
+      </section>
       {%- endif -%}
     {%- endfor -%}
-    <p class="this-week-more"><a href="{{ '/now/' | relative_url }}">This week in full</a>.</p>
+    <p class="this-week-more"><a href="{{ '/now/' | relative_url }}">Everything in season this week →</a></p>
   </div>
   <p class="hook-none" id="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues" hidden></p>
 </section>

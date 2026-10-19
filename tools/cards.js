@@ -22,7 +22,7 @@ const V = require("../assets/verdict.js");
 const { loadYaml } = require("./yaml.js");
 
 // How many foods each line names, as index.html samples and site.js draws.
-const STRIP_PICK = 5;
+const STRIP_PICK = 3;
 
 const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "_data");
@@ -64,7 +64,7 @@ const CSS = [
   .foot { position: absolute; left: 80px; right: 56px; bottom: 40px; display: flex; justify-content: space-between; align-items: baseline; }
   .asof { font-size: 26px; color: ${MUTED}; margin: 0; }
   .brand { font-size: 36px; line-height: 1; color: ${INK}; }
-  .pink { color: ${RHUBARB}; }
+  .pink { color: ${RHUBARB}; text-decoration: underline ${RHUBARB} 0.08em; text-underline-offset: 0.12em; text-decoration-skip-ink: none; }
   .hook { font-size: 128px; line-height: 1.05; margin: 10px 0 0; white-space: nowrap; }
   .title { font-size: 104px; line-height: 1.05; margin: 16px 0 0; white-space: nowrap; }
   .strap { font-size: 40px; font-weight: 700; line-height: 1.25; margin: 20px 0 0; max-width: 1000px; }
@@ -93,23 +93,24 @@ function verdictCard(name, colour, word, line, asofText) {
     `<p class="line">${esc(line)}</p>` + foot(asofText), colour);
 }
 
-// The week's three lines, as the home page's strip: a random handful of
-// each list in their colours and how many more there are. Just arrived
-// is always said, even when it is nothing.
+// The week's three lines, as the home page's blocks: just arrived (or on
+// the way, in a week when nothing has arrived), great now and last
+// chance, a random three of each in their colours and how many more there
+// are. A list with nothing in it is left out.
 function sample(items) {
   return items.slice().sort(() => Math.random() - 0.5).slice(0, STRIP_PICK);
 }
 function lines(baked) {
-  const specs = [["arrived", "Just arrived", "nothing new this week."], ["still", "Great now", null], ["last", "Last chance", null]];
-  return `<div class="lines">` + specs.map(([key, label, empty]) => {
+  const first = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
+  const specs = [first, ["still", "Great now"], ["last", "Last chance"]];
+  return `<div class="lines">` + specs.map(([key, label]) => {
     const all = V.flatten(baked.now[key] || []);
-    if (!all.length && !empty) return "";
-    if (!all.length) return `<p><strong>${label}:</strong> ${esc(empty)}</p>`;
+    if (!all.length) return "";
     const pick = sample(all);
     const more = all.length - pick.length;
     return `<p><strong>${label}:</strong> ` +
       pick.map((i) => `<span class="food" style="--food: ${i.colour}">${esc(i.name)}</span>`).join(", ") +
-      (more > 0 ? ` and ${more} more` : "") + `.</p>`;
+      (more > 0 ? ` and ${more} more` : "") + `</p>`;
   }).join("") + `</div>`;
 }
 

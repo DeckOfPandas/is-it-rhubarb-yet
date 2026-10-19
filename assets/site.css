@@ -253,13 +253,17 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   #hook-input { width: 100%; box-sizing: border-box; }
 }
 .hook-ruler { position: absolute; right: 0; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: uppercase; padding: 0 0.08em; }
-/* The this-week strip: a line per list, each food a link in its own
-   colour, bold so the colour carries at text size. */
-.this-week { margin: 1.25rem 0 0.5rem; max-width: 44rem; color: var(--muted); }
-.this-week p { margin: 0 0 0.2rem; max-width: none; }
-.this-week strong { color: var(--ink); }
-.this-week .this-week-more { margin-top: 1.6rem; }
-.food-link { color: var(--food); font-weight: 700; text-decoration-color: currentColor; }
+/* The this-week blocks: an Anton label, as Now heads its sections, over
+   three foods, each a link in its own colour, underlined only on hover or
+   focus. */
+.this-week { margin: 3rem 0 0.5rem; max-width: 44rem; color: var(--muted); }
+.teaser + .teaser { margin-top: 1.75rem; }
+.teaser-label { font: 400 1.1875rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--ink); margin: 0 0 0.3rem; }
+.teaser-foods { margin: 0; max-width: none; }
+.this-week .this-week-more { margin-top: 2rem; }
+.this-week-more a { color: var(--ink); }
+.food-link { color: var(--food); text-decoration: none; }
+.food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 .hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
 .list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
 .list-title { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); }
