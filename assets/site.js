@@ -138,7 +138,6 @@
     if (wordsAt(c, q, 0)) return 2;
     for (var i = 1; i < c.length; i++) if (wordsAt(c, q, i)) return 3;
     var qs = q.join(" ");
-    if (qs.length < 3) return 0;
     if (c.join(" ").indexOf(qs) >= 0 || c.map(singular).join(" ").indexOf(q.map(singular).join(" ")) >= 0) return 4;
     return 0;
   }
@@ -508,20 +507,23 @@
       });
       if (input.value.trim()) apply();
     });
-    // Every candidate at its best tier, by tier and then A to Z by food
-    // and variety; a variety is left out when its food is found as well
-    // or better.
+    // One hit per food, at its best tier, by tier and then A to Z by food
+    // and variety. A food found by a variety alone shows as that variety,
+    // the best one; a food found as well or better itself shows as the
+    // food. So a food stays one row while letters are typed, and the rows
+    // only ever narrow.
     function search(text) {
       var q = words(fold(text));
       if (!q.length) return [];
-      var hits = [], foodTier = {};
+      var best = {};
       index.forEach(function (it) {
         var t = 0;
         it.strings.forEach(function (c) { var x = tierOf(c, q); if (x && (!t || x < t)) t = x; });
-        if (t) hits.push({ it: it, tier: t });
+        if (!t) return;
+        var b = best[it.slug];
+        if (!b || t < b.tier || (t === b.tier && !it.label)) best[it.slug] = { it: it, tier: t };
       });
-      hits.forEach(function (h) { if (!h.it.label) foodTier[h.it.slug] = h.tier; });
-      return hits.filter(function (h) { return !h.it.label || !(foodTier[h.it.slug] <= h.tier); })
+      return Object.keys(best).map(function (k) { return best[k]; })
         .sort(function (a, b) {
           var x = a.it.name + " " + a.it.label, y = b.it.name + " " + b.it.label;
           return (a.tier - b.tier) || (x < y ? -1 : x > y ? 1 : 0);
@@ -650,10 +652,11 @@
     // straight away. One exact match is answered: its question, as a food
     // page asks it, its verdict and its date line (a never-food's own
     // line), all one link, then "Also:" and what begins with the text or
-    // a later word of it. Otherwise those are rows under a count, in rank
-    // order, and only when there are none, what has the text inside a
-    // word; a list of one is answered too. Nothing at all is the
-    // not-found line, with the foods that share its first three letters.
+    // a later word of it; what has it inside a word is left out. Otherwise
+    // every match, of every tier, is a row under a count, in rank order,
+    // so each letter typed only ever takes rows away; a list of one is
+    // answered too. Nothing at all is the not-found line, with the foods
+    // that share its first three letters.
     function filter(q) {
       found.textContent = "";
       suggestList.textContent = "";
@@ -671,7 +674,6 @@
       var near = hits.filter(function (h) { return h.tier === 2 || h.tier === 3; });
       var answer = null, also = [], list = [];
       if (exact.length === 1) { answer = exact[0]; also = near; }
-      else if (exact.length || near.length) list = exact.concat(near);
       else list = hits;
       if (list.length === 1) { answer = list[0]; list = []; }
       if (hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier)) lead = hits[0].it;
