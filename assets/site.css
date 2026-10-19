@@ -88,7 +88,6 @@ h1, h2, h3 { font-weight: 400; margin: 0; }
 h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); margin: 1.5rem 0 0.5rem; }
 @media (min-width: 42rem) { h1 { letter-spacing: var(--track-large); } }
 .page-head { margin-bottom: 1rem; }
-.lede { color: var(--muted); max-width: 40rem; }
 
 /* --- Header ---------------------------------------------------------------- */
 /* Phone: the wordmark and the magnifier, then the nav under them. Wide:
