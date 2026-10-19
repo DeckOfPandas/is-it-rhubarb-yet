@@ -6,7 +6,9 @@
 // home and Now cards carry the week's three lines, as the home page does:
 // just arrived, great now, last chance, a random handful of each.
 //
-// usage: node tools/cards.js [--out _site/cards] [--only rhubarb,home,now]
+// It also draws the favicon and the app icon, into _site/icons.
+//
+// usage: node tools/cards.js [--out _site/cards] [--icons _site/icons] [--only rhubarb,home,now,icons]
 //
 // Each card is a small HTML page with the site's fonts inlined, opened in
 // headless Chromium (Playwright, which the container and the deploy both
@@ -118,6 +120,22 @@ function homeCard(baked) {
     `<div class="foot"><p class="asof">as of ${esc(baked.asofText)}</p></div>`);
 }
 
+// The favicon and the app icon: IIRY, light ink on the forcing shed, the R
+// in rhubarb pink and underlined in it. One square page, shot at each size
+// in ICONS, so Chromium sets the type at that size rather than shrinking a
+// large picture. The header keeps the full wordmark; IIRY is only for here.
+const ICONS = { "favicon-32.png": 32, "icon-192.png": 192, "apple-touch-icon.png": 180 };
+const SHED = "#16110e", SHED_INK = "#f3ede4";
+function iconPage() {
+  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><style>${fontFace("Anton", "anton-latin.woff2", "normal", "400")}
+  html, body { margin: 0; width: 512px; height: 512px; overflow: hidden; background: ${SHED}; }
+  body { display: flex; align-items: center; justify-content: center; }
+  .mark { font: 400 330px/1 Anton, sans-serif; letter-spacing: 0.01em; color: ${SHED_INK}; transform: translateY(-0.04em); }
+  .r { position: relative; color: ${RHUBARB}; }
+  .r::after { content: ""; position: absolute; left: 0.02em; right: 0.04em; bottom: 0.2em; height: 0.07em; background: ${RHUBARB}; }
+  </style></head><body><div class="mark">II<span class="r">R</span>Y</div></body></html>`;
+}
+
 function nowCard(baked) {
   return page(
     `<div class="display title">In season this week</div>` +
@@ -167,6 +185,18 @@ async function main() {
     }));
     await tab.screenshot({ path: path.join(out, card.slug + ".png"), type: "png" });
     drawn++;
+  }
+  if (!only.length || only.includes("icons")) {
+    const icons = path.resolve(ROOT, arg("--icons", path.join(path.dirname(out), "icons")));
+    fs.mkdirSync(icons, { recursive: true });
+    for (const [file, size] of Object.entries(ICONS)) {
+      const shot = await browser.newPage({ viewport: { width: 512, height: 512 }, deviceScaleFactor: size / 512 });
+      await shot.setContent(iconPage(), { waitUntil: "load" });
+      await shot.evaluate(() => document.fonts.ready);
+      await shot.screenshot({ path: path.join(icons, file), type: "png" });
+      await shot.close();
+    }
+    console.log(`drew ${Object.keys(ICONS).length} icons into ${path.relative(ROOT, icons)}`);
   }
   await browser.close();
   console.log(`drew ${drawn} share cards for ${baked.asofText} into ${path.relative(ROOT, out)}`);

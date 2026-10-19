@@ -47,6 +47,9 @@ Now have cards of their own; every other page shows the home card.
   <meta name="twitter:description" content="{{ description | strip | escape }}">
   <meta name="twitter:image" content="{{ '/cards/' | append: card | append: '.png' | absolute_url }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/icons/favicon-32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ '/icons/icon-192.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/icons/apple-touch-icon.png' | relative_url }}">
   <link rel="preload" href="{{ '/assets/fonts/anton-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/atkinson-hyperlegible-next-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
