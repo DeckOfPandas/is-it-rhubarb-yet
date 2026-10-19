@@ -18,7 +18,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   `assets/site.js` recomputes everything for the visitor's own day. The
   thresholds (NEARLY within 3 weeks, JUST within 2, NEW for 2, isolated
   "just about" runs read JUST) are constants at the top of
-  `verdict.js`. Tests: `node --test tests/verdict/verdict.test.js`.
+  `verdict.js`. Tests: `node --test tests/verdict/verdict.test.js`,
+  which also checks that every food and variety has a verdict and a
+  date phrase in every week.
 - **No calendar dates for seasons.** The data is weekly and mostly came
   from monthly calendars, so a season boundary is said in words chosen
   by the days from today ("Any day now", "In a week or two", "From
@@ -193,9 +195,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   are folded (case, accents, punctuation; "&" is "and") and singular
   equals plural. A candidate's best tier: 1, exact; 2, the string
   starts with the query; 3, a later word starts with it; 4, the query
-  is inside a word (three letters or more). The last typed word may be
-  unfinished. A variety is left out when its food is found as well or
-  better, so "rhubarb" is not followed by "Rhubarb (forced)".
+  is inside a word, from the first letter typed. The last typed word
+  may be unfinished. A food is one hit at its best tier: found by a
+  variety alone it shows as that variety ("cox" gives "Apples (Cox)"),
+  and found as well or better itself it shows as the food, so
+  "rhubarb" is not followed by "Rhubarb (forced)". Each letter typed
+  only ever takes hits away: "b", "be", "ber", "berr" narrow from 43
+  to 17 to 11 to 9.
   - One tier-1 match: answered. In the label's place its question as
     a food page asks it, "Is it apples yet?" ("Is it Cox apples yet?"
     for a variety), in Atkinson 400, muted, 17px; then its verdict in
@@ -203,12 +209,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     line) in Atkinson 400; all one link. Under it a quiet line, "Also:
     Crab apples", of the tier 2–3 matches as links in their colours.
     Tier 4 is dropped.
-  - Otherwise the tier 1–3 matches (several tier-1, as "mushrooms"
-    finds every fungus) as rows under "N MATCHES", a teaser label in
-    the first teaser's spot, in one column, by tier then A to Z, with
-    leaders and tags. Tier 4 shows only when there is nothing else
-    ("berries" finds the nine berries; "pina" finds spinach). A list
-    of one is answered as above, without "Also".
+  - Otherwise every match of every tier (several tier-1, as
+    "mushrooms" finds every fungus) is a row under "N MATCHES", which
+    counts them all, a teaser label in the first teaser's spot, in one
+    column, by tier then A to Z, with leaders and tags. A list of one
+    is answered as above, without "Also" ("pina" finds spinach).
   - No match: "Is it dilll yet? Literally no idea. If that's an actual
     thing, please tell us." with up to five foods sharing its first
     three letters under DID YOU MEAN.
