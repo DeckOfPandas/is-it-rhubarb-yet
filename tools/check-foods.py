@@ -34,9 +34,11 @@ COLOUR = re.compile(r"^#[0-9a-f]{6}$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
 # Paths that are not foods. A food with one of these slugs would take the
-# page's URL, because food pages live at /<slug>/.
+# page's URL, because food pages live at /<slug>/. grey-squirrel is the
+# page that forwards to /squirrel/.
 RESERVED_SLUGS = {"now", "calendar", "wheel", "about", "sources", "foods",
-                  "remind", "assets", "api", "season-starts", "404", "is-it", "year"}
+                  "remind", "assets", "api", "season-starts", "404", "is-it", "year",
+                  "icons", "cards", "grey-squirrel"}
 
 SHED = "#16110e"
 CUSTARD = "#fbf3d9"
@@ -202,6 +204,10 @@ def main() -> int:
                 problems.append(f"{label}: said must be a phrase")
             if "said" in v and not v.get("name"):
                 problems.append(f"{label}: said needs a named variety")
+            if "cultivar" in v and v["cultivar"] is not True:
+                problems.append(f"{label}: cultivar is true or left out")
+            if v.get("cultivar") and not v.get("name"):
+                problems.append(f"{label}: cultivar needs a named variety")
             check_shades(v, label, problems, warnings, slug)
             check_aliases(v, label, problems, aliases, slug)
             row_colour = v.get("colour", f.get("colour"))
