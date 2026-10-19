@@ -131,8 +131,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   with a pink underline.
 - Never-foods all share `--never`, ghost grey `#857f78` (4.7:1 on the
   shed, 3.6:1 on custard): their swatches and tags, their pages and
-  cards, the inline NEVER result, and the hero's word and underline on
-  a lone never-food match. They never fall back to the pink. The
+  cards, the NEVER in a lone search result, the hero's completion, and
+  the hero's word and underline on a lone never-food match. They never fall back to the pink. The
   colour is a token at the top of `assets/site.css` and a constant in
   `tools/cards.js`; there is no colours file.
 - Every food colour passes 3:1 on both backgrounds, so a verdict word
@@ -183,19 +183,38 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   results; with reduced motion it jumps.
 - **Home search.** While the input has text, the teasers, the arrow
   link and the whole Everything section are hidden, and the results
-  stand in the teasers' place, at once, with no debounce. The count
-  ("3 MATCHES", "1 MATCH") is a teaser label in the same spot as the
-  first teaser's; under it the matches, best first, as shared food rows
-  with leaders and tags. Matching is the same as everywhere (names,
-  varieties as said, aliases, `also`; case and accents ignored). One
-  match: its row is lit on a wash of its colour, with its date line
-  under the name. One never-food: NEVER. in Anton over its line, ghost
-  grey, one link to its page. No match: "Is it dilll yet? Literally no
-  idea. If that's an actual thing, please tell us." with up to five
-  foods sharing its first three letters under DID YOU MEAN. Up and
-  Down move the highlight, Enter opens the lit row (or the best match),
-  Escape clears; a polite live region says the count. Clearing the
+  stand in the teasers' place, at once, with no debounce. Two or more
+  matches: the count ("3 MATCHES") is a teaser label in the same spot
+  as the first teaser's; under it the matches, best first, as shared
+  food rows with leaders and tags. Matching is the same as everywhere
+  (names, varieties as said, aliases, `also`; case and accents
+  ignored; a typed word may sit inside a name or its singular, so
+  "berry" finds strawberries). One match, food or never-food: in the
+  label's place its question as a food page asks it, "Is it avocados
+  yet?", in Atkinson 400, muted, 17px; then its verdict in Anton,
+  2.75rem, in its colour; then its date line (a never-food's line) in
+  Atkinson 400; all one link to its page. No match: "Is it dilll yet?
+  Literally no idea. If that's an actual thing, please tell us." with
+  up to five foods sharing its first three letters under DID YOU MEAN.
+  Up and Down move a highlight through the rows, Enter opens it (or
+  the best match); a polite live region says the count. Clearing the
   input brings everything back.
+- **Completion.** When the best match's name, or one of its aliases,
+  begins with what is typed, the rest of it shows after the typed text
+  in the hero, faded to 35% in the food's colour (ghost grey for a
+  never-food): AVOC + ADOS, ZUCC + HINI (an alias, for Courgettes).
+  None for a match only inside a word, for text that is already a
+  whole name, with no match, or while an input method is composing.
+  It is an `aria-hidden` layer over the input in the same type, the
+  typed part transparent, so the real caret stays after the typed
+  text and the underline under it alone. The hero is sized for typed
+  text and completion together, so accepting does not make the word
+  jump. Tab, End, or → at the end of the text accept it, as does a tap
+  on the faded part; the input then holds the whole name and the
+  results follow. Tab with no completion moves focus as usual. Escape
+  dismisses a completion, and a second Escape clears the input. The
+  input has `aria-autocomplete="both"`; the completion is not
+  announced.
 - **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
   GREAT NOW and LAST CHANCE, each an Anton label over a random three
   foods in their colours and "and N more", which links to Now, then
