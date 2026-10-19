@@ -46,6 +46,9 @@ Now have cards of their own; every other page shows the home card.
   <meta name="twitter:title" content="{{ title | default: site.title | escape }}">
   <meta name="twitter:description" content="{{ description | strip | escape }}">
   <meta name="twitter:image" content="{{ '/cards/' | append: card | append: '.png' | absolute_url }}">
+  {%- if page.noindex %}
+  <meta name="robots" content="noindex">
+  {%- endif %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/icons/favicon-32.png' | relative_url }}">
   <link rel="icon" type="image/png" sizes="192x192" href="{{ '/icons/icon-192.png' | relative_url }}">

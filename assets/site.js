@@ -1006,7 +1006,7 @@
     document.querySelectorAll("[data-asof]").forEach(function (n) { n.textContent = V.fmtDateYear(TODAY); });
     initSwitches();
     initFood();
-    fitVerdict(document.querySelector(".verdict-word"));
+    fitVerdict(document.querySelector("article.food .verdict-word"));
     initAbout();
     initHome();
     initNow();
