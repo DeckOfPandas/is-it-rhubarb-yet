@@ -408,16 +408,26 @@ article.food { padding-top: 0.5rem; }
 .about-ways li { margin: 0.35rem 0; }
 
 /* --- Footer ---------------------------------------------------------------- */
+/* Every label in the footer is set as the nav is: Atkinson 700 in small
+   caps, +0.07em, muted, links underlined in pink only on hover or focus.
+   The licences and the as-of date are smaller and fainter. */
 .site-footer {
-  max-width: 64rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--rule);
-  display: grid; justify-items: center; gap: 0.6rem; text-align: center; color: var(--muted); font-size: 0.9rem;
+  max-width: 64rem; margin: 0 auto; padding: 1.75rem 1rem 3rem; border-top: 1px solid var(--rule);
+  display: grid; justify-items: center; gap: 0.9rem; text-align: center; color: var(--muted);
+  font: 700 0.8125rem/1.4 var(--text); letter-spacing: 0.07em; text-transform: uppercase;
 }
 .site-footer p { margin: 0; max-width: none; }
-.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.25rem; }
-.footer-github { display: inline-flex; margin-top: 0.4rem; color: var(--muted); }
+.site-footer a { color: var(--muted); text-decoration: none; text-underline-offset: 0.4em; }
+.site-footer a:not(.hearts):hover, .site-footer a:not(.hearts):focus-visible { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem 1.5rem; }
+.footer-links .footer-github { display: inline-flex; }
 .footer-github:hover, .footer-github:focus-visible { color: var(--rhubarb); }
-.footer-icon { width: 2rem; height: 2rem; fill: currentColor; }
-.licence span { display: inline-block; white-space: nowrap; }
-.hearts { display: block; color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; text-decoration: none; }
+.footer-icon { width: 1.25rem; height: 1.25rem; fill: currentColor; }
+.licence, .footer-asof { font-size: 0.6875rem; color: color-mix(in oklab, var(--muted) 75%, var(--bg)); }
+.licence { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 0.6rem; }
+.licence span { white-space: nowrap; }
+.licence span + span::before { content: "·"; margin-right: 0.6rem; }
+.licence a, .footer-asof { color: inherit; }
+.site-footer .hearts { display: block; color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; text-decoration: none; }
 .hearts svg { display: block; width: min(240px, 45vw); height: auto; }
 .hearts:hover svg, .hearts:focus-visible svg { transform: translateY(-2px); }

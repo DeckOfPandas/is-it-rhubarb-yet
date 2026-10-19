@@ -231,12 +231,10 @@ test("ranking across varieties: YES beats JUST beats NEARLY beats NO; sooner win
 });
 
 test("calendar dates, for the as-of line and the week range only", () => {
-  assert.equal(V.fmtDate(new Date(2026, 9, 29)), "29th October");
-  assert.equal(V.fmtDate(new Date(2026, 3, 2)), "2nd April");
-  assert.equal(V.fmtDate(new Date(2026, 2, 3)), "3rd March");
-  assert.equal(V.fmtDate(new Date(2026, 10, 11)), "11th November");
-  assert.equal(V.fmtDate(new Date(2026, 10, 21)), "21st November");
-  assert.equal(V.fmtDateYear(TODAY), "18th October 2026");
+  assert.equal(V.fmtDate(new Date(2026, 9, 29)), "29 October");
+  assert.equal(V.fmtDate(new Date(2026, 3, 2)), "2 April");
+  assert.equal(V.fmtDate(new Date(2026, 10, 21)), "21 November");
+  assert.equal(V.fmtDateYear(TODAY), "18 October 2026");
   assert.equal(V.fmtRange(42, 2026), "15–21 October");
   assert.equal(V.fmtRange(5, 2026), "29 January – 4 February");
   assert.equal(V.fmtRange(52, 2026), "24–31 December");

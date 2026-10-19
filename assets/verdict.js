@@ -194,26 +194,16 @@
 
   // --- Dates in words -------------------------------------------------------
 
-  function ordinal(n) {
-    var s = n % 100;
-    if (s >= 11 && s <= 13) return n + "th";
-    switch (n % 10) {
-      case 1: return n + "st";
-      case 2: return n + "nd";
-      case 3: return n + "rd";
-      default: return n + "th";
-    }
-  }
-  function fmtDate(d) { return ordinal(d.getDate()) + " " + MONTHS[d.getMonth()]; }
+  // Plain numbers, never ordinals: "19 October", "19 October 2026".
+  function fmtDate(d) { return d.getDate() + " " + MONTHS[d.getMonth()]; }
   function fmtDateYear(d) { return fmtDate(d) + " " + d.getFullYear(); }
-  // A week's days, plain numbers and an en dash: "15–21 October", "29
-  // October – 4 November", and the years only when it crosses one.
+  // A week's days, with an en dash: "15–21 October", "29 October – 4
+  // November", and the years only when it crosses one.
   function fmtRange(week, year) {
     var a = startOfWeek(week, year), b = endOfWeek(week, year);
-    var day = function (d) { return d.getDate() + " " + MONTHS[d.getMonth()]; };
-    if (a.getFullYear() !== b.getFullYear()) return day(a) + " " + a.getFullYear() + " – " + day(b) + " " + b.getFullYear();
-    if (a.getMonth() === b.getMonth()) return a.getDate() + "–" + day(b);
-    return day(a) + " – " + day(b);
+    if (a.getFullYear() !== b.getFullYear()) return fmtDateYear(a) + " – " + fmtDateYear(b);
+    if (a.getMonth() === b.getMonth()) return a.getDate() + "–" + fmtDate(b);
+    return fmtDate(a) + " – " + fmtDate(b);
   }
   // The date a {week, years} stands for, given the reference year.
   function startDate(at, year) { return startOfWeek(at.week, year + at.years); }
@@ -485,7 +475,7 @@
     weekOf: weekOf, startOfWeek: startOfWeek, endOfWeek: endOfWeek,
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,
-    ordinal: ordinal, fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange,
+    fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
     phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLine: varietyLine, daysTo: daysTo,
     timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid,
