@@ -94,7 +94,7 @@ test("Jerusalem artichokes are NEARLY from a just-about week", () => {
   assert.equal(fv.verdict, "NEARLY");
   assert.equal(fv.variety.state, "avail");
   assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Properly in within a week or two.");
+  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "A few about now, properly in a week or two.");
 });
 
 test("basil is JUST: a just-about tail to 28 October", () => {

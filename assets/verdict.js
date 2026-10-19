@@ -250,20 +250,20 @@
   // today: the digest for another week.
   function midOfToday(week, year) { return midOfWeek({ week: week, years: 0 }, year); }
 
-  // How a start is said: `soon` follows "First ones" or stands alone,
-  // `within` follows "Properly in", `back` follows a NO. All lower-case.
+  // How a start is said: `soon` follows "First ones" or "properly" or
+  // stands alone, `back` follows a NO. All lower-case.
   function arriving(at, year, today) {
     var days = daysBetween(today, startDate(at, year));
     var mid = midOfWeek(at, year), month = MONTHS[mid.getMonth()];
-    if (days <= 6) return { soon: "any day now", within: "any day now", back: "any day now" };
-    if (days <= 13) return { soon: "in a week or two", within: "within a week or two", back: "in a week or two" };
-    if (days <= 27) return { soon: "in two or three weeks", within: "within two or three weeks", back: "in two or three weeks" };
+    if (days <= 6) return { soon: "any day now", back: "any day now" };
+    if (days <= 13) return { soon: "in a week or two", back: "in a week or two" };
+    if (days <= 27) return { soon: "in two or three weeks", back: "in two or three weeks" };
     if (days <= 62) {
       var part = "from " + monthPart(mid);
-      return { soon: part, within: part, back: part };
+      return { soon: part, back: part };
     }
     var far = mid.getMonth() === today.getMonth() ? "next " + month : "in " + month;
-    return { soon: far, within: "from " + month, back: "back " + far, farOff: true };
+    return { soon: far, back: "back " + far, farOff: true };
   }
   // How an end is said, lower-case: "for a few more days", "until late
   // December".
@@ -300,7 +300,7 @@
       case "JUST":
         return cap(leaving(r.until, year, today));
       case "NEARLY":
-        if (r.state === "avail") return "Properly in " + arriving(r.from, year, today).within;
+        if (r.state === "avail") return "A few about now, properly " + arriving(r.from, year, today).soon;
         if (r.inFrom && r.inFrom.week !== r.from.week) return firstOnes(r, year, today);
         return cap(arriving(r.from, year, today).soon);
       case "NO":
