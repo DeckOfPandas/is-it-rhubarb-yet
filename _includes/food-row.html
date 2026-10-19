@@ -10,13 +10,14 @@ shows neither. In a list grouped by timing, a food's earlier timing
 Hovering underlines the food's name alone, not its variety or timing.
 Expects: item (slug, name, colour, and optionally verdict, variety and
 early), verdict (when the item has none), tag and leader (each on unless
-false), and for the home list never (true for a never-food), terms and
-line (the date line, or a never-food's line, for search results).
+false), and for the home list never (true for a never-food), terms,
+names (name and aliases, for the hero's completion) and line (the date
+line, or a never-food's line, for search results).
 site.js builds the same markup in foodRow.
 {%- endcomment -%}
 {%- assign item = include.item -%}
 {%- assign verdict = include.verdict | default: item.verdict -%}
-<li class="food-row{% if include.never %} never{% endif %}" data-slug="{{ item.slug }}"{% if include.terms %} data-terms="{{ include.terms | escape }}"{% endif %}{% if include.line %} data-line="{{ include.line | escape }}"{% endif %} data-verdict="{{ verdict }}"{% unless include.never %} style="--food: {{ item.colour }}"{% endunless %}{% if include.never %} hidden{% endif %}>
+<li class="food-row{% if include.never %} never{% endif %}" data-slug="{{ item.slug }}"{% if include.terms %} data-terms="{{ include.terms | escape }}"{% endif %}{% if include.names %} data-names="{{ include.names | escape }}"{% endif %}{% if include.line %} data-line="{{ include.line | escape }}"{% endif %} data-verdict="{{ verdict }}"{% unless include.never %} style="--food: {{ item.colour }}"{% endunless %}{% if include.never %} hidden{% endif %}>
   <a href="{{ '/' | append: item.slug | append: '/' | relative_url }}">
     <span class="swatch" aria-hidden="true"></span>
     <span class="food-name"><span class="food-title">{{ item.name }}</span>{% if item.variety and item.variety != "" %} <span class="variety">({{ item.variety }})</span>{% endif %}{% if item.early and item.early != "" %} <span class="early">{{ item.early }}</span>{% endif %}</span>

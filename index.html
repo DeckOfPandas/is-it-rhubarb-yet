@@ -14,8 +14,8 @@ them when the visitor's week differs. The list is drawn twice, by family
 (the default) and A to Z, and the order switch shows one by CSS, as the
 calendar's does: lists in columns read down, then across, so one list
 cannot be reordered in place. The A to Z list carries the never-foods,
-hidden, and every row's search terms and line, which the matches are
-copied from.
+hidden, and every row's search terms, the names it completes to (its
+name and aliases) and its line, which the matches are copied from.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign foods = site.data.foods | sort: "name" -%}
@@ -24,7 +24,7 @@ copied from.
     <label class="hook-line" for="hook-input">
       <span class="hook-word">Is it</span>
       <span class="hook-slot"><input id="hook-input" name="q" type="search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
-        placeholder="rhubarb" aria-label="Is it … yet? Type a food" size="7"></span>
+        placeholder="rhubarb" aria-label="Is it … yet? Type a food" aria-autocomplete="both" size="7"></span>
       <span class="hook-word">yet?</span>
     </label>
     <button type="submit" class="visually-hidden">Ask</button>
@@ -59,12 +59,13 @@ copied from.
   </div>
   {%- comment -%} What is typed, answered in the this-week blocks' place,
      filled by site.js: a count in a teaser label over the matches, best
-     first, with tags; a lone NEVER match as its verdict; or, with no
-     match, the not-found line and the nearest foods. {%- endcomment -%}
+     first, with tags; a lone match as its question, verdict and line;
+     or, with no match, the not-found line and the nearest foods.
+     {%- endcomment -%}
   <section class="results" id="results" aria-labelledby="results-label" hidden>
     <h2 class="teaser-label" id="results-label"></h2>
     <ul class="food-list" id="found"></ul>
-    <a class="never-result" id="never-result" hidden><span class="never-word">Never.</span> <span class="never-line"></span></a>
+    <a class="one-result" id="one-result" hidden><span class="one-ask"></span> <span class="one-word"></span> <span class="one-line"></span></a>
     <div class="results-none" id="hook-none" hidden>
       <p class="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues"></p>
       <div class="food-group" id="suggest" hidden>
@@ -105,11 +106,12 @@ copied from.
           {%- for food in foods -%}
             {%- assign b = baked.foods[food.slug] -%}
             {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
-            {%- include food-row.html item=food verdict=b.verdict terms=terms line=b.line -%}
+            {%- capture names -%}{{ food.name }}|{% for a in food.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
+            {%- include food-row.html item=food verdict=b.verdict terms=terms names=names line=b.line -%}
           {%- endfor -%}
           {%- for n in site.data.never -%}
             {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
-            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms line=n.line -%}
+            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms names=terms line=n.line -%}
           {%- endfor -%}
         </ul>
       </div>

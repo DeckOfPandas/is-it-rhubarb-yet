@@ -58,7 +58,7 @@
   // or ies, its singular, on both sides, so "leek" begins "leeks",
   // "cherry" begins "cherries" (as "cherry") and "chilli" begins
   // "chillies" as typed. Every typed word must begin a candidate word, or
-  // at least occur inside one; a word that begins the whole candidate
+  // at least occur inside one or its singular; a word that begins the whole candidate
   // scores highest, then one that begins a word, then one found inside a
   // word.
   function fold(s) {
@@ -77,6 +77,12 @@
     }
     return false;
   }
+  // Whether a typed word is found inside any form of a word, so "berry"
+  // is inside "strawberries" by way of "strawberry".
+  function inside(q, t) {
+    for (var k = 0; k < t.length; k++) if (t[k].indexOf(q) >= 0) return true;
+    return false;
+  }
   function words(s) { return s.split(" ").filter(Boolean); }
 
   // Score of a candidate (an array of folded terms) for a typed query; 0
@@ -92,7 +98,7 @@
         if (tw.length && begins(qw[i], tw[0])) { best = Math.max(best, t === 0 ? 3 : 2.5); continue; }
         for (var k = 0; k < tw.length; k++) {
           if (begins(qw[i], tw[k])) best = Math.max(best, 2);
-          else if (qw[i][0].length >= 3 && tw[k][0].indexOf(qw[i][0]) >= 0) best = Math.max(best, 1);
+          else if (qw[i][0].length >= 3 && inside(qw[i][0], tw[k])) best = Math.max(best, 1);
         }
       }
       if (!best) return 0;
@@ -408,14 +414,18 @@
     var results = document.getElementById("results");
     var label = document.getElementById("results-label");
     var found = document.getElementById("found");
-    var neverBox = document.getElementById("never-result");
+    var one = document.getElementById("one-result");
     var none = document.getElementById("hook-none");
     var noneLine = none.querySelector(".hook-none");
     var suggest = document.getElementById("suggest");
     var suggestList = document.getElementById("suggest-list");
     var status = document.getElementById("results-status");
     var index = rows.map(function (li) {
-      return { li: li, name: li.querySelector(".food-title").textContent, terms: li.dataset.terms.split("|").filter(Boolean).map(fold) };
+      return {
+        li: li, name: li.querySelector(".food-title").textContent,
+        terms: li.dataset.terms.split("|").filter(Boolean).map(fold),
+        names: (li.dataset.names || "").split("|").filter(Boolean),
+      };
     });
     var shown = [];
     // The links Up and Down move the highlight through, and which is lit.
@@ -429,18 +439,27 @@
     });
 
     // A hidden span in the same font measures the value, or the placeholder
-    // when there is none. On one line the input is as wide as its word, up to
-    // the room "Is it" and "yet?" leave; when the question stacks, the input
-    // is the full width. Either way a word too long for its room is set
-    // smaller until it fits. The underline is the word's width; the
-    // resting caret stands at the word's start. The input is a hair wider
-    // than its word, room for the real caret after the last letter, so the
-    // word sits a normal space from "Is it" and from "yet?".
+    // when there is none. On one line the input is as wide as its word and
+    // any completion, up to the room "Is it" and "yet?" leave; when the
+    // question stacks, the input is the full width. Either way a word too
+    // long for its room is set smaller until it fits, the completion
+    // counted, so accepting it does not make the word jump. The underline
+    // is the typed word's width; the resting caret stands at the word's
+    // start. The input is a hair wider than its word, room for the real
+    // caret after the last letter, so the word sits a normal space from
+    // "Is it" and from "yet?".
     var slot = input.parentElement;
     var ruler = el("span", "hook-ruler");
     var underline = el("span", "hook-underline");
     var caret = el("span", "hook-caret");
-    [ruler, underline, caret].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
+    // The completion lies over the input in the same type: the typed part
+    // is transparent, so the input's own text and caret show through, and
+    // the rest is faded in the food's colour.
+    var layer = el("span", "hook-ghost");
+    var layerTyped = el("span", "ghost-typed"), layerRest = el("span", "ghost-rest");
+    layer.appendChild(layerTyped); layer.appendChild(layerRest);
+    layer.hidden = true;
+    [ruler, underline, caret, layer].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
     var line = input.closest(".hook-line");
     var stacked = matchMedia("(max-width: 37.49rem)");
     var CARET_ROOM = 3;
@@ -449,7 +468,9 @@
       slot.classList.toggle("has-value", !!input.value);
       var text = ruler.getBoundingClientRect().width;
       if (!text) return;
-      var w = text + CARET_ROOM;
+      var full = text;
+      if (ghost) { ruler.textContent = input.value + ghost; full = ruler.getBoundingClientRect().width; }
+      var w = full + CARET_ROOM;
       input.style.fontSize = "";
       var room;
       if (stacked.matches) {
@@ -464,7 +485,51 @@
       var scale = w > room ? room / w : 1;
       if (scale < 1) input.style.fontSize = (parseFloat(getComputedStyle(input).fontSize) * scale) + "px";
       underline.style.width = (text * scale) + "px";
+      layer.style.fontSize = input.style.fontSize;
+      layer.style.top = (input.offsetTop + input.clientTop) + "px";
+      layer.style.height = input.clientHeight + "px";
     }
+
+    // Ghost completion: when the best match's name, or one of its aliases,
+    // begins with what is typed, the rest of it shows after the typed text.
+    // None when the text is already a whole name, while an input method
+    // is composing, or after Escape until the next keystroke. Folding can
+    // change a name's length ("&" is "and"), so the typed part of the name
+    // is the shortest slice that folds to the typed text, and the space
+    // after it too when the typed text ends in one.
+    var ghost = "", ghostFull = "", composing = false, dismissed = false;
+    var WORDY = /[\p{L}\p{N}]/u;
+    function complete() {
+      ghost = ghostFull = "";
+      var typed = input.value, q = fold(typed);
+      if (q && !composing && !dismissed && shown.length) {
+        var names = shown[0].names;
+        if (!names.some(function (s) { return fold(s) === q; })) {
+          for (var i = 0; i < names.length && !ghostFull; i++) {
+            var s = names[i];
+            if (fold(s).indexOf(q) !== 0) continue;
+            var k = 1;
+            while (k <= s.length && fold(s.slice(0, k)) !== q) k++;
+            if (k > s.length) continue;
+            if (!WORDY.test(typed.slice(-1))) while (k < s.length && !WORDY.test(s.charAt(k))) k++;
+            ghost = s.slice(k); ghostFull = s;
+          }
+        }
+      }
+      layerTyped.textContent = input.value;
+      layerRest.textContent = ghost;
+      layer.hidden = !ghost;
+      if (ghost) layer.style.setProperty("--ghost", getComputedStyle(shown[0].li).getPropertyValue("--food"));
+    }
+    function accept() {
+      input.value = ghostFull;
+      input.setSelectionRange(ghostFull.length, ghostFull.length);
+      apply();
+    }
+    // A tap on the faded part accepts it; the input keeps its focus.
+    layerRest.addEventListener("pointerdown", function (e) { e.preventDefault(); if (ghost) accept(); });
+    input.addEventListener("compositionstart", function () { composing = true; complete(); size(); });
+    input.addEventListener("compositionend", function () { composing = false; apply(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     window.addEventListener("resize", size);
 
@@ -482,42 +547,47 @@
 
     function apply() {
       var q = input.value.trim();
-      size();
       filter(q);
+      complete();
+      size();
       colour();
     }
     // While there is text, the results take the this-week blocks' place
     // and the Everything list is hidden, so matches show in one place,
-    // straight away. Many matches are rows with their tags; a lone food is
-    // lit, with its date line under its name; a lone never-food is its
-    // verdict and its line; nothing at all is the not-found line, with the
-    // foods that share its first three letters.
+    // straight away. Many matches are rows with their tags under a count;
+    // a lone match is its question, as a food page asks it, its verdict
+    // and its date line (a never-food's own line), all one link; nothing
+    // at all is the not-found line, with the foods that share its first
+    // three letters.
     function filter(q) {
       found.textContent = "";
       suggestList.textContent = "";
       strip.hidden = everything.hidden = !!q;
       results.hidden = !q;
-      neverBox.hidden = none.hidden = suggest.hidden = true;
+      one.hidden = none.hidden = suggest.hidden = true;
       label.hidden = false;
       light(-1);
       picks = [];
       if (!q) { shown = []; status.textContent = ""; return; }
       shown = rank(index, q);
       var n = shown.length;
-      label.textContent = n + (n === 1 ? " match" : " matches");
+      label.textContent = n + " matches";
       status.textContent = label.textContent;
-      if (n === 1 && shown[0].li.classList.contains("never")) {
-        neverBox.href = shown[0].li.querySelector("a").href;
-        neverBox.querySelector(".never-line").textContent = shown[0].li.dataset.line;
-        neverBox.hidden = false;
-        picks = [neverBox];
-        status.textContent = "1 match: " + shown[0].name + ", never.";
+      if (n === 1) {
+        var li = shown[0].li, verdict = li.dataset.verdict;
+        label.hidden = true;
+        one.href = li.querySelector("a").href;
+        one.style.setProperty("--food", getComputedStyle(li).getPropertyValue("--food"));
+        one.querySelector(".one-ask").textContent = "Is it " + shown[0].name.toLowerCase() + " yet?";
+        one.querySelector(".one-word").textContent = verdict + ".";
+        one.querySelector(".one-line").textContent = lineOf[li.dataset.slug] || li.dataset.line;
+        one.hidden = false;
+        picks = [one];
+        status.textContent = "1 match: " + shown[0].name + ", " + verdict.toLowerCase() + ".";
       } else if (n) {
         shown.forEach(function (it) {
           var copy = it.li.cloneNode(true);
           copy.hidden = false;
-          var line = n === 1 && (lineOf[it.li.dataset.slug] || it.li.dataset.line);
-          if (line) copy.querySelector(".food-name").appendChild(el("span", "match-line", line));
           found.appendChild(copy);
           picks.push(copy.querySelector("a"));
         });
@@ -542,7 +612,6 @@
         });
         suggest.hidden = !near.length;
       }
-      if (n === 1) light(0);
     }
     function light(i) {
       if (active >= 0) picks[active].classList.remove("is-active");
@@ -552,13 +621,24 @@
       picks[i].scrollIntoView({ block: "nearest" });
     }
 
-    input.addEventListener("input", apply);
+    input.addEventListener("input", function () { dismissed = false; apply(); });
     // Up and Down move the highlight through the results, Enter opens the
-    // lit one (or the best match), and Escape clears the input.
+    // lit one (or the best match). Tab, End, or → with the caret at the
+    // end accept a completion; Tab with none showing moves focus as
+    // usual. Escape dismisses a completion, then clears the input.
     input.addEventListener("keydown", function (e) {
+      var atEnd = input.selectionStart === input.value.length && input.selectionEnd === input.value.length;
       if ((e.key === "ArrowDown" || e.key === "ArrowUp") && picks.length) {
         e.preventDefault();
         light(Math.max(-1, Math.min(picks.length - 1, active + (e.key === "ArrowDown" ? 1 : -1))));
+      } else if (ghost && !e.isComposing && ((e.key === "Tab" && !e.shiftKey) || e.key === "End" || (e.key === "ArrowRight" && atEnd))) {
+        e.preventDefault();
+        accept();
+      } else if (e.key === "Escape" && ghost) {
+        e.preventDefault();
+        dismissed = true;
+        complete();
+        size();
       } else if (e.key === "Escape" && input.value) {
         e.preventDefault();
         input.value = "";
