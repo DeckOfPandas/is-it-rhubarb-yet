@@ -205,10 +205,22 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - One tier-1 match: answered. In the label's place its question as
     a food page asks it, "Is it apples yet?" ("Is it Cox apples yet?"
     for a variety), in Atkinson 400, muted, 17px; then its verdict in
-    Anton, 2.75rem, in its colour; then its date line (a never-food's
-    line) in Atkinson 400; all one link. Under it a quiet line, "Also:
-    Crab apples", of the tier 2–3 matches as links in their colours.
-    Tier 4 is dropped.
+    Anton, 2.75rem, in its colour; then its date line, a sentence with
+    its full stop, in Atkinson 400; then "More about apples →" (the
+    food's name, lower case), ink underlined in the food's colour, the
+    arrow never underlined. Beside the text is a miniature of the
+    food's dial, 88px (80px on a phone; below the text under 22rem),
+    with today's hand: `site.js` fetches the food page and takes its own
+    `figure.wheel` SVG, cropped to the ring, so it is the same
+    component, and the fetch warms the page. The whole block is one
+    link to the food page, with the usual focus outline, and Enter
+    opens it. A never-food's answer is its question, NEVER. and its
+    line only: no dial, no "More about", and no link. Under the answer
+    a quiet line, "Also: Crab apples", of the tier 2–3 matches as links
+    in their colours. Tier 4 is dropped.
+  - Phrases used as labels in lists (Now's groups) have no full stop;
+    a date line that answers a question (the home answer, a food
+    page) does.
   - Otherwise every match of every tier (several tier-1, as
     "mushrooms" finds every fungus) is a row under "N MATCHES", which
     counts them all, a teaser label in the first teaser's spot, in one
@@ -221,6 +233,18 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     its "Also" links or the rows; Enter opens it, or the first. A
     polite live region says the count. Clearing the input brings
     everything back.
+- **Into the food page.** Pages cross-fade with cross-document view
+  transitions (`@view-transition { navigation: auto; }` in
+  `assets/site.css`, only with `prefers-reduced-motion:
+  no-preference`; a browser without them simply navigates). Following
+  a home answer, `site.js` names the typed word `food-name`, the
+  verdict `food-verdict` and the mini dial `food-dial`, and the food
+  page names its question's food name (`.ask-name`), its verdict and
+  its dial the same, so each moves into place. The home names are set
+  only as the answer is followed and cleared once home is shown again,
+  so a row or "Also" link never borrows them. The typed text is kept in
+  the address as `?q=`, so Back (or a reload) returns to the same
+  answer.
 - **Completion.** When the single best match (as for the hero's
   colour) has a name or alias that begins with what is typed, the rest
   of it shows after the typed text
