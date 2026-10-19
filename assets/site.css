@@ -6,6 +6,18 @@
    Charts keep --c for a row's colour. */
 
 /* --- Fonts: three families, one job each, self-hosted, Latin only ------ */
+/* Which face, asked in order:
+   1. A quotation? Newsreader italic. Nothing else uses it.
+   2. A verdict, or the name of a page or section? Anton, in capitals: the
+      logo, verdicts at every size, page titles, section labels (ON THE
+      WAY, GREAT NOW, EVERYTHING).
+   3. Everything else is Atkinson: food names, body text, date phrases,
+      the nav and footer, buttons and toggles, counts, chart labels, and
+      group labels inside lists (ROOTS & TUBERS).
+   Anton never sets a sentence, a link or a control. Atkinson uses 400
+   and 700 only, and capitals only for small labels, always at
+   +0.06em to +0.07em. An Anton label heads a section and an Atkinson
+   capitals label a group inside it, never the reverse. */
 @font-face {
   font-family: "Anton";
   font-style: normal; font-weight: 400; font-display: swap;
@@ -290,7 +302,9 @@ article.food { padding-top: 0.5rem; }
 .quote cite { display: block; margin-top: 0.5rem; font: 400 0.85rem/1.4 var(--text); font-style: normal; color: var(--muted); }
 .quote cite::before { content: "— "; }
 .buy { max-width: 36rem; margin: 0 0 1.5rem; padding: 0.6rem 0.9rem; border-left: 3px solid var(--food); }
-.also h2, .fine summary, .suggest h2 { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); margin: 1.5rem 0 0.25rem; }
+.also h2, .suggest h2 { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); margin: 1.5rem 0 0.25rem; }
+/* The data disclosure's summary is a control, so it is Atkinson, not Anton. */
+.fine summary { font: 700 1rem/1.3 var(--text); color: var(--muted); }
 .also { margin: 1.5rem 0; }
 .fine { margin: 2rem 0; color: var(--muted); }
 .fine summary { cursor: pointer; margin: 0; }
@@ -342,7 +356,7 @@ article.food { padding-top: 0.5rem; }
 .chart text { fill: var(--ink); font-family: var(--text); font-size: 12px; }
 .chart .month-label { font-weight: 700; }
 .chart .week-label { fill: var(--muted); font-size: 8px; }
-.chart .group-label { font-weight: 700; font-size: 13px; fill: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.chart .group-label { font-weight: 700; font-size: 13px; fill: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .chart .row-label { font-size: 11px; }
 .chart .row-variety { fill: var(--muted); }
 .chart .cell { shape-rendering: crispEdges; }
@@ -368,7 +382,7 @@ article.food { padding-top: 0.5rem; }
 .wheel .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), var(--off)); }
 .wheel .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
 .wheel .spoke { stroke: var(--bg); stroke-width: 2; }
-.wheel .month { fill: var(--muted); font-family: var(--text); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.wheel .month { fill: var(--muted); font-family: var(--text); font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
 .wheel .hand { opacity: 0; transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s; }
 .wheel .hand.on { opacity: 1; }
 .wheel .hand line { stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
