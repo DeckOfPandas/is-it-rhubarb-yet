@@ -1,5 +1,6 @@
 {%- comment -%}
-One band of the digest: a heading with the count, then its foods in one
+One band of the digest: a heading with the count (none when it is
+nothing), then its foods in one
 of three shapes, or one line when there is nothing. Every food in a band
 has the verdict its heading says, so no row carries a tag.
   plain   one list, A to Z (just arrived)
@@ -15,7 +16,7 @@ week.
 {%- assign total = 0 -%}
 {%- for k in include.list -%}{%- assign total = total | plus: k.items.size -%}{%- endfor -%}
 <section class="band {{ include.cls }}">
-  <h2>{{ include.heading }} <span class="count">{{ total }}</span></h2>
+  <h2>{{ include.heading }}{% if total > 0 %} <span class="count">{{ total }}</span>{% endif %}</h2>
   {%- if total == 0 -%}
   <p class="empty">{{ include.empty }}</p>
   {%- elsif include.shape == "phrase" -%}

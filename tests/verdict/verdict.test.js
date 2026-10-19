@@ -209,9 +209,10 @@ test("calendar dates, for the as-of line and the week range only", () => {
   assert.equal(V.fmtDate(new Date(2026, 10, 11)), "11th November");
   assert.equal(V.fmtDate(new Date(2026, 10, 21)), "21st November");
   assert.equal(V.fmtDateYear(TODAY), "18th October 2026");
-  assert.equal(V.fmtRange(42, 2026), "15th to 21st October");
-  assert.equal(V.fmtRange(5, 2026), "29th January to 4th February");
-  assert.equal(V.fmtRange(52, 2026), "24th to 31st December");
+  assert.equal(V.fmtRange(42, 2026), "15–21 October");
+  assert.equal(V.fmtRange(5, 2026), "29 January – 4 February");
+  assert.equal(V.fmtRange(52, 2026), "24–31 December");
+  assert.equal(V.fmtRange(1, 2027), "1–7 January");
 });
 
 test("the weekly digest for week 42: four lists, by kind, by time left", () => {

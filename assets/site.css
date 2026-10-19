@@ -273,22 +273,28 @@ article.food { padding-top: 0.5rem; }
 .onwards + .onwards { margin-top: 0.35rem; }
 
 /* --- Now: the digest ----------------------------------------------------- */
-.week-dates { font-weight: 700; font-size: 1.1rem; margin: 0.25rem 0 0.75rem; }
-.controls { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
-.controls button, button.plain {
-  font: inherit; font-size: 0.9rem; padding: 0.3rem 0.9rem; border: 1px solid var(--ink); border-radius: 999px;
-  background: transparent; color: var(--ink); cursor: pointer;
+/* The top of Now: the title, then one quiet line of the week's days
+   between two bare arrows, each a 44px target round a small glyph; an
+   arrow at the end of the range is greyed and does nothing. Sections are
+   parted by space alone. */
+.now-head { margin-bottom: 0; }
+.week-line { display: flex; align-items: center; margin: 0.25rem 0 0; font-size: 1.125rem; color: var(--muted); }
+.week-step {
+  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0 -0.35rem;
+  font: 400 1.6rem/1 var(--text); color: var(--ink); background: none; border: 0; padding: 0 0 0.15rem; cursor: pointer;
 }
-.controls button:hover, .controls button:focus-visible { background: var(--ink); color: var(--bg); }
-.digest { display: grid; gap: 1.5rem 2rem; }
+.week-step:first-child { margin-left: -14px; }
+.week-step:hover { color: var(--rhubarb); }
+.week-step:disabled { color: var(--rule); cursor: default; }
+.week-back { margin: 0.1rem 0 0; font-size: 0.875rem; }
+.digest { display: grid; gap: 0 2rem; }
 @media (min-width: 52rem) {
   .digest { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .digest .band.still { grid-column: 1 / -1; }
 }
-.band { border-top: 3px solid var(--rule); padding-top: 0.4rem; min-width: 0; }
-.band.arrived { border-top-color: var(--rhubarb); }
-.band h2 { font: 400 1.4rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; margin: 0.3rem 0 0.5rem; }
-.band .count { color: var(--muted); font: 400 0.9rem var(--text); margin-left: 0.3em; }
+.band { min-width: 0; padding-top: 2.75rem; }
+.band h2 { font: 400 1.4rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; margin: 0 0 0.5rem; }
+.band .count { color: var(--muted); font: 400 0.9rem var(--text); font-variant-numeric: tabular-nums; margin-left: 0.3em; }
 .band .food-list { grid-template-columns: 1fr; }
 .band.still .food-list { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
 /* Last chance and on the way, under their phrases; great now, a closed

@@ -470,15 +470,30 @@
     var digest = document.getElementById("digest");
     if (!digest) return;
     var groups = JSON.parse(digest.dataset.groups || "[]");
-    var controls = document.querySelector(".controls");
     var title = document.getElementById("week-title");
     var dates = document.getElementById("week-dates");
-    var param = parseInt(new URL(location.href).searchParams.get("week"), 10);
-    var week = (param >= 1 && param <= 52) ? param : WEEK;
+    var prev = document.getElementById("prev-week"), next = document.getElementById("next-week");
+    var back = document.getElementById("week-back");
+    var site = document.title.split(" · ").slice(1).join(" · ");
     var KIND = { veg: "Veg", fruit: "Fruit", wild: "Wild", herbs: "Herbs", fish: "Fish", meat: "Meat" };
+    // A week is shown as its distance in weeks from this one, at most
+    // RANGE either way; the address carries week= and, in another year,
+    // year=.
+    var RANGE = 52;
+    function weekAt(offset) {
+      var w = WEEK + offset, y = YEAR;
+      while (w > 52) { w -= 52; y++; }
+      while (w < 1) { w += 52; y--; }
+      return { week: w, year: y };
+    }
+    var params = new URL(location.href).searchParams;
+    var pw = parseInt(params.get("week"), 10), py = parseInt(params.get("year"), 10) || YEAR;
+    var offset = (pw >= 1 && pw <= 52) ? (py - YEAR) * 52 + (pw - WEEK) : 0;
+    if (Math.abs(offset) > RANGE) offset = 0;
+    var redrawn = false;
 
     // One band, the same markup as _includes/band.html: a heading with the
-    // count, then the foods as one A to Z list (plain), under their phrases
+    // count (none when it is nothing), then the foods as one A to Z list (plain), under their phrases
     // (phrase), or in a closed disclosure per kind (kind). No row has a tag.
     function list(items) {
       var ul = el("ul", "food-list");
@@ -489,7 +504,7 @@
       var s = el("section", "band " + cls);
       var h = el("h2", null, heading + " ");
       var total = V.flatten(kinds).length;
-      h.appendChild(el("span", "count", String(total)));
+      if (total) h.appendChild(el("span", "count", String(total)));
       s.appendChild(h);
       if (!total) { s.appendChild(el("p", "empty", emptyText)); return s; }
       if (shape === "phrase") {
@@ -513,16 +528,26 @@
     }
 
     // The digest for another week reads its phrases from the middle of
-    // that week, since it has no today.
-    function render(w) {
-      title.textContent = w === WEEK ? "this week" : "in week " + w;
-      dates.textContent = "Week " + w + ": " + V.fmtRange(w, YEAR);
+    // that week, since it has no today. The baked digest is kept only
+    // while nothing else has been drawn over it.
+    function render() {
+      var at = weekAt(offset), w = at.week, y = at.year;
+      title.textContent = "In season" + (offset === 0 ? " this week" : offset === 1 ? " next week" : offset === -1 ? " last week" : "");
+      document.title = title.textContent + (site ? " · " + site : "");
+      dates.textContent = V.fmtRange(w, y);
+      prev.disabled = offset <= -RANGE;
+      next.disabled = offset >= RANGE;
+      back.hidden = offset === 0;
       var url = new URL(location.href);
-      if (w === WEEK) url.searchParams.delete("week"); else url.searchParams.set("week", w);
+      url.searchParams.delete("week"); url.searchParams.delete("year");
+      if (offset !== 0) url.searchParams.set("week", w);
+      if (y !== YEAR) url.searchParams.set("year", y);
       history.replaceState(null, "", url);
-      if (w === WEEK && SAME_DAY) return;
+      if (offset === 0 && SAME_DAY && !redrawn) return;
+      redrawn = true;
       loadFoods().then(function (foods) {
-        var now = V.nowLists(foods, groups, w, YEAR, w === WEEK ? TODAY : V.midOfToday(w, YEAR));
+        if (weekAt(offset).week !== w || weekAt(offset).year !== y) return;
+        var now = V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y));
         digest.textContent = "";
         digest.appendChild(band("arrived", "Just arrived", now.arrived, "plain", "Nothing new this week."));
         digest.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
@@ -531,12 +556,10 @@
       });
     }
 
-    if (controls) {
-      controls.hidden = false;
-      document.getElementById("prev-week").addEventListener("click", function () { week = week === 1 ? 52 : week - 1; render(week); });
-      document.getElementById("next-week").addEventListener("click", function () { week = week === 52 ? 1 : week + 1; render(week); });
-    }
-    render(week);
+    prev.hidden = next.hidden = false;
+    prev.addEventListener("click", function () { if (offset > -RANGE) { offset--; render(); } });
+    next.addEventListener("click", function () { if (offset < RANGE) { offset++; render(); } });
+    render();
   }
 
   // --- Not found ---------------------------------------------------------------

@@ -139,7 +139,7 @@ function iconPage() {
 function nowCard(baked) {
   return page(
     `<div class="display title">In season this week</div>` +
-    `<p class="week">Week ${baked.week}: ${esc(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
+    `<p class="week">${esc(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
 }
 
 async function main() {

@@ -205,10 +205,14 @@
   }
   function fmtDate(d) { return ordinal(d.getDate()) + " " + MONTHS[d.getMonth()]; }
   function fmtDateYear(d) { return fmtDate(d) + " " + d.getFullYear(); }
+  // A week's days, plain numbers and an en dash: "15–21 October", "29
+  // October – 4 November", and the years only when it crosses one.
   function fmtRange(week, year) {
     var a = startOfWeek(week, year), b = endOfWeek(week, year);
-    if (a.getMonth() === b.getMonth()) return ordinal(a.getDate()) + " to " + fmtDate(b);
-    return fmtDate(a) + " to " + fmtDate(b);
+    var day = function (d) { return d.getDate() + " " + MONTHS[d.getMonth()]; };
+    if (a.getFullYear() !== b.getFullYear()) return day(a) + " " + a.getFullYear() + " – " + day(b) + " " + b.getFullYear();
+    if (a.getMonth() === b.getMonth()) return a.getDate() + "–" + day(b);
+    return day(a) + " – " + day(b);
   }
   // The date a {week, years} stands for, given the reference year.
   function startDate(at, year) { return startOfWeek(at.week, year + at.years); }

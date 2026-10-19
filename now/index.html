@@ -1,5 +1,5 @@
 ---
-title: In season now
+title: In season this week
 description: What is in season in the UK this week, what has just arrived, what is on its way out, and what is on the way.
 permalink: /now/
 ---
@@ -14,13 +14,18 @@ the baked week shows, dated.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign now = baked.now -%}
-<header class="page-head">
-  <h1>In season <span id="week-title">this week</span></h1>
-  <p class="week-dates" id="week-dates">Week {{ baked.week }}: {{ baked.range }}</p>
-  <p class="controls" hidden>
-    <button type="button" id="prev-week">← Previous week</button>
-    <button type="button" id="next-week">Next week →</button>
+{%- comment -%} The title names the week by its distance from this one,
+   and the week line says its days; site.js shows the arrows and keeps
+   both, the page title and the address in step with the week shown.
+   {%- endcomment -%}
+<header class="page-head now-head">
+  <h1 id="week-title">In season this week</h1>
+  <p class="week-line">
+    <button type="button" class="week-step" id="prev-week" aria-label="Previous week" hidden>‹</button>
+    <span id="week-dates">{{ baked.range }}</span>
+    <button type="button" class="week-step" id="next-week" aria-label="Next week" hidden>›</button>
   </p>
+  <p class="week-back" id="week-back" hidden><a href="{{ '/now/' | relative_url }}">Back to this week</a></p>
 </header>
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
