@@ -28,7 +28,8 @@ const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "_data");
 const FONTS = path.join(ROOT, "assets", "fonts");
 const WIDTH = 1200, HEIGHT = 630;
-const CUSTARD = "#fbf3d9", INK = "#1c1714", MUTED = "#5e544b", RHUBARB = "#ff2d78";
+// NEVER is every never-food's colour, as --never is on the site.
+const CUSTARD = "#fbf3d9", INK = "#1c1714", MUTED = "#5e544b", RHUBARB = "#ff2d78", NEVER = "#857f78";
 
 function arg(name, fallback) {
   const at = process.argv.indexOf(name);
@@ -160,7 +161,7 @@ async function main() {
     cards.push({ slug: f.slug, html: verdictCard(f.name, colour, b.verdict, b.line, baked.asofText) });
   });
   never.forEach((n) => {
-    cards.push({ slug: n.slug, html: verdictCard(n.name, RHUBARB, "NEVER", n.line, baked.asofText) });
+    cards.push({ slug: n.slug, html: verdictCard(n.name, NEVER, "NEVER", n.line, baked.asofText) });
   });
   cards.push({ slug: "home", html: homeCard(baked) });
   cards.push({ slug: "now", html: nowCard(baked) });

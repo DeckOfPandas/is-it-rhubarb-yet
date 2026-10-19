@@ -3,7 +3,8 @@
    also rhubarb's own colour and never carries body-size text. Each food's
    colour arrives as --food on its row or page and every colour in the data
    passes 3:1 on both backgrounds, so a verdict word can simply be set in it.
-   Charts keep --c for a row's colour. */
+   Charts keep --c for a row's colour. Never-foods all share --never, ghost
+   grey, which is no food's and is never the pink. */
 
 /* --- Fonts: three families, one job each, self-hosted, Latin only ------ */
 /* Which face, asked in order:
@@ -43,6 +44,7 @@
   --shed: #16110e;
   --custard: #fbf3d9;
   --rhubarb: #ff2d78;
+  --never: #857f78;
   --bg: var(--custard);
   --ink: #1c1714;
   --muted: #5e544b;
@@ -194,7 +196,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .early { color: var(--muted); font-size: 0.85em; }
 .leader { flex: 1 1 16px; min-width: 16px; border-bottom: 2px dotted color-mix(in oklab, var(--ink) 28%, var(--bg)); }
 .food-row .verdict-tag { flex: none; margin-left: auto; }
-.food-row.never { --food: var(--rhubarb); }
+.food-row.never { --food: var(--never); }
 /* A group inside a section: a small caps label in Atkinson, then its
    foods. A hairline and space part each group from the one before; the
    section above it is headed in Anton. Home's families, Now's timings and
@@ -235,7 +237,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   font: inherit; letter-spacing: inherit; text-transform: uppercase; line-height: inherit; text-align: left;
   color: var(--ink); caret-color: var(--rhubarb); transition: color 0.25s;
   background: transparent; border: 0; border-bottom: 0.06em solid var(--rhubarb); border-radius: 0;
-  padding: 0; margin: 0; min-width: 3ch; max-width: 100%; -webkit-appearance: none; appearance: none;
+  padding: 0; margin: 0; min-width: 1ch; max-width: 100%; -webkit-appearance: none; appearance: none;
   height: 1.2em; box-sizing: content-box;
 }
 .js #hook-input { border-bottom-color: transparent; }
@@ -283,7 +285,24 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .arrow-link .arrow { display: inline-block; margin-left: 0.35em; }
 .food-link { color: var(--food); text-decoration: none; }
 .food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
+/* What is typed, answered where the this-week blocks were: the count in
+   their label's style and place, then the rows. The lit row (a lone
+   match, or the one Up and Down reach) sits on a wash of its food's
+   colour. A lone never-food is NEVER. in Anton over its line, all in
+   ghost grey and all one link. */
+.results { margin: 3rem 0 0.5rem; }
+.results .teaser-label { margin-bottom: 0.5rem; }
+.results .food-row a { margin: 0 -0.4rem; padding: 0.1rem 0.4rem; border-radius: 4px; }
+.results .food-row a.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); }
+.match-line { display: block; color: var(--muted); font-size: 0.95rem; }
+.never-result { display: block; width: fit-content; max-width: 40rem; margin: 0 -0.4rem; padding: 0.2rem 0.4rem; border-radius: 4px; color: var(--never); text-decoration: none; }
+.never-result.is-active { background: color-mix(in oklab, var(--never) 8%, var(--bg)); }
+.never-word { display: block; font: 400 2.75rem/1 var(--display); letter-spacing: var(--track-large); text-transform: uppercase; }
+.never-line { display: block; margin-top: 0.4rem; font-weight: 700; font-size: 1.1rem; color: var(--ink); }
+.never-result:hover .never-line, .never-result:focus-visible .never-line { text-decoration: underline; text-decoration-color: var(--never); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+@media (max-width: 37.49rem) { .results { min-height: 60vh; } }
 .hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
+.results .hook-none { margin-top: 0; }
 .list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
 .list-title { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); }
 .list-head .switch { margin: 0; }
@@ -302,7 +321,8 @@ article.food { padding-top: 0.5rem; }
   letter-spacing: var(--track-large); text-transform: uppercase; color: var(--food); white-space: nowrap;
   padding-top: 0.08em;
 }
-.never .verdict-word, .not-found .verdict-word { color: var(--rhubarb); }
+article.never { --food: var(--never); }
+.not-found .verdict-word { color: var(--rhubarb); }
 /* A quotation stands behind a bar in a quiet version of the food's colour. */
 .quote { margin: 1.5rem 0 2rem; max-width: 34rem; padding-left: 1rem; border-left: 3px solid color-mix(in oklab, var(--food) 40%, var(--bg)); font: italic 400 1.3rem/1.3 var(--quote); }
 .quote p { margin: 0; max-width: none; }

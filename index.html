@@ -3,10 +3,10 @@ title:
 description: Is it in season yet? Type a UK food and get a yes, a no, or a date.
 ---
 {%- comment -%}
-The hook. A huge "Is it [    ] yet?" with the input inline; as the
-visitor types, the list below narrows, each food's verdict word in its
-own colour at the end of its row. Enter, or a single remaining match, goes to the
-food page; no match gets the not-found line. Without JavaScript the
+The hook. A huge "Is it [    ] yet?" with the input inline. As the
+visitor types, the this-week blocks and the Everything list give way to
+the matches, directly under the hero, each with its verdict at the end
+of its row; clearing the input brings them back. Without JavaScript the
 whole list renders and the input is a form that reloads this page.
 
 Verdicts in the list are baked for the build day; site.js recomputes
@@ -14,8 +14,8 @@ them when the visitor's week differs. The list is drawn twice, by family
 (the default) and A to Z, and the order switch shows one by CSS, as the
 calendar's does: lists in columns read down, then across, so one list
 cannot be reordered in place. The A to Z list carries the never-foods,
-hidden, and every row's search terms; typing hides both lists and shows
-the matches, best first, in a list of their own.
+hidden, and every row's search terms and line, which the matches are
+copied from.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign foods = site.data.foods | sort: "name" -%}
@@ -57,7 +57,23 @@ the matches, best first, in a list of their own.
     {%- endfor -%}
     <p class="this-week-more"><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
   </div>
-  <p class="hook-none" id="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues" hidden></p>
+  {%- comment -%} What is typed, answered in the this-week blocks' place,
+     filled by site.js: a count in a teaser label over the matches, best
+     first, with tags; a lone NEVER match as its verdict; or, with no
+     match, the not-found line and the nearest foods. {%- endcomment -%}
+  <section class="results" id="results" aria-labelledby="results-label" hidden>
+    <h2 class="teaser-label" id="results-label"></h2>
+    <ul class="food-list" id="found"></ul>
+    <a class="never-result" id="never-result" hidden><span class="never-word">Never.</span> <span class="never-line"></span></a>
+    <div class="results-none" id="hook-none" hidden>
+      <p class="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues"></p>
+      <div class="food-group" id="suggest" hidden>
+        <h3 class="group-label">Did you mean</h3>
+        <ul class="food-list" id="suggest-list"></ul>
+      </div>
+    </div>
+  </section>
+  <p class="visually-hidden" id="results-status" aria-live="polite"></p>
 </section>
 
 <section class="all-foods" id="all-foods">
@@ -89,15 +105,14 @@ the matches, best first, in a list of their own.
           {%- for food in foods -%}
             {%- assign b = baked.foods[food.slug] -%}
             {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
-            {%- include food-row.html item=food verdict=b.verdict terms=terms -%}
+            {%- include food-row.html item=food verdict=b.verdict terms=terms line=b.line -%}
           {%- endfor -%}
           {%- for n in site.data.never -%}
             {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
-            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms -%}
+            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms line=n.line -%}
           {%- endfor -%}
         </ul>
       </div>
     </div>
   </div>
-  <div class="food-group" id="found-group" hidden><ul class="food-list" id="found"></ul></div>
 </section>

@@ -3,7 +3,7 @@ layout: default
 ---
 {%- comment -%}
 One food, top to bottom: the question, the verdict word, the date line,
-the variety line, the quotation, the dial, the counter note, up to six
+the variety line, the quotation, the dial, the counter note, three
 foods from the same family that are perfect now, the data, and the way
 on. Everything date-dependent is baked for the build day and
 recomputed by site.js for the visitor's own day from the food's data in
@@ -44,23 +44,21 @@ colour.
 
   {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
 
-  {%- comment -%} Up to six foods of the same family that are perfect now,
-     from the baked verdicts, and how many more there are, which links to
-     Now. All are YES, as the heading says, so no row carries a tag. The
-     heading is "Also great this week" unless this food is NO. {%- endcomment -%}
-  {%- assign also = "" | split: "" -%}
-  {%- assign also_all = 0 -%}
+  {%- comment -%} Three foods of the same family that are perfect now, at
+     random from the baked verdicts, A to Z, and how many more there are,
+     which links to Now. All are YES, as the heading says, so no row
+     carries a tag. The heading is "Also great this week" unless this food
+     is NO. site.js picks the same number. {%- endcomment -%}
+  {%- assign also_all = "" | split: "" -%}
   {%- for other in site.data.foods -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
       {%- assign ob = baked.foods[other.slug] -%}
-      {%- if ob.verdict == "YES" -%}
-        {%- assign also_all = also_all | plus: 1 -%}
-        {%- if also.size < 6 -%}{%- assign also = also | push: other -%}{%- endif -%}
-      {%- endif -%}
+      {%- if ob.verdict == "YES" -%}{%- assign also_all = also_all | push: other -%}{%- endif -%}
     {%- endif -%}
   {%- endfor -%}
+  {%- assign also = also_all | sample: 3 | sort: "name" -%}
   {%- if also.size > 0 -%}
-  {%- assign also_more = also_all | minus: also.size -%}
+  {%- assign also_more = also_all.size | minus: also.size -%}
   <section class="also">
     <h2><span data-also-no{% if b.verdict != "NO" %} hidden{% endif %}>Great this week</span><span data-also-yes{% if b.verdict == "NO" %} hidden{% endif %}>Also great this week</span></h2>
     <ul class="food-list">

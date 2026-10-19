@@ -26,9 +26,12 @@
   // How many foods each of the home page's this-week blocks names;
   // index.html samples the same number at build.
   var STRIP_PICK = 3;
-  // How many same-family foods a food page lists; _layouts/food.html bakes
-  // the same number.
-  var ALSO_MAX = 6;
+  // How many same-family foods a food page lists, at random;
+  // _layouts/food.html samples the same number at build.
+  var ALSO_PICK = 3;
+  function pickSome(items, n) {
+    return items.slice().sort(function () { return Math.random() - 0.5; }).slice(0, n);
+  }
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -339,8 +342,8 @@
     document.title = "Is it " + food.name.toLowerCase() + " yet? " +
       fv.verdict.charAt(0) + fv.verdict.slice(1).toLowerCase() + ".";
     // "Great this week" is baked; for another week, or a page baked with
-    // no data at all, it is rebuilt from foods.json: up to ALSO_MAX foods
-    // of the same family that are YES, in data order, as the template
+    // no data at all, it is rebuilt from foods.json: ALSO_PICK foods of
+    // the same family that are YES, at random and A to Z, as the template
     // picks them, then how many more there are. It is "Also great this
     // week" unless this food is NO.
     function alsoHeading(h) {
@@ -352,7 +355,7 @@
       var all = foods.filter(function (f) {
         return f.group === food.group && f.slug !== food.slug && V.foodVerdict(f, WEEK).verdict === "YES";
       });
-      var picks = all.slice(0, ALSO_MAX);
+      var picks = pickSome(all, ALSO_PICK).sort(function (a, b) { return a.name < b.name ? -1 : 1; });
       section = article.querySelector(".also");
       if (!picks.length) { if (section) section.hidden = true; return; }
       if (!section) {
@@ -396,17 +399,34 @@
     var input = document.getElementById("hook-input");
     var list = document.getElementById("food-list");
     if (!input || !list) return;
-    // The A to Z list holds every food and never-food with its search terms;
-    // matches are copied from it into a list of their own, best first.
+    // The A to Z list holds every food and never-food with its search terms
+    // and line; matches are copied from it into the results, best first.
     var rows = Array.prototype.slice.call(list.querySelectorAll(".food-row"));
     var lists = document.getElementById("food-lists");
+    var strip = document.getElementById("this-week");
+    var everything = document.getElementById("all-foods");
+    var results = document.getElementById("results");
+    var label = document.getElementById("results-label");
     var found = document.getElementById("found");
-    var foundGroup = document.getElementById("found-group");
+    var neverBox = document.getElementById("never-result");
     var none = document.getElementById("hook-none");
+    var noneLine = none.querySelector(".hook-none");
+    var suggest = document.getElementById("suggest");
+    var suggestList = document.getElementById("suggest-list");
+    var status = document.getElementById("results-status");
     var index = rows.map(function (li) {
-      return { li: li, name: li.querySelector(".food-name").textContent, terms: li.dataset.terms.split("|").filter(Boolean).map(fold) };
+      return { li: li, name: li.querySelector(".food-title").textContent, terms: li.dataset.terms.split("|").filter(Boolean).map(fold) };
     });
     var shown = [];
+    // The links Up and Down move the highlight through, and which is lit.
+    var picks = [], active = -1;
+    // A lone match shows its date line: baked for the build day, worked
+    // out from foods.json on any other.
+    var lineOf = {};
+    if (!SAME_DAY) loadFoods().then(function (foods) {
+      foods.forEach(function (f) { lineOf[f.slug] = V.dateLine(V.foodVerdict(f, WEEK).variety, YEAR, TODAY); });
+      if (shown.length === 1) apply();
+    });
 
     // A hidden span in the same font measures the value, or the placeholder
     // when there is none. On one line the input is as wide as its word, up to
@@ -466,34 +486,89 @@
       filter(q);
       colour();
     }
+    // While there is text, the results take the this-week blocks' place
+    // and the Everything list is hidden, so matches show in one place,
+    // straight away. Many matches are rows with their tags; a lone food is
+    // lit, with its date line under its name; a lone never-food is its
+    // verdict and its line; nothing at all is the not-found line, with the
+    // foods that share its first three letters.
     function filter(q) {
       found.textContent = "";
-      if (!q) {
-        lists.hidden = false; foundGroup.hidden = true;
-        none.hidden = true; shown = [];
-        return;
-      }
-      lists.hidden = true;
+      suggestList.textContent = "";
+      strip.hidden = everything.hidden = !!q;
+      results.hidden = !q;
+      neverBox.hidden = none.hidden = suggest.hidden = true;
+      label.hidden = false;
+      light(-1);
+      picks = [];
+      if (!q) { shown = []; status.textContent = ""; return; }
       shown = rank(index, q);
-      shown.forEach(function (it) {
-        var copy = it.li.cloneNode(true);
-        copy.hidden = false;
-        found.appendChild(copy);
-      });
-      foundGroup.hidden = !shown.length;
-      if (shown.length) { none.hidden = true; return; }
-      none.textContent = "";
-      none.appendChild(document.createTextNode("Is it " + q + " yet? Literally no idea. If that's an actual thing, please "));
-      var a = el("a", null, "tell us"); a.href = none.dataset.issues;
-      none.appendChild(a);
-      none.appendChild(document.createTextNode("."));
-      none.hidden = false;
+      var n = shown.length;
+      label.textContent = n + (n === 1 ? " match" : " matches");
+      status.textContent = label.textContent;
+      if (n === 1 && shown[0].li.classList.contains("never")) {
+        neverBox.href = shown[0].li.querySelector("a").href;
+        neverBox.querySelector(".never-line").textContent = shown[0].li.dataset.line;
+        neverBox.hidden = false;
+        picks = [neverBox];
+        status.textContent = "1 match: " + shown[0].name + ", never.";
+      } else if (n) {
+        shown.forEach(function (it) {
+          var copy = it.li.cloneNode(true);
+          copy.hidden = false;
+          var line = n === 1 && (lineOf[it.li.dataset.slug] || it.li.dataset.line);
+          if (line) copy.querySelector(".food-name").appendChild(el("span", "match-line", line));
+          found.appendChild(copy);
+          picks.push(copy.querySelector("a"));
+        });
+      } else {
+        label.hidden = true;
+        noneLine.textContent = "";
+        noneLine.appendChild(document.createTextNode("Is it " + q + " yet? Literally no idea. If that's an actual thing, please "));
+        var a = el("a", null, "tell us"); a.href = noneLine.dataset.issues;
+        noneLine.appendChild(a);
+        noneLine.appendChild(document.createTextNode("."));
+        none.hidden = false;
+        status.textContent = "No matches.";
+        var bit = fold(q).slice(0, 3);
+        var near = bit.length < 3 ? [] : index.filter(function (it) {
+          return it.terms.some(function (t) { return t.indexOf(bit) >= 0; });
+        }).slice(0, 5);
+        near.forEach(function (it) {
+          var copy = it.li.cloneNode(true);
+          copy.hidden = false;
+          suggestList.appendChild(copy);
+          picks.push(copy.querySelector("a"));
+        });
+        suggest.hidden = !near.length;
+      }
+      if (n === 1) light(0);
+    }
+    function light(i) {
+      if (active >= 0) picks[active].classList.remove("is-active");
+      active = i;
+      if (i < 0) return;
+      picks[i].classList.add("is-active");
+      picks[i].scrollIntoView({ block: "nearest" });
     }
 
     input.addEventListener("input", apply);
+    // Up and Down move the highlight through the results, Enter opens the
+    // lit one (or the best match), and Escape clears the input.
+    input.addEventListener("keydown", function (e) {
+      if ((e.key === "ArrowDown" || e.key === "ArrowUp") && picks.length) {
+        e.preventDefault();
+        light(Math.max(-1, Math.min(picks.length - 1, active + (e.key === "ArrowDown" ? 1 : -1))));
+      } else if (e.key === "Escape" && input.value) {
+        e.preventDefault();
+        input.value = "";
+        apply();
+      }
+    });
     input.form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (shown.length) location.href = shown[0].li.querySelector("a").href;
+      var go = active >= 0 ? picks[active] : shown.length ? picks[0] : null;
+      if (go) location.href = go.href;
     });
     var q = new URL(location.href).searchParams.get("q");
     if (q) input.value = q;
@@ -510,12 +585,20 @@
     // names no element, so the browser does not scroll: the cursor goes to
     // the input and the page stays where it is. On home itself the
     // magnifier goes back up to the input.
+    // On a phone, focus brings the input's line near the top of the
+    // screen, a little room above it, so the keyboard does not cover the
+    // results.
+    function still() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
+    input.addEventListener("focus", function () {
+      if (!stacked.matches) return;
+      var top = slot.getBoundingClientRect().top + window.scrollY - 16;
+      window.scrollTo({ top: Math.max(0, top), behavior: still() ? "auto" : "smooth" });
+    });
     if (location.hash === "#search" || location.hash === "#hook-input") input.focus({ preventScroll: true });
     document.querySelectorAll(".search-link").forEach(function (a) {
       a.addEventListener("click", function (e) {
         e.preventDefault();
-        var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-        window.scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
+        if (!stacked.matches) window.scrollTo({ top: 0, behavior: still() ? "auto" : "smooth" });
         input.focus({ preventScroll: true });
       });
     });
@@ -524,8 +607,7 @@
     // The this-week blocks for a week other than the baked one: the same
     // blocks index.html bakes, a few foods picked at random from each list.
     if (!SAME_WEEK) {
-      var strip = document.getElementById("this-week");
-      if (strip) loadFoods().then(function (foods) {
+      loadFoods().then(function (foods) {
         var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
         strip.textContent = "";
         function block(label, list) {
@@ -534,7 +616,7 @@
           var s = el("section", "teaser");
           s.appendChild(el("h2", "teaser-label", label));
           var p = el("p", "teaser-foods");
-          var pick = items.slice().sort(function () { return Math.random() - 0.5; }).slice(0, STRIP_PICK);
+          var pick = pickSome(items, STRIP_PICK);
           pick.forEach(function (i, n) {
             if (n) p.appendChild(document.createTextNode(", "));
             var a = el("a", "food-link", i.name);
