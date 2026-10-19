@@ -76,7 +76,7 @@ Now have cards of their own; every other page shows the home card.
         <a href="{{ '/wheel/' | relative_url }}"{% if page.url == '/wheel/' %} aria-current="page"{% endif %}>Wheel</a>
       </nav>
       {%- if page.url != '/' -%}
-      <a class="search-link" href="{{ '/' | relative_url }}#hook-input" aria-label="Search foods">{% include icons/search.svg %}</a>
+      <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
       {%- endif -%}
     </div>
   </header>

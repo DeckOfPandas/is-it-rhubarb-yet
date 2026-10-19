@@ -371,6 +371,7 @@
     var line = input.closest(".hook-line");
     var stacked = matchMedia("(max-width: 37.49rem)");
     function size() {
+      ruler.style.textTransform = input.value ? "uppercase" : "none";
       ruler.textContent = input.value || input.placeholder;
       var w = ruler.getBoundingClientRect().width + 12;
       if (w <= 12) return;
@@ -440,7 +441,10 @@
     // Autofocus on a desktop only: on a phone the keyboard would hide the
     // week's news.
     if (!q && matchMedia("(pointer: fine) and (min-width: 48rem)").matches) input.focus();
-    if (location.hash === "#hook-input") input.focus();
+    // The magnifier and "Ask about something else" link to #search, which
+    // names no element, so the browser does not scroll: the cursor goes to
+    // the input and the page stays where it is.
+    if (location.hash === "#search" || location.hash === "#hook-input") input.focus({ preventScroll: true });
     refreshRows(list);
 
     // The this-week strip for a week other than the baked one: the same

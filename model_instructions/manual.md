@@ -129,10 +129,12 @@ drops it in `tmp/inbox/`); this is the map.
   is the nav alone. The theme switch is in the footer: sun, Auto, moon.
 - **Home hero.** One line on a wide screen, three stacked lines below
   600px with the input the full width; `site.js` sets a word too long
-  for its room smaller until it fits. The input is lower case; the grey
-  placeholder is centred in its pink underline, and typed text runs
-  from the left. When the typing narrows the list to one food, or is
-  one food's name in full, the word takes that food's colour.
+  for its room smaller until it fits. The grey placeholder is lower
+  case and centred in its pink underline; typed text is in capitals and
+  runs from the left. When the typing narrows the list to one food, or
+  is one food's name in full, the word takes that food's colour. Links
+  to the input go to `/#search`, which names no element, so the page
+  does not scroll; `site.js` puts the cursor there.
 - **Now.** The title follows the week shown ("this week", "next week",
   "last week", or none), over one muted line, "‹ 15–21 October ›".
   Weeks run through real years, a year either way of this week; the
