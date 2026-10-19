@@ -295,13 +295,17 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .food-link { color: var(--food); text-decoration: none; }
 .food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 /* What is typed, answered where the this-week blocks were. Two or more
-   matches: the count in their label's style and place, then the rows;
-   the one Up and Down reach sits on a wash of its food's colour. One
-   match: in the label's place its question, small and muted, then its
-   verdict in Anton in its colour and its date line (a never-food's
-   line), all one link. */
+   matches: the count in their label's style and place, then the rows in
+   one column, in rank order; the one Up and Down reach sits on a wash
+   of its food's colour. One match: in the label's place its question,
+   small and muted, then its verdict in Anton in its colour and its date
+   line (a never-food's line), all one link; then a quiet "Also:" line
+   of near matches, each in its own colour. */
 .results { margin: 3rem 0 0.5rem; }
 .results .teaser-label { margin-bottom: 0.5rem; }
+.results .food-list { columns: auto; max-width: 30rem; }
+.also-line { margin: 0.9rem 0 0; color: var(--muted); }
+.also-line .food-link.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); border-radius: 3px; }
 .results .food-row a { margin: 0 -0.4rem; padding: 0.1rem 0.4rem; border-radius: 4px; }
 .results .food-row a.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); }
 .one-result { display: block; width: fit-content; max-width: 40rem; color: var(--ink); text-decoration: none; }

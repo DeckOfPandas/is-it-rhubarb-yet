@@ -117,6 +117,32 @@
       .map(function (r) { return r.item; });
   }
 
+  // --- Home search: tiers ----------------------------------------------------
+  // The hero ranks a candidate (a food's name, alias or shared word, a
+  // variety's name or how it is said, each as folded words) by how the
+  // typed words meet it: 1, exactly; 2, at its start; 3, at the start of
+  // a later word; 4, inside a word. Singular and plural are equal, and the
+  // last typed word, still being typed, may also begin its word.
+  function singular(w) { return w.replace(/ies$/, "y").replace(/oes$/, "o").replace(/([^s])s$/, "$1"); }
+  function wordsAt(c, q, i) {
+    if (i + q.length > c.length) return false;
+    for (var j = 0; j < q.length; j++) {
+      if (singular(c[i + j]) === singular(q[j])) continue;
+      if (j === q.length - 1 && c[i + j].indexOf(q[j]) === 0) continue;
+      return false;
+    }
+    return true;
+  }
+  function tierOf(c, q) {
+    if (c.length === q.length && c.every(function (w, i) { return singular(w) === singular(q[i]); })) return 1;
+    if (wordsAt(c, q, 0)) return 2;
+    for (var i = 1; i < c.length; i++) if (wordsAt(c, q, i)) return 3;
+    var qs = q.join(" ");
+    if (qs.length < 3) return 0;
+    if (c.join(" ").indexOf(qs) >= 0 || c.map(singular).join(" ").indexOf(q.map(singular).join(" ")) >= 0) return 4;
+    return 0;
+  }
+
   // --- A food in a list, the same markup as _includes/food-row.html ------
   // opts.tag and opts.leader are each on unless false.
   function foodRow(item, opts) {
@@ -155,6 +181,26 @@
     var arrow = el("span", "arrow", "→"); arrow.setAttribute("aria-hidden", "true");
     a.appendChild(arrow);
     return a;
+  }
+
+  // A home teaser's foods: STRIP_PICK of them at random, each a link in its
+  // colour, then "and N more", which links to Now.
+  function fillTeaser(p, items) {
+    p.textContent = "";
+    var pick = pickSome(items, STRIP_PICK);
+    pick.forEach(function (i, n) {
+      if (n) p.appendChild(document.createTextNode(", "));
+      var a = el("a", "food-link", i.name);
+      a.href = foodUrl(i.slug);
+      a.style.setProperty("--food", i.colour);
+      p.appendChild(a);
+    });
+    var more = items.length - pick.length;
+    if (more > 0) {
+      p.appendChild(document.createTextNode(" "));
+      var m = el("a", "more-link", "and " + more + " more"); m.href = BASE + "now/";
+      p.appendChild(m);
+    }
   }
 
   // A group of foods, the same markup as _includes/food-group.html: an
@@ -347,20 +393,23 @@
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
     document.title = "Is it " + food.name.toLowerCase() + " yet? " +
       fv.verdict.charAt(0) + fv.verdict.slice(1).toLowerCase() + ".";
-    // "Great this week" is baked; for another week, or a page baked with
-    // no data at all, it is rebuilt from foods.json: ALSO_PICK foods of
-    // the same family that are YES, at random and A to Z, as the template
-    // picks them, then how many more there are. It is "Also great this
-    // week" unless this food is NO.
+    // "Great this week": ALSO_PICK foods of the same family that are YES,
+    // a fresh pick on every visit, A to Z, then how many more there are.
+    // In the baked week they come from the section's data-all; for another
+    // week, or a page baked with none, from foods.json. It is "Also great
+    // this week" unless this food is NO.
     function alsoHeading(h) {
       h.textContent = fv.verdict === "NO" ? "Great this week" : "Also great this week";
     }
     var section = article.querySelector(".also");
     if (section) alsoHeading(section.querySelector("h2"));
-    if (!SAME_WEEK) loadFoods().then(function (foods) {
-      var all = foods.filter(function (f) {
+    if (SAME_WEEK) { if (section) fillAlso(JSON.parse(section.dataset.all || "[]")); }
+    else loadFoods().then(function (foods) {
+      fillAlso(foods.filter(function (f) {
         return f.group === food.group && f.slug !== food.slug && V.foodVerdict(f, WEEK).verdict === "YES";
-      });
+      }));
+    });
+    function fillAlso(all) {
       var picks = pickSome(all, ALSO_PICK).sort(function (a, b) { return a.name < b.name ? -1 : 1; });
       section = article.querySelector(".also");
       if (!picks.length) { if (section) section.hidden = true; return; }
@@ -382,7 +431,7 @@
       section.querySelector(".also-more").hidden = !more;
       section.querySelector(".more-link").textContent = "and " + more + " more";
       section.hidden = false;
-    });
+    }
   }
 
   // --- About: tonight's dinner ---------------------------------------------
@@ -420,23 +469,71 @@
     var suggest = document.getElementById("suggest");
     var suggestList = document.getElementById("suggest-list");
     var status = document.getElementById("results-status");
+    var alsoLine = document.getElementById("also-line");
+    // What can be found: every food and never-food in the A to Z list, by
+    // its name, aliases and shared words, completing to its name or an
+    // alias; its row, verdict and line come from the list. Each named
+    // variety joins once foods.json is in, by its own name and how it is
+    // said ("cox", "forced rhubarb"), and shows as "Apples (Cox)".
+    var lineOf = {};
+    function terms(list) { return list.map(function (s) { return words(fold(s)); }); }
     var index = rows.map(function (li) {
+      var name = li.querySelector(".food-title").textContent;
       return {
-        li: li, name: li.querySelector(".food-title").textContent,
-        terms: li.dataset.terms.split("|").filter(Boolean).map(fold),
+        name: name, label: "", slug: li.dataset.slug, ask: name.toLowerCase(),
+        strings: terms(li.dataset.terms.split("|").filter(Boolean)),
         names: (li.dataset.names || "").split("|").filter(Boolean),
+        colour: function () { return getComputedStyle(li).getPropertyValue("--food").trim(); },
+        verdict: function () { return li.dataset.verdict; },
+        line: function () { return lineOf[li.dataset.slug] || li.dataset.line; },
+        row: function () { var c = li.cloneNode(true); c.hidden = false; return c; },
       };
     });
-    var shown = [];
-    // The links Up and Down move the highlight through, and which is lit.
-    var picks = [], active = -1;
-    // A lone match shows its date line: baked for the build day, worked
-    // out from foods.json on any other.
-    var lineOf = {};
-    if (!SAME_DAY) loadFoods().then(function (foods) {
-      foods.forEach(function (f) { lineOf[f.slug] = V.dateLine(V.foodVerdict(f, WEEK).variety, YEAR, TODAY); });
-      if (shown.length === 1) apply();
+    loadFoods().then(function (foods) {
+      foods.forEach(function (f) {
+        var fv = V.foodVerdict(f, WEEK);
+        lineOf[f.slug] = V.dateLine(fv.variety, YEAR, TODAY);
+        fv.varieties.forEach(function (r) {
+          if (!r.v.name) return;
+          var said = V.varietySaid(f, r.v), label = V.varietyLabel(r.v);
+          index.push({
+            name: f.name, label: label, slug: f.slug, ask: V.varietySaid(f, r.v, true),
+            strings: terms([r.v.name, said]), names: [r.v.name, said],
+            colour: function () { return r.colour; },
+            verdict: function () { return r.verdict; },
+            line: function () { return V.dateLine(r, YEAR, TODAY); },
+            row: function () { return foodRow({ slug: f.slug, name: f.name, variety: label, colour: r.colour, verdict: r.verdict }); },
+          });
+        });
+      });
+      if (input.value.trim()) apply();
     });
+    // Every candidate at its best tier, by tier and then A to Z by food
+    // and variety; a variety is left out when its food is found as well
+    // or better.
+    function search(text) {
+      var q = words(fold(text));
+      if (!q.length) return [];
+      var hits = [], foodTier = {};
+      index.forEach(function (it) {
+        var t = 0;
+        it.strings.forEach(function (c) { var x = tierOf(c, q); if (x && (!t || x < t)) t = x; });
+        if (t) hits.push({ it: it, tier: t });
+      });
+      hits.forEach(function (h) { if (!h.it.label) foodTier[h.it.slug] = h.tier; });
+      return hits.filter(function (h) { return !h.it.label || !(foodTier[h.it.slug] <= h.tier); })
+        .sort(function (a, b) {
+          var x = a.it.name + " " + a.it.label, y = b.it.name + " " + b.it.label;
+          return (a.tier - b.tier) || (x < y ? -1 : x > y ? 1 : 0);
+        });
+    }
+    // The single best match, when it is found exactly or at its start
+    // and nothing else is found as well: it alone colours the hero and
+    // completes the typed word.
+    var lead = null;
+    // The links Up and Down move the highlight through, in rank order,
+    // and which is lit.
+    var picks = [], active = -1;
 
     // A hidden span in the same font measures the value, or the placeholder
     // when there is none. On one line the input is as wide as its word and
@@ -502,8 +599,8 @@
     function complete() {
       ghost = ghostFull = "";
       var typed = input.value, q = fold(typed);
-      if (q && !composing && !dismissed && shown.length) {
-        var names = shown[0].names;
+      if (q && !composing && !dismissed && lead) {
+        var names = lead.names;
         if (!names.some(function (s) { return fold(s) === q; })) {
           for (var i = 0; i < names.length && !ghostFull; i++) {
             var s = names[i];
@@ -519,7 +616,7 @@
       layerTyped.textContent = input.value;
       layerRest.textContent = ghost;
       layer.hidden = !ghost;
-      if (ghost) layer.style.setProperty("--ghost", getComputedStyle(shown[0].li).getPropertyValue("--food"));
+      if (ghost) layer.style.setProperty("--ghost", lead.colour());
     }
     function accept() {
       input.value = ghostFull;
@@ -533,16 +630,12 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     window.addEventListener("resize", size);
 
-    // When the typing narrows the list to one food, the typed word and its
-    // underline take that food's colour; so they do when the word is one
-    // food's name or alias in full, as "apples" is while crab apples and
-    // pineapples still show.
+    // The typed word and its underline take the lead's colour; with no
+    // lead, as when the text is only found inside words, they stay ink
+    // over the pink.
     function colour() {
-      var q = fold(input.value);
-      var exact = shown.filter(function (it) { return it.terms.indexOf(q) >= 0; });
-      var one = shown.length === 1 ? shown[0].li : exact.length === 1 ? exact[0].li : null;
-      input.classList.toggle("is-food", !!one);
-      if (one) slot.style.setProperty("--food", getComputedStyle(one).getPropertyValue("--food"));
+      input.classList.toggle("is-food", !!lead);
+      if (lead) slot.style.setProperty("--food", lead.colour());
     }
 
     function apply() {
@@ -554,42 +647,65 @@
     }
     // While there is text, the results take the this-week blocks' place
     // and the Everything list is hidden, so matches show in one place,
-    // straight away. Many matches are rows with their tags under a count;
-    // a lone match is its question, as a food page asks it, its verdict
-    // and its date line (a never-food's own line), all one link; nothing
-    // at all is the not-found line, with the foods that share its first
-    // three letters.
+    // straight away. One exact match is answered: its question, as a food
+    // page asks it, its verdict and its date line (a never-food's own
+    // line), all one link, then "Also:" and what begins with the text or
+    // a later word of it. Otherwise those are rows under a count, in rank
+    // order, and only when there are none, what has the text inside a
+    // word; a list of one is answered too. Nothing at all is the
+    // not-found line, with the foods that share its first three letters.
     function filter(q) {
       found.textContent = "";
       suggestList.textContent = "";
+      alsoLine.textContent = "";
       strip.hidden = everything.hidden = !!q;
       results.hidden = !q;
-      one.hidden = none.hidden = suggest.hidden = true;
+      one.hidden = none.hidden = suggest.hidden = alsoLine.hidden = true;
       label.hidden = false;
       light(-1);
       picks = [];
-      if (!q) { shown = []; status.textContent = ""; return; }
-      shown = rank(index, q);
-      var n = shown.length;
-      label.textContent = n + " matches";
-      status.textContent = label.textContent;
-      if (n === 1) {
-        var li = shown[0].li, verdict = li.dataset.verdict;
+      lead = null;
+      if (!q) { status.textContent = ""; return; }
+      var hits = search(q);
+      var exact = hits.filter(function (h) { return h.tier === 1; });
+      var near = hits.filter(function (h) { return h.tier === 2 || h.tier === 3; });
+      var answer = null, also = [], list = [];
+      if (exact.length === 1) { answer = exact[0]; also = near; }
+      else if (exact.length || near.length) list = exact.concat(near);
+      else list = hits;
+      if (list.length === 1) { answer = list[0]; list = []; }
+      if (hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier)) lead = hits[0].it;
+      if (answer) {
+        var it = answer.it, verdict = it.verdict();
         label.hidden = true;
-        one.href = li.querySelector("a").href;
-        one.style.setProperty("--food", getComputedStyle(li).getPropertyValue("--food"));
-        one.querySelector(".one-ask").textContent = "Is it " + shown[0].name.toLowerCase() + " yet?";
+        one.href = foodUrl(it.slug);
+        one.style.setProperty("--food", it.colour());
+        one.querySelector(".one-ask").textContent = "Is it " + it.ask + " yet?";
         one.querySelector(".one-word").textContent = verdict + ".";
-        one.querySelector(".one-line").textContent = lineOf[li.dataset.slug] || li.dataset.line;
+        one.querySelector(".one-line").textContent = it.line();
         one.hidden = false;
         picks = [one];
-        status.textContent = "1 match: " + shown[0].name + ", " + verdict.toLowerCase() + ".";
-      } else if (n) {
-        shown.forEach(function (it) {
-          var copy = it.li.cloneNode(true);
-          copy.hidden = false;
-          found.appendChild(copy);
-          picks.push(copy.querySelector("a"));
+        status.textContent = "1 match: " + it.name + (it.label ? " (" + it.label + ")" : "") + ", " + verdict.toLowerCase() + ".";
+        if (also.length) {
+          alsoLine.appendChild(document.createTextNode("Also: "));
+          also.forEach(function (h, i) {
+            if (i) alsoLine.appendChild(document.createTextNode(", "));
+            var a = el("a", "food-link", h.it.name + (h.it.label ? " (" + h.it.label + ")" : ""));
+            a.href = foodUrl(h.it.slug);
+            a.style.setProperty("--food", h.it.colour());
+            alsoLine.appendChild(a);
+            picks.push(a);
+          });
+          alsoLine.hidden = false;
+          status.textContent += " Also " + also.length + " more.";
+        }
+      } else if (list.length) {
+        label.textContent = list.length + " matches";
+        status.textContent = label.textContent;
+        list.forEach(function (h) {
+          var row = h.it.row();
+          found.appendChild(row);
+          picks.push(row.querySelector("a"));
         });
       } else {
         label.hidden = true;
@@ -601,16 +717,15 @@
         none.hidden = false;
         status.textContent = "No matches.";
         var bit = fold(q).slice(0, 3);
-        var near = bit.length < 3 ? [] : index.filter(function (it) {
-          return it.terms.some(function (t) { return t.indexOf(bit) >= 0; });
+        var close = bit.length < 3 ? [] : index.filter(function (it) {
+          return !it.label && it.strings.some(function (c) { return c.join(" ").indexOf(bit) >= 0; });
         }).slice(0, 5);
-        near.forEach(function (it) {
-          var copy = it.li.cloneNode(true);
-          copy.hidden = false;
-          suggestList.appendChild(copy);
-          picks.push(copy.querySelector("a"));
+        close.forEach(function (it) {
+          var row = it.row();
+          suggestList.appendChild(row);
+          picks.push(row.querySelector("a"));
         });
-        suggest.hidden = !near.length;
+        suggest.hidden = !close.length;
       }
     }
     function light(i) {
@@ -647,7 +762,7 @@
     });
     input.form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var go = active >= 0 ? picks[active] : shown.length ? picks[0] : null;
+      var go = active >= 0 ? picks[active] : results.hidden || !none.hidden ? null : picks[0];
       if (go) location.href = go.href;
     });
     var q = new URL(location.href).searchParams.get("q");
@@ -686,7 +801,13 @@
 
     // The this-week blocks for a week other than the baked one: the same
     // blocks index.html bakes, a few foods picked at random from each list.
-    if (!SAME_WEEK) {
+    // A fresh three on every visit: from the baked lists in the visitor's
+    // week, and otherwise from the data.
+    if (SAME_WEEK) {
+      strip.querySelectorAll(".teaser-foods[data-all]").forEach(function (p) {
+        fillTeaser(p, JSON.parse(p.dataset.all));
+      });
+    } else {
       loadFoods().then(function (foods) {
         var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
         strip.textContent = "";
@@ -696,20 +817,7 @@
           var s = el("section", "teaser");
           s.appendChild(el("h2", "teaser-label", label));
           var p = el("p", "teaser-foods");
-          var pick = pickSome(items, STRIP_PICK);
-          pick.forEach(function (i, n) {
-            if (n) p.appendChild(document.createTextNode(", "));
-            var a = el("a", "food-link", i.name);
-            a.href = foodUrl(i.slug);
-            a.style.setProperty("--food", i.colour);
-            p.appendChild(a);
-          });
-          var more = items.length - pick.length;
-          if (more > 0) {
-            p.appendChild(document.createTextNode(" "));
-            var m = el("a", "more-link", "and " + more + " more"); m.href = BASE + "now/";
-            p.appendChild(m);
-          }
+          fillTeaser(p, items);
           s.appendChild(p);
           strip.appendChild(s);
         }

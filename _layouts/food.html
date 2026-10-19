@@ -48,7 +48,8 @@ colour.
      random from the baked verdicts, A to Z, and how many more there are,
      which links to Now. All are YES, as the heading says, so no row
      carries a tag. The heading is "Also great this week" unless this food
-     is NO. site.js picks the same number. {%- endcomment -%}
+     is NO. All of them are in data-all, and site.js picks a fresh three
+     on every visit. {%- endcomment -%}
   {%- assign also_all = "" | split: "" -%}
   {%- for other in site.data.foods -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
@@ -59,7 +60,8 @@ colour.
   {%- assign also = also_all | sample: 3 | sort: "name" -%}
   {%- if also.size > 0 -%}
   {%- assign also_more = also_all.size | minus: also.size -%}
-  <section class="also">
+  {%- capture also_json -%}[{% for o in also_all %}{"slug":{{ o.slug | jsonify }},"name":{{ o.name | jsonify }},"colour":{{ o.colour | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
+  <section class="also" data-all='{{ also_json | escape }}'>
     <h2><span data-also-no{% if b.verdict != "NO" %} hidden{% endif %}>Great this week</span><span data-also-yes{% if b.verdict == "NO" %} hidden{% endif %}>Also great this week</span></h2>
     <ul class="food-list">
       {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
