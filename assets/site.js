@@ -479,7 +479,7 @@
     var index = rows.map(function (li) {
       var name = li.querySelector(".food-title").textContent;
       return {
-        name: name, label: "", slug: li.dataset.slug, ask: name.toLowerCase(),
+        name: name, label: "", slug: li.dataset.slug, ask: name.toLowerCase(), never: li.classList.contains("never"),
         strings: terms(li.dataset.terms.split("|").filter(Boolean)),
         names: (li.dataset.names || "").split("|").filter(Boolean),
         colour: function () { return getComputedStyle(li).getPropertyValue("--food").trim(); },
@@ -640,12 +640,17 @@
       if (lead) slot.style.setProperty("--food", lead.colour());
     }
 
+    // The typed text is kept in the address as ?q=, so Back from a food
+    // page, or a reload, comes back to the same answer.
     function apply() {
       var q = input.value.trim();
       filter(q);
       complete();
       size();
       colour();
+      var url = new URL(location.href);
+      if (q) url.searchParams.set("q", input.value); else url.searchParams.delete("q");
+      if (url.href !== location.href) history.replaceState(history.state, "", url);
     }
     // While there is text, the results take the this-week blocks' place
     // and the Everything list is hidden, so matches show in one place,
@@ -668,6 +673,7 @@
       light(-1);
       picks = [];
       lead = null;
+      answered = null;
       if (!q) { status.textContent = ""; return; }
       var hits = search(q);
       var exact = hits.filter(function (h) { return h.tier === 1; });
@@ -680,13 +686,19 @@
       if (answer) {
         var it = answer.it, verdict = it.verdict();
         label.hidden = true;
-        one.href = foodUrl(it.slug);
+        if (it.never) one.removeAttribute("href");
+        else one.href = foodUrl(it.slug);
+        one.classList.toggle("is-never", !!it.never);
         one.style.setProperty("--food", it.colour());
         one.querySelector(".one-ask").textContent = "Is it " + it.ask + " yet?";
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
+        one.querySelector(".one-more").hidden = !!it.never;
+        one.querySelector(".one-more .arrow-text").textContent = "More about " + it.name.toLowerCase();
+        dialFor(it.never ? null : it.slug);
         one.hidden = false;
-        picks = [one];
+        answered = it.never ? "never" : "link";
+        picks = it.never ? [] : [one];
         status.textContent = "1 match: " + it.name + (it.label ? " (" + it.label + ")" : "") + ", " + verdict.toLowerCase() + ".";
         if (also.length) {
           alsoLine.appendChild(document.createTextNode("Also: "));
@@ -730,6 +742,45 @@
         suggest.hidden = !close.length;
       }
     }
+    // The answer's dial is its food page's own, fetched once a food and
+    // kept, drawn small with today's hand; the fetch also warms the page
+    // the answer leads to. Its box holds the space while it comes.
+    var dialBox = one.querySelector(".one-dial"), dials = {}, dialSlug = null;
+    function dialFor(slug) {
+      if (slug === dialSlug && dialBox.firstChild) return;
+      dialSlug = slug;
+      dialBox.textContent = "";
+      dialBox.hidden = !slug;
+      if (!slug) return;
+      if (!dials[slug]) dials[slug] = fetch(foodUrl(slug)).then(function (r) { return r.text(); }).then(function (page) {
+        return new DOMParser().parseFromString(page, "text/html").querySelector("figure.wheel svg");
+      }).catch(function () { return null; });
+      dials[slug].then(function (svg) {
+        if (!svg || dialSlug !== slug) return;
+        var fig = el("span", "wheel");
+        var copy = document.importNode(svg, true);
+        copy.setAttribute("viewBox", "30 30 300 300");
+        copy.removeAttribute("role"); copy.removeAttribute("aria-label");
+        fig.appendChild(copy);
+        dialBox.textContent = "";
+        dialBox.appendChild(fig);
+        markWheel(fig, TODAY);
+      });
+    }
+    // Going to the answer's page, the typed word, the verdict and the dial
+    // are named for the view transition, so each moves into the food
+    // page's question, verdict and dial. The names go once this page is
+    // shown again, so no other link borrows them.
+    var answered = null;
+    function nameFor(on) {
+      input.style.viewTransitionName = on ? "food-name" : "";
+      one.querySelector(".one-word").style.viewTransitionName = on ? "food-verdict" : "";
+      dialBox.style.viewTransitionName = on && dialBox.firstChild ? "food-dial" : "";
+    }
+    one.addEventListener("click", function () { if (one.hasAttribute("href")) nameFor(true); });
+    window.addEventListener("pagereveal", function (e) {
+      (e.viewTransition ? e.viewTransition.finished : Promise.resolve()).then(function () { nameFor(false); });
+    });
     function light(i) {
       if (active >= 0) picks[active].classList.remove("is-active");
       active = i;
@@ -764,7 +815,8 @@
     });
     input.form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var go = active >= 0 ? picks[active] : results.hidden || !none.hidden ? null : picks[0];
+      var go = active >= 0 ? picks[active] : results.hidden || !none.hidden || answered === "never" ? null : picks[0];
+      if (go === one) nameFor(true);
       if (go) location.href = go.href;
     });
     var q = new URL(location.href).searchParams.get("q");

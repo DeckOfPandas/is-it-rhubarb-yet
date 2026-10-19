@@ -27,7 +27,7 @@ colour.
 {%- assign width = cw | times: 52 | plus: x0 | plus: 4 -%}
 
 <article class="food" style="--food: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ quotes_json | escape }}'>
-  <p class="ask">Is it {{ food.name | downcase }} yet?</p>
+  <p class="ask">Is it <span class="ask-name">{{ food.name | downcase }}</span> yet?</p>
 
   <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
   <p class="date-line" id="date-line">{{ b.line }}</p>
