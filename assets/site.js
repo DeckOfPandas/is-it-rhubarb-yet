@@ -122,6 +122,7 @@
     a.appendChild(sw);
     var name = el("span", "food-name", item.name);
     if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", "(" + item.variety + ")")); }
+    if (item.early) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "early", item.early)); }
     a.appendChild(name);
     if (opts.tag !== false) {
       if (opts.leader !== false) {
@@ -133,6 +134,22 @@
     }
     li.appendChild(a);
     return li;
+  }
+
+  // A group of foods, the same markup as _includes/food-group.html: an
+  // optional small caps label, with the number of foods when `count`,
+  // over rows with no tag.
+  function foodGroup(items, label, count) {
+    var g = el("div", "food-group");
+    if (label) {
+      var h = el("h3", "group-label", label);
+      if (count) { h.appendChild(document.createTextNode(" ")); h.appendChild(el("span", "count", String(items.length))); }
+      g.appendChild(h);
+    }
+    var ul = el("ul", "food-list");
+    items.forEach(function (i) { ul.appendChild(foodRow(i, { tag: false })); });
+    g.appendChild(ul);
+    return g;
   }
 
   // Verdicts baked for another week are replaced on every row that shows
@@ -352,11 +369,15 @@
     var input = document.getElementById("hook-input");
     var list = document.getElementById("food-list");
     if (!input || !list) return;
+    // The A to Z list holds every food and never-food with its search terms;
+    // matches are copied from it into a list of their own, best first.
     var rows = Array.prototype.slice.call(list.querySelectorAll(".food-row"));
-    var headings = list.querySelectorAll(".heading");
+    var lists = document.getElementById("food-lists");
+    var found = document.getElementById("found");
+    var foundGroup = document.getElementById("found-group");
     var none = document.getElementById("hook-none");
     var index = rows.map(function (li) {
-      return { li: li, name: li.querySelector(".food-name").textContent, terms: li.dataset.terms.split("|").filter(Boolean).map(fold), never: li.classList.contains("never") };
+      return { li: li, name: li.querySelector(".food-name").textContent, terms: li.dataset.terms.split("|").filter(Boolean).map(fold) };
     });
     var shown = [];
 
@@ -409,18 +430,20 @@
       colour();
     }
     function filter(q) {
+      found.textContent = "";
       if (!q) {
-        list.classList.remove("filtered");
-        index.forEach(function (it) { it.li.hidden = it.never; it.li.style.order = ""; });
-        headings.forEach(function (h) { h.hidden = false; });
+        lists.hidden = false; foundGroup.hidden = true;
         none.hidden = true; shown = [];
         return;
       }
-      list.classList.add("filtered");
-      headings.forEach(function (h) { h.hidden = true; });
+      lists.hidden = true;
       shown = rank(index, q);
-      index.forEach(function (it) { it.li.hidden = true; it.li.style.order = ""; });
-      shown.forEach(function (it, i) { it.li.hidden = false; it.li.style.order = i; });
+      shown.forEach(function (it) {
+        var copy = it.li.cloneNode(true);
+        copy.hidden = false;
+        found.appendChild(copy);
+      });
+      foundGroup.hidden = !shown.length;
       if (shown.length) { none.hidden = true; return; }
       none.textContent = "";
       none.appendChild(document.createTextNode("Is it " + q + " yet? Literally no idea. If that's an actual thing, please "));
@@ -445,7 +468,7 @@
     // names no element, so the browser does not scroll: the cursor goes to
     // the input and the page stays where it is.
     if (location.hash === "#search" || location.hash === "#hook-input") input.focus({ preventScroll: true });
-    refreshRows(list);
+    refreshRows(lists).then(function () { if (input.value.trim()) apply(); });
 
     // The this-week strip for a week other than the baked one: the same
     // lines index.html bakes, a few foods picked at random from each list.
@@ -511,13 +534,9 @@
     var redrawn = false;
 
     // One band, the same markup as _includes/band.html: a heading with the
-    // count (none when it is nothing), then the foods as one A to Z list (plain), under their phrases
-    // (phrase), or in a closed disclosure per kind (kind). No row has a tag.
-    function list(items) {
-      var ul = el("ul", "food-list");
-      items.forEach(function (i) { ul.appendChild(foodRow(i, { tag: false })); });
-      return ul;
-    }
+    // count (none when it is nothing), then the foods as one A to Z list
+    // (plain), a group per timing (phrase) or a group per kind with its
+    // count (kind). No row has a tag.
     function band(cls, heading, kinds, shape, emptyText) {
       var s = el("section", "band " + cls);
       var h = el("h2", null, heading + " ");
@@ -526,21 +545,11 @@
       s.appendChild(h);
       if (!total) { s.appendChild(el("p", "empty", emptyText)); return s; }
       if (shape === "phrase") {
-        V.byPhrase(kinds).forEach(function (g) {
-          s.appendChild(el("h3", "phrase", g.phrase));
-          s.appendChild(list(g.items));
-        });
+        V.byPhrase(kinds).forEach(function (g) { s.appendChild(foodGroup(g.items, g.phrase)); });
       } else if (shape === "kind") {
-        kinds.forEach(function (k) {
-          var d = el("details", "kind");
-          var sum = el("summary", null, (KIND[k.kind] || k.kind) + " ");
-          sum.appendChild(el("span", "count", String(k.items.length)));
-          d.appendChild(sum);
-          d.appendChild(list(k.items));
-          s.appendChild(d);
-        });
+        kinds.forEach(function (k) { s.appendChild(foodGroup(k.items, KIND[k.kind] || k.kind, true)); });
       } else {
-        s.appendChild(list(V.azList(kinds)));
+        s.appendChild(foodGroup(V.azList(kinds)));
       }
       return s;
     }

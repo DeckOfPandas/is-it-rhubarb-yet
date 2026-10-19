@@ -1,0 +1,19 @@
+{%- comment -%}
+A group of foods inside a section: a small caps label in Atkinson (the
+section itself is headed in Anton, never the reverse), then the foods as
+rows in columns that read down, then across. Every group after the
+first in its section has a hairline above it. Every food in a group here
+shares the verdict its section names, so no row has a tag. Expects:
+items, and optionally label (none for a section that is one list) and
+count (true to follow the label with the number of foods). Home's
+families are the same markup with home's own rows; site.js builds it in
+foodGroup.
+{%- endcomment -%}
+<div class="food-group">
+  {%- if include.label -%}
+  <h3 class="group-label">{{ include.label }}{% if include.count %} <span class="count">{{ include.items.size }}</span>{% endif %}</h3>
+  {%- endif -%}
+  <ul class="food-list">
+    {%- for item in include.items -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
+  </ul>
+</div>

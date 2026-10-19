@@ -169,27 +169,28 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    to the name by a dotted leader, like a greengrocer's price list. The
    leader gives way to a long name down to 16px; then the name wraps and
    the tag stays on its first line, since every part sits on the first
-   baseline. */
-.food-list { list-style: none; margin: 0.5rem 0 1rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.4rem 2rem; }
+   baseline. A list of several columns reads down each, then across, so
+   A to Z reads down. */
+.food-list { list-style: none; margin: 0; padding: 0; columns: 15rem; column-gap: 2rem; }
+.food-list > li { break-inside: avoid; padding: 0.2rem 0; }
 .food-row a { display: flex; align-items: baseline; gap: 0.5em; text-decoration: none; }
 .food-row a:hover .food-name, .food-row a:focus-visible .food-name { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .food-name { flex: 0 1 auto; min-width: 0; }
 .variety { color: var(--muted); }
+.early { color: var(--muted); font-size: 0.85em; }
 .leader { flex: 1 1 16px; min-width: 16px; border-bottom: 2px dotted color-mix(in oklab, var(--ink) 28%, var(--bg)); }
 .food-row .verdict-tag { flex: none; margin-left: auto; }
 .food-row.never { --food: var(--rhubarb); }
-.food-list .heading {
-  display: none; grid-column: 1 / -1; margin-top: 1rem;
-  font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;
+/* A group inside a section: a small caps label in Atkinson, then its
+   foods. A hairline and space part each group from the one before; the
+   section above it is headed in Anton. Home's families, Now's timings and
+   kinds all use it. */
+.food-group { margin: 0.5rem 0 1rem; }
+.food-group + .food-group { border-top: 1px solid color-mix(in oklab, var(--ink) 10%, var(--bg)); margin-top: 1.5rem; padding-top: 1.5rem; }
+.group-label {
+  margin: 0 0 0.5rem; font: 700 0.8125rem/1.3 var(--text); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
 }
-/* The home list opens by family: rows and headings alike are laid out by
-   --og, the headings included or they would all sort to the top; A to Z
-   swaps the rows to --oa and drops the headings. */
-.ordered-list .food-row, .ordered-list .heading { order: var(--og); }
-main:has(#order-group:checked) .ordered-list .heading { display: block; }
-main:has(#order-alpha:checked) .ordered-list .food-row { order: var(--oa); }
-main:has(#order-alpha:checked) .ordered-list .heading { display: none; }
-.ordered-list.filtered .heading { display: none; }
+.group-label .count { font-weight: 700; margin-left: 0.25em; }
 .empty { color: var(--muted); font-style: italic; }
 
 /* The date line: bold, tabular, the second thing on a verdict page. */
@@ -297,16 +298,7 @@ article.food { padding-top: 0.5rem; }
 }
 .band { min-width: 0; padding-top: 2.75rem; }
 .band h2 { font: 400 1.4rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; margin: 0 0 0.5rem; }
-.band .count { color: var(--muted); font: 400 0.9rem var(--text); font-variant-numeric: tabular-nums; margin-left: 0.3em; }
-.band .food-list { grid-template-columns: 1fr; }
-.band.still .food-list { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
-/* Last chance and on the way, under their phrases; great now, a closed
-   disclosure per kind. */
-.band .phrase { font: 700 1rem/1.3 var(--text); margin: 1.25rem 0 0.25rem; }
-.band .phrase + .food-list { margin-top: 0.25rem; }
-.band details.kind { margin: 0.5rem 0; }
-.band .kind summary { font-weight: 700; cursor: pointer; padding: 0.35rem 0; width: max-content; }
-.band .kind summary .count { font-weight: 400; }
+.band h2 .count { color: var(--muted); font: 400 0.9rem var(--text); font-variant-numeric: tabular-nums; margin-left: 0.3em; }
 
 /* --- Charts ---------------------------------------------------------------- */
 /* A row's colour is --c; in-season bars take it as is, "just about" bars

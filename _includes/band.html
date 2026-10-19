@@ -1,16 +1,17 @@
 {%- comment -%}
 One band of the digest: a heading with the count (none when it is
-nothing), then its foods in one
-of three shapes, or one line when there is nothing. Every food in a band
-has the verdict its heading says, so no row carries a tag.
+nothing), then its foods in one of three shapes, or one line when there
+is nothing. Every food in a band has the verdict its heading says, so no
+row carries a tag.
   plain   one list, A to Z (just arrived)
-  phrase  a sub-heading per phrase, soonest first, A to Z under each
-          (last chance, on the way), from the baked byPhrase groups
-  kind    a closed disclosure per kind of food (great now)
-Expects: cls (arrived, last, onway, still), heading, list (the baked
-[{kind, items}] from nowLists), shape, phrases (the baked [{phrase,
-items}] for the phrase shape), az (the baked A to Z list for the plain
-shape), and empty (the line for an empty band).
+  phrase  a group per timing, soonest first, A to Z in each (last
+          chance, on the way), from the baked byPhrase groups; a food's
+          earlier "first ones" timing shows beside it
+  kind    a group per kind of food with its count, A to Z (great now)
+A group is food-group.html. Expects: cls (arrived, last, onway, still),
+heading, list (the baked [{kind, items}] from nowLists), shape, phrases
+(the baked [{phrase, items}] for the phrase shape), az (the baked A to Z
+list for the plain shape), and empty (the line for an empty band).
 site.js builds the same markup when it redraws the digest for another
 week.
 {%- endcomment -%}
@@ -21,24 +22,10 @@ week.
   {%- if total == 0 -%}
   <p class="empty">{{ include.empty }}</p>
   {%- elsif include.shape == "phrase" -%}
-    {%- for g in include.phrases -%}
-    <h3 class="phrase">{{ g.phrase }}</h3>
-    <ul class="food-list">
-      {%- for item in g.items -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
-    </ul>
-    {%- endfor -%}
+    {%- for g in include.phrases -%}{%- include food-group.html label=g.phrase items=g.items -%}{%- endfor -%}
   {%- elsif include.shape == "kind" -%}
-    {%- for k in include.list -%}
-    <details class="kind">
-      <summary>{{ k.kind | capitalize }} <span class="count">{{ k.items.size }}</span></summary>
-      <ul class="food-list">
-        {%- for item in k.items -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
-      </ul>
-    </details>
-    {%- endfor -%}
+    {%- for k in include.list -%}{%- include food-group.html label=k.kind items=k.items count=true -%}{%- endfor -%}
   {%- else -%}
-    <ul class="food-list">
-      {%- for item in include.az -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
-    </ul>
+    {%- include food-group.html items=include.az -%}
   {%- endif -%}
 </section>

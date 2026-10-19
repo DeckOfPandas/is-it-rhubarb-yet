@@ -10,10 +10,12 @@ food page; no match gets the not-found line. Without JavaScript the
 whole list renders and the input is a form that reloads this page.
 
 Verdicts in the list are baked for the build day; site.js recomputes
-them when the visitor's week differs. The list is one grid whose items
-carry a rank under two orders as --og (by family, A to Z within it) and
---oa (A to Z); the order switch picks which rank lays it out by, and
-family headings are items that only show in family order, the default.
+them when the visitor's week differs. The list is drawn twice, by family
+(the default) and A to Z, and the order switch shows one by CSS, as the
+calendar's does: lists in columns read down, then across, so one list
+cannot be reordered in place. The A to Z list carries the never-foods,
+hidden, and every row's search terms; typing hides both lists and shows
+the matches, best first, in a list of their own.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign foods = site.data.foods | sort: "name" -%}
@@ -61,22 +63,35 @@ family headings are items that only show in family order, the default.
       <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
     </fieldset>
   </div>
-  <ul class="food-list ordered-list" id="food-list">
-    {%- for g in site.data.groups -%}
-    <li class="heading" id="{{ g.key }}" data-group="{{ g.key }}" style="--og: {{ forloop.index0 | times: 300 }}">{{ g.name }}</li>
-    {%- endfor -%}
-    {%- for food in foods -%}
-      {%- assign oa = forloop.index -%}
-      {%- assign gi = 0 -%}
-      {%- for g in site.data.groups -%}{%- if g.key == food.group -%}{%- assign gi = forloop.index0 -%}{%- endif -%}{%- endfor -%}
-      {%- assign b = baked.foods[food.slug] -%}
-      {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
-      {%- capture order -%}--oa: {{ oa }}; --og: {{ gi | times: 300 | plus: oa }}{%- endcapture -%}
-      {%- include food-row.html item=food verdict=b.verdict group=food.group terms=terms order=order -%}
-    {%- endfor -%}
-    {%- for n in site.data.never -%}
-      {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
-      {%- include food-row.html item=n verdict="NEVER" never=true terms=terms -%}
-    {%- endfor -%}
-  </ul>
+  <div class="ordered" id="food-lists">
+    <div class="by-group">
+      {%- for g in site.data.groups -%}
+      {%- assign in_group = foods | where: "group", g.key -%}
+      {%- if in_group.size > 0 -%}
+      <div class="food-group">
+        <h3 class="group-label" id="{{ g.key }}">{{ g.name }}</h3>
+        <ul class="food-list">
+          {%- for food in in_group -%}{%- assign b = baked.foods[food.slug] -%}{%- include food-row.html item=food verdict=b.verdict -%}{%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="by-alpha">
+      <div class="food-group">
+        <ul class="food-list" id="food-list">
+          {%- for food in foods -%}
+            {%- assign b = baked.foods[food.slug] -%}
+            {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
+            {%- include food-row.html item=food verdict=b.verdict terms=terms -%}
+          {%- endfor -%}
+          {%- for n in site.data.never -%}
+            {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
+            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="food-group" id="found-group" hidden><ul class="food-list" id="found"></ul></div>
 </section>
