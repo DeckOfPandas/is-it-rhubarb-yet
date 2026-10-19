@@ -579,6 +579,7 @@
   group: fruiting
   colour: "#09812d"
   source: ncgm
+  aliases: ["zucchini"]
   varieties:
     - name: ""
       weeks:
