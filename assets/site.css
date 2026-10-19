@@ -200,10 +200,11 @@ main:has(#order-alpha:checked) .ordered-list .heading { display: none; }
 /* --- Home: the hook ------------------------------------------------------- */
 /* The hero question is the wordmark on home. Wide: one line, the input as
    wide as its word. Below 600px: three lines, the input the full width,
-   and site.js shrinks a long name's type until it fits. The placeholder is
-   lower case and grey, which is what makes it read as a box to type in;
-   what is typed is in capitals like the rest of the question. The word
-   sits in the middle of its underline. */
+   and site.js shrinks a long name's type until it fits. The input is lower
+   case, grey as a placeholder, which is what makes it read as a box to
+   type in among the capitals; the placeholder sits in the middle of its
+   underline and what is typed runs from the left. Once the typing narrows the list to one food, site.js sets
+   .is-food and the word takes that food's colour. */
 .hook { padding: 1.5rem 0 0.5rem; }
 .hook-form { margin: 0; }
 .hook-line {
@@ -213,17 +214,19 @@ main:has(#order-alpha:checked) .ordered-list .heading { display: none; }
 }
 .hook-slot { display: inline-flex; max-width: 100%; }
 #hook-input {
-  font: inherit; letter-spacing: inherit; text-transform: inherit; line-height: inherit; text-align: center;
-  color: var(--ink); background: transparent; border: 0; border-bottom: 0.06em solid var(--rhubarb); border-radius: 0;
+  font: inherit; letter-spacing: inherit; text-transform: none; line-height: inherit; text-align: left;
+  color: var(--ink); transition: color 0.25s; background: transparent; border: 0; border-bottom: 0.06em solid var(--rhubarb); border-radius: 0;
   padding: 0 0.08em; margin: 0; min-width: 3ch; max-width: 100%; -webkit-appearance: none; appearance: none;
 }
-#hook-input::placeholder { color: var(--muted); opacity: 0.55; text-transform: none; }
+#hook-input::placeholder { color: var(--muted); opacity: 0.55; text-align: center; }
+#hook-input.is-food { color: var(--food); }
+@media (prefers-reduced-motion: reduce) { #hook-input { transition: none; } }
 @media (max-width: 37.49rem) {
   .hook-line { flex-direction: column; align-items: stretch; font-size: clamp(3rem, 19vw, 6rem); line-height: 1; }
-  .hook-slot { display: flex; align-items: flex-end; width: 100%; height: 1.05em; margin: 0 0 0.12em; }
+  .hook-slot { display: flex; align-items: flex-end; width: 100%; height: 1.3em; margin: 0 0 0.12em; }
   #hook-input { width: 100%; }
 }
-.hook-ruler { position: absolute; right: 0; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: inherit; padding: 0 0.08em; }
+.hook-ruler { position: absolute; right: 0; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: none; padding: 0 0.08em; }
 .hook-slot { position: relative; }
 #hook-input:focus { outline: none; border-bottom-width: 0.1em; margin-bottom: -0.04em; }
 #hook-input::-webkit-search-cancel-button { display: none; }

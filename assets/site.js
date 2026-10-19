@@ -371,7 +371,6 @@
     var line = input.closest(".hook-line");
     var stacked = matchMedia("(max-width: 37.49rem)");
     function size() {
-      ruler.style.textTransform = input.value ? "" : "none";
       ruler.textContent = input.value || input.placeholder;
       var w = ruler.getBoundingClientRect().width + 12;
       if (w <= 12) return;
@@ -391,9 +390,24 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     window.addEventListener("resize", size);
 
+    // When the typing narrows the list to one food, the typed word takes
+    // that food's colour; so it does when the word is one food's name in
+    // full, as "apples" is while crab apples and pineapples still show.
+    function colour() {
+      var q = fold(input.value);
+      var exact = shown.filter(function (it) { return it.terms.indexOf(q) >= 0; });
+      var one = shown.length === 1 ? shown[0].li : exact.length === 1 ? exact[0].li : null;
+      input.classList.toggle("is-food", !!one);
+      if (one) input.style.setProperty("--food", getComputedStyle(one).getPropertyValue("--food"));
+    }
+
     function apply() {
       var q = input.value.trim();
       size();
+      filter(q);
+      colour();
+    }
+    function filter(q) {
       if (!q) {
         list.classList.remove("filtered");
         index.forEach(function (it) { it.li.hidden = it.never; it.li.style.order = ""; });
