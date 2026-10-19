@@ -66,7 +66,7 @@ test("rhubarb is NEARLY: forced rhubarb from 29 October, eleven days off", () =>
   assert.equal(fv.variety.name, "Forced");
   assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "In a week or two.");
-  assert.equal(V.varietyLine(bySlug.rhubarb, fv, YEAR, TODAY), "Forced, nearly. Outdoor: back in May.",
+  assert.equal(V.varietyLine(bySlug.rhubarb, fv, YEAR, TODAY), "Forced rhubarb, nearly. Outdoor rhubarb: back in May.",
     "outdoor rhubarb's week 18 starts on 30 April, but its middle is 3 May");
 });
 
@@ -86,7 +86,35 @@ test("potatoes are YES by maincrop until late December; new potatoes are back in
   assert.equal(fv.variety.name, "Maincrop");
   assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-12-31");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Until late December.");
-  assert.equal(V.varietyLine(bySlug.potatoes, fv, YEAR, TODAY), "Maincrop, yes. New: first ones in May, properly in June.");
+  assert.equal(V.varietyLine(bySlug.potatoes, fv, YEAR, TODAY), "Maincrop potatoes, yes. New potatoes: first ones in May, properly in June.");
+});
+
+test("a variety is named as a type or a cultivar, in a list and in a sentence", () => {
+  const v = (slug, name) => bySlug[slug].varieties.find((x) => x.name === name);
+  assert.equal(V.varietyLabel(v("rhubarb", "Forced")), "forced");
+  assert.equal(V.varietyLabel(v("cabbage", "Winter white")), "winter white");
+  assert.equal(V.varietyLabel(v("venison", "Red & Fallow")), "red & fallow");
+  assert.equal(V.varietyLabel(v("apples", "Cox")), "Cox");
+  assert.equal(V.varietyLabel(v("apples", "Egremont Russet")), "Egremont Russet");
+  assert.equal(V.varietyLabel({ name: "", weeks: [] }), "");
+  assert.equal(V.varietySaid(bySlug.rhubarb, v("rhubarb", "Forced")), "Forced rhubarb");
+  assert.equal(V.varietySaid(bySlug.rhubarb, v("rhubarb", "Forced"), true), "forced rhubarb");
+  assert.equal(V.varietySaid(bySlug.apples, v("apples", "Cox")), "Cox apples");
+  assert.equal(V.varietySaid(bySlug.apples, v("apples", "Cox"), true), "Cox apples", "a cultivar is never lower-cased");
+  assert.equal(V.varietySaid(bySlug.lamb, v("lamb", "New season")), "New-season lamb", "said wins");
+  assert.equal(V.varietySaid(bySlug.lamb, v("lamb", "New season"), true), "new-season lamb");
+  assert.equal(V.varietySaid(bySlug.venison, v("venison", "Roe & Muntjac"), true), "roe & muntjac venison");
+  ["apples", "pears"].forEach((slug) => bySlug[slug].varieties.forEach((x) => assert.equal(x.cultivar, true, slug + " " + x.name)));
+});
+
+test("a two-part arrival is grouped by when it is properly in", () => {
+  const t = (slug) => V.timing(verdictOf(slug).variety, YEAR, TODAY);
+  assert.deepEqual(t("jerusalem-artichokes"), { when: "In a week or two", early: "a few about now", days: 11 });
+  assert.equal(t("celery").when, "For another week or two");
+  assert.equal(t("celery").early, "");
+  const turkey = t("turkey");
+  assert.match(turkey.early, /^first ones /);
+  assert.ok(!/first ones|properly/i.test(turkey.when), turkey.when);
 });
 
 test("Jerusalem artichokes are NEARLY from a just-about week", () => {
@@ -234,17 +262,16 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
     assert.deepEqual(kinds, order.filter((k) => kinds.includes(k)), name + " is in kind order");
     assert.equal(new Set(kinds).size, kinds.length);
   });
-  // Within a kind, last chance and on the way run soonest first, and great
-  // now puts all-year foods last.
+  // Within a kind, last chance and on the way run soonest first; just
+  // arrived and great now run A to Z by food, then variety.
   const ascending = (items) => items.every((it, i) => i === 0 || items[i - 1].days === null ||
     (it.days !== null && items[i - 1].days <= it.days) || it.days === null);
   now.last.forEach((k) => assert.ok(ascending(k.items), "last chance " + k.kind));
   now.onway.forEach((k) => assert.ok(ascending(k.items), "on the way " + k.kind));
-  now.still.forEach((k) => {
-    assert.ok(ascending(k.items), "great now " + k.kind);
-    const firstAllYear = k.items.findIndex((i) => i.days === null);
-    if (firstAllYear >= 0) assert.ok(k.items.slice(firstAllYear).every((i) => i.days === null), "all year last in " + k.kind);
-  });
+  const keys = (items) => items.map((i) => i.name + " " + i.variety);
+  now.arrived.concat(now.still).forEach((k) => assert.deepEqual(keys(k.items), keys(k.items).slice().sort(), k.kind + " is A to Z"));
+  // A variety is named as a list shows it.
+  assert.equal(V.flatten(now.onway).find((i) => i.slug === "rhubarb").variety, "forced");
   // Lines are the new phrasing, never a calendar date.
   V.flatten(now.last).concat(V.flatten(now.onway), V.flatten(now.still)).forEach((i) => {
     assert.ok(!/\d/.test(i.line), i.name + ": " + i.line);
@@ -259,23 +286,26 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
   assert.equal(plain.last[0].kind, "");
 });
 
-test("last chance and on the way group by phrase, soonest first, A to Z within", () => {
+test("last chance and on the way group by one timing, soonest first, A to Z within", () => {
   const now = V.nowLists(foods, groups, WEEK, YEAR, TODAY);
   ["last", "onway"].forEach((name) => {
     const grouped = V.byPhrase(now[name]);
     const phrases = grouped.map((g) => g.phrase);
-    assert.equal(new Set(phrases).size, phrases.length, name + ": each phrase once");
+    assert.equal(new Set(phrases).size, phrases.length, name + ": each timing once");
     assert.equal(grouped.reduce((n, g) => n + g.items.length, 0), V.flatten(now[name]).length, name + ": every food once");
     grouped.forEach((g) => {
-      g.items.forEach((i) => assert.equal(i.line, g.phrase));
-      const names = g.items.map((i) => i.name);
+      g.items.forEach((i) => assert.equal(i.when, g.phrase));
+      assert.ok(!/first ones|properly|about now/i.test(g.phrase), name + ": " + g.phrase + " is one timing");
+      const names = g.items.map((i) => i.name + " " + i.variety);
       assert.deepEqual(names, names.slice().sort(), name + " " + g.phrase + " is A to Z");
     });
-    const soonest = grouped.map((g) => Math.min(...g.items.map((i) => (i.days === null ? Infinity : i.days))));
+    const soonest = grouped.map((g) => Math.min(...g.items.map((i) => (i.whenDays === null ? Infinity : i.whenDays))));
     soonest.forEach((d, i) => assert.ok(i === 0 || soonest[i - 1] <= d, name + " groups run soonest first"));
   });
   const last = V.byPhrase(now.last);
   assert.ok(last.find((g) => g.phrase === "For another week or two").items.some((i) => i.slug === "celery"));
+  const onway = V.byPhrase(now.onway);
+  assert.ok(onway.find((g) => g.phrase === "In a week or two").items.some((i) => i.slug === "jerusalem-artichokes"));
   assert.deepEqual(V.byPhrase([]), []);
 });
 

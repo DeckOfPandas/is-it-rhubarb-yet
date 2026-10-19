@@ -174,7 +174,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .food-row a { display: flex; align-items: baseline; gap: 0.5em; text-decoration: none; }
 .food-row a:hover .food-name, .food-row a:focus-visible .food-name { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .food-name { flex: 0 1 auto; min-width: 0; }
-.variety { color: var(--muted); font-size: 0.9em; }
+.variety { color: var(--muted); }
 .leader { flex: 1 1 16px; min-width: 16px; border-bottom: 2px dotted color-mix(in oklab, var(--ink) 28%, var(--bg)); }
 .food-row .verdict-tag { flex: none; margin-left: auto; }
 .food-row.never { --food: var(--rhubarb); }
@@ -326,6 +326,7 @@ article.food { padding-top: 0.5rem; }
 .chart .week-label { fill: var(--muted); font-size: 8px; }
 .chart .group-label { font-weight: 700; font-size: 13px; fill: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
 .chart .row-label { font-size: 11px; }
+.chart .row-variety { fill: var(--muted); }
 .chart .cell { shape-rendering: crispEdges; }
 .chart .cell.in { fill: var(--c); }
 .chart .cell.avail { fill: color-mix(in oklab, var(--c) 45%, var(--off)); }

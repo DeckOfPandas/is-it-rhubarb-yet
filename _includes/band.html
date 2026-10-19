@@ -9,7 +9,8 @@ has the verdict its heading says, so no row carries a tag.
   kind    a closed disclosure per kind of food (great now)
 Expects: cls (arrived, last, onway, still), heading, list (the baked
 [{kind, items}] from nowLists), shape, phrases (the baked [{phrase,
-items}] for the phrase shape), and empty (the line for an empty band).
+items}] for the phrase shape), az (the baked A to Z list for the plain
+shape), and empty (the line for an empty band).
 site.js builds the same markup when it redraws the digest for another
 week.
 {%- endcomment -%}
@@ -36,11 +37,8 @@ week.
     </details>
     {%- endfor -%}
   {%- else -%}
-    {%- assign all = "" | split: "" -%}
-    {%- for k in include.list -%}{%- assign all = all | concat: k.items -%}{%- endfor -%}
     <ul class="food-list">
-      {%- assign all = all | sort: "name" -%}
-      {%- for item in all -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
+      {%- for item in include.az -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
     </ul>
   {%- endif -%}
 </section>

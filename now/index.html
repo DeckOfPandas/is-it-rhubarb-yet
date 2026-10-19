@@ -29,7 +29,7 @@ the baked week shows, dated.
 </header>
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
-  {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived shape="plain" empty="Nothing new this week." -%}
+  {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived shape="plain" az=baked.az.arrived empty="Nothing new this week." -%}
   {%- include band.html cls="last" heading="Last chance" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
   {%- include band.html cls="onway" heading="On the way" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
   {%- include band.html cls="still" heading="Great now" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}

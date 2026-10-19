@@ -121,7 +121,7 @@
     var sw = el("span", "swatch"); sw.setAttribute("aria-hidden", "true");
     a.appendChild(sw);
     var name = el("span", "food-name", item.name);
-    if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", item.variety)); }
+    if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", "(" + item.variety + ")")); }
     a.appendChild(name);
     if (opts.tag !== false) {
       if (opts.leader !== false) {
@@ -540,7 +540,7 @@
           s.appendChild(d);
         });
       } else {
-        s.appendChild(list(V.flatten(kinds).sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; })));
+        s.appendChild(list(V.azList(kinds)));
       }
       return s;
     }

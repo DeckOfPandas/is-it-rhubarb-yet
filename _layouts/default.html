@@ -20,7 +20,7 @@ Now have cards of their own; every other page shows the home card.
   {%- assign b = baked.foods[page.slug] -%}
   {%- capture title -%}Is it {{ thing.name | downcase }} yet?{% if b %} {{ b.word }}.{% endif %}{%- endcapture -%}
   {%- if b -%}
-    {%- capture description -%}{{ b.word }}. {{ b.line | remove: "." }}{% if b.variety != "" %} ({{ b.variety | downcase }} {{ thing.name | downcase }}){% endif %}. As of {{ baked.asofText }}.{%- endcapture -%}
+    {%- capture description -%}{{ b.word }}. {{ b.line | remove: "." }}{% if b.said != "" %} ({{ b.said }}){% endif %}. As of {{ baked.asofText }}.{%- endcapture -%}
     {%- capture alt -%}{{ title }} {{ b.line }} As of {{ baked.asofText }}.{%- endcapture -%}
   {%- endif -%}
 {%- endif -%}

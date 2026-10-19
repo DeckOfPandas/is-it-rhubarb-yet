@@ -6,7 +6,9 @@ permalink: /season-starts.ics
 A subscribable calendar with one all-day event per variety on the first day
 of each fully-in-season run, repeating yearly. Dates are computed from the
 build year; the yearly rule keeps them valid afterwards. Tags trim only the
-whitespace after themselves so that each property keeps its own line.
+whitespace after themselves so that each property keeps its own line. A
+variety is named as a list names it, from the baked labels: "Rhubarb
+(forced)", "Apples (Cox)".
 {%- endcomment -%}
 {%- assign year = site.time | date: "%Y" -%}
 {%- assign jan1 = year | append: "-01-01" | date: "%s" | plus: 0 %}
@@ -16,7 +18,11 @@ PRODID:-//Is It Rhubarb Yet//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:UK seasons
 {% for food in site.data.foods -%}
+{% assign fslug = food.slug -%}
+{% assign vlabels = site.data.baked.labels[fslug] -%}
 {% for v in food.varieties -%}
+{% assign vix = forloop.index0 -%}
+{% assign vlabel = vlabels[vix] -%}
 {% for r in v.weeks -%}
 {% if r[2] == "in" -%}
 {% assign offset = r[0] | minus: 1 | times: 604800 -%}
@@ -28,7 +34,7 @@ DTSTAMP:{{ site.time | date: "%Y%m%dT%H%M%SZ" }}
 DTSTART;VALUE=DATE:{{ start }}
 DTEND;VALUE=DATE:{{ stop }}
 RRULE:FREQ=YEARLY
-SUMMARY:In season: {{ food.name }}{% if v.name != "" %} ({{ v.name | downcase }}){% endif %}
+SUMMARY:In season: {{ food.name }}{% if vlabel != "" %} ({{ vlabel }}){% endif %}
 DESCRIPTION:Week {{ r[0] }} to {{ r[1] }}. {{ site.url }}{{ site.baseurl }}/{{ food.slug }}/
 END:VEVENT
 {% endif -%}

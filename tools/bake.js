@@ -51,9 +51,11 @@ function main() {
     year: year,
     range: V.fmtRange(week, year),
     foods: {},
+    labels: {},
     now: V.nowLists(foods, groups, week, year, date)
   };
   baked.phrases = { last: V.byPhrase(baked.now.last), onway: V.byPhrase(baked.now.onway) };
+  baked.az = { arrived: V.azList(baked.now.arrived) };
 
   foods.forEach((f) => {
     const fv = V.foodVerdict(f, week);
@@ -64,14 +66,18 @@ function main() {
       line: V.dateLine(fv.variety, year, date),
       varietyLine: V.varietyLine(f, fv, year, date),
       variety: fv.variety.name || "",
+      said: fv.variety.name ? V.varietySaid(f, fv.variety.v, true) : "",
       since: fv.variety.since === undefined ? null : fv.variety.since,
       quote: q ? { text: q.text, by: q.by } : null
     };
   });
+  // Each variety's name as a list shows it in brackets, by index, for the
+  // calendar and the calendar feed; "" for an unnamed variety.
+  foods.forEach((f) => { baked.labels[f.slug] = f.varieties.map(V.varietyLabel); });
   never.forEach((n) => {
     const q = V.pickQuote(quotes, "NEVER", n.slug, week);
     baked.foods[n.slug] = {
-      verdict: "NEVER", word: "Never", line: n.line, varietyLine: "", variety: "", since: null,
+      verdict: "NEVER", word: "Never", line: n.line, varietyLine: "", variety: "", said: "", since: null,
       quote: q ? { text: q.text, by: q.by } : null
     };
   });
