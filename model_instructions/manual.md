@@ -129,6 +129,12 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   in both themes; it is also rhubarb's food colour and no other food
   comes near it. The pink never carries body-size text: links are ink
   with a pink underline.
+- Never-foods all share `--never`, ghost grey `#857f78` (4.7:1 on the
+  shed, 3.6:1 on custard): their swatches and tags, their pages and
+  cards, the inline NEVER result, and the hero's word and underline on
+  a lone never-food match. They never fall back to the pink. The
+  colour is a token at the top of `assets/site.css` and a constant in
+  `tools/cards.js`; there is no colours file.
 - Every food colour passes 3:1 on both backgrounds, so a verdict word
   is simply set in `--food`. "Today" is drawn in ink: the dial hand,
   the calendar line, the wheel hand.
@@ -159,18 +165,37 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   Home has no wordmark and no line under its header. The magnifier
   links to `/#search`, which names no element, so the page does not
   scroll; `site.js` puts the cursor in the input, and on home scrolls
-  back up to it.
+  back up to it (on a phone, to the input's line).
 - **Home hero.** The logo is the input. At rest it reads IS IT RHUBARB
   YET?, the placeholder RHUBARB in pink capitals over its underline with
   a blinking pink caret at its start, a normal space either side of the
   word; on focus the placeholder dims. Typed
   text is capitals in ink; once it names one food, or is one food's name
-  or alias in full, the word and its underline take that food's colour.
+  or alias in full, the word and its underline take that food's colour
+  (ghost grey for a never-food). Text that matches nothing stays ink
+  over the pink underline.
   `site.js` draws the underline at the word's width and the caret, and
   sets a word too long for its room smaller until it fits. One line on
   a wide screen, three below 600px. The input is not focused on load,
   so the hero rests as the logo; the first letter typed anywhere on
-  home goes into it.
+  home goes into it. On a phone, focusing it scrolls its line near the
+  top of the screen, 16px clear, so the keyboard does not hide the
+  results; with reduced motion it jumps.
+- **Home search.** While the input has text, the teasers, the arrow
+  link and the whole Everything section are hidden, and the results
+  stand in the teasers' place, at once, with no debounce. The count
+  ("3 MATCHES", "1 MATCH") is a teaser label in the same spot as the
+  first teaser's; under it the matches, best first, as shared food rows
+  with leaders and tags. Matching is the same as everywhere (names,
+  varieties as said, aliases, `also`; case and accents ignored). One
+  match: its row is lit on a wash of its colour, with its date line
+  under the name. One never-food: NEVER. in Anton over its line, ghost
+  grey, one link to its page. No match: "Is it dilll yet? Literally no
+  idea. If that's an actual thing, please tell us." with up to five
+  foods sharing its first three letters under DID YOU MEAN. Up and
+  Down move the highlight, Enter opens the lit row (or the best match),
+  Escape clears; a polite live region says the count. Clearing the
+  input brings everything back.
 - **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
   GREAT NOW and LAST CHANCE, each an Anton label over a random three
   foods in their colours and "and N more", which links to Now, then
@@ -179,7 +204,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   week", a food page's "Ask about something else" and "See the whole
   year") has an arrow after it and no underline at rest; on hover its
   words underline and the arrow, inside the link, does not.
-- **Food page.** Up to six foods of the same family that are YES,
+- **Food page.** Three foods of the same family that are YES, picked
+  at random at build (and in `site.js` for another week), A to Z,
   headed "Also great this week" ("Great this week" when the food is
   NO), then "and N more", which links to Now.
 - **Hover.** A food's name underlines in pink on hover, in lists and on
@@ -189,7 +215,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   words in ink.
 - **Footer.** Every label in the nav style: SOURCE DATA · CALENDAR FEED
   (to the feed's section on Source data) · JSON; ABOUT; the theme
-  switch; GitHub; the licences and the as-of date, smaller and
+  switch; GitHub; the licences (CODE: MIT · DATA AND WRITING: CC BY
+  4.0 · ©) and the as-of date, smaller and
   fainter; the signature hearts, which do not change on hover.
 - **Now.** The title follows the week shown ("this week", "next week",
   "last week", or none), over one muted line, "‹ 15–21 October ›".
