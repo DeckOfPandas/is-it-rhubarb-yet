@@ -690,11 +690,11 @@
         else one.href = foodUrl(it.slug);
         one.classList.toggle("is-never", !!it.never);
         one.style.setProperty("--food", it.colour());
-        one.querySelector(".one-ask").textContent = "Is it " + it.ask + " yet?";
+        one.querySelector(".ask-name").textContent = it.ask;
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
-        one.querySelector(".one-more").hidden = !!it.never;
-        one.querySelector(".one-more .arrow-text").textContent = "More about " + it.name.toLowerCase();
+        one.querySelector(".one-sub").hidden = one.querySelector(".one-go").hidden = !!it.never;
+        one.querySelector(".one-sub").textContent = "When is " + it.name.toLowerCase() + " in season?";
         dialFor(it.never ? null : it.slug);
         one.hidden = false;
         answered = it.never ? "never" : "link";
@@ -767,13 +767,13 @@
         markWheel(fig, TODAY);
       });
     }
-    // Going to the answer's page, the typed word, the verdict and the dial
+    // Going to the answer's page, the card's food name, verdict and dial
     // are named for the view transition, so each moves into the food
     // page's question, verdict and dial. The names go once this page is
     // shown again, so no other link borrows them.
     var answered = null;
     function nameFor(on) {
-      input.style.viewTransitionName = on ? "food-name" : "";
+      one.querySelector(".ask-name").style.viewTransitionName = on ? "food-name" : "";
       one.querySelector(".one-word").style.viewTransitionName = on ? "food-verdict" : "";
       dialBox.style.viewTransitionName = on && dialBox.firstChild ? "food-dial" : "";
     }

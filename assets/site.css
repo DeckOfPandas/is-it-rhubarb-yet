@@ -51,6 +51,13 @@
   --rule: color-mix(in oklab, var(--ink) 16%, var(--bg));
   --off: color-mix(in oklab, var(--ink) 11%, var(--bg));
   --band: color-mix(in oklab, var(--ink) 4%, var(--bg));
+  /* A panel is one step lighter than the page, and lighter again on
+     hover; lighter is toward white on custard and toward ink on the
+     shed. */
+  --panel: color-mix(in oklab, #fff 45%, var(--bg));
+  --panel-hover: color-mix(in oklab, #fff 70%, var(--bg));
+  /* The coloured edge on a food's card. */
+  --food-bar-width: 6px;
   --food: var(--rhubarb);
   --display: Anton, Impact, "Arial Narrow", sans-serif;
   --text: "Atkinson Hyperlegible Next", system-ui, sans-serif;
@@ -67,6 +74,8 @@
     --bg: var(--shed);
     --ink: #f3ede4;
     --muted: #b9ae9f;
+    --panel: color-mix(in oklab, var(--ink) 7%, var(--bg));
+    --panel-hover: color-mix(in oklab, var(--ink) 11%, var(--bg));
   }
 }
 :root[data-theme="dark"] {
@@ -74,6 +83,8 @@
   --bg: var(--shed);
   --ink: #f3ede4;
   --muted: #b9ae9f;
+  --panel: color-mix(in oklab, var(--ink) 7%, var(--bg));
+  --panel-hover: color-mix(in oklab, var(--ink) 11%, var(--bg));
 }
 :root[data-theme="light"] { color-scheme: light; }
 
@@ -222,7 +233,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .empty { color: var(--muted); font-style: italic; }
 
 /* The date line: bold, tabular, the second thing on a verdict page. */
-.date-line { font-weight: 700; font-size: 1.2rem; line-height: 1.35; margin: 0.9rem 0 0.25rem; }
+.date-line, .one-line { font-weight: 700; font-size: 1.2rem; line-height: 1.35; margin: 0.9rem 0 0.25rem; }
 .variety-line { color: var(--muted); margin: 0 0 1rem; }
 
 /* --- Home: the hook ------------------------------------------------------- */
@@ -309,11 +320,9 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 /* What is typed, answered where the this-week blocks were. Two or more
    matches: the count in their label's style and place, then the rows in
    one column, in rank order; the one Up and Down reach sits on a wash
-   of its food's colour. One match: in the label's place its question,
-   small and muted, then its verdict in Anton in its colour, its date
-   line, "More about …" and its dial, all one link to its page; a
-   never-food's is its question, NEVER. and its line, and no link. Then
-   a quiet "Also:" line of near matches, each in its own colour. */
+   of its food's colour. One match: the food's card, in the label's
+   place. Then a quiet "Also:" line of near matches, each in its own
+   colour. */
 .results { margin: 3rem 0 0.5rem; }
 .results .teaser-label { margin-bottom: 0.5rem; }
 .results .food-list { columns: auto; max-width: 30rem; }
@@ -321,25 +330,44 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .also-line .food-link.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); border-radius: 3px; }
 .results .food-row a { margin: 0 -0.4rem; padding: 0.1rem 0.4rem; border-radius: 4px; }
 .results .food-row a.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); }
-.one-result { display: grid; grid-template-columns: minmax(0, auto) auto; align-items: center; gap: 0.75rem 1.25rem; width: fit-content; max-width: 40rem; color: var(--ink); text-decoration: none; border-radius: 4px; }
-.one-text { display: block; min-width: 0; }
-.one-ask { display: block; font: 400 1.0625rem/1.3 var(--text); color: var(--muted); }
-.one-word { display: block; margin-top: 0.2rem; font: 400 2.75rem/1 var(--display); letter-spacing: var(--track-large); text-transform: uppercase; color: var(--food); }
-.one-line { display: block; margin-top: 0.4rem; font: 400 1.1rem/1.4 var(--text); }
-/* "More about basil →": ink, underlined in the food's colour, the arrow
-   never; it is part of the answer's one link, so a span. */
-.one-more { display: inline-block; margin-top: 0.6rem; font: 400 1rem/1.4 var(--text); }
-.one-more .arrow-text { text-decoration: underline; text-decoration-color: var(--food); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
-.one-result:hover .one-more .arrow-text, .one-result:focus-visible .one-more .arrow-text { text-decoration-thickness: 2px; }
-.one-more .arrow { display: inline-block; margin-left: 0.35em; }
-/* The answer's dial: the food page's own, its ring cropped close and its
-   month names and date left out at this size. Beside the text, and
-   below it on a screen too narrow for both. */
-.one-dial { flex: none; width: 88px; height: 88px; }
+/* A food's card: the food page in small. A panel one step lighter than
+   the page, its left edge in the food's colour (--food-bar-width), and
+   the page's own question, verdict, date line and dial, in that order,
+   at card size; their rules are the food page's, shared below. Under
+   them "When is basil in season?", and a round arrow in the food's
+   colour: on a wide screen the dial and the arrow stand at the right,
+   on a phone the dial beside the text and the arrow at the bottom
+   right, the subtitle left of it. The whole card is one link, lighter
+   on hover or focus, the arrow nudging right. A never-food's card is
+   its question, NEVER. and its line only, and no link. */
+.one-result {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "text dial go" "sub dial go";
+  align-items: center; gap: 0.5rem 1.5rem; max-width: 44rem;
+  padding: 1.25rem 1.5rem; background: var(--panel); border-radius: 12px; border-left: var(--food-bar-width) solid var(--food);
+  color: var(--ink); text-decoration: none; transition: background-color 0.15s;
+}
+.one-result[href]:hover, .one-result[href]:focus-visible { background: var(--panel-hover); }
+.one-text { grid-area: text; display: block; min-width: 0; }
+.one-result .one-ask { display: block; margin: 0; font-size: 1.375rem; }
+.one-result .one-word { display: block; margin-top: 0.3rem; font-size: 2.75rem; line-height: 1; padding-top: 0; }
+.one-result .one-line { display: block; margin: 0.4rem 0 0; font-weight: 400; font-size: 1.1rem; }
+.one-sub { grid-area: sub; color: var(--muted); font: 400 1rem/1.4 var(--text); }
+.one-dial { grid-area: dial; width: 120px; height: 120px; }
 .one-dial .wheel { display: block; width: 100%; margin: 0; }
 .one-dial .month, .one-dial .today-label { display: none; }
-@media (max-width: 37.49rem) { .one-dial { width: 80px; height: 80px; } }
-@media (max-width: 21.99rem) { .one-result { grid-template-columns: minmax(0, auto); } }
+.one-go {
+  grid-area: go; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--food); color: var(--shed); transition: transform 0.15s;
+}
+.one-go .icon { width: 1.5rem; height: 1.5rem; }
+.one-result:hover .one-go, .one-result:focus-visible .one-go { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .one-result, .one-go { transition: none; } .one-result:hover .one-go, .one-result:focus-visible .one-go { transform: none; } }
+@media (max-width: 37.49rem) {
+  .one-result { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "sub go"; padding: 1rem 1rem 1rem 1.1rem; gap: 0.5rem 1rem; }
+  .one-dial { width: 90px; height: 90px; }
+  .one-go { width: 48px; height: 48px; justify-self: end; }
+  .one-sub { align-self: center; }
+}
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
 .hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
 .results .hook-none { margin-top: 0; }
@@ -352,11 +380,13 @@ article.food { padding-top: 0.5rem; }
 /* The question is set like a page title, at the h1's size, in the muted
    ink; the verdict under it is the real h1. The word stops at half the
    viewport's height as well as the line's width, so a wide, short screen
-   still shows the date line under it; site.js fits it the same way. */
-.ask { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); color: var(--muted); margin: 1.5rem 0 0; }
+   still shows the date line under it; site.js fits it the same way.
+   The question, the verdict and the date line are shared with a food's
+   card on home, which sets them smaller. */
+.ask, .one-ask { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); color: var(--muted); margin: 1.5rem 0 0; }
 @media (min-width: 42rem) { .ask { letter-spacing: var(--track-large); } }
 .verdict { margin: 0.1em 0 0 -0.03em; line-height: 1; }
-.verdict-word {
+.verdict-word, .one-word {
   display: inline-block; font: 400 clamp(4rem, min(22vw, 50vh), 12rem)/0.86 var(--display);
   letter-spacing: var(--track-large); text-transform: uppercase; color: var(--food); white-space: nowrap;
   padding-top: 0.08em;
