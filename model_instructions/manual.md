@@ -170,10 +170,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   YET?, the placeholder RHUBARB in pink capitals over its underline with
   a blinking pink caret at its start, a normal space either side of the
   word; on focus the placeholder dims. Typed
-  text is capitals in ink; once it names one food, or is one food's name
-  or alias in full, the word and its underline take that food's colour
-  (ghost grey for a never-food). Text that matches nothing stays ink
-  over the pink underline.
+  text is capitals in ink; when the single best match is found exactly
+  or at its start (tier 1 or 2, below, with nothing else at its tier),
+  the word and its underline take that food's colour (ghost grey for a
+  never-food). Otherwise, as for text found only inside words or not
+  at all, they stay ink over the pink underline.
   `site.js` draws the underline at the word's width and the caret, and
   sets a word too long for its room smaller until it fits. One line on
   a wide screen, three below 600px. The input is not focused on load,
@@ -183,24 +184,41 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   results; with reduced motion it jumps.
 - **Home search.** While the input has text, the teasers, the arrow
   link and the whole Everything section are hidden, and the results
-  stand in the teasers' place, at once, with no debounce. Two or more
-  matches: the count ("3 MATCHES") is a teaser label in the same spot
-  as the first teaser's; under it the matches, best first, as shared
-  food rows with leaders and tags. Matching is the same as everywhere
-  (names, varieties as said, aliases, `also`; case and accents
-  ignored; a typed word may sit inside a name or its singular, so
-  "berry" finds strawberries). One match, food or never-food: in the
-  label's place its question as a food page asks it, "Is it avocados
-  yet?", in Atkinson 400, muted, 17px; then its verdict in Anton,
-  2.75rem, in its colour; then its date line (a never-food's line) in
-  Atkinson 400; all one link to its page. No match: "Is it dilll yet?
-  Literally no idea. If that's an actual thing, please tell us." with
-  up to five foods sharing its first three letters under DID YOU MEAN.
-  Up and Down move a highlight through the rows, Enter opens it (or
-  the best match); a polite live region says the count. Clearing the
-  input brings everything back.
-- **Completion.** When the best match's name, or one of its aliases,
-  begins with what is typed, the rest of it shows after the typed text
+  stand in the teasers' place, at once, with no debounce.
+- **Search ranking.** Home ranks its own way (`tierOf` in `site.js`;
+  the not-found page keeps the older scoring). Candidates are each
+  food's and never-food's name, aliases and shared `also` words, and
+  each named variety by its own name and how it is said ("cox",
+  "forced rhubarb"), which joins once `foods.json` is in. Both sides
+  are folded (case, accents, punctuation; "&" is "and") and singular
+  equals plural. A candidate's best tier: 1, exact; 2, the string
+  starts with the query; 3, a later word starts with it; 4, the query
+  is inside a word (three letters or more). The last typed word may be
+  unfinished. A variety is left out when its food is found as well or
+  better, so "rhubarb" is not followed by "Rhubarb (forced)".
+  - One tier-1 match: answered. In the label's place its question as
+    a food page asks it, "Is it apples yet?" ("Is it Cox apples yet?"
+    for a variety), in Atkinson 400, muted, 17px; then its verdict in
+    Anton, 2.75rem, in its colour; then its date line (a never-food's
+    line) in Atkinson 400; all one link. Under it a quiet line, "Also:
+    Crab apples", of the tier 2–3 matches as links in their colours.
+    Tier 4 is dropped.
+  - Otherwise the tier 1–3 matches (several tier-1, as "mushrooms"
+    finds every fungus) as rows under "N MATCHES", a teaser label in
+    the first teaser's spot, in one column, by tier then A to Z, with
+    leaders and tags. Tier 4 shows only when there is nothing else
+    ("berries" finds the nine berries; "pina" finds spinach). A list
+    of one is answered as above, without "Also".
+  - No match: "Is it dilll yet? Literally no idea. If that's an actual
+    thing, please tell us." with up to five foods sharing its first
+    three letters under DID YOU MEAN.
+  - Up and Down move a highlight in rank order through the answer,
+    its "Also" links or the rows; Enter opens it, or the first. A
+    polite live region says the count. Clearing the input brings
+    everything back.
+- **Completion.** When the single best match (as for the hero's
+  colour) has a name or alias that begins with what is typed, the rest
+  of it shows after the typed text
   in the hero, faded to 35% in the food's colour (ghost grey for a
   never-food): AVOC + ADOS, ZUCC + HINI (an alias, for Courgettes).
   None for a match only inside a word, for text that is already a
@@ -216,15 +234,18 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   input has `aria-autocomplete="both"`; the completion is not
   announced.
 - **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
-  GREAT NOW and LAST CHANCE, each an Anton label over a random three
-  foods in their colours and "and N more", which links to Now, then
-  "Everything in season this week →".
+  GREAT NOW and LAST CHANCE, each an Anton label over three foods in
+  their colours, picked afresh at random on every visit by `site.js`
+  from the block's `data-all` (the build's own pick stands without
+  JavaScript), and "and N more", which links to Now, then "Everything
+  in season this week →".
 - **Arrow links.** A link that leads on ("Everything in season this
   week", a food page's "Ask about something else" and "See the whole
   year") has an arrow after it and no underline at rest; on hover its
   words underline and the arrow, inside the link, does not.
 - **Food page.** Three foods of the same family that are YES, picked
-  at random at build (and in `site.js` for another week), A to Z,
+  afresh at random on every visit by `site.js` (from the section's
+  `data-all`, or from `foods.json` for another week), A to Z,
   headed "Also great this week" ("Great this week" when the food is
   NO), then "and N more", which links to Now.
 - **Hover.** A food's name underlines in pink on hover, in lists and on
