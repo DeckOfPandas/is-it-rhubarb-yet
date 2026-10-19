@@ -489,10 +489,18 @@ article.never { --food: var(--never); }
 
 /* --- Prose pages: about, sources ----------------------------------------- */
 .about { max-width: 40rem; }
+/* About opens on its question as body text, with the space a title would
+   leave above it. */
+.about > p:first-of-type { margin-top: 1.5rem; }
 .about h2 { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); margin: 2rem 0 0.5rem; }
 .about h3 { font: 700 1.05rem/1.3 var(--text); margin: 1.5rem 0 0.25rem; }
 .about h3 + p { margin-top: 0; }
 .about hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
+/* The About page's numbered list: quiet numbers, bold and muted, the
+   list indented a little and tucked under the line that opens it. */
+.about-list { margin: -0.5rem 0 1rem; padding-left: 1.6rem; }
+.about-list li { padding-left: 0.2rem; }
+.about-list li::marker { color: var(--muted); font-weight: 700; }
 .about-ways { padding-left: 1.2rem; }
 .about-ways li { margin: 0.35rem 0; }
 
