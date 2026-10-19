@@ -202,22 +202,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   "rhubarb" is not followed by "Rhubarb (forced)". Each letter typed
   only ever takes hits away: "b", "be", "ber", "berr" narrow from 43
   to 17 to 11 to 9.
-  - One tier-1 match: answered. In the label's place its question as
-    a food page asks it, "Is it apples yet?" ("Is it Cox apples yet?"
-    for a variety), in Atkinson 400, muted, 17px; then its verdict in
-    Anton, 2.75rem, in its colour; then its date line, a sentence with
-    its full stop, in Atkinson 400; then "More about apples →" (the
-    food's name, lower case), ink underlined in the food's colour, the
-    arrow never underlined. Beside the text is a miniature of the
-    food's dial, 88px (80px on a phone; below the text under 22rem),
-    with today's hand: `site.js` fetches the food page and takes its own
-    `figure.wheel` SVG, cropped to the ring, so it is the same
-    component, and the fetch warms the page. The whole block is one
-    link to the food page, with the usual focus outline, and Enter
-    opens it. A never-food's answer is its question, NEVER. and its
-    line only: no dial, no "More about", and no link. Under the answer
-    a quiet line, "Also: Crab apples", of the tier 2–3 matches as links
-    in their colours. Tier 4 is dropped.
+  - One tier-1 match: answered with the food's card (see "A food at
+    three levels"), in the label's place. Under it a quiet line,
+    "Also: Crab apples", of the tier 2–3 matches as links in their
+    colours. Tier 4 is dropped.
   - Phrases used as labels in lists (Now's groups) have no full stop;
     a date line that answers a question (the home answer, a food
     page) does.
@@ -233,12 +221,43 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     its "Also" links or the rows; Enter opens it, or the first. A
     polite live region says the count. Clearing the input brings
     everything back.
+- **A food at three levels.** A food is shown as a row, a card or a
+  page, and each is a smaller version of the next, never a different
+  design. No fourth way: any new view that needs a food uses one of
+  these as it is.
+  - **Row** (lists, search results, Now, "Also great this week"):
+    swatch, name, and in a list of mixed verdicts the tag on a dotted
+    leader. `_includes/food-row.html`, built the same by `foodRow` in
+    `site.js`.
+  - **Card** (home's single answer): the food page in small. In order:
+    the question ("IS IT BASIL YET?", or "Cox apples" for a variety),
+    the verdict, the date line (a sentence, with its full stop), then
+    "When is basil in season?" (Atkinson 400, muted, the food's name in
+    lower case), a miniature of the dial with today's hand, and a round
+    arrow in the food's colour with a dark arrow icon. The question,
+    verdict and date line share the food page's rules (`.ask`,
+    `.verdict-word`, `.date-line` in `assets/site.css`) and the card
+    only sets them smaller; the date line is 400, not the page's bold,
+    at Helen's request. The dial is the food page's own `figure.wheel`
+    SVG, fetched from the page and cropped to the ring (the fetch also
+    warms the page): 120px, 90px on a phone. The panel is `--panel`,
+    one step lighter than the page in both themes (`--panel-hover` on
+    hover or focus), 12px radius, its left edge `--food-bar-width`
+    (6px) in the food's colour; the food page has no matching bar. Wide:
+    text and subtitle on the left, dial and a 56px arrow at the right,
+    centred. Phone: text and a 90px dial on top, the subtitle and a
+    48px arrow on the bottom row. The whole card is one link with the
+    focus ring; the arrow nudges 4px right on hover, and stays still
+    with reduced motion; Enter opens it. A never-food's card is its question, NEVER.
+    and its line, in ghost grey with a grey edge: no link, arrow, dial
+    or subtitle.
+  - **Page** (`/<slug>/`): everything.
 - **Into the food page.** Pages cross-fade with cross-document view
   transitions (`@view-transition { navigation: auto; }` in
   `assets/site.css`, only with `prefers-reduced-motion:
   no-preference`; a browser without them simply navigates). Following
-  a home answer, `site.js` names the typed word `food-name`, the
-  verdict `food-verdict` and the mini dial `food-dial`, and the food
+  a home card, `site.js` names the card's food name `food-name`, its
+  verdict `food-verdict` and its dial `food-dial`, and the food
   page names its question's food name (`.ask-name`), its verdict and
   its dial the same, so each moves into place. The home names are set
   only as the answer is followed and cleared once home is shown again,
