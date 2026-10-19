@@ -1,4 +1,6 @@
 tmp/
+# Written by tools/dev/shots.js for design review; never committed.
+screenshots/
 .claude/settings.local.json
 .env
 .env.*

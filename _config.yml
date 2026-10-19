@@ -61,6 +61,7 @@ exclude:
   - tests/
   - tools/
   - tmp/
+  - screenshots/
   - scripts/
   - model_instructions/
   - .devcontainer/
