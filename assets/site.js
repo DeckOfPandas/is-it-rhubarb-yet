@@ -385,17 +385,22 @@
     // when there is none. On one line the input is as wide as its word, up to
     // the room "Is it" and "yet?" leave; when the question stacks, the input
     // is the full width. Either way a word too long for its room is set
-    // smaller until it fits.
+    // smaller until it fits. The underline is the word's width and the
+    // resting caret stands just after it.
+    var slot = input.parentElement;
     var ruler = el("span", "hook-ruler");
-    ruler.setAttribute("aria-hidden", "true");
-    input.parentElement.appendChild(ruler);
+    var underline = el("span", "hook-underline");
+    var caret = el("span", "hook-caret");
+    [ruler, underline, caret].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
     var line = input.closest(".hook-line");
     var stacked = matchMedia("(max-width: 37.49rem)");
+    var CARET_ROOM = 12;
     function size() {
-      ruler.style.textTransform = input.value ? "uppercase" : "none";
       ruler.textContent = input.value || input.placeholder;
-      var w = ruler.getBoundingClientRect().width + 12;
-      if (w <= 12) return;
+      slot.classList.toggle("has-value", !!input.value);
+      var text = ruler.getBoundingClientRect().width;
+      if (!text) return;
+      var w = text + CARET_ROOM;
       input.style.fontSize = "";
       var room;
       if (stacked.matches) {
@@ -407,20 +412,24 @@
         line.querySelectorAll(".hook-word").forEach(function (word) { room -= word.getBoundingClientRect().width; });
         input.style.width = Math.min(w, room) + "px";
       }
-      if (w > room) input.style.fontSize = (parseFloat(getComputedStyle(input).fontSize) * room / w) + "px";
+      var scale = w > room ? room / w : 1;
+      if (scale < 1) input.style.fontSize = (parseFloat(getComputedStyle(input).fontSize) * scale) + "px";
+      underline.style.width = (text * scale) + "px";
+      caret.style.left = (text * scale + 2) + "px";
     }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     window.addEventListener("resize", size);
 
-    // When the typing narrows the list to one food, the typed word takes
-    // that food's colour; so it does when the word is one food's name in
-    // full, as "apples" is while crab apples and pineapples still show.
+    // When the typing narrows the list to one food, the typed word and its
+    // underline take that food's colour; so they do when the word is one
+    // food's name or alias in full, as "apples" is while crab apples and
+    // pineapples still show.
     function colour() {
       var q = fold(input.value);
       var exact = shown.filter(function (it) { return it.terms.indexOf(q) >= 0; });
       var one = shown.length === 1 ? shown[0].li : exact.length === 1 ? exact[0].li : null;
       input.classList.toggle("is-food", !!one);
-      if (one) input.style.setProperty("--food", getComputedStyle(one).getPropertyValue("--food"));
+      if (one) slot.style.setProperty("--food", getComputedStyle(one).getPropertyValue("--food"));
     }
 
     function apply() {
@@ -461,13 +470,27 @@
     var q = new URL(location.href).searchParams.get("q");
     if (q) input.value = q;
     apply();
-    // Autofocus on a desktop only: on a phone the keyboard would hide the
-    // week's news.
-    if (!q && matchMedia("(pointer: fine) and (min-width: 48rem)").matches) input.focus();
+    // The input is not focused on load, so the hero rests as the logo; the
+    // first letter typed anywhere on the page goes into it instead.
+    document.addEventListener("keydown", function (e) {
+      if (e.key.length !== 1 || e.ctrlKey || e.metaKey || e.altKey || e.key === " ") return;
+      var t = e.target;
+      if (t === input || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable) return;
+      input.focus({ preventScroll: true });
+    });
     // The magnifier and "Ask about something else" link to #search, which
     // names no element, so the browser does not scroll: the cursor goes to
-    // the input and the page stays where it is.
+    // the input and the page stays where it is. On home itself the
+    // magnifier goes back up to the input.
     if (location.hash === "#search" || location.hash === "#hook-input") input.focus({ preventScroll: true });
+    document.querySelectorAll(".search-link").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
+        input.focus({ preventScroll: true });
+      });
+    });
     refreshRows(lists).then(function () { if (input.value.trim()) apply(); });
 
     // The this-week strip for a week other than the baked one: the same

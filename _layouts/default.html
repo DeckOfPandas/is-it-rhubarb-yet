@@ -61,23 +61,23 @@ Now have cards of their own; every other page shows the home card.
   </script>
 </head>
 <body>
-  {%- comment -%} On home the hero question is the wordmark, and its input
-     the search, so the header there is the nav alone. Elsewhere the
-     magnifier goes to that input, focused. {%- endcomment -%}
+  {%- comment -%} The nav and the magnifier sit at the right of every page,
+     home included, so nothing moves between pages. On home the hero
+     question is the logo, so the header has no wordmark and no line under
+     it; elsewhere the wordmark is on the left. The magnifier goes to home's
+     input, focused. {%- endcomment -%}
   <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
       {%- if page.url != '/' -%}
-      {%- comment -%} The wordmark: RHUBARB is always in rhubarb's colour. {%- endcomment -%}
+      {%- comment -%} The logo: RHUBARB in rhubarb's pink, underlined in it. {%- endcomment -%}
       <a class="brand" href="{{ '/' | relative_url }}" aria-label="Is it rhubarb yet? Home">Is it <span class="brand-rhubarb">rhubarb</span> yet?</a>
       {%- endif -%}
       <nav class="site-nav" aria-label="Site">
         <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>
         <a href="{{ '/calendar/' | relative_url }}"{% if page.url == '/calendar/' %} aria-current="page"{% endif %}>Calendar</a>
         <a href="{{ '/wheel/' | relative_url }}"{% if page.url == '/wheel/' %} aria-current="page"{% endif %}>Wheel</a>
+        <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
       </nav>
-      {%- if page.url != '/' -%}
-      <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
-      {%- endif -%}
     </div>
   </header>
   <main>

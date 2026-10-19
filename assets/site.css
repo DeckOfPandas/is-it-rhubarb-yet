@@ -90,42 +90,44 @@ h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: upper
 .page-head { margin-bottom: 1rem; }
 
 /* --- Header ---------------------------------------------------------------- */
-/* Phone: the wordmark and the magnifier, then the nav under them. Wide:
-   one row, the magnifier pushed to the right. Home has neither the
-   wordmark nor the magnifier, so its header is the nav alone. */
-.site-header { padding: 0.5rem 1rem 0; border-bottom: 1px solid var(--rule); }
-.site-header-inner {
-  max-width: 64rem; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr auto; column-gap: 1.5rem;
-  grid-template-areas: "brand search" "nav nav";
-  align-items: center; padding-bottom: 0.25rem;
-}
-.is-home .site-header-inner { grid-template-areas: "nav nav"; }
-@media (min-width: 40rem) {
-  .site-header-inner { grid-template-columns: auto 1fr auto; grid-template-areas: "brand nav search"; column-gap: 2rem; padding-bottom: 0; }
-}
+/* The nav and the magnifier sit at the top right of every page, where
+   they stay from page to page; the wordmark (not on home, where the hero
+   is the logo) is on the left of the same row, or on a phone, where the
+   row cannot hold all three, on a row of its own under them. Home has no
+   line under its header. */
+.site-header { padding: 0.25rem 1rem 0; border-bottom: 1px solid var(--rule); }
+.site-header.is-home { border-bottom: 0; }
+.site-header-inner { max-width: 64rem; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; }
 .brand {
-  grid-area: brand; justify-self: start;
-  font: 400 1.5rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
+  font: 400 clamp(1.2rem, 4.4vw, 1.5rem)/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--ink); text-decoration: none; white-space: nowrap;
 }
-.brand:hover, .brand:focus-visible { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 0.08em; text-underline-offset: 0.12em; }
-.brand-rhubarb { color: var(--rhubarb); }
-/* The nav is words in the soft ink; only the current page is full ink,
-   bold and underlined in pink. Each link is 44px tall to tap. */
-.site-nav { grid-area: nav; display: flex; gap: 1.5rem; }
+@media (max-width: 28rem) {
+  .site-header-inner { flex-wrap: wrap; row-gap: 0; }
+  .site-nav { order: -1; width: 100%; justify-content: flex-end; }
+  .brand { padding: 0.1rem 0 0.75rem; font-size: 1.5rem; }
+}
+/* The logo's RHUBARB is pink and underlined in pink, the line exactly the
+   word's width; hovering the logo thickens it. */
+.brand-rhubarb {
+  color: var(--rhubarb); text-decoration: underline; text-decoration-color: var(--rhubarb);
+  text-decoration-thickness: 0.08em; text-underline-offset: 0.12em; text-decoration-skip-ink: none;
+}
+.brand:hover .brand-rhubarb, .brand:focus-visible .brand-rhubarb { text-decoration-thickness: 0.14em; }
+/* The nav: small caps labels in muted ink, the current page in full ink,
+   a pink underline only on hover or focus. Each link is 44px tall. */
+.site-nav { display: flex; align-items: center; gap: clamp(0.7rem, 3vw, 1.5rem); margin-left: auto; }
 .site-nav a {
   display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap;
-  font-size: 1rem; color: var(--muted); text-decoration: none; text-underline-offset: 0.35em;
+  font: 700 0.8125rem/1 var(--text); letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; text-underline-offset: 0.4em;
 }
-.site-nav a:hover, .site-nav a:focus-visible { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 1px; }
-.site-nav a[aria-current] { font-weight: 700; color: var(--ink); text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 3px; }
-.search-link {
-  grid-area: search; justify-self: end; display: inline-flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; margin-right: -10px; color: var(--ink);
-}
-.search-link:hover, .search-link:focus-visible { color: var(--rhubarb); }
+.site-nav a[aria-current] { color: var(--ink); }
+.site-nav a:hover, .site-nav a:focus-visible { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
+.site-nav .search-link { justify-content: center; width: 40px; margin: 0 -10px 0 -0.25rem; color: var(--ink); }
+.site-nav .search-link:hover, .site-nav .search-link:focus-visible { color: var(--rhubarb); }
 .icon { width: 1.4rem; height: 1.4rem; flex: none; }
+.search-link .icon { width: 1.25rem; height: 1.25rem; }
 
 /* --- Switches ----------------------------------------------------------- */
 /* A radio group drawn as a pill. The theme switch needs JavaScript to do
@@ -198,14 +200,17 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .variety-line { color: var(--muted); margin: 0 0 1rem; }
 
 /* --- Home: the hook ------------------------------------------------------- */
-/* The hero question is the wordmark on home. Wide: one line, the input as
-   wide as its word. Below 600px: three lines, the input the full width,
-   and site.js shrinks a long name's type until it fits. The placeholder
-   is lower case and grey, which is what makes it read as a box to type in
-   among the capitals, and sits in the middle of its underline; what is
-   typed is in capitals like the rest of the question and runs from the
-   left. Once the typing narrows the list to one food, site.js sets
-   .is-food and the word takes that food's colour. */
+/* The hero is the logo, and the logo is the input. At rest it reads "IS
+   IT RHUBARB YET?": the placeholder is RHUBARB in pink capitals over its
+   pink underline, with a blinking pink caret after it (steady without
+   motion) as the only cue to type. On focus the placeholder dims and the
+   real caret takes over. What is typed is in capitals and ink; once it
+   names one food, the word and its underline take that food's colour.
+   The underline is the word's width, the placeholder's when empty, and
+   follows it as it grows. Wide: one line. Below 600px: three lines, the
+   input the full width, and site.js sets a word too long for it smaller
+   until it fits. site.js draws the underline and the caret; without it
+   the input keeps a plain pink underline. */
 .hook { padding: 1.5rem 0 0.5rem; }
 .hook-form { margin: 0; }
 .hook-line {
@@ -213,24 +218,41 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   font: 400 clamp(2.6rem, 11vw, 6.5rem)/1.05 var(--display); letter-spacing: var(--track-large); text-transform: uppercase;
   cursor: text;
 }
-.hook-slot { display: inline-flex; max-width: 100%; }
+.hook-slot { display: inline-flex; max-width: 100%; position: relative; }
 #hook-input {
   font: inherit; letter-spacing: inherit; text-transform: uppercase; line-height: inherit; text-align: left;
-  color: var(--ink); transition: color 0.25s; background: transparent; border: 0; border-bottom: 0.06em solid var(--rhubarb); border-radius: 0;
+  color: var(--ink); caret-color: var(--rhubarb); transition: color 0.25s;
+  background: transparent; border: 0; border-bottom: 0.06em solid var(--rhubarb); border-radius: 0;
   padding: 0 0.08em; margin: 0; min-width: 3ch; max-width: 100%; -webkit-appearance: none; appearance: none;
+  height: 1.2em; box-sizing: content-box;
 }
-#hook-input::placeholder { color: var(--muted); opacity: 0.55; text-align: center; text-transform: none; }
+.js #hook-input { border-bottom-color: transparent; }
+#hook-input::placeholder { color: var(--rhubarb); opacity: 1; transition: opacity 0.2s; }
+#hook-input:focus { outline: none; }
+#hook-input:focus::placeholder { opacity: 0.35; }
 #hook-input.is-food { color: var(--food); }
-@media (prefers-reduced-motion: reduce) { #hook-input { transition: none; } }
+#hook-input::-webkit-search-cancel-button { display: none; }
+.hook-underline {
+  position: absolute; left: 0; bottom: 0.1em; height: 0.06em; width: 0; max-width: 100%;
+  background: var(--rhubarb); transition: width 0.12s, background-color 0.25s; pointer-events: none;
+}
+#hook-input.is-food ~ .hook-underline { background: var(--food); }
+.hook-caret {
+  position: absolute; top: 0.12em; bottom: 0.16em; width: 0.045em; background: var(--rhubarb);
+  pointer-events: none; animation: hook-blink 1.1s steps(1) infinite;
+}
+#hook-input:focus ~ .hook-caret, .hook-slot.has-value .hook-caret { display: none; }
+@keyframes hook-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  #hook-input, #hook-input::placeholder, .hook-underline { transition: none; }
+  .hook-caret { animation: none; }
+}
 @media (max-width: 37.49rem) {
   .hook-line { flex-direction: column; align-items: stretch; font-size: clamp(3rem, 19vw, 6rem); line-height: 1; }
-  .hook-slot { display: flex; align-items: flex-end; width: 100%; height: 1.3em; margin: 0 0 0.12em; }
-  #hook-input { width: 100%; }
+  .hook-slot { display: flex; align-items: flex-end; width: 100%; height: 1.26em; margin-bottom: 0.1em; }
+  #hook-input { width: 100%; box-sizing: border-box; }
 }
-.hook-ruler { position: absolute; right: 0; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: none; padding: 0 0.08em; }
-.hook-slot { position: relative; }
-#hook-input:focus { outline: none; border-bottom-width: 0.1em; margin-bottom: -0.04em; }
-#hook-input::-webkit-search-cancel-button { display: none; }
+.hook-ruler { position: absolute; right: 0; visibility: hidden; white-space: pre; font: inherit; letter-spacing: inherit; text-transform: uppercase; padding: 0 0.08em; }
 /* The this-week strip: a line per list, each food a link in its own
    colour, bold so the colour carries at text size. */
 .this-week { margin: 1.25rem 0 0.5rem; max-width: 44rem; color: var(--muted); }
