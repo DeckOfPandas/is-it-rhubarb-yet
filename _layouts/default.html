@@ -58,39 +58,23 @@ Now have cards of their own; every other page shows the home card.
   </script>
 </head>
 <body>
-  <header class="site-header">
+  {%- comment -%} On home the hero question is the wordmark, and its input
+     the search, so the header there is the nav alone. Elsewhere the
+     magnifier goes to that input, focused. {%- endcomment -%}
+  <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
+      {%- if page.url != '/' -%}
       {%- comment -%} The wordmark: RHUBARB is always in rhubarb's colour. {%- endcomment -%}
       <a class="brand" href="{{ '/' | relative_url }}" aria-label="Is it rhubarb yet? Home">Is it <span class="brand-rhubarb">rhubarb</span> yet?</a>
+      {%- endif -%}
       <nav class="site-nav" aria-label="Site">
         <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>
         <a href="{{ '/calendar/' | relative_url }}"{% if page.url == '/calendar/' %} aria-current="page"{% endif %}>Calendar</a>
         <a href="{{ '/wheel/' | relative_url }}"{% if page.url == '/wheel/' %} aria-current="page"{% endif %}>Wheel</a>
       </nav>
       {%- if page.url != '/' -%}
-      {%- comment -%} The search for a food, on every page but home, where
-         the hook is the search: the same "Is it [    ] yet?" in small. A
-         plain GET to home with q=, which the hook reads; site.js adds a
-         dropdown fed from search.json. {%- endcomment -%}
-      <form class="search" role="search" method="get" action="{{ '/' | relative_url }}"
-            data-index="{{ '/search.json' | relative_url }}">
-        <label class="search-line" for="site-search">
-          <span class="hook-word">is it</span>
-          <span class="hook-slot"><input id="site-search" type="search" name="q" class="search-input" autocomplete="off" autocapitalize="off" spellcheck="false"
-                 placeholder="rhubarb" aria-label="Is it … yet? Which food?" size="7"
-                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results"></span>
-          <span class="hook-word">yet?</span>
-        </label>
-        <button type="submit" class="visually-hidden">Ask</button>
-        <div class="search-results" id="search-results" role="listbox" hidden></div>
-      </form>
+      <a class="search-link" href="{{ '/' | relative_url }}#hook-input" aria-label="Search foods">{% include icons/search.svg %}</a>
       {%- endif -%}
-      <fieldset class="switch theme" data-remember="theme">
-        <legend>Theme</legend>
-        <input type="radio" name="theme" id="theme-dark" value="dark"><label for="theme-dark">dark</label>
-        <input type="radio" name="theme" id="theme-auto" value="auto" checked><label for="theme-auto">auto</label>
-        <input type="radio" name="theme" id="theme-light" value="light"><label for="theme-light">light</label>
-      </fieldset>
     </div>
   </header>
   <main>
@@ -103,6 +87,15 @@ Now have cards of their own; every other page shows the home card.
       <a href="{{ '/foods.json' | relative_url }}">Data as JSON</a>
     </nav>
     <p class="footer-about"><a href="{{ '/about/' | relative_url }}">About</a></p>
+    {%- comment -%} A radio group, so the current choice is checked and
+       announced; each input carries its spoken name, since the sun and the
+       moon say nothing to a screen reader. {%- endcomment -%}
+    <fieldset class="switch theme" data-remember="theme">
+      <legend>Theme</legend>
+      <input type="radio" name="theme" id="theme-light" value="light" aria-label="Light theme"><label for="theme-light">{% include icons/sun.svg %}</label>
+      <input type="radio" name="theme" id="theme-auto" value="auto" aria-label="Follow device" checked><label for="theme-auto">{% include icons/screen.svg %}Auto</label>
+      <input type="radio" name="theme" id="theme-dark" value="dark" aria-label="Dark theme"><label for="theme-dark">{% include icons/moon.svg %}</label>
+    </fieldset>
     <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="Source on GitHub">{% include icons/github.svg %}</a>
     <p class="copyright">&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
     {%- comment -%} Two sentences in two spans, so a narrow screen breaks

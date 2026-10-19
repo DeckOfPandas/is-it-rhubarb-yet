@@ -354,15 +354,33 @@
     });
     var shown = [];
 
-    // The input is as wide as its word: a hidden span in the same font
-    // measures the value, or the placeholder when there is none.
+    // A hidden span in the same font measures the value, or the placeholder
+    // when there is none. On one line the input is as wide as its word, up to
+    // the room "Is it" and "yet?" leave; when the question stacks, the input
+    // is the full width. Either way a word too long for its room is set
+    // smaller until it fits.
     var ruler = el("span", "hook-ruler");
     ruler.setAttribute("aria-hidden", "true");
     input.parentElement.appendChild(ruler);
+    var line = input.closest(".hook-line");
+    var stacked = matchMedia("(max-width: 37.49rem)");
     function size() {
+      ruler.style.textTransform = input.value ? "" : "none";
       ruler.textContent = input.value || input.placeholder;
-      var w = ruler.getBoundingClientRect().width;
-      if (w) input.style.width = (w + 12) + "px";
+      var w = ruler.getBoundingClientRect().width + 12;
+      if (w <= 12) return;
+      input.style.fontSize = "";
+      var room;
+      if (stacked.matches) {
+        input.style.width = "";
+        room = input.clientWidth;
+      } else {
+        var gap = parseFloat(getComputedStyle(line).columnGap) || 0;
+        room = line.clientWidth - 2 * gap - 8;
+        line.querySelectorAll(".hook-word").forEach(function (word) { room -= word.getBoundingClientRect().width; });
+        input.style.width = Math.min(w, room) + "px";
+      }
+      if (w > room) input.style.fontSize = (parseFloat(getComputedStyle(input).fontSize) * room / w) + "px";
     }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     window.addEventListener("resize", size);
@@ -498,85 +516,6 @@
     render(week);
   }
 
-  // --- The header's search box -----------------------------------------------
-  function initSearch() {
-    var form = document.querySelector("form.search");
-    if (!form) return;
-    var input = form.querySelector(".search-input");
-    var panel = form.querySelector(".search-results");
-    var index = null, live = null, options = [], active = -1;
-
-    function load(then) {
-      if (index) { then(); return; }
-      loadSearch().then(function (items) {
-        index = items.map(function (it) { it.terms = it.terms.map(fold); return it; });
-        then();
-      }).catch(function () {});
-      if (!SAME_WEEK) loadFoods().then(function (foods) {
-        live = {};
-        foods.forEach(function (f) { live[f.slug] = V.foodVerdict(f, WEEK).verdict; });
-      }).catch(function () {});
-    }
-
-    function close() {
-      panel.hidden = true; panel.textContent = ""; options = []; active = -1;
-      input.setAttribute("aria-expanded", "false");
-      input.removeAttribute("aria-activedescendant");
-    }
-
-    function paint() {
-      var found = index ? rank(index, input.value).slice(0, 8) : [];
-      panel.textContent = ""; options = []; active = -1;
-      if (!input.value.trim()) { close(); return; }
-      if (!found.length) {
-        panel.appendChild(el("p", "search-none", "Literally no idea."));
-      } else {
-        var ul = el("ul", "food-list");
-        found.forEach(function (it, i) {
-          var item = { slug: it.slug, name: it.name, colour: it.colour, never: it.never,
-            verdict: live && live[it.slug] ? live[it.slug] : it.verdict };
-          var li = foodRow(item);
-          li.id = "search-option-" + i;
-          li.setAttribute("role", "option");
-          options.push(li);
-          ul.appendChild(li);
-        });
-        panel.appendChild(ul);
-      }
-      panel.hidden = false;
-      input.setAttribute("aria-expanded", "true");
-    }
-
-    function setActive(n) {
-      if (active >= 0 && options[active]) options[active].classList.remove("is-active");
-      active = n;
-      if (active >= 0 && options[active]) {
-        options[active].classList.add("is-active");
-        input.setAttribute("aria-activedescendant", options[active].id);
-      } else input.removeAttribute("aria-activedescendant");
-    }
-
-    input.addEventListener("focus", function () { load(paint); });
-    input.addEventListener("input", function () { load(paint); });
-    input.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { close(); return; }
-      if (!options.length) return;
-      if (e.key === "ArrowDown") { e.preventDefault(); setActive((active + 1) % options.length); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); setActive((active - 1 + options.length) % options.length); }
-    });
-    // Enter goes to the active option, or the first match.
-    form.addEventListener("submit", function (e) {
-      var pick = active >= 0 ? options[active] : options[0];
-      if (pick) { e.preventDefault(); location.href = pick.querySelector("a").href; }
-    });
-    // Closing on blur waits a beat, or a click on an option empties the
-    // panel before the click lands on the link.
-    input.addEventListener("blur", function () {
-      setTimeout(function () { if (!form.contains(document.activeElement)) close(); }, 120);
-    });
-    document.addEventListener("click", function (e) { if (!form.contains(e.target)) close(); });
-  }
-
   // --- Not found ---------------------------------------------------------------
   // The address says what was asked for; the nearest foods are offered.
   function initNotFound() {
@@ -616,7 +555,6 @@
     initAbout();
     initHome();
     initNow();
-    initSearch();
     initNotFound();
     syncChartHeads();
     targetRow();
