@@ -29,8 +29,12 @@ drops it in `tmp/inbox/`); this is the map.
   The one calendar date is the "as of" date, which is when an answer
   was true. Lists sort by the same day counts, soonest first.
 - **The digest** (`nowLists`) returns each of its four lists split by
-  kind of food, `[{kind, items}]`; `flatten` gives one array. The home
-  strip and `_includes/band.html` read that shape.
+  kind of food, `[{kind, items}]`; `flatten` gives one array, and
+  `byPhrase` regroups a list under its phrases, `[{phrase, items}]`,
+  soonest first and A to Z within. `bake.js` bakes `byPhrase` of last
+  chance and on the way as `phrases`. The Now page shows just arrived
+  as one A to Z list, last chance and on the way under their phrases,
+  and great now as a closed disclosure per kind.
 - **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
   and never-food, plus `home.png` and `now.png` (the wordmark or the
   Now title, then the week's three lines as the home strip has them,
@@ -41,8 +45,13 @@ drops it in `tmp/inbox/`); this is the map.
   raster files in the repository). Every page's `og:image` and
   `twitter:image` point at its card; the card carries the as-of date,
   because chat apps keep the first preview they fetch. `node
-  tools/cards.js --out tmp/cards --only rhubarb,home,now` draws a few
-  to look at.
+  tools/cards.js --out tmp/cards --icons tmp/icons --only
+  rhubarb,home,now,icons` draws a few to look at.
+- **Icons.** The favicon (32px), the Android icon (192px) and the
+  Apple touch icon (180px) are "IIRY" in Anton, light ink on the shed,
+  the R in pink and underlined in it. `tools/cards.js` draws them into
+  `_site/icons` at build, like the cards: one square page shot at each
+  size, never committed.
 - `_data/foods.yml` is the truth. `_data/groups.yml` names the culinary
   families and their `kind`. `_data/never.yml` lists the foods that are
   never in season here, each with a line. `_data/quotes.yml` holds the
@@ -63,11 +72,14 @@ drops it in `tmp/inbox/`); this is the map.
   `404.html` (the not-found verdict, with suggestions), and
   `about.html`, Helen's copy, reached from the signature hearts in the
   footer; its food count and dinner food come from the data. Data
-  endpoints: `foods.json`, `search.json` (what the search box matches
-  against), `season-starts.ics`.
-- Includes: `food-row.html` (one food in a list: swatch, name,
-  variety, verdict tag, line; `site.js` builds the same markup),
-  `band.html` (one band of the digest), `calendar.html` (a sticky
+  endpoints: `foods.json`, `search.json` (what the not-found page's
+  suggestions match against), `season-starts.ics`.
+- Includes: `food-row.html` (one food in a list, one link: swatch,
+  name, variety, and with `tag` and `leader` on, the default, the
+  verdict tag right-aligned at the row's end on a dotted leader; a list
+  whose heading already says the verdict passes `tag=false`; `site.js`
+  builds the same markup in `foodRow`), `band.html` (one band of the
+  digest, in the shape `plain`, `phrase` or `kind`), `calendar.html` (a sticky
   header SVG over a scrolling body SVG), `season-cells.html`,
   `season-wheel.html`, `arrivals-dial.html`.
 - Switches are radio groups. CSS `:has()` shows the chosen variant.
@@ -108,10 +120,24 @@ drops it in `tmp/inbox/`); this is the map.
   height so the date line stays above the fold on a laptop: `site.js`
   measures it after the fonts load. CSS `clamp()` stands in before
   that.
-- The question over the verdict is set at the h1's size. The header
-  search box is the question in lowercase text, "is it [rhubarb] yet?",
-  with only the food as the input, so it reads as a sentence and not as
-  a second wordmark.
+- The question over the verdict is set at the h1's size.
+- **Header.** On every page but home: the wordmark, then Now, Calendar
+  and Wheel as words in the soft ink (the current page bold, ink, with
+  a 3px pink underline), then a magnifier at the right that links to
+  home's input, focused. One row from 40rem, two below. On home the
+  hero question is the wordmark and its input the search, so the header
+  is the nav alone. The theme switch is in the footer: sun, Auto, moon.
+- **Home hero.** One line on a wide screen, three stacked lines below
+  600px with the input the full width; `site.js` sets a word too long
+  for its room smaller until it fits. The placeholder is lower case
+  and grey, centred in its pink underline.
+- **Now.** The title follows the week shown ("this week", "next week",
+  "last week", or none), over one muted line, "‹ 15–21 October ›".
+  Weeks run through real years, a year either way of this week; the
+  address carries `week=` and, in another year, `year=`. Sections are
+  parted by space, not rules.
+- Atkinson Hyperlegible Next's zero is slashed, and the font has no
+  feature to open it.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for
   the longest label at any angle; `site.js` tightens each visible
   wheel's viewBox to its drawn extent, so the wheel fills its width.
@@ -143,7 +169,7 @@ drops it in `tmp/inbox/`); this is the map.
   last line of defence.
 - Visual checks: `node tools/dev/shoot.js <base-url> <label> [--scheme
   dark] [--click <text>] [--type <text>] <page>...`; `--type` types
-  into the first visible input, for the hook and the search box.
+  into the first visible input, the hook's.
 - Helen's instructions win over this file. Hooks reject chained,
   nested or variable-expanding shell commands: one plain command per
   call, or a script in `tmp/`. A command that must reach outside the
