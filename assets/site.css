@@ -163,19 +163,21 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   font: 400 0.85rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--food); white-space: nowrap;
 }
-.tag-new {
-  font: 400 0.7rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
-  color: var(--ink); border: 2px solid var(--rhubarb); padding: 0.15em 0.4em 0.1em; white-space: nowrap;
-}
 .swatch { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 2px; background: var(--food); flex: none; transform: translateY(0.02em); }
 
-/* A food in a list: swatch, name, variety, verdict tag, and a line under. */
-.food-list { list-style: none; margin: 0.5rem 0 1rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.4rem 1.5rem; }
+/* A food in a list, one link: swatch, name, variety, and in a list that
+   mixes verdicts the tag, right-aligned at the end of the row and joined
+   to the name by a dotted leader, like a greengrocer's price list. The
+   leader gives way to a long name down to 16px; then the name wraps and
+   the tag stays on its first line, since every part sits on the first
+   baseline. */
+.food-list { list-style: none; margin: 0.5rem 0 1rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.4rem 2rem; }
 .food-row a { display: flex; align-items: baseline; gap: 0.5em; text-decoration: none; }
 .food-row a:hover .food-name, .food-row a:focus-visible .food-name { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
-.food-name { flex: 0 1 auto; }
+.food-name { flex: 0 1 auto; min-width: 0; }
 .variety { color: var(--muted); font-size: 0.9em; }
-.row-line { display: block; color: var(--muted); font-size: 0.85rem; line-height: 1.3; padding-left: 1.3em; }
+.leader { flex: 1 1 16px; min-width: 16px; border-bottom: 2px dotted color-mix(in oklab, var(--ink) 28%, var(--bg)); }
+.food-row .verdict-tag { flex: none; margin-left: auto; }
 .food-row.never { --food: var(--rhubarb); }
 .food-list .heading {
   display: none; grid-column: 1 / -1; margin-top: 1rem;
@@ -289,7 +291,13 @@ article.food { padding-top: 0.5rem; }
 .band .count { color: var(--muted); font: 400 0.9rem var(--text); margin-left: 0.3em; }
 .band .food-list { grid-template-columns: 1fr; }
 .band.still .food-list { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
-.kind { font: 700 0.8rem/1.4 var(--text); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 1rem 0 0.25rem; }
+/* Last chance and on the way, under their phrases; great now, a closed
+   disclosure per kind. */
+.band .phrase { font: 700 1rem/1.3 var(--text); margin: 1.25rem 0 0.25rem; }
+.band .phrase + .food-list { margin-top: 0.25rem; }
+.band details.kind { margin: 0.5rem 0; }
+.band .kind summary { font-weight: 700; cursor: pointer; padding: 0.35rem 0; width: max-content; }
+.band .kind summary .count { font-weight: 400; }
 
 /* --- Charts ---------------------------------------------------------------- */
 /* A row's colour is --c; in-season bars take it as is, "just about" bars

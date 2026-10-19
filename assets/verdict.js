@@ -398,6 +398,25 @@
   function flatten(list) {
     return list.reduce(function (all, k) { return all.concat(k.items); }, []);
   }
+  // One list's items grouped under their phrase, [{phrase, items}], for a
+  // list whose verdict is the same throughout (last chance, on the way):
+  // the phrase is all that tells its foods apart. Groups run soonest
+  // first, foods A to Z within a group.
+  function byPhrase(list) {
+    var groups = [], at = {};
+    flatten(list).forEach(function (i) {
+      if (!(i.line in at)) { at[i.line] = groups.length; groups.push({ phrase: i.line, days: i.days, items: [] }); }
+      var g = groups[at[i.line]];
+      g.items.push(i);
+      if (i.days !== null && (g.days === null || i.days < g.days)) g.days = i.days;
+    });
+    var byName = function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; };
+    groups.sort(function (a, b) {
+      if (a.days === null || b.days === null) return (a.days === null) - (b.days === null);
+      return a.days - b.days;
+    });
+    return groups.map(function (g) { return { phrase: g.phrase, items: g.items.sort(byName) }; });
+  }
 
   // --- Quotations ------------------------------------------------------------
   // Stable for a food for a week and different between foods: a small
@@ -422,6 +441,6 @@
     ordinal: ordinal, fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
     phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLine: varietyLine, daysTo: daysTo,
-    nowLists: nowLists, flatten: flatten, pickQuote: pickQuote
+    nowLists: nowLists, flatten: flatten, byPhrase: byPhrase, pickQuote: pickQuote
   };
 }));

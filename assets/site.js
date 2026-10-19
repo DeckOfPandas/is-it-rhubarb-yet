@@ -109,7 +109,9 @@
   }
 
   // --- A food in a list, the same markup as _includes/food-row.html ------
-  function foodRow(item, tag) {
+  // opts.tag and opts.leader are each on unless false.
+  function foodRow(item, opts) {
+    opts = opts || {};
     var li = el("li", "food-row" + (item.never ? " never" : ""));
     li.dataset.slug = item.slug;
     li.dataset.verdict = item.verdict;
@@ -121,11 +123,15 @@
     var name = el("span", "food-name", item.name);
     if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", item.variety)); }
     a.appendChild(name);
-    a.appendChild(document.createTextNode(" "));
-    a.appendChild(el("span", "verdict-tag", item.verdict));
-    if (tag === "new") { a.appendChild(document.createTextNode(" ")); a.appendChild(el("span", "tag-new", "New")); }
+    if (opts.tag !== false) {
+      if (opts.leader !== false) {
+        var leader = el("span", "leader"); leader.setAttribute("aria-hidden", "true");
+        a.appendChild(document.createTextNode(" "));
+        a.appendChild(leader);
+      }
+      a.appendChild(el("span", "verdict-tag", item.verdict));
+    }
     li.appendChild(a);
-    if (item.line) li.appendChild(el("span", "row-line", item.line));
     return li;
   }
 
@@ -321,7 +327,7 @@
       }
       var ul = section.querySelector("ul");
       ul.textContent = "";
-      picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" })); });
+      picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" }, { tag: false })); });
       section.hidden = false;
     });
   }
@@ -472,20 +478,37 @@
     var KIND = { veg: "Veg", fruit: "Fruit", wild: "Wild", herbs: "Herbs", fish: "Fish", meat: "Meat" };
 
     // One band, the same markup as _includes/band.html: a heading with the
-    // count, then a sub-heading and list per kind of food.
-    function band(cls, heading, list, emptyText, tag) {
+    // count, then the foods as one A to Z list (plain), under their phrases
+    // (phrase), or in a closed disclosure per kind (kind). No row has a tag.
+    function list(items) {
+      var ul = el("ul", "food-list");
+      items.forEach(function (i) { ul.appendChild(foodRow(i, { tag: false })); });
+      return ul;
+    }
+    function band(cls, heading, kinds, shape, emptyText) {
       var s = el("section", "band " + cls);
       var h = el("h2", null, heading + " ");
-      var total = V.flatten(list).length;
+      var total = V.flatten(kinds).length;
       h.appendChild(el("span", "count", String(total)));
       s.appendChild(h);
       if (!total) { s.appendChild(el("p", "empty", emptyText)); return s; }
-      list.forEach(function (k) {
-        s.appendChild(el("h3", "kind", KIND[k.kind] || k.kind));
-        var ul = el("ul", "food-list");
-        k.items.forEach(function (i) { ul.appendChild(foodRow(i, tag)); });
-        s.appendChild(ul);
-      });
+      if (shape === "phrase") {
+        V.byPhrase(kinds).forEach(function (g) {
+          s.appendChild(el("h3", "phrase", g.phrase));
+          s.appendChild(list(g.items));
+        });
+      } else if (shape === "kind") {
+        kinds.forEach(function (k) {
+          var d = el("details", "kind");
+          var sum = el("summary", null, (KIND[k.kind] || k.kind) + " ");
+          sum.appendChild(el("span", "count", String(k.items.length)));
+          d.appendChild(sum);
+          d.appendChild(list(k.items));
+          s.appendChild(d);
+        });
+      } else {
+        s.appendChild(list(V.flatten(kinds).sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; })));
+      }
       return s;
     }
 
@@ -501,10 +524,10 @@
       loadFoods().then(function (foods) {
         var now = V.nowLists(foods, groups, w, YEAR, w === WEEK ? TODAY : V.midOfToday(w, YEAR));
         digest.textContent = "";
-        digest.appendChild(band("arrived", "Just arrived", now.arrived, "Nothing new this week.", "new"));
-        digest.appendChild(band("last", "Last chance", now.last, "Nothing on its way out."));
-        digest.appendChild(band("onway", "On the way", now.onway, "Nothing due in the next few weeks."));
-        digest.appendChild(band("still", "Great now", now.still, "Nothing at all, which cannot be right."));
+        digest.appendChild(band("arrived", "Just arrived", now.arrived, "plain", "Nothing new this week."));
+        digest.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
+        digest.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
+        digest.appendChild(band("still", "Great now", now.still, "kind", "Nothing at all, which cannot be right."));
       });
     }
 

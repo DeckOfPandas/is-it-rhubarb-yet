@@ -1,23 +1,45 @@
 {%- comment -%}
-One band of the digest: a heading with the count, then for each kind of
-food a sub-heading and the list, or one line when there is nothing.
+One band of the digest: a heading with the count, then its foods in one
+of three shapes, or one line when there is nothing. Every food in a band
+has the verdict its heading says, so no row carries a tag.
+  plain   one list, A to Z (just arrived)
+  phrase  a sub-heading per phrase, soonest first, A to Z under each
+          (last chance, on the way), from the baked byPhrase groups
+  kind    a closed disclosure per kind of food (great now)
 Expects: cls (arrived, last, onway, still), heading, list (the baked
-[{kind, items}] from nowLists), empty (the line for an empty band), and
-tag ("new" marks every row). site.js builds the same markup when it
-redraws the digest for another day.
+[{kind, items}] from nowLists), shape, phrases (the baked [{phrase,
+items}] for the phrase shape), and empty (the line for an empty band).
+site.js builds the same markup when it redraws the digest for another
+week.
 {%- endcomment -%}
 {%- assign total = 0 -%}
 {%- for k in include.list -%}{%- assign total = total | plus: k.items.size -%}{%- endfor -%}
 <section class="band {{ include.cls }}">
   <h2>{{ include.heading }} <span class="count">{{ total }}</span></h2>
-  {%- if total > 0 -%}
-    {%- for k in include.list -%}
-    <h3 class="kind">{{ k.kind | capitalize }}</h3>
+  {%- if total == 0 -%}
+  <p class="empty">{{ include.empty }}</p>
+  {%- elsif include.shape == "phrase" -%}
+    {%- for g in include.phrases -%}
+    <h3 class="phrase">{{ g.phrase }}</h3>
     <ul class="food-list">
-      {%- for item in k.items -%}{%- include food-row.html item=item tag=include.tag -%}{%- endfor -%}
+      {%- for item in g.items -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
     </ul>
     {%- endfor -%}
+  {%- elsif include.shape == "kind" -%}
+    {%- for k in include.list -%}
+    <details class="kind">
+      <summary>{{ k.kind | capitalize }} <span class="count">{{ k.items.size }}</span></summary>
+      <ul class="food-list">
+        {%- for item in k.items -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
+      </ul>
+    </details>
+    {%- endfor -%}
   {%- else -%}
-  <p class="empty">{{ include.empty }}</p>
+    {%- assign all = "" | split: "" -%}
+    {%- for k in include.list -%}{%- assign all = all | concat: k.items -%}{%- endfor -%}
+    <ul class="food-list">
+      {%- assign all = all | sort: "name" -%}
+      {%- for item in all -%}{%- include food-row.html item=item tag=false -%}{%- endfor -%}
+    </ul>
   {%- endif -%}
 </section>

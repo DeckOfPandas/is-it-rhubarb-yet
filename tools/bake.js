@@ -53,6 +53,7 @@ function main() {
     foods: {},
     now: V.nowLists(foods, groups, week, year, date)
   };
+  baked.phrases = { last: V.byPhrase(baked.now.last), onway: V.byPhrase(baked.now.onway) };
 
   foods.forEach((f) => {
     const fv = V.foodVerdict(f, week);

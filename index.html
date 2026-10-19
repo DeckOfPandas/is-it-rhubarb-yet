@@ -4,8 +4,8 @@ description: Is it in season yet? Type a UK food and get a yes, a no, or a date.
 ---
 {%- comment -%}
 The hook. A huge "Is it [    ] yet?" with the input inline; as the
-visitor types, the list below narrows, each food showing its verdict
-word in its own colour. Enter, or a single remaining match, goes to the
+visitor types, the list below narrows, each food's verdict word in its
+own colour at the end of its row. Enter, or a single remaining match, goes to the
 food page; no match gets the not-found line. Without JavaScript the
 whole list renders and the input is a form that reloads this page.
 
@@ -71,23 +71,12 @@ family headings are items that only show in family order, the default.
       {%- for g in site.data.groups -%}{%- if g.key == food.group -%}{%- assign gi = forloop.index0 -%}{%- endif -%}{%- endfor -%}
       {%- assign b = baked.foods[food.slug] -%}
       {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
-      <li class="food-row" data-slug="{{ food.slug }}" data-group="{{ food.group }}" data-terms="{{ terms | escape }}" data-verdict="{{ b.verdict }}" style="--food: {{ food.colour }}; --oa: {{ oa }}; --og: {{ gi | times: 300 | plus: oa }}">
-        <a href="{{ '/' | append: food.slug | append: '/' | relative_url }}">
-          <span class="swatch" aria-hidden="true"></span>
-          <span class="food-name">{{ food.name }}</span>
-          <span class="verdict-tag">{{ b.verdict }}</span>
-        </a>
-      </li>
+      {%- capture order -%}--oa: {{ oa }}; --og: {{ gi | times: 300 | plus: oa }}{%- endcapture -%}
+      {%- include food-row.html item=food verdict=b.verdict group=food.group terms=terms order=order -%}
     {%- endfor -%}
     {%- for n in site.data.never -%}
       {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
-      <li class="food-row never" data-slug="{{ n.slug }}" data-terms="{{ terms | escape }}" data-verdict="NEVER" hidden>
-        <a href="{{ '/' | append: n.slug | append: '/' | relative_url }}">
-          <span class="swatch" aria-hidden="true"></span>
-          <span class="food-name">{{ n.name }}</span>
-          <span class="verdict-tag">NEVER</span>
-        </a>
-      </li>
+      {%- include food-row.html item=n verdict="NEVER" never=true terms=terms -%}
     {%- endfor -%}
   </ul>
 </section>

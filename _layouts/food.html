@@ -45,7 +45,8 @@ colour.
   {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
 
   {%- comment -%} Up to six foods of the same family that are perfect now,
-     from the baked verdicts. {%- endcomment -%}
+     from the baked verdicts. All are YES, as the heading says, so no row
+     carries a tag. {%- endcomment -%}
   {%- assign also = "" | split: "" -%}
   {%- for other in site.data.foods -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
@@ -57,16 +58,7 @@ colour.
   <section class="also">
     <h2>Great this week</h2>
     <ul class="food-list">
-      {%- for other in also -%}
-        {%- assign ob = baked.foods[other.slug] -%}
-        <li class="food-row" data-slug="{{ other.slug }}" data-verdict="{{ ob.verdict }}" style="--food: {{ other.colour }}">
-          <a href="{{ '/' | append: other.slug | append: '/' | relative_url }}">
-            <span class="swatch" aria-hidden="true"></span>
-            <span class="food-name">{{ other.name }}</span>
-            <span class="verdict-tag">{{ ob.verdict }}</span>
-          </a>
-        </li>
-      {%- endfor -%}
+      {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>
   </section>
   {%- endif -%}

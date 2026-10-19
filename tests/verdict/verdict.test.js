@@ -258,6 +258,26 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
   assert.equal(plain.last[0].kind, "");
 });
 
+test("last chance and on the way group by phrase, soonest first, A to Z within", () => {
+  const now = V.nowLists(foods, groups, WEEK, YEAR, TODAY);
+  ["last", "onway"].forEach((name) => {
+    const grouped = V.byPhrase(now[name]);
+    const phrases = grouped.map((g) => g.phrase);
+    assert.equal(new Set(phrases).size, phrases.length, name + ": each phrase once");
+    assert.equal(grouped.reduce((n, g) => n + g.items.length, 0), V.flatten(now[name]).length, name + ": every food once");
+    grouped.forEach((g) => {
+      g.items.forEach((i) => assert.equal(i.line, g.phrase));
+      const names = g.items.map((i) => i.name);
+      assert.deepEqual(names, names.slice().sort(), name + " " + g.phrase + " is A to Z");
+    });
+    const soonest = grouped.map((g) => Math.min(...g.items.map((i) => (i.days === null ? Infinity : i.days))));
+    soonest.forEach((d, i) => assert.ok(i === 0 || soonest[i - 1] <= d, name + " groups run soonest first"));
+  });
+  const last = V.byPhrase(now.last);
+  assert.ok(last.find((g) => g.phrase === "For another week or two").items.some((i) => i.slug === "celery"));
+  assert.deepEqual(V.byPhrase([]), []);
+});
+
 test("quotations are stable for a food for a week and prefer pinned lines", () => {
   const quotes = {
     yes: [{ text: "a", by: "x" }, { text: "b", by: "y" }, { text: "p", by: "z", foods: ["rhubarb"] }],

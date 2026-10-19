@@ -1,17 +1,24 @@
 {%- comment -%}
-One food in a list: swatch, name, the variety that gave the verdict, the
-verdict word as a small Anton tag in the food's colour, and an optional
-line under it. Expects: item (slug, name, colour, verdict, and optionally
-variety and line), and tag ("new" marks a just-arrived food). site.js
-builds the same markup when it redraws a list for another day.
+One food in a list, a single link: swatch, name, the variety that gave
+the verdict, then, when the tag is on, the verdict word as a small Anton
+tag in the food's colour at the right end of the row, joined to the name
+by a dotted leader when that is on too. A list that mixes verdicts shows
+both; a list whose heading already says the verdict shows neither.
+Expects: item (slug, name, colour, and optionally verdict and variety),
+verdict (when the item has none), tag and leader (each on unless false),
+and for the home list never (true for a never-food), terms, group and
+order (the --oa and --og declarations). site.js builds the same markup in
+foodRow.
 {%- endcomment -%}
 {%- assign item = include.item -%}
-<li class="food-row" data-slug="{{ item.slug }}" data-verdict="{{ item.verdict }}" style="--food: {{ item.colour }}">
+{%- assign verdict = include.verdict | default: item.verdict -%}
+<li class="food-row{% if include.never %} never{% endif %}" data-slug="{{ item.slug }}"{% if include.group %} data-group="{{ include.group }}"{% endif %}{% if include.terms %} data-terms="{{ include.terms | escape }}"{% endif %} data-verdict="{{ verdict }}"{% unless include.never %} style="--food: {{ item.colour }}{% if include.order %}; {{ include.order }}{% endif %}"{% endunless %}{% if include.never %} hidden{% endif %}>
   <a href="{{ '/' | append: item.slug | append: '/' | relative_url }}">
     <span class="swatch" aria-hidden="true"></span>
     <span class="food-name">{{ item.name }}{% if item.variety and item.variety != "" %} <span class="variety">{{ item.variety }}</span>{% endif %}</span>
-    <span class="verdict-tag">{{ item.verdict }}</span>
-    {%- if include.tag == "new" %} <span class="tag-new">New</span>{% endif -%}
+    {%- unless include.tag == false -%}
+    {%- unless include.leader == false %} <span class="leader" aria-hidden="true"></span>{% endunless %}
+    <span class="verdict-tag">{{ verdict }}</span>
+    {%- endunless %}
   </a>
-  {%- if item.line and item.line != "" %}<span class="row-line">{{ item.line }}</span>{% endif -%}
 </li>
