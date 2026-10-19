@@ -346,6 +346,26 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - Visual checks: `node tools/dev/shoot.js <base-url> <label> [--scheme
   dark] [--click <text>] [--type <text>] <page>...`; `--type` types
   into the first visible input, the hook's.
+- Design review: `node tools/dev/shots.js [--base <url>] [--date
+  YYYY-MM-DD] [--out <dir>]` writes 84 full-page shots into
+  `screenshots/` (gitignored, and excluded from the build), named
+  `<page>-<state>-<width>-<theme>.png`: the kitchen sink; home empty
+  and searching "avoc", "apples", "app", "banana" and "zzz"; a food
+  page per verdict (YES, NO, JUST, NEARLY, NEVER, picked for the date
+  from `foods.json` with `verdict.js`), rhubarb, a food with a buy note
+  and one whose source is general; Now this week and next; the
+  calendar, the wheel, About and a 404. At 390 and 1280, light and
+  dark, the clock frozen at noon on the date (default 2026-10-25), with
+  reduced motion so nothing is caught mid-animation. Not `npm run`:
+  the project has no npm.
+- `/kitchen-sink/` (`kitchen-sink/index.html`, `noindex`, linked from
+  nowhere, its slug reserved in `check-foods.py`) shows every shared
+  component from its real include or classes, at rest, hovered and
+  focused. The forced states are the stylesheet's own: a script on the
+  page copies every `:hover` and `:focus-visible` rule onto the
+  `.is-hover` and `.is-focus` columns, so nothing there is styled
+  twice. The search input's states are home itself in frames, by
+  `?q=`. A new shared component goes on this page too.
 - Helen's instructions win over this file. Hooks reject chained,
   nested or variable-expanding shell commands: one plain command per
   call, or a script in `tmp/`. A command that must reach outside the
