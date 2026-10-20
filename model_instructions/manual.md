@@ -347,16 +347,20 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   dark] [--click <text>] [--type <text>] <page>...`; `--type` types
   into the first visible input, the hook's.
 - Design review: `node tools/dev/shots.js [--base <url>] [--date
-  YYYY-MM-DD] [--out <dir>]` writes 84 full-page shots into
+  YYYY-MM-DD] [--out <dir>] [--full yes]` writes full-page shots into
   `screenshots/` (gitignored, and excluded from the build), named
   `<page>-<state>-<width>-<theme>.png`: the kitchen sink; home empty
-  and searching "avoc", "apples", "app", "banana" and "zzz"; a food
+  and searching "avoc", "basil", "apples", "app", "banana" and "zzz"; a food
   page per verdict (YES, NO, JUST, NEARLY, NEVER, picked for the date
   from `foods.json` with `verdict.js`), rhubarb, a food with a buy note
   and one whose source is general; Now this week and next; the
-  calendar, the wheel, About and a 404. At 390 and 1280, light and
-  dark, the clock frozen at noon on the date (default 2026-10-25), with
-  reduced motion so nothing is caught mid-animation. Not `npm run`:
+  calendar, the wheel, About and a 404. At 390 and 1280, the clock
+  frozen at noon on the date (default 2026-10-25), with reduced motion
+  so nothing is caught mid-animation. By default it takes Helen's
+  review list (68 shots): everything dark, the shots she starred light
+  too (the kitchen sink, home empty, the basil card and NEVER, the
+  verdict and rhubarb food pages, Now and the calendar), and the
+  kitchen sink at 1280 only. `--full yes` takes all 88. Not `npm run`:
   the project has no npm.
 - `/kitchen-sink/` (`kitchen-sink/index.html`, `noindex`, linked from
   nowhere, its slug reserved in `check-foods.py`) shows every shared
