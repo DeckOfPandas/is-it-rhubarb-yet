@@ -2,18 +2,22 @@
 title: Calendar
 description: Every UK food on one chart, week by week.
 permalink: /calendar/
+charts: true
 ---
 {%- comment -%}
 Three copies of the chart, one per ordering, built at build time. The
 switch is a radio group; CSS shows the chart whose radio is checked, so
-it works without JavaScript, which only draws the today line and keeps
-the sticky month header level with the chart. Every visit opens by
-start: the choice is not remembered.
+it works without JavaScript. site.js draws the today line, keeps the
+sticky month header level with the chart and opens it at today;
+assets/charts.js adds the time travel, the zoom and the food popover,
+and the list of foods for the chosen time under the chart. Every visit
+opens by start: the choice is not remembered.
 {%- endcomment -%}
 <header class="page-head">
   <h1>Calendar</h1>
 </header>
 
+<div class="tt" data-tt="calendar" data-groups='{{ site.data.groups | jsonify | escape }}'>
 <fieldset class="switch">
   <legend>Order</legend>
   <input type="radio" name="order" id="order-start" value="start" checked><label for="order-start">By start</label>
@@ -21,8 +25,13 @@ start: the choice is not remembered.
   <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
 </fieldset>
 
+{% include time-controls.html %}
+
 <div class="ordered">
   <figure class="chart by-start">{% include calendar.html order="start" id="cal-start" %}</figure>
   <figure class="chart by-group">{% include calendar.html order="group" id="cal-group" %}</figure>
   <figure class="chart by-alpha">{% include calendar.html order="alpha" id="cal-alpha" %}</figure>
+</div>
+
+<section class="tt-list" id="tt-list" hidden></section>
 </div>

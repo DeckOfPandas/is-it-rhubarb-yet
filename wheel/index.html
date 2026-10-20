@@ -2,16 +2,20 @@
 title: The shape of the year
 description: Where every UK food's season begins, one wheel per kind of food.
 permalink: /wheel/
+charts: true
 ---
 {%- comment -%}
 One arrivals wheel per kind of food. The kind switch is a radio group
-shown by CSS alone; JavaScript only points the hands. Every visit opens
-on veg.
+shown by CSS alone; site.js points the hands, and assets/charts.js adds
+the time travel, the zoom, the arcs or dots switch and the food popover,
+and the list of foods for the chosen time under the wheel. Every visit
+opens on veg.
 {%- endcomment -%}
 <header class="page-head">
   <h1>The shape of the year</h1>
 </header>
 
+<div class="tt" data-tt="wheel" data-groups='{{ site.data.groups | jsonify | escape }}'>
 <div class="switches">
 <fieldset class="switch">
   <legend>Kind</legend>
@@ -24,6 +28,8 @@ on veg.
 </fieldset>
 </div>
 
+{% include time-controls.html arcs=true %}
+
 <div class="ordered">
   <figure class="wheel dial by-veg">{% include arrivals-dial.html kind="veg" id="dial-veg" %}</figure>
   <figure class="wheel dial by-fruit">{% include arrivals-dial.html kind="fruit" id="dial-fruit" %}</figure>
@@ -31,4 +37,7 @@ on veg.
   <figure class="wheel dial by-herbs">{% include arrivals-dial.html kind="herbs" id="dial-herbs" %}</figure>
   <figure class="wheel dial by-fish">{% include arrivals-dial.html kind="fish" id="dial-fish" %}</figure>
   <figure class="wheel dial by-meat">{% include arrivals-dial.html kind="meat" id="dial-meat" %}</figure>
+</div>
+
+<section class="tt-list" id="tt-list" hidden></section>
 </div>

@@ -161,7 +161,7 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .page-head { margin-bottom: var(--sp-4); }
 /* A section's label: Anton, label size, full ink, 8px above what it
    labels. */
-.label, .teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
+.section-label, .teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
   font: 400 var(--fs-label)/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--ink); margin: 0 0 var(--sp-1);
 }
@@ -603,6 +603,90 @@ article.never { --food: var(--never); }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
 .dial .allyear { color: var(--muted); font-size: var(--fs-small); text-align: center; margin-top: var(--sp-1); }
 .dial .allyear .head { font: 700 var(--fs-caps)/1 var(--text); text-transform: uppercase; letter-spacing: var(--track-caps); }
+
+/* --- Time travel: the calendar and the wheel, played with ------------------ */
+/* All of it is drawn by assets/charts.js and hidden without it. Above the
+   chart, the season buttons (a 28px icon over its word in caps, the
+   pressed one's word underlined in pink), then play and the switches.
+   The line through the year is pink with a 2px halo in the page colour,
+   so it shows where it crosses rhubarb; today is a short ink tick that
+   never moves. The handle is the only thing that takes touch-action:
+   none. The line glides between steps unless motion is reduced, and
+   never while it is being dragged. */
+.tt-controls { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-3); }
+.seasons { display: flex; gap: var(--sp-1); }
+.season-btn {
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-1); min-width: 64px; min-height: 44px; padding: var(--sp-1);
+  background: none; border: 0; border-radius: 8px; color: var(--ink); cursor: pointer;
+}
+.season-btn .season-icon { width: 28px; height: 28px; }
+.season-word { font: 700 var(--fs-caps)/1 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; text-underline-offset: 0.4em; }
+.season-btn:hover .season-word, .season-btn[aria-pressed="true"] .season-word { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
+.tt-toggles { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); }
+.tt-toggles .switch { margin: 0; }
+.tt-play {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--rule); border-radius: 50%;
+  background: none; color: var(--ink); font: 400 var(--fs-small)/1 var(--text); cursor: pointer;
+}
+.tt-play[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.tt-line .tt-halo { stroke: var(--bg); stroke-width: 6; }
+.tt-line .tt-stroke { stroke: var(--rhubarb); stroke-width: 2; }
+.tt-line, .tt-handle { transition: transform 0.35s ease; }
+.tt-line { pointer-events: none; }
+.tt-today { stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; pointer-events: none; }
+.tt.is-dragging .tt-line, .tt.is-dragging .tt-handle { transition: none; }
+@media (prefers-reduced-motion: reduce) { .tt-line, .tt-handle { transition: none; } }
+.tt.draw-dots .dial .season { display: none; }
+/* The calendar's handle: a pink pill in a rail across the top of the
+   sticky header, centred on the line, its time in caps. */
+.tt-rail { position: relative; height: 40px; width: var(--cal-w); }
+.tt-handle:not(.tt-knob) {
+  position: absolute; top: var(--sp-1); left: 0; padding: 0.35rem 0.6rem; border-radius: 999px; white-space: nowrap;
+  background: var(--rhubarb); color: var(--shed); cursor: grab; touch-action: none; user-select: none;
+  font: 700 var(--fs-caps)/1 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
+}
+.tt-handle:not(.tt-knob)::before { content: ""; position: absolute; inset: -8px -4px; }
+.tt-handle:active { cursor: grabbing; }
+/* The wheel's handle: a knob at the rim, its time beside it. */
+.tt-knob { cursor: grab; touch-action: none; outline: none; }
+.tt-knob-dot { fill: var(--rhubarb); stroke: var(--bg); stroke-width: 2; }
+.tt-knob-ring { fill: transparent; }
+.tt-knob:focus-visible .tt-knob-ring { stroke: var(--ink); stroke-width: 2; }
+.tt-knob-label {
+  font: 700 12px var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
+  fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round;
+}
+/* A lit food: the rest fade to a quarter; on the calendar a faint ink
+   band lies behind its row, and a pinned one is outlined in ink. */
+.cal.is-lit a.row:not(.is-hot) { opacity: 0.25; }
+.chart .cal a.row.is-hot .row-hit { fill: color-mix(in oklab, var(--ink) 8%, var(--bg)); }
+.chart .cal a.row.is-pinned .row-hit { stroke: var(--ink); stroke-width: 1; }
+.dial svg.is-lit a.label:not(.is-hot), .dial svg.is-lit .season:not(.is-hot) { opacity: 0.25; }
+.dial a.label.is-hot text { font-weight: 700; }
+.dial a.label.is-pinned .dot { stroke: var(--ink); stroke-width: 2; }
+/* The food popover is a food's card with a close button in its top
+   right; beside the food on a wide screen, docked at the foot of the
+   screen on a narrow one. When it is not for today it says which time
+   it is for, in caps over the question. */
+.tt-pop {
+  position: absolute; z-index: 20; width: min(28rem, calc(100vw - 2 * var(--sp-2)));
+  padding-right: var(--sp-5); box-shadow: 0 8px 24px color-mix(in oklab, var(--shed) 30%, transparent);
+}
+.tt-pop.is-docked {
+  position: fixed; left: var(--sp-2); right: var(--sp-2); bottom: var(--sp-2); width: auto;
+  grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "sub go"; padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-2);
+}
+.tt-pop .one-dial { width: 90px; height: 90px; }
+.tt-pop .one-go { width: 48px; height: 48px; }
+.tt-pop-when { display: block; margin: 0 0 var(--sp-1); font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--muted); }
+.tt-pop-when:empty { display: none; }
+.tt-close {
+  position: absolute; top: 0; right: 0; width: 44px; height: 44px; padding: 0; border: 0; background: none;
+  color: var(--muted); font: 400 1.5rem/1 var(--text); cursor: pointer; border-radius: 0 12px 0 8px;
+}
+.tt-close:hover, .tt-close:focus-visible { color: var(--ink); }
+.tt-list { margin: var(--sp-4) 0 0; }
+.tt-list .tt-list-head { margin-bottom: var(--sp-3); }
 
 /* --- Kitchen sink: every component, for review ---------------------------- */
 /* Only the frame around the components: a label per section, three

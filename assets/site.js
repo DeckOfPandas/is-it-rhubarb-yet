@@ -958,6 +958,41 @@
   }
 
   // --- Now: the digest for any week ----------------------------------------
+  var KIND = { veg: "Veg", fruit: "Fruit", wild: "Wild", herbs: "Herbs", fish: "Fish", meat: "Meat" };
+  // One band, the same markup as _includes/band.html: a heading with the
+  // count (none when it is nothing), then the foods as one A to Z list
+  // (plain), a group per timing (phrase) or a group per kind with its
+  // count (kind). No row has a tag. An empty band shows its emptyText,
+  // or with none is left out.
+  function band(cls, heading, kinds, shape, emptyText) {
+    var total = V.flatten(kinds).length;
+    if (!total && !emptyText) return document.createTextNode("");
+    var s = el("section", "band " + cls);
+    s.id = cls;
+    var h = el("h2", null, heading + " ");
+    if (total) h.appendChild(el("span", "count", String(total)));
+    s.appendChild(h);
+    if (!total) { s.appendChild(el("p", "empty", emptyText)); return s; }
+    if (shape === "phrase") {
+      V.byPhrase(kinds).forEach(function (g) { s.appendChild(foodGroup(g.items, g.phrase)); });
+    } else if (shape === "kind") {
+      kinds.forEach(function (k) { s.appendChild(foodGroup(k.items, KIND[k.kind] || k.kind, true)); });
+    } else {
+      s.appendChild(foodGroup(V.azList(kinds)));
+    }
+    return s;
+  }
+  // Now's four bands, from nowLists, into `box`. For this week the labels
+  // are Now's own; for another time (`thisWeek` false) Great this week is
+  // just Great.
+  function fillDigest(box, now, thisWeek) {
+    box.textContent = "";
+    box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
+    box.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
+    box.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
+    box.appendChild(band("still", thisWeek ? "Great this week" : "Great", now.still, "kind", "Nothing at all, which cannot be right."));
+  }
+
   function initNow() {
     var digest = document.getElementById("digest");
     if (!digest) return;
@@ -967,7 +1002,6 @@
     var prev = document.getElementById("prev-week"), next = document.getElementById("next-week");
     var back = document.getElementById("week-back");
     var site = document.title.split(" · ").slice(1).join(" · ");
-    var KIND = { veg: "Veg", fruit: "Fruit", wild: "Wild", herbs: "Herbs", fish: "Fish", meat: "Meat" };
     // A week is shown as its distance in weeks from this one, at most
     // RANGE either way; the address carries week= and, in another year,
     // year=.
@@ -983,30 +1017,6 @@
     var offset = (pw >= 1 && pw <= 52) ? (py - YEAR) * 52 + (pw - WEEK) : 0;
     if (Math.abs(offset) > RANGE) offset = 0;
     var redrawn = false;
-
-    // One band, the same markup as _includes/band.html: a heading with the
-    // count (none when it is nothing), then the foods as one A to Z list
-    // (plain), a group per timing (phrase) or a group per kind with its
-    // count (kind). No row has a tag. An empty band shows its emptyText,
-    // or with none is left out.
-    function band(cls, heading, kinds, shape, emptyText) {
-      var total = V.flatten(kinds).length;
-      if (!total && !emptyText) return document.createTextNode("");
-      var s = el("section", "band " + cls);
-      s.id = cls;
-      var h = el("h2", null, heading + " ");
-      if (total) h.appendChild(el("span", "count", String(total)));
-      s.appendChild(h);
-      if (!total) { s.appendChild(el("p", "empty", emptyText)); return s; }
-      if (shape === "phrase") {
-        V.byPhrase(kinds).forEach(function (g) { s.appendChild(foodGroup(g.items, g.phrase)); });
-      } else if (shape === "kind") {
-        kinds.forEach(function (k) { s.appendChild(foodGroup(k.items, KIND[k.kind] || k.kind, true)); });
-      } else {
-        s.appendChild(foodGroup(V.azList(kinds)));
-      }
-      return s;
-    }
 
     // The digest for another week reads its phrases from the middle of
     // that week, since it has no today. The baked digest is kept only
@@ -1028,12 +1038,7 @@
       redrawn = true;
       loadFoods().then(function (foods) {
         if (weekAt(offset).week !== w || weekAt(offset).year !== y) return;
-        var now = V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y));
-        digest.textContent = "";
-        digest.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
-        digest.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
-        digest.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
-        digest.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
+        fillDigest(digest, V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y)), true);
       });
     }
 
@@ -1089,4 +1094,12 @@
     window.addEventListener("hashchange", targetRow);
     refreshRows(document.querySelector(".also"));
   });
+
+  // What assets/charts.js borrows, so the calendar and the wheel draw
+  // their cards and lists exactly as the rest of the site does.
+  window.Site = {
+    BASE: BASE, TODAY: TODAY, YEAR: YEAR,
+    el: el, foodUrl: foodUrl, loadFoods: loadFoods, whenIn: whenIn,
+    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest
+  };
 })();

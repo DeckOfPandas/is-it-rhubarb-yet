@@ -121,5 +121,8 @@ Now have cards of their own; every other page shows the home card.
   </footer>
   <script src="{{ '/assets/verdict.js' | relative_url }}"></script>
   <script src="{{ '/assets/site.js' | relative_url }}"></script>
+  {%- if page.charts %}
+  <script src="{{ '/assets/charts.js' | relative_url }}"></script>
+  {%- endif %}
 </body>
 </html>

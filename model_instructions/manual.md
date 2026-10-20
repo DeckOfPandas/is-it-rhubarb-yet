@@ -389,6 +389,83 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   a phone it runs to the screen's edges. `_includes/calendar.html`
   draws it as four SVGs sharing one set of coordinates: the corner and
   months on top, the names and weeks below.
+- **The calendar and the wheel, played with.** `assets/charts.js`,
+  loaded only on pages with `charts: true`, on top of charts that work
+  without it; it borrows the card's dial, the hand and Now's bands from
+  `site.js` through `window.Site`, and every date through `verdict.js`.
+  - **Highlight.** Hovering or focusing a food (a calendar row, by its
+    name or its weeks; a wheel dot, label or arc) lights it and fades the
+    rest to a quarter; on the calendar a faint ink band (ink at 8%) lies
+    behind its row; on the wheel its label comes to the front (unless it
+    has focus, which moving it would take). Each is focusable with a
+    name and its season, "Celery, July to October" ("Bay, all year";
+    two runs joined with "and").
+  - **Popover.** A click, tap or Enter pins the food (outlined in ink)
+    and opens its card: the home answer's, with the time it is for in
+    caps over the question when that is not today, the single ring of
+    the variety that gave the verdict (on the calendar, the row's own
+    variety), the arrow a link to the food page, and a × button of its
+    own in the top right. Escape, a click outside or × closes it; focus
+    goes back to the food (after a click outside, only if focus was in
+    the card). Wide: beside the food, under its row or right of its dot,
+    flipped to stay on the screen. Below 700px: docked at the foot of
+    the screen, and the page scrolls the food clear of it.
+  - **Time travel.** Today is a short ink tick on the calendar's month
+    axis and across the wheel's month ring, and never moves; it replaces
+    the dashed today line and the hand. The line is pink, `--rhubarb`,
+    with a 2px halo in the page colour so it shows across forced
+    rhubarb: a vertical line on the calendar, a radius from the month
+    ring to the rim on the wheel. Its handle (a pink pill in a rail over
+    the calendar's sticky header, kept inside the weeks; a knob at the
+    wheel's rim) says the time in caps, MID DECEMBER or TODAY, and is a
+    slider: → and ← a step, Page Up and Page Down a month, Home back to
+    today; dragging snaps to the nearest step. There are 36 steps, early,
+    mid and late in each month, standing for the 5th, 15th and 25th
+    (verdict.js's early is the 1st to the 10th). The line starts at
+    today itself, which is off the steps unless it falls on the 5th,
+    15th or 25th; the first move goes to the step either side. The
+    address carries `?when=mid-december` (none at today) and is read on
+    load. The calendar on show scrolls to keep the line in view.
+  - **The list under the chart** is Now's bands for the line's time,
+    built by the same code: at today, Now itself under "This week"; at
+    another time under "In mid-December" (Anton `label`), with "Great"
+    for "Great this week". On the wheel it is every food, not only the
+    kind shown.
+  - **Play.** ▶ beside the switches moves the line a step every 0.4s
+    round the whole year and back to where it began; ■ (the same button,
+    pressed), a touch anywhere on the chart or its controls, or a move of
+    the handle stops it. The line glides between steps (0.35s), and
+    jumps with reduced motion, and never glides while it is dragged.
+  - **Magnifier.** A focus and context distortion centred on the line:
+    each slice of the year is drawn as wide as 1 + 5 × exp(−(d / 2.6)²),
+    d its distance in weeks from the line (round the year on the wheel),
+    and the whole scaled back to 52 weeks. The calendar distorts its
+    weeks sideways; the wheel distorts by angle. It follows the line as
+    it is dragged or played. Month names and week numbers with no room
+    are hidden; wheel labels are all kept, however they crowd. Switched
+    by the Whole year · Magnify switch, off by default.
+  - **Seasons.** WINTER · SPRING · SUMMER · AUTUMN above the chart, each
+    a 28px icon over its word in caps, `aria-pressed`. One moves the line
+    to mid-January, mid-April, mid-July or mid-October and turns the
+    magnifier on; on the wheel it also turns the wheel so the line is at
+    the top. The pressed one's word is underlined in pink. Pressed again,
+    or with the magnifier switched off, it lets go: magnifier off, the
+    wheel turned back.
+  - **Arcs or dots.** The wheel's Arcs · Dots switch, at every size,
+    defaults to arcs; dots hides the season arcs.
+  - **Touch.** Only the handles take `touch-action: none`. Nothing else
+    blocks scrolling or pinch zoom (the viewport allows it), and no
+    wheel or scroll gesture zooms the chart.
+- **Season icons.** `_includes/icons/season-{winter,spring,summer,autumn}.svg`,
+  split by `tmp/` scripts from Helen's one-path Inkscape file (a 2×2
+  grid: flower, sun, leaf, snowflake), each in a 24-unit box, `fill="none"`,
+  `stroke="currentColor"`, round caps and joins, `stroke-width="2"` with
+  `vector-effect: non-scaling-stroke`, so 2px at any size, near the
+  magnifier's 2.25 units. The snowflake is drawn as an outline of its
+  arms, so at 28px its two lines close up and it reads bolder than the
+  others. Credits on About, as the licence asks: sun and leaf, "seasons"
+  by Made by Made from Noun Project; flower and snowflake, "seasons" by
+  VectorsLab from Noun Project; both CC BY 3.0.
 - Atkinson Hyperlegible Next's zero is slashed, and the font has no
   feature to open it.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for
@@ -397,8 +474,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 
 ## Drawing rules
 
-- No trigonometry. Arcs are dashed circles with `pathLength` in weeks
-  or days; rotation is a `transform`. Keep it that way.
+- No trigonometry in the templates. Arcs are dashed circles with
+  `pathLength` in weeks or days; rotation is a `transform`. Keep it that
+  way. The magnifier keeps it too: an arc is redrawn by moving its dash
+  to F of its start and end. Only `assets/charts.js` uses sine and
+  cosine, to place the wheel's knob and read a drag's angle.
 - A chart row's colour is `--c`; "just about" fades mix `--c` into
   `--off` in oklab. Variety colours override food colours row by row,
   and the checker refuses two rows with the same colour.
@@ -431,13 +511,15 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   page per verdict (YES, NO, JUST, NEARLY, NEVER, picked for the date
   from `foods.json` with `verdict.js`), rhubarb, a food with a buy note
   and one whose source is general; Now this week and next; the
-  calendar, the wheel, About and a 404. At 390 and 1280, the clock
+  calendar and the wheel, each at today, at `?when=mid-december` and
+  with SUMMER pressed; About and a 404. At 390, 820 and 1280, the clock
   frozen at noon on the date (default 2026-10-25), with reduced motion
   so nothing is caught mid-animation. By default it takes Helen's
-  review list (68 shots): everything dark, the shots she starred light
-  too (the kitchen sink, home empty, the basil card and NEVER, the
-  verdict and rhubarb food pages, Now and the calendar), and the
-  kitchen sink at 1280 only. `--full yes` takes all 88. Not `npm run`:
+  review list: everything dark, the shots she starred light too (the
+  kitchen sink, home empty, the basil card and NEVER, the verdict and
+  rhubarb food pages, Now, the calendar and the wheel states), and the
+  kitchen sink at 1280 only. `--full yes` takes all 156, every shot in
+  both themes, as a review round should be checked. Not `npm run`:
   the project has no npm.
 - `/kitchen-sink/` (`kitchen-sink/index.html`, `noindex`, linked from
   nowhere, its slug reserved in `check-foods.py`) shows every shared
