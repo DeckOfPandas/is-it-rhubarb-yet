@@ -468,12 +468,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - **TODAY and the seasons.** TODAY · WINTER · SPRING · SUMMER ·
     AUTUMN above the chart, each a 28px icon over its word in caps,
     `aria-pressed`; on a phone they share its width equally (five fit
-    in 358px with their icons). TODAY puts the line on today itself,
-    the magnifier off and the wheel as it was. A season moves the line
-    to mid-January, mid-April, mid-July or mid-October; on the calendar
-    it turns the magnifier on, on the wheel it turns the wheel so that
-    season is at the top. Pressed again while still pressed, it lets go
-    (magnifier off, wheel turned back, the line where it is). The pink
+    in 358px with their icons). TODAY puts the line on today itself
+    and the magnifier off. A season moves the line to mid-January,
+    mid-April, mid-July or mid-October, and on the calendar turns the
+    magnifier on. Neither ever turns the wheel, which always keeps its
+    normal orientation. A season pressed again while still pressed lets
+    go on the calendar (magnifier off, the line where it is) and does
+    nothing on the wheel. The pink
     underline under a word: TODAY's whenever the line is on today; a
     season's from its press until the line moves; none after a drag.
   - **The ALL wheel.** The wheel page's kind switch starts with All,
@@ -481,7 +482,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     On it only the foods in season (YES or JUST) at the line's time
     keep their names, changing as the line moves; every dot stays,
     named for a screen reader and tappable. The kind wheels keep all
-    their names. The page still opens on Veg.
+    their names. The page opens on All. Seven kinds fit a 390px phone
+    because pill segments are tighter below 28rem.
   - **Arcs or dots.** The wheel's Arcs · Dots switch, at every size,
     defaults to arcs; dots hides the season arcs.
   - **Touch.** Only the handles take `touch-action: none`. Nothing else
@@ -506,6 +508,14 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for
   the longest label at any angle; `site.js` tightens each visible
   wheel's viewBox to its drawn extent, so the wheel fills its width.
+  The extent counts every food's name, even one the ALL wheel has
+  hidden for now, and on the wheel page room for the time line's knob
+  and its longest time (EARLY SEPTEMBER) at any angle, so no label or
+  handle is ever clipped (checked for every kind and every step at
+  390, 820 and 1280).
+- The season-length axis stays at 12 o'clock, between December and
+  January, its ring labels and title haloed in the page colour
+  (`paint-order: stroke`) so they read over any dot or arc.
 
 ## Drawing rules
 
@@ -547,7 +557,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   from `foods.json` with `verdict.js`), rhubarb, a food with a buy note
   and one whose source is general; Now this week and next; the
   calendar and the wheel, each at today, at `?when=mid-december` and
-  with SUMMER pressed, and the ALL wheel at mid-December; About and a
+  with SUMMER pressed (the wheel on All, as it opens), and the Veg
+  wheel at mid-December; About and a
   404. At 390, 820 and 1280, the clock
   frozen at noon on the date (default 2026-10-25), with reduced motion
   so nothing is caught mid-animation. By default it takes Helen's

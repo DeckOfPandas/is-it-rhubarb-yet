@@ -219,6 +219,8 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .switch label { padding: 0.2rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: var(--fs-small); line-height: 1.4; }
 .switch input:checked + label { background: var(--ink); color: var(--bg); }
+/* The wheel's seven kinds fit a 390px phone only with tighter segments. */
+@media (max-width: 28rem) { .switch label { padding: 0.2rem 0.55rem; } }
 .switch input:focus-visible + label { outline: 2px solid var(--rhubarb); outline-offset: 1px; }
 /* The theme switch, in the footer: sun, Auto, moon, three segments of one
    pill. Each is a 44px square (or wider, for AUTO) to tap, but the
@@ -594,6 +596,9 @@ article.never { --food: var(--never); }
 .dial { width: min(100vw, calc(100svh - 4rem)); margin: var(--sp-1) 0 var(--sp-2); position: relative; left: 50%; transform: translateX(-50%); }
 .dial .guide-axis line, .dial .guide-axis path { stroke: var(--rule); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 .dial .guide-axis text { font-family: var(--text); font-size: 9px; fill: var(--muted); letter-spacing: var(--track-caps); text-transform: uppercase; }
+/* The season-length axis's title and ring labels wear a halo in the page
+   colour, so they read over any dot or arc. */
+.dial .guide-axis text, .dial .guide-label { paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
 .dial .month { font-size: 9px; fill: var(--ink); }
 .dial .label text { font-family: var(--text); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
 .dial .season { stroke: var(--c); stroke-width: var(--arc-w, 2.5); opacity: var(--arc-o, 0.75); }

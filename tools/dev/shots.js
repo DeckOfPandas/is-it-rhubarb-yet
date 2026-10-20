@@ -1,7 +1,8 @@
 // The design-review screenshot set: full-page shots of the kitchen sink,
 // home in each search state, a food page for every verdict and kind, Now
 // for this week and next, the calendar and the wheel (at today, at
-// mid-December and with SUMMER pressed), About and the 404, at
+// mid-December and with SUMMER pressed; the wheel on All, as it opens,
+// and Veg at mid-December), About and the 404, at
 // 390, 820 and 1280 wide, light and dark, with the clock frozen on one day.
 //
 // USAGE:
@@ -129,8 +130,8 @@ async function pickFoods(base, day) {
       await shot('wheel', 'wheel/', { both: true });
       await shot('wheel-mid-december', 'wheel/?when=mid-december', { both: true });
       await shot('wheel-summer', 'wheel/', { both: true, act: summer });
-      await shot('wheel-all-mid-december', 'wheel/?when=mid-december', { both: true, act: async () => {
-        await page.click('label[for="kind-all"]');
+      await shot('wheel-veg-mid-december', 'wheel/?when=mid-december', { both: true, act: async () => {
+        await page.click('label[for="kind-veg"]');
         await page.waitForLoadState('networkidle');
       } });
       await shot('about', 'about/');

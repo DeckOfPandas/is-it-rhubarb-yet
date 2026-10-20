@@ -143,12 +143,12 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
     {%- assign end_deg = nxt | minus: 1 | times: 360.0 | divided_by: 52 -%}
     {%- assign span = end_deg | minus: deg -%}
     {%- assign mid_deg = deg | plus: end_deg | divided_by: 2 | round: 2 -%}
-    <line class="spoke" data-angle="{{ deg | round: 2 }}" x1="{{ C }}" y1="{{ C | minus: RING | plus: 9 }}" x2="{{ C }}" y2="{{ C | minus: RING | minus: 9 }}" transform="rotate({{ deg | round: 2 }} {{ C }} {{ C }})" />
+    <line class="spoke" x1="{{ C }}" y1="{{ C | minus: RING | plus: 9 }}" x2="{{ C }}" y2="{{ C | minus: RING | minus: 9 }}" transform="rotate({{ deg | round: 2 }} {{ C }} {{ C }})" />
     {%- assign ly = C | minus: RING -%}
     {%- if mid_deg > 90 and mid_deg < 270 -%}
-    <text class="month" data-angle="{{ mid_deg }}" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }}) rotate(180 {{ C }} {{ ly }})">{{ month_names[mi] }}</text>
+    <text class="month" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }}) rotate(180 {{ C }} {{ ly }})">{{ month_names[mi] }}</text>
     {%- else -%}
-    <text class="month" data-angle="{{ mid_deg }}" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }})">{{ month_names[mi] }}</text>
+    <text class="month" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }})">{{ month_names[mi] }}</text>
     {%- endif -%}
     {%- assign prefix = mi | plus: 10 | prepend: "m" | append: " " -%}
     {%- assign mine = "" | split: "" -%}
@@ -174,10 +174,10 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
       {%- assign wk = angle | times: 52 | divided_by: 360.0 | round: 2 -%}
       {%- comment -%} The gap makes the dash pattern exactly one lap, so an arc that passes December carries on into January. {%- endcomment -%}
       {%- if arcs -%}
-      <circle class="season" data-slug="{{ food.slug }}" data-wk="{{ wk }}" data-len="{{ length }}" fill="none" cx="{{ C }}" cy="{{ C }}" r="{{ r }}" pathLength="52" stroke-dasharray="{{ length }} {{ 52 | minus: length }}" stroke-dashoffset="{{ 0 | minus: wk }}" transform="rotate(-90 {{ C }} {{ C }})" style="--c: {{ food.colour }}" />
+      <circle class="season" data-slug="{{ food.slug }}" fill="none" cx="{{ C }}" cy="{{ C }}" r="{{ r }}" pathLength="52" stroke-dasharray="{{ length }} {{ 52 | minus: length }}" stroke-dashoffset="{{ 0 | minus: wk }}" transform="rotate(-90 {{ C }} {{ C }})" style="--c: {{ food.colour }}" />
       {%- endif -%}
       {%- capture label -%}
-      <a class="label" data-slug="{{ food.slug }}" data-angle="{{ angle }}" data-r="{{ r }}" data-dot="{{ dot }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ food.colour }}">
+      <a class="label" data-slug="{{ food.slug }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ food.colour }}">
       {%- if angle < 180 -%}
         <g transform="rotate({{ angle | minus: 90 | round: 2 }} {{ C }} {{ C }})">
           <circle class="dot" cx="{{ C | plus: r }}" cy="{{ C }}" r="{{ dot }}" />
