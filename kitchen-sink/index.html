@@ -85,11 +85,17 @@ photographs it.
 
 <section class="ks-section">
   <h2 class="ks-title">Card</h2>
+  {%- comment -%} is or are, by the rule of whenIn in assets/site.js. {%- endcomment -%}
+  {%- assign end1 = yes0.name | slice: -1, 1 -%}
+  {%- assign end2 = yes0.name | slice: -2, 2 -%}
+  {%- assign be = "is" -%}
+  {%- if yes0.name contains " & " -%}{%- assign be = "are" -%}
+  {%- elsif end1 == "s" and end2 != "ss" and end2 != "us" -%}{%- assign be = "are" -%}{%- endif -%}
   <div class="ks-states">
   {%- for s in states -%}
     <div class="ks-state is-{{ s }}">
       <p class="ks-state-name">{{ s }}</p>
-      <a class="one-result" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <span class="one-sub">When is {{ yes0.name | downcase }} in season?</span><span class="one-dial" aria-hidden="true"></span><span class="one-go" aria-hidden="true">{% include icons/arrow.svg %}</span></a>
+      <a class="one-result" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <span class="one-sub">When {{ be }} {{ yes0.name | downcase }} in season?</span><span class="one-dial" aria-hidden="true"></span><span class="one-go" aria-hidden="true">{% include icons/arrow.svg %}</span></a>
     </div>
   {%- endfor -%}
   </div>
@@ -120,7 +126,7 @@ photographs it.
         <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
       </nav>
       <p><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
-      <p class="teaser-foods"><a class="food-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}">{{ yes0.name }}</a> <a class="more-link" href="{{ '/now/' | relative_url }}">and 4 more</a></p>
+      <p class="teaser-foods"><a class="food-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}">{{ yes0.name }}</a> <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and 4 more</span><span class="arrow" aria-hidden="true">→</span></a></p>
       <p class="week-line"><button type="button" class="week-step" aria-label="Previous week">‹</button><span>{{ baked.range }}</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
       <p class="week-line"><button type="button" class="week-step" aria-label="Previous week" disabled>‹</button><span>Last week in range</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
       <div class="site-footer ks-footer">

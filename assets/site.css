@@ -307,14 +307,14 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .teaser-label { font: 400 1.1875rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--ink); margin: 0 0 0.3rem; }
 .teaser-foods { margin: 0; max-width: none; }
 .this-week .this-week-more { margin-top: 2rem; }
-.more-link { color: inherit; text-decoration: none; }
-.more-link:hover, .more-link:focus-visible { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
 /* A link with an arrow after it: the arrow says it is a link, so the
    words are not underlined until hover or focus, and the arrow, inside the
-   link but an inline block, never is. */
+   link but an inline block, never is. "and N more" after a list of foods
+   is one, in the colour of the words around it. */
 .arrow-link { color: var(--ink); text-decoration: none; }
 .arrow-link:hover .arrow-text, .arrow-link:focus-visible .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .arrow-link .arrow { display: inline-block; margin-left: 0.35em; }
+.arrow-link.more-link { color: inherit; }
 .food-link { color: var(--food); text-decoration: none; }
 .food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 /* What is typed, answered where the this-week blocks were. Two or more

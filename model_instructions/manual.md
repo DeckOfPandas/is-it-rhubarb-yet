@@ -233,7 +233,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     the question ("IS IT BASIL YET?", or "Cox apples" for a variety),
     the verdict, the date line (a sentence, with its full stop), then
     "When is basil in season?" (Atkinson 400, muted, the food's name in
-    lower case), a miniature of the dial with today's hand, and a round
+    lower case; "are" when the name ends in s but not ss or us, or joins
+    two foods with &, so "When are apples in season?"), a miniature of the dial with today's hand, and a round
     arrow in the food's colour with a dark arrow icon. The question,
     verdict and date line share the food page's rules (`.ask`,
     `.verdict-word`, `.date-line` in `assets/site.css`) and the card
@@ -285,17 +286,19 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   GREAT NOW and LAST CHANCE, each an Anton label over three foods in
   their colours, picked afresh at random on every visit by `site.js`
   from the block's `data-all` (the build's own pick stands without
-  JavaScript), and "and N more", which links to Now, then "Everything
+  JavaScript), and "and N more →", which links to Now, then "Everything
   in season this week →".
 - **Arrow links.** A link that leads on ("Everything in season this
   week", a food page's "Ask about something else" and "See the whole
-  year") has an arrow after it and no underline at rest; on hover its
-  words underline and the arrow, inside the link, does not.
+  year", and every "and N more" after a list of foods) has an arrow
+  after it and no underline at rest; on hover its words underline and
+  the arrow, inside the link, does not. "and N more" keeps the colour
+  of the words around it.
 - **Food page.** Three foods of the same family that are YES, picked
   afresh at random on every visit by `site.js` (from the section's
   `data-all`, or from `foods.json` for another week), A to Z,
   headed "Also great this week" ("Great this week" when the food is
-  NO), then "and N more", which links to Now.
+  NO), then "and N more →", which links to Now.
 - **Hover.** A food's name underlines in pink on hover, in lists and on
   the calendar, never its variety or timing, and never changes weight
   or size. SVG text draws its underline in its own fill, so the

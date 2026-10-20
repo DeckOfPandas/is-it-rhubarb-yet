@@ -66,7 +66,7 @@ colour.
     <ul class="food-list">
       {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>
-    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="more-link" href="{{ '/now/' | relative_url }}">and {{ also_more }} more</a></p>
+    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and {{ also_more }} more</span><span class="arrow" aria-hidden="true">→</span></a></p>
   </section>
   {%- endif -%}
 

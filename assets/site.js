@@ -171,6 +171,15 @@
     return li;
   }
 
+  // "When is basil in season?", "When are apples in season?". A name is
+  // plural when it names two foods with &, or ends in s but not ss or us:
+  // watercress, sea bass, asparagus and hedgehog fungus are each one thing.
+  // kitchen-sink/index.html applies the same rule in Liquid.
+  function whenIn(name) {
+    var plural = / & /.test(name) || /[^su]s$/i.test(name);
+    return "When " + (plural ? "are " : "is ") + name.toLowerCase() + " in season?";
+  }
+
   // A link with an arrow after its words, the same markup as the templates'
   // .arrow-link: the words underline on hover, the arrow never does.
   function arrowLink(href, text) {
@@ -183,7 +192,7 @@
   }
 
   // A home teaser's foods: STRIP_PICK of them at random, each a link in its
-  // colour, then "and N more", which links to Now.
+  // colour, then "and N more →", which links to Now.
   function fillTeaser(p, items) {
     p.textContent = "";
     var pick = pickSome(items, STRIP_PICK);
@@ -197,7 +206,8 @@
     var more = items.length - pick.length;
     if (more > 0) {
       p.appendChild(document.createTextNode(" "));
-      var m = el("a", "more-link", "and " + more + " more"); m.href = BASE + "now/";
+      var m = arrowLink(BASE + "now/", "and " + more + " more");
+      m.classList.add("more-link");
       p.appendChild(m);
     }
   }
@@ -417,7 +427,8 @@
         section.appendChild(el("h2"));
         section.appendChild(el("ul", "food-list"));
         var p = el("p", "also-more");
-        var m = el("a", "more-link"); m.href = BASE + "now/";
+        var m = arrowLink(BASE + "now/", "");
+        m.classList.add("more-link");
         p.appendChild(m);
         section.appendChild(p);
         article.insertBefore(section, article.querySelector(".fine"));
@@ -428,7 +439,7 @@
       picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" }, { tag: false })); });
       var more = all.length - picks.length;
       section.querySelector(".also-more").hidden = !more;
-      section.querySelector(".more-link").textContent = "and " + more + " more";
+      section.querySelector(".more-link .arrow-text").textContent = "and " + more + " more";
       section.hidden = false;
     }
   }
@@ -694,7 +705,7 @@
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
         one.querySelector(".one-sub").hidden = one.querySelector(".one-go").hidden = !!it.never;
-        one.querySelector(".one-sub").textContent = "When is " + it.name.toLowerCase() + " in season?";
+        one.querySelector(".one-sub").textContent = whenIn(it.name);
         dialFor(it.never ? null : it.slug);
         one.hidden = false;
         answered = it.never ? "never" : "link";
