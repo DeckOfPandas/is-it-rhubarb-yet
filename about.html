@@ -9,8 +9,9 @@ too; a screen reader hears "About". The opening question is body text,
 its answer a link to rhubarb's page. Two things are filled from the data:
 how many foods there are besides rhubarb, which links to the calendar
 where they all are, and a food that has just arrived (or, in a quiet
-week, one that is great now) for the dinner line; site.js refreshes the
-dinner food for the visitor's own week.
+week, one that is great this week) for the dinner line; site.js swaps
+it for one picked at random from everything in season on the visitor's
+day.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign others = site.data.foods | size | minus: 1 -%}
@@ -48,4 +49,5 @@ dinner food for the visitor's own week.
 <h2>Credits</h2>
 <p>Sun and leaf icons: <a href="https://thenounproject.com/icon/seasons-7785071/">seasons</a> by Made by Made from <a href="https://thenounproject.com">Noun Project</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>).</p>
 <p>Flower and snowflake icons: <a href="https://thenounproject.com/icon/seasons-7866164/">seasons</a> by VectorsLab from <a href="https://thenounproject.com">Noun Project</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>).</p>
+<p>Today icon: <a href="https://thenounproject.com/icon/you-are-here-4212165/">You Are Here</a> by BBBL from <a href="https://thenounproject.com">Noun Project</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>).</p>
 </article>

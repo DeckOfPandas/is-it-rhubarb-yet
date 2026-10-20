@@ -23,15 +23,25 @@ Now have cards of their own; every other page shows the home card.
     {%- capture description -%}{{ b.word }}. {{ b.line | remove: "." }}{% if b.said != "" %} ({{ b.said }}){% endif %}. As of {{ baked.asofText }}.{%- endcapture -%}
     {%- capture alt -%}{{ title }} {{ b.line }} As of {{ baked.asofText }}.{%- endcapture -%}
   {%- endif -%}
+  {%- comment -%} A food page's <title> and meta description ask when it
+     is in season; the link preview (og: and twitter:) keeps the answer.
+     {%- endcomment -%}
+  {%- if page.collection == "foods" -%}
+    {%- capture page_title -%}{% include when-in.html name=thing.name %}{%- endcapture -%}
+    {%- assign page_title = page_title | strip -%}
+    {%- capture meta_description -%}{{ page_title }} {{ description | strip }}{%- endcapture -%}
+  {%- endif -%}
 {%- endif -%}
+{%- assign page_title = page_title | default: title -%}
+{%- assign meta_description = meta_description | default: description -%}
 {%- unless alt -%}{%- assign alt = description | strip -%}{%- endunless -%}
 <!doctype html>
 <html lang="{{ site.lang }}" data-baked-week="{{ baked.week }}" data-baked-year="{{ baked.year }}" data-baked-asof="{{ baked.asof }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if title %}{{ title }}{% if page.url != '/' %} · {{ site.title }}{% endif %}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{{ description | strip | escape }}">
+  <title>{% if page_title %}{{ page_title }}{% if page.url != '/' %} · {{ site.title }}{% endif %}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ meta_description | strip | escape }}">
   <meta property="og:title" content="{{ title | default: site.title | escape }}">
   <meta property="og:description" content="{{ description | strip | escape }}">
   <meta property="og:type" content="website">

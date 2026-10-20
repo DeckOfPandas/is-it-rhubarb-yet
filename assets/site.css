@@ -221,19 +221,30 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .switch input:checked + label { background: var(--ink); color: var(--bg); }
 .switch input:focus-visible + label { outline: 2px solid var(--rhubarb); outline-offset: 1px; }
 /* The theme switch, in the footer: sun, Auto, moon, three segments of one
-   pill, each at least 44px square to tap; the glyphs stay small. */
+   pill. Each is a 44px square (or wider, for AUTO) to tap, but the
+   chosen one is marked smaller: a 32px disc behind the sun or the moon,
+   a pill as tall behind AUTO. The sun and moon are 15px, their stroke
+   thinned to match the 12px screen's. */
 .theme { display: none; }
 .js .theme { display: inline-flex; margin: 0; padding: 1px; gap: 1px; }
 .theme label {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.25em; min-width: 44px; min-height: 44px; padding: 0 0.6rem;
+  position: relative; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.25em; min-width: 44px; min-height: 44px; padding: 0 0.85rem;
   font: 700 var(--fs-caps)/1 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
 }
+.theme label::before { content: ""; position: absolute; inset: 6px; border-radius: 999px; z-index: -1; }
+.switch.theme input:checked + label { background: none; }
+.switch.theme input:checked + label::before { background: var(--ink); }
+.switch.theme input:focus-visible + label { outline-offset: -4px; }
 .theme .icon { width: 0.75rem; height: 0.75rem; }
+.theme input:not([value="auto"]) + label { padding: 0; }
+.theme input:not([value="auto"]) + label .icon { width: 15px; height: 15px; stroke-width: 1.6; }
 .switches { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); align-items: center; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
 main:has(#order-alpha:checked) .ordered > .by-alpha,
+main:has(#kind-all:checked) .ordered > .by-all,
 main:has(#kind-veg:checked) .ordered > .by-veg,
 main:has(#kind-fruit:checked) .ordered > .by-fruit,
 main:has(#kind-wild:checked) .ordered > .by-wild,
@@ -381,45 +392,34 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .also-line .food-link.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); border-radius: 3px; }
 .results .food-row a { margin: 0 -0.4rem; padding: 0.1rem 0.4rem; border-radius: 4px; }
 .results .food-row a.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); }
-/* A food's card: the food page in small. A panel one step lighter than
-   the page, its left edge in the food's colour (--food-bar-width), and
-   the page's own question, verdict, date line and dial, in that order,
-   at card size: the question at label size, the verdict at title size,
-   the date line at lead. Under them "When is basil in season?", and a
-   round arrow in the food's colour: on a wide screen the dial and the
-   arrow stand at the right, on a phone the dial beside the text and the
-   arrow at the bottom right, the subtitle left of it. The whole card is
-   one link, lighter on hover or focus, the arrow nudging right. A plain
+/* A food's card: the food page in small, the same on home (a single
+   match) and in the calendar's and the wheel's popover. A panel one step
+   lighter than the page, its left edge in the food's colour
+   (--food-bar-width): the page's own question, verdict and date line, at
+   card size (the question at label size, the verdict at title size, the
+   date line at lead), then an action, "Tell me everything about apples
+   →", to the food's page; the dial alone on the right, 110px. A plain
    card (.is-plain: a never-food's, or nothing found) is its question,
    verdict and line only, and no link; nothing found is in ink. */
 .one-result {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "text dial go" "sub dial go";
-  align-items: center; gap: var(--sp-1) var(--sp-3); max-width: var(--answer-w);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "more dial";
+  align-items: center; gap: var(--sp-2) var(--sp-3); max-width: var(--answer-w);
   padding: var(--sp-3); background: var(--panel); border-radius: 12px; border-left: var(--food-bar-width) solid var(--food);
-  color: var(--ink); text-decoration: none; transition: background-color 0.15s;
+  color: var(--ink);
 }
-.one-result[href]:hover, .one-result[href]:focus-visible { background: var(--panel-hover); }
 .one-result.is-unknown { --food: var(--ink); }
 .one-text { grid-area: text; display: block; min-width: 0; }
 .one-result .one-ask { display: block; margin: 0; font-size: var(--fs-label); letter-spacing: var(--track-small); }
 .one-result .one-word { display: block; margin-top: var(--sp-1); font-size: var(--fs-title); line-height: 1; padding-top: 0; white-space: normal; }
 .one-result .one-line { display: block; margin: var(--sp-1) 0 0; }
-.one-sub { grid-area: sub; color: var(--muted); font: 400 var(--fs-body)/1.4 var(--text); }
-.one-dial { grid-area: dial; width: 120px; height: 120px; }
+.one-more { grid-area: more; align-self: start; }
+.one-more.is-active .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+.one-dial { grid-area: dial; width: 110px; height: 110px; }
 .one-dial .wheel { display: block; width: 100%; margin: 0; }
 .one-dial .month, .one-dial .today-label { display: none; }
-.one-go {
-  grid-area: go; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%;
-  background: var(--food); color: var(--shed); transition: transform 0.15s;
-}
-.one-go .icon { width: 1.5rem; height: 1.5rem; }
-.one-result:hover .one-go, .one-result:focus-visible .one-go { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) { .one-result, .one-go { transition: none; } .one-result:hover .one-go, .one-result:focus-visible .one-go { transform: none; } }
+.wheel svg.mono .blend { stroke: var(--c); }
 @media (max-width: 37.49rem) {
-  .one-result { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "sub go"; padding: var(--sp-2); gap: var(--sp-1) var(--sp-2); }
-  .one-dial { width: 90px; height: 90px; }
-  .one-go { width: 48px; height: 48px; justify-self: end; }
-  .one-sub { align-self: center; }
+  .one-result { padding: var(--sp-2); gap: var(--sp-2); }
 }
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
 .results-none .food-group { margin-top: var(--sp-4); }
@@ -619,6 +619,32 @@ article.never { --food: var(--never); }
   display: flex; flex-direction: column; align-items: center; gap: var(--sp-1); min-width: 64px; min-height: 44px; padding: var(--sp-1);
   background: none; border: 0; border-radius: 8px; color: var(--ink); cursor: pointer;
 }
+/* TODAY and the four seasons share a phone's width equally. */
+@media (max-width: 43.74rem) {
+  .seasons { width: 100%; gap: 0; justify-content: space-between; }
+  .season-btn { flex: 1 1 0; min-width: 0; padding: var(--sp-1) 0; }
+}
+/* On a wide screen the calendar's controls stick to the top while the
+   chart is in view (the stage ends with it), and its header sticks
+   under them, at --tt-controls-h, which charts.js keeps measured. On a
+   phone only the header sticks. */
+@media (min-width: 43.75rem) {
+  .tt-stage .tt-controls { position: sticky; top: 0; z-index: 6; background: var(--bg); margin: 0; padding: var(--sp-1) 0 var(--sp-3); }
+  .tt-stage .chart-head { top: var(--tt-controls-h, 0px); }
+}
+/* The readout, in the header's corner over the names: the time, then
+   how many foods are in season, in caps on two lines, a button down to
+   the list. */
+.cal-corner { display: flex; }
+.tt-readout {
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 2px; width: 100%; min-height: 44px; padding: 0 var(--sp-1) 0 0;
+  background: none; border: 0; color: var(--ink); cursor: pointer; text-align: right;
+  font: 700 var(--fs-caps)/1.2 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
+}
+.tt-readout-count { color: var(--muted); }
+.tt-readout:hover .tt-readout-count, .tt-readout:focus-visible .tt-readout-count { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.3em; }
+.tt-list-head:focus { outline: none; }
+.tt-list-head:focus-visible { outline: 2px solid var(--rhubarb); outline-offset: 4px; }
 .season-btn .season-icon { width: 28px; height: 28px; }
 .season-word { font: 700 var(--fs-caps)/1 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; text-underline-offset: 0.4em; }
 .season-btn:hover .season-word, .season-btn[aria-pressed="true"] .season-word { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
@@ -664,20 +690,16 @@ article.never { --food: var(--never); }
 .dial svg.is-lit a.label:not(.is-hot), .dial svg.is-lit .season:not(.is-hot) { opacity: 0.25; }
 .dial a.label.is-hot text { font-weight: 700; }
 .dial a.label.is-pinned .dot { stroke: var(--ink); stroke-width: 2; }
-/* The food popover is a food's card with a close button in its top
-   right; beside the food on a wide screen, docked at the foot of the
-   screen on a narrow one. When it is not for today it says which time
-   it is for, in caps over the question. */
+/* The food popover is exactly the card, the same width, type and
+   layout, with two things more: when it is not for today, the time it
+   is for in caps over the question, and a close button in its top
+   right. Beside the food on a wide screen; docked at the foot of the
+   screen on a narrow one. */
 .tt-pop {
-  position: absolute; z-index: 20; width: min(28rem, calc(100vw - 2 * var(--sp-2)));
-  padding-right: var(--sp-5); box-shadow: 0 8px 24px color-mix(in oklab, var(--shed) 30%, transparent);
+  position: absolute; z-index: 20; width: min(var(--answer-w), calc(100vw - 2 * var(--sp-2)));
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--shed) 30%, transparent);
 }
-.tt-pop.is-docked {
-  position: fixed; left: var(--sp-2); right: var(--sp-2); bottom: var(--sp-2); width: auto;
-  grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "sub go"; padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-2);
-}
-.tt-pop .one-dial { width: 90px; height: 90px; }
-.tt-pop .one-go { width: 48px; height: 48px; }
+.tt-pop.is-docked { position: fixed; left: var(--sp-2); right: var(--sp-2); bottom: var(--sp-2); width: auto; }
 .tt-pop-when { display: block; margin: 0 0 var(--sp-1); font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--muted); }
 .tt-pop-when:empty { display: none; }
 .tt-close {

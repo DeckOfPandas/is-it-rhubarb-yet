@@ -171,14 +171,8 @@
     return li;
   }
 
-  // "When is basil in season?", "When are apples in season?". A name is
-  // plural when it names two foods with &, or ends in s but not ss or us:
-  // watercress, sea bass, asparagus and hedgehog fungus are each one thing.
-  // kitchen-sink/index.html applies the same rule in Liquid.
-  function whenIn(name) {
-    var plural = / & /.test(name) || /[^su]s$/i.test(name);
-    return "When " + (plural ? "are " : "is ") + name.toLowerCase() + " in season?";
-  }
+  // A card's way on to the food's page, the name in its sentence form.
+  function tellMeAbout(name) { return "Tell me everything about " + name.toLowerCase(); }
 
   // A link with an arrow after its words, the same markup as the templates'
   // .arrow-link: the words underline on hover, the arrow never does.
@@ -380,11 +374,13 @@
   // gave the verdict, by its place in the food's varieties) and that ring
   // widened to fill the band all the rings share, as a food of one variety
   // draws it: _includes/season-wheel.html's R 140 and R0 78, less its 3
-  // units of gap. The page is fetched once per food and kept. Resolves to
-  // a span.wheel for markWheel, or null.
+  // units of gap. The ring keeps its variety's shape but is drawn in one
+  // colour, the verdict's (`colour`), shades and all. The page is fetched
+  // once per food and kept. Resolves to a span.wheel for markWheel, or
+  // null.
   var dialPages = {};
   var RING_THICK = 140 - 78 - 3, RING_MID = 140 - RING_THICK / 2;
-  function miniDial(slug, ring) {
+  function miniDial(slug, ring, colour) {
     if (!dialPages[slug]) dialPages[slug] = fetch(foodUrl(slug)).then(function (r) { return r.text(); }).then(function (page) {
       return new DOMParser().parseFromString(page, "text/html").querySelector("figure.wheel svg");
     }).catch(function () { return null; });
@@ -400,6 +396,10 @@
           g.setAttribute("stroke-width", RING_THICK);
           g.querySelectorAll("circle").forEach(function (c) { c.setAttribute("r", RING_MID); });
         });
+      }
+      if (colour) {
+        copy.classList.add("mono");
+        copy.querySelectorAll(".ring, .ring g").forEach(function (g) { g.style.setProperty("--c", colour); });
       }
       var fig = el("span", "wheel");
       fig.appendChild(copy);
@@ -461,8 +461,6 @@
     showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
     var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
-    document.title = "Is it " + food.name.toLowerCase() + " yet? " +
-      fv.verdict.charAt(0) + fv.verdict.slice(1).toLowerCase() + ".";
     // "Great this week": ALSO_PICK foods of the same family that are YES,
     // a fresh pick on every visit, A to Z, then how many more there are.
     // In the baked week they come from the section's data-all; for another
@@ -506,14 +504,16 @@
   }
 
   // --- About: tonight's dinner ---------------------------------------------
-  // The dinner line names a food that has just arrived, or in a quiet
-  // week one that is great now; baked, and redone for the visitor's week.
+  // The dinner line names a food in season on the visitor's day, picked
+  // at random from everything that is YES (just arrived or great this
+  // week) on every visit. The build bakes the first such food, which
+  // stands without JavaScript.
   function initAbout() {
     var a = document.getElementById("dinner");
-    if (!a || SAME_WEEK) return;
+    if (!a) return;
     loadFoods().then(function (foods) {
       var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
-      var pick = V.flatten(now.arrived)[0] || V.flatten(now.still)[0];
+      var pick = pickSome(V.flatten(now.arrived).concat(V.flatten(now.still)), 1)[0];
       if (!pick) return;
       a.textContent = pick.name.toLowerCase();
       a.href = foodUrl(pick.slug);
@@ -536,6 +536,7 @@
     var label = document.getElementById("results-label");
     var found = document.getElementById("found");
     var one = document.getElementById("one-result");
+    var oneMore = one.querySelector(".one-more");
     var none = document.getElementById("hook-none");
     var noneAsk = none.querySelector(".ask-name");
     var suggest = document.getElementById("suggest");
@@ -619,9 +620,10 @@
     // question stacks, the input is the full width. Either way a word too
     // long for its room is set smaller until it fits, the completion
     // counted, so accepting it does not make the word jump. The underline
-    // is the typed word's width; the resting caret stands just after
-    // RHUBARB while the input is empty, focused or not, and the real
-    // caret is hidden until the first keystroke. The input is a little
+    // is the typed word's width. While the input is empty the real caret
+    // is hidden and a drawn one stands in: just after RHUBARB at rest,
+    // and at the start of the field once it has focus, where the first
+    // letter will go. The input is a little
     // wider than its word, room for the real caret after the last letter,
     // so the word sits a normal space from "Is it" and from "yet?". Its
     // width is set in em, so it scales with the type wherever the type is
@@ -664,7 +666,7 @@
       if (scale < 1) input.style.fontSize = (em * scale) + "px";
       if (!stacked.matches) input.style.width = (Math.min(w, room) / (em * scale)).toFixed(3) + "em";
       underline.style.width = (text * scale / em).toFixed(3) + "em";
-      caret.style.left = (text * scale / em).toFixed(3) + "em";
+      caret.style.left = document.activeElement === input ? "0" : (text * scale / em).toFixed(3) + "em";
       layer.style.fontSize = input.style.fontSize;
       layer.style.top = (input.offsetTop + input.clientTop) + "px";
       layer.style.height = input.clientHeight + "px";
@@ -712,6 +714,8 @@
     input.addEventListener("compositionend", function () { composing = false; apply(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
     window.addEventListener("resize", size);
+    input.addEventListener("focus", size);
+    input.addEventListener("blur", size);
 
     // The typed word and its underline take the lead's colour; with no
     // lead, as when the text is only found inside words, they stay ink
@@ -767,20 +771,19 @@
       if (answer) {
         var it = answer.it, verdict = it.verdict();
         label.hidden = true;
-        if (it.never) one.removeAttribute("href");
-        else one.href = foodUrl(it.slug);
         one.classList.toggle("is-never", !!it.never);
         one.classList.toggle("is-plain", !!it.never);
         one.style.setProperty("--food", it.colour());
         one.querySelector(".ask-name").textContent = it.ask;
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
-        one.querySelector(".one-sub").hidden = one.querySelector(".one-go").hidden = !!it.never;
-        one.querySelector(".one-sub").textContent = whenIn(it.name);
-        dialFor(it.never ? null : it.slug, it.ring());
+        oneMore.hidden = !!it.never;
+        oneMore.href = foodUrl(it.slug);
+        oneMore.querySelector(".arrow-text").textContent = tellMeAbout(it.name);
+        dialFor(it.never ? null : it.slug, it.ring(), it.colour());
         one.hidden = false;
         answered = it.never ? "never" : "link";
-        picks = it.never ? [] : [one];
+        picks = it.never ? [] : [oneMore];
         status.textContent = "1 match: " + it.name + (it.label ? " (" + it.label + ")" : "") + ", " + verdict.toLowerCase() + ".";
         if (also.length) {
           alsoLine.appendChild(document.createTextNode("Also: "));
@@ -824,14 +827,14 @@
     // variety gave the verdict; the fetch also warms the page the answer
     // leads to. Its box holds the space while it comes.
     var dialBox = one.querySelector(".one-dial"), dialKey = null;
-    function dialFor(slug, ring) {
-      var key = slug + "/" + ring;
+    function dialFor(slug, ring, colour) {
+      var key = slug + "/" + ring + "/" + colour;
       if (key === dialKey && dialBox.firstChild) return;
       dialKey = key;
       dialBox.textContent = "";
       dialBox.hidden = !slug;
       if (!slug) return;
-      miniDial(slug, ring).then(function (fig) {
+      miniDial(slug, ring, colour).then(function (fig) {
         if (!fig || dialKey !== key) return;
         dialBox.textContent = "";
         dialBox.appendChild(fig);
@@ -848,7 +851,7 @@
       one.querySelector(".one-word").style.viewTransitionName = on ? "food-verdict" : "";
       dialBox.style.viewTransitionName = on && dialBox.firstChild ? "food-dial" : "";
     }
-    one.addEventListener("click", function () { if (one.hasAttribute("href")) nameFor(true); });
+    oneMore.addEventListener("click", function () { nameFor(true); });
     window.addEventListener("pagereveal", function (e) {
       (e.viewTransition ? e.viewTransition.finished : Promise.resolve()).then(function () { nameFor(false); });
     });
@@ -887,7 +890,7 @@
     input.form.addEventListener("submit", function (e) {
       e.preventDefault();
       var go = active >= 0 ? picks[active] : results.hidden || !none.hidden || answered === "never" ? null : picks[0];
-      if (go === one) nameFor(true);
+      if (go === oneMore) nameFor(true);
       if (go) location.href = go.href;
     });
     var q = new URL(location.href).searchParams.get("q");
@@ -1099,7 +1102,7 @@
   // their cards and lists exactly as the rest of the site does.
   window.Site = {
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
-    el: el, foodUrl: foodUrl, loadFoods: loadFoods, whenIn: whenIn,
+    el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
     miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest
   };
 })();

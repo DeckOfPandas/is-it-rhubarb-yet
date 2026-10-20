@@ -63,9 +63,9 @@ site.js adds the varieties from foods.json), the names it completes to
   {%- comment -%} What is typed, answered in the this-week blocks' place,
      filled by site.js: a count in a teaser label over the matches in
      rank order, with tags; a lone or exact match as a card, the food
-     page in small (question, verdict, line, "When is (or are) … in season?", a
-     miniature of its dial and an arrow, all one link; a never-food's
-     card is its question, verdict and line, and no link),
+     page in small (question, verdict, line, "Tell me everything about
+     … →", a link to its page, and a miniature of its dial; a
+     never-food's card is its question, verdict and line, and no link),
      then "Also:" and the near matches; or, with no match, a plain card
      like a never-food's, LITERALLY NO IDEA. in ink, and the nearest
      foods.
@@ -73,7 +73,7 @@ site.js adds the varieties from foods.json), the names it completes to
   <section class="results" id="results" aria-labelledby="results-label" hidden>
     <h2 class="teaser-label" id="results-label"></h2>
     <ul class="food-list" id="found"></ul>
-    <a class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <span class="one-sub"></span><span class="one-dial" aria-hidden="true"></span><span class="one-go" aria-hidden="true">{% include icons/arrow.svg %}</span></a>
+    <div class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <a class="arrow-link one-more"><span class="arrow-text"></span><span class="arrow" aria-hidden="true">→</span></a><span class="one-dial" aria-hidden="true"></span></div>
     <p class="also-line" id="also-line" hidden></p>
     <div class="results-none" id="hook-none" hidden>
       <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>

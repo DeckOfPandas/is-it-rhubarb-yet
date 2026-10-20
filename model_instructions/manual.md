@@ -207,8 +207,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   a blinking caret in muted ink just after it, a normal space either
   side of the word; on focus the placeholder dims. The input's own
   caret is transparent while it is empty (`:placeholder-shown`), so the
-  only caret is the drawn one, after RHUBARB, until the first
-  keystroke. The input's width is set in em, the word plus 0.05em, so
+  only caret is the drawn one until the first keystroke: after RHUBARB
+  at rest, and at the start of the field once the input has focus (a
+  click on RHUBARB puts it there, where the first letter will go). The
+  input's width is set in em, the word plus 0.05em, so
   it scales with the type and RHUBARB is never clipped, in print too
   (the drawn caret is not printed). Typed
   text is capitals in ink; when the single best match is found exactly
@@ -270,32 +272,32 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     swatch, name, and in a list of mixed verdicts the tag on a dotted
     leader. `_includes/food-row.html`, built the same by `foodRow` in
     `site.js`.
-  - **Card** (home's single answer): the food page in small. In order:
-    the question ("IS IT BASIL YET?", or "Cox apples" for a variety),
-    the verdict, the date line (a sentence, with its full stop), then
-    "When is basil in season?" (Atkinson 400, muted, the food's name in
-    lower case; "are" when the name ends in s but not ss or us, or joins
-    two foods with &, so "When are apples in season?"), a miniature of the dial with today's hand, and a round
-    arrow in the food's colour with a dark arrow icon. The question,
-    verdict and date line share the food page's rules (`.ask`,
-    `.verdict-word`, `.date-line` in `assets/site.css`) and the card
-    only sets them smaller: question `label`, verdict `title`, date
+  - **Card** (home's single answer, and the calendar's and the wheel's
+    popover, which is the same card): the food page in small. On the
+    left, in order: the question ("IS IT BASIL YET?", or "Cox apples"
+    for a variety), the verdict, the date line (a sentence, with its
+    full stop), then an action, "Tell me everything about apples →",
+    ink with an arrow, the food's name in its sentence form (lower
+    case), the one link, to the food's page. On the right, alone and
+    centred, a 110px miniature of the dial with today's hand. The
+    question, verdict and date line share the food page's rules
+    (`.ask`, `.verdict-word`, `.date-line` in `assets/site.css`) and the
+    card only sets them smaller: question `label`, verdict `title`, date
     line `lead` bold, as on the page. The dial is the food page's own
-    `figure.wheel` SVG, fetched from the page (`miniDial` in
-    `site.js`, which also warms the page), cut to the one ring whose
-    variety gave the verdict and that ring widened to fill the band,
-    and cropped to the ring: 120px, 90px on a phone. The card and a
-    list of matches share one width, `--answer-w`. The panel is `--panel`,
-    one step lighter than the page in both themes (`--panel-hover` on
-    hover or focus), 12px radius, its left edge `--food-bar-width`
-    (6px) in the food's colour; the food page has no matching bar. Wide:
-    text and subtitle on the left, dial and a 56px arrow at the right,
-    centred. Phone: text and a 90px dial on top, the subtitle and a
-    48px arrow on the bottom row. The whole card is one link with the
-    focus ring; the arrow nudges 4px right on hover, and stays still
-    with reduced motion; Enter opens it. A never-food's card is its question, NEVER.
-    and its line, in ghost grey with a grey edge: no link, arrow, dial
-    or subtitle.
+    `figure.wheel` SVG, fetched from the page (`miniDial` in `site.js`,
+    which also warms the page), cut to the one ring whose variety gave
+    the verdict, that ring widened to fill the band and drawn all in the
+    verdict's colour (its shape still the variety's), and cropped to the
+    ring. The card and a list of matches share one width, `--answer-w`.
+    The panel is `--panel`, one step lighter than the page in both
+    themes, 12px radius, its left edge `--food-bar-width` (6px) in the
+    food's colour; the food page has no matching bar. On home, Up and
+    Down reach the action, and Enter opens the food page. A
+    never-food's card is its question, NEVER. and its line, in ghost
+    grey with a grey edge: no link and no dial. "When are apples in
+    season?" is now the food page's `<title>` and the start of its meta
+    description (`_includes/when-in.html`, with the is/are rule); its
+    link preview (og: and twitter:) keeps "Is it apples yet? Just.".
   - **Page** (`/<slug>/`): everything.
 - **Into the food page.** Pages cross-fade with cross-document view
   transitions (`@view-transition { navigation: auto; }` in
@@ -360,7 +362,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - Chrome: the nav (above) and the footer (below).
 - **Tap targets.** Every control is at least 44×44px, by padding, the
   glyphs unchanged: the nav items, the magnifier, ??, the week arrows,
-  and each segment of the theme switch.
+  and each segment of the theme switch. A target can be bigger than its
+  mark: the theme switch's chosen segment is marked by a 32px disc
+  behind the sun or the moon (a pill as tall behind AUTO) inside its
+  44px target, and the sun and moon are 15px, their stroke thinned to
+  1.6 units to match the 12px screen icon's.
 - **Footer.** Every word is caps, muted: SOURCE DATA · CALENDAR FEED
   (to the feed's section on Source data) · JSON; ABOUT; the theme
   switch; the GitHub mark (2.2rem, muted ink, pink on hover or focus);
@@ -371,7 +377,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   below the capitals; on hover or focus it is ink with a 2px line.
 - **About.** Titled "??" in Anton `title` (a screen reader hears
   "About"); it opens "Is it rhubarb yet? Well, is it???", the second
-  sentence a prose link to rhubarb's page.
+  sentence a prose link to rhubarb's page. The dinner food in "Coolio,
+  I'm off to cook …" is picked at random on every visit from what is
+  YES on the visitor's day (just arrived or great this week); the build
+  bakes one for no JavaScript. Credits for the four season icons and the
+  TODAY pin close the page.
 - **Now.** The title follows the week shown ("this week", "next week",
   "last week", or none), over one muted line, "‹ 15–21 October ›".
   Weeks run through real years, a year either way of this week; the
@@ -401,11 +411,12 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     name and its season, "Celery, July to October" ("Bay, all year";
     two runs joined with "and").
   - **Popover.** A click, tap or Enter pins the food (outlined in ink)
-    and opens its card: the home answer's, with the time it is for in
-    caps over the question when that is not today, the single ring of
-    the variety that gave the verdict (on the calendar, the row's own
-    variety), the arrow a link to the food page, and a × button of its
-    own in the top right. Escape, a click outside or × closes it; focus
+    and opens its card: exactly the home answer's card (same width,
+    type and layout; see "A food at three levels"), plus the time it is
+    for in caps over the question when that is not today ("IN EARLY
+    APRIL"), and a × button of its own in the top right. Its dial is the
+    single ring of the variety that gave the verdict (on the calendar,
+    the row's own variety). Escape, a click outside or × closes it; focus
     goes back to the food (after a click outside, only if focus was in
     the card). Wide: beside the food, under its row or right of its dot,
     flipped to stay on the screen. Below 700px: docked at the foot of
@@ -426,6 +437,17 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     15th or 25th; the first move goes to the step either side. The
     address carries `?when=mid-december` (none at today) and is read on
     load. The calendar on show scrolls to keep the line in view.
+  - **Readout** (the calendar). In the sticky header's corner, over the
+    food names, a button in caps on two lines: "MID DECEMBER ·" over
+    "42 IN SEASON ↓", or "THIS WEEK ·" when the line is on today; N
+    counts the foods whose verdict is YES or JUST at the line's time,
+    and follows the line. Pressed, it scrolls to the list under the
+    chart (smoothly, or at once with reduced motion) and gives the
+    list's heading focus. From 700px the controls (TODAY, the seasons,
+    play, the magnifier) stick to the top while the chart is on screen,
+    the header under them (`.tt-stage` ends with the chart;
+    `--tt-controls-h` is measured by `charts.js`); below 700px only the
+    header sticks and the controls scroll away.
   - **The list under the chart** is Now's bands for the line's time,
     built by the same code: at today, Now itself under "This week"; at
     another time under "In mid-December" (Anton `label`), with "Great"
@@ -436,21 +458,30 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     pressed), a touch anywhere on the chart or its controls, or a move of
     the handle stops it. The line glides between steps (0.35s), and
     jumps with reduced motion, and never glides while it is dragged.
-  - **Magnifier.** A focus and context distortion centred on the line:
-    each slice of the year is drawn as wide as 1 + 5 × exp(−(d / 2.6)²),
-    d its distance in weeks from the line (round the year on the wheel),
-    and the whole scaled back to 52 weeks. The calendar distorts its
-    weeks sideways; the wheel distorts by angle. It follows the line as
-    it is dragged or played. Month names and week numbers with no room
-    are hidden; wheel labels are all kept, however they crowd. Switched
-    by the Whole year · Magnify switch, off by default.
-  - **Seasons.** WINTER · SPRING · SUMMER · AUTUMN above the chart, each
-    a 28px icon over its word in caps, `aria-pressed`. One moves the line
-    to mid-January, mid-April, mid-July or mid-October and turns the
-    magnifier on; on the wheel it also turns the wheel so the line is at
-    the top. The pressed one's word is underlined in pink. Pressed again,
-    or with the magnifier switched off, it lets go: magnifier off, the
-    wheel turned back.
+  - **Magnifier** (the calendar only). A focus and context distortion
+    centred on the line: each slice of the year is drawn as wide as
+    1 + 5 × exp(−(d / 2.6)²), d its distance in weeks from the line, and
+    the whole scaled back to 52 weeks, the weeks squeezed sideways. It
+    follows the line as it is dragged or played. Month names and week
+    numbers with no room are hidden. Switched by the Whole year ·
+    Magnify switch, off by default. The wheel has none.
+  - **TODAY and the seasons.** TODAY · WINTER · SPRING · SUMMER ·
+    AUTUMN above the chart, each a 28px icon over its word in caps,
+    `aria-pressed`; on a phone they share its width equally (five fit
+    in 358px with their icons). TODAY puts the line on today itself,
+    the magnifier off and the wheel as it was. A season moves the line
+    to mid-January, mid-April, mid-July or mid-October; on the calendar
+    it turns the magnifier on, on the wheel it turns the wheel so that
+    season is at the top. Pressed again while still pressed, it lets go
+    (magnifier off, wheel turned back, the line where it is). The pink
+    underline under a word: TODAY's whenever the line is on today; a
+    season's from its press until the line moves; none after a drag.
+  - **The ALL wheel.** The wheel page's kind switch starts with All,
+    every food on one wheel (`arrivals-dial.html` with `kind="all"`).
+    On it only the foods in season (YES or JUST) at the line's time
+    keep their names, changing as the line moves; every dot stays,
+    named for a screen reader and tappable. The kind wheels keep all
+    their names. The page still opens on Veg.
   - **Arcs or dots.** The wheel's Arcs · Dots switch, at every size,
     defaults to arcs; dots hides the season arcs.
   - **Touch.** Only the handles take `touch-action: none`. Nothing else
@@ -463,9 +494,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   `vector-effect: non-scaling-stroke`, so 2px at any size, near the
   magnifier's 2.25 units. The snowflake is drawn as an outline of its
   arms, so at 28px its two lines close up and it reads bolder than the
-  others. Credits on About, as the licence asks: sun and leaf, "seasons"
-  by Made by Made from Noun Project; flower and snowflake, "seasons" by
-  VectorsLab from Noun Project; both CC BY 3.0.
+  others. TODAY's pin (`season-today.svg`) is redrawn by hand, a
+  teardrop and a ring, to the proportions of "You Are Here": Helen's
+  file is a 416 KB trace, too heavy to inline on every chart page.
+  Credits on About, as the licence asks: sun and leaf, "seasons" by
+  Made by Made from Noun Project; flower and snowflake, "seasons" by
+  VectorsLab from Noun Project; the pin, "You Are Here" by BBBL from
+  Noun Project; all CC BY 3.0.
 - Atkinson Hyperlegible Next's zero is slashed, and the font has no
   feature to open it.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for
@@ -512,13 +547,14 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   from `foods.json` with `verdict.js`), rhubarb, a food with a buy note
   and one whose source is general; Now this week and next; the
   calendar and the wheel, each at today, at `?when=mid-december` and
-  with SUMMER pressed; About and a 404. At 390, 820 and 1280, the clock
+  with SUMMER pressed, and the ALL wheel at mid-December; About and a
+  404. At 390, 820 and 1280, the clock
   frozen at noon on the date (default 2026-10-25), with reduced motion
   so nothing is caught mid-animation. By default it takes Helen's
   review list: everything dark, the shots she starred light too (the
   kitchen sink, home empty, the basil card and NEVER, the verdict and
   rhubarb food pages, Now, the calendar and the wheel states), and the
-  kitchen sink at 1280 only. `--full yes` takes all 156, every shot in
+  kitchen sink at 1280 only. `--full yes` takes all 162, every shot in
   both themes, as a review round should be checked. Not `npm run`:
   the project has no npm.
 - `/kitchen-sink/` (`kitchen-sink/index.html`, `noindex`, linked from

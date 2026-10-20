@@ -129,6 +129,10 @@ async function pickFoods(base, day) {
       await shot('wheel', 'wheel/', { both: true });
       await shot('wheel-mid-december', 'wheel/?when=mid-december', { both: true });
       await shot('wheel-summer', 'wheel/', { both: true, act: summer });
+      await shot('wheel-all-mid-december', 'wheel/?when=mid-december', { both: true, act: async () => {
+        await page.click('label[for="kind-all"]');
+        await page.waitForLoadState('networkidle');
+      } });
       await shot('about', 'about/');
       await shot('404', 'not-a-food-at-all/');
       await context.close();

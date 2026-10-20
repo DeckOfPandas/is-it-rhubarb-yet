@@ -1,12 +1,13 @@
 {%- comment -%}
 The calendar's and the wheel's time travel, all of it hidden until
-assets/charts.js shows it: the season buttons, the play button, the
-magnifier switch (and, with arcs=true, the wheel's arcs or dots switch),
-and the template the food popover is copied from. Expects: arcs (true on
-the wheel).
+assets/charts.js shows it: TODAY and the season buttons, the play
+button, the calendar's magnifier switch or the wheel's arcs or dots
+switch, and the template the food popover is copied from. Expects: wheel
+(true on the wheel).
 {%- endcomment -%}
 <div class="tt-controls" id="tt-controls" hidden>
-  <div class="seasons" role="group" aria-label="Zoom to a season">
+  <div class="seasons" role="group" aria-label="Move through the year">
+    <button type="button" class="season-btn" data-season="today" aria-pressed="false">{% include icons/season-today.svg %}<span class="season-word">Today</span></button>
     <button type="button" class="season-btn" data-season="winter" aria-pressed="false">{% include icons/season-winter.svg %}<span class="season-word">Winter</span></button>
     <button type="button" class="season-btn" data-season="spring" aria-pressed="false">{% include icons/season-spring.svg %}<span class="season-word">Spring</span></button>
     <button type="button" class="season-btn" data-season="summer" aria-pressed="false">{% include icons/season-summer.svg %}<span class="season-word">Summer</span></button>
@@ -14,16 +15,17 @@ the wheel).
   </div>
   <div class="tt-toggles">
     <button type="button" class="tt-play" id="tt-play" aria-label="Play the year" aria-pressed="false"><span class="tt-play-glyph" aria-hidden="true">▶</span></button>
-    <fieldset class="switch tt-switch">
-      <legend>Magnifier</legend>
-      <input type="radio" name="zoom" id="zoom-off" value="off" checked><label for="zoom-off">Whole year</label>
-      <input type="radio" name="zoom" id="zoom-on" value="on"><label for="zoom-on">Magnify</label>
-    </fieldset>
-    {%- if include.arcs %}
+    {%- if include.wheel %}
     <fieldset class="switch tt-switch">
       <legend>Draw seasons as</legend>
       <input type="radio" name="draw" id="draw-arcs" value="arcs" checked><label for="draw-arcs">Arcs</label>
       <input type="radio" name="draw" id="draw-dots" value="dots"><label for="draw-dots">Dots</label>
+    </fieldset>
+    {%- else %}
+    <fieldset class="switch tt-switch">
+      <legend>Magnifier</legend>
+      <input type="radio" name="zoom" id="zoom-off" value="off" checked><label for="zoom-off">Whole year</label>
+      <input type="radio" name="zoom" id="zoom-on" value="on"><label for="zoom-on">Magnify</label>
     </fieldset>
     {%- endif %}
   </div>
@@ -31,7 +33,7 @@ the wheel).
 <template id="tt-pop">
   <div class="one-result tt-pop" role="dialog">
     <span class="one-text"><span class="tt-pop-when"></span><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span>
-    <span class="one-sub"></span><span class="one-dial" aria-hidden="true"></span><a class="one-go">{% include icons/arrow.svg %}</a>
+    <a class="arrow-link one-more"><span class="arrow-text"></span><span class="arrow" aria-hidden="true">→</span></a><span class="one-dial" aria-hidden="true"></span>
     <button type="button" class="tt-close" aria-label="Close">×</button>
   </div>
 </template>

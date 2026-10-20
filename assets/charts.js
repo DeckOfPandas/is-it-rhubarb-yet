@@ -1,11 +1,15 @@
 // The calendar and the wheel, made to be played with: a food highlights
 // on hover or focus and opens its card on a click, tap or Enter; a pink
 // line travels through the year, early, mid or late in each month, and
-// the foods for its time are listed under the chart; a magnifier spreads
-// the weeks round the line and squeezes the rest; four season buttons
-// jump to mid-season and zoom in. Everything here is added to charts that
-// work without it. Loaded after verdict.js and site.js, whose window.Site
-// lends the card's dial, the hand and Now's lists.
+// the foods for its time are listed under the chart; TODAY brings it
+// back. On the calendar a magnifier spreads the weeks round the line and
+// squeezes the rest, the four season buttons jump to mid-season and zoom
+// in, and a readout in the sticky header counts what is in season and
+// jumps to the list. On the wheel the season buttons turn that season to
+// the top, and the ALL wheel names only what is in season. Everything
+// here is added to charts that work without it. Loaded after verdict.js
+// and site.js, whose window.Site lends the card's dial, the hand and
+// Now's lists.
 (function () {
   "use strict";
   var S = window.Site, V = window.Verdict;
@@ -68,12 +72,12 @@
     return best;
   }
 
-  // --- The magnifier ------------------------------------------------------------
+  // --- The magnifier (the calendar's) -------------------------------------------
   // A focus and context distortion of the year: each slice of it is drawn
   // as wide as 1 + MAG * exp(-(d / SPREAD)^2), d its distance in weeks from
-  // the line (round the year on the wheel), and the whole scaled back to
-  // 52. F maps a place on the year to where it is drawn, Finv back again;
-  // both are the identity with the magnifier off. A table of N slices is
+  // the line, and the whole scaled back to 52. F maps a place on the year
+  // to where it is drawn, Finv back again; both are the identity with the
+  // magnifier off, as they always are on the wheel. A table of N slices is
   // rebuilt whenever the line moves.
   var MAG = 5, SPREAD = 2.6, N = 520, table = null;
   function buildF() {
@@ -81,7 +85,6 @@
     var c = tOf(state.at), sum = 0, acc = [0];
     for (var k = 0; k < N; k++) {
       var d = (k + 0.5) * 52 / N - c;
-      if (WHEEL) d = ((d % 52) + 78) % 52 - 26;
       sum += 1 + MAG * Math.exp(-(d * d) / (SPREAD * SPREAD));
       acc.push(sum);
     }
@@ -106,7 +109,9 @@
   // the weeks' SVG and in the header's, moved sideways; its handle is a
   // button-like slider in a rail across the top of the sticky header.
   // Today is an ink tick at the foot of the header and replaces the
-  // dashed line.
+  // dashed line. The header's corner, over the names, holds the readout:
+  // the time and how many foods are in season then, a button down to the
+  // list.
   var cals = [];
   function initCalendar() {
     document.querySelectorAll(".cal").forEach(function (cal) {
@@ -152,7 +157,13 @@
         stopPlay();
         setAt(nearest(Finv((e.clientX - months.getBoundingClientRect().left) / cw)));
       });
-      cals.push({ cal: cal, months: months, cells: cells, x0: x0, cw: cw, items: items, lines: lines, tick: tick, handle: handle });
+      var readout = el("button", "tt-readout");
+      readout.type = "button";
+      readout.appendChild(el("span", "tt-readout-when"));
+      readout.appendChild(el("span", "tt-readout-count"));
+      readout.addEventListener("click", toList);
+      cal.querySelector(".cal-corner").appendChild(readout);
+      cals.push({ cal: cal, months: months, cells: cells, x0: x0, cw: cw, items: items, lines: lines, tick: tick, handle: handle, readout: readout });
     });
   }
   function layoutCal(c) {
@@ -196,13 +207,15 @@
 
   // --- The wheel -----------------------------------------------------------------
   // Each label, arc, spoke and month name keeps the angle it was drawn at,
-  // and is redrawn at F of it, plus the wheel's spin (how far a season
-  // button has turned it, so that season is at the top). A label is laid
-  // out as arrivals-dial.html lays it: on the right half its dot and words
-  // run outward, on the left half they are turned over to stay readable.
-  // The line is a radius from the month ring to the rim; its handle is a
-  // knob at the rim with the time beside it. Today is an ink tick across
-  // the month ring and replaces the hand.
+  // and is redrawn turned by the wheel's spin (how far a season button
+  // has turned it, so that season is at the top). A label is laid out as
+  // arrivals-dial.html lays it: on the right half its dot and words run
+  // outward, on the left half they are turned over to stay readable. On
+  // the ALL wheel only the foods in season (YES or JUST) at the line's
+  // time keep their words; every dot stays, named and tappable. The line
+  // is a radius from the month ring to the rim; its handle is a knob at
+  // the rim with the time beside it. Today is an ink tick across the
+  // month ring and replaces the hand.
   var dials = [];
   function initWheel() {
     document.querySelectorAll("figure.dial > svg").forEach(function (svg) {
@@ -211,7 +224,7 @@
       svg.querySelectorAll("a.label").forEach(function (a) {
         labels.push({
           el: a, g: a.querySelector("g"), dot: a.querySelector(".dot"), text: a.querySelector("text"),
-          angle: +a.dataset.angle, r: +a.dataset.r, size: +a.dataset.dot
+          slug: a.dataset.slug, angle: +a.dataset.angle, r: +a.dataset.r, size: +a.dataset.dot
         });
       });
       var arcs = Array.prototype.map.call(svg.querySelectorAll(".season"), function (c) {
@@ -235,25 +248,24 @@
       var word = svgEl("text", "tt-knob-label", { "dominant-baseline": "middle" });
       knob.appendChild(word);
       svg.appendChild(knob);
-      dials.push({ svg: svg, C: C, RING: RING, RIM: RIM, labels: labels, arcs: arcs, turns: turns, tick: tick, line: line, knob: knob, word: word, last: null });
+      dials.push({ svg: svg, all: svg.dataset.kind === "all", C: C, RING: RING, RIM: RIM, labels: labels, arcs: arcs, turns: turns, tick: tick, line: line, knob: knob, word: word, last: null });
     });
   }
   function norm(a) { return ((a % 360) + 360) % 360; }
   function layoutDial(d) {
     var C = d.C;
-    function deg(a) { return F(a * 52 / 360) * 360 / 52 + state.spin; }
+    function deg(a) { return a + state.spin; }
     d.labels.forEach(function (l) {
       var a = norm(deg(l.angle)), right = a < 180;
       l.g.setAttribute("transform", "rotate(" + (right ? a - 90 : a + 90).toFixed(2) + " " + C + " " + C + ")");
       l.dot.setAttribute("cx", right ? C + l.r : C - l.r);
       l.text.setAttribute("x", right ? C + l.r + l.size + 4 : C - l.r - l.size - 4);
       l.text.setAttribute("text-anchor", right ? "start" : "end");
+      if (d.all) l.text.style.display = !inSeason || inSeason[l.slug] ? "" : "none";
     });
     var spinWeeks = state.spin * 52 / 360;
     d.arcs.forEach(function (a) {
-      var s = F(a.wk), e = F(a.wk + a.len), len = Math.max(0, e - s);
-      a.el.setAttribute("stroke-dasharray", len.toFixed(3) + " " + (52 - len).toFixed(3));
-      a.el.setAttribute("stroke-dashoffset", (-(s + spinWeeks)).toFixed(3));
+      a.el.setAttribute("stroke-dashoffset", (-(a.wk + spinWeeks)).toFixed(3));
     });
     d.turns.forEach(function (n) {
       var a = deg(n.angle), tr = "rotate(" + a.toFixed(2) + " " + C + " " + C + ")";
@@ -278,7 +290,7 @@
     p.x = d.C; p.y = d.C;
     var c = p.matrixTransform(d.svg.getScreenCTM());
     var a = Math.atan2(clientX - c.x, -(clientY - c.y)) * 180 / Math.PI - state.spin;
-    return Finv(norm(a) * 52 / 360);
+    return norm(a) * 52 / 360;
   }
 
   // --- The handle ------------------------------------------------------------------
@@ -340,27 +352,62 @@
 
   // --- Setting the time ---------------------------------------------------------------
   // Everything follows the line: the magnifier, the charts, the handles'
-  // values, the popover, the list under the chart and the address, which
-  // carries ?when=mid-december (none for today) so a time can be shared.
-  function setAt(at) {
+  // values, the readout, which button is pressed, the popover, the list
+  // under the chart and the address, which carries ?when=mid-december
+  // (none for today) so a time can be shared. `season` is the button
+  // that moved it, if one did: it stays pressed until the line moves
+  // again. TODAY is pressed whenever the line is on today.
+  function setAt(at, season) {
     state.at = at;
+    state.season = season || null;
     draw();
     var url = new URL(location.href);
     if (at === null) url.searchParams.delete("when"); else url.searchParams.set("when", STEPS[at].key);
     if (url.href !== location.href) history.replaceState(history.state, "", url);
   }
+  // What is in season (YES or JUST) at the line's time, by slug, and how
+  // many: for the readout and the ALL wheel. Null until foods.json is in.
+  var inSeason = null, inSeasonCount = 0;
+  function countInSeason() {
+    if (!foods) return;
+    var week = V.weekOf(dateOf(state.at));
+    inSeason = {}; inSeasonCount = 0;
+    foods.forEach(function (f) {
+      var v = V.foodVerdict(f, week).verdict;
+      if (v === "YES" || v === "JUST") { inSeason[f.slug] = true; inSeasonCount++; }
+    });
+  }
   function draw() {
     buildF();
+    countInSeason();
     var text = state.at === null ? "Today, " + V.fmtDate(TODAY) : cap(STEPS[state.at].label);
     document.querySelectorAll(".tt-handle").forEach(function (h) {
       h.setAttribute("aria-valuenow", state.at === null ? nearest(NOW_T) : state.at);
       h.setAttribute("aria-valuetext", text);
       if (!WHEEL) h.textContent = whenLabel();
     });
+    seasonBtns.forEach(function (b) {
+      var on = b.dataset.season === "today" ? state.at === null : b.dataset.season === state.season;
+      b.setAttribute("aria-pressed", String(on));
+    });
+    cals.forEach(function (c) {
+      c.readout.querySelector(".tt-readout-when").textContent = (state.at === null ? "This week" : STEPS[state.at].label) + " ·";
+      c.readout.querySelector(".tt-readout-count").textContent = foods ? inSeasonCount + " in season ↓" : "In season ↓";
+      c.readout.setAttribute("aria-label", (state.at === null ? "This week" : cap(STEPS[state.at].label)) +
+        (foods ? ", " + inSeasonCount + " in season" : "") + ". Go to the list");
+    });
     cals.forEach(layoutCal);
     dials.forEach(layoutDial);
     if (pop) fillPop();
     list();
+  }
+  // The readout's jump: down to the list, its heading taking focus.
+  function toList() {
+    var head = listBox.querySelector(".tt-list-head");
+    if (!head) return;
+    head.setAttribute("tabindex", "-1");
+    listBox.scrollIntoView({ behavior: still.matches ? "auto" : "smooth", block: "start" });
+    head.focus({ preventScroll: true });
   }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
@@ -390,36 +437,38 @@
   }
   playBtn.addEventListener("click", function () { if (timer) stopPlay(); else startPlay(); });
 
-  // --- Zoom: the magnifier switch and the season buttons -----------------------------
-  // A season button moves the line to mid-season and turns the magnifier
-  // on; on the wheel it also turns the wheel to bring the line to the top.
-  // Pressed again, or when the magnifier is switched off, it lets go: the
-  // magnifier off and the wheel back as it was.
+  // --- TODAY, the seasons and the calendar's magnifier -----------------------------
+  // A season button moves the line to mid-season: on the calendar it turns
+  // the magnifier on, on the wheel it turns the wheel to bring the line to
+  // the top. Pressed again while still pressed, it lets go: the magnifier
+  // off, the wheel turned back, the line where it is. TODAY puts the line
+  // on today itself, the magnifier off and the wheel as it was. Switching
+  // the magnifier off lets go of a season too.
   var zoomOn = document.getElementById("zoom-on"), zoomOff = document.getElementById("zoom-off");
   var seasonBtns = document.querySelectorAll(".season-btn");
-  function setZoom(on) {
+  function zoom(on) {
     state.zoom = on;
-    zoomOn.checked = on; zoomOff.checked = !on;
-    if (!on) pressSeason(null);
+    if (zoomOn) { zoomOn.checked = on; zoomOff.checked = !on; }
   }
-  function pressSeason(name) {
-    state.season = name;
-    seasonBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.season === name)); });
-    if (!name) state.spin = 0;
+  if (zoomOn) {
+    zoomOn.addEventListener("change", function () { zoom(true); draw(); });
+    zoomOff.addEventListener("change", function () { zoom(false); state.season = null; draw(); });
   }
-  zoomOn.addEventListener("change", function () { setZoom(true); draw(); });
-  zoomOff.addEventListener("change", function () { setZoom(false); draw(); });
   seasonBtns.forEach(function (b) {
     b.addEventListener("click", function () {
+      var name = b.dataset.season;
       stopPlay();
-      if (state.season === b.dataset.season) { setZoom(false); draw(); return; }
-      var at = SEASONS[b.dataset.season];
-      pressSeason(b.dataset.season);
-      state.zoom = true; zoomOn.checked = true;
-      state.at = at;
-      buildF();
-      state.spin = WHEEL ? -F(STEPS[at].t) * 360 / 52 : 0;
-      setAt(at);
+      if (name === "today" || state.season === name) {
+        zoom(false);
+        state.spin = 0;
+        if (name === "today") setAt(null);
+        else { state.season = null; draw(); }
+        return;
+      }
+      var at = SEASONS[name];
+      if (WHEEL) state.spin = -STEPS[at].t * 360 / 52;
+      else zoom(true);
+      setAt(at, name);
     });
   });
   var drawDots = document.getElementById("draw-dots");
@@ -494,7 +543,7 @@
     pop.querySelector(".tt-close").addEventListener("click", function () { close(true); });
     document.body.appendChild(pop);
     fillPop();
-    pop.querySelector(".one-go").focus({ preventScroll: true });
+    pop.querySelector(".one-more").focus({ preventScroll: true });
   }
   function close(giveBack) {
     if (!pop) return;
@@ -531,14 +580,13 @@
     pop.querySelector(".ask-name").textContent = label ? V.varietySaid(f, r.v, true) : f.name.toLowerCase();
     pop.querySelector(".one-word").textContent = r.verdict + ".";
     pop.querySelector(".one-line").textContent = V.dateLine(r, when.getFullYear(), when);
-    pop.querySelector(".one-sub").textContent = S.whenIn(f.name);
-    var go = pop.querySelector(".one-go");
+    var go = pop.querySelector(".one-more");
     go.href = S.foodUrl(f.slug);
-    go.setAttribute("aria-label", "More about " + f.name.toLowerCase());
+    go.querySelector(".arrow-text").textContent = S.tellMeAbout(f.name);
     var box = pop.querySelector(".one-dial"), key = f.slug + "/" + vi + "/" + (state.at === null ? "now" : state.at);
     if (box.dataset.key !== key) {
       box.dataset.key = key;
-      S.miniDial(f.slug, vi).then(function (fig) {
+      S.miniDial(f.slug, vi, r.colour).then(function (fig) {
         if (!fig || box.dataset.key !== key) return;
         box.textContent = "";
         box.appendChild(fig);
@@ -629,7 +677,12 @@
   document.addEventListener("DOMContentLoaded", function () {
     if (WHEEL) initWheel(); else initCalendar();
     document.querySelectorAll('input[name="order"], input[name="kind"]').forEach(function (r) { r.addEventListener("change", draw); });
-    document.getElementById("tt-controls").hidden = false;
+    var controls = document.getElementById("tt-controls");
+    controls.hidden = false;
+    // The calendar's header sticks under its controls on a wide screen.
+    if (!WHEEL && window.ResizeObserver) new ResizeObserver(function () {
+      root.style.setProperty("--tt-controls-h", controls.getBoundingClientRect().height + "px");
+    }).observe(controls);
     root.classList.add("is-live");
     var want = new URL(location.href).searchParams.get("when");
     var at = null;
@@ -640,7 +693,7 @@
       foods = all;
       all.forEach(function (f) { bySlug[f.slug] = f; });
       nameParts();
-      list();
+      draw();
     });
   });
 })();

@@ -25,12 +25,17 @@ opens by start: the choice is not remembered.
   <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
 </fieldset>
 
+{%- comment -%} The stage holds the controls and the chart, so that on a
+   wide screen the controls stick to the top only while the chart is
+   there. {%- endcomment -%}
+<div class="tt-stage">
 {% include time-controls.html %}
 
 <div class="ordered">
   <figure class="chart by-start">{% include calendar.html order="start" id="cal-start" %}</figure>
   <figure class="chart by-group">{% include calendar.html order="group" id="cal-group" %}</figure>
   <figure class="chart by-alpha">{% include calendar.html order="alpha" id="cal-alpha" %}</figure>
+</div>
 </div>
 
 <section class="tt-list" id="tt-list" hidden></section>

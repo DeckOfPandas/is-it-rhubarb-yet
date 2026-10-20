@@ -85,17 +85,11 @@ photographs it.
 
 <section class="ks-section">
   <h2 class="ks-title">Card</h2>
-  {%- comment -%} is or are, by the rule of whenIn in assets/site.js. {%- endcomment -%}
-  {%- assign end1 = yes0.name | slice: -1, 1 -%}
-  {%- assign end2 = yes0.name | slice: -2, 2 -%}
-  {%- assign be = "is" -%}
-  {%- if yes0.name contains " & " -%}{%- assign be = "are" -%}
-  {%- elsif end1 == "s" and end2 != "ss" and end2 != "us" -%}{%- assign be = "are" -%}{%- endif -%}
   <div class="ks-states">
   {%- for s in states -%}
     <div class="ks-state is-{{ s }}">
       <p class="ks-state-name">{{ s }}</p>
-      <a class="one-result" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <span class="one-sub">When {{ be }} {{ yes0.name | downcase }} in season?</span><span class="one-dial" aria-hidden="true"></span><span class="one-go" aria-hidden="true">{% include icons/arrow.svg %}</span></a>
+      <div class="one-result" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <a class="arrow-link one-more" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}"><span class="arrow-text">Tell me everything about {{ yes0.name | downcase }}</span><span class="arrow" aria-hidden="true">→</span></a><span class="one-dial" aria-hidden="true"></span></div>
     </div>
   {%- endfor -%}
   </div>

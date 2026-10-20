@@ -1,0 +1,12 @@
+{%- comment -%}
+"When is basil in season?", "When are apples in season?". Expects: name.
+A name is plural when it joins two foods with " & ", or ends in s but not
+ss or us (watercress, sea bass, asparagus and hedgehog fungus are each
+one thing). A food page's title and meta description.
+{%- endcomment -%}
+{%- assign wi_end1 = include.name | slice: -1, 1 -%}
+{%- assign wi_end2 = include.name | slice: -2, 2 -%}
+{%- assign wi_be = "is" -%}
+{%- if include.name contains " & " -%}{%- assign wi_be = "are" -%}
+{%- elsif wi_end1 == "s" and wi_end2 != "ss" and wi_end2 != "us" -%}{%- assign wi_be = "are" -%}{%- endif -%}
+When {{ wi_be }} {{ include.name | downcase }} in season?
