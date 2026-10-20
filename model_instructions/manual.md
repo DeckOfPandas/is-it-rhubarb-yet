@@ -144,25 +144,59 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   italic; a verdict or the name of a page or section is Anton in
   capitals; everything else is Atkinson Hyperlegible Next. Anton never
   sets a sentence, a link or a control; Atkinson uses 400 and 700 only,
-  and capitals only for small labels at +0.06em to +0.07em; an Anton
+  and capitals only in the caps style; an Anton
   label heads a section and an Atkinson one a group inside it. The
   rules head the fonts section of `assets/site.css`. Anton's
   letter-spacing has two settings by size, `--track-large` at 40px and
   above and `--track-small` below. The WOFF2 files under
   `assets/fonts/` are Google's Latin subsets, 116 KB in all; the budget
   is 150 KB.
-- The verdict word fills the line, but stops at half the viewport's
-  height so the date line stays above the fold on a laptop: `site.js`
-  measures it after the fonts load. CSS `clamp()` stands in before
-  that.
-- The question over the verdict is set at the h1's size.
+- **Type scale.** Every font size is a token at the top of
+  `assets/site.css`, and nothing else. Atkinson: `caps` 12px, 700,
+  capitals, +0.07em (`--fs-caps`, `--track-caps`; the nav, the footer,
+  group labels, chart month names, a dial's months and TODAY); `small`
+  14px; `body` 17px; `lead` 23px (the date line, bold, on a food page
+  and a card; the quotation, in Newsreader). Anton: `label` 20px (every
+  section label, in full ink: ON THE WAY, GREAT THIS WEEK, EVERYTHING,
+  ALSO GREAT THIS WEEK, N MATCHES; a card's question, muted); `title`,
+  one clamp (page titles, a food page's question, a card's verdict);
+  `display` (the hero, and the verdict until `site.js` fits it). The
+  sizes that do not fit, kept on purpose: the wordmark, sized as a
+  logo; the stacked hero below 600px, larger than display to fill the
+  phone; a row's verdict tag, Anton at the small size; the week arrows
+  on Now, glyphs sized as controls; the calendar's week numbers, 8
+  units so 52 fit; and the arrivals wheels' labels (9 and 10 units), in
+  a viewBox that is scaled to the screen, so their pixel size varies.
+  Chart text elsewhere is set in units equal to pixels: the calendar is
+  never scaled.
+- **Spacing scale.** Every margin and gap is `--sp-1` to `--sp-5`: 8,
+  16, 24, 40, 64px. 40px parts the major blocks of every page (hero,
+  teasers, results, the Everything list; a food page's body, Also, the
+  data, the way on; Now's bands); a label sits 8px above what it labels.
+  Padding inside small controls (a pill's segment, a row's highlight)
+  and optical nudges in em are not spacing and stay as they are.
+- The verdict word fills the line; then `site.js` makes it smaller, if
+  it must, until the date line under it is wholly on the first screen,
+  16px clear, at any window size (at 1280×800, carrots' YES is 625px).
+  Never below 64px. CSS stands in before the fonts load and without
+  JavaScript.
+- The question over the verdict is set at `title`, the full width, its
+  lines balanced (`text-wrap: balance`).
+- **Food page layout.** From 720px wide, under the verdict, two
+  columns: on the left the date line, the quotation, the variety line
+  and the counter note; on the right the dial and its legend. Below
+  720px one column, the dial after the quotation. Then Also, the data
+  and the way on, full width. `.food-body` in `_layouts/food.html`
+  holds the five in reading order and the grid places them. The quote
+  bar and the counter note's bar stay in the food's colour.
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
   in pink, the line exactly the word's width, in the header, the hero
   and the cards. It does not change on hover.
-- **Header.** NOW, CALENDAR, WHEEL and a magnifier at the top right of
-  every page, home included, in the nav style: Atkinson 700 capitals,
-  13px, +0.07em, muted, the current page in ink and underlined in pink,
-  as the others are on hover or focus. The wordmark is on the left of the same row, or on
+- **Header.** NOW, CALENDAR, WHEEL, ?? (About, `aria-label="About"`)
+  and a magnifier at the top right of every page, home included, in
+  caps, muted, no underline; the current page in ink and underlined in
+  pink, as the others are on hover or focus. Every item is at least
+  44px square. The wordmark is on the left of the same row, or on
   a phone on a row of its own under the nav, so the nav never moves.
   Home has no wordmark and no line under its header. The magnifier
   links to `/#search`, which names no element, so the page does not
@@ -170,8 +204,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   back up to it (on a phone, to the input's line).
 - **Home hero.** The logo is the input. At rest it reads IS IT RHUBARB
   YET?, the placeholder RHUBARB in pink capitals over its underline with
-  a blinking pink caret at its start, a normal space either side of the
-  word; on focus the placeholder dims. Typed
+  a blinking caret in muted ink just after it, a normal space either
+  side of the word; on focus the placeholder dims. The input's own
+  caret is transparent while it is empty (`:placeholder-shown`), so the
+  only caret is the drawn one, after RHUBARB, until the first
+  keystroke. The input's width is set in em, the word plus 0.05em, so
+  it scales with the type and RHUBARB is never clipped, in print too
+  (the drawn caret is not printed). Typed
   text is capitals in ink; when the single best match is found exactly
   or at its start (tier 1 or 2, below, with nothing else at its tier),
   the word and its underline take that food's colour (ghost grey for a
@@ -214,8 +253,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     counts them all, a teaser label in the first teaser's spot, in one
     column, by tier then A to Z, with leaders and tags. A list of one
     is answered as above, without "Also" ("pina" finds spinach).
-  - No match: "Is it dilll yet? Literally no idea. If that's an actual
-    thing, please tell us." with up to five foods sharing its first
+  - No match: a plain card like a never-food's, in ink (its edge
+    too): "Is it zzz yet?", LITERALLY NO IDEA., "If that's an actual
+    thing, please tell us." (a link to the issues). No dial, no
+    arrow, not a link. Under it up to five foods sharing its first
     three letters under DID YOU MEAN.
   - Up and Down move a highlight in rank order through the answer,
     its "Also" links or the rows; Enter opens it, or the first. A
@@ -238,10 +279,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     arrow in the food's colour with a dark arrow icon. The question,
     verdict and date line share the food page's rules (`.ask`,
     `.verdict-word`, `.date-line` in `assets/site.css`) and the card
-    only sets them smaller; the date line is 400, not the page's bold,
-    at Helen's request. The dial is the food page's own `figure.wheel`
-    SVG, fetched from the page and cropped to the ring (the fetch also
-    warms the page): 120px, 90px on a phone. The panel is `--panel`,
+    only sets them smaller: question `label`, verdict `title`, date
+    line `lead` bold, as on the page. The dial is the food page's own
+    `figure.wheel` SVG, fetched from the page (`miniDial` in
+    `site.js`, which also warms the page), cut to the one ring whose
+    variety gave the verdict and that ring widened to fill the band,
+    and cropped to the ring: 120px, 90px on a phone. The card and a
+    list of matches share one width, `--answer-w`. The panel is `--panel`,
     one step lighter than the page in both themes (`--panel-hover` on
     hover or focus), 12px radius, its left edge `--food-bar-width`
     (6px) in the food's colour; the food page has no matching bar. Wide:
@@ -283,38 +327,68 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   input has `aria-autocomplete="both"`; the completion is not
   announced.
 - **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
-  GREAT NOW and LAST CHANCE, each an Anton label over three foods in
-  their colours, picked afresh at random on every visit by `site.js`
-  from the block's `data-all` (the build's own pick stands without
-  JavaScript), and "and N more →", which links to Now, then "Everything
-  in season this week →".
-- **Arrow links.** A link that leads on ("Everything in season this
-  week", a food page's "Ask about something else" and "See the whole
-  year", and every "and N more" after a list of foods) has an arrow
-  after it and no underline at rest; on hover its words underline and
-  the arrow, inside the link, does not. "and N more" keeps the colour
-  of the words around it.
-- **Food page.** Three foods of the same family that are YES, picked
-  afresh at random on every visit by `site.js` (from the section's
-  `data-all`, or from `foods.json` for another week), A to Z,
-  headed "Also great this week" ("Great this week" when the food is
-  NO), then "and N more →", which links to Now.
-- **Hover.** A food's name underlines in pink on hover, in lists and on
-  the calendar, never its variety or timing, and never changes weight
-  or size. SVG text draws its underline in its own fill, so the
-  calendar turns the name's tspan pink and an inner tspan keeps the
-  words in ink.
-- **Footer.** Every label in the nav style: SOURCE DATA · CALENDAR FEED
+  GREAT THIS WEEK and LAST CHANCE, each an Anton label over three foods
+  in their colours, picked afresh at random on every visit by
+  `site.js` from the block's `data-all` (the build's own pick stands
+  without JavaScript), and "and N more →", which links to its own
+  section of Now (`/now/#arrived`, `#onway`, `#still`, `#last`: each
+  band's id is its class), then "Everything in season this week →".
+- **Wording.** "Great this week" everywhere (Now's section, the home
+  teaser, a food page's "Also great this week"); never "Great now".
+  Every link to Now in prose or as an action reads "Everything in
+  season this week →" (the nav's NOW and "and N more" excepted). Page
+  titles: CALENDAR; THE SHAPE OF THE YEAR on the wheel page, whose nav
+  item stays WHEEL. The data disclosures are "Great! Show me the data."
+  and "Fine, show me the data.", both with full stops.
+- **Links.** Four kinds, in `assets/site.css` under "Links come in four
+  kinds":
+  - Prose: ink, a 1px pink underline at all times, 3px on hover or
+    focus. A prose link to a food's page (`.food-ref`, with that food's
+    `--food`) is underlined in the food's colour: on About, "Well, is
+    it???" (to rhubarb) and the dinner food.
+  - Actions (`.arrow-link`): ink words and "→", underlined only on hover
+    or focus, the arrow never. Every "and N more" after a list of foods
+    is one, in the colour of the words around it.
+  - Foods in lists: inline lists (`.food-link`: the teasers, "Also:")
+    set the name in the food's colour; rows (`.food-row`) keep the name
+    in ink beside the swatch, since a food colour passes 3:1, not the
+    4.5:1 body text needs. Both underline on hover or focus, in the
+    food's colour, never the variety or timing, never changing weight
+    or size. SVG text draws its underline in its own fill, so the
+    calendar turns the name's tspan pink and an inner tspan keeps the
+    words in ink.
+  - Chrome: the nav (above) and the footer (below).
+- **Tap targets.** Every control is at least 44×44px, by padding, the
+  glyphs unchanged: the nav items, the magnifier, ??, the week arrows,
+  and each segment of the theme switch.
+- **Footer.** Every word is caps, muted: SOURCE DATA · CALENDAR FEED
   (to the feed's section on Source data) · JSON; ABOUT; the theme
-  switch; GitHub; the licences (CODE: MIT · DATA AND WRITING: CC BY
-  4.0 · ©) and the as-of date, smaller and
-  fainter; the signature hearts, which do not change on hover.
+  switch; the GitHub mark (2.2rem, muted ink, pink on hover or focus);
+  the licences (CODE: MIT · DATA AND WRITING: CC BY 4.0 · ©, MIT to
+  opensource.org's text and CC BY 4.0 to Creative Commons') and the
+  as-of date, fainter; the signature hearts, which do not change on
+  hover. Every text link is underlined in pink at all times, 1px, 0.3em
+  below the capitals; on hover or focus it is ink with a 2px line.
+- **About.** Titled "??" in Anton `title` (a screen reader hears
+  "About"); it opens "Is it rhubarb yet? Well, is it???", the second
+  sentence a prose link to rhubarb's page.
 - **Now.** The title follows the week shown ("this week", "next week",
   "last week", or none), over one muted line, "‹ 15–21 October ›".
   Weeks run through real years, a year either way of this week; the
-  address carries `week=` and, in another year, `year=`. Sections are
-  parted by space; groups inside them by a hairline. Just arrived is
-  left out in a week when nothing has arrived.
+  address carries `week=` and, in another year, `year=`. Every band is
+  the full width, 40px apart, at every screen size: Just arrived, Last
+  chance, On the way, Great this week. Inside a band, groups are
+  parted by a hairline and each group's foods flow down each column,
+  then across. Just arrived is left out in a week when nothing has
+  arrived.
+- **Calendar.** Drawn at its own size and never scaled, so every word
+  is the size it is set (food names 12px, rows 22px tall); where the
+  page is narrower than the chart, it scrolls sideways, the food names
+  stuck to the left and the month header stuck to the top, and it opens
+  scrolled so today is a third of the way across the weeks in view. On
+  a phone it runs to the screen's edges. `_includes/calendar.html`
+  draws it as four SVGs sharing one set of coordinates: the corner and
+  months on top, the names and weeks below.
 - Atkinson Hyperlegible Next's zero is slashed, and the font has no
   feature to open it.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for

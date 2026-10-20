@@ -3,7 +3,7 @@ layout: default
 ---
 {%- comment -%}
 One food, top to bottom: the question, the verdict word, the date line,
-the variety line, the quotation, the dial, the counter note, three
+the quotation, the variety line, the counter note, the dial, three
 foods from the same family that are perfect now, the data, and the way
 on. Everything date-dependent is baked for the build day and
 recomputed by site.js for the visitor's own day from the food's data in
@@ -30,8 +30,13 @@ colour.
   <p class="ask">Is it <span class="ask-name">{{ food.name | downcase }}</span> yet?</p>
 
   <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
+
+  {%- comment -%} Under the verdict, from 720px wide, the words on the
+     left (date line, quote, variety line, counter note) and the dial and
+     its legend on the right; narrower, one column, the dial after the
+     quote. site.css places them; this is the reading order. {%- endcomment -%}
+  <div class="food-body">
   <p class="date-line" id="date-line">{{ b.line }}</p>
-  <p class="variety-line" id="variety-line"{% if b.varietyLine == "" %} hidden{% endif %}>{{ b.varietyLine }}</p>
 
   <blockquote class="quote" id="quote"{% unless b.quote %} hidden{% endunless %}>
     {%- if b.quote -%}
@@ -40,9 +45,12 @@ colour.
     {%- endif -%}
   </blockquote>
 
-  {%- include season-wheel.html food=food -%}
+  <p class="variety-line" id="variety-line"{% if b.varietyLine == "" %} hidden{% endif %}>{{ b.varietyLine }}</p>
 
   {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
+
+  {%- include season-wheel.html food=food -%}
+  </div>
 
   {%- comment -%} Three foods of the same family that are perfect now, at
      random from the baked verdicts, A to Z, and how many more there are,
@@ -66,12 +74,12 @@ colour.
     <ul class="food-list">
       {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>
-    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and {{ also_more }} more</span><span class="arrow" aria-hidden="true">→</span></a></p>
+    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still"><span class="arrow-text">and {{ also_more }} more</span><span class="arrow" aria-hidden="true">→</span></a></p>
   </section>
   {%- endif -%}
 
   <details class="fine">
-    <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the data</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the data.</span></summary>
+    <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the data.</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the data.</span></summary>
     <ul class="runs">
     {%- for v in food.varieties -%}
       <li><span class="swatch" style="--food: {{ v.colour | default: food.colour }}" aria-hidden="true"></span>{% if v.name != "" %}<strong>{{ v.name }}:</strong> {% endif -%}

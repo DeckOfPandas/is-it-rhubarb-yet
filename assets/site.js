@@ -192,8 +192,8 @@
   }
 
   // A home teaser's foods: STRIP_PICK of them at random, each a link in its
-  // colour, then "and N more →", which links to Now.
-  function fillTeaser(p, items) {
+  // colour, then "and N more →", which links to its band on Now.
+  function fillTeaser(p, items, band) {
     p.textContent = "";
     var pick = pickSome(items, STRIP_PICK);
     pick.forEach(function (i, n) {
@@ -206,7 +206,7 @@
     var more = items.length - pick.length;
     if (more > 0) {
       p.appendChild(document.createTextNode(" "));
-      var m = arrowLink(BASE + "now/", "and " + more + " more");
+      var m = arrowLink(BASE + "now/#" + band, "and " + more + " more");
       m.classList.add("more-link");
       p.appendChild(m);
     }
@@ -249,19 +249,29 @@
   // --- The verdict word fills the line --------------------------------------
   // Measured after the fonts are in, so that YES and NEARLY both reach the
   // right edge; CSS's clamp() stands in before that and without JavaScript.
-  // The word also stops at half the viewport's height, so on a wide, short
-  // screen the date line under it stays above the fold.
+  // The word is then made smaller, if it must be, until the date line
+  // under it is wholly on the first screen, 16px clear of its foot.
+  var MIN_VERDICT = 64;
   function fitVerdict(word) {
     if (!word) return;
     var box = word.parentElement;
+    var dateLine = box.parentElement.querySelector(".date-line");
     function fit() {
       word.style.fontSize = "";
       var avail = box.clientWidth;
       var width = word.getBoundingClientRect().width;
       if (!width || !avail) return;
       var size = parseFloat(getComputedStyle(word).fontSize) * (avail / width);
-      size = Math.max(32, Math.min(size, avail * 0.9, window.innerHeight * 0.5));
+      size = Math.max(MIN_VERDICT, Math.min(size, avail * 0.9));
       word.style.fontSize = size + "px";
+      if (!dateLine) return;
+      for (var i = 0; i < 3; i++) {
+        var over = dateLine.getBoundingClientRect().bottom + window.scrollY - (window.innerHeight - 16);
+        if (over <= 1 || size <= MIN_VERDICT) break;
+        var tall = word.getBoundingClientRect().height;
+        size = Math.max(MIN_VERDICT, size * (1 - over / tall));
+        word.style.fontSize = size + "px";
+      }
     }
     var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     ready.then(fit);
@@ -313,6 +323,25 @@
     });
   }
 
+  // A calendar too wide for the screen opens scrolled so that today
+  // stands a third of the way across the weeks in view. Only the chart on
+  // show has a width, so the order switch scrolls the one it shows.
+  function scrollToToday() {
+    function scroll() {
+      document.querySelectorAll(".chart-body").forEach(function (body) {
+        var cells = body.querySelector(".cal-cells");
+        if (!cells || body.dataset.scrolled || !body.clientWidth || body.scrollWidth <= body.clientWidth) return;
+        var cw = parseFloat(cells.dataset.cw);
+        var labels = body.querySelector(".cal-labels").getBoundingClientRect().width;
+        var x = (WEEK - 1) * cw + cw / 2;
+        body.scrollLeft = Math.max(0, x - (body.clientWidth - labels) / 3);
+        body.dataset.scrolled = "1";
+      });
+    }
+    scroll();
+    document.querySelectorAll('input[name="order"]').forEach(function (r) { r.addEventListener("change", scroll); });
+  }
+
   // A food page links to the calendar with #<slug>: the rows of that food
   // are marked and the chart scrolls to the first visible one.
   function targetRow() {
@@ -343,6 +372,38 @@
     requestAnimationFrame(function () {
       hand.style.transform = "rotate(" + deg.toFixed(2) + "deg)";
       hand.classList.add("on");
+    });
+  }
+
+  // --- A food's card dial ------------------------------------------------------
+  // A copy of the food page's own dial, cut to one ring (the variety that
+  // gave the verdict, by its place in the food's varieties) and that ring
+  // widened to fill the band all the rings share, as a food of one variety
+  // draws it: _includes/season-wheel.html's R 140 and R0 78, less its 3
+  // units of gap. The page is fetched once per food and kept. Resolves to
+  // a span.wheel for markWheel, or null.
+  var dialPages = {};
+  var RING_THICK = 140 - 78 - 3, RING_MID = 140 - RING_THICK / 2;
+  function miniDial(slug, ring) {
+    if (!dialPages[slug]) dialPages[slug] = fetch(foodUrl(slug)).then(function (r) { return r.text(); }).then(function (page) {
+      return new DOMParser().parseFromString(page, "text/html").querySelector("figure.wheel svg");
+    }).catch(function () { return null; });
+    return dialPages[slug].then(function (svg) {
+      if (!svg) return null;
+      var copy = document.importNode(svg, true);
+      copy.setAttribute("viewBox", "30 30 300 300");
+      copy.removeAttribute("role"); copy.removeAttribute("aria-label");
+      var rings = copy.querySelectorAll(".ring");
+      if (rings.length > 1 && ring >= 0 && ring < rings.length) {
+        rings.forEach(function (g, k) {
+          if (k !== ring) { g.remove(); return; }
+          g.setAttribute("stroke-width", RING_THICK);
+          g.querySelectorAll("circle").forEach(function (c) { c.setAttribute("r", RING_MID); });
+        });
+      }
+      var fig = el("span", "wheel");
+      fig.appendChild(copy);
+      return fig;
     });
   }
 
@@ -427,7 +488,7 @@
         section.appendChild(el("h2"));
         section.appendChild(el("ul", "food-list"));
         var p = el("p", "also-more");
-        var m = arrowLink(BASE + "now/", "");
+        var m = arrowLink(BASE + "now/#still", "");
         m.classList.add("more-link");
         p.appendChild(m);
         section.appendChild(p);
@@ -456,6 +517,7 @@
       if (!pick) return;
       a.textContent = pick.name.toLowerCase();
       a.href = foodUrl(pick.slug);
+      a.style.setProperty("--food", pick.colour);
     });
   }
 
@@ -475,7 +537,7 @@
     var found = document.getElementById("found");
     var one = document.getElementById("one-result");
     var none = document.getElementById("hook-none");
-    var noneLine = none.querySelector(".hook-none");
+    var noneAsk = none.querySelector(".ask-name");
     var suggest = document.getElementById("suggest");
     var suggestList = document.getElementById("suggest-list");
     var status = document.getElementById("results-status");
@@ -485,7 +547,7 @@
     // alias; its row, verdict and line come from the list. Each named
     // variety joins once foods.json is in, by its own name and how it is
     // said ("cox", "forced rhubarb"), and shows as "Apples (Cox)".
-    var lineOf = {};
+    var lineOf = {}, ringOf = {};
     function terms(list) { return list.map(function (s) { return words(fold(s)); }); }
     var index = rows.map(function (li) {
       var name = li.querySelector(".food-title").textContent;
@@ -496,6 +558,7 @@
         colour: function () { return getComputedStyle(li).getPropertyValue("--food").trim(); },
         verdict: function () { return li.dataset.verdict; },
         line: function () { return lineOf[li.dataset.slug] || li.dataset.line; },
+        ring: function () { return ringOf[li.dataset.slug]; },
         row: function () { var c = li.cloneNode(true); c.hidden = false; return c; },
       };
     });
@@ -503,7 +566,8 @@
       foods.forEach(function (f) {
         var fv = V.foodVerdict(f, WEEK);
         lineOf[f.slug] = V.dateLine(fv.variety, YEAR, TODAY);
-        fv.varieties.forEach(function (r) {
+        ringOf[f.slug] = f.varieties.indexOf(fv.variety.v);
+        fv.varieties.forEach(function (r, k) {
           if (!r.v.name) return;
           var said = V.varietySaid(f, r.v), label = V.varietyLabel(r.v);
           index.push({
@@ -512,6 +576,7 @@
             colour: function () { return r.colour; },
             verdict: function () { return r.verdict; },
             line: function () { return V.dateLine(r, YEAR, TODAY); },
+            ring: function () { return k; },
             row: function () { return foodRow({ slug: f.slug, name: f.name, variety: label, colour: r.colour, verdict: r.verdict }); },
           });
         });
@@ -554,10 +619,13 @@
     // question stacks, the input is the full width. Either way a word too
     // long for its room is set smaller until it fits, the completion
     // counted, so accepting it does not make the word jump. The underline
-    // is the typed word's width; the resting caret stands at the word's
-    // start. The input is a hair wider than its word, room for the real
-    // caret after the last letter, so the word sits a normal space from
-    // "Is it" and from "yet?".
+    // is the typed word's width; the resting caret stands just after
+    // RHUBARB while the input is empty, focused or not, and the real
+    // caret is hidden until the first keystroke. The input is a little
+    // wider than its word, room for the real caret after the last letter,
+    // so the word sits a normal space from "Is it" and from "yet?". Its
+    // width is set in em, so it scales with the type wherever the type is
+    // resized without this script, as in print.
     var slot = input.parentElement;
     var ruler = el("span", "hook-ruler");
     var underline = el("span", "hook-underline");
@@ -572,7 +640,7 @@
     [ruler, underline, caret, layer].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
     var line = input.closest(".hook-line");
     var stacked = matchMedia("(max-width: 37.49rem)");
-    var CARET_ROOM = 3;
+    var CARET_ROOM = 0.05;
     function size() {
       ruler.textContent = input.value || input.placeholder;
       slot.classList.toggle("has-value", !!input.value);
@@ -580,8 +648,9 @@
       if (!text) return;
       var full = text;
       if (ghost) { ruler.textContent = input.value + ghost; full = ruler.getBoundingClientRect().width; }
-      var w = full + CARET_ROOM;
       input.style.fontSize = "";
+      var em = parseFloat(getComputedStyle(input).fontSize);
+      var w = full + CARET_ROOM * em;
       var room;
       if (stacked.matches) {
         input.style.width = "";
@@ -590,11 +659,12 @@
         var gap = parseFloat(getComputedStyle(line).columnGap) || 0;
         room = line.clientWidth - 2 * gap - 8;
         line.querySelectorAll(".hook-word").forEach(function (word) { room -= word.getBoundingClientRect().width; });
-        input.style.width = Math.min(w, room) + "px";
       }
       var scale = w > room ? room / w : 1;
-      if (scale < 1) input.style.fontSize = (parseFloat(getComputedStyle(input).fontSize) * scale) + "px";
-      underline.style.width = (text * scale) + "px";
+      if (scale < 1) input.style.fontSize = (em * scale) + "px";
+      if (!stacked.matches) input.style.width = (Math.min(w, room) / (em * scale)).toFixed(3) + "em";
+      underline.style.width = (text * scale / em).toFixed(3) + "em";
+      caret.style.left = (text * scale / em).toFixed(3) + "em";
       layer.style.fontSize = input.style.fontSize;
       layer.style.top = (input.offsetTop + input.clientTop) + "px";
       layer.style.height = input.clientHeight + "px";
@@ -700,13 +770,14 @@
         if (it.never) one.removeAttribute("href");
         else one.href = foodUrl(it.slug);
         one.classList.toggle("is-never", !!it.never);
+        one.classList.toggle("is-plain", !!it.never);
         one.style.setProperty("--food", it.colour());
         one.querySelector(".ask-name").textContent = it.ask;
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
         one.querySelector(".one-sub").hidden = one.querySelector(".one-go").hidden = !!it.never;
         one.querySelector(".one-sub").textContent = whenIn(it.name);
-        dialFor(it.never ? null : it.slug);
+        dialFor(it.never ? null : it.slug, it.ring());
         one.hidden = false;
         answered = it.never ? "never" : "link";
         picks = it.never ? [] : [one];
@@ -734,11 +805,7 @@
         });
       } else {
         label.hidden = true;
-        noneLine.textContent = "";
-        noneLine.appendChild(document.createTextNode("Is it " + q + " yet? Literally no idea. If that's an actual thing, please "));
-        var a = el("a", null, "tell us"); a.href = noneLine.dataset.issues;
-        noneLine.appendChild(a);
-        noneLine.appendChild(document.createTextNode("."));
+        noneAsk.textContent = q.toLowerCase();
         none.hidden = false;
         status.textContent = "No matches.";
         var bit = fold(q).slice(0, 3);
@@ -753,26 +820,19 @@
         suggest.hidden = !close.length;
       }
     }
-    // The answer's dial is its food page's own, fetched once a food and
-    // kept, drawn small with today's hand; the fetch also warms the page
-    // the answer leads to. Its box holds the space while it comes.
-    var dialBox = one.querySelector(".one-dial"), dials = {}, dialSlug = null;
-    function dialFor(slug) {
-      if (slug === dialSlug && dialBox.firstChild) return;
-      dialSlug = slug;
+    // The answer's dial is its food page's own, cut to the one ring whose
+    // variety gave the verdict; the fetch also warms the page the answer
+    // leads to. Its box holds the space while it comes.
+    var dialBox = one.querySelector(".one-dial"), dialKey = null;
+    function dialFor(slug, ring) {
+      var key = slug + "/" + ring;
+      if (key === dialKey && dialBox.firstChild) return;
+      dialKey = key;
       dialBox.textContent = "";
       dialBox.hidden = !slug;
       if (!slug) return;
-      if (!dials[slug]) dials[slug] = fetch(foodUrl(slug)).then(function (r) { return r.text(); }).then(function (page) {
-        return new DOMParser().parseFromString(page, "text/html").querySelector("figure.wheel svg");
-      }).catch(function () { return null; });
-      dials[slug].then(function (svg) {
-        if (!svg || dialSlug !== slug) return;
-        var fig = el("span", "wheel");
-        var copy = document.importNode(svg, true);
-        copy.setAttribute("viewBox", "30 30 300 300");
-        copy.removeAttribute("role"); copy.removeAttribute("aria-label");
-        fig.appendChild(copy);
+      miniDial(slug, ring).then(function (fig) {
+        if (!fig || dialKey !== key) return;
         dialBox.textContent = "";
         dialBox.appendChild(fig);
         markWheel(fig, TODAY);
@@ -870,26 +930,26 @@
     // week, and otherwise from the data.
     if (SAME_WEEK) {
       strip.querySelectorAll(".teaser-foods[data-all]").forEach(function (p) {
-        fillTeaser(p, JSON.parse(p.dataset.all));
+        fillTeaser(p, JSON.parse(p.dataset.all), p.dataset.band);
       });
     } else {
       loadFoods().then(function (foods) {
         var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
         strip.textContent = "";
-        function block(label, list) {
+        function block(key, label, list) {
           var items = V.flatten(list);
           if (!items.length) return;
           var s = el("section", "teaser");
           s.appendChild(el("h2", "teaser-label", label));
           var p = el("p", "teaser-foods");
-          fillTeaser(p, items);
+          fillTeaser(p, items, key);
           s.appendChild(p);
           strip.appendChild(s);
         }
-        if (V.flatten(now.arrived).length) block("Just arrived", now.arrived);
-        else block("On the way", now.onway);
-        block("Great now", now.still);
-        block("Last chance", now.last);
+        if (V.flatten(now.arrived).length) block("arrived", "Just arrived", now.arrived);
+        else block("onway", "On the way", now.onway);
+        block("still", "Great this week", now.still);
+        block("last", "Last chance", now.last);
         var p = el("p", "this-week-more");
         p.appendChild(arrowLink(BASE + "now/", "Everything in season this week"));
         strip.appendChild(p);
@@ -933,6 +993,7 @@
       var total = V.flatten(kinds).length;
       if (!total && !emptyText) return document.createTextNode("");
       var s = el("section", "band " + cls);
+      s.id = cls;
       var h = el("h2", null, heading + " ");
       if (total) h.appendChild(el("span", "count", String(total)));
       s.appendChild(h);
@@ -972,7 +1033,7 @@
         digest.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
         digest.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
         digest.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
-        digest.appendChild(band("still", "Great now", now.still, "kind", "Nothing at all, which cannot be right."));
+        digest.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
       });
     }
 
@@ -1023,6 +1084,7 @@
     initNow();
     initNotFound();
     syncChartHeads();
+    scrollToToday();
     targetRow();
     window.addEventListener("hashchange", targetRow);
     refreshRows(document.querySelector(".also"));

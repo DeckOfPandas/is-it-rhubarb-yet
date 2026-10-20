@@ -100,13 +100,15 @@ photographs it.
   {%- endfor -%}
   </div>
   <div class="ks-row">
-    <div class="one-result is-never" style="--food: var(--never)"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ never0.name | downcase }}</span> yet?</span> <span class="one-word">NEVER.</span> <span class="one-line">{{ never0.line }}</span></span></div>
+    <div class="one-result is-plain is-never" style="--food: var(--never)"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ never0.name | downcase }}</span> yet?</span> <span class="one-word">NEVER.</span> <span class="one-line">{{ never0.line }}</span></span></div>
+    <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">zzz</span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>
   </div>
 </section>
 
 <section class="ks-section">
   <h2 class="ks-title">Date phrase, labels</h2>
   <p class="date-line">{{ yb.line }}</p>
+  <p>Prose with <a href="{{ '/about/' | relative_url }}">a link</a> and <a class="food-ref" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}">a link to a food</a>.</p>
   <h3 class="teaser-label">Section label (home)</h3>
   <div class="band"><h2>Section label (Now) <span class="count">12</span></h2></div>
   <h3 class="group-label">Group label <span class="count">7</span></h3>
@@ -123,10 +125,11 @@ photographs it.
         <a href="{{ '/now/' | relative_url }}" aria-current="page">Now</a>
         <a href="{{ '/calendar/' | relative_url }}">Calendar</a>
         <a href="{{ '/wheel/' | relative_url }}">Wheel</a>
+        <a class="about-link" href="{{ '/about/' | relative_url }}" aria-label="About">??</a>
         <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
       </nav>
       <p><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
-      <p class="teaser-foods"><a class="food-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}">{{ yes0.name }}</a> <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and 4 more</span><span class="arrow" aria-hidden="true">→</span></a></p>
+      <p class="teaser-foods"><a class="food-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}">{{ yes0.name }}</a> <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still"><span class="arrow-text">and 4 more</span><span class="arrow" aria-hidden="true">→</span></a></p>
       <p class="week-line"><button type="button" class="week-step" aria-label="Previous week">‹</button><span>{{ baked.range }}</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
       <p class="week-line"><button type="button" class="week-step" aria-label="Previous week" disabled>‹</button><span>Last week in range</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
       <div class="site-footer ks-footer">
@@ -141,6 +144,8 @@ photographs it.
           <input type="radio" name="ks-theme-{{ s }}" id="ks-theme-{{ s }}-auto" value="auto" aria-label="Follow device" checked><label for="ks-theme-{{ s }}-auto">{% include icons/screen.svg %}Auto</label>
           <input type="radio" name="ks-theme-{{ s }}" id="ks-theme-{{ s }}-dark" value="dark" aria-label="Dark theme"><label for="ks-theme-{{ s }}-dark">{% include icons/moon.svg %}</label>
         </fieldset>
+        <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="GitHub">{% include icons/github.svg %}</a>
+        <p class="licence"><span>Code: <a href="https://opensource.org/license/mit">MIT</a></span> <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span></p>
       </div>
     </div>
   {%- endfor -%}

@@ -10,17 +10,21 @@ order "alpha": by food name, then variety, a food's varieties together.
 A row is labelled with the food, and a named variety follows in muted
 brackets as tools/bake.js names it, "Rhubarb (forced)", "Apples (Cox)".
 
-Every row is a link to its food's page. The month and week labels are a
-second, short SVG above the rows, in a block that sticks to the top of
-the viewport as the page scrolls; the rows' SVG starts its viewBox below
-the header so the two share x coordinates. JavaScript adds only the
-"today" marker and keeps the header level with the rows when they are
-scrolled sideways. The id prefixes the gradient ids, which must be unique
-on a page that carries several charts.
+The chart is drawn at its own size, never scaled, so its words are never
+smaller than they are set; where it is wider than the page it scrolls
+sideways. It is four SVGs sharing one set of coordinates, each viewBox
+cut to its part: the food names in a column that sticks to the left, the
+weeks beside them, and over both a header of months and week numbers
+that sticks to the top of the viewport (with a blank corner over the
+names). A row is two links to its food's page, its name and its weeks;
+only the name takes focus. JavaScript adds the "today" marker, keeps the
+header level with the rows when they are scrolled sideways, and opens
+the chart scrolled to today. The id prefixes the gradient ids, which must
+be unique on a page that carries several charts.
 {% endcomment %}
 {%- assign x0 = 190 -%}
 {%- assign cw = 14 -%}
-{%- assign rh = 18 -%}
+{%- assign rh = 22 -%}
 {%- assign header = 44 -%}
 {%- assign group_gap = 28 -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
@@ -68,9 +72,35 @@ number in a key is padded to a fixed width by adding 100 or 10.
 {%- assign height = keyed.size | times: rh | plus: header | plus: 10 -%}
 {%- assign height = groups_present | times: group_gap | plus: height -%}
 {%- assign width = cw | times: 52 | plus: x0 | plus: 8 -%}
+{%- assign cells_w = width | minus: x0 -%}
+{%- assign body_height = height | minus: header -%}
 
+{%- comment -%} The rows: "y|slug|variety index|label|variety label", and
+   the group labels, "g|y|name", worked out once for both columns. {%- endcomment -%}
+{%- assign rows = "" | split: "" -%}
+{%- assign y = header -%}
+{%- assign current_group = "" -%}
+{%- for key in keyed -%}
+  {%- assign parts = key | split: "|" -%}
+  {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+  {%- if include.order == "group" and food.group != current_group -%}
+    {%- assign current_group = food.group -%}
+    {%- assign g = site.data.groups | where: "key", current_group | first -%}
+    {%- assign y = y | plus: group_gap -%}
+    {%- assign gy = y | minus: 9 -%}
+    {%- assign glabel = "g|" | append: gy | append: "|" | append: g.name -%}
+    {%- assign rows = rows | push: glabel -%}
+  {%- endif -%}
+  {%- assign row = y | append: "|" | append: parts[1] | append: "|" | append: parts[2] -%}
+  {%- assign rows = rows | push: row -%}
+  {%- assign y = y | plus: rh -%}
+{%- endfor -%}
+
+<div class="cal" style="--cal-w: {{ width }}px; --cal-x0: {{ x0 }}px">
 <div class="chart-head">
-<svg viewBox="0 0 {{ width }} {{ header }}" width="{{ width }}" height="{{ header }}" aria-hidden="true" data-x0="{{ x0 }}" data-cw="{{ cw }}">
+<div class="cal-grid">
+<div class="cal-corner"></div>
+<svg class="cal-months" viewBox="{{ x0 }} 0 {{ cells_w }} {{ header }}" width="{{ cells_w }}" height="{{ header }}" aria-hidden="true" data-x0="{{ x0 }}" data-cw="{{ cw }}">
   {%- for m in (0..11) -%}
     {%- assign start = month_starts[m] | plus: 0 -%}
     {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
@@ -85,44 +115,56 @@ number in a key is padded to a fixed width by adding 100 or 10.
   <line class="today" x1="0" y1="{{ header | minus: 6 }}" x2="0" y2="{{ header }}" hidden />
 </svg>
 </div>
+</div>
 <div class="chart-body">
-{%- assign body_height = height | minus: header -%}
-<svg id="{{ include.id }}" viewBox="0 {{ header }} {{ width }} {{ body_height }}" width="{{ width }}" height="{{ body_height }}" role="img" aria-labelledby="{{ include.id }}-title" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="{{ header }}">
+<div class="cal-grid">
+{%- comment -%} The food names: a column of their own that sticks to the
+   left while the weeks scroll under it. Each name is the row's link. {%- endcomment -%}
+<svg class="cal-labels" viewBox="0 {{ header }} {{ x0 }} {{ body_height }}" width="{{ x0 }}" height="{{ body_height }}">
+  {%- for row in rows -%}
+    {%- assign parts = row | split: "|" -%}
+    {%- if parts[0] == "g" -%}
+      <text class="group-label" x="0" y="{{ parts[1] }}" aria-hidden="true">{{ parts[2] }}</text>
+      {%- continue -%}
+    {%- endif -%}
+    {%- assign y = parts[0] | plus: 0 -%}
+    {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+    {%- assign vi = parts[2] | plus: 0 -%}
+    {%- assign v = food.varieties[vi] -%}
+    {%- assign vlabels = site.data.baked.labels[food.slug] -%}
+    {%- assign vlabel = vlabels[vi] -%}
+    <a class="row" id="{{ include.id }}-{{ food.slug }}-{{ vi }}" data-row="{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" data-variety="{{ vi }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
+      <rect class="row-hit" x="0" y="{{ y }}" width="{{ x0 }}" height="{{ rh }}" />
+      <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end"><tspan class="row-name"><tspan class="row-ink">{{ food.name }}</tspan></tspan>{% if vlabel != "" %} <tspan class="row-variety">({{ vlabel }})</tspan>{% endif %}</text>
+    </a>
+  {%- endfor -%}
+</svg>
+<svg class="cal-cells" id="{{ include.id }}" viewBox="{{ x0 }} {{ header }} {{ cells_w }} {{ body_height }}" width="{{ cells_w }}" height="{{ body_height }}" role="img" aria-labelledby="{{ include.id }}-title" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="{{ header }}">
   <title id="{{ include.id }}-title">Seasonality of UK food by week</title>
-
   {%- for m in (0..11) -%}
     {%- assign start = month_starts[m] | plus: 0 -%}
     {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
     <line class="month-line" x1="{{ mx }}" y1="{{ header }}" x2="{{ mx }}" y2="{{ height }}" />
   {%- endfor -%}
-
-  {%- assign y = header -%}
-  {%- assign current_group = "" -%}
-  {%- for key in keyed -%}
-    {%- assign parts = key | split: "|" -%}
+  {%- for row in rows -%}
+    {%- assign parts = row | split: "|" -%}
+    {%- if parts[0] == "g" -%}{%- continue -%}{%- endif -%}
+    {%- assign y = parts[0] | plus: 0 -%}
     {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
     {%- assign vi = parts[2] | plus: 0 -%}
     {%- assign v = food.varieties[vi] -%}
-    {%- if include.order == "group" and food.group != current_group -%}
-      {%- assign current_group = food.group -%}
-      {%- assign g = site.data.groups | where: "key", current_group | first -%}
-      {%- assign y = y | plus: group_gap -%}
-      <text class="group-label" x="0" y="{{ y | minus: 9 }}">{{ g.name }}</text>
-    {%- endif -%}
-    {%- assign fslug = food.slug -%}
-    {%- assign vlabels = site.data.baked.labels[fslug] -%}
+    {%- assign vlabels = site.data.baked.labels[food.slug] -%}
     {%- assign vlabel = vlabels[vi] -%}
     {%- if vlabel != "" -%}{%- assign label = food.name | append: " (" | append: vlabel | append: ")" -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
     {%- assign gid = include.id | append: "-" | append: food.slug | append: "-" | append: vi -%}
-    <a class="row" id="{{ include.id }}-{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
-      <rect class="row-hit" x="0" y="{{ y }}" width="{{ width }}" height="{{ rh }}" />
-      <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end"><tspan class="row-name"><tspan class="row-ink">{{ food.name }}</tspan></tspan>{% if vlabel != "" %} <tspan class="row-variety">({{ vlabel }})</tspan>{% endif %}</text>
+    <a class="row" data-row="{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" tabindex="-1" aria-hidden="true" style="--c: {{ v.colour | default: food.colour }}">
+      <rect class="row-hit" x="{{ x0 }}" y="{{ y }}" width="{{ cells_w }}" height="{{ rh }}" />
       {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}
     </a>
-    {%- assign y = y | plus: rh -%}
   {%- endfor -%}
-
   <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="{{ header }}" x2="{{ x0 | plus: 728 }}" y2="{{ height }}" />
   <line class="today" x1="0" y1="{{ header }}" x2="0" y2="{{ height }}" hidden />
 </svg>
+</div>
+</div>
 </div>

@@ -1,7 +1,7 @@
 // The design-review screenshot set: full-page shots of the kitchen sink,
 // home in each search state, a food page for every verdict and kind, Now
 // for this week and next, the calendar, the wheel, About and the 404, at
-// 390 and 1280 wide, light and dark, with the clock frozen on one day.
+// 390, 820 and 1280 wide, light and dark, with the clock frozen on one day.
 //
 // USAGE:
 //   node tools/dev/shots.js [--base <url>] [--date YYYY-MM-DD] [--out <dir>] [--full yes]
@@ -28,7 +28,7 @@ const fs = require('fs');
 const path = require('path');
 const V = require('../../assets/verdict.js');
 
-const WIDTHS = [390, 1280];
+const WIDTHS = [390, 820, 1280];
 const THEMES = ['light', 'dark'];
 
 function parse(argv) {

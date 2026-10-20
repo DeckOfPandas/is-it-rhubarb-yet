@@ -4,8 +4,9 @@ description: What this site is for, by the person who wanted it.
 permalink: /about/
 ---
 {%- comment -%}
-Helen's copy. The opening question is body text, not the title; the
-page's h1 is for screen readers. Two things are filled from the data:
+Helen's copy, under a title of "??", which is how the nav names this page
+too; a screen reader hears "About". The opening question is body text,
+its answer a link to rhubarb's page. Two things are filled from the data:
 how many foods there are besides rhubarb, which links to the calendar
 where they all are, and a food that has just arrived (or, in a quiet
 week, one that is great now) for the dinner line; site.js refreshes the
@@ -17,9 +18,11 @@ dinner food for the visitor's own week.
 {%- for k in baked.now.arrived -%}{%- if dinner == nil -%}{%- assign dinner = k.items | first -%}{%- endif -%}{%- endfor -%}
 {%- for k in baked.now.still -%}{%- if dinner == nil -%}{%- assign dinner = k.items | first -%}{%- endif -%}{%- endfor -%}
 <article class="about">
-<h1 class="visually-hidden">About</h1>
+<header class="page-head">
+  <h1><span aria-hidden="true">??</span><span class="visually-hidden">About</span></h1>
+</header>
 
-<p>Is it rhubarb yet?</p>
+<p>Is it rhubarb yet? <a class="food-ref" href="{{ '/rhubarb/' | relative_url }}" style="--food: {{ site.data.foods | where: 'slug', 'rhubarb' | map: 'colour' | first }}">Well, is it???</a></p>
 
 <p>I can cook. I prefer to cook and eat food that:</p>
 <ol class="about-list">
@@ -40,5 +43,5 @@ dinner food for the visitor's own week.
 
 <p>The site doesn't explain what dinner to make with a kohlrabi, or which drink to float edible flowers in, because I already know, or can find out using my handy <a href="https://deckofpandas.github.io/helen-triages/food/">food</a> and <a href="https://deckofpandas.github.io/helen-triages/cocktails/">cocktails</a> recipe collections.</p>
 
-<p>Coolio, I'm off to cook (checks site) <a id="dinner" href="{{ '/' | append: dinner.slug | append: '/' | relative_url }}">{{ dinner.name | downcase }}</a> for dinner now, and it's going to be freaking delicious.</p>
+<p>Coolio, I'm off to cook (checks site) <a class="food-ref" id="dinner" href="{{ '/' | append: dinner.slug | append: '/' | relative_url }}" style="--food: {{ dinner.colour }}">{{ dinner.name | downcase }}</a> for dinner now, and it's going to be freaking delicious.</p>
 </article>

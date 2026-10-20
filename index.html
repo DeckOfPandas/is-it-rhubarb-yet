@@ -31,7 +31,7 @@ site.js adds the varieties from foods.json), the names it completes to
     <button type="submit" class="visually-hidden">Ask</button>
   </form>
   {%- comment -%} This week in three blocks, from the baked digest: just
-     arrived (or, in a week when nothing has, on the way), great now and
+     arrived (or, in a week when nothing has, on the way), great this week and
      last chance, each a label over a random three of its foods in their
      own colours and how many more there are. A block with nothing in it
      is left out. Each carries all its foods in data-all, and site.js
@@ -42,7 +42,7 @@ site.js adds the varieties from foods.json), the names it completes to
     {%- assign arrived_count = 0 -%}
     {%- for k in baked.now.arrived -%}{%- assign arrived_count = arrived_count | plus: k.items.size -%}{%- endfor -%}
     {%- if arrived_count == 0 -%}{%- assign first = "onway|On the way" -%}{%- endif -%}
-    {%- assign blocks = first | append: ",still|Great now,last|Last chance" | split: "," -%}
+    {%- assign blocks = first | append: ",still|Great this week,last|Last chance" | split: "," -%}
     {%- for entry in blocks -%}
       {%- assign parts = entry | split: "|" -%}
       {%- assign key = parts[0] -%}
@@ -54,7 +54,7 @@ site.js adds the varieties from foods.json), the names it completes to
       <section class="teaser">
         <h2 class="teaser-label">{{ parts[1] }}</h2>
         {%- capture all_json -%}[{% for i in all %}{"slug":{{ i.slug | jsonify }},"name":{{ i.name | jsonify }},"colour":{{ i.colour | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
-        <p class="teaser-foods" data-all='{{ all_json | escape }}'>{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and {{ more }} more</span><span class="arrow" aria-hidden="true">→</span></a>{% endif %}</p>
+        <p class="teaser-foods" data-all='{{ all_json | escape }}' data-band="{{ key }}">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#{{ key }}"><span class="arrow-text">and {{ more }} more</span><span class="arrow" aria-hidden="true">→</span></a>{% endif %}</p>
       </section>
       {%- endif -%}
     {%- endfor -%}
@@ -66,8 +66,9 @@ site.js adds the varieties from foods.json), the names it completes to
      page in small (question, verdict, line, "When is (or are) … in season?", a
      miniature of its dial and an arrow, all one link; a never-food's
      card is its question, verdict and line, and no link),
-     then "Also:" and the near matches; or, with no match, the
-     not-found line and the nearest foods.
+     then "Also:" and the near matches; or, with no match, a plain card
+     like a never-food's, LITERALLY NO IDEA. in ink, and the nearest
+     foods.
      {%- endcomment -%}
   <section class="results" id="results" aria-labelledby="results-label" hidden>
     <h2 class="teaser-label" id="results-label"></h2>
@@ -75,7 +76,7 @@ site.js adds the varieties from foods.json), the names it completes to
     <a class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <span class="one-sub"></span><span class="one-dial" aria-hidden="true"></span><span class="one-go" aria-hidden="true">{% include icons/arrow.svg %}</span></a>
     <p class="also-line" id="also-line" hidden></p>
     <div class="results-none" id="hook-none" hidden>
-      <p class="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues"></p>
+      <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>
       <div class="food-group" id="suggest" hidden>
         <h3 class="group-label">Did you mean</h3>
         <ul class="food-list" id="suggest-list"></ul>

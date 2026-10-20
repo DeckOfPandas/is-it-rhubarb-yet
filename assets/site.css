@@ -11,14 +11,14 @@
    1. A quotation? Newsreader italic. Nothing else uses it.
    2. A verdict, or the name of a page or section? Anton, in capitals: the
       logo, verdicts at every size, page titles, section labels (ON THE
-      WAY, GREAT NOW, EVERYTHING).
+      WAY, GREAT THIS WEEK, EVERYTHING).
    3. Everything else is Atkinson: food names, body text, date phrases,
       the nav and footer, buttons and toggles, counts, chart labels, and
       group labels inside lists (ROOTS & TUBERS).
    Anton never sets a sentence, a link or a control. Atkinson uses 400
-   and 700 only, and capitals only for small labels, always at
-   +0.06em to +0.07em. An Anton label heads a section and an Atkinson
-   capitals label a group inside it, never the reverse. */
+   and 700 only, and capitals only in the caps style. An Anton label
+   heads a section and an Atkinson caps label a group inside it, never
+   the reverse. */
 @font-face {
   font-family: "Anton";
   font-style: normal; font-weight: 400; font-display: swap;
@@ -65,6 +65,29 @@
   /* Anton's two letter-spacings, chosen by size: 40px and up, below 40px. */
   --track-large: 0;
   --track-small: 0.03em;
+  /* The type scale. Every font size on the site is one of these.
+     Atkinson: caps (12px, 700, capitals, +0.07em), small (14px), body
+     (17px), lead (23px). Anton: label (20px, section labels), title (page
+     titles and a food page's question), display (the hero, and the
+     verdict before site.js fits it to its line). */
+  --fs-caps: 0.75rem;
+  --fs-small: 0.875rem;
+  --fs-body: 1.0625rem;
+  --fs-lead: 1.4375rem;
+  --fs-label: 1.25rem;
+  --fs-title: clamp(2rem, 6vw, 3.25rem);
+  --fs-display: clamp(2.6rem, 11vw, 6.5rem);
+  --track-caps: 0.07em;
+  /* The spacing scale. Every margin and gap is one of these: 8, 16, 24,
+     40 and 64px. 40px parts the major blocks of every page, and a label
+     sits 8px above what it labels. */
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2.5rem;
+  --sp-5: 4rem;
+  /* A food's card and a list of matches share one width. */
+  --answer-w: 40rem;
 }
 /* Dark follows the system unless the header switch has set data-theme. The
    dark values appear twice because CSS cannot share a block between a media
@@ -93,14 +116,17 @@
 html { background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  font: 400 1.0625rem/1.5 var(--text);
+  font: 400 var(--fs-body)/1.5 var(--text);
   font-variant-numeric: tabular-nums;
 }
-main { max-width: 64rem; margin: 0 auto; padding: 0.5rem 1rem 3rem; }
+main { max-width: 64rem; margin: 0 auto; padding: var(--sp-1) var(--sp-2) var(--sp-5); }
 [hidden] { display: none !important; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-p { margin: 0 0 1rem; max-width: 40rem; }
+p { margin: 0 0 var(--sp-2); max-width: 40rem; }
 strong { font-weight: 700; }
+/* The caps style: small capitals in Atkinson 700, for the nav, the footer,
+   group labels and chart labels. */
+.caps { font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; }
 
 /* Going from page to page cross-fades, and from a home answer to its food
    page the typed word, the verdict and the dial move into the question,
@@ -114,17 +140,31 @@ strong { font-weight: 700; }
 .food .verdict-word { view-transition-name: food-verdict; }
 .food .wheel svg { view-transition-name: food-dial; }
 
-/* Links are ink with a pink underline; hover and focus thicken the line
-   and never recolour the words. */
+/* Links come in four kinds.
+   Prose: ink, with a 1px pink underline at all times, 3px on hover or
+   focus; a prose link to a food's page (.food-ref) is underlined in that
+   food's colour instead.
+   Actions (.arrow-link): ink and an arrow, underlined only on hover or
+   focus.
+   Foods in lists (.food-link, .food-row): the food's colour or swatch,
+   underlined only on hover or focus.
+   Chrome (the nav and the footer): see each. */
 a { color: inherit; text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
 a:hover, a:focus-visible { text-decoration-thickness: 3px; }
+a.food-ref { text-decoration-color: var(--food); }
 :focus-visible { outline: 2px solid var(--rhubarb); outline-offset: 2px; }
 
 /* Titles are Anton, in caps, never sentence-length. */
 h1, h2, h3 { font-weight: 400; margin: 0; }
-h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); margin: 1.5rem 0 0.5rem; }
+h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); margin: var(--sp-3) 0 0; text-wrap: balance; }
 @media (min-width: 42rem) { h1 { letter-spacing: var(--track-large); } }
-.page-head { margin-bottom: 1rem; }
+.page-head { margin-bottom: var(--sp-4); }
+/* A section's label: Anton, label size, full ink, 8px above what it
+   labels. */
+.label, .teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
+  font: 400 var(--fs-label)/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
+  color: var(--ink); margin: 0 0 var(--sp-1);
+}
 
 /* --- Header ---------------------------------------------------------------- */
 /* The nav and the magnifier sit at the top right of every page, where
@@ -132,9 +172,10 @@ h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: upper
    is the logo) is on the left of the same row, or on a phone, where the
    row cannot hold all three, on a row of its own under them. Home has no
    line under its header. */
-.site-header { padding: 0.25rem 1rem 0; border-bottom: 1px solid var(--rule); }
+.site-header { padding: 0 var(--sp-2); border-bottom: 1px solid var(--rule); }
 .site-header.is-home { border-bottom: 0; }
-.site-header-inner { max-width: 64rem; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; }
+.site-header-inner { max-width: 64rem; margin: 0 auto; display: flex; align-items: center; gap: var(--sp-2); }
+/* The wordmark is the logo, sized as a logo, outside the type scale. */
 .brand {
   font: 400 clamp(1.2rem, 4.4vw, 1.5rem)/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--ink); text-decoration: none; white-space: nowrap;
@@ -142,7 +183,7 @@ h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: upper
 @media (max-width: 28rem) {
   .site-header-inner { flex-wrap: wrap; row-gap: 0; }
   .site-nav { order: -1; width: 100%; justify-content: flex-end; }
-  .brand { padding: 0.1rem 0 0.75rem; font-size: 1.5rem; }
+  .brand { padding: 0 0 var(--sp-2); font-size: 1.5rem; }
 }
 /* The logo's RHUBARB is pink and underlined in pink, the line exactly the
    word's width; the logo does not change on hover. */
@@ -150,19 +191,21 @@ h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: upper
   color: var(--rhubarb); text-decoration: underline; text-decoration-color: var(--rhubarb);
   text-decoration-thickness: 0.08em; text-underline-offset: 0.12em; text-decoration-skip-ink: none;
 }
-/* The nav: small caps labels in muted ink, the current page in full ink
-   and underlined in pink as the others are on hover or focus. Each link
-   is 44px tall. */
-.site-nav { display: flex; align-items: center; gap: clamp(0.7rem, 3vw, 1.5rem); margin-left: auto; }
+/* The nav: caps in muted ink, no underline; the current page in full ink
+   and underlined in pink as the others are on hover or focus. Every item,
+   ?? included, is at least 44px square. */
+.site-nav { display: flex; align-items: center; gap: var(--sp-1) var(--sp-2); margin-left: auto; }
 .site-nav a {
-  display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap;
-  font: 700 0.8125rem/1 var(--text); letter-spacing: 0.07em; text-transform: uppercase;
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px; white-space: nowrap;
+  font: 700 var(--fs-caps)/1 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
   color: var(--muted); text-decoration: none; text-underline-offset: 0.4em;
 }
 .site-nav a[aria-current] { color: var(--ink); }
 .site-nav a:hover, .site-nav a:focus-visible, .site-nav a[aria-current] { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
-.site-nav .search-link { justify-content: center; width: 40px; margin: 0 -10px 0 -0.25rem; color: var(--ink); }
+.site-nav .about-link { min-width: 44px; margin: 0 calc(-1 * var(--sp-1)); }
+.site-nav .search-link { width: 44px; margin-right: -12px; color: var(--ink); }
 .site-nav .search-link:hover, .site-nav .search-link:focus-visible { color: var(--rhubarb); }
+@media (max-width: 28rem) { .site-nav { gap: var(--sp-1); } }
 .icon { width: 1.4rem; height: 1.4rem; flex: none; }
 .search-link .icon { width: 1.25rem; height: 1.25rem; }
 
@@ -171,19 +214,22 @@ h1 { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: upper
    anything, so it only appears with it. The order switches work by CSS
    alone: .ordered shows the child whose radio is checked, and JavaScript
    only remembers the choice. */
-.switch { display: inline-flex; gap: 2px; padding: 2px; margin: 0 0 1rem; border: 1px solid var(--rule); border-radius: 999px; position: relative; }
+.switch { display: inline-flex; gap: 2px; padding: 2px; margin: 0 0 var(--sp-2); border: 1px solid var(--rule); border-radius: 999px; position: relative; }
 .switch legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.switch label { padding: 0.2rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+.switch label { padding: 0.2rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: var(--fs-small); line-height: 1.4; }
 .switch input:checked + label { background: var(--ink); color: var(--bg); }
 .switch input:focus-visible + label { outline: 2px solid var(--rhubarb); outline-offset: 1px; }
 /* The theme switch, in the footer: sun, Auto, moon, three segments of one
-   small pill, kept quiet among the footer's links. */
+   pill, each at least 44px square to tap; the glyphs stay small. */
 .theme { display: none; }
-.js .theme { display: inline-flex; margin: 0.3rem 0 0; padding: 1px; gap: 1px; }
-.theme label { display: inline-flex; align-items: center; justify-content: center; gap: 0.25em; padding: 0.1rem 0.45rem; font-size: 0.7rem; line-height: 1.3; }
+.js .theme { display: inline-flex; margin: 0; padding: 1px; gap: 1px; }
+.theme label {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.25em; min-width: 44px; min-height: 44px; padding: 0 0.6rem;
+  font: 700 var(--fs-caps)/1 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
+}
 .theme .icon { width: 0.75rem; height: 0.75rem; }
-.switches { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
+.switches { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); align-items: center; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
@@ -196,9 +242,10 @@ main:has(#kind-fish:checked) .ordered > .by-fish,
 main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 
 /* --- Shared components ---------------------------------------------------- */
-/* The verdict word, at any size, is Anton in the food's colour. */
+/* The verdict word, at any size, is Anton in the food's colour. A row's
+   tag is the small size, the one Anton set below the label size. */
 .verdict-tag {
-  font: 400 0.85rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
+  font: 400 var(--fs-small)/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--food); white-space: nowrap;
 }
 .swatch { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 2px; background: var(--food); flex: none; transform: translateY(0.02em); }
@@ -209,50 +256,54 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    leader gives way to a long name down to 16px; then the name wraps and
    the tag stays on its first line, since every part sits on the first
    baseline. A list of several columns reads down each, then across, so
-   A to Z reads down. */
-.food-list { list-style: none; margin: 0; padding: 0; columns: 15rem; column-gap: 2rem; }
+   A to Z reads down. The name is ink, its colour in the swatch, and on
+   hover or focus it is underlined in that colour. */
+.food-list { list-style: none; margin: 0; padding: 0; columns: 15rem; column-gap: var(--sp-4); }
 .food-list > li { break-inside: avoid; padding: 0.2rem 0; }
-.food-row a { display: flex; align-items: baseline; gap: 0.5em; text-decoration: none; }
-.food-row a:hover .food-title, .food-row a:focus-visible .food-title { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+.food-row a { display: flex; align-items: baseline; gap: var(--sp-1); text-decoration: none; }
+.food-row a:hover .food-title, .food-row a:focus-visible .food-title { text-decoration: underline; text-decoration-color: var(--food); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .food-name { flex: 0 1 auto; min-width: 0; }
 .variety { color: var(--muted); }
-.early { color: var(--muted); font-size: 0.85em; }
+.early { color: var(--muted); font-size: var(--fs-small); }
 .leader { flex: 1 1 16px; min-width: 16px; border-bottom: 2px dotted color-mix(in oklab, var(--ink) 28%, var(--bg)); }
 .food-row .verdict-tag { flex: none; margin-left: auto; }
 .food-row.never { --food: var(--never); }
-/* A group inside a section: a small caps label in Atkinson, then its
-   foods. A hairline and space part each group from the one before; the
-   section above it is headed in Anton. Home's families, Now's timings and
-   kinds all use it. */
-.food-group { margin: 0.5rem 0 1rem; }
-.food-group + .food-group { border-top: 1px solid color-mix(in oklab, var(--ink) 10%, var(--bg)); margin-top: 1.5rem; padding-top: 1.5rem; }
+/* A group inside a section: a caps label in Atkinson, then its foods. A
+   hairline and space part each group from the one before; the section
+   above it is headed in Anton. Home's families, Now's timings and kinds
+   all use it. */
+.food-group { margin: 0 0 var(--sp-2); }
+.food-group + .food-group { border-top: 1px solid color-mix(in oklab, var(--ink) 10%, var(--bg)); margin-top: var(--sp-3); padding-top: var(--sp-3); }
 .group-label {
-  margin: 0 0 0.5rem; font: 700 0.8125rem/1.3 var(--text); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
+  margin: 0 0 var(--sp-1); font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--muted);
 }
 .group-label .count { font-weight: 700; margin-left: 0.25em; }
 .empty { color: var(--muted); font-style: italic; }
 
-/* The date line: bold, tabular, the second thing on a verdict page. */
-.date-line, .one-line { font-weight: 700; font-size: 1.2rem; line-height: 1.35; margin: 0.9rem 0 0.25rem; }
-.variety-line { color: var(--muted); margin: 0 0 1rem; }
+/* The date line: lead, bold, tabular, the second thing on a verdict page
+   and on a card. */
+.date-line, .one-line { font: 700 var(--fs-lead)/1.3 var(--text); margin: 0; }
+.variety-line { color: var(--muted); margin: 0; }
 
 /* --- Home: the hook ------------------------------------------------------- */
 /* The hero is the logo, and the logo is the input. At rest it reads "IS
    IT RHUBARB YET?": the placeholder is RHUBARB in pink capitals over its
-   pink underline, with a blinking pink caret at its start (steady without
-   motion) as the only cue to type. On focus the placeholder dims and the
-   real caret takes over. What is typed is in capitals and ink; once it
-   names one food, the word and its underline take that food's colour.
-   The underline is the word's width, the placeholder's when empty, and
-   follows it as it grows. Wide: one line. Below 600px: three lines, the
-   input the full width, and site.js sets a word too long for it smaller
-   until it fits. site.js draws the underline and the caret; without it
-   the input keeps a plain pink underline. */
-.hook { padding: 1.5rem 0 0.5rem; }
+   pink underline, with a blinking caret in muted ink just after it
+   (steady without motion) as the only cue to type; the input's own caret
+   is hidden until there is something typed. On focus the placeholder
+   dims. What is typed is in capitals and ink; once it names one food,
+   the word and its underline take that food's colour. The underline is
+   the word's width, the placeholder's when empty, and follows it as it
+   grows. Wide: one line. Below 600px: three lines, the input the full
+   width, and site.js sets a word too long for it smaller until it fits;
+   that stacked hero is set larger than display, to fill the phone. site.js
+   draws the underline and the caret; without it the input keeps a plain
+   pink underline. */
+.hook { padding: var(--sp-3) 0 0; }
 .hook-form { margin: 0; }
 .hook-line {
   display: flex; align-items: baseline; gap: 0 0.23em; white-space: nowrap;
-  font: 400 clamp(2.6rem, 11vw, 6.5rem)/1.05 var(--display); letter-spacing: var(--track-large); text-transform: uppercase;
+  font: 400 var(--fs-display)/1.05 var(--display); letter-spacing: var(--track-large); text-transform: uppercase;
   cursor: text;
 }
 .hook-slot { display: inline-flex; max-width: 100%; position: relative; }
@@ -263,6 +314,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   padding: 0; margin: 0; min-width: 1ch; max-width: 100%; -webkit-appearance: none; appearance: none;
   height: 1.2em; box-sizing: content-box;
 }
+#hook-input:placeholder-shown { caret-color: transparent; }
 .js #hook-input { border-bottom-color: transparent; }
 #hook-input::placeholder { color: var(--rhubarb); opacity: 1; transition: opacity 0.2s; }
 #hook-input:focus { outline: none; }
@@ -275,15 +327,16 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 }
 #hook-input.is-food ~ .hook-underline { background: var(--food); }
 .hook-caret {
-  position: absolute; left: -0.06em; top: 0.12em; bottom: 0.16em; width: 0.045em; background: var(--rhubarb);
+  position: absolute; left: 0; top: 0.12em; bottom: 0.16em; width: 0.045em; margin-left: 0.04em; background: var(--muted);
   pointer-events: none; animation: hook-blink 1.1s steps(1) infinite;
 }
-#hook-input:focus ~ .hook-caret, .hook-slot.has-value .hook-caret { display: none; }
+.hook-slot.has-value .hook-caret { display: none; }
 @keyframes hook-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   #hook-input, #hook-input::placeholder, .hook-underline { transition: none; }
   .hook-caret { animation: none; }
 }
+@media print { .hook-caret { display: none; } }
 @media (max-width: 37.49rem) {
   .hook-line { flex-direction: column; align-items: stretch; font-size: clamp(3rem, 19vw, 6rem); line-height: 1; }
   .hook-slot { display: flex; align-items: flex-end; width: 100%; height: 1.26em; margin-bottom: 0.1em; }
@@ -302,15 +355,14 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 /* The this-week blocks: an Anton label, as Now heads its sections, over
    three foods, each a link in its own colour, underlined only on hover or
    focus. */
-.this-week { margin: 3rem 0 0.5rem; max-width: 44rem; color: var(--muted); }
-.teaser + .teaser { margin-top: 1.75rem; }
-.teaser-label { font: 400 1.1875rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--ink); margin: 0 0 0.3rem; }
+.this-week { margin: var(--sp-4) 0 0; max-width: 44rem; color: var(--muted); }
+.teaser + .teaser { margin-top: var(--sp-3); }
 .teaser-foods { margin: 0; max-width: none; }
-.this-week .this-week-more { margin-top: 2rem; }
-/* A link with an arrow after it: the arrow says it is a link, so the
-   words are not underlined until hover or focus, and the arrow, inside the
-   link but an inline block, never is. "and N more" after a list of foods
-   is one, in the colour of the words around it. */
+.this-week .this-week-more { margin: var(--sp-4) 0 0; }
+/* An action: ink words and an arrow. The arrow says it is a link, so the
+   words are not underlined until hover or focus, and the arrow, inside
+   the link but an inline block, never is. "and N more" after a list of
+   foods is one, in the colour of the words around it. */
 .arrow-link { color: var(--ink); text-decoration: none; }
 .arrow-link:hover .arrow-text, .arrow-link:focus-visible .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .arrow-link .arrow { display: inline-block; margin-left: 0.35em; }
@@ -322,36 +374,37 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    one column, in rank order; the one Up and Down reach sits on a wash
    of its food's colour. One match: the food's card, in the label's
    place. Then a quiet "Also:" line of near matches, each in its own
-   colour. */
-.results { margin: 3rem 0 0.5rem; }
-.results .teaser-label { margin-bottom: 0.5rem; }
-.results .food-list { columns: auto; max-width: 30rem; }
-.also-line { margin: 0.9rem 0 0; color: var(--muted); }
+   colour. The card and the list share --answer-w. */
+.results { margin: var(--sp-4) 0 0; }
+.results .food-list { columns: auto; max-width: var(--answer-w); }
+.also-line { margin: var(--sp-2) 0 0; color: var(--muted); max-width: var(--answer-w); }
 .also-line .food-link.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); border-radius: 3px; }
 .results .food-row a { margin: 0 -0.4rem; padding: 0.1rem 0.4rem; border-radius: 4px; }
 .results .food-row a.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); }
 /* A food's card: the food page in small. A panel one step lighter than
    the page, its left edge in the food's colour (--food-bar-width), and
    the page's own question, verdict, date line and dial, in that order,
-   at card size; their rules are the food page's, shared below. Under
-   them "When is basil in season?", and a round arrow in the food's
-   colour: on a wide screen the dial and the arrow stand at the right,
-   on a phone the dial beside the text and the arrow at the bottom
-   right, the subtitle left of it. The whole card is one link, lighter
-   on hover or focus, the arrow nudging right. A never-food's card is
-   its question, NEVER. and its line only, and no link. */
+   at card size: the question at label size, the verdict at title size,
+   the date line at lead. Under them "When is basil in season?", and a
+   round arrow in the food's colour: on a wide screen the dial and the
+   arrow stand at the right, on a phone the dial beside the text and the
+   arrow at the bottom right, the subtitle left of it. The whole card is
+   one link, lighter on hover or focus, the arrow nudging right. A plain
+   card (.is-plain: a never-food's, or nothing found) is its question,
+   verdict and line only, and no link; nothing found is in ink. */
 .one-result {
   display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "text dial go" "sub dial go";
-  align-items: center; gap: 0.5rem 1.5rem; max-width: 44rem;
-  padding: 1.25rem 1.5rem; background: var(--panel); border-radius: 12px; border-left: var(--food-bar-width) solid var(--food);
+  align-items: center; gap: var(--sp-1) var(--sp-3); max-width: var(--answer-w);
+  padding: var(--sp-3); background: var(--panel); border-radius: 12px; border-left: var(--food-bar-width) solid var(--food);
   color: var(--ink); text-decoration: none; transition: background-color 0.15s;
 }
 .one-result[href]:hover, .one-result[href]:focus-visible { background: var(--panel-hover); }
+.one-result.is-unknown { --food: var(--ink); }
 .one-text { grid-area: text; display: block; min-width: 0; }
-.one-result .one-ask { display: block; margin: 0; font-size: 1.375rem; }
-.one-result .one-word { display: block; margin-top: 0.3rem; font-size: 2.75rem; line-height: 1; padding-top: 0; }
-.one-result .one-line { display: block; margin: 0.4rem 0 0; font-weight: 400; font-size: 1.1rem; }
-.one-sub { grid-area: sub; color: var(--muted); font: 400 1rem/1.4 var(--text); }
+.one-result .one-ask { display: block; margin: 0; font-size: var(--fs-label); letter-spacing: var(--track-small); }
+.one-result .one-word { display: block; margin-top: var(--sp-1); font-size: var(--fs-title); line-height: 1; padding-top: 0; white-space: normal; }
+.one-result .one-line { display: block; margin: var(--sp-1) 0 0; }
+.one-sub { grid-area: sub; color: var(--muted); font: 400 var(--fs-body)/1.4 var(--text); }
 .one-dial { grid-area: dial; width: 120px; height: 120px; }
 .one-dial .wheel { display: block; width: 100%; margin: 0; }
 .one-dial .month, .one-dial .today-label { display: none; }
@@ -363,64 +416,88 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .one-result:hover .one-go, .one-result:focus-visible .one-go { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) { .one-result, .one-go { transition: none; } .one-result:hover .one-go, .one-result:focus-visible .one-go { transform: none; } }
 @media (max-width: 37.49rem) {
-  .one-result { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "sub go"; padding: 1rem 1rem 1rem 1.1rem; gap: 0.5rem 1rem; }
+  .one-result { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "sub go"; padding: var(--sp-2); gap: var(--sp-1) var(--sp-2); }
   .one-dial { width: 90px; height: 90px; }
   .one-go { width: 48px; height: 48px; justify-self: end; }
   .one-sub { align-self: center; }
 }
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
-.hook-none { margin: 1rem 0; font-weight: 700; font-size: 1.1rem; }
-.results .hook-none { margin-top: 0; }
-.list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
-.list-title { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); }
+.results-none .food-group { margin-top: var(--sp-4); }
+.list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--sp-1) var(--sp-2); margin-top: var(--sp-4); border-top: 1px solid var(--rule); padding-top: var(--sp-2); }
+.list-head .list-title { margin: 0; }
 .list-head .switch { margin: 0; }
+.all-foods .ordered { margin-top: var(--sp-3); }
 
 /* --- A food page -------------------------------------------------------- */
-article.food { padding-top: 0.5rem; }
-/* The question is set like a page title, at the h1's size, in the muted
-   ink; the verdict under it is the real h1. The word stops at half the
-   viewport's height as well as the line's width, so a wide, short screen
-   still shows the date line under it; site.js fits it the same way.
-   The question, the verdict and the date line are shared with a food's
-   card on home, which sets them smaller. */
-.ask, .one-ask { font: 400 clamp(2rem, 6vw, 3.25rem)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); color: var(--muted); margin: 1.5rem 0 0; }
+article.food { padding-top: var(--sp-1); }
+/* The question is set like a page title, at title size, in the muted
+   ink, the full width, its lines balanced; the verdict under it is the
+   real h1, fitted to the line by site.js and kept short enough that the
+   date line is on the first screen. The question, the verdict and the
+   date line are shared with a food's card on home, which sets them
+   smaller. */
+.ask, .one-ask { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); color: var(--muted); margin: var(--sp-3) 0 0; text-wrap: balance; }
 @media (min-width: 42rem) { .ask { letter-spacing: var(--track-large); } }
-.verdict { margin: 0.1em 0 0 -0.03em; line-height: 1; }
+.verdict { margin: 0.1em 0 0 -0.03em; line-height: 1; text-wrap: nowrap; }
 .verdict-word, .one-word {
-  display: inline-block; font: 400 clamp(4rem, min(22vw, 50vh), 12rem)/0.86 var(--display);
+  display: inline-block; font: 400 var(--fs-display)/0.86 var(--display);
   letter-spacing: var(--track-large); text-transform: uppercase; color: var(--food); white-space: nowrap;
   padding-top: 0.08em;
 }
 article.never { --food: var(--never); }
-.not-found .verdict-word { color: var(--rhubarb); }
+.verdict + .date-line { margin-top: var(--sp-3); }
+.verdict + .date-line + .quote { margin-top: var(--sp-3); }
+.not-found .verdict-word, .is-unknown .one-word { color: var(--ink); }
+/* Under the verdict: from 720px, the words in a column on the left (date
+   line, quote, variety line, counter note) and the dial with its legend
+   on the right; narrower, one column, the dial after the quote. */
+.food-body {
+  display: grid; grid-template-columns: minmax(0, 1fr); row-gap: var(--sp-3); margin-top: var(--sp-3);
+  grid-template-areas: "date" "quote" "dial" "variety" "buy";
+}
+.food-body > .date-line { grid-area: date; }
+.food-body > .quote { grid-area: quote; }
+.food-body > .variety-line { grid-area: variety; }
+.food-body > .buy { grid-area: buy; }
+.food-body > .wheel { grid-area: dial; margin: 0; }
+@media (min-width: 45rem) {
+  .food-body {
+    grid-template-columns: minmax(0, 1fr) 22rem; column-gap: var(--sp-4); align-items: start;
+    grid-template-areas: "date dial" "quote dial" "variety dial" "buy dial" ". dial";
+    grid-template-rows: auto auto auto auto 1fr;
+  }
+}
 /* A quotation stands behind a bar in a quiet version of the food's colour. */
-.quote { margin: 1.5rem 0 2rem; max-width: 34rem; padding-left: 1rem; border-left: 3px solid color-mix(in oklab, var(--food) 40%, var(--bg)); font: italic 400 1.3rem/1.3 var(--quote); }
+.quote { margin: 0; max-width: 34rem; padding-left: var(--sp-2); border-left: 3px solid color-mix(in oklab, var(--food) 40%, var(--bg)); font: italic 400 var(--fs-lead)/1.3 var(--quote); }
 .quote p { margin: 0; max-width: none; }
-.quote cite { display: block; margin-top: 0.5rem; font: 400 0.85rem/1.4 var(--text); font-style: normal; color: var(--muted); }
+.quote cite { display: block; margin-top: var(--sp-1); font: 400 var(--fs-small)/1.4 var(--text); font-style: normal; color: var(--muted); }
 .quote cite::before { content: "— "; }
-.buy { max-width: 36rem; margin: 0 0 1.5rem; padding: 0.6rem 0.9rem; border-left: 3px solid var(--food); }
-.also h2, .suggest h2 { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); margin: 1.5rem 0 0.25rem; }
+.buy { max-width: 36rem; margin: 0; padding: var(--sp-1) var(--sp-2); border-left: 3px solid var(--food); }
+.also, .fine { margin: var(--sp-4) 0 0; }
+.also-more { margin: var(--sp-1) 0 0; color: var(--muted); }
 /* The data disclosure's summary is a control, so it is Atkinson, not Anton. */
-.fine summary { font: 700 1rem/1.3 var(--text); color: var(--muted); }
-.also { margin: 1.5rem 0; }
-.also-more { margin: 0.3rem 0 0; color: var(--muted); }
-.fine { margin: 2rem 0; color: var(--muted); }
-.fine summary { cursor: pointer; margin: 0; }
+.fine { color: var(--muted); }
+.fine summary { font: 700 var(--fs-body)/1.3 var(--text); color: var(--muted); cursor: pointer; margin: 0; }
 .fine summary span { display: inline; }
-.runs { list-style: none; padding: 0; margin: 0.75rem 0; }
-.runs li { margin: 0.25rem 0; }
-.runs .swatch { margin-right: 0.5em; }
-.note, .source, .as-of { color: var(--muted); font-size: 0.95rem; max-width: 40rem; }
-.onwards { margin: 2rem 0 0; }
-.onwards + .onwards { margin-top: 0.35rem; }
+.runs { list-style: none; padding: 0; margin: var(--sp-2) 0; }
+.runs li { margin: var(--sp-1) 0; }
+.runs .swatch { margin-right: var(--sp-1); }
+.note, .source, .as-of { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
+.suggest { margin: var(--sp-4) 0 0; }
+.onwards { margin: var(--sp-4) 0 0; }
+.onwards + .onwards { margin-top: var(--sp-1); }
 
 /* --- Now: the digest ----------------------------------------------------- */
 /* The top of Now: the title, then one quiet line of the week's days
    between two bare arrows, each a 44px target round a small glyph; an
-   arrow at the end of the range is greyed and does nothing. Sections are
-   parted by space alone. */
-.now-head { margin-bottom: 0; }
-.week-line { display: flex; align-items: center; margin: 0.25rem 0 0; font-size: 1.125rem; color: var(--muted); }
+   arrow at the end of the range is greyed and does nothing. Every band
+   is the full width, 40px apart, its groups' foods flowing down each
+   column and across. */
+.now-head .week-line { margin-top: var(--sp-1); }
+.now-head h1 + .week-line { margin-top: var(--sp-1); }
+.week-line { display: flex; align-items: center; margin: 0; color: var(--muted); }
+/* The week arrows are glyphs, sized as the control they are rather than
+   as text. */
 .week-step {
   display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0 -0.35rem;
   font: 400 1.6rem/1 var(--text); color: var(--ink); background: none; border: 0; padding: 0 0 0.15rem; cursor: pointer;
@@ -428,35 +505,43 @@ article.never { --food: var(--never); }
 .week-step:first-child { margin-left: -14px; }
 .week-step:hover { color: var(--rhubarb); }
 .week-step:disabled { color: var(--rule); cursor: default; }
-.week-back { margin: 0.1rem 0 0; font-size: 0.875rem; }
-.digest { display: grid; gap: 0 2rem; }
-@media (min-width: 52rem) {
-  .digest { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .digest:not(:has(.band.arrived)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .digest .band.still { grid-column: 1 / -1; }
-}
-.band { min-width: 0; padding-top: 2.75rem; }
-.band h2 { font: 400 1.4rem/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; margin: 0 0 0.5rem; }
-.band h2 .count { color: var(--muted); font: 400 0.9rem var(--text); font-variant-numeric: tabular-nums; margin-left: 0.3em; }
+.week-back { margin: 0; font-size: var(--fs-small); }
+.digest { display: block; }
+.band + .band { margin-top: var(--sp-4); }
+.band h2 .count { color: var(--muted); font: 400 var(--fs-small) var(--text); font-variant-numeric: tabular-nums; margin-left: 0.3em; }
 
 /* --- Charts ---------------------------------------------------------------- */
 /* A row's colour is --c; in-season bars take it as is, "just about" bars
    fade between the off-season tint and it through a gradient whose stops
-   read the row's --c. Today is a line of ink. */
-.chart { margin: 0 0 1.5rem; }
+   read the row's --c. Today is a line of ink. Chart words are SVG text
+   in the chart's own units: one unit is one pixel on the calendar, which
+   is never scaled, and on the wheels as near as their size allows. */
+.chart { margin: 0 0 var(--sp-3); }
 .chart svg { display: block; max-width: 100%; height: auto; }
 /* The whole-year chart is a sticky header block over a scrolling body;
    the header hides its own overflow and site.js scrolls it in step. A
    sticky block cannot sit inside a scrolling one, which is why the two
-   are siblings. */
+   are siblings. Inside each, the names (or the blank corner over them)
+   stick to the left. On a phone the chart runs to the screen's edges. */
+.cal { max-width: var(--cal-w); }
+.cal-grid { display: flex; width: var(--cal-w); }
+.cal svg { max-width: none; flex: none; }
+.cal-corner, .cal-labels { position: sticky; left: 0; z-index: 2; flex: none; width: var(--cal-x0); background: var(--bg); }
+.cal-labels { overflow: visible; }
 .chart-head { position: sticky; top: 0; z-index: 5; overflow: hidden; background: var(--bg); border-bottom: 1px solid var(--rule); }
 .chart-body { overflow-x: auto; }
+@media (max-width: 43.74rem) {
+  figure.chart:has(.cal) { margin-left: calc(-1 * var(--sp-2)); margin-right: calc(-1 * var(--sp-2)); }
+  .cal-corner, .cal-labels { box-shadow: 1px 0 0 var(--rule); }
+}
 .chart.mini { overflow-x: auto; }
 .chart text { fill: var(--ink); font-family: var(--text); font-size: 12px; }
-.chart .month-label { font-weight: 700; }
+.chart .month-label { font-weight: 700; letter-spacing: var(--track-caps); text-transform: uppercase; }
+/* The week numbers are the one chart text below the scale: 8 units, so
+   that all 52 fit their columns. */
 .chart .week-label { fill: var(--muted); font-size: 8px; }
-.chart .group-label { font-weight: 700; font-size: 13px; fill: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
-.chart .row-label { font-size: 11px; }
+.chart .group-label { font-weight: 700; font-size: 12px; fill: var(--muted); letter-spacing: var(--track-caps); text-transform: uppercase; }
+.chart .row-label { font-size: 12px; }
 .chart .row-ink { fill: var(--ink); }
 .chart .row-variety { fill: var(--muted); }
 .chart .cell { shape-rendering: crispEdges; }
@@ -470,7 +555,7 @@ article.never { --food: var(--never); }
    colour, so a hovered row's name turns pink for the line while the
    tspan inside it keeps the words in ink. The variety is not underlined,
    as in a food list. */
-.chart a.row:hover .row-name { fill: var(--rhubarb); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.15em; }
+.chart a.row:hover .row-name, .chart a.row:focus-visible .row-name { fill: var(--rhubarb); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.15em; }
 .chart a.row.is-target .row-label { font-weight: 700; }
 .chart a.row:hover .row-hit, .chart a.row.is-target .row-hit { fill: var(--band); }
 .chart .month-line { stroke: var(--rule); }
@@ -479,34 +564,36 @@ article.never { --food: var(--never); }
 /* The season wheel. Arcs are dashed circles whose stroke is the ring's
    --c; a fading day mixes --c into the off-season tint by --t (0 to 1),
    and a shaded week mixes --a into --b. The hand is hidden until
-   JavaScript points it at today, then sweeps round from January. */
-.wheel { width: min(22rem, 100%); margin: 1rem 0 1.5rem; }
+   JavaScript points it at today, then sweeps round from January. Its
+   month names and "today" are caps; the date under "today" is the small
+   size, bold. */
+.wheel { width: min(22rem, 100%); margin: 0; }
 .wheel svg { display: block; width: 100%; height: auto; overflow: visible; }
 .wheel .off { stroke: var(--off); }
 .wheel .in { stroke: var(--c); }
 .wheel .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), var(--off)); }
 .wheel .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
 .wheel .spoke { stroke: var(--bg); stroke-width: 2; }
-.wheel .month { fill: var(--muted); font-family: var(--text); font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+.wheel .month { fill: var(--muted); font-family: var(--text); font-size: 12px; font-weight: 700; letter-spacing: var(--track-caps); text-transform: uppercase; }
 .wheel .hand { opacity: 0; transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s; }
 .wheel .hand.on { opacity: 1; }
 .wheel .hand line { stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
 .wheel .hand circle { fill: var(--ink); }
-.wheel .today-label { fill: var(--muted); font-family: var(--text); font-size: 11px; text-anchor: middle; }
+.wheel .today-label { fill: var(--muted); font-family: var(--text); font-size: 12px; font-weight: 700; letter-spacing: var(--track-caps); text-transform: uppercase; text-anchor: middle; }
 .wheel .today-label[hidden] { display: none; }
-.wheel .today-label .date { fill: var(--ink); font-size: 15px; font-weight: 700; }
-.wheel figcaption { color: var(--muted); font-size: 0.9rem; }
-.rings { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
-.rings .swatch { margin-right: 0.4em; }
+.wheel .today-label .date { fill: var(--ink); font-size: 14px; letter-spacing: 0; text-transform: none; }
+.wheel figcaption { color: var(--muted); font-size: var(--fs-small); margin-top: var(--sp-1); }
+.rings { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-3); }
+.rings .swatch { margin-right: var(--sp-1); }
 @media (prefers-reduced-motion: reduce) { .wheel .hand { transition: opacity 0.4s; } }
 
 /* The arrivals wheel: a month ring with food labels radiating from it,
    centred on the viewport and as wide as it, out past the page gutters,
    up to a diameter that fits the screen top to bottom. site.js tightens
    each wheel's viewBox to what it drew, so the width is the drawing's. */
-.dial { width: min(100vw, calc(100svh - 4rem)); margin: 0.5rem 0 1rem; position: relative; left: 50%; transform: translateX(-50%); }
+.dial { width: min(100vw, calc(100svh - 4rem)); margin: var(--sp-1) 0 var(--sp-2); position: relative; left: 50%; transform: translateX(-50%); }
 .dial .guide-axis line, .dial .guide-axis path { stroke: var(--rule); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
-.dial .guide-axis text { font-family: var(--text); font-size: 9px; fill: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.dial .guide-axis text { font-family: var(--text); font-size: 9px; fill: var(--muted); letter-spacing: var(--track-caps); text-transform: uppercase; }
 .dial .month { font-size: 9px; fill: var(--ink); }
 .dial .label text { font-family: var(--text); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
 .dial .season { stroke: var(--c); stroke-width: var(--arc-w, 2.5); opacity: var(--arc-o, 0.75); }
@@ -514,67 +601,68 @@ article.never { --food: var(--never); }
 .dial .label:hover text { font-weight: 700; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
-.dial .allyear { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: 0.5rem; }
-.dial .allyear .head { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
+.dial .allyear { color: var(--muted); font-size: var(--fs-small); text-align: center; margin-top: var(--sp-1); }
+.dial .allyear .head { font: 700 var(--fs-caps)/1 var(--text); text-transform: uppercase; letter-spacing: var(--track-caps); }
 
 /* --- Kitchen sink: every component, for review ---------------------------- */
 /* Only the frame around the components: a label per section, three
    columns of states (rest, hover, focus), and the search frames. */
 .ks-lede { color: var(--muted); }
-.ks-section { margin: 2.5rem 0; }
-.ks-title { font: 700 0.8125rem/1.3 var(--text); letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--rule); padding-bottom: 0.4rem; margin: 0 0 1rem; }
-.ks-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.5rem 2rem; }
-.ks-state-name { margin: 0 0 0.5rem; font: 400 0.8125rem/1.3 var(--text); color: var(--muted); font-style: italic; }
+.ks-section { margin: var(--sp-4) 0; }
+.ks-title { font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--rule); padding-bottom: var(--sp-1); margin: 0 0 var(--sp-2); }
+.ks-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--sp-3) var(--sp-4); }
+.ks-state-name { margin: 0 0 var(--sp-1); font: 400 var(--fs-small)/1.3 var(--text); color: var(--muted); font-style: italic; }
 .ks-state .food-list { columns: auto; }
-.ks-state .one-result { padding: 1rem; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text go" "sub go"; }
+.ks-state .one-result { padding: var(--sp-2); grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text go" "sub go"; }
 .ks-state .one-dial { display: none; }
-.ks-nav { margin: 0 0 0.75rem; justify-content: flex-start; }
-.ks-footer { padding: 1rem 0 0; margin: 1rem 0 0; }
-.ks-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem 1.5rem; margin: 1rem 0; }
-.ks-verdicts { display: flex; flex-direction: column; gap: 0.5rem; }
+.ks-nav { margin: 0 0 var(--sp-2); justify-content: flex-start; }
+.ks-footer { padding: var(--sp-2) 0 0; margin: var(--sp-2) 0 0; }
+.ks-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-2) var(--sp-3); margin: var(--sp-2) 0; }
+.ks-verdicts { display: flex; flex-direction: column; gap: var(--sp-1); }
 .ks-bare { display: inline-block; padding: 0; background: none; border: 0; }
-.ks-frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem; }
+.ks-frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: var(--sp-2); }
 .ks-frame { margin: 0; }
 .ks-frame iframe { display: block; width: 100%; height: 34rem; border: 1px solid var(--rule); border-radius: 8px; background: var(--bg); }
 
 /* --- Prose pages: about, sources ----------------------------------------- */
 .about { max-width: 40rem; }
-/* About opens on its question as body text, with the space a title would
-   leave above it. */
-.about > p:first-of-type { margin-top: 1.5rem; }
-.about h2 { font: 400 1.1rem/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase; color: var(--muted); margin: 2rem 0 0.5rem; }
-.about h3 { font: 700 1.05rem/1.3 var(--text); margin: 1.5rem 0 0.25rem; }
+.about h2 { margin: var(--sp-4) 0 var(--sp-1); }
+.about h3 { font: 700 var(--fs-body)/1.3 var(--text); margin: var(--sp-3) 0 var(--sp-1); }
 .about h3 + p { margin-top: 0; }
-.about hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
+.about hr { border: 0; border-top: 1px solid var(--rule); margin: var(--sp-3) 0; }
 /* The About page's numbered list: quiet numbers, bold and muted, the
    list indented a little and tucked under the line that opens it. */
-.about-list { margin: -0.5rem 0 1rem; padding-left: 1.6rem; }
+.about-list { margin: calc(-1 * var(--sp-1)) 0 var(--sp-2); padding-left: 1.6rem; }
 .about-list li { padding-left: 0.2rem; }
 .about-list li::marker { color: var(--muted); font-weight: 700; }
 .about-ways { padding-left: 1.2rem; }
-.about-ways li { margin: 0.35rem 0; }
+.about-ways li { margin: var(--sp-1) 0; }
 
 /* --- Footer ---------------------------------------------------------------- */
-/* Every label in the footer is set as the nav is: Atkinson 700 in small
-   caps, +0.07em, muted, links underlined in pink only on hover or focus.
-   The licences and the as-of date are smaller and fainter. */
+/* Every word in the footer is caps, muted. Every text link is underlined
+   in pink at all times, a 1px line set well below the capitals, and in
+   ink with a 2px line on hover or focus. The GitHub mark is muted ink,
+   pink on hover or focus. The licences and the as-of date are fainter. */
 .site-footer {
-  max-width: 64rem; margin: 0 auto; padding: 1.75rem 1rem 3rem; border-top: 1px solid var(--rule);
-  display: grid; justify-items: center; gap: 0.9rem; text-align: center; color: var(--muted);
-  font: 700 0.8125rem/1.4 var(--text); letter-spacing: 0.07em; text-transform: uppercase;
+  max-width: 64rem; margin: 0 auto; padding: var(--sp-4) var(--sp-2) var(--sp-5); border-top: 1px solid var(--rule);
+  display: grid; justify-items: center; gap: var(--sp-2); text-align: center; color: var(--muted);
+  font: 700 var(--fs-caps)/1.4 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
 }
 .site-footer p { margin: 0; max-width: none; }
-.site-footer a { color: var(--muted); text-decoration: none; text-underline-offset: 0.4em; }
-.site-footer a:not(.hearts):hover, .site-footer a:not(.hearts):focus-visible { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
-.footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem 0.6rem; }
-.footer-links a + a::before { content: "·"; display: inline-block; margin-right: 0.6rem; color: var(--muted); }
-.footer-github { display: inline-flex; }
+.site-footer a:not(.hearts):not(.footer-github) {
+  color: var(--muted); text-decoration: underline; text-decoration-color: var(--rhubarb);
+  text-decoration-thickness: 1px; text-underline-offset: 0.3em;
+}
+.site-footer a:not(.hearts):not(.footer-github):hover, .site-footer a:not(.hearts):not(.footer-github):focus-visible { color: var(--ink); text-decoration-thickness: 2px; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--sp-1); }
+.footer-links a + a::before { content: "·"; display: inline-block; margin-right: var(--sp-1); color: var(--muted); text-decoration: none; }
+.footer-github { display: inline-flex; color: var(--muted); }
 .footer-github:hover, .footer-github:focus-visible { color: var(--rhubarb); }
-.footer-icon { width: 1.25rem; height: 1.25rem; fill: currentColor; }
-.licence, .footer-asof { font-size: 0.6875rem; color: color-mix(in oklab, var(--muted) 75%, var(--bg)); }
-.licence { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 0.6rem; }
+.footer-icon { width: 2.2rem; height: 2.2rem; fill: currentColor; }
+.licence, .footer-asof { color: color-mix(in oklab, var(--muted) 75%, var(--bg)); }
+.licence { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-1); }
 .licence span { white-space: nowrap; }
-.licence span + span::before { content: "·"; margin-right: 0.6rem; }
-.licence a, .footer-asof { color: inherit; }
-.site-footer .hearts { display: block; color: var(--rhubarb); line-height: 0; margin-top: 0.75rem; text-decoration: none; }
+.licence span + span::before { content: "·"; margin-right: var(--sp-1); }
+.site-footer .licence a { color: inherit; }
+.site-footer .hearts { display: block; color: var(--rhubarb); line-height: 0; margin-top: var(--sp-2); text-decoration: none; }
 .hearts svg { display: block; width: min(240px, 45vw); height: auto; }
