@@ -4,13 +4,16 @@
 // 390 and 1280 wide, light and dark, with the clock frozen on one day.
 //
 // USAGE:
-//   node tools/dev/shots.js [--base <url>] [--date YYYY-MM-DD] [--out <dir>]
+//   node tools/dev/shots.js [--base <url>] [--date YYYY-MM-DD] [--out <dir>] [--full yes]
 //
 //   --base  the running site, baseurl included (default
 //           http://localhost:9000/is-it-rhubarb-yet/)
 //   --date  the day the browser believes it is (default 2026-10-25), at
 //           noon; the pages recompute their verdicts for it
 //   --out   where the PNGs go (default screenshots/, which is gitignored)
+//   --full  yes takes every shot at both widths in both themes; without it
+//           the kitchen sink is taken at 1280 only, and only the shots
+//           marked both below are taken light as well as dark
 //
 // Shots are named <page>-<state>-<width>-<theme>.png, as
 // home-search-never-390-dark.png. The food pages are picked for the date
@@ -29,13 +32,15 @@ const WIDTHS = [390, 1280];
 const THEMES = ['light', 'dark'];
 
 function parse(argv) {
-  const opts = { base: 'http://localhost:9000/is-it-rhubarb-yet/', date: '2026-10-25', out: 'screenshots' };
+  const opts = { base: 'http://localhost:9000/is-it-rhubarb-yet/', date: '2026-10-25', out: 'screenshots', full: 'no' };
   for (let i = 0; i < argv.length; i++) {
     const key = argv[i].replace(/^--/, '');
     if (!(key in opts) || argv[i + 1] === undefined) usage(`unknown or empty option '${argv[i]}'`);
     opts[key] = argv[++i];
   }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(opts.date)) usage(`--date is YYYY-MM-DD, not '${opts.date}'`);
+  if (!['yes', 'no'].includes(opts.full)) usage(`--full is yes or no, not '${opts.full}'`);
+  opts.full = opts.full === 'yes';
   if (!opts.base.endsWith('/')) opts.base += '/';
   return opts;
 }
@@ -53,15 +58,15 @@ async function pickFoods(base, day) {
   const picks = [];
   for (const verdict of ['YES', 'NO', 'JUST', 'NEARLY']) {
     const f = first((x) => V.foodVerdict(x, week).verdict === verdict);
-    if (f) picks.push([`food-${verdict.toLowerCase()}-${f.slug}`, f.slug]);
+    if (f) picks.push([`food-${verdict.toLowerCase()}-${f.slug}`, f.slug, true]);
   }
   const never = search.find((i) => i.never);
-  if (never) picks.push([`food-never-${never.slug}`, never.slug]);
-  picks.push(['food-varieties-rhubarb', 'rhubarb']);
+  if (never) picks.push([`food-never-${never.slug}`, never.slug, true]);
+  picks.push(['food-varieties-rhubarb', 'rhubarb', true]);
   const buy = first((f) => f.buy);
-  if (buy) picks.push([`food-buy-${buy.slug}`, buy.slug]);
+  if (buy) picks.push([`food-buy-${buy.slug}`, buy.slug, false]);
   const general = first((f) => f.source === 'general');
-  if (general) picks.push([`food-general-${general.slug}`, general.slug]);
+  if (general) picks.push([`food-general-${general.slug}`, general.slug, false]);
   return picks;
 }
 
@@ -79,7 +84,9 @@ async function pickFoods(base, day) {
       const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme, reducedMotion: 'reduce' });
       await context.clock.install({ time: day });
       const page = await context.newPage();
-      async function shot(name, url, act) {
+      // both: taken light as well as dark. wide: taken at 1280 only.
+      async function shot(name, url, { both = false, wide = false, act } = {}) {
+        if (!opts.full && ((theme === 'light' && !both) || (wide && width !== 1280))) return;
         const file = path.join(opts.out, `${name}-${width}-${theme}.png`);
         try {
           await page.goto(opts.base + url, { waitUntil: 'networkidle' });
@@ -97,20 +104,21 @@ async function pickFoods(base, day) {
         await page.waitForLoadState('networkidle');
       };
 
-      await shot('kitchen-sink', 'kitchen-sink/');
-      await shot('home-empty', '');
-      await shot('home-search-ghost', '', type('avoc'));
-      await shot('home-search-single', '', type('apples'));
-      await shot('home-search-several', '', type('app'));
-      await shot('home-search-never', '', type('banana'));
-      await shot('home-search-unknown', '', type('zzz'));
-      for (const [name, slug] of foodPages) await shot(name, `${slug}/`);
-      await shot('now-this-week', 'now/');
-      await shot('now-next-week', 'now/', async () => {
+      await shot('kitchen-sink', 'kitchen-sink/', { both: true, wide: true });
+      await shot('home-empty', '', { both: true });
+      await shot('home-search-ghost', '', { act: type('avoc') });
+      await shot('home-search-card', '', { both: true, act: type('basil') });
+      await shot('home-search-also', '', { act: type('apples') });
+      await shot('home-search-several', '', { act: type('app') });
+      await shot('home-search-never', '', { both: true, act: type('banana') });
+      await shot('home-search-unknown', '', { act: type('zzz') });
+      for (const [name, slug, both] of foodPages) await shot(name, `${slug}/`, { both });
+      await shot('now-this-week', 'now/', { both: true });
+      await shot('now-next-week', 'now/', { both: true, act: async () => {
         await page.click('#next-week');
         await page.waitForLoadState('networkidle');
-      });
-      await shot('calendar', 'calendar/');
+      } });
+      await shot('calendar', 'calendar/', { both: true });
       await shot('wheel', 'wheel/');
       await shot('about', 'about/');
       await shot('404', 'not-a-food-at-all/');
