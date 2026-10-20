@@ -5,7 +5,10 @@ order "start": one row per variety, sorted by the first week it is in
 season, so the chart reads top to bottom as the year unfolds.
 order "group": rows gathered by culinary family, each family sorted by the
 food's first in-season week, a food's varieties together.
-order "alpha": by food name, a food's varieties together.
+order "alpha": by food name, then variety, a food's varieties together.
+
+A row is labelled with the food, and a named variety follows in muted
+brackets as tools/bake.js names it, "Rhubarb (forced)", "Apples (Cox)".
 
 Every row is a link to its food's page. The month and week labels are a
 second, short SVG above the rows, in a block that sticks to the top of
@@ -36,7 +39,11 @@ number in a key is padded to a fixed width by adding 100 or 10.
   {%- endfor -%}{%- endfor -%}
   {%- assign gi = 0 -%}
   {%- for g in site.data.groups -%}{%- if g.key == food.group -%}{%- assign gi = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+  {%- assign fslug = food.slug -%}
+  {%- assign vlabels = site.data.baked.labels[fslug] -%}
   {%- for v in food.varieties -%}
+    {%- assign vix = forloop.index0 -%}
+    {%- assign vlabel = vlabels[vix] -%}
     {%- assign vi = forloop.index0 | plus: 10 -%}
     {%- if include.order == "start" -%}
       {%- assign first = 99 -%}
@@ -45,7 +52,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- elsif include.order == "group" -%}
       {%- assign key = gi | plus: 10 | append: " " | append: food_first | plus: 100 | append: " " | append: food.name | append: " " | append: vi -%}
     {%- else -%}
-      {%- assign key = food.name | downcase | append: " " | append: vi -%}
+      {%- assign key = food.name | downcase | append: " " | append: vlabel | downcase | append: " " | append: vi -%}
     {%- endif -%}
     {%- assign key = key | append: "|" | append: food.slug | append: "|" | append: forloop.index0 -%}
     {%- assign keyed = keyed | push: key -%}
@@ -102,11 +109,14 @@ number in a key is padded to a fixed width by adding 100 or 10.
       {%- assign y = y | plus: group_gap -%}
       <text class="group-label" x="0" y="{{ y | minus: 9 }}">{{ g.name }}</text>
     {%- endif -%}
-    {%- if v.name != "" -%}{%- assign label = food.name | append: " · " | append: v.name -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
+    {%- assign fslug = food.slug -%}
+    {%- assign vlabels = site.data.baked.labels[fslug] -%}
+    {%- assign vlabel = vlabels[vi] -%}
+    {%- if vlabel != "" -%}{%- assign label = food.name | append: " (" | append: vlabel | append: ")" -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
     {%- assign gid = include.id | append: "-" | append: food.slug | append: "-" | append: vi -%}
     <a class="row" id="{{ include.id }}-{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
       <rect class="row-hit" x="0" y="{{ y }}" width="{{ width }}" height="{{ rh }}" />
-      <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end">{{ label }}</text>
+      <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 13 }}" text-anchor="end"><tspan class="row-name"><tspan class="row-ink">{{ food.name }}</tspan></tspan>{% if vlabel != "" %} <tspan class="row-variety">({{ vlabel }})</tspan>{% endif %}</text>
       {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}
     </a>
     {%- assign y = y | plus: rh -%}

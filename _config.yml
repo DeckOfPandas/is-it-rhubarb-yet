@@ -44,10 +44,12 @@ defaults:
     values:
       layout: wheel
 
-# The share cards are drawn into _site/cards by tools/cards.js after the
-# build; a regenerating `jekyll serve` must not sweep them away.
+# The share cards and the icons are drawn into _site/cards and _site/icons
+# by tools/cards.js after the build; a regenerating `jekyll serve` must
+# not sweep them away.
 keep_files:
   - cards
+  - icons
 
 exclude:
   - Gemfile
@@ -59,6 +61,7 @@ exclude:
   - tests/
   - tools/
   - tmp/
+  - screenshots/
   - scripts/
   - model_instructions/
   - .devcontainer/

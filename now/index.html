@@ -1,31 +1,36 @@
 ---
-title: In season now
+title: In season this week
 description: What is in season in the UK this week, what has just arrived, what is on its way out, and what is on the way.
 permalink: /now/
 ---
 {%- comment -%}
 The weekly digest, four lists in the order a cook reads them: just
-arrived, last chance, on the way, great now. Each is split by kind of
-food and, within a kind, runs by time left. The build-day week is baked
-here from _data/baked.json; site.js redraws the lists from foods.json
-whenever the page was not baked today, and for the previous/next
-buttons, building the same markup as band.html. Without JavaScript the
-baked week shows, dated.
+arrived, A to Z; last chance and on the way, under their phrases,
+soonest first; great now, a closed disclosure per kind of food. The
+build-day week is baked here from _data/baked.json; site.js redraws the
+lists from foods.json whenever the page was not baked today, and for
+another week, building the same markup as band.html. Without JavaScript
+the baked week shows, dated.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign now = baked.now -%}
-<header class="page-head">
-  <h1>In season <span id="week-title">this week</span></h1>
-  <p class="week-dates" id="week-dates">Week {{ baked.week }}: {{ baked.range }}</p>
-  <p class="controls" hidden>
-    <button type="button" id="prev-week">← Previous week</button>
-    <button type="button" id="next-week">Next week →</button>
+{%- comment -%} The title names the week by its distance from this one,
+   and the week line says its days; site.js shows the arrows and keeps
+   both, the page title and the address in step with the week shown.
+   {%- endcomment -%}
+<header class="page-head now-head">
+  <h1 id="week-title">In season this week</h1>
+  <p class="week-line">
+    <button type="button" class="week-step" id="prev-week" aria-label="Previous week" hidden>‹</button>
+    <span id="week-dates">{{ baked.range }}</span>
+    <button type="button" class="week-step" id="next-week" aria-label="Next week" hidden>›</button>
   </p>
+  <p class="week-back" id="week-back" hidden><a href="{{ '/now/' | relative_url }}">Back to this week</a></p>
 </header>
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
-  {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived empty="Nothing new this week." tag="new" -%}
-  {%- include band.html cls="last" heading="Last chance" list=now.last empty="Nothing on its way out." -%}
-  {%- include band.html cls="onway" heading="On the way" list=now.onway empty="Nothing due in the next few weeks." -%}
-  {%- include band.html cls="still" heading="Great now" list=now.still empty="Nothing at all, which cannot be right." -%}
+  {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived shape="plain" az=baked.az.arrived -%}
+  {%- include band.html cls="last" heading="Last chance" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
+  {%- include band.html cls="onway" heading="On the way" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
+  {%- include band.html cls="still" heading="Great now" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}
 </div>

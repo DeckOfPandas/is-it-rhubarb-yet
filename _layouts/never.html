@@ -3,8 +3,8 @@ layout: default
 ---
 {%- comment -%}
 A food that is never in season here: the question, NEVER, its line
-where the date would be, a quotation, and no dial. The page is in the
-brand pink, which is the only colour that is nobody's.
+where the date would be, a quotation, and no dial. The page is in ghost
+grey, --never, the colour every never-food shares and no food has.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign thing = site.data.never | where: "slug", page.slug | first -%}
@@ -19,6 +19,6 @@ brand pink, which is the only colour that is nobody's.
     <cite>{{ b.quote.by }}</cite>
     {%- endif -%}
   </blockquote>
-  <p class="onwards"><a href="{{ '/' | relative_url }}#hook-input">Ask about something that grows here</a></p>
-  <p class="onwards"><a href="{{ '/now/' | relative_url }}">What is in season this week</a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search"><span class="arrow-text">Ask about something that grows here</span><span class="arrow" aria-hidden="true">→</span></a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">What is in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
 </article>

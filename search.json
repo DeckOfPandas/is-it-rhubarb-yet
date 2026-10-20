@@ -3,7 +3,7 @@ layout: null
 permalink: /search.json
 ---
 {%- comment -%}
-What the header's search box matches against: every food and never-food
+What the not-found page's suggestions match against: every food and never-food
 with its name, the names its varieties are said by, its aliases, the
 broader words it also answers to, and the baked verdict for the build day.
 {%- endcomment -%}

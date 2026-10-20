@@ -1,23 +1,34 @@
 {%- comment -%}
-One band of the digest: a heading with the count, then for each kind of
-food a sub-heading and the list, or one line when there is nothing.
-Expects: cls (arrived, last, onway, still), heading, list (the baked
-[{kind, items}] from nowLists), empty (the line for an empty band), and
-tag ("new" marks every row). site.js builds the same markup when it
-redraws the digest for another day.
+One band of the digest: a heading with the count (none when it is
+nothing), then its foods in one of three shapes, or one line when there
+is nothing. Every food in a band has the verdict its heading says, so no
+row carries a tag.
+  plain   one list, A to Z (just arrived)
+  phrase  a group per timing, soonest first, A to Z in each (last
+          chance, on the way), from the baked byPhrase groups; a food's
+          earlier "first ones" timing shows beside it
+  kind    a group per kind of food with its count, A to Z (great now)
+A group is food-group.html. Expects: cls (arrived, last, onway, still),
+heading, list (the baked [{kind, items}] from nowLists), shape, phrases
+(the baked [{phrase, items}] for the phrase shape), az (the baked A to Z
+list for the plain shape), and empty (the line for an empty band; with
+none, an empty band is left out).
+site.js builds the same markup when it redraws the digest for another
+week.
 {%- endcomment -%}
 {%- assign total = 0 -%}
 {%- for k in include.list -%}{%- assign total = total | plus: k.items.size -%}{%- endfor -%}
+{%- if total > 0 or include.empty -%}
 <section class="band {{ include.cls }}">
-  <h2>{{ include.heading }} <span class="count">{{ total }}</span></h2>
-  {%- if total > 0 -%}
-    {%- for k in include.list -%}
-    <h3 class="kind">{{ k.kind | capitalize }}</h3>
-    <ul class="food-list">
-      {%- for item in k.items -%}{%- include food-row.html item=item tag=include.tag -%}{%- endfor -%}
-    </ul>
-    {%- endfor -%}
-  {%- else -%}
+  <h2>{{ include.heading }}{% if total > 0 %} <span class="count">{{ total }}</span>{% endif %}</h2>
+  {%- if total == 0 -%}
   <p class="empty">{{ include.empty }}</p>
+  {%- elsif include.shape == "phrase" -%}
+    {%- for g in include.phrases -%}{%- include food-group.html label=g.phrase items=g.items -%}{%- endfor -%}
+  {%- elsif include.shape == "kind" -%}
+    {%- for k in include.list -%}{%- include food-group.html label=k.kind items=k.items count=true -%}{%- endfor -%}
+  {%- else -%}
+    {%- include food-group.html items=include.az -%}
   {%- endif -%}
 </section>
+{%- endif -%}

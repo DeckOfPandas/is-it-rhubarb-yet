@@ -1,8 +1,7 @@
 # Manual
 
 How the site is put together, for whoever works on it next. Rules are
-in `CLAUDE.md`; the product is scoped in Helen's scope document (she
-drops it in `tmp/inbox/`); this is the map.
+in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 
 ## Shape
 
@@ -19,21 +18,42 @@ drops it in `tmp/inbox/`); this is the map.
   `assets/site.js` recomputes everything for the visitor's own day. The
   thresholds (NEARLY within 3 weeks, JUST within 2, NEW for 2, isolated
   "just about" runs read JUST) are constants at the top of
-  `verdict.js`. Tests: `node --test tests/verdict/verdict.test.js`.
+  `verdict.js`. Tests: `node --test tests/verdict/verdict.test.js`,
+  which also checks that every food and variety has a verdict and a
+  date phrase in every week.
 - **No calendar dates for seasons.** The data is weekly and mostly came
   from monthly calendars, so a season boundary is said in words chosen
   by the days from today ("Any day now", "In a week or two", "From
   early November", "Back in April"; "For a few more days", "Until late
   December") and names the middle of the data week. The rules are the
-  comment over `phrase` in `verdict.js` and §6.5 of the scope document.
-  The one calendar date is the "as of" date, which is when an answer
-  was true. Lists sort by the same day counts, soonest first.
+  comment over `phrase` in `verdict.js`. The one calendar date is the
+  "as of" date, which is when an answer was true. Dates are plain
+  numbers, never ordinals: "19 October 2026", "15–21 October".
 - **The digest** (`nowLists`) returns each of its four lists split by
-  kind of food, `[{kind, items}]`; `flatten` gives one array. The home
-  strip and `_includes/band.html` read that shape.
+  kind of food, `[{kind, items}]`, just arrived and great now A to Z,
+  last chance and on the way soonest first. `flatten` gives one array,
+  `azList` one array A to Z, and `byPhrase` regroups a list by one
+  timing per food, `[{phrase, items}]`, soonest first and A to Z
+  within: `timing` splits a two-part phrase into the `when` that groups
+  the food ("In a week or two") and the `early` part shown beside it
+  ("first ones any day now", "a few about now"). `bake.js` bakes them
+  as `phrases` and `az`. The Now page shows just arrived as one A to Z
+  list, last chance and on the way grouped by timing, and great now
+  grouped by kind with counts.
+- **Naming a variety.** A named variety is a type (forced, maincrop)
+  or, with `cultivar: true` in the data, a cultivar (Cox, Conference).
+  `varietyLabel` gives its list form, in muted brackets after the food,
+  a type lower-cased and a cultivar as written: "Rhubarb (forced)",
+  "Apples (Cox)". `varietySaid` gives its sentence form, the `said`
+  field or its name then the food's, "Forced rhubarb", "Cox apples",
+  with a type lower-cased mid-sentence and a cultivar never. Lists sort
+  by food, then variety. `bake.js` bakes `labels` per variety for the
+  calendar and the feed. Separate foods keep their own names (Wild
+  garlic, Wood pigeon), and paired names capitalise both (Marjoram &
+  Oregano).
 - **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
   and never-food, plus `home.png` and `now.png` (the wordmark or the
-  Now title, then the week's three lines as the home strip has them,
+  Now title, then the week's three lines as home's teasers have them,
   dated; every other page uses the home card), into `_site/cards/`
   after Jekyll: each is a small HTML page with the fonts inlined,
   screenshotted in headless Chromium through the Playwright the
@@ -41,20 +61,27 @@ drops it in `tmp/inbox/`); this is the map.
   raster files in the repository). Every page's `og:image` and
   `twitter:image` point at its card; the card carries the as-of date,
   because chat apps keep the first preview they fetch. `node
-  tools/cards.js --out tmp/cards --only rhubarb,home,now` draws a few
-  to look at.
-- `_data/foods.yml` is the truth. `_data/groups.yml` names the culinary
-  families and their `kind`. `_data/never.yml` lists the foods that are
-  never in season here, each with a line. `_data/quotes.yml` holds the
-  pools, one per verdict including `never`. `tools/check-foods.py`
-  validates all four, including the colour rules; run it after any data
-  edit.
-- `tools/make-foods.py` holds the curated food list and regenerates
-  `_data/foods.yml` and the `_foods/` stubs. Edit the food list there,
-  not in the YAML, or the next run loses the edit. It does not know the
-  18 October palette: a rerun would bring the old colours back, so
-  reapply `tmp/inbox/colours.yml` afterwards or, better, teach it the
-  new colours first.
+  tools/cards.js --out tmp/cards --icons tmp/icons --only
+  rhubarb,home,now,icons` draws a few to look at.
+- **Icons.** The favicon (32px), the Android icon (192px) and the
+  Apple touch icon (180px) are "IIRY" in Anton, light ink on the shed,
+  the R in pink and underlined in it. `tools/cards.js` draws them into
+  `_site/icons` at build, like the cards: one square page shot at each
+  size, never committed.
+- `_data/foods.yml` is the truth: edit it by hand. `_data/groups.yml`
+  names the culinary families and their `kind`. `_data/never.yml` lists
+  the foods that are never in season here, each with a line.
+  `_data/quotes.yml` holds the pools, one per verdict including
+  `never`. `tools/check-foods.py` validates all four, including the
+  colour rules and the `said` and `cultivar` fields; run it after any
+  data edit. A food's page needs its `_foods/<slug>.md` stub.
+- `tools/make-foods.py` derived `_data/foods.yml` and the stubs once
+  from the New Covent Garden Market PDF and is kept for provenance. It
+  knows none of the hand edits since (the palette, the cultivars, the
+  names): rerunning it overwrites them.
+- A renamed food keeps its old address as a page that forwards:
+  `grey-squirrel/index.html` sends `/grey-squirrel/` to `/squirrel/`,
+  and the checker keeps that slug from ever being a food's.
 - Pages: `index.html` (the hook: "Is it [ ] yet?" with the live-filtered
   list of every food and its verdict), `_layouts/food.html` (one food
   at `/<slug>/`), `_layouts/never.html` (a never-food at `/<slug>/`),
@@ -63,13 +90,24 @@ drops it in `tmp/inbox/`); this is the map.
   `404.html` (the not-found verdict, with suggestions), and
   `about.html`, Helen's copy, reached from the signature hearts in the
   footer; its food count and dinner food come from the data. Data
-  endpoints: `foods.json`, `search.json` (what the search box matches
-  against), `season-starts.ics`.
-- Includes: `food-row.html` (one food in a list: swatch, name,
-  variety, verdict tag, line; `site.js` builds the same markup),
-  `band.html` (one band of the digest), `calendar.html` (a sticky
+  endpoints: `foods.json`, `search.json` (what the not-found page's
+  suggestions match against), `season-starts.ics`.
+- Includes: `food-row.html` (one food in a list, one link: swatch,
+  name, variety in brackets, an earlier timing, and with `tag` and
+  `leader` on, the default, the verdict tag right-aligned at the row's
+  end on a dotted leader; a list whose heading already says the verdict
+  passes `tag=false`; `site.js` builds the same markup in `foodRow`),
+  `food-group.html` (a group inside a section: an Atkinson capitals
+  label, optionally with a count, over its rows, a hairline above every
+  group but the first; home's families, Now's timings and kinds;
+  `foodGroup` in `site.js`), `band.html` (one band of the digest, in
+  the shape `plain`, `phrase` or `kind`), `calendar.html` (a sticky
   header SVG over a scrolling body SVG), `season-cells.html`,
   `season-wheel.html`, `arrivals-dial.html`.
+- Every multi-column food list reads down each column, then across
+  (CSS `columns`), so A to Z reads down. A list in columns cannot be
+  reordered in place, so home draws its list twice, by family and A to
+  Z, and shows typed matches in a list of their own.
 - Switches are radio groups. CSS `:has()` shows the chosen variant.
   Only the theme is remembered; the order and kind switches open on
   their default every visit (home by family, calendar by start, wheel
@@ -82,10 +120,8 @@ drops it in `tmp/inbox/`); this is the map.
   "chilli" begins "chillies" and "cherry" begins "cherries"; every typed
   word must begin a candidate word, or at least occur inside one.
   Candidates are names, varieties as they are said, `aliases` (one
-  food's own: zucchini) and `also` (shared broader words: every fungus
-  answers to "mushrooms").
-- Variety names appear as written in the data, mid-sentence too, so
-  proper nouns keep their capitals ("Venison Red & Fallow").
+  food's own: zucchini, pigeon) and `also` (shared broader words: every
+  fungus answers to "mushrooms").
 
 ## Design
 
@@ -95,23 +131,192 @@ drops it in `tmp/inbox/`); this is the map.
   in both themes; it is also rhubarb's food colour and no other food
   comes near it. The pink never carries body-size text: links are ink
   with a pink underline.
+- Never-foods all share `--never`, ghost grey `#857f78` (4.7:1 on the
+  shed, 3.6:1 on custard): their swatches and tags, their pages and
+  cards, the NEVER in a lone search result, the hero's completion, and
+  the hero's word and underline on a lone never-food match. They never fall back to the pink. The
+  colour is a token at the top of `assets/site.css` and a constant in
+  `tools/cards.js`; there is no colours file.
 - Every food colour passes 3:1 on both backgrounds, so a verdict word
   is simply set in `--food`. "Today" is drawn in ink: the dial hand,
   the calendar line, the wheel hand.
-- Three fonts, one job each: Anton for verdict words and titles (never
-  a sentence), Atkinson Hyperlegible Next for everything read,
-  Newsreader italic for quotations. Anton's letter-spacing has two
-  settings by size, `--track-large` at 40px and above and
-  `--track-small` below. The WOFF2 files under `assets/fonts/` are
-  Google's Latin subsets, 116 KB in all; the budget is 150 KB.
+- Three fonts, chosen by asking in order: a quotation is Newsreader
+  italic; a verdict or the name of a page or section is Anton in
+  capitals; everything else is Atkinson Hyperlegible Next. Anton never
+  sets a sentence, a link or a control; Atkinson uses 400 and 700 only,
+  and capitals only for small labels at +0.06em to +0.07em; an Anton
+  label heads a section and an Atkinson one a group inside it. The
+  rules head the fonts section of `assets/site.css`. Anton's
+  letter-spacing has two settings by size, `--track-large` at 40px and
+  above and `--track-small` below. The WOFF2 files under
+  `assets/fonts/` are Google's Latin subsets, 116 KB in all; the budget
+  is 150 KB.
 - The verdict word fills the line, but stops at half the viewport's
   height so the date line stays above the fold on a laptop: `site.js`
   measures it after the fonts load. CSS `clamp()` stands in before
   that.
-- The question over the verdict is set at the h1's size. The header
-  search box is the question in lowercase text, "is it [rhubarb] yet?",
-  with only the food as the input, so it reads as a sentence and not as
-  a second wordmark.
+- The question over the verdict is set at the h1's size.
+- **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
+  in pink, the line exactly the word's width, in the header, the hero
+  and the cards. It does not change on hover.
+- **Header.** NOW, CALENDAR, WHEEL and a magnifier at the top right of
+  every page, home included, in the nav style: Atkinson 700 capitals,
+  13px, +0.07em, muted, the current page in ink and underlined in pink,
+  as the others are on hover or focus. The wordmark is on the left of the same row, or on
+  a phone on a row of its own under the nav, so the nav never moves.
+  Home has no wordmark and no line under its header. The magnifier
+  links to `/#search`, which names no element, so the page does not
+  scroll; `site.js` puts the cursor in the input, and on home scrolls
+  back up to it (on a phone, to the input's line).
+- **Home hero.** The logo is the input. At rest it reads IS IT RHUBARB
+  YET?, the placeholder RHUBARB in pink capitals over its underline with
+  a blinking pink caret at its start, a normal space either side of the
+  word; on focus the placeholder dims. Typed
+  text is capitals in ink; when the single best match is found exactly
+  or at its start (tier 1 or 2, below, with nothing else at its tier),
+  the word and its underline take that food's colour (ghost grey for a
+  never-food). Otherwise, as for text found only inside words or not
+  at all, they stay ink over the pink underline.
+  `site.js` draws the underline at the word's width and the caret, and
+  sets a word too long for its room smaller until it fits. One line on
+  a wide screen, three below 600px. The input is not focused on load,
+  so the hero rests as the logo; the first letter typed anywhere on
+  home goes into it. On a phone, focusing it scrolls its line near the
+  top of the screen, 16px clear, so the keyboard does not hide the
+  results; with reduced motion it jumps.
+- **Home search.** While the input has text, the teasers, the arrow
+  link and the whole Everything section are hidden, and the results
+  stand in the teasers' place, at once, with no debounce.
+- **Search ranking.** Home ranks its own way (`tierOf` in `site.js`;
+  the not-found page keeps the older scoring). Candidates are each
+  food's and never-food's name, aliases and shared `also` words, and
+  each named variety by its own name and how it is said ("cox",
+  "forced rhubarb"), which joins once `foods.json` is in. Both sides
+  are folded (case, accents, punctuation; "&" is "and") and singular
+  equals plural. A candidate's best tier: 1, exact; 2, the string
+  starts with the query; 3, a later word starts with it; 4, the query
+  is inside a word, from the first letter typed. The last typed word
+  may be unfinished. A food is one hit at its best tier: found by a
+  variety alone it shows as that variety ("cox" gives "Apples (Cox)"),
+  and found as well or better itself it shows as the food, so
+  "rhubarb" is not followed by "Rhubarb (forced)". Each letter typed
+  only ever takes hits away: "b", "be", "ber", "berr" narrow from 43
+  to 17 to 11 to 9.
+  - One tier-1 match: answered with the food's card (see "A food at
+    three levels"), in the label's place. Under it a quiet line,
+    "Also: Crab apples", of the tier 2–3 matches as links in their
+    colours. Tier 4 is dropped.
+  - Phrases used as labels in lists (Now's groups) have no full stop;
+    a date line that answers a question (the home answer, a food
+    page) does.
+  - Otherwise every match of every tier (several tier-1, as
+    "mushrooms" finds every fungus) is a row under "N MATCHES", which
+    counts them all, a teaser label in the first teaser's spot, in one
+    column, by tier then A to Z, with leaders and tags. A list of one
+    is answered as above, without "Also" ("pina" finds spinach).
+  - No match: "Is it dilll yet? Literally no idea. If that's an actual
+    thing, please tell us." with up to five foods sharing its first
+    three letters under DID YOU MEAN.
+  - Up and Down move a highlight in rank order through the answer,
+    its "Also" links or the rows; Enter opens it, or the first. A
+    polite live region says the count. Clearing the input brings
+    everything back.
+- **A food at three levels.** A food is shown as a row, a card or a
+  page, and each is a smaller version of the next, never a different
+  design. No fourth way: any new view that needs a food uses one of
+  these as it is.
+  - **Row** (lists, search results, Now, "Also great this week"):
+    swatch, name, and in a list of mixed verdicts the tag on a dotted
+    leader. `_includes/food-row.html`, built the same by `foodRow` in
+    `site.js`.
+  - **Card** (home's single answer): the food page in small. In order:
+    the question ("IS IT BASIL YET?", or "Cox apples" for a variety),
+    the verdict, the date line (a sentence, with its full stop), then
+    "When is basil in season?" (Atkinson 400, muted, the food's name in
+    lower case; "are" when the name ends in s but not ss or us, or joins
+    two foods with &, so "When are apples in season?"), a miniature of the dial with today's hand, and a round
+    arrow in the food's colour with a dark arrow icon. The question,
+    verdict and date line share the food page's rules (`.ask`,
+    `.verdict-word`, `.date-line` in `assets/site.css`) and the card
+    only sets them smaller; the date line is 400, not the page's bold,
+    at Helen's request. The dial is the food page's own `figure.wheel`
+    SVG, fetched from the page and cropped to the ring (the fetch also
+    warms the page): 120px, 90px on a phone. The panel is `--panel`,
+    one step lighter than the page in both themes (`--panel-hover` on
+    hover or focus), 12px radius, its left edge `--food-bar-width`
+    (6px) in the food's colour; the food page has no matching bar. Wide:
+    text and subtitle on the left, dial and a 56px arrow at the right,
+    centred. Phone: text and a 90px dial on top, the subtitle and a
+    48px arrow on the bottom row. The whole card is one link with the
+    focus ring; the arrow nudges 4px right on hover, and stays still
+    with reduced motion; Enter opens it. A never-food's card is its question, NEVER.
+    and its line, in ghost grey with a grey edge: no link, arrow, dial
+    or subtitle.
+  - **Page** (`/<slug>/`): everything.
+- **Into the food page.** Pages cross-fade with cross-document view
+  transitions (`@view-transition { navigation: auto; }` in
+  `assets/site.css`, only with `prefers-reduced-motion:
+  no-preference`; a browser without them simply navigates). Following
+  a home card, `site.js` names the card's food name `food-name`, its
+  verdict `food-verdict` and its dial `food-dial`, and the food
+  page names its question's food name (`.ask-name`), its verdict and
+  its dial the same, so each moves into place. The home names are set
+  only as the answer is followed and cleared once home is shown again,
+  so a row or "Also" link never borrows them. The typed text is kept in
+  the address as `?q=`, so Back (or a reload) returns to the same
+  answer.
+- **Completion.** When the single best match (as for the hero's
+  colour) has a name or alias that begins with what is typed, the rest
+  of it shows after the typed text
+  in the hero, faded to 35% in the food's colour (ghost grey for a
+  never-food): AVOC + ADOS, ZUCC + HINI (an alias, for Courgettes).
+  None for a match only inside a word, for text that is already a
+  whole name, with no match, or while an input method is composing.
+  It is an `aria-hidden` layer over the input in the same type, the
+  typed part transparent, so the real caret stays after the typed
+  text and the underline under it alone. The hero is sized for typed
+  text and completion together, so accepting does not make the word
+  jump. Tab, End, or → at the end of the text accept it, as does a tap
+  on the faded part; the input then holds the whole name and the
+  results follow. Tab with no completion moves focus as usual. Escape
+  dismisses a completion, and a second Escape clears the input. The
+  input has `aria-autocomplete="both"`; the completion is not
+  announced.
+- **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
+  GREAT NOW and LAST CHANCE, each an Anton label over three foods in
+  their colours, picked afresh at random on every visit by `site.js`
+  from the block's `data-all` (the build's own pick stands without
+  JavaScript), and "and N more →", which links to Now, then "Everything
+  in season this week →".
+- **Arrow links.** A link that leads on ("Everything in season this
+  week", a food page's "Ask about something else" and "See the whole
+  year", and every "and N more" after a list of foods) has an arrow
+  after it and no underline at rest; on hover its words underline and
+  the arrow, inside the link, does not. "and N more" keeps the colour
+  of the words around it.
+- **Food page.** Three foods of the same family that are YES, picked
+  afresh at random on every visit by `site.js` (from the section's
+  `data-all`, or from `foods.json` for another week), A to Z,
+  headed "Also great this week" ("Great this week" when the food is
+  NO), then "and N more →", which links to Now.
+- **Hover.** A food's name underlines in pink on hover, in lists and on
+  the calendar, never its variety or timing, and never changes weight
+  or size. SVG text draws its underline in its own fill, so the
+  calendar turns the name's tspan pink and an inner tspan keeps the
+  words in ink.
+- **Footer.** Every label in the nav style: SOURCE DATA · CALENDAR FEED
+  (to the feed's section on Source data) · JSON; ABOUT; the theme
+  switch; GitHub; the licences (CODE: MIT · DATA AND WRITING: CC BY
+  4.0 · ©) and the as-of date, smaller and
+  fainter; the signature hearts, which do not change on hover.
+- **Now.** The title follows the week shown ("this week", "next week",
+  "last week", or none), over one muted line, "‹ 15–21 October ›".
+  Weeks run through real years, a year either way of this week; the
+  address carries `week=` and, in another year, `year=`. Sections are
+  parted by space; groups inside them by a hairline. Just arrived is
+  left out in a week when nothing has arrived.
+- Atkinson Hyperlegible Next's zero is slashed, and the font has no
+  feature to open it.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for
   the longest label at any angle; `site.js` tightens each visible
   wheel's viewBox to its drawn extent, so the wheel fills its width.
@@ -143,7 +348,31 @@ drops it in `tmp/inbox/`); this is the map.
   last line of defence.
 - Visual checks: `node tools/dev/shoot.js <base-url> <label> [--scheme
   dark] [--click <text>] [--type <text>] <page>...`; `--type` types
-  into the first visible input, for the hook and the search box.
+  into the first visible input, the hook's.
+- Design review: `node tools/dev/shots.js [--base <url>] [--date
+  YYYY-MM-DD] [--out <dir>] [--full yes]` writes full-page shots into
+  `screenshots/` (gitignored, and excluded from the build), named
+  `<page>-<state>-<width>-<theme>.png`: the kitchen sink; home empty
+  and searching "avoc", "basil", "apples", "app", "banana" and "zzz"; a food
+  page per verdict (YES, NO, JUST, NEARLY, NEVER, picked for the date
+  from `foods.json` with `verdict.js`), rhubarb, a food with a buy note
+  and one whose source is general; Now this week and next; the
+  calendar, the wheel, About and a 404. At 390 and 1280, the clock
+  frozen at noon on the date (default 2026-10-25), with reduced motion
+  so nothing is caught mid-animation. By default it takes Helen's
+  review list (68 shots): everything dark, the shots she starred light
+  too (the kitchen sink, home empty, the basil card and NEVER, the
+  verdict and rhubarb food pages, Now and the calendar), and the
+  kitchen sink at 1280 only. `--full yes` takes all 88. Not `npm run`:
+  the project has no npm.
+- `/kitchen-sink/` (`kitchen-sink/index.html`, `noindex`, linked from
+  nowhere, its slug reserved in `check-foods.py`) shows every shared
+  component from its real include or classes, at rest, hovered and
+  focused. The forced states are the stylesheet's own: a script on the
+  page copies every `:hover` and `:focus-visible` rule onto the
+  `.is-hover` and `.is-focus` columns, so nothing there is styled
+  twice. The search input's states are home itself in frames, by
+  `?q=`. A new shared component goes on this page too.
 - Helen's instructions win over this file. Hooks reject chained,
   nested or variable-expanding shell commands: one plain command per
   call, or a script in `tmp/`. A command that must reach outside the
@@ -158,7 +387,7 @@ drops it in `tmp/inbox/`); this is the map.
 
 ## Not yet done
 
-Phase 2 and 3 of the scope document, each an open issue:
+Each an open issue:
 
 - #41 Per-food reminder `.ics` at `/remind/<slug>.ics`, and the "Remind
   me when it's back" line on NO, NEARLY and JUST pages that links to it.

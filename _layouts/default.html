@@ -20,7 +20,7 @@ Now have cards of their own; every other page shows the home card.
   {%- assign b = baked.foods[page.slug] -%}
   {%- capture title -%}Is it {{ thing.name | downcase }} yet?{% if b %} {{ b.word }}.{% endif %}{%- endcapture -%}
   {%- if b -%}
-    {%- capture description -%}{{ b.word }}. {{ b.line | remove: "." }}{% if b.variety != "" %} ({{ b.variety | downcase }} {{ thing.name | downcase }}){% endif %}. As of {{ baked.asofText }}.{%- endcapture -%}
+    {%- capture description -%}{{ b.word }}. {{ b.line | remove: "." }}{% if b.said != "" %} ({{ b.said }}){% endif %}. As of {{ baked.asofText }}.{%- endcapture -%}
     {%- capture alt -%}{{ title }} {{ b.line }} As of {{ baked.asofText }}.{%- endcapture -%}
   {%- endif -%}
 {%- endif -%}
@@ -46,7 +46,13 @@ Now have cards of their own; every other page shows the home card.
   <meta name="twitter:title" content="{{ title | default: site.title | escape }}">
   <meta name="twitter:description" content="{{ description | strip | escape }}">
   <meta name="twitter:image" content="{{ '/cards/' | append: card | append: '.png' | absolute_url }}">
+  {%- if page.noindex %}
+  <meta name="robots" content="noindex">
+  {%- endif %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/icons/favicon-32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ '/icons/icon-192.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/icons/apple-touch-icon.png' | relative_url }}">
   <link rel="preload" href="{{ '/assets/fonts/anton-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/atkinson-hyperlegible-next-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
@@ -58,60 +64,57 @@ Now have cards of their own; every other page shows the home card.
   </script>
 </head>
 <body>
-  <header class="site-header">
+  {%- comment -%} The nav and the magnifier sit at the right of every page,
+     home included, so nothing moves between pages. On home the hero
+     question is the logo, so the header has no wordmark and no line under
+     it; elsewhere the wordmark is on the left. The magnifier goes to home's
+     input, focused. {%- endcomment -%}
+  <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
-      {%- comment -%} The wordmark: RHUBARB is always in rhubarb's colour. {%- endcomment -%}
+      {%- if page.url != '/' -%}
+      {%- comment -%} The logo: RHUBARB in rhubarb's pink, underlined in it. {%- endcomment -%}
       <a class="brand" href="{{ '/' | relative_url }}" aria-label="Is it rhubarb yet? Home">Is it <span class="brand-rhubarb">rhubarb</span> yet?</a>
+      {%- endif -%}
       <nav class="site-nav" aria-label="Site">
         <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>
         <a href="{{ '/calendar/' | relative_url }}"{% if page.url == '/calendar/' %} aria-current="page"{% endif %}>Calendar</a>
         <a href="{{ '/wheel/' | relative_url }}"{% if page.url == '/wheel/' %} aria-current="page"{% endif %}>Wheel</a>
+        <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
       </nav>
-      {%- if page.url != '/' -%}
-      {%- comment -%} The search for a food, on every page but home, where
-         the hook is the search: the same "Is it [    ] yet?" in small. A
-         plain GET to home with q=, which the hook reads; site.js adds a
-         dropdown fed from search.json. {%- endcomment -%}
-      <form class="search" role="search" method="get" action="{{ '/' | relative_url }}"
-            data-index="{{ '/search.json' | relative_url }}">
-        <label class="search-line" for="site-search">
-          <span class="hook-word">is it</span>
-          <span class="hook-slot"><input id="site-search" type="search" name="q" class="search-input" autocomplete="off" autocapitalize="off" spellcheck="false"
-                 placeholder="rhubarb" aria-label="Is it … yet? Which food?" size="7"
-                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-results"></span>
-          <span class="hook-word">yet?</span>
-        </label>
-        <button type="submit" class="visually-hidden">Ask</button>
-        <div class="search-results" id="search-results" role="listbox" hidden></div>
-      </form>
-      {%- endif -%}
-      <fieldset class="switch theme" data-remember="theme">
-        <legend>Theme</legend>
-        <input type="radio" name="theme" id="theme-dark" value="dark"><label for="theme-dark">dark</label>
-        <input type="radio" name="theme" id="theme-auto" value="auto" checked><label for="theme-auto">auto</label>
-        <input type="radio" name="theme" id="theme-light" value="light"><label for="theme-light">light</label>
-      </fieldset>
     </div>
   </header>
   <main>
     {{ content }}
   </main>
+  {%- comment -%} Every label in the footer is set as the nav is: small
+     caps in Atkinson 700, muted, a pink underline only on hover or focus.
+     Top to bottom: the data links, About, the theme switch, GitHub, the
+     licences, the as-of date, the signature. {%- endcomment -%}
   <footer class="site-footer">
     <nav class="footer-links" aria-label="About this site">
       <a href="{{ '/sources/' | relative_url }}">Source data</a>
-      <a href="{{ '/season-starts.ics' | relative_url }}">Subscribe to season starts</a>
-      <a href="{{ '/foods.json' | relative_url }}">Data as JSON</a>
+      <a href="{{ '/sources/' | relative_url }}#calendar-feed">Calendar feed</a>
+      <a href="{{ '/foods.json' | relative_url }}">JSON</a>
     </nav>
     <p class="footer-about"><a href="{{ '/about/' | relative_url }}">About</a></p>
-    <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="Source on GitHub">{% include icons/github.svg %}</a>
-    <p class="copyright">&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
-    {%- comment -%} Two sentences in two spans, so a narrow screen breaks
+    {%- comment -%} A radio group, so the current choice is checked and
+       announced; each input carries its spoken name, since the sun and the
+       moon say nothing to a screen reader. {%- endcomment -%}
+    <fieldset class="switch theme" data-remember="theme">
+      <legend>Theme</legend>
+      <input type="radio" name="theme" id="theme-light" value="light" aria-label="Light theme"><label for="theme-light">{% include icons/sun.svg %}</label>
+      <input type="radio" name="theme" id="theme-auto" value="auto" aria-label="Follow device" checked><label for="theme-auto">{% include icons/screen.svg %}Auto</label>
+      <input type="radio" name="theme" id="theme-dark" value="dark" aria-label="Dark theme"><label for="theme-dark">{% include icons/moon.svg %}</label>
+    </fieldset>
+    <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="GitHub">{% include icons/github.svg %}</a>
+    {%- comment -%} Three parts in three spans, so a narrow screen breaks
        between them and never inside one. {%- endcomment -%}
     <p class="licence">
-      <span>Code: <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/blob/main/LICENSE">MIT</a>.</span>
-      <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span>
+      <span>Code: <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/blob/main/LICENSE">MIT</a></span>
+      <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
+      <span>&copy; {{ site.time | date: "%Y" }}</span>
     </p>
-    <p class="as-of">Answers as of <span data-asof>{{ baked.asofText }}</span>.</p>
+    <p class="footer-asof">Answers as of <span data-asof>{{ baked.asofText }}</span></p>
     {%- comment -%} The signature is the way to the About page. {%- endcomment -%}
     <a class="hearts" href="{{ '/about/' | relative_url }}" aria-label="About this site">{% include icons/hearts.svg %}</a>
   </footer>

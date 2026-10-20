@@ -3,7 +3,7 @@ layout: default
 ---
 {%- comment -%}
 One food, top to bottom: the question, the verdict word, the date line,
-the variety line, the quotation, the dial, the counter note, up to six
+the variety line, the quotation, the dial, the counter note, three
 foods from the same family that are perfect now, the data, and the way
 on. Everything date-dependent is baked for the build day and
 recomputed by site.js for the visitor's own day from the food's data in
@@ -27,7 +27,7 @@ colour.
 {%- assign width = cw | times: 52 | plus: x0 | plus: 4 -%}
 
 <article class="food" style="--food: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ quotes_json | escape }}'>
-  <p class="ask">Is it {{ food.name | downcase }} yet?</p>
+  <p class="ask">Is it <span class="ask-name">{{ food.name | downcase }}</span> yet?</p>
 
   <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
   <p class="date-line" id="date-line">{{ b.line }}</p>
@@ -44,30 +44,29 @@ colour.
 
   {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
 
-  {%- comment -%} Up to six foods of the same family that are perfect now,
-     from the baked verdicts. {%- endcomment -%}
-  {%- assign also = "" | split: "" -%}
+  {%- comment -%} Three foods of the same family that are perfect now, at
+     random from the baked verdicts, A to Z, and how many more there are,
+     which links to Now. All are YES, as the heading says, so no row
+     carries a tag. The heading is "Also great this week" unless this food
+     is NO. All of them are in data-all, and site.js picks a fresh three
+     on every visit. {%- endcomment -%}
+  {%- assign also_all = "" | split: "" -%}
   {%- for other in site.data.foods -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
       {%- assign ob = baked.foods[other.slug] -%}
-      {%- if ob.verdict == "YES" and also.size < 6 -%}{%- assign also = also | push: other -%}{%- endif -%}
+      {%- if ob.verdict == "YES" -%}{%- assign also_all = also_all | push: other -%}{%- endif -%}
     {%- endif -%}
   {%- endfor -%}
+  {%- assign also = also_all | sample: 3 | sort: "name" -%}
   {%- if also.size > 0 -%}
-  <section class="also">
-    <h2>Great this week</h2>
+  {%- assign also_more = also_all.size | minus: also.size -%}
+  {%- capture also_json -%}[{% for o in also_all %}{"slug":{{ o.slug | jsonify }},"name":{{ o.name | jsonify }},"colour":{{ o.colour | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
+  <section class="also" data-all='{{ also_json | escape }}'>
+    <h2><span data-also-no{% if b.verdict != "NO" %} hidden{% endif %}>Great this week</span><span data-also-yes{% if b.verdict == "NO" %} hidden{% endif %}>Also great this week</span></h2>
     <ul class="food-list">
-      {%- for other in also -%}
-        {%- assign ob = baked.foods[other.slug] -%}
-        <li class="food-row" data-slug="{{ other.slug }}" data-verdict="{{ ob.verdict }}" style="--food: {{ other.colour }}">
-          <a href="{{ '/' | append: other.slug | append: '/' | relative_url }}">
-            <span class="swatch" aria-hidden="true"></span>
-            <span class="food-name">{{ other.name }}</span>
-            <span class="verdict-tag">{{ ob.verdict }}</span>
-          </a>
-        </li>
-      {%- endfor -%}
+      {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>
+    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and {{ also_more }} more</span><span class="arrow" aria-hidden="true">→</span></a></p>
   </section>
   {%- endif -%}
 
@@ -108,6 +107,6 @@ colour.
     <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
   </details>
 
-  <p class="onwards"><a href="{{ '/' | relative_url }}#hook-input">Ask about something else</a></p>
-  <p class="onwards"><a href="{{ '/calendar/' | relative_url }}#{{ food.slug }}">See the whole year</a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search"><span class="arrow-text">Ask about something else</span><span class="arrow" aria-hidden="true">→</span></a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}"><span class="arrow-text">See the whole year</span><span class="arrow" aria-hidden="true">→</span></a></p>
 </article>

@@ -579,6 +579,7 @@
   group: fruiting
   colour: "#09812d"
   source: ncgm
+  aliases: ["zucchini"]
   varieties:
     - name: ""
       weeks:
@@ -662,24 +663,29 @@
   note: "NCGM lists eight varieties; three early-eater rows (Early Windsor, Golden Delicious, Royal Gala) are left out. NCGM marks Discovery as only 'available' in August and September; here August is in season, as it is sold."
   varieties:
     - name: "Discovery"
+      cultivar: true
       colour: "#ed5100"
       weeks:
         - [31, 35, in]
         - [36, 39, avail]
     - name: "Bramley"
+      cultivar: true
       colour: "#50931f"
       weeks:
         - [31, 39, in]
     - name: "Cox"
+      cultivar: true
       colour: "#bb7400"
       weeks:
         - [36, 43, in]
     - name: "Egremont Russet"
+      cultivar: true
       colour: "#815e00"
       weeks:
         - [36, 39, avail]
         - [40, 43, in]
     - name: "Braeburn"
+      cultivar: true
       colour: "#cb000e"
       weeks:
         - [40, 43, avail]
@@ -726,16 +732,19 @@
   source: ncgm
   varieties:
     - name: "Williams"
+      cultivar: true
       colour: "#869000"
       weeks:
         - [31, 35, avail]
         - [36, 39, in]
         - [40, 43, avail]
     - name: "Conference"
+      cultivar: true
       colour: "#3e781d"
       weeks:
         - [36, 52, in]
     - name: "Comice"
+      cultivar: true
       colour: "#a36522"
       weeks:
         - [40, 52, in]
@@ -772,7 +781,7 @@
         - [36, 43, in]
         - [44, 48, avail]
 
-- name: "Blackcurrants & redcurrants"
+- name: "Blackcurrants & Redcurrants"
   slug: blackcurrants-redcurrants
   group: soft
   colour: "#a02fb1"
@@ -805,7 +814,7 @@
         - [23, 26, avail]
         - [27, 35, in]
 
-- name: "Loganberries & tayberries"
+- name: "Loganberries & Tayberries"
   slug: loganberries-tayberries
   group: soft
   colour: "#b31e96"
@@ -1195,7 +1204,7 @@
         - [18, 35, in]
         - [36, 39, avail]
 
-- name: "Marjoram & oregano"
+- name: "Marjoram & Oregano"
   slug: marjoram-oregano
   group: herbs
   colour: "#7d7202"
@@ -1818,6 +1827,7 @@
   colour: "#777198"
   source: general
   note: "No closed season; at its best from spring to autumn."
+  aliases: ["pigeon"]
   varieties:
     - name: ""
       weeks:
@@ -1851,12 +1861,13 @@
         - [31, 35, avail]
         - [36, 52, in]
 
-- name: "Grey squirrel"
-  slug: grey-squirrel
+- name: "Squirrel"
+  slug: squirrel
   group: meat
   colour: "#5c7f88"
   source: basc
-  note: "No closed season; sold by a few game dealers."
+  note: "Grey squirrel only: red squirrels are protected. No closed season; sold by a few game dealers."
+  aliases: ["grey squirrel", "grey-squirrel"]
   varieties:
     - name: ""
       weeks:

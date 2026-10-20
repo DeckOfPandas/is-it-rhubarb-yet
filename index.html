@@ -3,17 +3,20 @@ title:
 description: Is it in season yet? Type a UK food and get a yes, a no, or a date.
 ---
 {%- comment -%}
-The hook. A huge "Is it [    ] yet?" with the input inline; as the
-visitor types, the list below narrows, each food showing its verdict
-word in its own colour. Enter, or a single remaining match, goes to the
-food page; no match gets the not-found line. Without JavaScript the
+The hook. A huge "Is it [    ] yet?" with the input inline. As the
+visitor types, the this-week blocks and the Everything list give way to
+the matches, directly under the hero, each with its verdict at the end
+of its row; clearing the input brings them back. Without JavaScript the
 whole list renders and the input is a form that reloads this page.
 
 Verdicts in the list are baked for the build day; site.js recomputes
-them when the visitor's week differs. The list is one grid whose items
-carry a rank under two orders as --og (by family, A to Z within it) and
---oa (A to Z); the order switch picks which rank lays it out by, and
-family headings are items that only show in family order, the default.
+them when the visitor's week differs. The list is drawn twice, by family
+(the default) and A to Z, and the order switch shows one by CSS, as the
+calendar's does: lists in columns read down, then across, so one list
+cannot be reordered in place. The A to Z list carries the never-foods,
+hidden, and every row's search terms (name, aliases and shared words;
+site.js adds the varieties from foods.json), the names it completes to
+(its name and aliases) and its line, which the matches are copied from.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign foods = site.data.foods | sort: "name" -%}
@@ -21,35 +24,65 @@ family headings are items that only show in family order, the default.
   <form class="hook-form" role="search" method="get" action="{{ '/' | relative_url }}">
     <label class="hook-line" for="hook-input">
       <span class="hook-word">Is it</span>
-      <span class="hook-slot"><input id="hook-input" name="q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false"
-        placeholder="rhubarb" aria-label="Which food?" size="7"></span>
+      <span class="hook-slot"><input id="hook-input" name="q" type="search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+        placeholder="rhubarb" aria-label="Is it … yet? Type a food" aria-autocomplete="both" size="7"></span>
       <span class="hook-word">yet?</span>
     </label>
     <button type="submit" class="visually-hidden">Ask</button>
   </form>
-  {%- comment -%} This week in three lines, from the baked digest: a
-     random handful from just arrived, great now and last chance, each
-     food in its own colour, and how many more there are. Just arrived
-     is always said, even when it is nothing. site.js and tools/cards.js
-     draw the same lines, with the same handful of five. {%- endcomment -%}
+  {%- comment -%} This week in three blocks, from the baked digest: just
+     arrived (or, in a week when nothing has, on the way), great now and
+     last chance, each a label over a random three of its foods in their
+     own colours and how many more there are. A block with nothing in it
+     is left out. Each carries all its foods in data-all, and site.js
+     picks a fresh three on every visit; tools/cards.js draws the same
+     blocks. {%- endcomment -%}
   <div class="this-week" id="this-week">
-    {%- assign lines = "arrived|Just arrived,still|Great now,last|Last chance" | split: "," -%}
-    {%- for entry in lines -%}
+    {%- assign first = "arrived|Just arrived" -%}
+    {%- assign arrived_count = 0 -%}
+    {%- for k in baked.now.arrived -%}{%- assign arrived_count = arrived_count | plus: k.items.size -%}{%- endfor -%}
+    {%- if arrived_count == 0 -%}{%- assign first = "onway|On the way" -%}{%- endif -%}
+    {%- assign blocks = first | append: ",still|Great now,last|Last chance" | split: "," -%}
+    {%- for entry in blocks -%}
       {%- assign parts = entry | split: "|" -%}
       {%- assign key = parts[0] -%}
       {%- assign all = "" | split: "" -%}
       {%- for k in baked.now[key] -%}{%- assign all = all | concat: k.items -%}{%- endfor -%}
-      {%- if all.size == 0 and key == "arrived" -%}
-      <p class="this-week-line"><strong>Just arrived:</strong> nothing new this week.</p>
-      {%- elsif all.size > 0 -%}
-      {%- assign pick = all | sample: 5 -%}
+      {%- if all.size > 0 -%}
+      {%- assign pick = all | sample: 3 -%}
       {%- assign more = all.size | minus: pick.size -%}
-      <p class="this-week-line"><strong>{{ parts[1] }}:</strong> {% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} and {{ more }} more{% endif %}.</p>
+      <section class="teaser">
+        <h2 class="teaser-label">{{ parts[1] }}</h2>
+        {%- capture all_json -%}[{% for i in all %}{"slug":{{ i.slug | jsonify }},"name":{{ i.name | jsonify }},"colour":{{ i.colour | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
+        <p class="teaser-foods" data-all='{{ all_json | escape }}'>{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and {{ more }} more</span><span class="arrow" aria-hidden="true">→</span></a>{% endif %}</p>
+      </section>
       {%- endif -%}
     {%- endfor -%}
-    <p class="this-week-more"><a href="{{ '/now/' | relative_url }}">This week in full</a>.</p>
+    <p class="this-week-more"><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
   </div>
-  <p class="hook-none" id="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues" hidden></p>
+  {%- comment -%} What is typed, answered in the this-week blocks' place,
+     filled by site.js: a count in a teaser label over the matches in
+     rank order, with tags; a lone or exact match as a card, the food
+     page in small (question, verdict, line, "When is (or are) … in season?", a
+     miniature of its dial and an arrow, all one link; a never-food's
+     card is its question, verdict and line, and no link),
+     then "Also:" and the near matches; or, with no match, the
+     not-found line and the nearest foods.
+     {%- endcomment -%}
+  <section class="results" id="results" aria-labelledby="results-label" hidden>
+    <h2 class="teaser-label" id="results-label"></h2>
+    <ul class="food-list" id="found"></ul>
+    <a class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <span class="one-sub"></span><span class="one-dial" aria-hidden="true"></span><span class="one-go" aria-hidden="true">{% include icons/arrow.svg %}</span></a>
+    <p class="also-line" id="also-line" hidden></p>
+    <div class="results-none" id="hook-none" hidden>
+      <p class="hook-none" data-issues="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues"></p>
+      <div class="food-group" id="suggest" hidden>
+        <h3 class="group-label">Did you mean</h3>
+        <ul class="food-list" id="suggest-list"></ul>
+      </div>
+    </div>
+  </section>
+  <p class="visually-hidden" id="results-status" aria-live="polite"></p>
 </section>
 
 <section class="all-foods" id="all-foods">
@@ -61,33 +94,35 @@ family headings are items that only show in family order, the default.
       <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
     </fieldset>
   </div>
-  <ul class="food-list ordered-list" id="food-list">
-    {%- for g in site.data.groups -%}
-    <li class="heading" id="{{ g.key }}" data-group="{{ g.key }}" style="--og: {{ forloop.index0 | times: 300 }}">{{ g.name }}</li>
-    {%- endfor -%}
-    {%- for food in foods -%}
-      {%- assign oa = forloop.index -%}
-      {%- assign gi = 0 -%}
-      {%- for g in site.data.groups -%}{%- if g.key == food.group -%}{%- assign gi = forloop.index0 -%}{%- endif -%}{%- endfor -%}
-      {%- assign b = baked.foods[food.slug] -%}
-      {%- capture terms -%}{{ food.name }}|{% for v in food.varieties %}{% if v.name != "" %}{{ v.said | default: v.name }}|{% endif %}{% endfor %}{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
-      <li class="food-row" data-slug="{{ food.slug }}" data-group="{{ food.group }}" data-terms="{{ terms | escape }}" data-verdict="{{ b.verdict }}" style="--food: {{ food.colour }}; --oa: {{ oa }}; --og: {{ gi | times: 300 | plus: oa }}">
-        <a href="{{ '/' | append: food.slug | append: '/' | relative_url }}">
-          <span class="swatch" aria-hidden="true"></span>
-          <span class="food-name">{{ food.name }}</span>
-          <span class="verdict-tag">{{ b.verdict }}</span>
-        </a>
-      </li>
-    {%- endfor -%}
-    {%- for n in site.data.never -%}
-      {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
-      <li class="food-row never" data-slug="{{ n.slug }}" data-terms="{{ terms | escape }}" data-verdict="NEVER" hidden>
-        <a href="{{ '/' | append: n.slug | append: '/' | relative_url }}">
-          <span class="swatch" aria-hidden="true"></span>
-          <span class="food-name">{{ n.name }}</span>
-          <span class="verdict-tag">NEVER</span>
-        </a>
-      </li>
-    {%- endfor -%}
-  </ul>
+  <div class="ordered" id="food-lists">
+    <div class="by-group">
+      {%- for g in site.data.groups -%}
+      {%- assign in_group = foods | where: "group", g.key -%}
+      {%- if in_group.size > 0 -%}
+      <div class="food-group">
+        <h3 class="group-label" id="{{ g.key }}">{{ g.name }}</h3>
+        <ul class="food-list">
+          {%- for food in in_group -%}{%- assign b = baked.foods[food.slug] -%}{%- include food-row.html item=food verdict=b.verdict -%}{%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="by-alpha">
+      <div class="food-group">
+        <ul class="food-list" id="food-list">
+          {%- for food in foods -%}
+            {%- assign b = baked.foods[food.slug] -%}
+            {%- capture terms -%}{{ food.name }}|{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
+            {%- capture names -%}{{ food.name }}|{% for a in food.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
+            {%- include food-row.html item=food verdict=b.verdict terms=terms names=names line=b.line -%}
+          {%- endfor -%}
+          {%- for n in site.data.never -%}
+            {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
+            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms names=terms line=n.line -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>

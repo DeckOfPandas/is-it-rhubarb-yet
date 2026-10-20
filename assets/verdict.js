@@ -177,6 +177,7 @@
     var results = food.varieties.map(function (v) {
       var r = varietyVerdict(v, week);
       r.name = v.name || "";
+      r.v = v;
       r.colour = v.colour || food.colour;
       return r;
     });
@@ -193,22 +194,16 @@
 
   // --- Dates in words -------------------------------------------------------
 
-  function ordinal(n) {
-    var s = n % 100;
-    if (s >= 11 && s <= 13) return n + "th";
-    switch (n % 10) {
-      case 1: return n + "st";
-      case 2: return n + "nd";
-      case 3: return n + "rd";
-      default: return n + "th";
-    }
-  }
-  function fmtDate(d) { return ordinal(d.getDate()) + " " + MONTHS[d.getMonth()]; }
+  // Plain numbers, never ordinals: "19 October", "19 October 2026".
+  function fmtDate(d) { return d.getDate() + " " + MONTHS[d.getMonth()]; }
   function fmtDateYear(d) { return fmtDate(d) + " " + d.getFullYear(); }
+  // A week's days, with an en dash: "15–21 October", "29 October – 4
+  // November", and the years only when it crosses one.
   function fmtRange(week, year) {
     var a = startOfWeek(week, year), b = endOfWeek(week, year);
-    if (a.getMonth() === b.getMonth()) return ordinal(a.getDate()) + " to " + fmtDate(b);
-    return fmtDate(a) + " to " + fmtDate(b);
+    if (a.getFullYear() !== b.getFullYear()) return fmtDateYear(a) + " – " + fmtDateYear(b);
+    if (a.getMonth() === b.getMonth()) return a.getDate() + "–" + fmtDate(b);
+    return fmtDate(a) + " – " + fmtDate(b);
   }
   // The date a {week, years} stands for, given the reference year.
   function startDate(at, year) { return startOfWeek(at.week, year + at.years); }
@@ -246,20 +241,20 @@
   // today: the digest for another week.
   function midOfToday(week, year) { return midOfWeek({ week: week, years: 0 }, year); }
 
-  // How a start is said: `soon` follows "First ones" or stands alone,
-  // `within` follows "Properly in", `back` follows a NO. All lower-case.
+  // How a start is said: `soon` follows "First ones" or "properly" or
+  // stands alone, `back` follows a NO. All lower-case.
   function arriving(at, year, today) {
     var days = daysBetween(today, startDate(at, year));
     var mid = midOfWeek(at, year), month = MONTHS[mid.getMonth()];
-    if (days <= 6) return { soon: "any day now", within: "any day now", back: "any day now" };
-    if (days <= 13) return { soon: "in a week or two", within: "within a week or two", back: "in a week or two" };
-    if (days <= 27) return { soon: "in two or three weeks", within: "within two or three weeks", back: "in two or three weeks" };
+    if (days <= 6) return { soon: "any day now", back: "any day now" };
+    if (days <= 13) return { soon: "in a week or two", back: "in a week or two" };
+    if (days <= 27) return { soon: "in two or three weeks", back: "in two or three weeks" };
     if (days <= 62) {
       var part = "from " + monthPart(mid);
-      return { soon: part, within: part, back: part };
+      return { soon: part, back: part };
     }
     var far = mid.getMonth() === today.getMonth() ? "next " + month : "in " + month;
-    return { soon: far, within: "from " + month, back: "back " + far, farOff: true };
+    return { soon: far, back: "back " + far, farOff: true };
   }
   // How an end is said, lower-case: "for a few more days", "until late
   // December".
@@ -296,7 +291,7 @@
       case "JUST":
         return cap(leaving(r.until, year, today));
       case "NEARLY":
-        if (r.state === "avail") return "Properly in " + arriving(r.from, year, today).within;
+        if (r.state === "avail") return "A few about now, properly " + arriving(r.from, year, today).soon;
         if (r.inFrom && r.inFrom.week !== r.from.week) return firstOnes(r, year, today);
         return cap(arriving(r.from, year, today).soon);
       case "NO":
@@ -323,30 +318,72 @@
     return null;
   }
 
+  // One timing per food for a list grouped by timing: `when` is the
+  // boundary that groups it (when a NEARLY food is properly in, when
+  // anything else ends or starts, as `phrase` says it), `days` the days to
+  // that boundary, and `early` the earlier part of a two-part phrase, "a
+  // few about now" or "first ones in a week or two", which a list shows
+  // beside the food rather than as a group of its own. The words are
+  // `phrase`'s own.
+  function timing(r, year, today) {
+    var whole = { when: phrase(r, year, today), early: "", days: daysTo(r, year, today) };
+    if (r.verdict !== "NEARLY") return whole;
+    if (r.state === "avail") return { when: cap(arriving(r.from, year, today).soon), early: "a few about now", days: whole.days };
+    if (!r.inFrom || r.inFrom.week === r.from.week) return whole;
+    var first = arriving(r.from, year, today).soon, then = arriving(r.inFrom, year, today).soon;
+    if (first === then) return whole;
+    return { when: cap(then), early: "first ones " + first, days: daysBetween(today, startDate(r.inFrom, year)) };
+  }
+
+  // --- Naming a variety ----------------------------------------------------
+  // A named variety is a type (forced, maincrop, savoy) or, marked
+  // `cultivar: true` in the data, a cultivar (Cox, Conference). In a list
+  // it follows the food in brackets: a type in lower case, a cultivar as
+  // written, "Rhubarb (forced)", "Apples (Cox)". In a sentence it is its
+  // `said` form, or else its name then the food's, "Forced rhubarb", "Cox
+  // apples"; mid-sentence a type is lower-cased and a cultivar never is.
+  function varietyLabel(v) {
+    if (!v || !v.name) return "";
+    return v.cultivar ? v.name : v.name.toLowerCase();
+  }
+  function varietySaid(food, v, mid) {
+    if (!v || !v.name) return mid ? food.name.toLowerCase() : food.name;
+    var s = v.said || (v.cultivar ? v.name : cap(v.name.toLowerCase())) + " " + food.name.toLowerCase();
+    return mid && !v.cultivar ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+  }
+
   // The variety line for a food with more than one variety: the variety
   // that gave the verdict, then the others in a phrase each.
-  // "Maincrop, yes. New: first ones in May, properly in June."
+  // "Maincrop potatoes, yes. New potatoes: first ones in May, properly in
+  // June."
   function varietyLine(food, fv, year, today) {
     if (!fv.variety || food.varieties.length < 2) return "";
     var others = fv.varieties.filter(function (r) { return r !== fv.variety; });
-    var head = (fv.variety.name || food.name) + ", " + fv.verdict.toLowerCase() + ".";
+    var head = varietySaid(food, fv.variety.v) + ", " + fv.verdict.toLowerCase() + ".";
     var rest = others.map(function (r) {
       var s = phrase(r, year, today);
-      return (r.name || food.name) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".";
+      return varietySaid(food, r.v) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".";
     });
     return [head].concat(rest).join(" ");
   }
 
   // --- The weekly digest --------------------------------------------------
+  // Foods in a list run A to Z by food, then by variety, so all the
+  // potatoes sit together.
+  function byFood(a, b) {
+    var x = a.name + " " + a.variety, y = b.name + " " + b.variety;
+    return x < y ? -1 : x > y ? 1 : 0;
+  }
   // Four lists for one week: arrived (YES, in-season run began within
   // NEW_WEEKS), last (chance: JUST), onway (NEARLY), still (great now:
   // the rest of YES). Each list is split by kind of food (veg, fruit,
   // wild, herbs, fish, meat, in the order of groups.yml) as [{kind,
   // items}], kinds with nothing in them left out. Within a kind, just
-  // arrived is newest first, and the others go by time left: the soonest
-  // to end or to arrive first, all-year foods last, names breaking ties.
-  // Each item names the variety that produced the verdict and carries
-  // its phrase. `today` defaults to the middle of the week asked about.
+  // arrived and great now run A to Z, and last chance and on the way by
+  // time left, soonest first, names breaking ties. Each item names the
+  // variety that produced the verdict, as a list shows it, and carries its
+  // phrase and its timing. `today` defaults to the middle of the week asked
+  // about.
   function nowLists(foods, groups, week, year, today) {
     today = today || midOfToday(week, year);
     var kindOf = {}, kinds = [];
@@ -361,11 +398,12 @@
       if (!v) return;
       var kind = kindOf[f.group] || "";
       if (kinds.indexOf(kind) < 0) kinds.push(kind);
+      var t = timing(v, year, today);
       var item = {
         slug: f.slug, name: f.name, colour: f.colour, group: f.group, kind: kind,
-        variety: v.name || "", verdict: fv.verdict,
+        variety: varietyLabel(v.v), verdict: fv.verdict,
         line: phrase(v, year, today), since: v.since === undefined ? null : v.since,
-        days: daysTo(v, year, today)
+        days: daysTo(v, year, today), when: t.when, early: t.early, whenDays: t.days
       };
       var list = null;
       if (fv.verdict === "YES" && !v.allYear && v.since < C.NEW_WEEKS) list = "arrived";
@@ -374,21 +412,19 @@
       else if (fv.verdict === "NEARLY") list = "onway";
       if (list) (buckets[list][kind] = buckets[list][kind] || []).push(item);
     });
-    var byName = function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; };
     var byDays = function (a, b) {
-      if (a.days === null && b.days === null) return byName(a, b);
+      if (a.days === null && b.days === null) return byFood(a, b);
       if (a.days === null) return 1;
       if (b.days === null) return -1;
-      return (a.days - b.days) || byName(a, b);
+      return (a.days - b.days) || byFood(a, b);
     };
-    var newest = function (a, b) { return (a.since - b.since) || byDays(a, b); };
     var out = {};
     Object.keys(buckets).forEach(function (list) {
       out[list] = [];
       kinds.forEach(function (k) {
         var items = buckets[list][k];
         if (!items) return;
-        items.sort(list === "arrived" ? newest : byDays);
+        items.sort(list === "arrived" || list === "still" ? byFood : byDays);
         out[list].push({ kind: k, items: items });
       });
     });
@@ -397,6 +433,26 @@
   // One list's items in one array, kinds in order.
   function flatten(list) {
     return list.reduce(function (all, k) { return all.concat(k.items); }, []);
+  }
+  // One list's items in one array, A to Z by food, then variety.
+  function azList(list) { return flatten(list).sort(byFood); }
+  // One list's items grouped by their timing, [{phrase, items}], for a
+  // list whose verdict is the same throughout (last chance, on the way):
+  // the timing is all that tells its foods apart. The phrase is the
+  // item's `when`; groups run soonest first, foods A to Z within a group.
+  function byPhrase(list) {
+    var groups = [], at = {};
+    flatten(list).forEach(function (i) {
+      if (!(i.when in at)) { at[i.when] = groups.length; groups.push({ phrase: i.when, days: i.whenDays, items: [] }); }
+      var g = groups[at[i.when]];
+      g.items.push(i);
+      if (i.whenDays !== null && (g.days === null || i.whenDays < g.days)) g.days = i.whenDays;
+    });
+    groups.sort(function (a, b) {
+      if (a.days === null || b.days === null) return (a.days === null) - (b.days === null);
+      return a.days - b.days;
+    });
+    return groups.map(function (g) { return { phrase: g.phrase, items: g.items.sort(byFood) }; });
   }
 
   // --- Quotations ------------------------------------------------------------
@@ -419,9 +475,10 @@
     weekOf: weekOf, startOfWeek: startOfWeek, endOfWeek: endOfWeek,
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,
-    ordinal: ordinal, fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange,
+    fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
     phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLine: varietyLine, daysTo: daysTo,
-    nowLists: nowLists, flatten: flatten, pickQuote: pickQuote
+    timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid,
+    nowLists: nowLists, flatten: flatten, azList: azList, byPhrase: byPhrase, pickQuote: pickQuote
   };
 }));

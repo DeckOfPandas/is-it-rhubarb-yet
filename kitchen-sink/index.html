@@ -1,0 +1,193 @@
+---
+title: Kitchen sink
+description: Every shared component in every state, for design review.
+permalink: /kitchen-sink/
+noindex: true
+---
+{%- comment -%}
+Every shared component, each in three columns: at rest, hovered and
+focused. The states are forced, not real: the script at the foot copies
+every :hover and :focus-visible rule in site.css onto the .is-hover and
+.is-focus columns, so a forced state is always the stylesheet's own and
+nothing here is styled twice. The components are the real ones, from
+their includes and classes, with foods picked from the baked verdicts.
+The search input needs the live hero, so its states are home itself in
+frames, by ?q=. Linked from nowhere, and noindex; tools/dev/shots.js
+photographs it.
+{%- endcomment -%}
+{%- assign baked = site.data.baked -%}
+{%- assign states = "rest,hover,focus" | split: "," -%}
+{%- assign verdicts = "YES,JUST,NEARLY,NO" | split: "," -%}
+{%- assign examples = "" | split: "" -%}
+{%- for v in verdicts -%}
+  {%- assign found = false -%}
+  {%- for f in site.data.foods -%}
+    {%- assign b = baked.foods[f.slug] -%}
+    {%- if found == false and b.verdict == v and f.slug != "rhubarb" -%}{%- assign found = f -%}{%- endif -%}
+  {%- endfor -%}
+  {%- assign examples = examples | push: found -%}
+{%- endfor -%}
+{%- assign never0 = site.data.never | first -%}
+{%- comment -%} A row with a variety, and one with an earlier timing, from
+   this week's lists. {%- endcomment -%}
+{%- assign with_variety = false -%}{%- assign with_early = false -%}
+{%- assign lists = "arrived,still,last,onway" | split: "," -%}
+{%- for key in lists -%}{%- for k in baked.now[key] -%}{%- for i in k.items -%}
+  {%- if with_variety == false and i.variety and i.variety != "" -%}{%- assign with_variety = i -%}{%- endif -%}
+  {%- if with_early == false and i.early and i.early != "" -%}{%- assign with_early = i -%}{%- endif -%}
+{%- endfor -%}{%- endfor -%}{%- endfor -%}
+{%- assign yes0 = examples[0] -%}
+{%- assign yb = baked.foods[yes0.slug] -%}
+<article class="kitchen-sink">
+<h1>Kitchen sink</h1>
+<p class="ks-lede">Every shared component, at rest, hovered and focused. The hover and focus columns are forced from the stylesheet's own rules.</p>
+
+<section class="ks-section">
+  <h2 class="ks-title">Food row</h2>
+  <div class="ks-states">
+  {%- for s in states -%}
+    <div class="ks-state is-{{ s }}">
+      <p class="ks-state-name">{{ s }}</p>
+      <ul class="food-list">
+        {%- include food-row.html item=yes0 verdict="YES" -%}
+        {%- include food-row.html item=yes0 verdict="YES" leader=false -%}
+        {%- include food-row.html item=yes0 verdict="YES" tag=false -%}
+        {%- if with_variety -%}{%- include food-row.html item=with_variety tag=false -%}{%- endif -%}
+        {%- if with_early -%}{%- include food-row.html item=with_early tag=false -%}{%- endif -%}
+        {%- include food-row.html item=never0 verdict="NEVER" never=true -%}
+      </ul>
+    </div>
+  {%- endfor -%}
+  </div>
+</section>
+
+<section class="ks-section">
+  <h2 class="ks-title">Verdict word: page, card and tag</h2>
+  <div class="ks-verdicts">
+    {%- for v in verdicts -%}{%- assign f = examples[forloop.index0] -%}
+    <span class="verdict-word" style="--food: {{ f.colour }}">{{ v }}.</span>
+    {%- endfor %}
+    <span class="verdict-word" style="--food: var(--never)">NEVER.</span>
+  </div>
+  <div class="ks-row">
+    {%- for v in verdicts -%}{%- assign f = examples[forloop.index0] -%}
+    <span class="one-result ks-bare" style="--food: {{ f.colour }}"><span class="one-word">{{ v }}.</span></span>
+    {%- endfor %}
+    <span class="one-result ks-bare" style="--food: var(--never)"><span class="one-word">NEVER.</span></span>
+  </div>
+  <div class="ks-row">
+    {%- for v in verdicts -%}{%- assign f = examples[forloop.index0] -%}
+    <span class="verdict-tag" style="--food: {{ f.colour }}">{{ v }}</span>
+    {%- endfor %}
+    <span class="verdict-tag" style="--food: var(--never)">NEVER</span>
+  </div>
+</section>
+
+<section class="ks-section">
+  <h2 class="ks-title">Card</h2>
+  {%- comment -%} is or are, by the rule of whenIn in assets/site.js. {%- endcomment -%}
+  {%- assign end1 = yes0.name | slice: -1, 1 -%}
+  {%- assign end2 = yes0.name | slice: -2, 2 -%}
+  {%- assign be = "is" -%}
+  {%- if yes0.name contains " & " -%}{%- assign be = "are" -%}
+  {%- elsif end1 == "s" and end2 != "ss" and end2 != "us" -%}{%- assign be = "are" -%}{%- endif -%}
+  <div class="ks-states">
+  {%- for s in states -%}
+    <div class="ks-state is-{{ s }}">
+      <p class="ks-state-name">{{ s }}</p>
+      <a class="one-result" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <span class="one-sub">When {{ be }} {{ yes0.name | downcase }} in season?</span><span class="one-dial" aria-hidden="true"></span><span class="one-go" aria-hidden="true">{% include icons/arrow.svg %}</span></a>
+    </div>
+  {%- endfor -%}
+  </div>
+  <div class="ks-row">
+    <div class="one-result is-never" style="--food: var(--never)"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ never0.name | downcase }}</span> yet?</span> <span class="one-word">NEVER.</span> <span class="one-line">{{ never0.line }}</span></span></div>
+  </div>
+</section>
+
+<section class="ks-section">
+  <h2 class="ks-title">Date phrase, labels</h2>
+  <p class="date-line">{{ yb.line }}</p>
+  <h3 class="teaser-label">Section label (home)</h3>
+  <div class="band"><h2>Section label (Now) <span class="count">12</span></h2></div>
+  <h3 class="group-label">Group label <span class="count">7</span></h3>
+  <h3 class="list-title">Everything</h3>
+</section>
+
+<section class="ks-section">
+  <h2 class="ks-title">Links and controls</h2>
+  <div class="ks-states">
+  {%- for s in states -%}
+    <div class="ks-state is-{{ s }}">
+      <p class="ks-state-name">{{ s }}</p>
+      <nav class="site-nav ks-nav" aria-label="Sample nav, {{ s }}">
+        <a href="{{ '/now/' | relative_url }}" aria-current="page">Now</a>
+        <a href="{{ '/calendar/' | relative_url }}">Calendar</a>
+        <a href="{{ '/wheel/' | relative_url }}">Wheel</a>
+        <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
+      </nav>
+      <p><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
+      <p class="teaser-foods"><a class="food-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}">{{ yes0.name }}</a> <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">and 4 more</span><span class="arrow" aria-hidden="true">→</span></a></p>
+      <p class="week-line"><button type="button" class="week-step" aria-label="Previous week">‹</button><span>{{ baked.range }}</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
+      <p class="week-line"><button type="button" class="week-step" aria-label="Previous week" disabled>‹</button><span>Last week in range</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
+      <div class="site-footer ks-footer">
+        <nav class="footer-links" aria-label="Sample footer links, {{ s }}">
+          <a href="{{ '/sources/' | relative_url }}">Source data</a>
+          <a href="{{ '/sources/' | relative_url }}#calendar-feed">Calendar feed</a>
+          <a href="{{ '/foods.json' | relative_url }}">JSON</a>
+        </nav>
+        <fieldset class="switch theme">
+          <legend>Theme</legend>
+          <input type="radio" name="ks-theme-{{ s }}" id="ks-theme-{{ s }}-light" value="light" aria-label="Light theme"><label for="ks-theme-{{ s }}-light">{% include icons/sun.svg %}</label>
+          <input type="radio" name="ks-theme-{{ s }}" id="ks-theme-{{ s }}-auto" value="auto" aria-label="Follow device" checked><label for="ks-theme-{{ s }}-auto">{% include icons/screen.svg %}Auto</label>
+          <input type="radio" name="ks-theme-{{ s }}" id="ks-theme-{{ s }}-dark" value="dark" aria-label="Dark theme"><label for="ks-theme-{{ s }}-dark">{% include icons/moon.svg %}</label>
+        </fieldset>
+      </div>
+    </div>
+  {%- endfor -%}
+  </div>
+</section>
+
+<section class="ks-section">
+  <h2 class="ks-title">Swatches</h2>
+  <p class="ks-row">
+    {%- for v in verdicts -%}{%- assign f = examples[forloop.index0] -%}<span class="swatch" style="--food: {{ f.colour }}" title="{{ f.name }}"></span> {% endfor -%}
+    <span class="swatch" style="--food: var(--rhubarb)" title="Rhubarb"></span> <span class="swatch" style="--food: var(--never)" title="Never"></span>
+  </p>
+</section>
+
+<section class="ks-section">
+  <h2 class="ks-title">Search input</h2>
+  <div class="ks-frames">
+    {%- assign frames = "At rest|,Focused|#search,Typing|?q=par,Completion|?q=avoc,NEVER|?q=banana,Unknown|?q=zzz" | split: "," -%}
+    {%- for fr in frames -%}{%- assign parts = fr | split: "|" -%}
+    <figure class="ks-frame">
+      <figcaption class="ks-state-name">{{ parts[0] }}</figcaption>
+      <iframe src="{{ '/' | relative_url }}{{ parts[1] }}" title="Home: {{ parts[0] }}" loading="eager"></iframe>
+    </figure>
+    {%- endfor -%}
+  </div>
+</section>
+</article>
+<script>
+  // The forced states: each :hover or :focus-visible rule is copied with
+  // the pseudo-class swapped for a column's class. Hover reaches anything
+  // in an .is-hover column; focus only what can take focus in an
+  // .is-focus column, as the ring does.
+  (function () {
+    var HOVER = ":is(.is-hover, .is-hover *)";
+    var FOCUS = ":is(.is-focus a[href], .is-focus button, .is-focus input, .is-focus summary)";
+    function copy(rules, into) {
+      Array.prototype.slice.call(rules).forEach(function (r) {
+        if (r.cssRules && !r.selectorText) { copy(r.cssRules, r); return; }
+        if (!r.selectorText || !/:hover|:focus-visible/.test(r.selectorText)) return;
+        var sel = r.selectorText.replace(/:hover/g, HOVER).replace(/:focus-visible/g, FOCUS);
+        try { into.insertRule(sel + " { " + r.style.cssText + " }", into.cssRules.length); } catch (e) {}
+      });
+    }
+    Array.prototype.forEach.call(document.styleSheets, function (sheet) {
+      try { copy(sheet.cssRules, sheet); } catch (e) {}
+    });
+    // A never-food's row is hidden in home's list until searched for.
+    document.querySelectorAll(".kitchen-sink .food-row[hidden]").forEach(function (li) { li.hidden = false; });
+  })();
+</script>

@@ -44,6 +44,23 @@ test("the week grid", () => {
   assert.equal(iso(V.midOfWeek({ week: 18, years: 0 }, 2026)), "2026-05-03", "week 18 starts 30 April and reads as May");
 });
 
+test("every food and every variety has a verdict and a date phrase in every week", () => {
+  const OK = new Set(["YES", "JUST", "NEARLY", "NO"]);
+  const missing = [];
+  for (const f of foods) {
+    for (let w = 1; w <= 52; w++) {
+      const today = V.midOfToday(w, YEAR);
+      const fv = V.foodVerdict(f, w);
+      if (!OK.has(fv.verdict)) missing.push(`${f.slug} week ${w}: verdict ${fv.verdict}`);
+      for (const r of fv.varieties) {
+        if (!OK.has(r.verdict)) missing.push(`${f.slug}/${r.name} week ${w}: verdict ${r.verdict}`);
+        if (!V.phrase(r, YEAR, today)) missing.push(`${f.slug}/${r.name} week ${w}: no phrase`);
+      }
+    }
+  }
+  assert.deepEqual(missing, []);
+});
+
 test("leap years: the grid is by day of year, week 52 takes nine days", () => {
   assert.equal(V.weekOf(new Date(2028, 11, 31)), 52);
   assert.equal(V.weekOf(new Date(2028, 11, 23)), 52);
@@ -66,7 +83,7 @@ test("rhubarb is NEARLY: forced rhubarb from 29 October, eleven days off", () =>
   assert.equal(fv.variety.name, "Forced");
   assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "In a week or two.");
-  assert.equal(V.varietyLine(bySlug.rhubarb, fv, YEAR, TODAY), "Forced, nearly. Outdoor: back in May.",
+  assert.equal(V.varietyLine(bySlug.rhubarb, fv, YEAR, TODAY), "Forced rhubarb, nearly. Outdoor rhubarb: back in May.",
     "outdoor rhubarb's week 18 starts on 30 April, but its middle is 3 May");
 });
 
@@ -86,7 +103,35 @@ test("potatoes are YES by maincrop until late December; new potatoes are back in
   assert.equal(fv.variety.name, "Maincrop");
   assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-12-31");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Until late December.");
-  assert.equal(V.varietyLine(bySlug.potatoes, fv, YEAR, TODAY), "Maincrop, yes. New: first ones in May, properly in June.");
+  assert.equal(V.varietyLine(bySlug.potatoes, fv, YEAR, TODAY), "Maincrop potatoes, yes. New potatoes: first ones in May, properly in June.");
+});
+
+test("a variety is named as a type or a cultivar, in a list and in a sentence", () => {
+  const v = (slug, name) => bySlug[slug].varieties.find((x) => x.name === name);
+  assert.equal(V.varietyLabel(v("rhubarb", "Forced")), "forced");
+  assert.equal(V.varietyLabel(v("cabbage", "Winter white")), "winter white");
+  assert.equal(V.varietyLabel(v("venison", "Red & Fallow")), "red & fallow");
+  assert.equal(V.varietyLabel(v("apples", "Cox")), "Cox");
+  assert.equal(V.varietyLabel(v("apples", "Egremont Russet")), "Egremont Russet");
+  assert.equal(V.varietyLabel({ name: "", weeks: [] }), "");
+  assert.equal(V.varietySaid(bySlug.rhubarb, v("rhubarb", "Forced")), "Forced rhubarb");
+  assert.equal(V.varietySaid(bySlug.rhubarb, v("rhubarb", "Forced"), true), "forced rhubarb");
+  assert.equal(V.varietySaid(bySlug.apples, v("apples", "Cox")), "Cox apples");
+  assert.equal(V.varietySaid(bySlug.apples, v("apples", "Cox"), true), "Cox apples", "a cultivar is never lower-cased");
+  assert.equal(V.varietySaid(bySlug.lamb, v("lamb", "New season")), "New-season lamb", "said wins");
+  assert.equal(V.varietySaid(bySlug.lamb, v("lamb", "New season"), true), "new-season lamb");
+  assert.equal(V.varietySaid(bySlug.venison, v("venison", "Roe & Muntjac"), true), "roe & muntjac venison");
+  ["apples", "pears"].forEach((slug) => bySlug[slug].varieties.forEach((x) => assert.equal(x.cultivar, true, slug + " " + x.name)));
+});
+
+test("a two-part arrival is grouped by when it is properly in", () => {
+  const t = (slug) => V.timing(verdictOf(slug).variety, YEAR, TODAY);
+  assert.deepEqual(t("jerusalem-artichokes"), { when: "In a week or two", early: "a few about now", days: 11 });
+  assert.equal(t("celery").when, "For another week or two");
+  assert.equal(t("celery").early, "");
+  const turkey = t("turkey");
+  assert.match(turkey.early, /^first ones /);
+  assert.ok(!/first ones|properly/i.test(turkey.when), turkey.when);
 });
 
 test("Jerusalem artichokes are NEARLY from a just-about week", () => {
@@ -94,7 +139,7 @@ test("Jerusalem artichokes are NEARLY from a just-about week", () => {
   assert.equal(fv.verdict, "NEARLY");
   assert.equal(fv.variety.state, "avail");
   assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Properly in within a week or two.");
+  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "A few about now, properly in a week or two.");
 });
 
 test("basil is JUST: a just-about tail to 28 October", () => {
@@ -203,15 +248,14 @@ test("ranking across varieties: YES beats JUST beats NEARLY beats NO; sooner win
 });
 
 test("calendar dates, for the as-of line and the week range only", () => {
-  assert.equal(V.fmtDate(new Date(2026, 9, 29)), "29th October");
-  assert.equal(V.fmtDate(new Date(2026, 3, 2)), "2nd April");
-  assert.equal(V.fmtDate(new Date(2026, 2, 3)), "3rd March");
-  assert.equal(V.fmtDate(new Date(2026, 10, 11)), "11th November");
-  assert.equal(V.fmtDate(new Date(2026, 10, 21)), "21st November");
-  assert.equal(V.fmtDateYear(TODAY), "18th October 2026");
-  assert.equal(V.fmtRange(42, 2026), "15th to 21st October");
-  assert.equal(V.fmtRange(5, 2026), "29th January to 4th February");
-  assert.equal(V.fmtRange(52, 2026), "24th to 31st December");
+  assert.equal(V.fmtDate(new Date(2026, 9, 29)), "29 October");
+  assert.equal(V.fmtDate(new Date(2026, 3, 2)), "2 April");
+  assert.equal(V.fmtDate(new Date(2026, 10, 21)), "21 November");
+  assert.equal(V.fmtDateYear(TODAY), "18 October 2026");
+  assert.equal(V.fmtRange(42, 2026), "15–21 October");
+  assert.equal(V.fmtRange(5, 2026), "29 January – 4 February");
+  assert.equal(V.fmtRange(52, 2026), "24–31 December");
+  assert.equal(V.fmtRange(1, 2027), "1–7 January");
 });
 
 test("the weekly digest for week 42: four lists, by kind, by time left", () => {
@@ -233,17 +277,16 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
     assert.deepEqual(kinds, order.filter((k) => kinds.includes(k)), name + " is in kind order");
     assert.equal(new Set(kinds).size, kinds.length);
   });
-  // Within a kind, last chance and on the way run soonest first, and great
-  // now puts all-year foods last.
+  // Within a kind, last chance and on the way run soonest first; just
+  // arrived and great now run A to Z by food, then variety.
   const ascending = (items) => items.every((it, i) => i === 0 || items[i - 1].days === null ||
     (it.days !== null && items[i - 1].days <= it.days) || it.days === null);
   now.last.forEach((k) => assert.ok(ascending(k.items), "last chance " + k.kind));
   now.onway.forEach((k) => assert.ok(ascending(k.items), "on the way " + k.kind));
-  now.still.forEach((k) => {
-    assert.ok(ascending(k.items), "great now " + k.kind);
-    const firstAllYear = k.items.findIndex((i) => i.days === null);
-    if (firstAllYear >= 0) assert.ok(k.items.slice(firstAllYear).every((i) => i.days === null), "all year last in " + k.kind);
-  });
+  const keys = (items) => items.map((i) => i.name + " " + i.variety);
+  now.arrived.concat(now.still).forEach((k) => assert.deepEqual(keys(k.items), keys(k.items).slice().sort(), k.kind + " is A to Z"));
+  // A variety is named as a list shows it.
+  assert.equal(V.flatten(now.onway).find((i) => i.slug === "rhubarb").variety, "forced");
   // Lines are the new phrasing, never a calendar date.
   V.flatten(now.last).concat(V.flatten(now.onway), V.flatten(now.still)).forEach((i) => {
     assert.ok(!/\d/.test(i.line), i.name + ": " + i.line);
@@ -256,6 +299,29 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
   const plain = V.nowLists(foods, [], WEEK, YEAR, TODAY);
   assert.equal(plain.last.length, 1);
   assert.equal(plain.last[0].kind, "");
+});
+
+test("last chance and on the way group by one timing, soonest first, A to Z within", () => {
+  const now = V.nowLists(foods, groups, WEEK, YEAR, TODAY);
+  ["last", "onway"].forEach((name) => {
+    const grouped = V.byPhrase(now[name]);
+    const phrases = grouped.map((g) => g.phrase);
+    assert.equal(new Set(phrases).size, phrases.length, name + ": each timing once");
+    assert.equal(grouped.reduce((n, g) => n + g.items.length, 0), V.flatten(now[name]).length, name + ": every food once");
+    grouped.forEach((g) => {
+      g.items.forEach((i) => assert.equal(i.when, g.phrase));
+      assert.ok(!/first ones|properly|about now/i.test(g.phrase), name + ": " + g.phrase + " is one timing");
+      const names = g.items.map((i) => i.name + " " + i.variety);
+      assert.deepEqual(names, names.slice().sort(), name + " " + g.phrase + " is A to Z");
+    });
+    const soonest = grouped.map((g) => Math.min(...g.items.map((i) => (i.whenDays === null ? Infinity : i.whenDays))));
+    soonest.forEach((d, i) => assert.ok(i === 0 || soonest[i - 1] <= d, name + " groups run soonest first"));
+  });
+  const last = V.byPhrase(now.last);
+  assert.ok(last.find((g) => g.phrase === "For another week or two").items.some((i) => i.slug === "celery"));
+  const onway = V.byPhrase(now.onway);
+  assert.ok(onway.find((g) => g.phrase === "In a week or two").items.some((i) => i.slug === "jerusalem-artichokes"));
+  assert.deepEqual(V.byPhrase([]), []);
 });
 
 test("quotations are stable for a food for a week and prefer pinned lines", () => {
