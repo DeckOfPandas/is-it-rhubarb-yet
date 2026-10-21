@@ -4,7 +4,7 @@
 // apps keep the first preview they fetch, so the date on the card lets an
 // old preview read like a dated newspaper rather than a wrong answer. The
 // home and Now cards carry the week's three lines, as the home page does:
-// just arrived, great now, last chance, a random handful of each.
+// just arrived, great this week, last chance, a random handful of each.
 //
 // It also draws the favicon and the app icon, into _site/icons.
 //
@@ -103,7 +103,7 @@ function sample(items) {
 }
 function lines(baked) {
   const first = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
-  const specs = [first, ["still", "Great now"], ["last", "Last chance"]];
+  const specs = [first, ["still", "Great this week"], ["last", "Last chance"]];
   return `<div class="lines">` + specs.map(([key, label]) => {
     const all = V.flatten(baked.now[key] || []);
     if (!all.length) return "";

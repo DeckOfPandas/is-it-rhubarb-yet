@@ -23,15 +23,25 @@ Now have cards of their own; every other page shows the home card.
     {%- capture description -%}{{ b.word }}. {{ b.line | remove: "." }}{% if b.said != "" %} ({{ b.said }}){% endif %}. As of {{ baked.asofText }}.{%- endcapture -%}
     {%- capture alt -%}{{ title }} {{ b.line }} As of {{ baked.asofText }}.{%- endcapture -%}
   {%- endif -%}
+  {%- comment -%} A food page's <title> and meta description ask when it
+     is in season; the link preview (og: and twitter:) keeps the answer.
+     {%- endcomment -%}
+  {%- if page.collection == "foods" -%}
+    {%- capture page_title -%}{% include when-in.html name=thing.name %}{%- endcapture -%}
+    {%- assign page_title = page_title | strip -%}
+    {%- capture meta_description -%}{{ page_title }} {{ description | strip }}{%- endcapture -%}
+  {%- endif -%}
 {%- endif -%}
+{%- assign page_title = page_title | default: title -%}
+{%- assign meta_description = meta_description | default: description -%}
 {%- unless alt -%}{%- assign alt = description | strip -%}{%- endunless -%}
 <!doctype html>
 <html lang="{{ site.lang }}" data-baked-week="{{ baked.week }}" data-baked-year="{{ baked.year }}" data-baked-asof="{{ baked.asof }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if title %}{{ title }}{% if page.url != '/' %} · {{ site.title }}{% endif %}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{{ description | strip | escape }}">
+  <title>{% if page_title %}{{ page_title }}{% if page.url != '/' %} · {{ site.title }}{% endif %}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ meta_description | strip | escape }}">
   <meta property="og:title" content="{{ title | default: site.title | escape }}">
   <meta property="og:description" content="{{ description | strip | escape }}">
   <meta property="og:type" content="website">
@@ -66,19 +76,30 @@ Now have cards of their own; every other page shows the home card.
 <body>
   {%- comment -%} The nav and the magnifier sit at the right of every page,
      home included, so nothing moves between pages. On home the hero
-     question is the logo, so the header has no wordmark and no line under
-     it; elsewhere the wordmark is on the left. The magnifier goes to home's
-     input, focused. {%- endcomment -%}
+     question is the logo, so the header has no wordmark; elsewhere the
+     wordmark is on the left, and it is the search, as the hero is: its
+     RHUBARB is the input's placeholder, and a click anywhere on it puts
+     the caret there. Without JavaScript it is a form that asks home. The
+     header sticks to the top of every page. The magnifier goes to the
+     wordmark's input (on home, to the hero's). {%- endcomment -%}
   <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
       {%- if page.url != '/' -%}
-      {%- comment -%} The logo: RHUBARB in rhubarb's pink, underlined in it. {%- endcomment -%}
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Is it rhubarb yet? Home">Is it <span class="brand-rhubarb">rhubarb</span> yet?</a>
+      <form class="brand head-search" role="search" method="get" action="{{ '/' | relative_url }}">
+        <label class="brand-line" for="head-input">
+          <span class="hook-word">Is it</span>
+          <span class="hook-slot"><input class="hook-input" id="head-input" name="q" type="search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+            enterkeyhint="go" placeholder="rhubarb" aria-label="Search foods" aria-autocomplete="both" size="7"></span>
+          <span class="hook-word">yet?</span>
+        </label>
+        <button type="submit" class="visually-hidden">Search</button>
+      </form>
       {%- endif -%}
       <nav class="site-nav" aria-label="Site">
         <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>
         <a href="{{ '/calendar/' | relative_url }}"{% if page.url == '/calendar/' %} aria-current="page"{% endif %}>Calendar</a>
         <a href="{{ '/wheel/' | relative_url }}"{% if page.url == '/wheel/' %} aria-current="page"{% endif %}>Wheel</a>
+        <a class="about-link" href="{{ '/about/' | relative_url }}" aria-label="About"{% if page.url == '/about/' %} aria-current="page"{% endif %}>??</a>
         <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
       </nav>
     </div>
@@ -86,9 +107,9 @@ Now have cards of their own; every other page shows the home card.
   <main>
     {{ content }}
   </main>
-  {%- comment -%} Every label in the footer is set as the nav is: small
-     caps in Atkinson 700, muted, a pink underline only on hover or focus.
-     Top to bottom: the data links, About, the theme switch, GitHub, the
+  {%- comment -%} Every word in the footer is caps, Atkinson 700, muted;
+     every text link in it is underlined in pink at all times. Top to
+     bottom: the data links, About, the theme switch, GitHub, the
      licences, the as-of date, the signature. {%- endcomment -%}
   <footer class="site-footer">
     <nav class="footer-links" aria-label="About this site">
@@ -102,15 +123,15 @@ Now have cards of their own; every other page shows the home card.
        moon say nothing to a screen reader. {%- endcomment -%}
     <fieldset class="switch theme" data-remember="theme">
       <legend>Theme</legend>
-      <input type="radio" name="theme" id="theme-light" value="light" aria-label="Light theme"><label for="theme-light">{% include icons/sun.svg %}</label>
+      <input type="radio" name="theme" id="theme-light" value="light" aria-label="Light theme"><label class="seg-icon" for="theme-light">{% include icons/sun.svg %}</label>
       <input type="radio" name="theme" id="theme-auto" value="auto" aria-label="Follow device" checked><label for="theme-auto">{% include icons/screen.svg %}Auto</label>
-      <input type="radio" name="theme" id="theme-dark" value="dark" aria-label="Dark theme"><label for="theme-dark">{% include icons/moon.svg %}</label>
+      <input type="radio" name="theme" id="theme-dark" value="dark" aria-label="Dark theme"><label class="seg-icon" for="theme-dark">{% include icons/moon.svg %}</label>
     </fieldset>
     <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="GitHub">{% include icons/github.svg %}</a>
     {%- comment -%} Three parts in three spans, so a narrow screen breaks
        between them and never inside one. {%- endcomment -%}
     <p class="licence">
-      <span>Code: <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/blob/main/LICENSE">MIT</a></span>
+      <span>Code: <a href="https://opensource.org/license/mit">MIT</a></span>
       <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
       <span>&copy; {{ site.time | date: "%Y" }}</span>
     </p>
@@ -120,5 +141,8 @@ Now have cards of their own; every other page shows the home card.
   </footer>
   <script src="{{ '/assets/verdict.js' | relative_url }}"></script>
   <script src="{{ '/assets/site.js' | relative_url }}"></script>
+  {%- if page.charts %}
+  <script src="{{ '/assets/charts.js' | relative_url }}"></script>
+  {%- endif %}
 </body>
 </html>

@@ -6,7 +6,7 @@ permalink: /now/
 {%- comment -%}
 The weekly digest, four lists in the order a cook reads them: just
 arrived, A to Z; last chance and on the way, under their phrases,
-soonest first; great now, a closed disclosure per kind of food. The
+soonest first; great this week, a group per kind of food. The
 build-day week is baked here from _data/baked.json; site.js redraws the
 lists from foods.json whenever the page was not baked today, and for
 another week, building the same markup as band.html. Without JavaScript
@@ -24,13 +24,13 @@ the baked week shows, dated.
     <button type="button" class="week-step" id="prev-week" aria-label="Previous week" hidden>‹</button>
     <span id="week-dates">{{ baked.range }}</span>
     <button type="button" class="week-step" id="next-week" aria-label="Next week" hidden>›</button>
+    <a class="arrow-link week-back" id="week-back" href="{{ '/now/' | relative_url }}" hidden><span class="arrow-text">Back to this week</span>{% include icons/arrow-right.svg class="arrow" %}</a>
   </p>
-  <p class="week-back" id="week-back" hidden><a href="{{ '/now/' | relative_url }}">Back to this week</a></p>
 </header>
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
   {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived shape="plain" az=baked.az.arrived -%}
   {%- include band.html cls="last" heading="Last chance" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
   {%- include band.html cls="onway" heading="On the way" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
-  {%- include band.html cls="still" heading="Great now" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}
+  {%- include band.html cls="still" heading="Great this week" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}
 </div>

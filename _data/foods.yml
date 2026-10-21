@@ -24,6 +24,11 @@
 #          alias belongs to one food; tools/check-foods.py enforces it.
 # also: optional, broader words a food should answer to as well, shared
 #       between foods: every fungus answers to "mushrooms".
+# short: optional, a calendar row's name on a phone (below 700px) and
+#        nowhere else, 17 characters at most, in the plural sentence form
+#        ("Bramley apples") and never an invented name. On a variety it is the whole
+#        row's name ("Calabrese"); on a food it replaces the food's name in
+#        its rows, a named variety still following in brackets.
 # Variety names appear as written, mid-sentence too ("Venison Red &
 # Fallow"), so proper nouns keep their capitals and the rest are lower-case
 # after the first letter.
@@ -111,6 +116,7 @@
         - [18, 22, avail]
         - [23, 39, in]
     - name: "Maincrop"
+      short: "Maincrop potatoes"
       colour: "#a74d00"
       weeks:
         - [36, 39, avail]
@@ -126,6 +132,7 @@
       weeks:
         - [14, 48, in]
     - name: "Mooli"
+      short: "Mooli"
       said: "Mooli"
       colour: "#718385"
       weeks:
@@ -176,6 +183,7 @@
   note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
   varieties:
     - name: "Calabrese"
+      short: "Calabrese"
       said: "Calabrese"
       colour: "#008944"
       weeks:
@@ -183,6 +191,7 @@
         - [23, 43, in]
         - [44, 48, avail]
     - name: "Purple sprouting"
+      short: "Purple broccoli"
       colour: "#973fcc"
       weeks:
         - [1, 4, avail]
@@ -190,6 +199,7 @@
 
 - name: "Brussels sprouts"
   slug: brussels-sprouts
+  short: "Sprouts"
   group: brassicas
   colour: "#5e7f00"
   source: ncgm
@@ -218,6 +228,7 @@
         - [14, 30, avail]
         - [31, 52, in]
     - name: "Winter white"
+      short: "White cabbage"
       colour: "#709166"
       weeks:
         - [31, 35, avail]
@@ -475,6 +486,7 @@
 
 - name: "Runner & French beans"
   slug: runner-french-beans
+  short: "Green beans"
   group: shoots
   colour: "#00823d"
   source: ncgm
@@ -508,6 +520,7 @@
 
 - name: "Globe artichokes"
   slug: globe-artichokes
+  short: "Artichokes"
   group: shoots
   colour: "#4b765f"
   source: ncgm
@@ -663,12 +676,14 @@
   note: "NCGM lists eight varieties; three early-eater rows (Early Windsor, Golden Delicious, Royal Gala) are left out. NCGM marks Discovery as only 'available' in August and September; here August is in season, as it is sold."
   varieties:
     - name: "Discovery"
+      short: "Discovery apples"
       cultivar: true
       colour: "#ed5100"
       weeks:
         - [31, 35, in]
         - [36, 39, avail]
     - name: "Bramley"
+      short: "Bramley apples"
       cultivar: true
       colour: "#50931f"
       weeks:
@@ -679,12 +694,14 @@
       weeks:
         - [36, 43, in]
     - name: "Egremont Russet"
+      short: "Russet apples"
       cultivar: true
       colour: "#815e00"
       weeks:
         - [36, 39, avail]
         - [40, 43, in]
     - name: "Braeburn"
+      short: "Braeburn apples"
       cultivar: true
       colour: "#cb000e"
       weeks:
@@ -732,6 +749,7 @@
   source: ncgm
   varieties:
     - name: "Williams"
+      short: "Williams pears"
       cultivar: true
       colour: "#869000"
       weeks:
@@ -739,6 +757,7 @@
         - [36, 39, in]
         - [40, 43, avail]
     - name: "Conference"
+      short: "Conference pears"
       cultivar: true
       colour: "#3e781d"
       weeks:
@@ -783,6 +802,7 @@
 
 - name: "Blackcurrants & Redcurrants"
   slug: blackcurrants-redcurrants
+  short: "Currants"
   group: soft
   colour: "#a02fb1"
   source: ncgm
@@ -842,11 +862,13 @@
   note: "BBC Good Food has rhubarb January to June with no forced/outdoor split."
   varieties:
     - name: "Forced"
+      short: "Forced rhubarb"
       colour: "#ff2d78"
       weeks:
         - [1, 13, in]
         - [44, 52, in]
     - name: "Outdoor"
+      short: "Outdoor rhubarb"
       colour: "#b92c62"
       weeks:
         - [18, 30, in]
@@ -1206,6 +1228,7 @@
 
 - name: "Marjoram & Oregano"
   slug: marjoram-oregano
+  short: "Oregano"
   group: herbs
   colour: "#7d7202"
   source: general
@@ -1670,6 +1693,7 @@
   source: general
   varieties:
     - name: "New season"
+      short: "New-season lamb"
       said: "New-season lamb"
       colour: "#d8655d"
       weeks:
@@ -1812,11 +1836,13 @@
   note: "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season."
   varieties:
     - name: "Red & Fallow"
+      short: "Red & fallow"
       colour: "#b83500"
       weeks:
         - [1, 17, in]
         - [31, 52, in]
     - name: "Roe & Muntjac"
+      short: "Roe & muntjac"
       colour: "#b06958"
       weeks:
         - [1, 52, in]

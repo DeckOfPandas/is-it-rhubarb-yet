@@ -1,7 +1,9 @@
 // The design-review screenshot set: full-page shots of the kitchen sink,
 // home in each search state, a food page for every verdict and kind, Now
-// for this week and next, the calendar, the wheel, About and the 404, at
-// 390 and 1280 wide, light and dark, with the clock frozen on one day.
+// for this week and next, the calendar and the wheel (at today, at
+// mid-December and with SUMMER pressed; the wheel on All, as it opens,
+// and Veg at mid-December), About and the 404, at
+// 390, 820 and 1280 wide, light and dark, with the clock frozen on one day.
 //
 // USAGE:
 //   node tools/dev/shots.js [--base <url>] [--date YYYY-MM-DD] [--out <dir>] [--full yes]
@@ -28,7 +30,7 @@ const fs = require('fs');
 const path = require('path');
 const V = require('../../assets/verdict.js');
 
-const WIDTHS = [390, 1280];
+const WIDTHS = [390, 820, 1280];
 const THEMES = ['light', 'dark'];
 
 function parse(argv) {
@@ -91,6 +93,9 @@ async function pickFoods(base, day) {
         try {
           await page.goto(opts.base + url, { waitUntil: 'networkidle' });
           if (act) await act();
+          // A full-page shot draws the sticky header where the screen was
+          // scrolled to, so every shot is taken from the top.
+          await page.evaluate(() => window.scrollTo(0, 0));
           await page.waitForTimeout(400);
           await page.screenshot({ path: file, fullPage: true });
           count++;
@@ -118,8 +123,20 @@ async function pickFoods(base, day) {
         await page.click('#next-week');
         await page.waitForLoadState('networkidle');
       } });
+      const summer = async () => {
+        await page.click('.season-btn[data-season="summer"]');
+        await page.waitForLoadState('networkidle');
+      };
       await shot('calendar', 'calendar/', { both: true });
-      await shot('wheel', 'wheel/');
+      await shot('calendar-mid-december', 'calendar/?when=mid-december', { both: true });
+      await shot('calendar-summer', 'calendar/', { both: true, act: summer });
+      await shot('wheel', 'wheel/', { both: true });
+      await shot('wheel-mid-december', 'wheel/?when=mid-december', { both: true });
+      await shot('wheel-summer', 'wheel/', { both: true, act: summer });
+      await shot('wheel-veg-mid-december', 'wheel/?when=mid-december', { both: true, act: async () => {
+        await page.click('label[for="kind-veg"]');
+        await page.waitForLoadState('networkidle');
+      } });
       await shot('about', 'about/');
       await shot('404', 'not-a-food-at-all/');
       await context.close();
