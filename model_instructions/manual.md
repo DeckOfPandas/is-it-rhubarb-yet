@@ -241,8 +241,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   45px, controls 136px, month row 53px) is 234px, 29% of the screen.
 - **Header search.** On every page but home the wordmark is the search,
   as the hero is: `#head-input`, named "Search foods", is RHUBARB's
-  placeholder, and a click or tap anywhere on IS IT RHUBARB YET? puts
-  the caret there. It no longer links home. It is the hero's own field
+  placeholder, and a click or tap on RHUBARB puts the caret there. IS IT
+  and YET? stay links home (one tab stop, named Home; YET? is hidden from
+  screen readers and the tab order). It is the hero's own field
   (`hookField` in `site.js`): capitals, the faded completion (Tab, End,
   → accept), the word and underline in the food's colour on one tier
   1–2 match, a long word shrinking to fit the header. It matches

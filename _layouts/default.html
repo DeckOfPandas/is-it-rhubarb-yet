@@ -77,9 +77,9 @@ Now have cards of their own; every other page shows the home card.
   {%- comment -%} The nav and the magnifier sit at the right of every page,
      home included, so nothing moves between pages. On home the hero
      question is the logo, so the header has no wordmark; elsewhere the
-     wordmark is on the left, and it is the search, as the hero is: its
-     RHUBARB is the input's placeholder, and a click anywhere on it puts
-     the caret there. Without JavaScript it is a form that asks home. The
+     wordmark is on the left, and its RHUBARB is the search, as the hero
+     is: the input's placeholder. IS IT and YET? are links home (one tab
+     stop, named Home). Without JavaScript it is a form that asks home. The
      header sticks to the top of every page. The magnifier goes to the
      wordmark's input (on home, to the hero's). {%- endcomment -%}
   <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
@@ -87,10 +87,10 @@ Now have cards of their own; every other page shows the home card.
       {%- if page.url != '/' -%}
       <form class="brand head-search" role="search" method="get" action="{{ '/' | relative_url }}">
         <label class="brand-line" for="head-input">
-          <span class="hook-word">Is it</span>
+          <a class="hook-word" href="{{ '/' | relative_url }}" aria-label="Home">Is it</a>
           <span class="hook-slot"><input class="hook-input" id="head-input" name="q" type="search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
             enterkeyhint="go" placeholder="rhubarb" aria-label="Search foods" aria-autocomplete="both" size="7"></span>
-          <span class="hook-word">yet?</span>
+          <a class="hook-word" href="{{ '/' | relative_url }}" tabindex="-1" aria-hidden="true">yet?</a>
         </label>
         <button type="submit" class="visually-hidden">Search</button>
       </form>
