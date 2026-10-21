@@ -621,7 +621,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     every food on one wheel (`arrivals-dial.html` with `kind="all"`).
     The page opens on All. Seven kinds fit a 390px phone.
   - **In season or whole year.** Every wheel's In season · Whole year
-    switch, In season by default. In season: only the foods in season
+    switch, Whole year by default. In season: only the foods in season
     (YES or JUST) at the line's time keep their names and have their
     arcs at full strength, over the faint rest, changing as the line
     moves. Whole year: every name, every arc at full strength, wherever
