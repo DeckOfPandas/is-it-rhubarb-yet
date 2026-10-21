@@ -1,0 +1,19 @@
+---
+layout: null
+---
+{%- comment -%}
+One food's calendar, at /remind/<slug>.ics: its season starts, as the
+whole-site feed has them (_includes/ics-events.html), named for the food
+so a calendar app lists it as "Rhubarb season". The page is a stub under
+_remind/ naming the slug.
+{%- endcomment -%}
+{%- assign food = site.data.foods | where: "slug", page.slug | first -%}
+{%- assign year = site.time | date: "%Y" -%}
+{%- assign jan1 = year | append: "-01-01" | date: "%s" | plus: 0 %}
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Is It Rhubarb Yet//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:{{ food.name }} season
+{% include ics-events.html food=food jan1=jan1 -%}
+END:VCALENDAR

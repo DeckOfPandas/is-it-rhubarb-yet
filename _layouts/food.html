@@ -120,7 +120,7 @@ colour.
     {%- if keys == "" -%}{%- assign keys = "" | split: "" | push: food.source -%}{%- endif -%}
     <p class="source">{% if keys.size > 1 %}Sources{% else %}Source{% endif %}: {% for k in keys -%}
       {%- assign s = site.data.sources | where: "key", k | first -%}
-      {%- if s.url != "" %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name | default: k }}{% endif -%}
+      {%- if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name | default: k }}{% endif -%}
       {%- unless forloop.last -%}; {% endunless -%}
     {%- endfor -%}. <a href="{{ '/sources/' | relative_url }}">About the sources</a>.</p>
     <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
@@ -128,4 +128,14 @@ colour.
 
   <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search"><span class="arrow-text">Ask about something else</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
   <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}"><span class="arrow-text">See the whole year</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
+  {%- comment -%} The food's own calendar of season starts, to subscribe
+     to: webcal:// for Apple's Calendar and most others, Google's own
+     subscribe link (Google does not open webcal://), the file itself, and
+     every food's at once. Not for a food that cannot be sold. {%- endcomment -%}
+  {%- unless food.unsold -%}
+  {%- capture feed -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/remind/{{ food.slug }}.ics{%- endcapture -%}
+  {%- capture every -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/season-starts.ics{%- endcapture -%}
+  <p class="onwards"><a class="arrow-link" href="{{ feed }}"><span class="arrow-text">Put {{ food.name | downcase }} in your calendar</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
+  <p class="calendar-also">Or <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">in Google Calendar</a>, as <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">a file</a>, or <a href="{{ every }}">every food's season</a> at once. About <a href="{{ '/sources/' | relative_url }}#calendar-feed">the calendar feeds</a>.</p>
+  {%- endunless -%}
 </article>

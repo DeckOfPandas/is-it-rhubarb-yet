@@ -1,5 +1,5 @@
-"""Validate the data files: _data/foods.yml, groups.yml, never.yml, quotes.yml
-and the _foods/ and _never/ stubs.
+"""Validate the data files: _data/foods.yml, groups.yml, never.yml, quotes.yml,
+sources.yml and the _foods/, _remind/ and _never/ stubs.
 
 usage: python3 -I tools/check-foods.py
 
@@ -33,6 +33,7 @@ NEVER_FILE = ROOT / "_data" / "never.yml"
 QUOTES_FILE = ROOT / "_data" / "quotes.yml"
 SOURCES_FILE = ROOT / "_data" / "sources.yml"
 STUBS = ROOT / "_foods"
+REMIND = ROOT / "_remind"
 NEVER_STUBS = ROOT / "_never"
 VERDICTS = {"yes", "nearly", "just", "no", "never"}
 STATES = {"in", "avail", "store"}
@@ -215,6 +216,7 @@ def main() -> int:
     colours = {}
     aliases = {}
     stubs = {p.stem for p in STUBS.glob("*.md")}
+    reminders = {p.stem for p in REMIND.glob("*.ics")}
     never_stubs = {p.stem for p in NEVER_STUBS.glob("*.md")} if NEVER_STUBS.exists() else set()
 
     for f in foods:
@@ -245,6 +247,8 @@ def main() -> int:
         check_short(f, where, problems, warnings)
         if slug not in stubs:
             problems.append(f"{where}: no _foods/{slug}.md stub")
+        if slug not in reminders:
+            problems.append(f"{where}: no _remind/{slug}.ics stub")
         if not f.get("varieties"):
             problems.append(f"{where}: no varieties")
         variety_colours = []
@@ -308,6 +312,8 @@ def main() -> int:
 
     for extra in sorted(stubs - slugs):
         problems.append(f"_foods/{extra}.md: no such food in the data file")
+    for extra in sorted(reminders - slugs):
+        problems.append(f"_remind/{extra}.ics: no such food in the data file")
 
     # Never-foods: their own slugs and aliases, clashing with nothing.
     never_slugs = set()

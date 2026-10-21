@@ -1,0 +1,42 @@
+{%- comment -%}
+The calendar events for one food: one all-day event, repeating yearly, on
+the first day of each fully-in-season run of each ring that gives the
+verdict (not another coast, a glasshouse or a wild ring beside a market
+one); none for a food that cannot be sold. A run that carries on from
+week 52 into week 1 is one season, which starts in its autumn run, not
+again on 1 January. Each event's UID is the food, the ring and which of
+the ring's seasons it is ("rhubarb-forced-1@is-it-rhubarb-yet"), not its
+date, so a calendar updates the event when the date moves rather than
+adding another. Expects: food, jan1 (1 January of the build year, in
+seconds). Tags trim only the whitespace after themselves so that each
+property keeps its own line.
+{%- endcomment -%}
+{% unless include.food.unsold -%}
+{% assign food = include.food -%}
+{% assign vlabels = site.data.baked.labels[food.slug] -%}
+{% for v in food.varieties -%}
+{% if v.lead == false -%}{% continue -%}{% endif -%}
+{% assign vlabel = vlabels[forloop.index0] -%}
+{% assign wraps = false -%}
+{% for r in v.weeks -%}{% if r[2] == "in" and r[1] == 52 -%}{% assign wraps = true -%}{% endif -%}{% endfor -%}
+{% assign n = 0 -%}
+{% for r in v.weeks -%}
+{% if r[2] == "in" -%}
+{% if r[0] == 1 and wraps and r[1] != 52 -%}{% continue -%}{% endif -%}
+{% assign n = n | plus: 1 -%}
+{% assign offset = r[0] | minus: 1 | times: 604800 -%}
+{% assign start = include.jan1 | plus: offset | date: "%Y%m%d" -%}
+{% assign stop = include.jan1 | plus: offset | plus: 86400 | date: "%Y%m%d" -%}
+BEGIN:VEVENT
+UID:{{ food.slug }}{% if v.name != "" %}-{{ v.name | slugify }}{% endif %}-{{ n }}@is-it-rhubarb-yet
+DTSTAMP:{{ site.time | date: "%Y%m%dT%H%M%SZ" }}
+DTSTART;VALUE=DATE:{{ start }}
+DTEND;VALUE=DATE:{{ stop }}
+RRULE:FREQ=YEARLY
+SUMMARY:In season: {{ food.name }}{% if vlabel != "" %} ({{ vlabel }}){% endif %}
+DESCRIPTION:Week {{ r[0] }} to {{ r[1] }}. {{ site.url }}{{ site.baseurl }}/{{ food.slug }}/
+END:VEVENT
+{% endif -%}
+{% endfor -%}
+{% endfor -%}
+{% endunless -%}

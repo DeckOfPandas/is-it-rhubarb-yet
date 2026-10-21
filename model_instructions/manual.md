@@ -130,7 +130,34 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   `about.html`, Helen's copy, reached from the signature hearts in the
   footer; its food count and dinner food come from the data. Data
   endpoints: `foods.json`, `search.json` (what the not-found page's
-  suggestions match against), `season-starts.ics`.
+  suggestions match against), `season-starts.ics`, and each food's own
+  calendar, `/remind/<slug>.ics`.
+- **Calendar feeds.** One all-day event, repeating yearly, at the start of
+  each in-season run of each ring that gives the verdict.
+  - **The shared include:** `_includes/ics-events.html`, used by both the
+    whole-site feed (`season-starts.ics`) and each food's (layout
+    `remind.ics`, from a stub per food in `_remind/`, which
+    `check-foods.py` requires).
+  - **Year-end runs:** a run that carries on from week 52 into week 1 is
+    one season, starting in its autumn run.
+  - **Stable UIDs:** a UID names the food, the ring and which of its
+    seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), not its date,
+    so a calendar updates a moved event rather than adding another.
+  - **Wild salmon:** no events.
+  - **The food page:** "Put rhubarb in your calendar →" (a `webcal://`
+    link, which Apple Calendar and most apps take as subscribe), then a
+    small line with Google Calendar's own subscribe link (it does not
+    open `webcal://`), the file, and every food's feed.
+  - **The Sources page** offers the whole feed the same three ways.
+- **Source data page** (`sources/index.html`) is Helen's copy:
+  - where each kind of food's dates come from;
+  - the foraging footnote;
+  - the JSON;
+  - the calendar feeds;
+  - the full list of sources by kind.
+
+  `_data/sources.yml` names each source as that list does, for each
+  food page's "Sources:" line.
 - Includes: `food-row.html` (one food in a list, one link: swatch,
   name, variety in brackets, an earlier timing, and with `tag` and
   `leader` on, the default, the verdict tag right-aligned at the row's
