@@ -93,6 +93,9 @@ async function pickFoods(base, day) {
         try {
           await page.goto(opts.base + url, { waitUntil: 'networkidle' });
           if (act) await act();
+          // A full-page shot draws the sticky header where the screen was
+          // scrolled to, so every shot is taken from the top.
+          await page.evaluate(() => window.scrollTo(0, 0));
           await page.waitForTimeout(400);
           await page.screenshot({ path: file, fullPage: true });
           count++;
