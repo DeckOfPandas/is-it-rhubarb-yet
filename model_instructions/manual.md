@@ -299,7 +299,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     left, in order: the question ("IS IT BASIL YET?", or "Cox apples"
     for a variety), the verdict, the date line (a sentence, with its
     full stop), then an action, "Tell me everything about apples →",
-    ink with an arrow, the food's name in its sentence form (lower
+    ink with an arrow, its words (not the arrow) underlined in pink at
+    rest, 2px on hover or focus, the food's name in its sentence form (lower
     case), the one link, to the food's page. On the right, alone and
     centred, a 110px miniature of the dial with today's hand. The
     question, verdict and date line share the food page's rules
@@ -496,7 +497,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     heading (at once with reduced motion) and gives it focus, and hides.
     Hidden under a docked popover. A wheel short enough that its list's
     heading is always on screen with it (a phone) never shows it. There
-    is no readout in the calendar's corner.
+    is no readout in the calendar's corner. Once the chart is wholly
+    above the screen, down in the list, the same pill in the same place
+    says "BACK TO TOP ↑": it goes to the top of the page (at once with
+    reduced motion) and focuses the page's title. A chart page's footer
+    has room under the signature so the pill never sits on it.
   - **The list under the chart** opens with Now's own header: the title
     ("In season this week", or "In season in mid-January", Anton
     `title`) over the stepper, "‹ 11–20 January ›": the third of the

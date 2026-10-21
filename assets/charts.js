@@ -4,7 +4,8 @@
 // the foods for its time are listed under the chart, under a heading
 // with a stepper of its own; TODAY brings it back. While the chart is on
 // screen a pink button at the foot of the screen counts what is in
-// season and jumps to the list. On the calendar a magnifier spreads the
+// season and jumps to the list; down in the list, another takes you back
+// to the top. On the calendar a magnifier spreads the
 // weeks round the line and squeezes the rest, and the four season
 // buttons jump to mid-season and zoom in; on a phone its names column is
 // fitted to its longest name. The wheel never turns; In season names and
@@ -447,8 +448,25 @@
   jump.appendChild(el("span", "tt-jump-arrow", " ↓")).setAttribute("aria-hidden", "true");
   jump.addEventListener("click", toList);
   var chartSeen = false, headSeen = false, headWatch = null;
+  // Back to top, the same pill with "Back to top ↑", in the same place
+  // once the chart is wholly above the screen, down in the list. Pressed,
+  // it goes to the top of the page (at once with reduced motion) and
+  // gives the page's title focus.
+  var up = el("button", "tt-jump tt-up caps");
+  up.type = "button";
+  up.hidden = true;
+  up.appendChild(el("span", "tt-jump-text", "Back to top"));
+  up.appendChild(el("span", "tt-jump-arrow", " ↑")).setAttribute("aria-hidden", "true");
+  up.addEventListener("click", function () {
+    var title = document.querySelector("main h1");
+    window.scrollTo({ top: 0, behavior: still.matches ? "auto" : "smooth" });
+    if (title) { title.setAttribute("tabindex", "-1"); title.focus({ preventScroll: true }); }
+  });
   function showJump() {
-    jump.hidden = !foods || !chartSeen || headSeen || !!(pop && pop.classList.contains("is-docked"));
+    var docked = !!(pop && pop.classList.contains("is-docked"));
+    jump.hidden = !foods || !chartSeen || headSeen || docked;
+    var chart = root.querySelector(".ordered");
+    up.hidden = !jump.hidden || docked || chart.getBoundingClientRect().bottom > S.headerHeight();
   }
   function toList() {
     var head = listBox.querySelector(".tt-list-title");
@@ -752,6 +770,13 @@
     if (document.fonts) document.fonts.ready.then(fitNames);
     narrow.addEventListener("change", fitNames);
     document.body.appendChild(jump);
+    document.body.appendChild(up);
+    var queued = false;
+    window.addEventListener("scroll", function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; showJump(); });
+    }, { passive: true });
     if (window.IntersectionObserver) {
       new IntersectionObserver(function (entries) {
         chartSeen = entries.some(function (e) { return e.isIntersecting; });

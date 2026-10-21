@@ -426,7 +426,10 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .one-result .one-ask { display: block; margin: 0; font-size: var(--fs-label); letter-spacing: var(--track-small); }
 .one-result .one-word { display: block; margin-top: var(--sp-1); font-size: var(--fs-title); line-height: 1; padding-top: 0; white-space: normal; }
 .one-result .one-line { display: block; margin: var(--sp-1) 0 0; }
+/* On a card the action's words are underlined in pink at rest too, 1px,
+   2px on hover or focus; the arrow never is. */
 .one-more { grid-area: more; align-self: start; }
+.one-more .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
 .one-more.is-active .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .one-dial { grid-area: dial; width: 110px; height: 110px; }
 .one-dial .wheel { display: block; width: 100%; margin: 0; }
@@ -675,9 +678,15 @@ article.never { --food: var(--never); }
   [data-tt="calendar"] .cal a.row { scroll-margin-top: calc(var(--header-h) + var(--tt-controls-h, 0px) + var(--cal-head-h, 0px)); }
 }
 .cal a.row { scroll-margin-top: calc(var(--header-h) + var(--cal-head-h, 0px)); }
-/* The floating button: a pink pill fixed at the foot of the screen,
-   centred, dark caps, "81 IN SEASON IN LATE NOVEMBER ↓", 44px tall. It
-   shows while the chart is on screen and the list's heading is not. */
+/* The floating buttons: a pink pill fixed at the foot of the screen,
+   centred, dark caps, 44px tall. "81 IN SEASON IN LATE NOVEMBER ↓"
+   shows while the chart is on screen and the list's heading is not;
+   "BACK TO TOP ↑" in its place once the chart is above the screen. The
+   title it returns to takes focus without a ring, unless by keyboard. */
+main h1:focus:not(:focus-visible) { outline: none; }
+/* Room under the footer on a chart's page, so the pill never sits on
+   the signature at the very end. */
+body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var(--sp-2)); }
 .tt-jump {
   position: fixed; z-index: 15; left: 50%; bottom: calc(var(--sp-2) + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--sp-2); max-width: calc(100vw - 2 * var(--sp-2));
