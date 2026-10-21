@@ -79,6 +79,45 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   from the New Covent Garden Market PDF and is kept for provenance. It
   knows none of the hand edits since (the palette, the cultivars, the
   names): rerunning it overwrites them.
+- `tools/merge-bundle.py` merged the 21 October 2026 season bundle
+  (`seasons.json`, `sustainability.json`, `sources.json`) and
+  `colours.yml` into `foods.yml` once, and wrote `_data/sources.yml`; it
+  is kept for provenance and must not be rerun on today's file. What it
+  did and why is in its docstring:
+  - **States:** months on the 4-4-5 week split, and the new `store` state.
+  - **Rings:** rings as varieties, with `ring` and `lead: false`.
+  - **What stayed Helen's:** her windows for the foraged plants she
+    already had, and her Discovery row.
+  - **Changes:** snipe dropped, wild salmon `unsold`, fish `buy` lines
+    from the Good Fish Guide, and every colour and text colour from
+    `colours.yml`.
+- **Rings.** A food's `varieties` are its rings. A named variety or type
+  has its own colour; a ring of the food itself (`ring: region`,
+  `method`, `zone` or `part`) shares the food's (or its variety's) and is
+  named in the variety line by itself, "Glasshouse: all year."
+  - **`lead: false`:** the ring is drawn on the food's dial, listed in
+    its data and said in its variety line, but gives no verdict, no
+    calendar row, no wheel dot, no search hit and no calendar-feed
+    event. Rings marked this way:
+    - every coast but a fish's South West, where it has one;
+    - glasshouse rings;
+    - a wild ring beside a market or cultivated one;
+    - provenance (Welsh, salt marsh), Orkney, the Cornish sardine
+      fishery, and the national native and Porthilly rock oysters.
+  - **Coasts in the variety line:** said as places, "Just in the South
+    West, but yes in the North East, nearly in the South East and yes
+    nationally."
+  - **Stores and wild salmon:** a `store` week answers YES, its date
+    line "From storage until late August." (between two YES, in season
+    beats from store; never "just arrived"). Wild salmon is `unsold`:
+    always NO, its line "It cannot be sold in England, Wales or
+    Scotland."
+  - **Drawing stores:** the calendar and the food's dial draw a store run
+    flat, the colour 30% into the grey.
+  - **Sources:** a food's page names its sources from `sources.yml`,
+    linked.
+  - **Fungi:** a group of their own, wild and cultivated, on the Wild
+    wheel.
 - A renamed food keeps its old address as a page that forwards:
   `grey-squirrel/index.html` sends `/grey-squirrel/` to `/squirrel/`,
   and the checker keeps that slug from ever being a food's.
@@ -142,9 +181,20 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   cards, the NEVER in a lone search result, the hero's completion, and
   the hero's word and underline on a lone never-food match. They never fall back to the pink. The
   colour is a token at the top of `assets/site.css` and a constant in
-  `tools/cards.js`; there is no colours file.
-- Every food colour passes 3:1 on both backgrounds, so a verdict word
-  is simply set in `--food`. "Today" is drawn in ink: the food page
+  `tools/cards.js`.
+- Every food and variety colour (from `colours.yml`, 21 October 2026)
+  reaches 3.15:1 on both backgrounds and stays clear of the rhubarb
+  pink, so a verdict word is simply set in `--food`.
+  - **Text colours:** no colour can reach 4.5:1 on both backgrounds.
+    Where `colour` falls short as text, the food has `text_on_shed` and
+    `text_on_custard`: the same hue at 4.6:1. A food's name set in its
+    colour at text size (`.food-link`: home's teasers, "Also:", "ALL
+    YEAR:") takes `--food-custard` in light and `--food-shed` in dark,
+    or the colour itself where there is none.
+  - **Rows:** they keep their names in ink.
+  - **The checker:** `tools/check-foods.py` fails a colour under 3.15:1,
+    a text colour under 4.5:1, or a missing text colour where one is
+    needed. "Today" is drawn in ink: the food page
   dial's hand, and on the calendar and the wheel a short ink tick that
   never moves (hidden on the calendar while the pink time line is on
   today itself).
@@ -429,7 +479,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - Foods in lists: inline lists (`.food-link`: the teasers, "Also:",
     the wheel's "ALL YEAR:")
     set the name in the food's colour; rows (`.food-row`) keep the name
-    in ink beside the swatch, since a food colour passes 3:1, not the
+    in ink beside the swatch, since a food colour passes 3.15:1, not the
     4.5:1 body text needs. Both underline on hover or focus, in the
     food's colour, never the variety or timing, never changing weight
     or size. SVG text draws its underline in its own fill, so the
@@ -756,7 +806,8 @@ Each an open issue:
 
 - Reaching for a plugin, a gem, npm or a raster image. Every one has
   been refused so far and will be again.
-- Editing `_data/foods.yml` by hand and then running `make-foods.py`.
+- Editing `_data/foods.yml` by hand and then running `make-foods.py`,
+  or running `merge-bundle.py` again: both were one-offs.
 - Writing verdict logic anywhere but `assets/verdict.js`. The Liquid
   templates only read `_data/baked.json`.
 - Building with `bundle exec jekyll build` alone and wondering why the

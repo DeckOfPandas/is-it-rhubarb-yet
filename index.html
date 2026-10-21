@@ -53,8 +53,8 @@ site.js adds the varieties from foods.json), the names it completes to
       {%- assign more = all.size | minus: pick.size -%}
       <section class="teaser">
         <h2 class="teaser-label">{{ parts[1] }}</h2>
-        {%- capture all_json -%}[{% for i in all %}{"slug":{{ i.slug | jsonify }},"name":{{ i.name | jsonify }},"colour":{{ i.colour | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
-        <p class="teaser-foods" data-all='{{ all_json | escape }}' data-band="{{ key }}">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#{{ key }}"><span class="arrow-text">and {{ more }} more</span>{% include icons/arrow-right.svg class="arrow" %}</a>{% endif %}</p>
+        {%- capture all_json -%}[{% for i in all %}{"slug":{{ i.slug | jsonify }},"name":{{ i.name | jsonify }},"colour":{{ i.colour | jsonify }},"textShed":{{ i.textShed | jsonify }},"textCustard":{{ i.textCustard | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
+        <p class="teaser-foods" data-all='{{ all_json | escape }}' data-band="{{ key }}">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}{% if item.textShed != "" %}; --food-shed: {{ item.textShed }}{% endif %}{% if item.textCustard != "" %}; --food-custard: {{ item.textCustard }}{% endif %}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#{{ key }}"><span class="arrow-text">and {{ more }} more</span>{% include icons/arrow-right.svg class="arrow" %}</a>{% endif %}</p>
       </section>
       {%- endif -%}
     {%- endfor -%}

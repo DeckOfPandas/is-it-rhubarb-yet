@@ -5,7 +5,7 @@ permalink: /search.json
 {%- comment -%}
 What the not-found page's suggestions and the header's search match
 against: every food and never-food with its name, the names its varieties
-are said by, its aliases, the broader words it also answers to (terms),
+are said by (not its rings: a coast, a glasshouse), its aliases, the broader words it also answers to (terms),
 the names a typed word completes to besides its own (names: its
 aliases), and the baked verdict for the build day.
 {%- endcomment -%}
@@ -15,7 +15,7 @@ aliases), and the baked verdict for the build day.
   {%- assign b = baked.foods[food.slug] -%}
   {%- assign terms = "" | split: "" | push: food.name -%}
   {%- for v in food.varieties -%}
-    {%- if v.name != "" -%}
+    {%- if v.name != "" and v.ring == nil -%}
       {%- assign lower = food.name | downcase -%}
       {%- assign said = v.name | append: " " | append: lower -%}
       {%- if v.said -%}{%- assign said = v.said -%}{%- endif -%}

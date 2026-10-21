@@ -411,7 +411,13 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    sized to the text it follows and sitting on its x-height. */
 .arrow-link .arrow { display: inline-block; width: 1.05em; height: 0.63em; margin-left: 0.35em; vertical-align: 0.05em; overflow: visible; }
 .arrow-link.more-link { white-space: nowrap; }
-.food-link { color: var(--food); text-decoration: none; }
+/* A food's name set in its colour at text size takes the food's text
+   colour for the theme (--food-custard light, --food-shed dark), the same
+   hue made darker or lighter to 4.5:1 where its colour falls short; the
+   colour itself where it does not. */
+.food-link { --food-ink: var(--food-custard, var(--food)); color: var(--food-ink); text-decoration: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .food-link { --food-ink: var(--food-shed, var(--food)); } }
+:root[data-theme="dark"] .food-link { --food-ink: var(--food-shed, var(--food)); }
 .food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 /* What is typed, answered where the this-week blocks were. Two or more
    matches: the count in their label's style and place, then the rows in
@@ -530,6 +536,7 @@ article.never { --food: var(--never); }
 .runs { list-style: none; padding: 0; margin: var(--sp-2) 0; }
 .runs li { margin: var(--sp-1) 0; }
 .runs .swatch { margin-right: var(--sp-1); }
+.runs .ring-note { color: var(--muted); font-size: var(--fs-small); }
 .note, .source, .as-of { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
 .suggest { margin: var(--sp-4) 0 0; }
 .onwards { margin: var(--sp-4) 0 0; }
@@ -608,6 +615,8 @@ article.never { --food: var(--never); }
 .chart .cell { shape-rendering: crispEdges; }
 .chart .cell.in { fill: var(--c); }
 .chart .cell.avail { fill: color-mix(in oklab, var(--c) 45%, var(--off)); }
+/* Sold from store: the colour faded well into the grey, flat. */
+.chart .cell.store { fill: color-mix(in oklab, var(--c) 30%, var(--off)); }
 .chart .stop-off { stop-color: var(--off); }
 .chart .stop-c { stop-color: var(--c); }
 .chart .row-hit { fill: transparent; }
@@ -633,6 +642,7 @@ article.never { --food: var(--never); }
 .wheel .off { stroke: var(--off); }
 .wheel .in { stroke: var(--c); }
 .wheel .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), var(--off)); }
+.wheel .store { stroke: color-mix(in oklab, var(--c) 30%, var(--off)); }
 .wheel .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
 .wheel .spoke { stroke: var(--bg); stroke-width: 2; }
 .wheel .month { fill: var(--muted); font-family: var(--text); font-size: 12px; font-weight: 700; letter-spacing: var(--track-caps); text-transform: uppercase; }

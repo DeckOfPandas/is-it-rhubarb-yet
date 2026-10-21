@@ -202,6 +202,14 @@
     return a;
   }
 
+  // A food's colour, and its text colours for the two themes where it has
+  // them, on a node that names it (site.css picks one by theme).
+  function foodColours(node, colour, shed, custard) {
+    node.style.setProperty("--food", colour);
+    if (shed) node.style.setProperty("--food-shed", shed);
+    if (custard) node.style.setProperty("--food-custard", custard);
+  }
+
   // A home teaser's foods: STRIP_PICK of them at random, each a link in its
   // colour, then "and N more →", which links to its band on Now.
   function fillTeaser(p, items, band) {
@@ -211,7 +219,7 @@
       if (n) p.appendChild(document.createTextNode(", "));
       var a = el("a", "food-link", i.name);
       a.href = foodUrl(i.slug);
-      a.style.setProperty("--food", i.colour);
+      foodColours(a, i.colour, i.textShed, i.textCustard);
       p.appendChild(a);
     });
     var more = items.length - pick.length;
@@ -817,9 +825,10 @@
     var alsoLine = document.getElementById("also-line");
     // What can be found: every food and never-food in the A to Z list, by
     // its name, aliases and shared words, completing to its name or an
-    // alias; its row, verdict and line come from the list. Each named
-    // variety joins once foods.json is in, by its own name and how it is
-    // said ("cox", "forced rhubarb"), and shows as "Apples (Cox)".
+    // alias; its row, verdict, line and colours come from the list. Each
+    // named variety (not a ring: a coast, a glasshouse) joins once
+    // foods.json is in, by its own name and how it is said ("cox",
+    // "forced rhubarb"), and shows as "Apples (Cox)".
     var lineOf = {}, ringOf = {};
     function terms(list) { return list.map(function (s) { return words(fold(s)); }); }
     var index = rows.map(function (li) {
@@ -829,6 +838,7 @@
         strings: terms(li.dataset.terms.split("|").filter(Boolean)),
         names: (li.dataset.names || "").split("|").filter(Boolean),
         colour: function () { return getComputedStyle(li).getPropertyValue("--food").trim(); },
+        ink: function () { var s = getComputedStyle(li); return [s.getPropertyValue("--food-shed").trim(), s.getPropertyValue("--food-custard").trim()]; },
         verdict: function () { return li.dataset.verdict; },
         line: function () { return lineOf[li.dataset.slug] || li.dataset.line; },
         ring: function () { return ringOf[li.dataset.slug]; },
@@ -841,12 +851,13 @@
         lineOf[f.slug] = V.dateLine(fv.variety, YEAR, TODAY);
         ringOf[f.slug] = f.varieties.indexOf(fv.variety.v);
         fv.varieties.forEach(function (r, k) {
-          if (!r.v.name) return;
+          if (!r.v.name || r.v.ring) return;
           var said = V.varietySaid(f, r.v), label = V.varietyLabel(r.v);
           index.push({
             name: f.name, label: label, slug: f.slug, ask: V.varietySaid(f, r.v, true),
             strings: terms([r.v.name, said]), names: [r.v.name, said],
             colour: function () { return r.colour; },
+            ink: function () { return r.v.colour ? [r.v.text_on_shed, r.v.text_on_custard] : [f.text_on_shed, f.text_on_custard]; },
             verdict: function () { return r.verdict; },
             line: function () { return V.dateLine(r, YEAR, TODAY); },
             ring: function () { return k; },
@@ -953,7 +964,7 @@
             if (i) alsoLine.appendChild(document.createTextNode(", "));
             var a = el("a", "food-link", h.it.name + (h.it.label ? " (" + h.it.label + ")" : ""));
             a.href = foodUrl(h.it.slug);
-            a.style.setProperty("--food", h.it.colour());
+            foodColours(a, h.it.colour(), h.it.ink()[0], h.it.ink()[1]);
             alsoLine.appendChild(a);
             picks.push(a);
           });

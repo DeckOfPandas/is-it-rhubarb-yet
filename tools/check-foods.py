@@ -8,10 +8,16 @@ needs anyway) and handed over as JSON. Exit status is non-zero on any
 problem, with one line per problem. Warnings are printed but do not fail.
 
 Colour rules, from the design scheme: every food, variety and shade colour
-reaches 3:1 contrast on both theme backgrounds (fail) and 3.15:1 (warn),
-because the verdict word is set in it; no food but rhubarb sits within 10
-OKLab units (x100) of either candidate brand pink; two varieties of one
-food within 12 of each other get a warning.
+reaches 3.15:1 contrast on both theme backgrounds, because the verdict word
+is set in it; where it falls short of 4.5:1 on one, a text colour for that
+background (text_on_shed, text_on_custard) is given and reaches 4.5:1 there,
+for a food's name set as ordinary-sized text. No food but rhubarb sits
+within 10 OKLab units (x100) of the brand pink; two varieties
+of one food within 12 of each other get a warning. Rings of one food
+(ring: region, method, zone or part) share its colour, or their variety's.
+
+Sources: a food has `source` (one key) or `sources` (a list), and a ring
+may have its own `sources`; every key is one in _data/sources.yml.
 """
 
 import json
@@ -25,11 +31,12 @@ DATA = ROOT / "_data" / "foods.yml"
 GROUPS_FILE = ROOT / "_data" / "groups.yml"
 NEVER_FILE = ROOT / "_data" / "never.yml"
 QUOTES_FILE = ROOT / "_data" / "quotes.yml"
+SOURCES_FILE = ROOT / "_data" / "sources.yml"
 STUBS = ROOT / "_foods"
 NEVER_STUBS = ROOT / "_never"
-SOURCES = {"ncgm", "bbc", "basc", "ffs", "general"}
 VERDICTS = {"yes", "nearly", "just", "no", "never"}
-STATES = {"in", "avail"}
+STATES = {"in", "avail", "store"}
+RINGS = {"region", "method", "zone", "part"}
 COLOUR = re.compile(r"^#[0-9a-f]{6}$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
@@ -42,10 +49,10 @@ RESERVED_SLUGS = {"now", "calendar", "wheel", "about", "sources", "foods",
 
 SHED = "#16110e"
 CUSTARD = "#fbf3d9"
-BRAND_PINKS = ("#ff2d78", "#ff045e")
+BRAND_PINKS = ("#ff2d78",)
 SHORT_MAX = 17
-CONTRAST_FAIL = 3.0
-CONTRAST_WARN = 3.15
+CONTRAST_FAIL = 3.15
+TEXT_CONTRAST = 4.5
 PINK_DISTANCE = 10.0
 VARIETY_DISTANCE = 12.0
 
@@ -105,13 +112,43 @@ def check_colour(colour, label, problems, warnings, food_slug=None):
         ratio = contrast(colour, bg)
         if ratio < CONTRAST_FAIL:
             problems.append(f"{label}: {colour} is {ratio:.2f}:1 on {name}, below {CONTRAST_FAIL}:1")
-        elif ratio < CONTRAST_WARN:
-            warnings.append(f"{label}: {colour} is {ratio:.2f}:1 on {name}, below {CONTRAST_WARN}:1")
     if food_slug != "rhubarb":
         for pink in BRAND_PINKS:
             d = distance(colour, pink)
             if d < PINK_DISTANCE:
                 problems.append(f"{label}: {colour} is {d:.1f} from the brand pink {pink}; pink belongs to rhubarb")
+
+
+def check_text_colours(item, label, problems):
+    """Where an item's own colour is under 4.5:1 on a background, its text
+    colour for that background is given and reaches 4.5:1 there."""
+    colour = item.get("colour")
+    for name, bg in (("shed", SHED), ("custard", CUSTARD)):
+        key = "text_on_" + name
+        if key in item:
+            if not COLOUR.match(str(item[key])):
+                problems.append(f"{label}: {key} must be #rrggbb lowercase")
+            elif contrast(item[key], bg) < TEXT_CONTRAST:
+                problems.append(f"{label}: {key} {item[key]} is {contrast(item[key], bg):.2f}:1, below {TEXT_CONTRAST}:1")
+        elif colour and COLOUR.match(str(colour)) and contrast(colour, bg) < TEXT_CONTRAST:
+            problems.append(f"{label}: {colour} is {contrast(colour, bg):.2f}:1 on {name}, so it needs {key}")
+
+
+def check_sources(item, label, problems, warnings, known):
+    """`source` or `sources` name keys in sources.yml; general warns."""
+    keys = ([item["source"]] if "source" in item else []) + list(item.get("sources") or [])
+    for k in keys:
+        if k not in known:
+            problems.append(f"{label}: unknown source {k!r}")
+    if "general" in keys:
+        warnings.append(f"{label}: source is general knowledge, still to be checked")
+    return keys
+
+
+def check_notes(item, label, problems):
+    """`notes`, when present, is a list of sentences."""
+    if "notes" in item and not (isinstance(item["notes"], list) and all(isinstance(n, str) and n.strip() for n in item["notes"])):
+        problems.append(f"{label}: notes must be a list of sentences")
 
 
 def check_shades(item, label, problems, warnings, slug):
@@ -171,6 +208,7 @@ def main() -> int:
     foods = load(DATA)
     groups = {g["key"] for g in load(GROUPS_FILE)}
     never = load(NEVER_FILE) if NEVER_FILE.exists() else []
+    known = {s["key"] for s in load(SOURCES_FILE)}
     problems = []
     warnings = []
     slugs = set()
@@ -182,9 +220,11 @@ def main() -> int:
     for f in foods:
         where = f.get("name", "?")
         slug = f.get("slug")
-        for key in ("name", "slug", "group", "colour", "source", "varieties"):
+        for key in ("name", "slug", "group", "colour", "varieties"):
             if key not in f:
                 problems.append(f"{where}: missing {key}")
+        if "source" not in f and not f.get("sources"):
+            problems.append(f"{where}: missing source or sources")
         if not SLUG.match(slug or ""):
             problems.append(f"{where}: bad slug {slug!r}")
         if slug in RESERVED_SLUGS:
@@ -194,11 +234,12 @@ def main() -> int:
         slugs.add(slug)
         if f.get("group") not in groups:
             problems.append(f"{where}: unknown group {f.get('group')!r}")
-        if f.get("source") not in SOURCES:
-            problems.append(f"{where}: unknown source {f.get('source')!r}")
-        if f.get("source") == "general":
-            warnings.append(f"{where}: source is general knowledge, still to be checked")
+        check_sources(f, where, problems, warnings, known)
+        check_notes(f, where, problems)
+        if "unsold" in f and not (isinstance(f["unsold"], str) and f["unsold"].strip()):
+            problems.append(f"{where}: unsold must be a sentence")
         check_colour(f.get("colour", ""), where, problems, warnings, slug)
+        check_text_colours(f, where, problems)
         check_shades(f, where, problems, warnings, slug)
         check_aliases(f, where, problems, aliases, slug)
         check_short(f, where, problems, warnings)
@@ -214,6 +255,14 @@ def main() -> int:
                 continue
             if "colour" in v:
                 check_colour(v["colour"], label, problems, warnings, slug)
+                check_text_colours(v, label, problems)
+            if "ring" in v and v["ring"] not in RINGS:
+                problems.append(f"{label}: ring is one of {sorted(RINGS)}")
+            if "lead" in v and v["lead"] is not False:
+                problems.append(f"{label}: lead is false or left out")
+            if "sources" in v:
+                check_sources({"sources": v["sources"]}, label, problems, [], known)
+            check_notes(v, label, problems)
             if "said" in v and not (isinstance(v["said"], str) and v["said"].strip()):
                 problems.append(f"{label}: said must be a phrase")
             if "said" in v and not v.get("name"):
@@ -226,6 +275,9 @@ def main() -> int:
             check_aliases(v, label, problems, aliases, slug)
             check_short(v, label, problems, warnings)
             row_colour = v.get("colour", f.get("colour"))
+            # A ring shares its food's colour, or its variety's.
+            if v.get("ring"):
+                continue
             if row_colour in colours and colours[row_colour].split(" / ")[0] != where:
                 problems.append(f"{label}: same colour as {colours[row_colour]}")
             colours[row_colour] = label

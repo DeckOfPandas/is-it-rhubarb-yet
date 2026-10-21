@@ -8,7 +8,9 @@ of each fully-in-season run, repeating yearly. Dates are computed from the
 build year; the yearly rule keeps them valid afterwards. Tags trim only the
 whitespace after themselves so that each property keeps its own line. A
 variety is named as a list names it, from the baked labels: "Rhubarb
-(forced)", "Apples (Cox)".
+(forced)", "Apples (Cox)". Only rings that give the verdict have events
+(not another coast, a glasshouse or a wild ring beside a market one), and
+a food that cannot be sold has none.
 {%- endcomment -%}
 {%- assign year = site.time | date: "%Y" -%}
 {%- assign jan1 = year | append: "-01-01" | date: "%s" | plus: 0 %}
@@ -18,9 +20,11 @@ PRODID:-//Is It Rhubarb Yet//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:UK seasons
 {% for food in site.data.foods -%}
+{% if food.unsold -%}{% continue -%}{% endif -%}
 {% assign fslug = food.slug -%}
 {% assign vlabels = site.data.baked.labels[fslug] -%}
 {% for v in food.varieties -%}
+{% if v.lead == false -%}{% continue -%}{% endif -%}
 {% assign vix = forloop.index0 -%}
 {% assign vlabel = vlabels[vix] -%}
 {% for r in v.weeks -%}
