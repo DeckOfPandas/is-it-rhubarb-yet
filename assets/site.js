@@ -356,6 +356,20 @@
     document.querySelectorAll('input[name="order"]').forEach(function (r) { r.addEventListener("change", scroll); });
   }
 
+  // The sticky header's height, rule included, as --header-h: what sticks
+  // below it sits there, and what is jumped to stops there.
+  function measureHeader() {
+    var header = document.querySelector(".site-header");
+    if (!header || !window.ResizeObserver) return;
+    new ResizeObserver(function () {
+      document.documentElement.style.setProperty("--header-h", header.getBoundingClientRect().height + "px");
+    }).observe(header);
+  }
+  function headerHeight() {
+    var header = document.querySelector(".site-header");
+    return header ? header.getBoundingClientRect().height : 0;
+  }
+
   // A food page links to the calendar with #<slug>: the rows of that food
   // are marked and the chart scrolls to the first visible one.
   function targetRow() {
@@ -929,12 +943,12 @@
     // the input and the page stays where it is. On home itself the
     // magnifier goes back up to the input.
     // On a phone, focus brings the input's line near the top of the
-    // screen, a little room above it, so the keyboard does not cover the
-    // results.
+    // screen, a little room between it and the header, so the keyboard
+    // does not cover the results.
     function still() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
     input.addEventListener("focus", function () {
       if (!stacked.matches) return;
-      var top = slot.getBoundingClientRect().top + window.scrollY - 16;
+      var top = slot.getBoundingClientRect().top + window.scrollY - headerHeight() - 16;
       window.scrollTo({ top: Math.max(0, top), behavior: still() ? "auto" : "smooth" });
     });
     if (location.hash === "#search" || location.hash === "#hook-input") input.focus({ preventScroll: true });
@@ -1100,6 +1114,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    measureHeader();
     document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, WEEK); });
     document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, TODAY); });
     fitDials();
@@ -1123,6 +1138,7 @@
   window.Site = {
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
-    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest
+    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest,
+    headerHeight: headerHeight
   };
 })();

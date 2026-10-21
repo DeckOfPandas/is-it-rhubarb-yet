@@ -586,7 +586,7 @@
       if (y + h > vh - 16) y = rect.top - 8 - h;
     }
     x = Math.max(16, Math.min(x, vw - 16 - w));
-    y = Math.max(16, Math.min(y, vh - 16 - h));
+    y = Math.max(S.headerHeight() + 16, Math.min(y, vh - 16 - h));
     pop.style.left = (x + window.scrollX) + "px";
     pop.style.top = (y + window.scrollY) + "px";
   }
@@ -643,10 +643,19 @@
     document.querySelectorAll('input[name="order"], input[name="kind"]').forEach(function (r) { r.addEventListener("change", draw); });
     var controls = document.getElementById("tt-controls");
     controls.hidden = false;
-    // The calendar's header sticks under its controls on a wide screen.
-    if (!WHEEL && window.ResizeObserver) new ResizeObserver(function () {
-      root.style.setProperty("--tt-controls-h", controls.getBoundingClientRect().height + "px");
-    }).observe(controls);
+    // The calendar's header sticks under its controls on a wide screen,
+    // and a row the keyboard reaches stops under both. Only the chart on
+    // show has a header with a height.
+    if (!WHEEL && window.ResizeObserver) {
+      new ResizeObserver(function () {
+        root.style.setProperty("--tt-controls-h", controls.getBoundingClientRect().height + "px");
+      }).observe(controls);
+      root.querySelectorAll(".chart-head").forEach(function (h) {
+        new ResizeObserver(function () {
+          if (h.offsetHeight) root.style.setProperty("--cal-head-h", h.offsetHeight + "px");
+        }).observe(h);
+      });
+    }
     root.classList.add("is-live");
     var want = new URL(location.href).searchParams.get("when");
     var at = null;

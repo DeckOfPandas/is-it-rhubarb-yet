@@ -111,7 +111,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - Switches are radio groups. CSS `:has()` shows the chosen variant.
   Only the theme is remembered; the order and kind switches open on
   their default every visit (home by family, calendar by start, wheel
-  on veg). Nothing on the site needs
+  on All). Every toggle is one build, `.switch` in `assets/site.css`:
+  a 32px pill, the chosen segment marked in ink by a 26px pill (a 26px
+  disc for an icon alone, `label.seg-icon`), words in the caps style,
+  icons 15px. Each segment is at least 44px wide and its tap area, an
+  invisible `::before`, runs 9px above and below it to 44px, 6px past
+  the pill, so a pill needs 6px clear above and below; segments touch,
+  so tap areas meet and never overlap. Nothing on the site needs
   JavaScript to be readable; the baked verdicts carry their "as of"
   date in the footer and in each food page's data disclosure.
 - Matching what people type (`site.js`): case, accents and punctuation
@@ -150,7 +156,12 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   letter-spacing has two settings by size, `--track-large` at 40px and
   above and `--track-small` below. The WOFF2 files under
   `assets/fonts/` are Google's Latin subsets, 116 KB in all; the budget
-  is 150 KB.
+  is 150 KB. Atkinson's is the variable font (weights 200 to 800), so
+  400 and 700 are one file and one design; its l has a curled foot at
+  every weight. Buttons and inputs take the page's font
+  (`font: inherit`), since browsers otherwise set them in their own
+  (Arial, whose l is straight). The subsets have no arrows, so → and ↓
+  come from the system's fonts.
 - **Type scale.** Every font size is a token at the top of
   `assets/site.css`, and nothing else. Atkinson: `caps` 12px, 700,
   capitals, +0.07em (`--fs-caps`, `--track-caps`; the nav, the footer,
@@ -198,7 +209,14 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   pink, as the others are on hover or focus. Every item is at least
   44px square. The wordmark is on the left of the same row, or on
   a phone on a row of its own under the nav, so the nav never moves.
-  Home has no wordmark and no line under its header. The magnifier
+  Home has no wordmark. The header sticks to the top of every page,
+  on a solid page-colour background over a 1px rule; `site.js`
+  measures its height into `--header-h` (CSS guesses 45px, 85px on a
+  phone with the wordmark, until then). What sticks below it sits at
+  `--header-h`, and every element with an id has
+  `scroll-margin-top: var(--header-h)`, so a jump stops below the
+  header; a calendar row reached by the keyboard stops below the
+  calendar's sticky blocks too. The magnifier
   links to `/#search`, which names no element, so the page does not
   scroll; `site.js` puts the cursor in the input, and on home scrolls
   back up to it (on a phone, to the input's line).
@@ -362,11 +380,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - Chrome: the nav (above) and the footer (below).
 - **Tap targets.** Every control is at least 44×44px, by padding, the
   glyphs unchanged: the nav items, the magnifier, ??, the week arrows,
-  and each segment of the theme switch. A target can be bigger than its
-  mark: the theme switch's chosen segment is marked by a 32px disc
-  behind the sun or the moon (a pill as tall behind AUTO) inside its
-  44px target, and the sun and moon are 15px, their stroke thinned to
-  1.6 units to match the 12px screen icon's.
+  and each segment of every switch. A target can be bigger than its
+  mark: a switch's segment is 26px tall inside a 32px pill, and its
+  tap area reaches out to 44px (see Switches, above).
 - **Footer.** Every word is caps, muted: SOURCE DATA · CALENDAR FEED
   (to the feed's section on Source data) · JSON; ABOUT; the theme
   switch; the GitHub mark (2.2rem, muted ink, pink on hover or focus);
@@ -444,10 +460,12 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     and follows the line. Pressed, it scrolls to the list under the
     chart (smoothly, or at once with reduced motion) and gives the
     list's heading focus. From 700px the controls (TODAY, the seasons,
-    play, the magnifier) stick to the top while the chart is on screen,
-    the header under them (`.tt-stage` ends with the chart;
-    `--tt-controls-h` is measured by `charts.js`); below 700px only the
-    header sticks and the controls scroll away.
+    play, the magnifier) stick under the site's header while the chart
+    is on screen, the chart's header under them (`.tt-stage` ends with
+    the chart; `charts.js` measures `--tt-controls-h`, and the chart's
+    header as `--cal-head-h` for the rows' scroll margin); below 700px
+    only the chart's header sticks, directly under the site's, and the
+    controls scroll away.
   - **The list under the chart** is Now's bands for the line's time,
     built by the same code: at today, Now itself under "This week"; at
     another time under "In mid-December" (Anton `label`), with "Great"

@@ -76,9 +76,9 @@ Now have cards of their own; every other page shows the home card.
 <body>
   {%- comment -%} The nav and the magnifier sit at the right of every page,
      home included, so nothing moves between pages. On home the hero
-     question is the logo, so the header has no wordmark and no line under
-     it; elsewhere the wordmark is on the left. The magnifier goes to home's
-     input, focused. {%- endcomment -%}
+     question is the logo, so the header has no wordmark; elsewhere the
+     wordmark is on the left. The header sticks to the top of every page.
+     The magnifier goes to home's input, focused. {%- endcomment -%}
   <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
       {%- if page.url != '/' -%}
@@ -113,9 +113,9 @@ Now have cards of their own; every other page shows the home card.
        moon say nothing to a screen reader. {%- endcomment -%}
     <fieldset class="switch theme" data-remember="theme">
       <legend>Theme</legend>
-      <input type="radio" name="theme" id="theme-light" value="light" aria-label="Light theme"><label for="theme-light">{% include icons/sun.svg %}</label>
+      <input type="radio" name="theme" id="theme-light" value="light" aria-label="Light theme"><label class="seg-icon" for="theme-light">{% include icons/sun.svg %}</label>
       <input type="radio" name="theme" id="theme-auto" value="auto" aria-label="Follow device" checked><label for="theme-auto">{% include icons/screen.svg %}Auto</label>
-      <input type="radio" name="theme" id="theme-dark" value="dark" aria-label="Dark theme"><label for="theme-dark">{% include icons/moon.svg %}</label>
+      <input type="radio" name="theme" id="theme-dark" value="dark" aria-label="Dark theme"><label class="seg-icon" for="theme-dark">{% include icons/moon.svg %}</label>
     </fieldset>
     <a class="footer-github" href="https://github.com/DeckOfPandas/is-it-rhubarb-yet" aria-label="GitHub">{% include icons/github.svg %}</a>
     {%- comment -%} Three parts in three spans, so a narrow screen breaks

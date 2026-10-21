@@ -122,11 +122,14 @@ body {
 main { max-width: 64rem; margin: 0 auto; padding: var(--sp-1) var(--sp-2) var(--sp-5); }
 [hidden] { display: none !important; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Form controls take the page's font; left alone, browsers set them in
+   their own (Arial, whose straight l stands out beside Atkinson's). */
+button, input, select, textarea { font: inherit; }
 p { margin: 0 0 var(--sp-2); max-width: 40rem; }
 strong { font-weight: 700; }
 /* The caps style: small capitals in Atkinson 700, for the nav, the footer,
-   group labels and chart labels. */
-.caps { font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; }
+   group labels, chart labels and every switch. */
+.caps, .switch label { font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; }
 
 /* Going from page to page cross-fades, and from a home answer to its food
    page the typed word, the verdict and the dial move into the question,
@@ -170,10 +173,16 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 /* The nav and the magnifier sit at the top right of every page, where
    they stay from page to page; the wordmark (not on home, where the hero
    is the logo) is on the left of the same row, or on a phone, where the
-   row cannot hold all three, on a row of its own under them. Home has no
-   line under its header. */
-.site-header { padding: 0 var(--sp-2); border-bottom: 1px solid var(--rule); }
-.site-header.is-home { border-bottom: 0; }
+   row cannot hold all three, on a row of its own under them. The header
+   sticks to the top of every page, solid, over a 1px rule. Whatever
+   sticks below it (the calendar's controls and month row) sits at
+   --header-h, its height with the rule, which site.js keeps measured;
+   the values here are its height before then. Every element a link or
+   a script jumps to stops below it. */
+:root { --header-h: 45px; }
+@media (max-width: 28rem) { :root:not(:has(.site-header.is-home)) { --header-h: 85px; } }
+.site-header { position: sticky; top: 0; z-index: 10; padding: 0 var(--sp-2); background: var(--bg); border-bottom: 1px solid var(--rule); }
+[id] { scroll-margin-top: var(--header-h); }
 .site-header-inner { max-width: 64rem; margin: 0 auto; display: flex; align-items: center; gap: var(--sp-2); }
 /* The wordmark is the logo, sized as a logo, outside the type scale. */
 .brand {
@@ -210,37 +219,36 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .search-link .icon { width: 1.25rem; height: 1.25rem; }
 
 /* --- Switches ----------------------------------------------------------- */
-/* A radio group drawn as a pill. The theme switch needs JavaScript to do
-   anything, so it only appears with it. The order switches work by CSS
-   alone: .ordered shows the child whose radio is checked, and JavaScript
-   only remembers the choice. */
-.switch { display: inline-flex; gap: 2px; padding: 2px; margin: 0 0 var(--sp-2); border: 1px solid var(--rule); border-radius: 999px; position: relative; }
+/* A radio group drawn as a pill: the one build for every toggle on the
+   site (order, kind, Whole year · Magnify, Arcs · Dots, the theme). The
+   pill is 32px tall; the chosen segment is marked in ink by a 26px pill
+   (by a 26px disc, for an icon alone, .seg-icon). Words are caps (see
+   .caps) and icons 15px, their stroke thinned to match the caps. Every
+   segment is at least 44px wide, and its tap area, an invisible
+   ::before, reaches 9px above and below it to make 44px, 6px past the
+   pill's edge, so a pill needs 6px clear above and below. Segments
+   touch, so their tap areas meet and never overlap.
+   The theme switch needs JavaScript to do anything, so it only appears
+   with it. The order switches work by CSS alone: .ordered shows the
+   child whose radio is checked, and JavaScript only remembers the
+   choice. */
+.switch { display: inline-flex; padding: 2px; margin: 0 0 var(--sp-2); border: 1px solid var(--rule); border-radius: 999px; position: relative; }
 .switch legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.switch label { padding: 0.2rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: var(--fs-small); line-height: 1.4; }
-.switch input:checked + label { background: var(--ink); color: var(--bg); }
-/* The wheel's seven kinds fit a 390px phone only with tighter segments. */
-@media (max-width: 28rem) { .switch label { padding: 0.2rem 0.55rem; } }
-.switch input:focus-visible + label { outline: 2px solid var(--rhubarb); outline-offset: 1px; }
-/* The theme switch, in the footer: sun, Auto, moon, three segments of one
-   pill. Each is a 44px square (or wider, for AUTO) to tap, but the
-   chosen one is marked smaller: a 32px disc behind the sun or the moon,
-   a pill as tall behind AUTO. The sun and moon are 15px, their stroke
-   thinned to match the 12px screen's. */
-.theme { display: none; }
-.js .theme { display: inline-flex; margin: 0; padding: 1px; gap: 1px; }
-.theme label {
-  position: relative; isolation: isolate;
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.25em; min-width: 44px; min-height: 44px; padding: 0 0.85rem;
-  font: 700 var(--fs-caps)/1 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
+.switch label {
+  position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 0.35em;
+  min-width: 44px; height: 26px; padding: 0 var(--sp-1); cursor: pointer; color: var(--muted); white-space: nowrap;
 }
-.theme label::before { content: ""; position: absolute; inset: 6px; border-radius: 999px; z-index: -1; }
-.switch.theme input:checked + label { background: none; }
-.switch.theme input:checked + label::before { background: var(--ink); }
-.switch.theme input:focus-visible + label { outline-offset: -4px; }
-.theme .icon { width: 0.75rem; height: 0.75rem; }
-.theme input:not([value="auto"]) + label { padding: 0; }
-.theme input:not([value="auto"]) + label .icon { width: 15px; height: 15px; stroke-width: 1.6; }
+.switch label::before { content: ""; position: absolute; left: 0; right: 0; top: -9px; bottom: -9px; }
+.switch label::after { content: ""; position: absolute; inset: 0; border-radius: 999px; z-index: -1; }
+.switch label.seg-icon { padding: 0; }
+.switch label.seg-icon::after { left: 50%; right: auto; width: 26px; margin-left: -13px; }
+.switch input:checked + label { color: var(--bg); }
+.switch input:checked + label::after { background: var(--ink); }
+.switch input:focus-visible + label::after { outline: 2px solid var(--rhubarb); outline-offset: 1px; }
+.switch .icon { width: 15px; height: 15px; stroke-width: 1.6; }
+.theme { display: none; }
+.js .theme { display: inline-flex; margin: 0; }
 .switches { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); align-items: center; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
@@ -523,14 +531,15 @@ article.never { --food: var(--never); }
 /* The whole-year chart is a sticky header block over a scrolling body;
    the header hides its own overflow and site.js scrolls it in step. A
    sticky block cannot sit inside a scrolling one, which is why the two
-   are siblings. Inside each, the names (or the blank corner over them)
-   stick to the left. On a phone the chart runs to the screen's edges. */
+   are siblings. The header sticks directly under the site's header.
+   Inside each, the names (or the blank corner over them) stick to the
+   left. On a phone the chart runs to the screen's edges. */
 .cal { max-width: var(--cal-w); }
 .cal-grid { display: flex; width: var(--cal-w); }
 .cal svg { max-width: none; flex: none; }
 .cal-corner, .cal-labels { position: sticky; left: 0; z-index: 2; flex: none; width: var(--cal-x0); background: var(--bg); }
 .cal-labels { overflow: visible; }
-.chart-head { position: sticky; top: 0; z-index: 5; overflow: hidden; background: var(--bg); border-bottom: 1px solid var(--rule); }
+.chart-head { position: sticky; top: var(--header-h); z-index: 5; overflow: hidden; background: var(--bg); border-bottom: 1px solid var(--rule); }
 .chart-body { overflow-x: auto; }
 @media (max-width: 43.74rem) {
   figure.chart:has(.cal) { margin-left: calc(-1 * var(--sp-2)); margin-right: calc(-1 * var(--sp-2)); }
@@ -629,14 +638,18 @@ article.never { --food: var(--never); }
   .seasons { width: 100%; gap: 0; justify-content: space-between; }
   .season-btn { flex: 1 1 0; min-width: 0; padding: var(--sp-1) 0; }
 }
-/* On a wide screen the calendar's controls stick to the top while the
-   chart is in view (the stage ends with it), and its header sticks
-   under them, at --tt-controls-h, which charts.js keeps measured. On a
-   phone only the header sticks. */
+/* On a wide screen the calendar's controls stick under the site's
+   header while the chart is in view (the stage ends with it), and the
+   chart's header sticks under them, at --tt-controls-h, which charts.js
+   keeps measured. On a phone only the chart's header sticks. A row taken
+   to by the keyboard stops below all of it: charts.js measures the
+   chart's header as --cal-head-h. */
 @media (min-width: 43.75rem) {
-  .tt-stage .tt-controls { position: sticky; top: 0; z-index: 6; background: var(--bg); margin: 0; padding: var(--sp-1) 0 var(--sp-3); }
-  .tt-stage .chart-head { top: var(--tt-controls-h, 0px); }
+  .tt-stage .tt-controls { position: sticky; top: var(--header-h); z-index: 6; background: var(--bg); margin: 0; padding: var(--sp-1) 0 var(--sp-3); }
+  .tt-stage .chart-head { top: calc(var(--header-h) + var(--tt-controls-h, 0px)); }
+  .tt-stage .cal a.row { scroll-margin-top: calc(var(--header-h) + var(--tt-controls-h, 0px) + var(--cal-head-h, 0px)); }
 }
+.cal a.row { scroll-margin-top: calc(var(--header-h) + var(--cal-head-h, 0px)); }
 /* The readout, in the header's corner over the names: the time, then
    how many foods are in season, in caps on two lines, a button down to
    the list. */
