@@ -31,6 +31,9 @@
 - key: foraged
   name: Foraged & wild
   kind: wild
+- key: fungi
+  name: Mushrooms & fungi
+  kind: wild
 - key: herbs
   name: Herbs
   kind: herbs
