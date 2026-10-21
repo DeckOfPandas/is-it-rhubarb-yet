@@ -11,7 +11,9 @@ timezone: Europe/London
 # the foods that are never in season here. tools/check-foods.py keeps a
 # food's slug off the page URLs (now, calendar, wheel, about, sources).
 # A stub under _wheels/ (make-foods.py --wheels) becomes a standalone SVG
-# of the food's season wheel.
+# of the food's season wheel. A stub under _remind/ becomes the food's own
+# calendar of season starts, /remind/<slug>.ics; check-foods.py keeps one
+# for every food.
 collections:
   foods:
     output: true
@@ -22,6 +24,9 @@ collections:
   wheels:
     output: true
     permalink: /wheel/:name:output_ext
+  remind:
+    output: true
+    permalink: /remind/:name:output_ext
 
 defaults:
   - scope:
@@ -43,6 +48,11 @@ defaults:
       type: wheels
     values:
       layout: wheel
+  - scope:
+      path: ""
+      type: remind
+    values:
+      layout: remind
 
 # The share cards and the icons are drawn into _site/cards and _site/icons
 # by tools/cards.js after the build; a regenerating `jekyll serve` must

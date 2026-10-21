@@ -79,6 +79,45 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   from the New Covent Garden Market PDF and is kept for provenance. It
   knows none of the hand edits since (the palette, the cultivars, the
   names): rerunning it overwrites them.
+- `tools/merge-bundle.py` merged the 21 October 2026 season bundle
+  (`seasons.json`, `sustainability.json`, `sources.json`) and
+  `colours.yml` into `foods.yml` once, and wrote `_data/sources.yml`; it
+  is kept for provenance and must not be rerun on today's file. What it
+  did and why is in its docstring:
+  - **States:** months on the 4-4-5 week split, and the new `store` state.
+  - **Rings:** rings as varieties, with `ring` and `lead: false`.
+  - **What stayed Helen's:** her windows for the foraged plants she
+    already had, and her Discovery row.
+  - **Changes:** snipe dropped, wild salmon `unsold`, fish `buy` lines
+    from the Good Fish Guide, and every colour and text colour from
+    `colours.yml`.
+- **Rings.** A food's `varieties` are its rings. A named variety or type
+  has its own colour; a ring of the food itself (`ring: region`,
+  `method`, `zone` or `part`) shares the food's (or its variety's) and is
+  named in the variety line by itself, "Glasshouse: all year."
+  - **`lead: false`:** the ring is drawn on the food's dial, listed in
+    its data and said in its variety line, but gives no verdict, no
+    calendar row, no wheel dot, no search hit and no calendar-feed
+    event. Rings marked this way:
+    - every coast but a fish's South West, where it has one;
+    - glasshouse rings;
+    - a wild ring beside a market or cultivated one;
+    - provenance (Welsh, salt marsh), Orkney, the Cornish sardine
+      fishery, and the national native and Porthilly rock oysters.
+  - **Coasts in the variety line:** said as places, "Just in the South
+    West, but yes in the North East, nearly in the South East and yes
+    nationally."
+  - **Stores and wild salmon:** a `store` week answers YES, its date
+    line "From storage until late August." (between two YES, in season
+    beats from store; never "just arrived"). Wild salmon is `unsold`:
+    always NO, its line "It cannot be sold in England, Wales or
+    Scotland."
+  - **Drawing stores:** the calendar and the food's dial draw a store run
+    flat, the colour 30% into the grey.
+  - **Sources:** a food's page names its sources from `sources.yml`,
+    linked.
+  - **Fungi:** a group of their own, wild and cultivated, on the Wild
+    wheel.
 - A renamed food keeps its old address as a page that forwards:
   `grey-squirrel/index.html` sends `/grey-squirrel/` to `/squirrel/`,
   and the checker keeps that slug from ever being a food's.
@@ -91,7 +130,41 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   `about.html`, Helen's copy, reached from the signature hearts in the
   footer; its food count and dinner food come from the data. Data
   endpoints: `foods.json`, `search.json` (what the not-found page's
-  suggestions match against), `season-starts.ics`.
+  suggestions match against), `season-starts.ics`, and each food's own
+  calendar, `/remind/<slug>.ics`.
+- **Calendar feeds.** One all-day event, repeating yearly, at the start of
+  each in-season run of each ring that gives the verdict.
+  - **The shared include:** `_includes/ics-events.html`, used by both the
+    whole-site feed (`season-starts.ics`) and each food's (layout
+    `remind.ics`, from a stub per food in `_remind/`, which
+    `check-foods.py` requires).
+  - **Year-end runs:** a run that carries on from week 52 into week 1 is
+    one season, starting in its autumn run.
+  - **Stable UIDs:** a UID names the food, the ring and which of its
+    seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), not its date,
+    so a calendar updates a moved event rather than adding another.
+  - **Wild salmon:** no events.
+  - **The food page:** "Put rhubarb in your calendar →" (a `webcal://`
+    link, which Apple Calendar and most apps take as subscribe), then a
+    small line with Google Calendar's own subscribe link (it does not
+    open `webcal://`), the file, and every food's feed.
+  - **The Sources page** offers the whole feed the same three ways.
+- **Source data page** (`sources/index.html`) is Helen's copy:
+  - where each kind of food's dates come from;
+  - the foraging footnote;
+  - the JSON;
+  - the calendar feeds;
+  - the full list of sources by kind.
+
+  `_data/sources.yml` names each source as that list does, for each
+  food page's "Sources:" line. "common knowledge*" is one prose link
+  to its footnote at the foot of the page, which ends "Back to where I
+  was" with the arrow turned up.
+- **Sustainability and carbon** (`sustainability-and-carbon/index.html`, from the
+  footer) is the reference page for the bundle's `sustainability.json`
+  and `emissions.json`: for now "Information coming soon." and kept out
+  of search engines (`noindex`); its slug is reserved in
+  `check-foods.py`.
 - Includes: `food-row.html` (one food in a list, one link: swatch,
   name, variety in brackets, an earlier timing, and with `tag` and
   `leader` on, the default, the verdict tag right-aligned at the row's
@@ -142,9 +215,20 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   cards, the NEVER in a lone search result, the hero's completion, and
   the hero's word and underline on a lone never-food match. They never fall back to the pink. The
   colour is a token at the top of `assets/site.css` and a constant in
-  `tools/cards.js`; there is no colours file.
-- Every food colour passes 3:1 on both backgrounds, so a verdict word
-  is simply set in `--food`. "Today" is drawn in ink: the food page
+  `tools/cards.js`.
+- Every food and variety colour (from `colours.yml`, 21 October 2026)
+  reaches 3.15:1 on both backgrounds and stays clear of the rhubarb
+  pink, so a verdict word is simply set in `--food`.
+  - **Text colours:** no colour can reach 4.5:1 on both backgrounds.
+    Where `colour` falls short as text, the food has `text_on_shed` and
+    `text_on_custard`: the same hue at 4.6:1. A food's name set in its
+    colour at text size (`.food-link`: home's teasers, "Also:", "ALL
+    YEAR:") takes `--food-custard` in light and `--food-shed` in dark,
+    or the colour itself where there is none.
+  - **Rows:** they keep their names in ink.
+  - **The checker:** `tools/check-foods.py` fails a colour under 3.15:1,
+    a text colour under 4.5:1, or a missing text colour where one is
+    needed. "Today" is drawn in ink: the food page
   dial's hand, and on the calendar and the wheel a short ink tick that
   never moves (hidden on the calendar while the pink time line is on
   today itself).
@@ -241,8 +325,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   45px, controls 136px, month row 53px) is 234px, 29% of the screen.
 - **Header search.** On every page but home the wordmark is the search,
   as the hero is: `#head-input`, named "Search foods", is RHUBARB's
-  placeholder, and a click or tap anywhere on IS IT RHUBARB YET? puts
-  the caret there. It no longer links home. It is the hero's own field
+  placeholder, and a click or tap on RHUBARB puts the caret there. IS IT
+  and YET? stay links home (one tab stop, named Home; YET? is hidden from
+  screen readers and the tab order). It is the hero's own field
   (`hookField` in `site.js`): capitals, the faded completion (Tab, End,
   → accept), the word and underline in the food's colour on one tier
   1–2 match, a long word shrinking to fit the header. It matches
@@ -428,7 +513,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - Foods in lists: inline lists (`.food-link`: the teasers, "Also:",
     the wheel's "ALL YEAR:")
     set the name in the food's colour; rows (`.food-row`) keep the name
-    in ink beside the swatch, since a food colour passes 3:1, not the
+    in ink beside the swatch, since a food colour passes 3.15:1, not the
     4.5:1 body text needs. Both underline on hover or focus, in the
     food's colour, never the variety or timing, never changing weight
     or size. SVG text draws its underline in its own fill, so the
@@ -440,8 +525,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   invisible `::before` round it, which no gap counts: the nav items,
   the magnifier, ??, play (a 32px circle), each segment of every switch
   (26px tall inside a 32px pill). The week arrows are 44px boxes.
-- **Footer.** Every word is caps, muted: SOURCE DATA · CALENDAR FEED
-  (to the feed's section on Source data) · JSON; ABOUT; the theme
+- **Footer.** Every word is caps, muted: SOURCES · CALENDAR FEED
+  (to the feed's section on Source data) · JSON; SUSTAINABILITY AND
+  CARBON (its own line); ABOUT; the theme
   switch; the GitHub mark (2.2rem, muted ink, pink on hover or focus);
   the licences (CODE: MIT · DATA AND WRITING: CC BY 4.0 · ©, MIT to
   opensource.org's text and CC BY 4.0 to Creative Commons') and the
@@ -620,7 +706,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     every food on one wheel (`arrivals-dial.html` with `kind="all"`).
     The page opens on All. Seven kinds fit a 390px phone.
   - **In season or whole year.** Every wheel's In season · Whole year
-    switch, In season by default. In season: only the foods in season
+    switch, Whole year by default. In season: only the foods in season
     (YES or JUST) at the line's time keep their names and have their
     arcs at full strength, over the faint rest, changing as the line
     moves. Whole year: every name, every arc at full strength, wherever
@@ -755,7 +841,8 @@ Each an open issue:
 
 - Reaching for a plugin, a gem, npm or a raster image. Every one has
   been refused so far and will be again.
-- Editing `_data/foods.yml` by hand and then running `make-foods.py`.
+- Editing `_data/foods.yml` by hand and then running `make-foods.py`,
+  or running `merge-bundle.py` again: both were one-offs.
 - Writing verdict logic anywhere but `assets/verdict.js`. The Liquid
   templates only read `_data/baked.json`.
 - Building with `bundle exec jekyll build` alone and wondering why the

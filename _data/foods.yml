@@ -1,34 +1,55 @@
 # UK seasonality, one entry per food. Generated once by
-# tools/make-foods.py and hand-edited since: this file is the truth.
+# tools/make-foods.py, hand-edited, and merged with the 21 October 2026
+# season bundle by tools/merge-bundle.py: this file is the truth.
 #
 # group: a key from _data/groups.yml.
+# varieties: the food's rings, outermost first on its dial. A ring is a
+#   named variety or type (Bramley, Cos), with its own colour, or a ring of
+#   the food itself, which shares the food's colour (or its variety's):
+# ring: region (a coast, a producer, a provenance), method (glasshouse,
+#   outdoor, cultivated, wild), zone (a legal zone) or part (shoots,
+#   flowers). Unset on a named variety or the food's one ring.
+# lead: false on a ring that is shown (the food's dial, its data, the
+#   variety line) but does not give the verdict, a calendar row, a wheel
+#   dot or a search hit: every coast but a fish's South West, a glasshouse,
+#   a wild ring beside a market one, a provenance ring.
 # weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
-# state: in = in season, avail = just coming in or going out.
+# state: in = in season, avail = just coming in or going out, store = sold
+#   from store after the harvest (it answers as in season does, its date
+#   line "From storage until ...").
 # colour: per food; a variety may carry its own colour to stand apart.
-#         Every colour must reach 3:1 contrast on both backgrounds, forcing
-#         shed #16110E and custard #FBF3D9, because the verdict word is set
-#         in it. Pink belongs to rhubarb alone: forced rhubarb is the brand
-#         pink, and no other food sits near it. Palette redone 18 Oct 2026.
+#   Every colour reaches 3.15:1 on both backgrounds, forcing shed #16110E
+#   and custard #FBF3D9, because the verdict word is set in it. Pink
+#   belongs to rhubarb alone: forced rhubarb is the brand pink, and no
+#   other food sits near it. Palette from colours.yml, 21 Oct 2026.
+# text_on_shed, text_on_custard: where colour falls short of 4.5:1 on a
+#   background, the same hue at 4.6:1 there, for the food's name set in
+#   its colour at text size (teasers, "Also:", every food link).
 # shades: optional, two or three colours the season wheel sweeps through
-#         across the in-season run (unripe, ripe, over), on a food or a
-#         variety. The calendar keeps using colour.
-# source: ncgm = New Covent Garden Market calendar, bbc = BBC Good Food,
-#         basc = BASC shooting seasons, ffs = Flying Fish Seafoods'
-#         Cornish chart, general = common knowledge, please check.
-# buy: optional, what to ask for at the counter (fish and shellfish).
+#   across the in-season run (unripe, ripe, over), on a food or a
+#   variety. The calendar keeps using colour.
+# sources: on a food, every source its rings use; on a ring, its own.
+#   Keys are in _data/sources.yml. A food not in the bundle keeps its one
+#   older `source` (general = common knowledge, please check).
+# note: optional, Helen's own note on the food. notes: the bundle's notes,
+#   on a food or a ring, shown with the data.
+# unsold: a food that cannot legally be sold here: always NO, its date
+#   line this sentence (wild salmon).
+# buy: optional, what to ask for at the counter; for fish, the Marine
+#   Conservation Society's Good Fish Guide.
 # said: optional on a variety, how it is said in full. Unset, a variety
-#       is its name then the food's: "Bramley apples", "Forced rhubarb".
-#       Set it when the name is a noun on its own (Mooli, Calabrese,
-#       Mutton) or the phrase hyphenates (New-season lamb).
+#   is its name then the food's: "Bramley apples", "Forced rhubarb".
+#   Set it when the name is a noun on its own (Mooli, Calabrese,
+#   Mutton) or the phrase hyphenates (New-season lamb).
 # aliases: optional, other names a food is asked for by (zucchini). An
-#          alias belongs to one food; tools/check-foods.py enforces it.
+#   alias belongs to one food; tools/check-foods.py enforces it.
 # also: optional, broader words a food should answer to as well, shared
-#       between foods: every fungus answers to "mushrooms".
+#   between foods: every fungus answers to "mushrooms".
 # short: optional, a calendar row's name on a phone (below 700px) and
-#        nowhere else, 17 characters at most, in the plural sentence form
-#        ("Bramley apples") and never an invented name. On a variety it is the whole
-#        row's name ("Calabrese"); on a food it replaces the food's name in
-#        its rows, a named variety still following in brackets.
+#   nowhere else, 17 characters at most, in the plural sentence form
+#   ("Bramley apples") and never an invented name. On a variety it is the
+#   whole row's name ("Calabrese"); on a food it replaces the food's name
+#   in its rows, a named variety still following in brackets.
 # Variety names appear as written, mid-sentence too ("Venison Red &
 # Fallow"), so proper nouns keep their capitals and the rest are lower-case
 # after the first letter.
@@ -36,56 +57,85 @@
 - name: "Beetroot"
   slug: beetroot
   group: roots
-  colour: "#bb0e88"
-  source: ncgm
+  colour: "#bd0588"
+  text_on_shed: "#dd38a3"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown beetroot quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
+        - [1, 17, store]
         - [18, 22, avail]
         - [23, 43, in]
+        - [44, 52, store]
 
 - name: "Carrots"
   slug: carrots
   group: roots
-  colour: "#c55d00"
-  source: ncgm
+  colour: "#c86000"
+  text_on_custard: "#b05300"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown carrots quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 8, in]
+        - [9, 17, store]
         - [18, 22, avail]
         - [23, 52, in]
 
 - name: "Celeriac"
   slug: celeriac
   group: roots
-  colour: "#826c54"
-  source: ncgm
+  colour: "#867461"
+  text_on_shed: "#8d7b67"
+  text_on_custard: "#7c6b58"
+  sources: [ncgm, rhs_planner, defra]
+  notes:
+    - "Defra wholesale data: UK-grown celeriac quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, rhs_planner, defra]
+      notes:
+        - "In season September-January with February tailing off, from the RHS harvest window; Covent Garden's all-year \"in season\" recoded as from store for March-August."
       weeks:
-        - [1, 52, in]
+        - [1, 4, in]
+        - [5, 8, avail]
+        - [9, 35, store]
+        - [36, 52, in]
 
 - name: "Horseradish"
   slug: horseradish
   group: roots
-  colour: "#878a6e"
-  source: ncgm
+  colour: "#719173"
+  text_on_custard: "#567559"
+  sources: [ncgm]
+  notes:
+    - "Roots are best lifted from October, once frost has knocked back the leaves."
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
+        - [1, 13, store]
         - [14, 17, avail]
         - [18, 22, in]
         - [36, 39, avail]
         - [40, 43, in]
+        - [44, 52, store]
 
 - name: "Jerusalem artichokes"
   slug: jerusalem-artichokes
   group: roots
-  colour: "#885a20"
-  source: ncgm
+  colour: "#855b2f"
+  text_on_shed: "#a17549"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [1, 8, in]
         - [40, 43, avail]
@@ -94,10 +144,14 @@
 - name: "Parsnips"
   slug: parsnips
   group: roots
-  colour: "#a17f47"
-  source: ncgm
+  colour: "#ad7e4a"
+  text_on_custard: "#926430"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown parsnips quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 8, in]
         - [9, 17, avail]
@@ -107,34 +161,46 @@
 - name: "Potatoes"
   slug: potatoes
   group: roots
-  colour: "#a56333"
-  source: ncgm
+  colour: "#aa5e48"
+  text_on_shed: "#b76953"
+  text_on_custard: "#a55944"
+  sources: [ncgm]
   varieties:
     - name: "New"
-      colour: "#8f8334"
+      colour: "#8a8b33"
+      text_on_custard: "#717112"
+      sources: [ncgm]
       weeks:
         - [18, 22, avail]
         - [23, 39, in]
     - name: "Maincrop"
       short: "Maincrop potatoes"
-      colour: "#a74d00"
+      colour: "#aa4d00"
+      text_on_shed: "#c36426"
+      sources: [ncgm]
       weeks:
+        - [1, 22, store]
         - [36, 39, avail]
         - [40, 52, in]
 
 - name: "Radishes"
   slug: radishes
   group: roots
-  colour: "#d42819"
-  source: ncgm
+  colour: "#d52f26"
+  text_on_shed: "#e64135"
+  text_on_custard: "#d22b23"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [14, 48, in]
     - name: "Mooli"
-      short: "Mooli"
       said: "Mooli"
-      colour: "#718385"
+      short: "Mooli"
+      colour: "#638290"
+      text_on_custard: "#547280"
+      sources: [ncgm]
       weeks:
         - [18, 22, avail]
         - [23, 48, in]
@@ -143,7 +209,8 @@
 - name: "Salsify"
   slug: salsify
   group: roots
-  colour: "#706060"
+  colour: "#6e6067"
+  text_on_shed: "#897a81"
   source: bbc
   note: "BBC Good Food screenshot is cut off after September; October to December assumed."
   varieties:
@@ -156,21 +223,32 @@
 - name: "Swede"
   slug: swede
   group: roots
-  colour: "#8f6e00"
-  source: ncgm
+  colour: "#916f00"
+  text_on_shed: "#9c7917"
+  text_on_custard: "#8a6900"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown swede quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
+        - [1, 22, store]
         - [27, 35, avail]
         - [36, 48, in]
+        - [49, 52, store]
 
 - name: "Turnips"
   slug: turnips
   group: roots
-  colour: "#8c7ba2"
-  source: ncgm
+  colour: "#907ba4"
+  text_on_custard: "#7a668d"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown turnip quoted in Jan, Feb, Mar, Jun, Jul, Aug, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 17, in]
         - [27, 52, in]
@@ -178,33 +256,51 @@
 - name: "Broccoli"
   slug: broccoli
   group: brassicas
-  colour: "#007f39"
-  source: ncgm
+  colour: "#007638"
+  text_on_shed: "#2d8f50"
+  sources: [ncgm, defra, rhs, gardeners_calendar, rocket_gardens]
   note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
+  notes:
+    - "The RHS Crop Planner PDF draws calabrese harvest as January-May and September-December; the RHS website and The Gardener's Calendar both give July-October. The PDF row was dropped as an error."
+    - "Defra wholesale data: UK-grown calabrese quoted in Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "A late-winter and spring crop: Rocket Gardens says harvest starts between very early and late spring depending on planting; Good Food (dropped as a source) also showed January-April."
   varieties:
     - name: "Calabrese"
-      short: "Calabrese"
       said: "Calabrese"
-      colour: "#008944"
+      short: "Calabrese"
+      colour: "#008b51"
+      text_on_shed: "#119156"
+      text_on_custard: "#007e49"
+      sources: [ncgm, defra, rhs, gardeners_calendar]
       weeks:
         - [18, 22, avail]
         - [23, 43, in]
         - [44, 48, avail]
     - name: "Purple sprouting"
       short: "Purple broccoli"
-      colour: "#973fcc"
+      colour: "#9740cc"
+      text_on_shed: "#ab56e2"
+      sources: [ncgm, rocket_gardens]
+      notes:
+        - "Covent Garden's spring months kept (March-April in season, May available); its June-October \"in season\" months dropped as an error."
       weeks:
         - [1, 4, avail]
         - [5, 17, in]
+        - [18, 22, avail]
 
 - name: "Brussels sprouts"
   slug: brussels-sprouts
-  short: "Sprouts"
   group: brassicas
-  colour: "#5e7f00"
-  source: ncgm
+  colour: "#5b7d00"
+  text_on_shed: "#668919"
+  text_on_custard: "#587800"
+  sources: [ncgm, defra]
+  short: "Sprouts"
+  notes:
+    - "Defra wholesale data: UK-grown brussels sprouts quoted in Jan, Feb, Mar, Apr, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 8, in]
         - [36, 39, avail]
@@ -213,35 +309,53 @@
 - name: "Cabbage"
   slug: cabbage
   group: brassicas
-  colour: "#5f904f"
-  source: ncgm
+  colour: "#688e5d"
+  text_on_custard: "#527748"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown cabbage quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown spring greens quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: "Red"
-      colour: "#af249a"
+      colour: "#ac299d"
+      text_on_shed: "#ca49b9"
+      sources: [ncgm, defra]
       weeks:
+        - [1, 22, store]
         - [27, 30, avail]
         - [31, 48, in]
+        - [49, 52, store]
     - name: "Savoy"
-      colour: "#556c00"
+      colour: "#696700"
+      text_on_shed: "#83822a"
+      sources: [ncgm, defra]
       weeks:
         - [1, 13, in]
         - [14, 30, avail]
         - [31, 52, in]
     - name: "Winter white"
       short: "White cabbage"
-      colour: "#709166"
+      colour: "#729263"
+      text_on_custard: "#587649"
+      sources: [ncgm, defra]
       weeks:
+        - [1, 26, store]
         - [31, 35, avail]
         - [36, 52, in]
 
 - name: "Spring greens"
   slug: spring-greens
   group: brassicas
-  colour: "#629700"
-  source: ncgm
+  colour: "#649700"
+  text_on_custard: "#507900"
+  sources: [ncgm, defra]
   note: "NCGM has these most of the year; BBC Good Food gives March to June."
+  notes:
+    - "Defra wholesale data: UK-grown cabbage quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown spring greens quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 17, in]
         - [23, 30, avail]
@@ -250,10 +364,15 @@
 - name: "Cauliflower"
   slug: cauliflower
   group: brassicas
-  colour: "#968565"
-  source: ncgm
+  colour: "#a2845f"
+  text_on_custard: "#856944"
+  sources: [ncgm, defra]
+  notes:
+    - "Good Food left out May-September; Covent Garden, the RHS and Defra all show summer cauliflower, so Good Food was dropped here."
+    - "Defra wholesale data: UK-grown cauliflower quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 22, in]
         - [27, 52, in]
@@ -261,7 +380,8 @@
 - name: "Cavolo nero"
   slug: cavolo-nero
   group: brassicas
-  colour: "#486e70"
+  colour: "#556b72"
+  text_on_shed: "#6b8289"
   source: bbc
   note: "BBC Good Food screenshot is cut off after September; the autumn months are assumed."
   varieties:
@@ -273,10 +393,14 @@
 - name: "Kale"
   slug: kale
   group: brassicas
-  colour: "#007b65"
-  source: ncgm
+  colour: "#007a6e"
+  text_on_shed: "#268d80"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown curly kale quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 17, in]
         - [31, 35, avail]
@@ -285,10 +409,13 @@
 - name: "Kohlrabi"
   slug: kohlrabi
   group: brassicas
-  colour: "#7c7a33"
-  source: ncgm
+  colour: "#7b7447"
+  text_on_shed: "#867f51"
+  text_on_custard: "#756f42"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [23, 26, avail]
         - [27, 48, in]
@@ -296,30 +423,47 @@
 - name: "Pak choi"
   slug: pak-choi
   group: brassicas
-  colour: "#009c71"
-  source: ncgm
+  colour: "#009a86"
+  text_on_custard: "#007c6c"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown pak choi quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
-    - name: ""
+    - name: "Outdoor"
+      ring: method
+      sources: [ncgm]
       weeks:
         - [27, 39, in]
+    - name: "Glasshouse"
+      ring: method
+      lead: false
+      sources: [defra]
+      notes:
+        - "Defra quotes UK pak choi in every month, which can only be protected growing over winter."
+      weeks:
+        - [1, 52, in]
 
 - name: "Romanesco"
   slug: romanesco
   group: brassicas
-  colour: "#8c8a00"
-  source: ncgm
+  colour: "#8f8300"
+  text_on_custard: "#7a6f00"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [23, 52, in]
 
 - name: "Garlic"
   slug: garlic
   group: alliums
-  colour: "#8e8676"
-  source: ncgm
+  colour: "#8b857e"
+  text_on_custard: "#736d67"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [1, 4, avail]
         - [31, 52, in]
@@ -327,10 +471,15 @@
 - name: "Leeks"
   slug: leeks
   group: alliums
-  colour: "#488530"
-  source: ncgm
+  colour: "#3d8534"
+  text_on_shed: "#468e3c"
+  text_on_custard: "#347c2b"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown leeks quoted in Jan, Feb, Mar, Apr, May, Jul, Aug, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [1, 8, in]
         - [9, 13, avail]
@@ -340,22 +489,31 @@
 - name: "Onions"
   slug: onions
   group: alliums
-  colour: "#ab6813"
-  source: ncgm
+  colour: "#b36a2c"
+  text_on_shed: "#b66c2f"
+  text_on_custard: "#a35c1a"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown onion quoted in every month (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
+        - [1, 22, store]
         - [23, 26, avail]
         - [27, 39, in]
         - [40, 43, avail]
+        - [44, 52, store]
 
 - name: "Shallots"
   slug: shallots
   group: alliums
-  colour: "#b54a21"
-  source: ncgm
+  colour: "#b3492d"
+  text_on_shed: "#ca5e41"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [1, 26, in]
         - [36, 52, in]
@@ -363,10 +521,15 @@
 - name: "Spring onions"
   slug: spring-onions
   group: alliums
-  colour: "#738f00"
-  source: ncgm
+  colour: "#7e8900"
+  text_on_custard: "#6a7400"
+  sources: [ncgm, defra]
+  notes:
+    - "Good Food showed all year; Defra confirms April-October, so it was dropped."
+    - "Defra wholesale data: UK-grown onion quoted in Apr, May, Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [14, 22, avail]
         - [23, 43, in]
@@ -375,20 +538,28 @@
 - name: "Chard"
   slug: chard
   group: leaves
-  colour: "#008846"
-  source: ncgm
+  colour: "#008453"
+  text_on_shed: "#1c905e"
+  text_on_custard: "#007e4f"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [18, 43, in]
 
 - name: "Chicory & Radicchio"
   slug: chicory-radicchio
   group: leaves
-  colour: "#b91e7c"
-  source: ncgm
+  colour: "#b91f7b"
+  text_on_shed: "#d94296"
+  sources: [ncgm, dowding]
+  notes:
+    - "Covent Garden's row covers chicory, endive and radicchio; its variety label reads \"Jerusalem\", a layout error. Months used as given."
+    - "Charles Dowding cuts radicchio hearts from about August to December, and firm heads store for up to six weeks. Good Food's \"all year\" dropped."
   varieties:
     - name: ""
+      sources: [ncgm, dowding]
       weeks:
         - [18, 22, avail]
         - [23, 43, in]
@@ -397,77 +568,178 @@
 - name: "Cucumber"
   slug: cucumber
   group: leaves
-  colour: "#399100"
-  source: ncgm
+  colour: "#00931a"
+  text_on_custard: "#008015"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown cucumbers quoted in Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [9, 13, avail]
         - [14, 39, in]
         - [40, 43, avail]
+    - name: "Glasshouse"
+      ring: method
+      lead: false
+      sources: [defra]
+      notes:
+        - "UK cucumbers are glasshouse-grown."
+      weeks:
+        - [5, 8, avail]
+        - [9, 43, in]
+        - [44, 48, avail]
 
 - name: "Edible flowers"
   slug: edible-flowers
   group: leaves
   colour: "#b343cb"
-  source: ncgm
+  text_on_shed: "#bc4dd5"
+  text_on_custard: "#aa3ac2"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [14, 39, in]
 
 - name: "Lettuce"
   slug: lettuce
   group: leaves
-  colour: "#769400"
-  source: ncgm
+  colour: "#829100"
+  text_on_custard: "#687400"
+  sources: [ncgm, defra]
   note: "NCGM lists five types; this row is their union."
+  notes:
+    - "Defra wholesale data: UK-grown lettuce quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown lettuce quoted in May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
   varieties:
-    - name: ""
+    - name: "Cos"
+      colour: "#3d7100"
+      text_on_shed: "#568c2a"
+      sources: [ncgm]
+      weeks:
+        - [23, 26, avail]
+        - [27, 43, in]
+    - name: "Curly"
+      colour: "#ad5055"
+      text_on_shed: "#c16166"
+      sources: [ncgm]
+      weeks:
+        - [18, 26, avail]
+        - [27, 43, in]
+        - [44, 48, avail]
+    - name: "Iceberg"
+      colour: "#7d8c8b"
+      text_on_custard: "#627070"
+      sources: [ncgm]
+      weeks:
+        - [1, 52, in]
+    - name: "Little gem"
+      colour: "#2f9b59"
+      text_on_custard: "#007f40"
+      sources: [ncgm]
       weeks:
         - [9, 13, avail]
-        - [14, 43, in]
-        - [44, 48, avail]
+        - [14, 39, in]
+        - [40, 43, avail]
+    - name: "Round"
+      colour: "#a78500"
+      text_on_custard: "#866a00"
+      sources: [ncgm]
+      weeks:
+        - [14, 39, in]
+    - name: "Glasshouse"
+      ring: method
+      lead: false
+      sources: [defra]
+      notes:
+        - "Defra indoor butterhead lettuce."
+      weeks:
+        - [1, 52, in]
 
 - name: "Rocket"
   slug: rocket
   group: leaves
-  colour: "#507800"
-  source: ncgm
+  colour: "#726e00"
+  text_on_shed: "#858122"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown rocket quoted in May, Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [14, 43, in]
 
 - name: "Spinach"
   slug: spinach
   group: leaves
-  colour: "#00743f"
-  source: ncgm
+  colour: "#326f52"
+  text_on_shed: "#4d8a6b"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown spinach leaf quoted in May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [18, 43, in]
 
 - name: "Watercress"
   slug: watercress
   group: leaves
-  colour: "#048d71"
-  source: ncgm
+  colour: "#2a8981"
+  text_on_shed: "#2d8c83"
+  text_on_custard: "#157b73"
+  sources: [ncgm, forestheart]
+  notes:
+    - "Never eat wild watercress raw from water that livestock can reach (liver fluke)."
   varieties:
-    - name: ""
+    - name: "Cultivated"
+      ring: method
+      sources: [ncgm]
       weeks:
         - [18, 26, avail]
         - [27, 39, in]
         - [40, 48, avail]
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [forestheart]
+      notes:
+        - "Wild watercress has a summer gap, exactly when cultivated watercress peaks."
+      weeks:
+        - [9, 26, in]
+        - [36, 48, in]
+
+- name: "Cress"
+  slug: cress
+  group: leaves
+  colour: "#5c8500"
+  text_on_shed: "#618b0e"
+  text_on_custard: "#547900"
+  sources: [ncgm]
+  varieties:
+    - name: ""
+      sources: [ncgm]
+      weeks:
+        - [1, 52, in]
 
 - name: "Asparagus"
   slug: asparagus
   group: shoots
-  colour: "#5f7700"
-  source: ncgm
+  colour: "#607100"
+  text_on_shed: "#738624"
+  sources: [ncgm, defra, farming_uk_asparagus]
+  notes:
+    - "Growers traditionally cut British asparagus from St George's Day (23 April) to 21 June, then stop so the crowns can recover; weather moves the start (Farming UK)."
+    - "Good Food showed a July peak; dropped. Defra prices are lowest in May and June."
+    - "Defra wholesale data: UK-grown asparagus quoted in Mar, Apr, May, Jun (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra, farming_uk_asparagus]
       weeks:
         - [14, 17, avail]
         - [18, 26, in]
@@ -475,10 +747,15 @@
 - name: "Broad beans"
   slug: broad-beans
   group: shoots
-  colour: "#459a51"
-  source: ncgm
+  colour: "#379a6b"
+  text_on_custard: "#0b7d50"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown beans quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown beans quoted in Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [23, 26, avail]
         - [27, 35, in]
@@ -486,12 +763,17 @@
 
 - name: "Runner & French beans"
   slug: runner-french-beans
-  short: "Green beans"
   group: shoots
-  colour: "#00823d"
-  source: ncgm
+  colour: "#007c4b"
+  text_on_shed: "#268f5c"
+  sources: [ncgm, defra]
+  short: "Green beans"
+  notes:
+    - "Defra wholesale data: UK-grown beans quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown beans quoted in Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [23, 26, avail]
         - [27, 39, in]
@@ -500,10 +782,14 @@
 - name: "Celery"
   slug: celery
   group: shoots
-  colour: "#84902c"
-  source: ncgm
+  colour: "#828f50"
+  text_on_custard: "#677335"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown celery quoted in Jun, Jul, Aug, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [23, 26, avail]
         - [27, 43, in]
@@ -511,21 +797,26 @@
 - name: "Fennel"
   slug: fennel
   group: shoots
-  colour: "#887b2e"
-  source: ncgm
+  colour: "#887433"
+  text_on_shed: "#917d3c"
+  text_on_custard: "#806c2b"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [27, 48, in]
 
 - name: "Globe artichokes"
   slug: globe-artichokes
-  short: "Artichokes"
   group: shoots
-  colour: "#4b765f"
-  source: ncgm
+  colour: "#557763"
+  text_on_shed: "#638671"
+  sources: [ncgm]
+  short: "Artichokes"
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [18, 22, avail]
         - [23, 43, in]
@@ -534,7 +825,8 @@
 - name: "Mangetout"
   slug: mangetout
   group: shoots
-  colour: "#678a00"
+  colour: "#6f8700"
+  text_on_custard: "#617600"
   source: bbc
   varieties:
     - name: ""
@@ -544,10 +836,14 @@
 - name: "Peas"
   slug: peas
   group: shoots
-  colour: "#199200"
-  source: ncgm
+  colour: "#009135"
+  text_on_custard: "#007f2e"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown peas quoted in Jun, Jul, Aug, Sep (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [18, 22, avail]
         - [23, 39, in]
@@ -556,10 +852,14 @@
 - name: "Sweetcorn"
   slug: sweetcorn
   group: shoots
-  colour: "#b47d00"
-  source: ncgm
+  colour: "#b37600"
+  text_on_custard: "#976300"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown sweetcorn quoted in Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [27, 30, avail]
         - [31, 43, in]
@@ -569,9 +869,11 @@
   slug: aubergine
   group: fruiting
   colour: "#8a39cc"
-  source: ncgm
+  text_on_shed: "#a557eb"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [18, 22, avail]
         - [23, 39, in]
@@ -579,10 +881,12 @@
 - name: "Chillies"
   slug: chillies
   group: fruiting
-  colour: "#cb0019"
-  source: ncgm
+  colour: "#ca0024"
+  text_on_shed: "#eb3840"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [18, 48, in]
         - [49, 52, avail]
@@ -590,11 +894,15 @@
 - name: "Courgettes"
   slug: courgettes
   group: fruiting
-  colour: "#09812d"
-  source: ncgm
+  colour: "#007f3a"
+  text_on_shed: "#23904a"
+  sources: [ncgm, defra]
   aliases: ["zucchini"]
+  notes:
+    - "Defra wholesale data: UK-grown courgettes quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [18, 22, avail]
         - [23, 39, in]
@@ -603,7 +911,8 @@
 - name: "Courgette flowers"
   slug: courgette-flowers
   group: fruiting
-  colour: "#a48500"
+  colour: "#9f8000"
+  text_on_custard: "#856b00"
   source: bbc
   varieties:
     - name: ""
@@ -613,10 +922,13 @@
 - name: "Marrow"
   slug: marrow
   group: fruiting
-  colour: "#617f31"
-  source: ncgm
+  colour: "#677e33"
+  text_on_shed: "#6f873c"
+  text_on_custard: "#5f762b"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [27, 30, avail]
         - [31, 43, in]
@@ -625,97 +937,159 @@
 - name: "Peppers"
   slug: peppers
   group: fruiting
-  colour: "#bd4c00"
-  source: ncgm
+  colour: "#b94900"
+  text_on_shed: "#ce5c21"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown capsicum quoted in Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [18, 43, in]
+    - name: "Glasshouse"
+      ring: method
+      lead: false
+      sources: [defra]
+      notes:
+        - "UK peppers are almost all glasshouse-grown; Defra red peppers used as the guide."
+      weeks:
+        - [14, 26, avail]
+        - [27, 39, in]
+        - [40, 48, avail]
 
 - name: "Pumpkin"
   slug: pumpkin
   group: fruiting
-  colour: "#aa6600"
-  source: ncgm
+  colour: "#9c6300"
+  text_on_shed: "#ac721d"
+  sources: [ncgm]
   note: "NCGM also marks January to March, presumably stored; kept as given."
   varieties:
     - name: ""
+      sources: [ncgm]
+      notes:
+        - "Covent Garden marks pumpkins in season January-March and July-August as well as September-December. January-March recoded as from store (its own squash row shows stored stock then); July-August dropped."
       weeks:
-        - [1, 13, in]
-        - [27, 52, in]
+        - [1, 13, store]
+        - [36, 52, in]
 
 - name: "Squash"
   slug: squash
   group: fruiting
-  colour: "#c47500"
-  source: ncgm
+  colour: "#c87500"
+  text_on_custard: "#a25d00"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
+        - [1, 13, store]
         - [31, 35, avail]
         - [36, 43, in]
+        - [44, 52, store]
 
 - name: "Tomatoes"
   slug: tomatoes
   group: fruiting
-  colour: "#db3901"
-  source: ncgm
+  colour: "#e03900"
+  text_on_shed: "#e7410f"
+  text_on_custard: "#ce3300"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown tomatoes quoted in Apr, May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
       shades: ["#5d8f00", "#e44500", "#b4344e"]
+      sources: [ncgm]
       weeks:
         - [9, 26, avail]
         - [27, 35, in]
         - [36, 48, avail]
+    - name: "Glasshouse"
+      ring: method
+      lead: false
+      sources: [defra]
+      notes:
+        - "Defra round tomatoes; most UK tomatoes are glasshouse-grown."
+      weeks:
+        - [14, 48, in]
 
 - name: "Apples"
   slug: apples
   group: orchard
-  colour: "#cd170f"
-  source: ncgm
+  colour: "#c81800"
+  text_on_shed: "#e7402a"
+  sources: [ncgm, defra, bap]
   note: "NCGM lists eight varieties; three early-eater rows (Early Windsor, Golden Delicious, Royal Gala) are left out. NCGM marks Discovery as only 'available' in August and September; here August is in season, as it is sold."
+  notes:
+    - "British Apples & Pears lists Bramleys as available all year: harvested August-September, the rest from store. Good Food's \"not in season August-October\" dropped."
+    - "Defra wholesale data: UK-grown apples quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown apples quoted in Jan, Feb, Mar, Apr, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
   varieties:
-    - name: "Discovery"
-      short: "Discovery apples"
+    - name: "Bramley"
       cultivar: true
-      colour: "#ed5100"
+      short: "Bramley apples"
+      colour: "#459323"
+      text_on_custard: "#307e00"
+      sources: [ncgm, defra, bap]
+      weeks:
+        - [1, 30, store]
+        - [31, 39, in]
+        - [40, 52, store]
+    - name: "Braeburn"
+      cultivar: true
+      short: "Braeburn apples"
+      colour: "#c71500"
+      text_on_shed: "#e83f2b"
+      sources: [ncgm, defra]
+      weeks:
+        - [1, 17, store]
+        - [40, 43, avail]
+        - [44, 48, in]
+        - [49, 52, store]
+    - name: "Cox"
+      cultivar: true
+      colour: "#bf6b00"
+      text_on_custard: "#a55b00"
+      sources: [ncgm, defra]
+      weeks:
+        - [1, 17, store]
+        - [36, 43, in]
+        - [44, 52, store]
+    - name: "Discovery"
+      cultivar: true
+      short: "Discovery apples"
+      colour: "#fe4200"
+      text_on_custard: "#cd3400"
+      sources: [ncgm, defra]
       weeks:
         - [31, 35, in]
         - [36, 39, avail]
-    - name: "Bramley"
-      short: "Bramley apples"
-      cultivar: true
-      colour: "#50931f"
-      weeks:
-        - [31, 39, in]
-    - name: "Cox"
-      cultivar: true
-      colour: "#bb7400"
-      weeks:
-        - [36, 43, in]
     - name: "Egremont Russet"
-      short: "Russet apples"
       cultivar: true
-      colour: "#815e00"
+      short: "Russet apples"
+      colour: "#726422"
+      text_on_shed: "#8c7e3d"
+      sources: [ncgm, defra]
       weeks:
+        - [1, 4, store]
         - [36, 39, avail]
         - [40, 43, in]
-    - name: "Braeburn"
-      short: "Braeburn apples"
-      cultivar: true
-      colour: "#cb000e"
-      weeks:
-        - [40, 43, avail]
-        - [44, 48, in]
+        - [44, 52, store]
 
 - name: "Cherries"
   slug: cherries
   group: orchard
-  colour: "#c50e4f"
-  source: ncgm
+  colour: "#c50a53"
+  text_on_shed: "#e63a6c"
+  sources: [ncgm, defra]
   note: "BBC Good Food has cherries June to July; NCGM runs later."
+  notes:
+    - "Defra wholesale data: UK-grown cherries quoted in Jun, Jul, Aug (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [14, 26, avail]
         - [27, 39, in]
@@ -724,9 +1098,11 @@
   slug: damsons
   group: orchard
   colour: "#6d49d2"
-  source: ncgm
+  text_on_shed: "#8566f0"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [31, 35, avail]
         - [36, 39, in]
@@ -734,10 +1110,14 @@
 - name: "Medlars"
   slug: medlars
   group: orchard
-  colour: "#85654f"
-  source: ncgm
+  colour: "#82655b"
+  text_on_shed: "#95786d"
+  sources: [ncgm]
+  notes:
+    - "Medlars need bletting (left to soften almost to brown) before they are worth eating."
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [40, 43, avail]
         - [44, 52, in]
@@ -745,70 +1125,105 @@
 - name: "Pears"
   slug: pears
   group: orchard
-  colour: "#807e06"
-  source: ncgm
+  colour: "#7f7f00"
+  text_on_shed: "#82830a"
+  text_on_custard: "#727100"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown pears quoted in Jan, Feb, Mar, Apr, May, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown pears quoted in Jan, Feb, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
   varieties:
-    - name: "Williams"
-      short: "Williams pears"
+    - name: "Comice & Concorde"
       cultivar: true
-      colour: "#869000"
+      colour: "#a15c20"
+      text_on_shed: "#b46d33"
+      sources: [ncgm, defra]
+      weeks:
+        - [1, 8, store]
+        - [40, 52, in]
+    - name: "Conference"
+      cultivar: true
+      short: "Conference pears"
+      colour: "#34772a"
+      text_on_shed: "#498d3f"
+      sources: [ncgm, defra]
+      weeks:
+        - [1, 22, store]
+        - [36, 52, in]
+    - name: "Williams"
+      cultivar: true
+      short: "Williams pears"
+      colour: "#8a8e00"
+      text_on_custard: "#6f7200"
+      sources: [ncgm]
       weeks:
         - [31, 35, avail]
         - [36, 39, in]
         - [40, 43, avail]
-    - name: "Conference"
-      short: "Conference pears"
-      cultivar: true
-      colour: "#3e781d"
-      weeks:
-        - [36, 52, in]
-    - name: "Comice"
-      cultivar: true
-      colour: "#a36522"
-      weeks:
-        - [40, 52, in]
 
 - name: "Plums"
   slug: plums
   group: orchard
-  colour: "#9a30c1"
-  source: ncgm
+  colour: "#9a2fc4"
+  text_on_shed: "#b64ee1"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown plums quoted in Aug, Sep (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [31, 39, in]
 
 - name: "Quince"
   slug: quince
   group: orchard
-  colour: "#a78500"
-  source: ncgm
+  colour: "#ae8200"
+  text_on_custard: "#8d6800"
+  sources: [ncgm]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [40, 48, in]
 
 - name: "Blackberries"
   slug: blackberries
   group: soft
-  colour: "#7e44c7"
-  source: ncgm
+  colour: "#7c45c7"
+  text_on_shed: "#9662e5"
+  sources: [ncgm, defra, forestheart]
+  notes:
+    - "Market blackberries run later than wild ones (cultivated and polytunnel crops)."
+    - "Defra wholesale data: UK-grown blackberries quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [31, 35, avail]
         - [36, 43, in]
         - [44, 48, avail]
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [forestheart]
+      weeks:
+        - [27, 39, in]
 
 - name: "Blackcurrants & Redcurrants"
   slug: blackcurrants-redcurrants
-  short: "Currants"
   group: soft
-  colour: "#a02fb1"
-  source: ncgm
+  colour: "#9d31b4"
+  text_on_shed: "#ba50d1"
+  sources: [ncgm, defra]
+  short: "Currants"
   note: "BBC Good Food has blackcurrants from late May to July; NCGM has July to August."
+  notes:
+    - "Defra wholesale data: UK-grown currants quoted in Jul, Aug (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown currants quoted in Aug (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [27, 30, avail]
         - [31, 35, in]
@@ -817,27 +1232,42 @@
   slug: blueberries
   group: soft
   colour: "#4862dc"
-  source: ncgm
+  text_on_shed: "#5774f0"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown blueberries quoted in Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [27, 35, in]
 
 - name: "Gooseberries"
   slug: gooseberries
   group: soft
-  colour: "#6d8d1c"
-  source: ncgm
+  colour: "#6a902b"
+  text_on_custard: "#547806"
+  sources: [ncgm, defra, forestheart]
+  notes:
+    - "Defra wholesale data: UK-grown gooseberries quoted in Jun, Jul (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [23, 26, avail]
         - [27, 35, in]
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [forestheart]
+      weeks:
+        - [27, 39, in]
 
 - name: "Loganberries & Tayberries"
   slug: loganberries-tayberries
   group: soft
-  colour: "#b31e96"
+  colour: "#b70d99"
+  text_on_shed: "#d63bb6"
   source: bbc
   varieties:
     - name: ""
@@ -847,10 +1277,15 @@
 - name: "Raspberries"
   slug: raspberries
   group: soft
-  colour: "#c8007d"
-  source: ncgm
+  colour: "#d8009b"
+  text_on_shed: "#e623a7"
+  text_on_custard: "#cf0095"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra wholesale data: UK-grown raspberries quoted in Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [18, 43, in]
 
@@ -858,28 +1293,42 @@
   slug: rhubarb
   group: soft
   colour: "#ff2d78"
-  source: ncgm
+  text_on_custard: "#d8005f"
+  sources: [ncgm, defra]
   note: "BBC Good Food has rhubarb January to June with no forced/outdoor split."
+  notes:
+    - "Yorkshire Forced Rhubarb has PDO status (2010), but the registration contains no season dates; growers' practice is roughly January to March."
+    - "Defra wholesale data: UK-grown rhubarb quoted in Jan, Feb, Mar, Apr, May (>=50% of reports, 2017-2026)."
+    - "Defra wholesale data: UK-grown rhubarb quoted in Mar, Apr, May, Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
   varieties:
     - name: "Forced"
       short: "Forced rhubarb"
       colour: "#ff2d78"
+      text_on_custard: "#d8005f"
+      sources: [ncgm, defra]
       weeks:
         - [1, 13, in]
         - [44, 52, in]
     - name: "Outdoor"
       short: "Outdoor rhubarb"
       colour: "#b92c62"
+      text_on_shed: "#d74a7b"
+      sources: [ncgm, defra]
       weeks:
         - [18, 30, in]
 
 - name: "Strawberries"
   slug: strawberries
   group: soft
-  colour: "#d6120d"
-  source: ncgm
+  colour: "#da0007"
+  text_on_shed: "#f12e25"
+  sources: [ncgm, defra]
+  notes:
+    - "Defra shows UK strawberries March-December, which includes protected and table-top crops; it cannot separate them, so no glasshouse ring."
+    - "Defra wholesale data: UK-grown strawberries quoted in Apr, May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
   varieties:
     - name: ""
+      sources: [ncgm, defra]
       weeks:
         - [18, 22, avail]
         - [23, 35, in]
@@ -888,29 +1337,51 @@
 - name: "Cobnuts"
   slug: cobnuts
   group: nuts
-  colour: "#a56822"
-  source: ncgm
+  colour: "#a26930"
+  text_on_shed: "#ab7239"
+  text_on_custard: "#9a6127"
+  sources: [ncgm, forestheart]
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [31, 35, avail]
         - [36, 43, in]
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [forestheart]
+      weeks:
+        - [31, 48, in]
 
 - name: "Walnuts"
   slug: walnuts
   group: nuts
-  colour: "#7e604b"
-  source: ncgm
+  colour: "#815d49"
+  text_on_shed: "#9b7661"
+  sources: [ncgm, forestheart]
   note: "Fresh (wet) walnuts."
   varieties:
-    - name: ""
+    - name: "Fresh"
+      ring: method
+      sources: [ncgm]
       weeks:
         - [40, 43, in]
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [forestheart]
+      notes:
+        - "Forestheart's June start probably counts green walnuts for pickling; ripe nuts come in October."
+      weeks:
+        - [23, 48, in]
 
 - name: "Wild garlic"
   slug: wild-garlic
   group: foraged
-  colour: "#348f1c"
+  colour: "#008b0a"
+  text_on_shed: "#159218"
+  text_on_custard: "#008008"
   source: general
   varieties:
     - name: ""
@@ -921,7 +1392,8 @@
 - name: "Nettles"
   slug: nettles
   group: foraged
-  colour: "#457803"
+  colour: "#4e7600"
+  text_on_shed: "#608a23"
   source: general
   note: "Young tops only; tough and gritty once they flower."
   varieties:
@@ -934,6 +1406,7 @@
   slug: dandelion
   group: foraged
   colour: "#9f8800"
+  text_on_custard: "#806d00"
   source: general
   note: "Leaves before the flowers open."
   varieties:
@@ -945,7 +1418,8 @@
 - name: "Sea beet"
   slug: sea-beet
   group: foraged
-  colour: "#007d52"
+  colour: "#007a5b"
+  text_on_shed: "#278e6d"
   source: general
   varieties:
     - name: ""
@@ -957,11 +1431,15 @@
 - name: "Samphire"
   slug: samphire
   group: foraged
-  colour: "#00926a"
-  source: ncgm
+  colour: "#00928a"
+  text_on_custard: "#007b75"
+  sources: [ncgm]
   note: "Marsh samphire."
+  notes:
+    - "Marsh samphire; pick by snipping above the base, never pulling up."
   varieties:
     - name: ""
+      sources: [ncgm]
       weeks:
         - [23, 26, avail]
         - [27, 35, in]
@@ -969,7 +1447,8 @@
 - name: "Elderflower"
   slug: elderflower
   group: foraged
-  colour: "#848e5c"
+  colour: "#868b75"
+  text_on_custard: "#6c705b"
   source: general
   varieties:
     - name: ""
@@ -980,7 +1459,8 @@
 - name: "Meadowsweet"
   slug: meadowsweet
   group: foraged
-  colour: "#a07d64"
+  colour: "#a9735e"
+  text_on_custard: "#96614d"
   source: general
   varieties:
     - name: ""
@@ -990,7 +1470,9 @@
 - name: "Wild strawberries"
   slug: wild-strawberries
   group: foraged
-  colour: "#d93f0d"
+  colour: "#db472e"
+  text_on_shed: "#df4a31"
+  text_on_custard: "#cb371f"
   source: general
   varieties:
     - name: ""
@@ -1000,7 +1482,8 @@
 - name: "Bilberries"
   slug: bilberries
   group: foraged
-  colour: "#5356d6"
+  colour: "#5654d9"
+  text_on_shed: "#6b6ef5"
   source: general
   varieties:
     - name: ""
@@ -1011,6 +1494,7 @@
   slug: elderberries
   group: foraged
   colour: "#8c3fba"
+  text_on_shed: "#a85cd8"
   source: general
   varieties:
     - name: ""
@@ -1018,83 +1502,11 @@
         - [31, 35, avail]
         - [36, 39, in]
 
-- name: "Ceps"
-  slug: ceps
-  group: foraged
-  colour: "#925c00"
-  source: general
-  note: "Penny buns."
-  aliases: ["porcini", "penny buns"]
-  also: ["mushrooms"]
-  varieties:
-    - name: ""
-      weeks:
-        - [31, 43, in]
-
-- name: "Field mushrooms"
-  slug: field-mushrooms
-  group: foraged
-  colour: "#867276"
-  source: general
-  also: ["mushrooms"]
-  varieties:
-    - name: ""
-      weeks:
-        - [31, 43, in]
-
-- name: "Giant puffball"
-  slug: giant-puffball
-  group: foraged
-  colour: "#828b89"
-  source: general
-  aliases: ["puffballs"]
-  also: ["mushrooms"]
-  varieties:
-    - name: ""
-      weeks:
-        - [31, 43, in]
-
-- name: "Girolles"
-  slug: girolles
-  group: foraged
-  colour: "#bd7b00"
-  source: ncgm
-  note: "Chanterelles."
-  aliases: ["chanterelles"]
-  also: ["mushrooms"]
-  varieties:
-    - name: ""
-      weeks:
-        - [27, 48, in]
-
-- name: "Hedgehog fungus"
-  slug: hedgehog-fungus
-  group: foraged
-  colour: "#a56e28"
-  source: general
-  aliases: ["hedgehog mushrooms", "pied de mouton"]
-  also: ["mushrooms"]
-  varieties:
-    - name: ""
-      weeks:
-        - [36, 48, in]
-
-- name: "Morels"
-  slug: morels
-  group: foraged
-  colour: "#83604c"
-  source: ncgm
-  also: ["mushrooms"]
-  varieties:
-    - name: ""
-      weeks:
-        - [9, 13, avail]
-        - [14, 22, in]
-
 - name: "Rosehips"
   slug: rosehips
   group: foraged
-  colour: "#bf3200"
+  colour: "#bd3000"
+  text_on_shed: "#dc4e2a"
   source: general
   note: "Best after the first frost."
   varieties:
@@ -1106,7 +1518,9 @@
 - name: "Crab apples"
   slug: crab-apples
   group: foraged
-  colour: "#807f00"
+  colour: "#837000"
+  text_on_shed: "#917e1c"
+  text_on_custard: "#806d00"
   source: general
   varieties:
     - name: ""
@@ -1116,7 +1530,8 @@
 - name: "Sea buckthorn"
   slug: sea-buckthorn
   group: foraged
-  colour: "#d06500"
+  colour: "#d06a00"
+  text_on_custard: "#ac5600"
   source: general
   varieties:
     - name: ""
@@ -1126,7 +1541,8 @@
 - name: "Sloes"
   slug: sloes
   group: foraged
-  colour: "#1e65c3"
+  colour: "#1466c3"
+  text_on_shed: "#317edd"
   source: general
   varieties:
     - name: ""
@@ -1136,7 +1552,8 @@
 - name: "Sweet chestnuts"
   slug: sweet-chestnuts
   group: foraged
-  colour: "#a14a2c"
+  colour: "#9b4e33"
+  text_on_shed: "#b8694d"
   source: general
   varieties:
     - name: ""
@@ -1144,10 +1561,251 @@
         - [40, 48, in]
         - [49, 52, avail]
 
+- name: "Wood sorrel"
+  slug: wood-sorrel
+  group: foraged
+  colour: "#0e935d"
+  text_on_custard: "#007e4e"
+  sources: [forestheart]
+  varieties:
+    - name: ""
+      sources: [forestheart]
+      weeks:
+        - [1, 52, in]
+
+- name: "Hop"
+  slug: hop
+  group: foraged
+  colour: "#718749"
+  text_on_custard: "#607538"
+  sources: [forestheart]
+  varieties:
+    - name: "Shoots"
+      ring: part
+      sources: [forestheart]
+      weeks:
+        - [23, 30, in]
+    - name: "Flowers"
+      ring: part
+      sources: [forestheart]
+      weeks:
+        - [31, 39, in]
+
+- name: "Spruce tips"
+  slug: spruce-tips
+  group: foraged
+  colour: "#59982e"
+  text_on_custard: "#3f7c03"
+  sources: [forestheart]
+  notes:
+    - "Be certain it is not yew: every part of yew is poisonous."
+  varieties:
+    - name: ""
+      sources: [forestheart]
+      weeks:
+        - [14, 22, in]
+
+- name: "Ceps"
+  slug: ceps
+  group: fungi
+  colour: "#8a5a00"
+  text_on_shed: "#a6752b"
+  source: general
+  aliases: ["porcini", "penny buns"]
+  also: ["mushrooms"]
+  note: "Penny buns."
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 43, in]
+
+- name: "Field mushrooms"
+  slug: field-mushrooms
+  group: fungi
+  colour: "#896d83"
+  text_on_shed: "#92768c"
+  text_on_custard: "#81657b"
+  source: general
+  also: ["mushrooms"]
+  varieties:
+    - name: ""
+      weeks:
+        - [31, 43, in]
+
+- name: "Giant puffball"
+  slug: giant-puffball
+  group: fungi
+  colour: "#6d8e9c"
+  text_on_custard: "#527280"
+  sources: [first_nature]
+  aliases: ["puffballs"]
+  also: ["mushrooms"]
+  notes:
+    - "Edible only while fresh and pure white throughout."
+  varieties:
+    - name: ""
+      sources: [first_nature]
+      notes:
+        - "July to November."
+      weeks:
+        - [27, 48, in]
+
+- name: "Girolles"
+  slug: girolles
+  group: fungi
+  colour: "#b87d00"
+  text_on_custard: "#956400"
+  sources: [first_nature, ncgm]
+  aliases: ["chanterelles"]
+  also: ["mushrooms"]
+  note: "Chanterelles."
+  varieties:
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [first_nature]
+      notes:
+        - "June to October, sometimes November."
+      weeks:
+        - [23, 43, in]
+        - [44, 48, avail]
+    - name: "Market"
+      ring: method
+      sources: [ncgm]
+      weeks:
+        - [27, 48, in]
+
+- name: "Hedgehog fungus"
+  slug: hedgehog-fungus
+  group: fungi
+  colour: "#ab6700"
+  text_on_shed: "#b36e12"
+  text_on_custard: "#9f5f00"
+  sources: [first_nature]
+  aliases: ["hedgehog mushrooms", "pied de mouton"]
+  also: ["mushrooms"]
+  varieties:
+    - name: ""
+      sources: [first_nature]
+      notes:
+        - "August to December."
+      weeks:
+        - [31, 52, in]
+
+- name: "Morels"
+  slug: morels
+  group: fungi
+  colour: "#785e59"
+  text_on_shed: "#937872"
+  sources: [first_nature, ncgm]
+  also: ["mushrooms"]
+  notes:
+    - "Only edible when thoroughly cooked."
+  varieties:
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [first_nature]
+      notes:
+        - "March to early June."
+      weeks:
+        - [9, 22, in]
+        - [23, 26, avail]
+    - name: ""
+      sources: [ncgm]
+      weeks:
+        - [9, 13, avail]
+        - [14, 22, in]
+
+- name: "Hen of the woods"
+  slug: hen-of-the-woods
+  group: fungi
+  colour: "#8a714c"
+  text_on_shed: "#937a55"
+  text_on_custard: "#836a45"
+  sources: [first_nature]
+  aliases: ["maitake"]
+  notes:
+    - "Uncommon and localised in Britain."
+  varieties:
+    - name: ""
+      sources: [first_nature]
+      notes:
+        - "FUDGE: First Nature says only \"summer and autumn\"; July-October is an approximation."
+      weeks:
+        - [27, 43, in]
+
+- name: "Oyster mushrooms"
+  slug: oyster-mushrooms
+  group: fungi
+  colour: "#637f74"
+  text_on_shed: "#688479"
+  text_on_custard: "#587369"
+  sources: [first_nature, ncgm]
+  varieties:
+    - name: "Wild"
+      ring: method
+      lead: false
+      sources: [first_nature]
+      notes:
+        - "FUDGE: First Nature says \"summer, autumn and early winter\"; June-November plus December approximates that."
+      weeks:
+        - [23, 48, in]
+        - [49, 52, avail]
+    - name: "Cultivated"
+      ring: method
+      sources: [ncgm]
+      weeks:
+        - [1, 52, in]
+
+- name: "Button, cup and flat mushrooms"
+  slug: button-mushrooms
+  group: fungi
+  colour: "#a08281"
+  text_on_custard: "#846766"
+  sources: [ncgm]
+  notes:
+    - "Cultivated, so available all year."
+  varieties:
+    - name: ""
+      sources: [ncgm]
+      weeks:
+        - [1, 52, in]
+
+- name: "Enoki"
+  slug: enoki
+  group: fungi
+  colour: "#8a8c61"
+  text_on_custard: "#6f7047"
+  sources: [ncgm]
+  notes:
+    - "Cultivated, so available all year."
+  varieties:
+    - name: ""
+      sources: [ncgm]
+      weeks:
+        - [1, 52, in]
+
+- name: "Shiitake"
+  slug: shiitake
+  group: fungi
+  colour: "#a05646"
+  text_on_shed: "#b66a59"
+  sources: [ncgm]
+  notes:
+    - "Cultivated, so available all year."
+  varieties:
+    - name: ""
+      sources: [ncgm]
+      weeks:
+        - [1, 52, in]
+
 - name: "Basil"
   slug: basil
   group: herbs
-  colour: "#00881d"
+  colour: "#008426"
+  text_on_shed: "#1e9134"
+  text_on_custard: "#008024"
   source: general
   varieties:
     - name: ""
@@ -1159,7 +1817,8 @@
 - name: "Bay"
   slug: bay
   group: herbs
-  colour: "#4b6c4e"
+  colour: "#556a4e"
+  text_on_shed: "#6e8466"
   source: general
   note: "Evergreen, picked all year."
   varieties:
@@ -1170,7 +1829,8 @@
 - name: "Chervil"
   slug: chervil
   group: herbs
-  colour: "#709500"
+  colour: "#769400"
+  text_on_custard: "#5e7600"
   source: general
   varieties:
     - name: ""
@@ -1182,7 +1842,9 @@
 - name: "Chives"
   slug: chives
   group: herbs
-  colour: "#008e56"
+  colour: "#008b65"
+  text_on_shed: "#0f9069"
+  text_on_custard: "#007d5b"
   source: general
   varieties:
     - name: ""
@@ -1194,7 +1856,8 @@
 - name: "Coriander"
   slug: coriander
   group: herbs
-  colour: "#189e36"
+  colour: "#009e42"
+  text_on_custard: "#007f34"
   source: general
   varieties:
     - name: ""
@@ -1206,7 +1869,8 @@
 - name: "Dill"
   slug: dill
   group: herbs
-  colour: "#8f8400"
+  colour: "#997b00"
+  text_on_custard: "#856b00"
   source: general
   varieties:
     - name: ""
@@ -1217,7 +1881,8 @@
 - name: "Lovage"
   slug: lovage
   group: herbs
-  colour: "#566e00"
+  colour: "#516d00"
+  text_on_shed: "#6a882a"
   source: general
   varieties:
     - name: ""
@@ -1228,10 +1893,11 @@
 
 - name: "Marjoram & Oregano"
   slug: marjoram-oregano
-  short: "Oregano"
   group: herbs
-  colour: "#7d7202"
+  colour: "#7e6700"
+  text_on_shed: "#947c25"
   source: general
+  short: "Oregano"
   varieties:
     - name: ""
       weeks:
@@ -1242,7 +1908,8 @@
 - name: "Mint"
   slug: mint
   group: herbs
-  colour: "#008b7c"
+  colour: "#008b94"
+  text_on_custard: "#007a83"
   source: general
   varieties:
     - name: ""
@@ -1254,7 +1921,8 @@
 - name: "Parsley"
   slug: parsley
   group: herbs
-  colour: "#00783f"
+  colour: "#00734d"
+  text_on_shed: "#2f8e66"
   source: general
   varieties:
     - name: ""
@@ -1266,7 +1934,8 @@
 - name: "Rosemary"
   slug: rosemary
   group: herbs
-  colour: "#51787c"
+  colour: "#537482"
+  text_on_shed: "#618391"
   source: general
   note: "Evergreen, picked all year."
   varieties:
@@ -1277,7 +1946,8 @@
 - name: "Sage"
   slug: sage
   group: herbs
-  colour: "#738679"
+  colour: "#77867d"
+  text_on_custard: "#637169"
   source: general
   varieties:
     - name: ""
@@ -1289,7 +1959,9 @@
 - name: "Sorrel"
   slug: sorrel
   group: herbs
-  colour: "#5f8300"
+  colour: "#6a7f00"
+  text_on_shed: "#718712"
+  text_on_custard: "#627600"
   source: general
   varieties:
     - name: ""
@@ -1301,7 +1973,8 @@
 - name: "Tarragon"
   slug: tarragon
   group: herbs
-  colour: "#5d955a"
+  colour: "#5c9663"
+  text_on_custard: "#417a49"
   source: general
   varieties:
     - name: ""
@@ -1313,7 +1986,8 @@
 - name: "Thyme"
   slug: thyme
   group: herbs
-  colour: "#756f4d"
+  colour: "#806c56"
+  text_on_shed: "#8f7b64"
   source: general
   varieties:
     - name: ""
@@ -1325,346 +1999,874 @@
 - name: "Mackerel"
   slug: mackerel
   group: fish
-  colour: "#00818e"
-  source: ffs
+  colour: "#007e8d"
+  text_on_shed: "#1e8a9a"
+  text_on_custard: "#007988"
+  sources: [northumberland, bnfs, ffs, seafish]
   note: "Flying Fish Seafoods have Cornish handline mackerel poor from June to September and only fair the rest of the year; the summer mackerel of common knowledge is a different fishery."
-  buy: "Handline-caught from the South West is the good choice, and most UK mackerel is."
+  notes:
+    - "The coasts disagree: Northumberland peaks June-August and has none November-April, while Flying Fish marks Cornish mackerel poor June-September and varying the rest of the year."
+  buy: "Good Fish Guide: every mackerel rating is Avoid."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [18, 22, avail]
+        - [23, 35, in]
+        - [36, 43, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 8, avail]
+        - [14, 39, in]
+        - [40, 48, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
       weeks:
         - [1, 22, in]
         - [40, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "All year round, at its best in summer."
+      weeks:
+        - [1, 22, avail]
+        - [23, 35, in]
+        - [36, 52, avail]
 
 - name: "Sea bass"
   slug: sea-bass
   group: fish
-  colour: "#607b97"
-  source: ffs
+  colour: "#5a76af"
+  text_on_shed: "#617eb7"
+  text_on_custard: "#526da6"
+  sources: [bnfs, ffs, seafish]
   note: "Wild, line-caught; poor through the summer."
-  buy: "Wild bass is line-caught in small numbers; farmed is the everyday fish. Ask which you are getting."
+  notes:
+    - "Brighton & Newhaven marks February-March out of season, which matches the commercial bass closure in recent years: verify current rules."
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (C&S), Irish Sea, English Channel, Bristol Channel, Celtic Sea; Hook & line (handline). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 4, in]
+        - [14, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
       weeks:
         - [1, 13, in]
         - [14, 22, avail]
         - [40, 48, avail]
         - [49, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Wild season August-March (high price)."
+      weeks:
+        - [1, 13, in]
+        - [31, 52, in]
 
 - name: "Sardines"
   slug: sardines
   group: fish
-  colour: "#0089ba"
-  source: ffs
+  colour: "#008ab9"
+  text_on_custard: "#00769f"
+  sources: [bnfs, ffs, msc_sardine]
   note: "Cornish sardines, best in the cold months."
-  buy: "Cornish sardines are ring-netted from a well-managed stock."
+  notes:
+    - "Flying Fish shows Cornish sardines good most of the year (varying April-June), best quality in the cold months; Brighton & Newhaven has none March-July."
+  buy: "Good Fish Guide: Best Choice (2). Ask for Southern Celtic Seas and English Channel; Net (purse seine or ring)."
   varieties:
-    - name: ""
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
       weeks:
-        - [1, 17, in]
-        - [27, 39, avail]
-        - [40, 52, in]
+        - [1, 8, avail]
+        - [31, 35, in]
+        - [36, 52, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 13, in]
+        - [14, 26, avail]
+        - [27, 52, in]
+    - name: "Cornish fishery (MSC)"
+      ring: region
+      lead: false
+      sources: [msc_sardine]
+      notes:
+        - "The MSC-certified Cornish ring-net fishery usually runs July to January."
+      weeks:
+        - [1, 4, in]
+        - [27, 52, in]
 
 - name: "Herring"
   slug: herring
   group: fish
-  colour: "#3a72ae"
-  source: ffs
+  colour: "#2476d5"
+  text_on_shed: "#2e7ede"
+  text_on_custard: "#196dcc"
+  sources: [northumberland, ffs]
   note: "Poor from January to March."
-  buy: "North Sea and Norwegian herring are in good shape; the MSC label is easy to find."
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea Autumn Spawners (North Sea, eastern Channel); Net (drift). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
-        - [18, 26, avail]
+        - [1, 39, avail]
+        - [40, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [14, 26, avail]
         - [27, 39, in]
         - [40, 48, avail]
 
 - name: "Cod"
   slug: cod
   group: fish
-  colour: "#5d886f"
-  source: ffs
-  note: "Cornish cod is at its best from July to October and poor in November and December, which is not what the fish counter will tell you."
-  buy: "Icelandic, Norwegian and Barents Sea cod are the well-managed stocks; the North Sea stock is still rebuilding. Look for the MSC label."
+  colour: "#229271"
+  text_on_custard: "#007d5f"
+  sources: [northumberland, bnfs, ffs, seafish]
+  note: "Cornish cod is at its best from March to May and again in September and October."
+  notes:
+    - "Fishmongers' rings follow Helen's decision to go with the fishmongers; Good Food's February-April peak (spawning) dropped."
+  buy: "Good Fish Guide: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2); trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
+        - [1, 4, in]
+        - [5, 35, avail]
+        - [36, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 4, in]
+        - [5, 48, avail]
+        - [49, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 8, avail]
+        - [9, 22, in]
+        - [23, 35, avail]
+        - [36, 43, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Season June-February, best quality July-October, can be difficult in November-December."
+      weeks:
+        - [1, 8, avail]
         - [23, 26, avail]
         - [27, 43, in]
+        - [44, 52, avail]
 
 - name: "Haddock"
   slug: haddock
   group: fish
-  colour: "#827d7b"
-  source: ffs
+  colour: "#8e8396"
+  text_on_custard: "#756a7c"
+  sources: [northumberland, bnfs, ffs]
   note: "Two peaks: late winter and late summer."
-  buy: "North Sea and Icelandic haddock are in good shape; look for the MSC label."
+  buy: "Good Fish Guide: Best Choice (1). Ask for North Sea, West of Scotland, Skagerrak; Net (demersal seine). Ratings run from 1 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 4, in]
+        - [5, 35, avail]
+        - [36, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
       weeks:
         - [1, 4, avail]
         - [5, 17, in]
-        - [18, 26, avail]
-        - [27, 39, in]
-        - [40, 43, avail]
+        - [18, 30, avail]
+        - [31, 43, in]
 
 - name: "Hake"
   slug: hake
   group: fish
-  colour: "#51929f"
-  source: ffs
+  colour: "#5e8fac"
+  text_on_custard: "#43738f"
+  sources: [northumberland, bnfs, ffs]
   note: "Consistent all year."
-  buy: "Cornish hake is MSC-certified and plentiful."
+  buy: "Good Fish Guide: Best Choice (2). Ask for Northern stock (North Sea, Celtic Seas, northern Biscay); Net (gill or fixed)."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 8, avail]
+        - [9, 35, in]
+        - [36, 52, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [5, 8, avail]
+        - [9, 43, in]
+        - [44, 48, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Plaice"
   slug: plaice
   group: fish
-  colour: "#a76700"
-  source: ffs
+  colour: "#9f6d00"
+  text_on_shed: "#a77513"
+  text_on_custard: "#936500"
+  sources: [northumberland, bnfs, ffs, seafish]
   note: "Poor in January and February after spawning."
-  buy: "North Sea plaice is well managed; otter-trawled or line-caught over beam-trawled if you can choose."
+  notes:
+    - "Flying Fish marks January-February poor, in line with Seafish's advice to avoid plaice in roe (February-April)."
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Skagerrak; Bottom trawl (otter). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
-        - [18, 22, avail]
-        - [23, 35, in]
+        - [1, 17, avail]
+        - [18, 43, in]
+        - [44, 52, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [14, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [9, 17, avail]
+        - [18, 35, in]
         - [36, 43, avail]
+        - [44, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Season May-February; avoid February-April when it is in roe."
+      weeks:
+        - [1, 4, in]
+        - [18, 52, in]
 
 - name: "Dover sole"
   slug: dover-sole
   group: fish
-  colour: "#916950"
-  source: ffs
+  colour: "#a14e4f"
+  text_on_shed: "#bb6565"
+  sources: [northumberland, bnfs, ffs, seafish]
   note: "Poor in January and February after spawning; best in spring and again from July."
-  buy: "Ask where it was landed; the Channel and North Sea stocks are the better-managed ones."
+  buy: "Good Fish Guide: Best Choice (2). Ask for English Channel (West); Net (gill or fixed). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
-        - [9, 17, in]
-        - [18, 26, avail]
-        - [27, 48, in]
+        - [1, 35, avail]
+        - [36, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [9, 13, avail]
+        - [14, 26, in]
+        - [36, 48, in]
         - [49, 52, avail]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Season May-March, avoid at Christmas. Attribution between Dover and lemon sole was ambiguous in the guide's layout: verify."
+      weeks:
+        - [1, 13, in]
+        - [18, 52, in]
 
 - name: "Pollock"
   slug: pollock
   group: fish
-  colour: "#556684"
-  source: ffs
+  colour: "#4d658a"
+  text_on_shed: "#6680a6"
+  sources: [northumberland, ffs]
   note: "Poor in January and February; good from March."
-  buy: "A good swap for cod. Line-caught Cornish pollack is the best choice."
+  notes:
+    - "Northumberland's row covers pollack and saithe (coley) together."
+  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for English Channel and Celtic Seas; Hook & line (handline). Ratings run from 3 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 22, avail]
+        - [23, 35, in]
+        - [36, 52, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
       weeks:
         - [9, 22, in]
-        - [23, 26, avail]
+        - [23, 43, avail]
+        - [44, 52, in]
 
 - name: "Whiting"
   slug: whiting
   group: fish
-  colour: "#8088a8"
-  source: ffs
+  colour: "#8283c5"
+  text_on_custard: "#6767a7"
+  sources: [northumberland, ffs]
   note: "Consistent all year."
-  buy: "Line-caught is the choice; whiting is cheap and underused."
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, English Channel (East); Bottom trawl (otter). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 4, in]
+        - [5, 39, avail]
+        - [40, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Monkfish"
   slug: monkfish
   group: fish
-  colour: "#815a57"
-  source: ffs
-  buy: "Ask for tail or cheeks from the Cornish inshore boats; beam-trawled is the one to pass over."
+  colour: "#7e596c"
+  text_on_shed: "#9a7386"
+  sources: [northumberland, bnfs, ffs, seafish]
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Rockall & West of Scotland, Kattegat & Skagerrak; Bottom trawl (otter)."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
-        - [1, 17, in]
+        - [1, 30, avail]
+        - [31, 48, in]
+        - [49, 52, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [5, 13, avail]
+        - [14, 39, in]
+        - [40, 48, avail]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "All year round, best quality October-May."
+      weeks:
+        - [1, 22, in]
+        - [23, 39, avail]
         - [40, 52, in]
 
 - name: "Lemon sole"
   slug: lemon-sole
   group: fish
-  colour: "#928812"
-  source: ffs
+  colour: "#978a00"
+  text_on_custard: "#7a6f00"
+  sources: [northumberland, bnfs, ffs]
   note: "Poor from January to March and from October."
-  buy: "Cornish day-boat lemon sole; a cheaper, gentler choice than Dover sole."
+  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for North Sea, Skagerrak & Kattegat, English Channel (East); Bottom trawl (otter)."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
-        - [18, 22, avail]
-        - [23, 39, in]
-
-- name: "Gurnard"
-  slug: gurnard
-  group: fish
-  colour: "#cc2416"
-  source: ffs
-  buy: "Plentiful, cheap and underused; any gurnard is a good choice."
-  varieties:
-    - name: ""
+        - [1, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
       weeks:
-        - [9, 13, avail]
-        - [18, 39, in]
-        - [40, 43, avail]
-
-- name: "Brill"
-  slug: brill
-  group: fish
-  colour: "#6c673f"
-  source: ffs
-  note: "Poor in January and February."
-  buy: "Day-boat brill from the South West; it is turbot at half the price."
-  varieties:
-    - name: ""
-      weeks:
-        - [9, 17, avail]
-        - [18, 39, in]
-        - [40, 52, avail]
-
-- name: "Cuttlefish"
-  slug: cuttlefish
-  group: fish
-  colour: "#a2826e"
-  source: ffs
-  note: "Poor from May to July."
-  buy: "Trap-caught Cornish cuttlefish; most of the catch goes abroad, which is their loss."
-  varieties:
-    - name: ""
-      weeks:
-        - [1, 8, in]
-        - [9, 17, avail]
-        - [44, 52, in]
-
-- name: "Wild salmon"
-  slug: wild-salmon
-  group: fish
-  colour: "#b7643c"
-  source: general
-  note: "Rod-caught Scottish; most salmon sold is farmed all year."
-  buy: "Wild Atlantic salmon is endangered, so rod-caught is a rare treat. Organic farmed salmon or sea trout are the everyday choices."
-  varieties:
-    - name: ""
-      weeks:
-        - [9, 13, avail]
-        - [14, 35, in]
-        - [36, 39, avail]
-
-- name: "Sea trout"
-  slug: sea-trout
-  group: fish
-  colour: "#ca5557"
-  source: general
-  buy: "Wild sea trout is scarce; farmed sea trout is widely sold."
-  varieties:
-    - name: ""
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
       weeks:
         - [14, 17, avail]
         - [18, 35, in]
         - [36, 39, avail]
 
+- name: "Gurnard"
+  slug: gurnard
+  group: fish
+  colour: "#cc2e00"
+  text_on_shed: "#e34623"
+  sources: [northumberland, bnfs, ffs]
+  notes:
+    - "The coasts disagree sharply: North East peak June-August, South East out of season June-September."
+  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for Northeast Atlantic; Bottom trawl (otter). Ratings run from 3 to 5 depending on where and how it is caught, so ask."
+  varieties:
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 22, avail]
+        - [23, 35, in]
+        - [36, 52, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 13, avail]
+        - [14, 22, in]
+        - [40, 43, in]
+        - [44, 52, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [9, 22, in]
+        - [23, 30, avail]
+        - [31, 39, in]
+        - [40, 43, avail]
+
+- name: "Brill"
+  slug: brill
+  group: fish
+  colour: "#586b28"
+  text_on_shed: "#718643"
+  sources: [northumberland, bnfs, ffs]
+  note: "Poor in January and February."
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Skagerrak & Kattegat, English Channel; Net (gill or fixed). Ratings run from 2 to 4 depending on where and how it is caught, so ask."
+  varieties:
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [9, 17, avail]
+        - [18, 39, in]
+        - [40, 48, avail]
+
+- name: "Cuttlefish"
+  slug: cuttlefish
+  group: fish
+  colour: "#ab7f70"
+  text_on_custard: "#8e6456"
+  sources: [bnfs, ffs]
+  note: "Poor from May to July."
+  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for English Channel and Celtic Seas; Pot, trap or creel."
+  varieties:
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [14, 26, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 8, in]
+        - [9, 17, avail]
+        - [36, 43, avail]
+
+- name: "Wild salmon"
+  slug: wild-salmon
+  group: fish
+  colour: "#b8684f"
+  text_on_custard: "#a75840"
+  sources: [northumberland]
+  unsold: "It cannot be sold in England, Wales or Scotland"
+  note: "Rod-caught Scottish; most salmon sold is farmed all year."
+  notes:
+    - "Selling rod-caught salmon or sea trout has been illegal since 2009, and coastal net fisheries are largely closed, so wild salmon is rarely legitimately on sale."
+  buy: "Good Fish Guide: Avoid (5). Ask for NE Atlantic (England and Wales); Drift and fixed nets."
+  varieties:
+    - name: "North East"
+      ring: region
+      sources: [northumberland]
+      weeks:
+        - [23, 35, in]
+
+- name: "Sea trout"
+  slug: sea-trout
+  group: fish
+  colour: "#cc5356"
+  text_on_shed: "#d05659"
+  text_on_custard: "#bd454a"
+  sources: [northumberland]
+  notes:
+    - "As for wild salmon, rod-caught sea trout cannot be sold."
+  buy: "Good Fish Guide: not rated."
+  varieties:
+    - name: "North East"
+      ring: region
+      sources: [northumberland]
+      weeks:
+        - [14, 22, avail]
+        - [23, 35, in]
+
 - name: "Squid"
   slug: squid
   group: fish
-  colour: "#a17b98"
-  source: ffs
-  buy: "Jig-caught squid from the South West is the choice."
+  colour: "#ac77ad"
+  text_on_custard: "#8f5c91"
+  sources: [northumberland, bnfs, ffs, seafish]
+  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for Celtic Seas; Hook & line (jig)."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 4, in]
+        - [5, 22, avail]
+        - [23, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 4, in]
+        - [5, 39, avail]
+        - [40, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Season May-October, but best availability and quality October-March."
       weeks:
         - [1, 13, in]
-        - [14, 17, avail]
-        - [36, 39, avail]
+        - [18, 39, avail]
         - [40, 52, in]
 
 - name: "Brown crab"
   slug: brown-crab
   group: fish
-  colour: "#9f4d00"
-  source: ffs
+  colour: "#9d4f00"
+  text_on_shed: "#ba6a2a"
+  sources: [northumberland, bnfs, ffs, seafish]
   note: "Poor in January."
-  buy: "Pot-caught is the usual method and the good one."
+  notes:
+    - "The coasts disagree: Northumberland peaks in winter (November-February); Flying Fish and Seafish say April-September, with Flying Fish marking October-January poor; Brighton & Newhaven has it all year."
+  buy: "Good Fish Guide: Best Choice (2). Ask for Scotland (Shetland); Pot, trap or creel. Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
-        - [5, 8, avail]
-        - [9, 52, in]
+        - [1, 8, in]
+        - [9, 43, avail]
+        - [44, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [5, 13, avail]
+        - [14, 39, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "All year round; season and best availability April-September."
+      weeks:
+        - [1, 13, avail]
+        - [14, 39, in]
+        - [40, 52, avail]
 
 - name: "Lobster"
   slug: lobster
   group: fish
-  colour: "#0064ba"
-  source: ffs
+  colour: "#0066b1"
+  text_on_shed: "#2d82cf"
+  sources: [northumberland, bnfs, ffs, seafish]
   note: "Native Cornish lobster is of consistent quality all year; the summer peak is one of supply and price."
-  buy: "Pot-caught native lobster is the choice; Canadian lobster is the cheaper import."
+  notes:
+    - "Minimum landing size rising to 90 mm, phased in 2026-28 (Defra)."
+  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for England (Northwest); Pot, trap or creel. Ratings run from 3 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 13, avail]
+        - [14, 43, in]
+        - [44, 52, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 13, avail]
+        - [14, 43, in]
+        - [44, 52, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "All year round; season April-November."
+      weeks:
+        - [1, 13, avail]
+        - [14, 48, in]
+        - [49, 52, avail]
 
 - name: "Langoustines"
   slug: langoustines
   group: fish
-  colour: "#b97278"
-  source: general
-  buy: "Creel-caught is the best choice; trawled is what most scampi is."
+  colour: "#c76e85"
+  text_on_custard: "#a8536a"
+  sources: [northumberland]
+  buy: "Good Fish Guide: Best Choice (2). Ask for South Minch (FU 12); Pot, trap or creel. Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      sources: [northumberland]
       weeks:
-        - [14, 17, avail]
-        - [18, 43, in]
-        - [44, 48, avail]
+        - [1, 4, in]
+        - [5, 35, avail]
+        - [36, 52, in]
 
 - name: "Mussels"
   slug: mussels
   group: fish
-  colour: "#5157c8"
-  source: ffs
+  colour: "#5457c7"
+  text_on_shed: "#6b72e5"
+  sources: [bnfs, ffs, seafish]
   note: "Rope-grown mussels are good all year and at their best from October to March."
-  buy: "Rope-grown mussels are about as sustainable as seafood gets."
+  buy: "Good Fish Guide: Best Choice (1). Ask for UK and Ireland; Suspension (rope) culture (farmed). Ratings run from 1 to 3 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
       weeks:
-        - [1, 13, in]
-        - [14, 17, avail]
-        - [36, 39, avail]
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
+      weeks:
+        - [1, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Rope-grown October-July (dredged August-May). Not at their best when spawning in spring."
+      weeks:
+        - [1, 30, in]
         - [40, 52, in]
 
 - name: "Oysters"
   slug: oysters
   group: fish
-  colour: "#5f736a"
-  source: general
+  colour: "#3f6d63"
+  text_on_shed: "#58877c"
+  sources: [shellfish_act, seafish, ffs]
   note: "Natives in the months with an R; rock oysters all year."
+  notes:
+    - "The traditional \"R months\" rule has a legal basis for native oysters; Pacific oysters are exempt."
   buy: "Farmed rock oysters are a best choice; wild natives are the rarer treat."
   varieties:
-    - name: ""
+    - name: "Native"
+      colour: "#426c62"
+      text_on_shed: "#5c867c"
+      sources: [shellfish_act]
+      notes:
+        - "Selling native oysters is an offence from 14 May to 4 August, so May and August are part-months."
+      weeks:
+        - [1, 17, in]
+        - [18, 22, avail]
+        - [31, 35, avail]
+        - [36, 52, in]
+    - name: "Native, national"
+      ring: region
+      lead: false
+      colour: "#426c62"
+      text_on_shed: "#5c867c"
+      sources: [seafish]
+      notes:
+        - "Native oysters September-April."
       weeks:
         - [1, 17, in]
         - [36, 52, in]
+    - name: "Rock"
+      colour: "#00989d"
+      text_on_custard: "#007a7f"
+      sources: [seafish]
+      notes:
+        - "Pacific (rock) oysters available year round."
+      weeks:
+        - [1, 52, in]
+    - name: "Rock, Porthilly"
+      ring: region
+      lead: false
+      colour: "#00989d"
+      text_on_custard: "#007a7f"
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
+      weeks:
+        - [1, 52, in]
 
 - name: "Scallops"
   slug: scallops
   group: fish
-  colour: "#b97c35"
-  source: ffs
+  colour: "#be7a28"
+  text_on_custard: "#9f5f00"
+  sources: [northumberland, bnfs, ffs, seafish]
   note: "Cornish scallops are poor in midwinter and best in September and October; Orkney hand-dived scallops are consistent all year."
-  buy: "Hand-dived scallops; dredging damages the seabed."
+  notes:
+    - "Devon & Severn IFCA closes scallop dredging 1 July-30 September in its district."
+  buy: "Good Fish Guide: Best Choice (1). Ask for UK: Scotland; Bottom and suspension culture (farmed). Ratings run from 1 to 5 depending on where and how it is caught, so ask."
   varieties:
-    - name: ""
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
       weeks:
-        - [14, 22, avail]
-        - [27, 35, avail]
-        - [36, 43, in]
-        - [44, 48, avail]
+        - [1, 22, avail]
+        - [23, 35, in]
+        - [36, 52, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 8, in]
+        - [9, 39, avail]
+        - [40, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [9, 13, avail]
+        - [14, 22, in]
+        - [23, 26, avail]
+        - [27, 39, in]
+        - [40, 48, avail]
+    - name: "Orkney, hand-dived"
+      ring: region
+      lead: false
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
+      weeks:
+        - [1, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Guide says season September-March but best March-November, which reads oddly: verify."
+      weeks:
+        - [1, 8, avail]
+        - [9, 48, in]
+        - [49, 52, avail]
 
 - name: "Cockles"
   slug: cockles
   group: fish
-  colour: "#887d4b"
+  colour: "#6a914a"
+  text_on_custard: "#537832"
   source: general
   buy: "Hand-raked from a managed bed is the good choice."
   varieties:
@@ -1676,7 +2878,8 @@
 - name: "Brown shrimp"
   slug: brown-shrimp
   group: fish
-  colour: "#896800"
+  colour: "#7f5f00"
+  text_on_shed: "#9a7a2b"
   source: general
   buy: "Ask for shrimp from a certified fishery; Morecambe Bay and the Wash are the UK ones."
   varieties:
@@ -1686,23 +2889,400 @@
         - [23, 43, in]
         - [44, 48, avail]
 
+- name: "Turbot"
+  slug: turbot
+  group: fish
+  colour: "#6c7b5a"
+  text_on_shed: "#748361"
+  text_on_custard: "#647252"
+  sources: [northumberland, bnfs, ffs, seafish]
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea; Bottom trawl (otter). Ratings run from 2 to 4 depending on where and how it is caught, so ask."
+  varieties:
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 22, avail]
+        - [23, 43, in]
+        - [44, 52, avail]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
+      weeks:
+        - [1, 52, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "Wild season April-February."
+      weeks:
+        - [1, 8, in]
+        - [14, 52, in]
+
+- name: "Red mullet"
+  slug: red-mullet
+  group: fish
+  colour: "#bf2d52"
+  text_on_shed: "#db4968"
+  sources: [northumberland, ffs, seafish]
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, eastern Channel, Skagerrak & Kattegat (Northern Area); Net (demersal seine). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  varieties:
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [23, 35, in]
+        - [36, 39, avail]
+        - [40, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 22, avail]
+        - [23, 39, in]
+    - name: "National"
+      ring: region
+      lead: false
+      sources: [seafish]
+      notes:
+        - "UK season May-November, best in summer."
+      weeks:
+        - [18, 22, avail]
+        - [23, 35, in]
+        - [36, 48, avail]
+
+- name: "Skates & rays"
+  slug: skates-rays
+  group: fish
+  colour: "#7e659a"
+  text_on_shed: "#8d73a9"
+  text_on_custard: "#7c6398"
+  sources: [northumberland, bnfs, ffs]
+  buy: "Good Fish Guide: Best Choice (2). Ask for Irish Sea, Bristol Channel, Celtic Sea North; Bottom trawl (otter). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  varieties:
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 52, in]
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
+      weeks:
+        - [1, 52, in]
+
+- name: "Grey mullet"
+  slug: grey-mullet
+  group: fish
+  colour: "#6a7681"
+  text_on_shed: "#73808b"
+  text_on_custard: "#646f7a"
+  sources: [bnfs, ffs]
+  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for Cornwall; Net (beach seine)."
+  varieties:
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [14, 35, in]
+        - [36, 48, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [14, 22, avail]
+        - [23, 39, in]
+        - [40, 48, avail]
+
+- name: "John Dory"
+  slug: john-dory
+  group: fish
+  colour: "#787800"
+  text_on_shed: "#828218"
+  text_on_custard: "#727100"
+  sources: [ffs]
+  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for North East Atlantic; Net (gill or fixed)."
+  varieties:
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 52, in]
+
+- name: "Octopus"
+  slug: octopus
+  group: fish
+  colour: "#9d4d82"
+  text_on_shed: "#b56298"
+  sources: [ffs]
+  buy: "Good Fish Guide: not rated."
+  varieties:
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 52, in]
+
+- name: "Dab"
+  slug: dab
+  group: fish
+  colour: "#948253"
+  text_on_custard: "#7e6c3e"
+  sources: [northumberland, ffs]
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Skagerrak & Kattegat; Bottom trawl (otter). Ratings run from 2 to 4 depending on where and how it is caught, so ask."
+  varieties:
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 22, avail]
+        - [23, 35, in]
+        - [36, 52, avail]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
+      weeks:
+        - [1, 52, in]
+
+- name: "Witch sole"
+  slug: witch-sole
+  group: fish
+  colour: "#9e6a7c"
+  text_on_shed: "#a46f81"
+  text_on_custard: "#925f71"
+  sources: [northumberland]
+  aliases: ["witch", "torbay sole"]
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (North), West of Scotland; Bottom trawl (otter)."
+  varieties:
+    - name: ""
+      sources: [northumberland]
+      weeks:
+        - [1, 52, in]
+
+- name: "Megrim"
+  slug: megrim
+  group: fish
+  colour: "#9561cd"
+  text_on_shed: "#9966d2"
+  text_on_custard: "#8954bf"
+  sources: [northumberland]
+  aliases: ["megrim sole", "cornish sole"]
+  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (North), West of Scotland; Bottom trawl (otter)."
+  varieties:
+    - name: ""
+      sources: [northumberland]
+      weeks:
+        - [1, 52, in]
+
+- name: "Ling"
+  slug: ling
+  group: fish
+  colour: "#377e49"
+  text_on_shed: "#468d57"
+  text_on_custard: "#347b47"
+  sources: [northumberland]
+  buy: "Good Fish Guide: Avoid (5). Ask for Cornwall; Bottom trawl (beam)."
+  varieties:
+    - name: "North East"
+      ring: region
+      sources: [northumberland]
+      weeks:
+        - [1, 17, in]
+        - [18, 52, avail]
+
+- name: "Halibut"
+  slug: halibut
+  group: fish
+  colour: "#70624e"
+  text_on_shed: "#8a7c67"
+  sources: [northumberland, ffs]
+  notes:
+    - "Wild Atlantic halibut is rated Avoid; no UK-farmed halibut rating exists."
+  buy: "Good Fish Guide: Avoid (5). Ask for Northeast Atlantic; Bottom trawl (otter)."
+  varieties:
+    - name: "North East"
+      ring: region
+      lead: false
+      sources: [northumberland]
+      weeks:
+        - [1, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Flying Fish shows good availability all year."
+      weeks:
+        - [1, 52, in]
+
+- name: "Farmed salmon"
+  slug: salmon-farmed
+  group: fish
+  colour: "#e15f24"
+  text_on_custard: "#bf4600"
+  sources: [ffs]
+  buy: "Good Fish Guide: Best Choice (2). Ask for Ireland; UK: Scotland; Open net pen, marine (organic certified) (farmed)."
+  varieties:
+    - name: "Glenarm, Northern Ireland"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Glenarm, Northern Ireland, organic."
+      weeks:
+        - [1, 4, avail]
+        - [5, 35, in]
+        - [36, 39, avail]
+    - name: "Loch Duart, Scotland"
+      ring: region
+      sources: [ffs]
+      notes:
+        - "Loch Duart, Scotland."
+      weeks:
+        - [1, 4, avail]
+        - [5, 35, in]
+        - [36, 39, avail]
+
+- name: "Spider crab"
+  slug: spider-crab
+  group: fish
+  colour: "#bc5700"
+  text_on_shed: "#c86117"
+  text_on_custard: "#b25200"
+  sources: [bnfs]
+  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for Cornwall; Pot, trap or creel."
+  varieties:
+    - name: "South East"
+      ring: region
+      sources: [bnfs]
+      weeks:
+        - [18, 26, in]
+
+- name: "Clams"
+  slug: clams
+  group: fish
+  colour: "#728f7f"
+  text_on_custard: "#587465"
+  sources: [bnfs, ffs]
+  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for Scotland; Hand-gathering (diving, shore)."
+  varieties:
+    - name: "South East"
+      ring: region
+      lead: false
+      sources: [bnfs]
+      weeks:
+        - [1, 8, in]
+        - [18, 52, in]
+    - name: "South West"
+      ring: region
+      sources: [ffs]
+      weeks:
+        - [1, 17, in]
+        - [18, 22, avail]
+        - [31, 35, avail]
+        - [36, 52, in]
+
+- name: "Whelks"
+  slug: whelks
+  group: fish
+  colour: "#906850"
+  text_on_shed: "#9e755d"
+  text_on_custard: "#8d654e"
+  sources: [bnfs]
+  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for England (Sussex coast); Pot, trap or creel."
+  varieties:
+    - name: "South East"
+      ring: region
+      sources: [bnfs]
+      weeks:
+        - [1, 52, in]
+
 - name: "Lamb"
   slug: lamb
   group: meat
   colour: "#c74650"
-  source: general
+  text_on_shed: "#d4525b"
+  text_on_custard: "#c1404b"
+  sources: [nsa_lamb, ahdb_lamb, lishmans, hcc, saltmarsh]
+  notes:
+    - "Easter \"spring lamb\" is usually winter-born or imported; grass-fed British lamb is at its best from late summer. Mutton (over two years) has no stated season."
   varieties:
-    - name: "New season"
-      short: "New-season lamb"
+    - name: "New-season"
       said: "New-season lamb"
+      short: "New-season lamb"
       colour: "#d8655d"
+      text_on_custard: "#b94944"
+      sources: [nsa_lamb, ahdb_lamb]
+      notes:
+        - "First new-season lamb reaches shops around Easter; the lamb kill peaks late summer to early autumn."
       weeks:
-        - [18, 22, avail]
-        - [23, 48, in]
+        - [14, 30, avail]
+        - [31, 48, in]
         - [49, 52, avail]
+    - name: "Milk-fed spring"
+      colour: "#988673"
+      text_on_custard: "#7c6b59"
+      sources: [lishmans]
+      notes:
+        - "Butcher's guide only; not an industry source."
+      weeks:
+        - [14, 22, in]
+        - [23, 26, avail]
+    - name: "Hogget"
+      said: "Hogget"
+      colour: "#79603d"
+      text_on_shed: "#937a56"
+      sources: [lishmans]
+      notes:
+        - "Last season's lamb carried over, over a year old."
+      weeks:
+        - [1, 4, avail]
+        - [5, 17, in]
+        - [18, 22, avail]
+    - name: "Welsh (PGI)"
+      ring: region
+      lead: false
+      sources: [hcc]
+      notes:
+        - "Season opens 1 August; HCC calls August-September the height of the season. No end date given."
+      weeks:
+        - [31, 39, in]
+    - name: "Salt marsh (Gower PDO)"
+      ring: region
+      lead: false
+      sources: [saltmarsh]
+      notes:
+        - "From a butcher quoted in trade press; the producer gives no months."
+      weeks:
+        - [23, 26, avail]
+        - [27, 43, in]
+        - [44, 52, avail]
     - name: "Mutton"
       said: "Mutton"
       colour: "#b1384d"
+      text_on_shed: "#d05566"
       weeks:
         - [1, 8, in]
         - [9, 13, avail]
@@ -1712,44 +3292,60 @@
 - name: "Beef"
   slug: beef
   group: meat
-  colour: "#ca002e"
+  colour: "#c90039"
+  text_on_shed: "#ea3752"
   source: general
   note: "All year."
   varieties:
     - name: ""
+      sources: []
+      notes:
+        - "No source gives this a season."
       weeks:
         - [1, 52, in]
 
 - name: "Pork"
   slug: pork
   group: meat
-  colour: "#ab7c74"
+  colour: "#a77c99"
+  text_on_custard: "#8b617e"
   source: general
   note: "All year."
   varieties:
     - name: ""
+      sources: []
+      notes:
+        - "No source gives this a season."
       weeks:
         - [1, 52, in]
 
 - name: "Goose"
   slug: goose
   group: meat
-  colour: "#77785c"
-  source: general
+  colour: "#5c7442"
+  text_on_shed: "#6d8653"
+  sources: [goose]
   note: "Michaelmas to Christmas."
   varieties:
     - name: ""
+      sources: [goose]
+      notes:
+        - "From Michaelmas (29 September) to Christmas. Source dated 2004."
       weeks:
-        - [40, 43, avail]
-        - [44, 52, in]
+        - [36, 39, avail]
+        - [40, 52, in]
 
 - name: "Turkey"
   slug: turkey
   group: meat
-  colour: "#9a7f4c"
-  source: general
+  colour: "#808331"
+  text_on_custard: "#70721d"
+  sources: [tfta]
   varieties:
     - name: ""
+      sources: [tfta]
+      notes:
+        - "A Christmas bird; frozen out of season."
       weeks:
         - [44, 48, avail]
         - [49, 52, in]
@@ -1757,11 +3353,17 @@
 - name: "Grouse"
   slug: grouse
   group: meat
-  colour: "#9a4f2f"
-  source: basc
+  colour: "#94514a"
+  text_on_shed: "#b16b64"
+  sources: [basc, naturescot_game]
   note: "12 August to 10 December."
+  notes:
+    - "Same dates in Scotland, where grouse moors now need a NatureScot licence; Northern Ireland closes on 30 November."
   varieties:
     - name: ""
+      sources: [basc, naturescot_game]
+      notes:
+        - "12 August to 10 December."
       weeks:
         - [31, 35, avail]
         - [36, 48, in]
@@ -1770,11 +3372,18 @@
 - name: "Pheasant"
   slug: pheasant
   group: meat
-  colour: "#ae5c00"
-  source: basc
+  colour: "#b06000"
+  text_on_shed: "#ba6a16"
+  text_on_custard: "#a75a00"
+  sources: [basc]
   note: "1 October to 1 February."
+  notes:
+    - "Northern Ireland closes on 31 January."
   varieties:
     - name: ""
+      sources: [basc]
+      notes:
+        - "1 October to 1 February."
       weeks:
         - [1, 4, in]
         - [40, 52, in]
@@ -1782,11 +3391,15 @@
 - name: "Partridge"
   slug: partridge
   group: meat
-  colour: "#8e6a1a"
-  source: basc
+  colour: "#8b6700"
+  text_on_shed: "#9d7921"
+  sources: [basc]
   note: "1 September to 1 February."
   varieties:
     - name: ""
+      sources: [basc]
+      notes:
+        - "1 September to 1 February (grey and red-legged)."
       weeks:
         - [1, 4, in]
         - [36, 52, in]
@@ -1794,36 +3407,39 @@
 - name: "Wild duck"
   slug: wild-duck
   group: meat
-  colour: "#1d7d5c"
-  source: basc
+  colour: "#008269"
+  text_on_shed: "#1d8e74"
+  text_on_custard: "#007c64"
+  sources: [basc]
   note: "Mallard, teal and wigeon: 1 September to 31 January inland, to 20 February on the foreshore."
+  notes:
+    - "Defra's 2026 consultation proposed removing pochard (and in England pintail, goldeneye and white-fronted goose) from the quarry list."
   varieties:
     - name: ""
+      sources: [basc]
+      notes:
+        - "1 September to 31 January."
+        - "1 September to 20 February."
       weeks:
         - [1, 4, in]
-        - [36, 52, in]
-
-- name: "Snipe"
-  slug: snipe
-  group: meat
-  colour: "#6b663d"
-  source: basc
-  note: "12 August to 31 January."
-  varieties:
-    - name: ""
-      weeks:
-        - [1, 4, in]
-        - [31, 35, avail]
+        - [5, 8, avail]
         - [36, 52, in]
 
 - name: "Woodcock"
   slug: woodcock
   group: meat
-  colour: "#85625b"
-  source: basc
+  colour: "#726971"
+  text_on_shed: "#857b83"
+  sources: [basc]
   note: "1 October to 31 January."
+  notes:
+    - "Scotland opens on 1 September."
+    - "Defra consulted in spring 2026 on extending the close season to 30 November in England and Wales; no decision announced as of 21 October 2026. Check before launch."
   varieties:
     - name: ""
+      sources: [basc]
+      notes:
+        - "1 October to 31 January."
       weeks:
         - [1, 4, in]
         - [40, 52, in]
@@ -1831,70 +3447,147 @@
 - name: "Venison"
   slug: venison
   group: meat
-  colour: "#b73700"
-  source: basc
+  colour: "#af3f00"
+  text_on_shed: "#ce5b2b"
+  sources: [basc]
   note: "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season."
+  notes:
+    - "Scotland: no close season for male deer of any species since 21 October 2023; hinds and does 21 October to 15 February (roe does to 31 March)."
+    - "Dates are legal open seasons, not quality peaks; some venison is sold frozen."
   varieties:
-    - name: "Red & Fallow"
+    - name: "Red & fallow"
+      said: "Red & fallow deer"
       short: "Red & fallow"
-      colour: "#b83500"
+      colour: "#ae4000"
+      text_on_shed: "#cd5c2a"
+      sources: [basc]
+      notes:
+        - "1 August to 30 April."
+        - "1 November to 31 March."
       weeks:
         - [1, 17, in]
         - [31, 52, in]
-    - name: "Roe & Muntjac"
-      short: "Roe & muntjac"
-      colour: "#b06958"
+    - name: "Roe"
+      said: "Roe deer"
+      colour: "#be6d74"
+      text_on_custard: "#a5565e"
+      sources: [basc]
+      notes:
+        - "1 April to 31 October."
+        - "1 November to 31 March."
+      weeks:
+        - [1, 52, in]
+    - name: "Chinese water deer"
+      said: "Chinese water deer"
+      colour: "#71826b"
+      text_on_custard: "#62725c"
+      sources: [basc]
+      notes:
+        - "1 November to 31 March."
+      weeks:
+        - [1, 13, in]
+        - [44, 52, in]
+    - name: "Muntjac"
+      said: "Muntjac deer"
+      colour: "#895277"
+      text_on_shed: "#a56c92"
+      sources: [basc]
+      notes:
+        - "No statutory close season."
       weeks:
         - [1, 52, in]
 
 - name: "Wood pigeon"
   slug: wood-pigeon
   group: meat
-  colour: "#777198"
-  source: general
-  note: "No closed season; at its best from spring to autumn."
+  colour: "#7e70a0"
+  text_on_shed: "#8577a7"
+  text_on_custard: "#746696"
+  sources: [basc]
   aliases: ["pigeon"]
+  note: "No closed season; at its best from spring to autumn."
+  notes:
+    - "Defra's 2026 consultation proposed adding wood pigeon to the quarry list with a 1 September-31 January season (crop-protection shooting would continue all year). No decision announced as of 21 October 2026."
   varieties:
     - name: ""
+      sources: [basc]
+      notes:
+        - "Shot all year as a crop pest under general licences."
       weeks:
-        - [14, 17, avail]
-        - [18, 48, in]
-        - [49, 52, avail]
+        - [1, 52, in]
 
 - name: "Rabbit"
   slug: rabbit
   group: meat
-  colour: "#878580"
-  source: general
+  colour: "#7b8aa0"
+  text_on_custard: "#606f84"
+  sources: [basc, naturescot_game]
   note: "No closed season; young rabbits from late summer are the ones to buy."
   varieties:
     - name: ""
+      sources: [basc, naturescot_game]
+      notes:
+        - "No close season."
       weeks:
-        - [27, 30, avail]
-        - [31, 48, in]
-        - [49, 52, avail]
+        - [1, 52, in]
 
 - name: "Hare"
   slug: hare
   group: meat
-  colour: "#be7125"
-  source: basc
+  colour: "#c97333"
+  text_on_custard: "#ab570d"
+  sources: [basc]
   note: "No closed season in England and Wales, but hare may only be sold from 1 August to 28 February."
+  notes:
+    - "Scotland: close season 1 February-30 September. Northern Ireland: open 12 August-31 January. Mountain hare is fully protected in Scotland."
   varieties:
     - name: ""
+      sources: [basc]
+      notes:
+        - "No close season for shooting in England & Wales, but selling brown hare March-July has long been prohibited (Hares Preservation Act 1892): verify it is still in force."
       weeks:
         - [1, 8, in]
-        - [31, 35, avail]
-        - [36, 52, in]
+        - [31, 52, in]
 
 - name: "Squirrel"
   slug: squirrel
   group: meat
-  colour: "#5c7f88"
-  source: basc
-  note: "Grey squirrel only: red squirrels are protected. No closed season; sold by a few game dealers."
+  colour: "#467f90"
+  text_on_shed: "#4c8697"
+  text_on_custard: "#3c7586"
+  source: general
   aliases: ["grey squirrel", "grey-squirrel"]
+  note: "Grey squirrel only: red squirrels are protected. No closed season; sold by a few game dealers."
   varieties:
     - name: ""
+      weeks:
+        - [1, 52, in]
+
+- name: "Chicken"
+  slug: chicken
+  group: meat
+  colour: "#a78438"
+  text_on_custard: "#8a6916"
+  source: general
+  varieties:
+    - name: ""
+      sources: []
+      notes:
+        - "No source gives this a season."
+      weeks:
+        - [1, 52, in]
+
+- name: "Duck"
+  slug: duck
+  group: meat
+  colour: "#9d6957"
+  text_on_shed: "#a6725f"
+  text_on_custard: "#956150"
+  source: general
+  varieties:
+    - name: ""
+      sources: []
+      notes:
+        - "No source gives this a season."
       weeks:
         - [1, 52, in]

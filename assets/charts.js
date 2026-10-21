@@ -307,11 +307,11 @@
 
   // --- The wheel -----------------------------------------------------------------
   // The wheel never turns: its labels, arcs and months stay where
-  // arrivals-dial.html drew them. In season (the default): on every wheel
-  // only the foods in season (YES or JUST) at the line's time keep their
-  // words, and their arcs are lit at full strength over the faint rest;
-  // every dot stays, named and tappable. Whole year: every word, every
-  // arc at full strength, wherever the line is. The line is a radius from
+  // arrivals-dial.html drew them. Whole year (the default): every word,
+  // every arc at full strength, wherever the line is. In season: on every
+  // wheel only the foods in season (YES or JUST) at the line's time keep
+  // their words, and their arcs are lit at full strength over the faint
+  // rest; every dot stays, named and tappable. The line is a radius from
   // the month ring to the rim; its handle is a knob at the rim with the
   // time beside it, always shown (TODAY on today). Today is an ink tick
   // across the month ring and replaces the hand.

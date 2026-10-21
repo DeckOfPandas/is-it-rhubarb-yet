@@ -190,7 +190,8 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 [id] { scroll-margin-top: var(--header-h); }
 .site-header-inner { max-width: var(--page); min-height: 44px; margin: 0 auto; display: flex; align-items: center; gap: var(--sp-2); }
 /* The wordmark is the logo, sized as a logo, outside the type scale, and
-   the search: the hero's field in small (see Home: the hook). It takes
+   the search: its RHUBARB is the hero's field in small (see Home: the
+   hook), its IS IT and YET? links home. It takes
    the row's room the nav leaves, and a long word shrinks to fit it. On a
    phone it has a row of its own under the nav. */
 .brand {
@@ -199,6 +200,9 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
   color: var(--ink);
 }
 .brand-line { display: flex; align-items: baseline; gap: 0 0.23em; white-space: nowrap; cursor: text; }
+/* IS IT and YET? are links home, in ink, unchanged on hover as the logo
+   is; only RHUBARB is the field. */
+.brand-line a.hook-word { color: inherit; text-decoration: none; cursor: pointer; }
 .brand .hook-slot { display: inline-flex; position: relative; max-width: 100%; }
 .brand .hook-input { height: 1.15em; }
 @media (max-width: 28rem) {
@@ -407,7 +411,13 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    sized to the text it follows and sitting on its x-height. */
 .arrow-link .arrow { display: inline-block; width: 1.05em; height: 0.63em; margin-left: 0.35em; vertical-align: 0.05em; overflow: visible; }
 .arrow-link.more-link { white-space: nowrap; }
-.food-link { color: var(--food); text-decoration: none; }
+/* A food's name set in its colour at text size takes the food's text
+   colour for the theme (--food-custard light, --food-shed dark), the same
+   hue made darker or lighter to 4.5:1 where its colour falls short; the
+   colour itself where it does not. */
+.food-link { --food-ink: var(--food-custard, var(--food)); color: var(--food-ink); text-decoration: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .food-link { --food-ink: var(--food-shed, var(--food)); } }
+:root[data-theme="dark"] .food-link { --food-ink: var(--food-shed, var(--food)); }
 .food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 /* What is typed, answered where the this-week blocks were. Two or more
    matches: the count in their label's style and place, then the rows in
@@ -526,10 +536,13 @@ article.never { --food: var(--never); }
 .runs { list-style: none; padding: 0; margin: var(--sp-2) 0; }
 .runs li { margin: var(--sp-1) 0; }
 .runs .swatch { margin-right: var(--sp-1); }
+.runs .ring-note { color: var(--muted); font-size: var(--fs-small); }
 .note, .source, .as-of { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
 .suggest { margin: var(--sp-4) 0 0; }
 .onwards { margin: var(--sp-4) 0 0; }
 .onwards + .onwards { margin-top: var(--sp-1); }
+/* Under "Put rhubarb in your calendar →": the other ways in, small. */
+.calendar-also { margin: var(--sp-1) 0 0; color: var(--muted); font-size: var(--fs-small); }
 
 /* --- Now: the digest ----------------------------------------------------- */
 /* The top of Now: the title, then one quiet line of the week's days
@@ -604,6 +617,8 @@ article.never { --food: var(--never); }
 .chart .cell { shape-rendering: crispEdges; }
 .chart .cell.in { fill: var(--c); }
 .chart .cell.avail { fill: color-mix(in oklab, var(--c) 45%, var(--off)); }
+/* Sold from store: the colour faded well into the grey, flat. */
+.chart .cell.store { fill: color-mix(in oklab, var(--c) 30%, var(--off)); }
 .chart .stop-off { stop-color: var(--off); }
 .chart .stop-c { stop-color: var(--c); }
 .chart .row-hit { fill: transparent; }
@@ -629,6 +644,7 @@ article.never { --food: var(--never); }
 .wheel .off { stroke: var(--off); }
 .wheel .in { stroke: var(--c); }
 .wheel .fade { stroke: color-mix(in oklab, var(--c) calc(var(--t) * 100%), var(--off)); }
+.wheel .store { stroke: color-mix(in oklab, var(--c) 30%, var(--off)); }
 .wheel .blend { stroke: color-mix(in oklab, var(--b) calc(var(--t) * 100%), var(--a)); }
 .wheel .spoke { stroke: var(--bg); stroke-width: 2; }
 .wheel .month { fill: var(--muted); font-family: var(--text); font-size: 12px; font-weight: 700; letter-spacing: var(--track-caps); text-transform: uppercase; }
@@ -852,6 +868,16 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .about-list li { padding-left: 0.2rem; }
 .about-list li::marker { color: var(--muted); font-weight: 700; }
 .about-ways { padding-left: 1.2rem; }
+/* Source data: "common knowledge*" is a prose link to its footnote at
+   the foot of the page, quiet, behind a bar, which ends with the way
+   back up (the arrow turned up). The lists of sources are plain, a
+   little apart. */
+.sources .footnote { margin: var(--sp-4) 0 0; padding-left: var(--sp-2); border-left: 3px solid var(--rule); color: var(--muted); font-size: var(--fs-small); }
+.back-up .arrow { transform: rotate(-90deg); }
+.sources .footnote p { margin: 0 0 var(--sp-1); }
+.sources .footnote ol { margin: 0 0 var(--sp-1); padding-left: 1.4rem; }
+.source-list { padding-left: 1.2rem; margin: 0 0 var(--sp-2); }
+.source-list li { margin: 0.2rem 0; }
 .about-ways li { margin: var(--sp-1) 0; }
 
 /* --- Footer ---------------------------------------------------------------- */

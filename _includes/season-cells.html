@@ -8,8 +8,9 @@ is a bar of the same height fading between the off-season grey and the
 colour, as on the season wheel: rising into an in-season range that
 follows it, falling out of one that precedes it, and a flat mix when it
 touches neither or both. Year ends count as adjacent, so a December ramp
-can lead into a January season. The two gradients sit inside the row so
-that they inherit its --c.
+can lead into a January season. A range sold from store is a flat bar,
+the colour faded well into the grey. The two gradients sit inside the
+row so that they inherit its --c.
 {% endcomment %}
 {%- assign h = include.rh -%}
 <linearGradient id="{{ include.gid }}-up"><stop offset="0" class="stop-off" /><stop offset="1" class="stop-c" /></linearGradient>
@@ -19,6 +20,8 @@ that they inherit its --c.
   {%- assign x2 = r[1] | times: include.cw | plus: include.x0 -%}
   {%- if r[2] == "in" -%}
     <rect class="cell in" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+  {%- elsif r[2] == "store" -%}
+    <rect class="cell store" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: from storage, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
   {%- else -%}
     {%- assign before = r[0] | minus: 1 -%}{%- if before == 0 -%}{%- assign before = 52 -%}{%- endif -%}
     {%- assign after = r[1] | plus: 1 -%}{%- if after == 53 -%}{%- assign after = 1 -%}{%- endif -%}

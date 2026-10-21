@@ -9,6 +9,9 @@ order "alpha": by food name, then variety, a food's varieties together.
 
 A row is labelled with the food, and a named variety follows in muted
 brackets as tools/bake.js names it, "Rhubarb (forced)", "Apples (Cox)".
+A ring that does not give the verdict (`lead: false`: another coast
+than a fish's South West, a glasshouse, a wild ring beside a market one)
+has no row; the food's page shows it.
 A row with a short name (foods.yml's `short:`, on the variety for the
 whole row, or on the food for its name) carries it as a second label,
 which CSS shows in place of the first below 700px and nowhere else.
@@ -48,6 +51,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
   {%- assign fslug = food.slug -%}
   {%- assign vlabels = site.data.baked.labels[fslug] -%}
   {%- for v in food.varieties -%}
+    {%- if v.lead == false -%}{%- continue -%}{%- endif -%}
     {%- assign vix = forloop.index0 -%}
     {%- assign vlabel = vlabels[vix] -%}
     {%- assign vi = forloop.index0 | plus: 10 -%}

@@ -55,14 +55,17 @@
 
   // --- Reading a variety ----------------------------------------------------
 
-  // "in", "avail" or "" for one week; "in" wins where runs overlap.
+  // "in", "store", "avail" or "" for one week; "in" wins where runs
+  // overlap, then "store". A store run is sold from store after the
+  // harvest, and answers as in season does.
   function stateAt(variety, week) {
     var best = "";
     for (var i = 0; i < variety.weeks.length; i++) {
       var r = variety.weeks[i];
       if (week >= r[0] && week <= r[1]) {
         if (r[2] === "in") return "in";
-        best = "avail";
+        if (r[2] === "store") best = "store";
+        else if (!best) best = "avail";
       }
     }
     return best;
@@ -84,6 +87,7 @@
   }
   function covered(s) { return s !== ""; }
   function isIn(s) { return s === "in"; }
+  function isStore(s) { return s === "store"; }
   function empty(s) { return s === ""; }
 
   // A week reached by walking forward or back: which week, and how many
@@ -112,9 +116,19 @@
   //   until    the last week it is in season (YES) or present at all (JUST)
   //   since    weeks since the in-season run began (YES, JUST from "in")
   //   weeksUntil  weeks until `from` (NEARLY, NO)
+  //   store    true when the week is sold from store (YES, until the end
+  //            of the store run)
   function varietyVerdict(variety, week) {
     var s = stateAt(variety, week);
     var r = { state: s };
+    if (s === "store") {
+      var storeEnd = walk(variety, week, 1, isStore);
+      r.verdict = "YES"; r.store = true; r.since = 52;
+      if (storeEnd.all) { r.allYear = true; return r; }
+      r.until = ahead(storeEnd);
+      r.spanUntil = ahead(walk(variety, week, 1, covered));
+      return r;
+    }
     if (s === "in") {
       var inEnd = walk(variety, week, 1, isIn);
       if (inEnd.all) {
@@ -170,22 +184,32 @@
   }
 
   // --- The verdict for a food -----------------------------------------------
-  // The best variety's verdict, YES > JUST > NEARLY > NO. Between two
-  // NEARLY or NO varieties the sooner wins; otherwise data order.
+  // The best lead variety's verdict, YES > JUST > NEARLY > NO. Between two
+  // YES, one in season beats one from store; between two NEARLY or NO the
+  // sooner wins; otherwise data order. A ring
+  // marked `lead: false` (another coast than a fish's South West, a
+  // glasshouse, a wild ring beside a market one) is answered for too, for
+  // the variety line, but never gives the verdict. A food that cannot be
+  // sold (`unsold`) is NO, its line that sentence.
   function foodVerdict(food, week) {
     if (food.never) return { verdict: "NEVER", variety: null, varieties: [] };
     var results = food.varieties.map(function (v) {
       var r = varietyVerdict(v, week);
+      if (food.unsold) r = { verdict: "NO", state: "", unsold: food.unsold };
       r.name = v.name || "";
       r.v = v;
       r.colour = v.colour || food.colour;
+      r.lead = v.lead !== false;
       return r;
     });
+    var leads = results.filter(function (r) { return r.lead; });
     var best = null;
-    results.forEach(function (r) {
+    (leads.length ? leads : results).forEach(function (r) {
       if (!best) { best = r; return; }
       var a = RANK[r.verdict], b = RANK[best.verdict];
       if (a > b) best = r;
+      // Between two YES, one in season beats one from store.
+      else if (a === b && best.store && !r.store) best = r;
       else if (a === b && (r.verdict === "NEARLY" || r.verdict === "NO") &&
         r.weeksUntil < best.weeksUntil) best = r;
     });
@@ -285,9 +309,11 @@
   // year of the week asked about and `today` the day the question is
   // asked on; a digest for another week passes the middle of that week.
   function phrase(r, year, today) {
+    if (r.unsold) return r.unsold;
     switch (r.verdict) {
       case "YES":
-        if (r.allYear) return "All year";
+        if (r.allYear) return r.store ? "From storage all year" : "All year";
+        if (r.store) return "From storage " + leaving(r.until, year, today);
         return cap(leaving(r.until, year, today));
       case "JUST":
         return cap(leaving(r.until, year, today));
@@ -313,7 +339,7 @@
   // and JUST, the start for NEARLY and NO; null for all year and never.
   // Lists sort by it.
   function daysTo(r, year, today) {
-    if (r.allYear || r.never) return null;
+    if (r.allYear || r.never || r.unsold) return null;
     if (r.verdict === "YES" || r.verdict === "JUST") return daysBetween(today, endDate(r.until, year));
     if (r.from) return daysBetween(today, startDate(r.from, year));
     return null;
@@ -343,12 +369,15 @@
   // written, "Rhubarb (forced)", "Apples (Cox)". In a sentence it is its
   // `said` form, or else its name then the food's, "Forced rhubarb", "Cox
   // apples"; mid-sentence a type is lower-cased and a cultivar never is.
+  // A ring of a coast or a place (`ring: region`) keeps its capitals, as a
+  // cultivar does: "Cod (South West)".
   function varietyLabel(v) {
     if (!v || !v.name) return "";
-    return v.cultivar ? v.name : v.name.toLowerCase();
+    return v.cultivar || v.ring === "region" ? v.name : v.name.toLowerCase();
   }
   function varietySaid(food, v, mid) {
     if (!v || !v.name) return mid ? food.name.toLowerCase() : food.name;
+    if (v.ring) return (mid ? food.name.toLowerCase() : food.name) + " (" + varietyLabel(v) + ")";
     var s = v.said || (v.cultivar ? v.name : cap(v.name.toLowerCase())) + " " + food.name.toLowerCase();
     return mid && !v.cultivar ? s.charAt(0).toLowerCase() + s.slice(1) : s;
   }
@@ -356,17 +385,34 @@
   // The variety line for a food with more than one variety, one pattern
   // throughout: the variety that gave the verdict, then the others, each
   // "Name: phrase." "Maincrop potatoes: yes. New potatoes: first ones in
-  // May, properly in June."
+  // May, properly in June." A ring is named by itself: "Glasshouse: yes."
+  // Coasts are said as places, the verdict's first, the rest after it in
+  // data order: "No in the South West, but yes in the North East, yes in
+  // the South East and no nationally."
+  function where(v) { return v.name === "National" ? "nationally" : "in the " + v.name; }
+  function andList(xs) { return xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " and " + xs[xs.length - 1]; }
   function varietyLine(food, fv, year, today) {
-    if (!fv.variety || food.varieties.length < 2) return "";
+    if (!fv.variety || food.varieties.length < 2 || food.unsold) return "";
     var others = fv.varieties.filter(function (r) { return r !== fv.variety; });
-    var head = varietySaid(food, fv.variety.v) + ": " + fv.verdict.toLowerCase() + ".";
-    var rest = others.map(function (r) {
+    var named = function (r) { return r.v.ring ? r.v.name : varietySaid(food, r.v); };
+    var coasts = fv.variety.v.ring === "region" && others.filter(function (r) { return r.v.ring === "region" && REGION_WORDS[r.v.name]; });
+    var out = [];
+    if (coasts && coasts.length && REGION_WORDS[fv.variety.v.name]) {
+      var head = cap(fv.verdict.toLowerCase()) + " " + where(fv.variety.v);
+      var rest = coasts.map(function (r) { return r.verdict.toLowerCase() + " " + where(r.v); });
+      var differs = coasts.some(function (r) { return r.verdict !== fv.verdict; });
+      out.push(head + ", " + (differs ? "but " : "and ") + andList(rest) + ".");
+      others = others.filter(function (r) { return coasts.indexOf(r) < 0; });
+    } else {
+      out.push(named(fv.variety) + ": " + fv.verdict.toLowerCase() + ".");
+    }
+    others.forEach(function (r) {
       var s = phrase(r, year, today);
-      return varietySaid(food, r.v) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".";
+      out.push(named(r) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".");
     });
-    return [head].concat(rest).join(" ");
+    return out.join(" ");
   }
+  var REGION_WORDS = { "North East": true, "South East": true, "South West": true, "National": true };
 
   // --- The weekly digest --------------------------------------------------
   // Foods in a list run A to Z by food, then by variety, so all the
@@ -401,7 +447,8 @@
       if (kinds.indexOf(kind) < 0) kinds.push(kind);
       var t = timing(v, year, today);
       var item = {
-        slug: f.slug, name: f.name, colour: f.colour, group: f.group, kind: kind,
+        slug: f.slug, name: f.name, colour: f.colour, textShed: f.text_on_shed || "", textCustard: f.text_on_custard || "",
+        group: f.group, kind: kind,
         variety: varietyLabel(v.v), verdict: fv.verdict,
         line: phrase(v, year, today), since: v.since === undefined ? null : v.since,
         days: daysTo(v, year, today), when: t.when, early: t.early, whenDays: t.days

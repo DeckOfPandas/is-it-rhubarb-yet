@@ -1,0 +1,173 @@
+# Where the seasons come from: every key a food or a variety's `sources`
+# (or an older food's `source`) may name, with its name and address.
+# From the 21 October 2026 bundle's register (tools/merge-bundle.py),
+# named as the Sources page lists them;
+# ffs is Flying Fish Seafoods, the bundle's flying_fish.
+
+- key: ahdb_lamb
+  name: "AHDB: Patterns in sheep slaughter"
+  url: "https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change"
+
+- key: bap
+  name: "British Apples & Pears: Apple varieties"
+  url: "https://www.britishapplesandpears.co.uk/apple-varieties/"
+
+- key: basc
+  name: "BASC: Shooting seasons"
+  url: "https://basc.org.uk/shooting-seasons/"
+
+- key: bbc
+  name: "BBC Good Food: Seasonal calendar"
+  url: "https://www.bbcgoodfood.com/howto/guide/seasonal-calendar"
+
+- key: bnfs
+  name: "Brighton & Newhaven Fish Sales"
+  url: "https://www.bnfs.co.uk/"
+
+- key: countrylife_salmon
+  name: "Country Life, Selling rod-caught salmon made illegal (2009)"
+  url: "https://www.countrylife.co.uk/news/selling-rod-caught-salmon-made-illegal-30957"
+
+- key: defra
+  name: "Defra: Wholesale fruit and vegetable prices"
+  url: "https://www.gov.uk/government/statistics/wholesale-fruit-and-vegetable-prices"
+
+- key: defra_lobster
+  name: "Defra: Lobster size rules are changing"
+  url: "https://defrafmp.blog.gov.uk/2025/12/11/lobster-size-rules-are-changing-heres-what-you-need-to-know"
+
+- key: defra_quarry
+  name: "GOV.UK: Stronger protections for threatened wild birds"
+  url: "https://www.gov.uk/government/news/stronger-protections-to-help-protect-threatened-wild-birds"
+
+- key: dowding
+  name: "Charles Dowding: Chicory and radicchio"
+  url: "https://charlesdowding.co.uk/growing-guide/chicory-radicchio"
+
+- key: eating_better
+  name: "Eating Better: Sourcing Better framework"
+  url: "https://www.eating-better.org/site/assets/files/1799/sourcing_better_framework_final.pdf"
+
+- key: farming_uk_asparagus
+  name: "Farming UK: The British asparagus season"
+  url: "https://farming.co.uk/news/early-start-leads-to-early-close-for-uk-asparagus-crop"
+
+- key: ffs
+  name: "Flying Fish Seafoods: Seasonality"
+  url: "https://flyingfishseafoods.co.uk/seasonality/"
+
+- key: first_nature
+  name: "First Nature: Fungi"
+  url: "https://www.first-nature.com/fungi/"
+
+- key: forestheart
+  name: "Forestheart"
+  url: "https://substack.com/@forestheart"
+
+- key: fsa_lead
+  name: "Food Standards Agency: Game shot with lead"
+  url: "https://www.food.gov.uk/science/advice-to-frequent-eaters-of-game-shot-with-lead"
+
+- key: gardeners_calendar
+  name: "The Gardener's Calendar: Calabrese"
+  url: "https://the-gardeners-calendar.co.uk/plants/calabrese"
+
+- key: general
+  name: "Common knowledge, not yet checked against a named source"
+  url: null
+
+- key: goose
+  name: "Farmers Weekly: Michaelmas geese"
+  url: "https://www.fwi.co.uk/livestock/poultry/michaelmas-geese-on-the-move"
+
+- key: gov_venison
+  name: "GOV.UK: Wild venison quality assurance scheme"
+  url: "https://www.gov.uk/government/news/national-quality-assurance-scheme-for-wild-venison-launches"
+
+- key: hares_act
+  name: "Hares Preservation Act 1892"
+  url: "https://www.legislation.gov.uk/ukpga/Vict/55-56/8"
+
+- key: hcc
+  name: "Hybu Cig Cymru, via Business Wales"
+  url: "https://businesswales.gov.wales/foodanddrink/node/652"
+
+- key: ifca_scallop
+  name: "Devon & Severn IFCA: King scallop closure"
+  url: "https://www.devonandsevernifca.gov.uk/wp-content/uploads/2025/01/DS-IFCA-Response-to-Consultation-on-King-Scallop-Closure-2025.pdf"
+
+- key: lishmans
+  name: "Lishman's: Guide to lamb"
+  url: "https://www.lishmansbutchers.co.uk/david-lishmans-guide-to-lamb/"
+
+- key: mcs
+  name: "Marine Conservation Society: Good Fish Guide"
+  url: "https://www.mcsuk.org/goodfishguide/"
+
+- key: msc_sardine
+  name: "MSC: Cornish sardine fishery"
+  url: "https://msc.org/uk/what-we-are-doing/uk-irish-fisheries/cornish-sardine"
+
+- key: naturescot_game
+  name: "NatureScot: Game"
+  url: "https://www.nature.scot/professional-advice/social-and-economic-benefits-nature/food-and-drink/game"
+
+- key: ncgm
+  name: "New Covent Garden Market: British seasonal fruit and veg calendar"
+  url: "https://newcoventgardenmarket.com/wp-content/uploads/2022/02/British-seasonal-fruit-veg-calendar-new-covent-garden-market-2.pdf"
+
+- key: northumberland
+  name: "Northumberland Seafood: Seasonality"
+  url: "https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/"
+
+- key: nrw_salmon
+  name: "Natural Resources Wales: Buying and selling salmon and sea trout"
+  url: "https://naturalresourceswales.gov.uk/guidance-and-advice/business-sectors/fisheries/buying-and-selling-salmon-and-sea-trout-in-wales-staying-within-the-law/?lang=en"
+
+- key: nsa_lamb
+  name: "National Sheep Association, via Agriland"
+  url: "https://www.agriland.co.uk/farming-news/nsa-encourages-shoppers-to-enjoy-british-lamb-this-easter/"
+
+- key: owid
+  name: "Poore & Nemecek (2018), via Our World in Data"
+  url: "https://ourworldindata.org/grapher/ghg-per-kg-poore"
+
+- key: pfl
+  name: "Pasture for Life: Standards"
+  url: "https://www.pastureforlife.org/certification/the-pasture-for-life-standards/"
+
+- key: rhs
+  name: "RHS: Calabrese, grow your own"
+  url: "https://rhs.org.uk/vegetables/calabrese/grow-your-own"
+
+- key: rhs_planner
+  name: "RHS: Crop planner"
+  url: "https://www.rhs.org.uk/advice/pdfs/crop-planner.pdf"
+
+- key: rocket_gardens
+  name: "Rocket Gardens: Harvesting purple sprouting broccoli"
+  url: "https://www.rocketgardens.co.uk/harvesting-purple-sprouting-broccoli/"
+
+- key: rspca
+  name: "RSPCA Assured"
+  url: "https://www.rspcaassured.org.uk/"
+
+- key: saltmarsh
+  name: "Farm Contractor: Salt marsh lamb"
+  url: "https://www.farmcontractormagazine.com/livestock/sheep/salt-marsh-lamb-the-welsh-delicacy-coming-into-season-this-mayjune.html"
+
+- key: scot_salmon_sale
+  name: "Conservation of Salmon (Prohibition of Sale) (Scotland) Regulations 2002"
+  url: "https://www.legislation.gov.uk/ssi/2002/418"
+
+- key: seafish
+  name: "Seafish: Seafood guide"
+  url: "https://seafoodacademy.org/pdfs/seafood-guide.pdf"
+
+- key: shellfish_act
+  name: "Sea Fisheries (Shellfish) Act 1967, section 16"
+  url: "https://legislation.gov.uk/ukpga/1967/83/section/16/data.html"
+
+- key: tfta
+  name: "Traditional Farmfresh Turkey Association"
+  url: "https://www.kiwa.com/en/services/certification/traditional-farmfresh-turkey-association/"
