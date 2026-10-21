@@ -6,30 +6,20 @@ charts: true
 ---
 {%- comment -%}
 One arrivals wheel for every food and one per kind of food. The kind
-switch is a radio group shown by CSS alone; site.js points the hands,
-and assets/charts.js adds the time travel, the arcs or dots switch and
-the food popover, the list of foods for the chosen time under the
-wheel, and on the ALL wheel names only the foods in season at the
-line's time. Every visit opens on All.
+switch, the first row of the controls, is a radio group shown by CSS
+alone; site.js points the hands, and assets/charts.js adds the time
+travel, the arcs or dots switch, the in season or whole year switch and
+the food popover, and the list of foods for the chosen time under the
+wheel. Every visit opens on All.
 {%- endcomment -%}
 <header class="page-head">
   <h1>The shape of the year</h1>
 </header>
 
 <div class="tt" data-tt="wheel" data-groups='{{ site.data.groups | jsonify | escape }}'>
-<div class="switches">
-<fieldset class="switch">
-  <legend>Kind</legend>
-  <input type="radio" name="kind" id="kind-all" value="all" checked><label for="kind-all">All</label>
-  <input type="radio" name="kind" id="kind-veg" value="veg"><label for="kind-veg">Veg</label>
-  <input type="radio" name="kind" id="kind-fruit" value="fruit"><label for="kind-fruit">Fruit</label>
-  <input type="radio" name="kind" id="kind-wild" value="wild"><label for="kind-wild">Wild</label>
-  <input type="radio" name="kind" id="kind-herbs" value="herbs"><label for="kind-herbs">Herbs</label>
-  <input type="radio" name="kind" id="kind-fish" value="fish"><label for="kind-fish">Fish</label>
-  <input type="radio" name="kind" id="kind-meat" value="meat"><label for="kind-meat">Meat</label>
-</fieldset>
-</div>
-
+{%- comment -%} The controls and the wheel, 40px apart, as on the
+   calendar. {%- endcomment -%}
+<div class="tt-stage">
 {% include time-controls.html wheel=true %}
 
 <div class="ordered">
@@ -40,6 +30,7 @@ line's time. Every visit opens on All.
   <figure class="wheel dial by-herbs">{% include arrivals-dial.html kind="herbs" id="dial-herbs" %}</figure>
   <figure class="wheel dial by-fish">{% include arrivals-dial.html kind="fish" id="dial-fish" %}</figure>
   <figure class="wheel dial by-meat">{% include arrivals-dial.html kind="meat" id="dial-meat" %}</figure>
+</div>
 </div>
 
 <section class="tt-list" id="tt-list" hidden></section>

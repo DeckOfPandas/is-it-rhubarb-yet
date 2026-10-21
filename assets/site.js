@@ -297,9 +297,9 @@
   // in. Every food's name counts, even one the ALL wheel has hidden for
   // now, since it may show later; and on the wheel page, where charts.js
   // runs a time line out to the rim (data-rim), so does room for its knob
-  // and the longest time
-  // beside it, EARLY SEPTEMBER, at any angle. A hidden wheel has no box to
-  // measure, so the kind switch fits the one it shows.
+  // and the longest time beside it, EARLY SEPTEMBER, at any angle. A
+  // hidden wheel has no box to measure, so the kind switch fits the one
+  // it shows.
   var LONGEST_TIME = "Early September";
   function fitDials() {
     var svgs = document.querySelectorAll("figure.dial > svg");
@@ -323,7 +323,12 @@
         x0 = Math.min(x0, C - R - reach); x1 = Math.max(x1, C + R + reach);
         y0 = Math.min(y0, C - R - 20); y1 = Math.max(y1, C + R + 20);
       }
-      svg.setAttribute("viewBox", [x0 - 6, y0 - 6, x1 - x0 + 12, y1 - y0 + 12].join(" "));
+      // A wheel as wide as the screen keeps what it draws 8px in from the
+      // screen's edges: m screen pixels at S pixels for W + 2 pad units.
+      var r = svg.getBoundingClientRect(), S = r.width, W = x1 - x0;
+      var m = Math.max(0, 8 - r.left, 8 - (document.documentElement.clientWidth - r.right));
+      var pad = Math.max(6, m * W / (S - 2 * m));
+      svg.setAttribute("viewBox", [x0 - pad, y0 - pad, W + 2 * pad, y1 - y0 + 2 * pad].join(" "));
       svg.dataset.fitted = "1";
     }
     function all() { svgs.forEach(fit); }

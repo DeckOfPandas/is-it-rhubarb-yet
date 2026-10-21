@@ -1,15 +1,17 @@
 // The calendar and the wheel, made to be played with: a food highlights
 // on hover or focus and opens its card on a click, tap or Enter; a pink
 // line travels through the year, early, mid or late in each month, and
-// the foods for its time are listed under the chart; TODAY brings it
-// back. On the calendar a magnifier spreads the weeks round the line and
-// squeezes the rest, the four season buttons jump to mid-season and zoom
-// in, and a readout in the sticky header counts what is in season and
-// jumps to the list. The wheel never turns, and the ALL wheel names only
-// what is in season. Everything
-// here is added to charts that work without it. Loaded after verdict.js
-// and site.js, whose window.Site lends the card's dial, the hand and
-// Now's lists.
+// the foods for its time are listed under the chart, under a heading
+// with a stepper of its own; TODAY brings it back. While the chart is on
+// screen a pink button at the foot of the screen counts what is in
+// season and jumps to the list. On the calendar a magnifier spreads the
+// weeks round the line and squeezes the rest, and the four season
+// buttons jump to mid-season and zoom in; on a phone its names column is
+// fitted to its longest name. The wheel never turns; In season names and
+// lights only what is in season, Whole year everything. Everything here
+// is added to charts that work without it. Loaded after verdict.js and
+// site.js, whose window.Site lends the card's dial, the hand and Now's
+// lists.
 (function () {
   "use strict";
   var S = window.Site, V = window.Verdict;
@@ -36,15 +38,19 @@
   // measured along the year in weeks, 0 to 52, on the charts' own scale:
   // week w starts at w-1, so a day's place is its day of the year less one
   // over seven. `at` is a step's index, or null for today itself, which
-  // falls between steps and is where the line starts.
+  // falls between steps and is where the line starts. A step is said
+  // "mid-January" (mid always hyphenated), "early January", "late
+  // January"; its third of the month is the 1st to the 10th, the 11th to
+  // the 20th, or the 21st to the month's end.
   var PARTS = ["early", "mid", "late"], DAYS = [5, 15, 25];
   var STEPS = [];
   MONTHS.forEach(function (m, mi) {
     PARTS.forEach(function (p, pi) {
+      var last = new Date(YEAR, mi + 1, 0).getDate();
       STEPS.push({
         key: p + "-" + m.toLowerCase(),
-        label: p + " " + m,
         phrase: (p === "mid" ? "mid-" : p + " ") + m,
+        range: [1, 11, 21][pi] + "–" + [10, 20, last][pi] + " " + m,
         date: new Date(YEAR, mi, DAYS[pi])
       });
     });
@@ -106,12 +112,12 @@
   // --- The calendar --------------------------------------------------------------
   // Every bar, month line and label keeps the place on the year it was
   // drawn at, in weeks, and is redrawn at F of it. The line is a group in
-  // the weeks' SVG and in the header's, moved sideways; its handle is a
-  // button-like slider in a rail across the top of the sticky header.
-  // Today is an ink tick at the foot of the header and replaces the
-  // dashed line. The header's corner, over the names, holds the readout:
-  // the time and how many foods are in season then, a button down to the
-  // list.
+  // the weeks' SVG and in the header's, moved sideways, under the month
+  // names, which wear a halo in the page colour; its handle is a
+  // button-like slider in a rail across the top of the sticky header,
+  // always shown (TODAY on today). Today is an ink tick at the foot of
+  // the header and replaces the dashed line. Where the magnifier spreads
+  // the year, short ticks mark early, mid and late.
   var cals = [];
   function initCalendar() {
     document.querySelectorAll(".cal").forEach(function (cal) {
@@ -134,7 +140,6 @@
         items.push({ el: t, kind: "month", a: a });
       });
       items.forEach(function (it) { if (it.kind === "month") { var i = starts.indexOf(it.a); it.b = i < 11 ? starts[i + 1] : 52; } });
-      months.querySelectorAll(".week-label").forEach(function (t) { items.push({ el: t, kind: "week", a: (+t.getAttribute("x") - x0) / cw }); });
       cal.querySelectorAll(".today").forEach(function (l) { l.style.display = "none"; });
 
       function lineIn(svg, y1, y2) {
@@ -144,9 +149,15 @@
         svg.appendChild(g);
         return g;
       }
+      var steps = STEPS.map(function (s) {
+        var t = svgEl("line", "tt-step-tick", { y1: header - 5, y2: header, "aria-hidden": "true" });
+        months.appendChild(t);
+        return { el: t, t: s.t };
+      });
       var lines = [lineIn(months, 0, header), lineIn(cells, header, bottom)];
-      var tick = svgEl("line", "tt-today", { y1: header - 10, y2: header, "aria-hidden": "true" });
+      var tick = svgEl("line", "tt-today", { y1: header - 8, y2: header, "aria-hidden": "true" });
       months.appendChild(tick);
+      months.querySelectorAll(".month-label").forEach(function (t) { months.appendChild(t); });
       var head = cal.querySelector(".chart-head");
       var rail = el("div", "tt-rail");
       var handle = makeHandle(el("div", "tt-handle"));
@@ -157,14 +168,12 @@
         stopPlay();
         setAt(nearest(Finv((e.clientX - months.getBoundingClientRect().left) / cw)));
       });
-      var readout = el("button", "tt-readout");
-      readout.type = "button";
-      readout.appendChild(el("span", "tt-readout-when"));
-      readout.appendChild(el("span", "tt-readout-count"));
-      readout.addEventListener("click", toList);
-      cal.querySelector(".cal-corner").appendChild(readout);
-      cals.push({ cal: cal, months: months, cells: cells, x0: x0, cw: cw, items: items, lines: lines, tick: tick, handle: handle, readout: readout });
+      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail,
+        x0: x0, cw: cw, items: items, steps: steps, lines: lines, tick: tick, handle: handle, x: x0 };
+      cal.querySelector(".chart-body").addEventListener("scroll", function () { placeHandle(c); }, { passive: true });
+      cals.push(c);
     });
+    window.addEventListener("resize", function () { cals.forEach(placeHandle); });
   }
   function layoutCal(c) {
     function X(t) { return c.x0 + F(t) * c.cw; }
@@ -175,49 +184,99 @@
         it.el.setAttribute("width", Math.max(0, X(it.b) - xa).toFixed(2));
       } else if (it.kind === "line") {
         it.el.setAttribute("x1", xa.toFixed(2)); it.el.setAttribute("x2", xa.toFixed(2));
-      } else if (it.kind === "month") {
+      } else {
         it.el.setAttribute("x", (xa + 4).toFixed(2));
         it.el.style.visibility = X(it.b) - xa < 30 ? "hidden" : "";
-      } else {
-        it.el.setAttribute("x", xa.toFixed(2));
-        it.el.style.visibility = X(it.a + 0.5) - X(it.a - 0.5) < 10 ? "hidden" : "";
       }
     });
+    // A step's tick shows only where the magnifier has spread its third
+    // of the month to twice its width or more.
+    var third = 52 / 36, plain = third * c.cw;
+    c.steps.forEach(function (s) {
+      var xs = X(s.t);
+      s.el.setAttribute("x1", xs.toFixed(2)); s.el.setAttribute("x2", xs.toFixed(2));
+      s.el.style.display = state.zoom && X(s.t + third / 2) - X(s.t - third / 2) >= 2 * plain ? "" : "none";
+    });
     var x = X(tOf(state.at));
+    c.x = x;
     c.lines.forEach(function (g) { g.style.transform = "translateX(" + x.toFixed(2) + "px)"; });
     var now = X(NOW_T).toFixed(2);
     c.tick.setAttribute("x1", now); c.tick.setAttribute("x2", now);
-    // Centred on the line, but kept inside the weeks, so its words are
-    // never cut off at either end of the year.
-    var hw = c.handle.offsetWidth, end = c.x0 + 52 * c.cw + 8;
-    var left = Math.max(c.x0, Math.min(x - hw / 2, end - hw));
-    c.handle.style.transform = "translateX(" + left.toFixed(2) + "px)";
     // The chart on show scrolls, if it must, to keep the line in view.
+    // A place in the weeks' SVG is x0 less than its place in the scrolled
+    // row, after the names column.
     var body = c.cal.querySelector(".chart-body");
     if (body.clientWidth && body.scrollWidth > body.clientWidth) {
-      var labels = c.cal.querySelector(".cal-labels").getBoundingClientRect().width;
+      var labels = c.labels.getBoundingClientRect().width, at = x - c.x0 + labels;
       var from = body.scrollLeft + labels + 24, to = body.scrollLeft + body.clientWidth - 24;
-      if (x < from || x > to) body.scrollTo({ left: Math.max(0, x - labels - (body.clientWidth - labels) / 2), behavior: still.matches || !c.ready ? "auto" : "smooth" });
+      if (at < from || at > to) body.scrollTo({ left: Math.max(0, at - labels - (body.clientWidth - labels) / 2), behavior: still.matches || !c.ready ? "auto" : "smooth" });
     }
+    placeHandle(c);
     c.ready = true;
+  }
+  // The handle is centred on the line, but slides along to stay on the
+  // screen and inside the chart, 8px in from the screen's edge.
+  function placeHandle(c) {
+    var hw = c.handle.offsetWidth;
+    if (!hw) return;
+    var rail = c.rail.getBoundingClientRect(), head = c.head.getBoundingClientRect();
+    var vw = document.documentElement.clientWidth;
+    var lo = Math.max(8, head.left), hi = Math.min(vw - 8, head.right) - hw;
+    var screen = rail.left + c.x - c.x0 + c.labels.getBoundingClientRect().width - hw / 2;
+    screen = Math.max(lo, Math.min(screen, hi));
+    c.handle.style.transform = "translateX(" + (screen - rail.left).toFixed(2) + "px)";
   }
   function calTime(c, clientX) {
     return Finv((clientX - c.months.getBoundingClientRect().left) / c.cw);
   }
+  // On a phone the names are the small size, a row's short name where it
+  // has one, and their column is exactly as wide as the longest name and
+  // 8px: the labels' viewBox starts that far left of the weeks, and the
+  // corner over them matches. Wider, the column is x0 as drawn. The
+  // charts share their rows, so the one on show is measured for all three.
+  var nameW = 0;
+  function fitNames() {
+    if (!cals.length) return;
+    if (narrow.matches) {
+      var widest = 0;
+      cals.forEach(function (c) {
+        c.labels.querySelectorAll(".row-label").forEach(function (t) {
+          if (t.getClientRects().length) widest = Math.max(widest, t.getBBox().width);
+        });
+      });
+      if (widest) nameW = Math.ceil(widest) + 8;
+    }
+    var w = narrow.matches && nameW ? nameW : 0;
+    cals.forEach(function (c) {
+      var vb = c.labels.getAttribute("viewBox").split(" ");
+      var col = w || c.x0;
+      vb[0] = c.x0 - col; vb[2] = col;
+      c.labels.setAttribute("viewBox", vb.join(" "));
+      c.labels.setAttribute("width", col);
+      c.cal.style.setProperty("--cal-x0", col + "px");
+      c.cal.style.setProperty("--cal-w", (col + +c.cells.getAttribute("width")) + "px");
+      c.labels.querySelectorAll(".group-label").forEach(function (g) { g.setAttribute("x", c.x0 - col); });
+      placeHandle(c);
+    });
+  }
 
   // --- The wheel -----------------------------------------------------------------
   // The wheel never turns: its labels, arcs and months stay where
-  // arrivals-dial.html drew them. On the ALL wheel only the foods in
-  // season (YES or JUST) at the line's time keep their words; every dot
-  // stays, named and tappable. The line is a radius from the month ring
-  // to the rim; its handle is a knob at the rim with the time beside it.
-  // Today is an ink tick across the month ring and replaces the hand.
+  // arrivals-dial.html drew them. In season (the default): on every wheel
+  // only the foods in season (YES or JUST) at the line's time keep their
+  // words, and their arcs are lit at full strength over the faint rest;
+  // every dot stays, named and tappable. Whole year: every word, every
+  // arc at full strength, wherever the line is. The line is a radius from
+  // the month ring to the rim; its handle is a knob at the rim with the
+  // time beside it, always shown (TODAY on today). Today is an ink tick
+  // across the month ring and replaces the hand.
   var dials = [];
+  var litYear = document.getElementById("lit-year");
   function initWheel() {
     document.querySelectorAll("figure.dial > svg").forEach(function (svg) {
       var C = +svg.dataset.c, RING = +svg.dataset.ring, RIM = +svg.dataset.rim;
       var labels = Array.prototype.map.call(svg.querySelectorAll("a.label"), function (a) {
-        return { slug: a.dataset.slug, text: a.querySelector("text") };
+        return { slug: a.dataset.slug, text: a.querySelector("text"), arc: svg.querySelector('.season[data-slug="' + a.dataset.slug + '"]') };
       });
       var hand = svg.querySelector(".hand");
       if (hand) hand.style.display = "none";
@@ -234,13 +293,18 @@
       var word = svgEl("text", "tt-knob-label", { "dominant-baseline": "middle" });
       knob.appendChild(word);
       svg.appendChild(knob);
-      dials.push({ svg: svg, all: svg.dataset.kind === "all", C: C, RING: RING, RIM: RIM, labels: labels, tick: tick, line: line, knob: knob, word: word, last: null });
+      dials.push({ svg: svg, C: C, RING: RING, RIM: RIM, labels: labels, tick: tick, line: line, knob: knob, word: word, last: null });
     });
+    if (litYear) document.querySelectorAll('input[name="lit"]').forEach(function (r) { r.addEventListener("change", draw); });
   }
   function norm(a) { return ((a % 360) + 360) % 360; }
   function layoutDial(d) {
-    var C = d.C;
-    if (d.all) d.labels.forEach(function (l) { l.text.style.display = !inSeason || inSeason[l.slug] ? "" : "none"; });
+    var C = d.C, year = litYear && litYear.checked;
+    d.labels.forEach(function (l) {
+      var on = year || !inSeason || !!inSeason[l.slug];
+      l.text.style.display = on ? "" : "none";
+      if (l.arc) l.arc.classList.toggle("is-on", year || !!(inSeason && inSeason[l.slug]));
+    });
     d.tick.setAttribute("transform", "rotate(" + (NOW_T * 360 / 52).toFixed(2) + " " + C + " " + C + ")");
     var L = tOf(state.at) * 360 / 52;
     if (d.last !== null) L += 360 * Math.round((d.last - L) / 360);
@@ -267,7 +331,7 @@
   // Page Up and Page Down a month, Home back to today. Dragging snaps to
   // the nearest step. Only the handle takes touch-action: none, so the
   // chart itself still scrolls and pinches as a page does.
-  function whenLabel() { return state.at === null ? "Today" : STEPS[state.at].label; }
+  function whenLabel() { return state.at === null ? "Today" : STEPS[state.at].phrase; }
   function makeHandle(h) {
     h.setAttribute("tabindex", "0");
     h.setAttribute("role", "slider");
@@ -320,8 +384,8 @@
 
   // --- Setting the time ---------------------------------------------------------------
   // Everything follows the line: the magnifier, the charts, the handles'
-  // values, the readout, which button is pressed, the popover, the list
-  // under the chart and the address, which carries ?when=mid-december
+  // values, the floating button, which button is pressed, the popover,
+  // the list under the chart and the address, which carries ?when=mid-december
   // (none for today) so a time can be shared. `season` is the button
   // that moved it, if one did: it stays pressed until the line moves
   // again. TODAY is pressed whenever the line is on today.
@@ -334,7 +398,8 @@
     if (url.href !== location.href) history.replaceState(history.state, "", url);
   }
   // What is in season (YES or JUST) at the line's time, by slug, and how
-  // many: for the readout and the ALL wheel. Null until foods.json is in.
+  // many: for the floating button and the wheels. Null until foods.json
+  // is in.
   var inSeason = null, inSeasonCount = 0;
   function countInSeason() {
     if (!foods) return;
@@ -348,7 +413,7 @@
   function draw() {
     buildF();
     countInSeason();
-    var text = state.at === null ? "Today, " + V.fmtDate(TODAY) : cap(STEPS[state.at].label);
+    var text = state.at === null ? "Today, " + V.fmtDate(TODAY) : cap(STEPS[state.at].phrase);
     document.querySelectorAll(".tt-handle").forEach(function (h) {
       h.setAttribute("aria-valuenow", state.at === null ? nearest(NOW_T) : state.at);
       h.setAttribute("aria-valuetext", text);
@@ -358,26 +423,39 @@
       var on = b.dataset.season === "today" ? state.at === null : b.dataset.season === state.season;
       b.setAttribute("aria-pressed", String(on));
     });
-    cals.forEach(function (c) {
-      c.readout.querySelector(".tt-readout-when").textContent = (state.at === null ? "This week" : STEPS[state.at].label) + " ·";
-      c.readout.querySelector(".tt-readout-count").textContent = foods ? inSeasonCount + " in season ↓" : "In season ↓";
-      c.readout.setAttribute("aria-label", (state.at === null ? "This week" : cap(STEPS[state.at].label)) +
-        (foods ? ", " + inSeasonCount + " in season" : "") + ". Go to the list");
-    });
+    var when = state.at === null ? "this week" : "in " + STEPS[state.at].phrase;
+    jump.querySelector(".tt-jump-text").textContent = inSeasonCount + " in season " + when;
+    jump.setAttribute("aria-label", inSeasonCount + " in season " + when + ". Go to the list");
     cals.forEach(layoutCal);
     dials.forEach(layoutDial);
     if (pop) fillPop();
     list();
-  }
-  // The readout's jump: down to the list, its heading taking focus.
-  function toList() {
-    var head = listBox.querySelector(".tt-list-head");
-    if (!head) return;
-    head.setAttribute("tabindex", "-1");
-    listBox.scrollIntoView({ behavior: still.matches ? "auto" : "smooth", block: "start" });
-    head.focus({ preventScroll: true });
+    showJump();
   }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  // --- The floating button -------------------------------------------------------------------
+  // A pink pill fixed at the foot of the screen, "81 in season in late
+  // November ↓", while the chart is on screen and the list's heading is
+  // not, and not while a docked popover holds the foot of the screen.
+  // Pressed, it scrolls to the list's heading (at once with reduced
+  // motion) and gives it focus. It waits for foods.json, for its count.
+  var jump = el("button", "tt-jump caps");
+  jump.type = "button";
+  jump.hidden = true;
+  jump.appendChild(el("span", "tt-jump-text"));
+  jump.appendChild(el("span", "tt-jump-arrow", " ↓")).setAttribute("aria-hidden", "true");
+  jump.addEventListener("click", toList);
+  var chartSeen = false, headSeen = false, headWatch = null;
+  function showJump() {
+    jump.hidden = !foods || !chartSeen || headSeen || !!(pop && pop.classList.contains("is-docked"));
+  }
+  function toList() {
+    var head = listBox.querySelector(".tt-list-title");
+    if (!head) return;
+    head.scrollIntoView({ behavior: still.matches ? "auto" : "smooth", block: "start" });
+    head.focus({ preventScroll: true });
+  }
 
   // --- Play the year ----------------------------------------------------------------------
   // One step every PLAY_MS, all the way round, and back to where it began;
@@ -517,6 +595,7 @@
     if (t) partsOf(t).parts.forEach(function (p) { p.classList.remove("is-pinned"); });
     pinned = null;
     light(null);
+    showJump();
     if (giveBack && t) t.focus({ preventScroll: true });
   }
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && pop) { e.preventDefault(); close(true); } });
@@ -567,6 +646,7 @@
   function placePop() {
     var docked = narrow.matches;
     pop.classList.toggle("is-docked", docked);
+    showJump();
     var rect = (WHEEL ? pinned.querySelector(".dot") : pinned).getBoundingClientRect();
     if (docked) {
       pop.style.left = pop.style.top = "";
@@ -622,27 +702,66 @@
   }
 
   // --- The list under the chart -------------------------------------------------------------
-  // Now's own bands for the line's time: at today, Now itself under "This
-  // week"; at another time, under "In mid-December", with Great for Great
-  // this week.
+  // Now's own header and bands for the line's time. At today, Now itself:
+  // "In season this week" over the week's days. At another time, "In
+  // season in mid-December" over that third of the month, "11–20
+  // December", with Great for Great this week. The ‹ › either side of the
+  // days step the line early, mid, late. The header is made once, so a
+  // stepper keeps its focus; only its words change.
   var listBox = document.getElementById("tt-list");
+  var listTitle, listDates, listBands;
+  function makeList() {
+    var head = el("header", "page-head now-head tt-list-head");
+    listTitle = el("h2", "tt-list-title");
+    listTitle.id = "tt-list-title";
+    listTitle.setAttribute("tabindex", "-1");
+    head.appendChild(listTitle);
+    var line = el("p", "week-line");
+    [["‹", "Earlier", -1], ["›", "Later", 1]].forEach(function (b, i) {
+      var btn = el("button", "week-step", b[0]);
+      btn.type = "button";
+      btn.setAttribute("aria-label", b[1]);
+      btn.addEventListener("click", function () { stopPlay(); move(b[2]); });
+      if (i) line.appendChild(btn); else { line.appendChild(btn); listDates = el("span", "tt-list-dates"); line.appendChild(listDates); }
+    });
+    head.appendChild(line);
+    listBox.appendChild(head);
+    listBands = el("div", "digest");
+    listBox.appendChild(listBands);
+    if (headWatch) headWatch.observe(listTitle);
+  }
   function list() {
     if (!foods) return;
+    if (!listTitle) makeList();
     var when = dateOf(state.at), week = V.weekOf(when);
-    listBox.textContent = "";
-    listBox.appendChild(el("h2", "tt-list-head section-label", state.at === null ? "This week" : "In " + STEPS[state.at].phrase));
-    var bands = el("div", "digest");
-    S.fillDigest(bands, V.nowLists(foods, groups, week, when.getFullYear(), when), state.at === null);
-    listBox.appendChild(bands);
+    listTitle.textContent = "In season " + (state.at === null ? "this week" : "in " + STEPS[state.at].phrase);
+    listDates.textContent = state.at === null ? V.fmtRange(week, when.getFullYear()) : STEPS[state.at].range;
+    S.fillDigest(listBands, V.nowLists(foods, groups, week, when.getFullYear(), when), state.at === null);
     listBox.hidden = false;
   }
 
   // --- Start -----------------------------------------------------------------------------------
   document.addEventListener("DOMContentLoaded", function () {
     if (WHEEL) initWheel(); else initCalendar();
-    document.querySelectorAll('input[name="order"], input[name="kind"]').forEach(function (r) { r.addEventListener("change", draw); });
+    document.querySelectorAll('input[name="order"], input[name="kind"]').forEach(function (r) {
+      r.addEventListener("change", function () { fitNames(); draw(); });
+    });
     var controls = document.getElementById("tt-controls");
-    controls.hidden = false;
+    document.getElementById("tt-time").hidden = false;
+    fitNames();
+    if (document.fonts) document.fonts.ready.then(fitNames);
+    narrow.addEventListener("change", fitNames);
+    document.body.appendChild(jump);
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (entries) {
+        chartSeen = entries.some(function (e) { return e.isIntersecting; });
+        showJump();
+      }).observe(root.querySelector(".ordered"));
+      headWatch = new IntersectionObserver(function (entries) {
+        headSeen = entries[0].isIntersecting;
+        showJump();
+      });
+    }
     // The calendar's header sticks under its controls on a wide screen,
     // and a row the keyboard reaches stops under both. Only the chart on
     // show has a header with a height.

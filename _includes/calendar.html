@@ -9,14 +9,16 @@ order "alpha": by food name, then variety, a food's varieties together.
 
 A row is labelled with the food, and a named variety follows in muted
 brackets as tools/bake.js names it, "Rhubarb (forced)", "Apples (Cox)".
+A row with a short name (foods.yml's `short:`, on the variety for the
+whole row, or on the food for its name) carries it as a second label,
+which CSS shows in place of the first below 700px and nowhere else.
 
 The chart is drawn at its own size, never scaled, so its words are never
 smaller than they are set; where it is wider than the page it scrolls
 sideways. It is four SVGs sharing one set of coordinates, each viewBox
 cut to its part: the food names in a column that sticks to the left, the
-weeks beside them, and over both a header of months and week numbers
-that sticks to the top of the viewport (with a blank corner over the
-names). A row is two links to its food's page, its name and its weeks;
+weeks beside them, and over both a header of month names that sticks to
+the top of the viewport (with a blank corner over the names). A row is two links to its food's page, its name and its weeks;
 only the name takes focus. JavaScript adds the "today" marker, keeps the
 header level with the rows when they are scrolled sideways, and opens
 the chart scrolled to today. The id prefixes the gradient ids, which must
@@ -25,7 +27,7 @@ be unique on a page that carries several charts.
 {%- assign x0 = 190 -%}
 {%- assign cw = 14 -%}
 {%- assign rh = 22 -%}
-{%- assign header = 44 -%}
+{%- assign header = 28 -%}
 {%- assign group_gap = 28 -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
@@ -105,11 +107,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- assign start = month_starts[m] | plus: 0 -%}
     {%- assign mx = start | minus: 1 | times: cw | plus: x0 -%}
     <line class="month-line" x1="{{ mx }}" y1="4" x2="{{ mx }}" y2="{{ header }}" />
-    <text class="month-label" x="{{ mx | plus: 4 }}" y="16">{{ month_names[m] }}</text>
-  {%- endfor -%}
-  {%- for w in (1..52) -%}
-    {%- assign wx = w | minus: 1 | times: cw | plus: x0 -%}
-    <text class="week-label" x="{{ wx | plus: 7 }}" y="34" text-anchor="middle">{{ w }}</text>
+    <text class="month-label" x="{{ mx | plus: 4 }}" y="17">{{ month_names[m] }}</text>
   {%- endfor -%}
   <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="4" x2="{{ x0 | plus: 728 }}" y2="{{ header }}" />
   <line class="today" x1="0" y1="{{ header | minus: 6 }}" x2="0" y2="{{ header }}" hidden />
@@ -133,9 +131,15 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- assign v = food.varieties[vi] -%}
     {%- assign vlabels = site.data.baked.labels[food.slug] -%}
     {%- assign vlabel = vlabels[vi] -%}
-    <a class="row" id="{{ include.id }}-{{ food.slug }}-{{ vi }}" data-row="{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" data-variety="{{ vi }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
+    {%- assign short = v.short | default: food.short -%}
+    <a class="row{% if short %} has-short{% endif %}" id="{{ include.id }}-{{ food.slug }}-{{ vi }}" data-row="{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" data-variety="{{ vi }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" style="--c: {{ v.colour | default: food.colour }}">
       <rect class="row-hit" x="0" y="{{ y }}" width="{{ x0 }}" height="{{ rh }}" />
-      <text class="row-label" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end"><tspan class="row-name"><tspan class="row-ink">{{ food.name }}</tspan></tspan>{% if vlabel != "" %} <tspan class="row-variety">({{ vlabel }})</tspan>{% endif %}</text>
+      <text class="row-label row-full" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end"><tspan class="row-name"><tspan class="row-ink">{{ food.name }}</tspan></tspan>{% if vlabel != "" %} <tspan class="row-variety">({{ vlabel }})</tspan>{% endif %}</text>
+      {%- if v.short %}
+      <text class="row-label row-short" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end"><tspan class="row-name"><tspan class="row-ink">{{ v.short }}</tspan></tspan></text>
+      {%- elsif food.short %}
+      <text class="row-label row-short" x="{{ x0 | minus: 8 }}" y="{{ y | plus: 15 }}" text-anchor="end"><tspan class="row-name"><tspan class="row-ink">{{ food.short }}</tspan></tspan>{% if vlabel != "" %} <tspan class="row-variety">({{ vlabel }})</tspan>{% endif %}</text>
+      {%- endif %}
     </a>
   {%- endfor -%}
 </svg>

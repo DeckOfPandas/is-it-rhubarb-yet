@@ -161,23 +161,26 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   every weight. Buttons and inputs take the page's font
   (`font: inherit`), since browsers otherwise set them in their own
   (Arial, whose l is straight). The subsets have no arrows, so the
-  readout's ↓ comes from the system's fonts; the right arrow is an SVG
-  (see Links).
+  floating list button's ↓ comes from the system's fonts; the right
+  arrow is an SVG (see Links).
 - **Type scale.** Every font size is a token at the top of
   `assets/site.css`, and nothing else. Atkinson: `caps` 12px, 700,
   capitals, +0.07em (`--fs-caps`, `--track-caps`; the nav, the footer,
   group labels, chart month names, a dial's months and TODAY); `small`
-  14px; `body` 17px; `lead` 23px (the date line, bold, on a food page
-  and a card; the quotation, in Newsreader). Anton: `label` 20px (every
+  14px (the calendar's names on a phone); `body` 17px (the date line,
+  bold, on a card, the search's or a chart's popover); `lead` 23px (the
+  date line, bold, on a food page; the quotation, in Newsreader). Anton:
+  `label` 20px (every
   section label, in full ink: ON THE WAY, GREAT THIS WEEK, EVERYTHING,
   ALSO GREAT THIS WEEK, N MATCHES; a card's question, muted); `title`,
-  one clamp (page titles, a food page's question, a card's verdict);
+  one clamp (page titles, each in a `.page-head` with 40px under it; a
+  food page's question; a card's verdict; the heading of the list under
+  a chart);
   `display` (the hero, and the verdict until `site.js` fits it). The
   sizes that do not fit, kept on purpose: the wordmark, sized as a
   logo; the stacked hero below 600px, larger than display to fill the
   phone; a row's verdict tag, Anton at the small size; the week arrows
-  on Now, glyphs sized as controls; the calendar's week numbers, 8
-  units so 52 fit; and the arrivals wheels' labels (9 and 10 units), in
+  on Now, glyphs sized as controls; and the arrivals wheels' labels (9 and 10 units), in
   a viewBox that is scaled to the screen, so their pixel size varies.
   Chart text elsewhere is set in units equal to pixels: the calendar is
   never scaled.
@@ -302,7 +305,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     question, verdict and date line share the food page's rules
     (`.ask`, `.verdict-word`, `.date-line` in `assets/site.css`) and the
     card only sets them smaller: question `label`, verdict `title`, date
-    line `lead` bold, as on the page. The dial is the food page's own
+    line `body` bold (`.one-line`; the page's stays `lead`). The dial is the food page's own
     `figure.wheel` SVG, fetched from the page (`miniDial` in `site.js`,
     which also warms the page), cut to the one ring whose variety gave
     the verdict, that ring widened to fill the band and drawn all in the
@@ -417,10 +420,17 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   is the size it is set (food names 12px, rows 22px tall); where the
   page is narrower than the chart, it scrolls sideways, the food names
   stuck to the left and the month header stuck to the top, and it opens
-  scrolled so today is a third of the way across the weeks in view. On
-  a phone it runs to the screen's edges. `_includes/calendar.html`
-  draws it as four SVGs sharing one set of coordinates: the corner and
-  months on top, the names and weeks below.
+  scrolled so today is a third of the way across the weeks in view. The
+  axis is month names only, no week numbers. On a phone (below 700px)
+  it runs to the screen's edges, the names are `small` (14px), a row
+  with a `short:` name in `foods.yml` shows that instead (a variety's
+  is the whole row's name; a food's replaces its name, a variety
+  following in brackets; popovers, lists and the names a screen reader
+  hears keep the full name), and `charts.js` fits the names column to
+  the longest name shown plus 8px, nothing to its left.
+  `tools/check-foods.py` warns at a short name over 15 characters.
+  `_includes/calendar.html` draws it as four SVGs sharing one set of
+  coordinates: the corner and months on top, the names and weeks below.
 - **The calendar and the wheel, played with.** `assets/charts.js`,
   loaded only on pages with `charts: true`, on top of charts that work
   without it; it borrows the card's dial, the hand and Now's bands from
@@ -448,35 +458,54 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     the dashed today line and the hand. The line is pink, `--rhubarb`,
     with a 2px halo in the page colour so it shows across forced
     rhubarb: a vertical line on the calendar, a radius from the month
-    ring to the rim on the wheel. Its handle (a pink pill in a rail over
-    the calendar's sticky header, kept inside the weeks; a knob at the
-    wheel's rim) says the time in caps, MID DECEMBER or TODAY, and is a
-    slider: → and ← a step, Page Up and Page Down a month, Home back to
+    ring to the rim on the wheel. The calendar's month names are drawn
+    over the line with a halo in the page colour, so it never cuts
+    through them. Its handle (a pink pill in a rail just its height over
+    the calendar's month names, sliding along to stay on the screen 8px
+    in from its edge; a knob at the wheel's rim, whose wheel keeps
+    everything 8px in) is always shown, says the time in caps, MID-DECEMBER
+    or TODAY, and is a slider: → and ← a step, Page Up and Page Down a month, Home back to
     today; dragging snaps to the nearest step. There are 36 steps, early,
     mid and late in each month, standing for the 5th, 15th and 25th
-    (verdict.js's early is the 1st to the 10th). The line starts at
+    (verdict.js's early is the 1st to the 10th). "Mid-" is always
+    hyphenated, everywhere it is said (MID-JULY, "until mid-January"),
+    and "early" and "late" never are. The line starts at
     today itself, which is off the steps unless it falls on the 5th,
     15th or 25th; the first move goes to the step either side. The
     address carries `?when=mid-december` (none at today) and is read on
     load. The calendar on show scrolls to keep the line in view.
-  - **Readout** (the calendar). In the sticky header's corner, over the
-    food names, a button in caps on two lines: "MID DECEMBER ·" over
-    "42 IN SEASON ↓", or "THIS WEEK ·" when the line is on today; N
-    counts the foods whose verdict is YES or JUST at the line's time,
-    and follows the line. Pressed, it scrolls to the list under the
-    chart (smoothly, or at once with reduced motion) and gives the
-    list's heading focus. From 700px the controls (TODAY, the seasons,
-    play, the magnifier) stick under the site's header while the chart
-    is on screen, the chart's header under them (`.tt-stage` ends with
-    the chart; `charts.js` measures `--tt-controls-h`, and the chart's
-    header as `--cal-head-h` for the rows' scroll margin); below 700px
-    only the chart's header sticks, directly under the site's, and the
-    controls scroll away.
-  - **The list under the chart** is Now's bands for the line's time,
-    built by the same code: at today, Now itself under "This week"; at
-    another time under "In mid-December" (Anton `label`), with "Great"
-    for "Great this week". On the wheel it is every food, not only the
-    kind shown.
+  - **The controls** are one component on both pages
+    (`_includes/time-controls.html`): a flex column, rows 24px apart,
+    no margins on its rows, in the same order: (1) the order or kind
+    switch; (2) TODAY and the seasons; (3) play and the other switches,
+    at the right of row 2 where it fits and wrapping on a phone, its
+    lines 24px apart too. 40px from the page title to row 1 and from
+    the last row to the chart (the calendar's handle rail included):
+    `.tt-stage` is a flex column with a 40px gap. From 700px the
+    calendar's controls stick under the site's header while the chart
+    is on screen, the chart's header under them (`charts.js` measures
+    `--tt-controls-h`, and the chart's header as `--cal-head-h` for the
+    rows' scroll margin); stuck, they keep 16px of page colour above
+    and below, given back by a negative margin. Below 700px only the
+    chart's header sticks, directly under the site's.
+  - **Floating button.** While the chart is on screen and the list's
+    heading is not, a pink pill at the foot of the screen, centred, dark
+    caps, at least 44px tall: "81 IN SEASON IN LATE NOVEMBER ↓", or "38
+    IN SEASON THIS WEEK ↓" on today; N counts the foods whose verdict is
+    YES or JUST at the line's time. Pressed, it scrolls to the list's
+    heading (at once with reduced motion) and gives it focus, and hides.
+    Hidden under a docked popover. A wheel short enough that its list's
+    heading is always on screen with it (a phone) never shows it. There
+    is no readout in the calendar's corner.
+  - **The list under the chart** opens with Now's own header: the title
+    ("In season this week", or "In season in mid-January", Anton
+    `title`) over the stepper, "‹ 11–20 January ›": the third of the
+    month (1st to 10th, 11th to 20th, 21st to the end), or the week's
+    days on today. The arrows step the line early, mid, late, round the
+    year; the header is built once so they keep their focus. Then Now's
+    bands for the line's time, built by the same code, with "Great" for
+    "Great this week" away from today. On the wheel it is every food,
+    not only the kind shown.
   - **Play.** ▶ beside the switches moves the line a step every 0.4s
     round the whole year and back to where it began; ■ (the same button,
     pressed), a touch anywhere on the chart or its controls, or a move of
@@ -486,9 +515,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     centred on the line: each slice of the year is drawn as wide as
     1 + 5 × exp(−(d / 2.6)²), d its distance in weeks from the line, and
     the whole scaled back to 52 weeks, the weeks squeezed sideways. It
-    follows the line as it is dragged or played. Month names and week
-    numbers with no room are hidden. Switched by the Whole year ·
-    Magnify switch, off by default. The wheel has none.
+    follows the line as it is dragged or played. Month names with no
+    room are hidden. In the magnified stretch only (where a third of a
+    month is drawn at twice its width or more), short unlabelled ticks
+    mark early, mid and late. Switched by the Whole year · Magnify
+    switch, off by default. The wheel has none.
   - **TODAY and the seasons.** TODAY · WINTER · SPRING · SUMMER ·
     AUTUMN above the chart, each a 28px icon over its word in caps,
     `aria-pressed`; on a phone they share its width equally (five fit
@@ -503,11 +534,14 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     season's from its press until the line moves; none after a drag.
   - **The ALL wheel.** The wheel page's kind switch starts with All,
     every food on one wheel (`arrivals-dial.html` with `kind="all"`).
-    On it only the foods in season (YES or JUST) at the line's time
-    keep their names, changing as the line moves; every dot stays,
-    named for a screen reader and tappable. The kind wheels keep all
-    their names. The page opens on All. Seven kinds fit a 390px phone
-    because pill segments are tighter below 28rem.
+    The page opens on All. Seven kinds fit a 390px phone.
+  - **In season or whole year.** Every wheel's In season · Whole year
+    switch, In season by default. In season: only the foods in season
+    (YES or JUST) at the line's time keep their names and have their
+    arcs at full strength, over the faint rest, changing as the line
+    moves. Whole year: every name, every arc at full strength, wherever
+    the line is. Every dot stays, named for a screen reader and
+    tappable.
   - **Arcs or dots.** The wheel's Arcs · Dots switch, at every size,
     defaults to arcs; dots hides the season arcs.
   - **Touch.** Only the handles take `touch-action: none`. Nothing else
@@ -532,11 +566,12 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - The arrivals wheels are drawn in an 880-unit viewBox with room for
   the longest label at any angle; `site.js` tightens each visible
   wheel's viewBox to its drawn extent, so the wheel fills its width.
-  The extent counts every food's name, even one the ALL wheel has
-  hidden for now, and on the wheel page room for the time line's knob
-  and its longest time (EARLY SEPTEMBER) at any angle, so no label or
-  handle is ever clipped (checked for every kind and every step at
-  390, 820 and 1280).
+  The extent counts every food's name, even one In season has hidden
+  for now, and on the wheel page room for the time line's knob and its
+  longest time (EARLY SEPTEMBER) at any angle, so no label or handle is
+  ever clipped (checked for every kind and every step at 390, 820 and
+  1280). A wheel as wide as the screen pads its viewBox to keep all of
+  it 8px in from the screen's edges.
 - The season-length axis stays at 12 o'clock, between December and
   January, its ring labels and title haloed in the page colour
   (`paint-order: stroke`) so they read over any dot or arc.

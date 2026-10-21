@@ -225,7 +225,8 @@
   //     0 to 6 "for a few more days"; 7 to 13 "for another week or two";
   //     14 to 27 "for another two or three weeks"; 28 on "until late
   //     December".
-  // Early is the 1st to the 10th, mid the 11th to the 20th, late the rest.
+  // Early is the 1st to the 10th, mid the 11th to the 20th, late the rest;
+  // mid is always hyphenated ("mid-January"), early and late never are.
   // The one calendar date on the site is the "as of" date, which is when
   // an answer was true, not a season estimate.
   function midOfWeek(at, year) {
@@ -234,7 +235,7 @@
   }
   function monthPart(d) {
     var day = d.getDate();
-    return (day <= 10 ? "early " : day <= 20 ? "mid " : "late ") + MONTHS[d.getMonth()];
+    return (day <= 10 ? "early " : day <= 20 ? "mid-" : "late ") + MONTHS[d.getMonth()];
   }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   // The middle of the week `today` falls in, for a week with no real

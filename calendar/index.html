@@ -6,28 +6,22 @@ charts: true
 ---
 {%- comment -%}
 Three copies of the chart, one per ordering, built at build time. The
-switch is a radio group; CSS shows the chart whose radio is checked, so
-it works without JavaScript. site.js draws the today line, keeps the
-sticky month header level with the chart and opens it at today;
-assets/charts.js adds the time travel, the zoom and the food popover,
-and the list of foods for the chosen time under the chart. Every visit
-opens by start: the choice is not remembered.
+order switch, the first row of the controls, is a radio group; CSS shows
+the chart whose radio is checked, so it works without JavaScript.
+site.js draws the today line, keeps the sticky month header level with
+the chart and opens it at today; assets/charts.js adds the time travel,
+the zoom and the food popover, and the list of foods for the chosen
+time under the chart. Every visit opens by start: the choice is not
+remembered.
 {%- endcomment -%}
 <header class="page-head">
   <h1>Calendar</h1>
 </header>
 
 <div class="tt" data-tt="calendar" data-groups='{{ site.data.groups | jsonify | escape }}'>
-<fieldset class="switch">
-  <legend>Order</legend>
-  <input type="radio" name="order" id="order-start" value="start" checked><label for="order-start">By start</label>
-  <input type="radio" name="order" id="order-group" value="group"><label for="order-group">By family</label>
-  <input type="radio" name="order" id="order-alpha" value="alpha"><label for="order-alpha">A to Z</label>
-</fieldset>
-
-{%- comment -%} The stage holds the controls and the chart, so that on a
-   wide screen the controls stick to the top only while the chart is
-   there. {%- endcomment -%}
+{%- comment -%} The stage holds the controls and the chart, 40px apart,
+   so that on a wide screen the controls stick to the top only while the
+   chart is there. {%- endcomment -%}
 <div class="tt-stage">
 {% include time-controls.html %}
 
