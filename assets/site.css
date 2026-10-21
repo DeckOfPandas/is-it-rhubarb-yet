@@ -386,7 +386,9 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    foods is one, in the colour of the words around it. */
 .arrow-link { color: var(--ink); text-decoration: none; }
 .arrow-link:hover .arrow-text, .arrow-link:focus-visible .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
-.arrow-link .arrow { display: inline-block; margin-left: 0.35em; }
+/* The arrow is Helen's mark (_includes/icons/arrow-right.svg), 20 by 12,
+   sized to the text it follows and sitting on its x-height. */
+.arrow-link .arrow { display: inline-block; width: 1.05em; height: 0.63em; margin-left: 0.35em; vertical-align: 0.05em; overflow: visible; }
 .arrow-link.more-link { color: inherit; }
 .food-link { color: var(--food); text-decoration: none; }
 .food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }

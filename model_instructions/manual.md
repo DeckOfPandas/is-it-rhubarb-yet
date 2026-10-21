@@ -160,8 +160,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   400 and 700 are one file and one design; its l has a curled foot at
   every weight. Buttons and inputs take the page's font
   (`font: inherit`), since browsers otherwise set them in their own
-  (Arial, whose l is straight). The subsets have no arrows, so → and ↓
-  come from the system's fonts.
+  (Arial, whose l is straight). The subsets have no arrows, so the
+  readout's ↓ comes from the system's fonts; the right arrow is an SVG
+  (see Links).
 - **Type scale.** Every font size is a token at the top of
   `assets/site.css`, and nothing else. Atkinson: `caps` 12px, 700,
   capitals, +0.07em (`--fs-caps`, `--track-caps`; the nav, the footer,
@@ -366,9 +367,14 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     focus. A prose link to a food's page (`.food-ref`, with that food's
     `--food`) is underlined in the food's colour: on About, "Well, is
     it???" (to rhubarb) and the dinner food.
-  - Actions (`.arrow-link`): ink words and "→", underlined only on hover
-    or focus, the arrow never. Every "and N more" after a list of foods
-    is one, in the colour of the words around it.
+  - Actions (`.arrow-link`): ink words and an arrow, underlined only on
+    hover or focus, the arrow never. The arrow is Helen's mark from her
+    Helen Triages sites, `_includes/icons/arrow-right.svg` (a 20 by 12
+    shaft and head, round caps, stroke 2, `currentColor`), included
+    with `class="arrow"` and sized 1.05em by 0.63em on the x-height;
+    `site.js` draws the same path for the links it builds
+    (`arrowMark`). Every "and N more" after a list of foods is one, in
+    the colour of the words around it.
   - Foods in lists: inline lists (`.food-link`: the teasers, "Also:")
     set the name in the food's colour; rows (`.food-row`) keep the name
     in ink beside the swatch, since a food colour passes 3:1, not the

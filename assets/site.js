@@ -175,13 +175,30 @@
   function tellMeAbout(name) { return "Tell me everything about " + name.toLowerCase(); }
 
   // A link with an arrow after its words, the same markup as the templates'
-  // .arrow-link: the words underline on hover, the arrow never does.
+  // .arrow-link and _includes/icons/arrow-right.svg: the words underline
+  // on hover, the arrow never does.
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  function arrowMark() {
+    var svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("viewBox", "0 0 20 12");
+    svg.setAttribute("class", "arrow");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    var path = document.createElementNS(SVG_NS, "path");
+    path.setAttribute("d", "M1 6h18M14 2l5 4-5 4");
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "currentColor");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    svg.appendChild(path);
+    return svg;
+  }
   function arrowLink(href, text) {
     var a = el("a", "arrow-link");
     a.href = href;
     a.appendChild(el("span", "arrow-text", text));
-    var arrow = el("span", "arrow", "→"); arrow.setAttribute("aria-hidden", "true");
-    a.appendChild(arrow);
+    a.appendChild(arrowMark());
     return a;
   }
 

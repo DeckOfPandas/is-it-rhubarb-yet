@@ -54,11 +54,11 @@ site.js adds the varieties from foods.json), the names it completes to
       <section class="teaser">
         <h2 class="teaser-label">{{ parts[1] }}</h2>
         {%- capture all_json -%}[{% for i in all %}{"slug":{{ i.slug | jsonify }},"name":{{ i.name | jsonify }},"colour":{{ i.colour | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
-        <p class="teaser-foods" data-all='{{ all_json | escape }}' data-band="{{ key }}">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#{{ key }}"><span class="arrow-text">and {{ more }} more</span><span class="arrow" aria-hidden="true">→</span></a>{% endif %}</p>
+        <p class="teaser-foods" data-all='{{ all_json | escape }}' data-band="{{ key }}">{% for item in pick %}{% unless forloop.first %}, {% endunless %}<a class="food-link" href="{{ '/' | append: item.slug | append: '/' | relative_url }}" style="--food: {{ item.colour }}">{{ item.name }}</a>{% endfor %}{% if more > 0 %} <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#{{ key }}"><span class="arrow-text">and {{ more }} more</span>{% include icons/arrow-right.svg class="arrow" %}</a>{% endif %}</p>
       </section>
       {%- endif -%}
     {%- endfor -%}
-    <p class="this-week-more"><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span><span class="arrow" aria-hidden="true">→</span></a></p>
+    <p class="this-week-more"><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
   </div>
   {%- comment -%} What is typed, answered in the this-week blocks' place,
      filled by site.js: a count in a teaser label over the matches in
@@ -73,7 +73,7 @@ site.js adds the varieties from foods.json), the names it completes to
   <section class="results" id="results" aria-labelledby="results-label" hidden>
     <h2 class="teaser-label" id="results-label"></h2>
     <ul class="food-list" id="found"></ul>
-    <div class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <a class="arrow-link one-more"><span class="arrow-text"></span><span class="arrow" aria-hidden="true">→</span></a><span class="one-dial" aria-hidden="true"></span></div>
+    <div class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <a class="arrow-link one-more"><span class="arrow-text"></span>{% include icons/arrow-right.svg class="arrow" %}</a><span class="one-dial" aria-hidden="true"></span></div>
     <p class="also-line" id="also-line" hidden></p>
     <div class="results-none" id="hook-none" hidden>
       <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>

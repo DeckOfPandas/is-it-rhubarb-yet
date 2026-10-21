@@ -74,7 +74,7 @@ colour.
     <ul class="food-list">
       {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>
-    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still"><span class="arrow-text">and {{ also_more }} more</span><span class="arrow" aria-hidden="true">→</span></a></p>
+    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still"><span class="arrow-text">and {{ also_more }} more</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
   </section>
   {%- endif -%}
 
@@ -115,6 +115,6 @@ colour.
     <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
   </details>
 
-  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search"><span class="arrow-text">Ask about something else</span><span class="arrow" aria-hidden="true">→</span></a></p>
-  <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}"><span class="arrow-text">See the whole year</span><span class="arrow" aria-hidden="true">→</span></a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search"><span class="arrow-text">Ask about something else</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}"><span class="arrow-text">See the whole year</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
 </article>
