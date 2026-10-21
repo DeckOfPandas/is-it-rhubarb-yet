@@ -2145,7 +2145,7 @@
   colour: "#229271"
   text_on_custard: "#007d5f"
   sources: [northumberland, bnfs, ffs, seafish]
-  note: "Cornish cod is at its best from July to October and poor in November and December, which is not what the fish counter will tell you."
+  note: "Cornish cod is at its best from March to May and again in September and October."
   notes:
     - "Fishmongers' rings follow Helen's decision to go with the fishmongers; Good Food's February-April peak (spawning) dropped."
   buy: "Good Fish Guide: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2); trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
@@ -3488,7 +3488,7 @@
         - [1, 13, in]
         - [44, 52, in]
     - name: "Muntjac"
-      said: "Muntjac"
+      said: "Muntjac deer"
       colour: "#895277"
       text_on_shed: "#a56c92"
       sources: [basc]

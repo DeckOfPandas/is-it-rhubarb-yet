@@ -133,7 +133,7 @@ UNSOLD = {"wild-salmon": "It cannot be sold in England, Wales or Scotland"}
 # How a new variety is said in full, where its name then the food's reads
 # badly ("Hogget lamb", "Muntjac venison").
 SAID = {("lamb", "Hogget"): "Hogget", ("venison", "Red & fallow"): "Red & fallow deer", ("venison", "Roe"): "Roe deer",
-        ("venison", "Chinese water deer"): "Chinese water deer", ("venison", "Muntjac"): "Muntjac"}
+        ("venison", "Chinese water deer"): "Chinese water deer", ("venison", "Muntjac"): "Muntjac deer"}
 # Helen's variety names the bundle renames or replaces: (slug, old) -> new, or None to drop.
 RENAMED = {("pears", "Comice"): "Comice & Concorde", ("lamb", "New season"): "New-season",
            ("venison", "Red & Fallow"): "Red & fallow", ("venison", "Roe & Muntjac"): None}
