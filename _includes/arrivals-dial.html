@@ -9,7 +9,7 @@ three, six and nine months carry their own labels, and a light arrow
 runs out from the month ring past the last ring to the words "season
 length", so the chart needs no key. Read clockwise from the hand for
 what comes next. Foods in season all year have no beginning and are
-listed in the hole.
+listed under the wheel, "All year:", each a link in its own colour.
 
 A season "begins" at the first in-season week not joined to an in-season
 week before it (the year end counts as adjacent), so a season that wraps
@@ -75,7 +75,7 @@ opacity), dot (dot radius), arcs (false draws dots only).
       {%- if vlen > length -%}{%- assign length = vlen -%}{%- endif -%}
     {%- endfor -%}
     {%- if start == 99 -%}
-      {%- assign allyear = allyear | push: food.name -%}
+      {%- assign allyear = allyear | push: food -%}
     {%- else -%}
       {%- assign m = 0 -%}
       {%- for ms in month_starts -%}{%- assign msn = ms | plus: 0 -%}{%- if start >= msn -%}{%- assign m = forloop.index0 -%}{%- endif -%}{%- endfor -%}
@@ -204,5 +204,6 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
   </g>
 </svg>
 {%- if allyear.size > 0 -%}
-<figcaption class="allyear"><span class="head">All year:</span> {{ allyear | join: ", " }}.</figcaption>
+{%- comment -%} The foods in season all year, each a link in its own colour, as "Also:" lists them. {%- endcomment -%}
+<figcaption class="allyear"><span class="head">All year:</span> {% for f in allyear %}<a class="food-link" href="{{ '/' | append: f.slug | append: '/' | relative_url }}" style="--food: {{ f.colour }}">{{ f.name }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}.</figcaption>
 {%- endif -%}

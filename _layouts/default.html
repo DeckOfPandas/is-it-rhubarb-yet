@@ -77,13 +77,23 @@ Now have cards of their own; every other page shows the home card.
   {%- comment -%} The nav and the magnifier sit at the right of every page,
      home included, so nothing moves between pages. On home the hero
      question is the logo, so the header has no wordmark; elsewhere the
-     wordmark is on the left. The header sticks to the top of every page.
-     The magnifier goes to home's input, focused. {%- endcomment -%}
+     wordmark is on the left, and it is the search, as the hero is: its
+     RHUBARB is the input's placeholder, and a click anywhere on it puts
+     the caret there. Without JavaScript it is a form that asks home. The
+     header sticks to the top of every page. The magnifier goes to the
+     wordmark's input (on home, to the hero's). {%- endcomment -%}
   <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
       {%- if page.url != '/' -%}
-      {%- comment -%} The logo: RHUBARB in rhubarb's pink, underlined in it. {%- endcomment -%}
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Is it rhubarb yet? Home">Is it <span class="brand-rhubarb">rhubarb</span> yet?</a>
+      <form class="brand head-search" role="search" method="get" action="{{ '/' | relative_url }}">
+        <label class="brand-line" for="head-input">
+          <span class="hook-word">Is it</span>
+          <span class="hook-slot"><input class="hook-input" id="head-input" name="q" type="search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
+            enterkeyhint="go" placeholder="rhubarb" aria-label="Search foods" aria-autocomplete="both" size="7"></span>
+          <span class="hook-word">yet?</span>
+        </label>
+        <button type="submit" class="visually-hidden">Search</button>
+      </form>
       {%- endif -%}
       <nav class="site-nav" aria-label="Site">
         <a href="{{ '/now/' | relative_url }}"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>

@@ -353,14 +353,14 @@
     return mid && !v.cultivar ? s.charAt(0).toLowerCase() + s.slice(1) : s;
   }
 
-  // The variety line for a food with more than one variety: the variety
-  // that gave the verdict, then the others in a phrase each.
-  // "Maincrop potatoes, yes. New potatoes: first ones in May, properly in
-  // June."
+  // The variety line for a food with more than one variety, one pattern
+  // throughout: the variety that gave the verdict, then the others, each
+  // "Name: phrase." "Maincrop potatoes: yes. New potatoes: first ones in
+  // May, properly in June."
   function varietyLine(food, fv, year, today) {
     if (!fv.variety || food.varieties.length < 2) return "";
     var others = fv.varieties.filter(function (r) { return r !== fv.variety; });
-    var head = varietySaid(food, fv.variety.v) + ", " + fv.verdict.toLowerCase() + ".";
+    var head = varietySaid(food, fv.variety.v) + ": " + fv.verdict.toLowerCase() + ".";
     var rest = others.map(function (r) {
       var s = phrase(r, year, today);
       return varietySaid(food, r.v) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".";

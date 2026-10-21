@@ -3,9 +3,11 @@ layout: null
 permalink: /search.json
 ---
 {%- comment -%}
-What the not-found page's suggestions match against: every food and never-food
-with its name, the names its varieties are said by, its aliases, the
-broader words it also answers to, and the baked verdict for the build day.
+What the not-found page's suggestions and the header's search match
+against: every food and never-food with its name, the names its varieties
+are said by, its aliases, the broader words it also answers to (terms),
+the names a typed word completes to besides its own (names: its
+aliases), and the baked verdict for the build day.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 [
@@ -22,11 +24,11 @@ broader words it also answers to, and the baked verdict for the build day.
   {%- endfor -%}
   {%- for a in food.aliases -%}{%- assign terms = terms | push: a -%}{%- endfor -%}
   {%- for a in food.also -%}{%- assign terms = terms | push: a -%}{%- endfor -%}
-  {"slug": {{ food.slug | jsonify }}, "name": {{ food.name | jsonify }}, "colour": {{ food.colour | jsonify }}, "verdict": {{ b.verdict | jsonify }}, "terms": {{ terms | jsonify }}},
+  {"slug": {{ food.slug | jsonify }}, "name": {{ food.name | jsonify }}, "colour": {{ food.colour | jsonify }}, "verdict": {{ b.verdict | jsonify }}, "terms": {{ terms | jsonify }}, "names": {{ food.aliases | jsonify }}},
 {%- endfor -%}
 {%- for n in site.data.never -%}
   {%- assign terms = "" | split: "" | push: n.name -%}
   {%- for a in n.aliases -%}{%- assign terms = terms | push: a -%}{%- endfor -%}
-  {"slug": {{ n.slug | jsonify }}, "name": {{ n.name | jsonify }}, "colour": null, "verdict": "NEVER", "never": true, "terms": {{ terms | jsonify }}}{% unless forloop.last %},{% endunless %}
+  {"slug": {{ n.slug | jsonify }}, "name": {{ n.name | jsonify }}, "colour": null, "verdict": "NEVER", "never": true, "terms": {{ terms | jsonify }}, "names": {{ n.aliases | jsonify }}}{% unless forloop.last %},{% endunless %}
 {%- endfor -%}
 ]

@@ -83,7 +83,7 @@ test("rhubarb is NEARLY: forced rhubarb from 29 October, eleven days off", () =>
   assert.equal(fv.variety.name, "Forced");
   assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "In a week or two.");
-  assert.equal(V.varietyLine(bySlug.rhubarb, fv, YEAR, TODAY), "Forced rhubarb, nearly. Outdoor rhubarb: back in May.",
+  assert.equal(V.varietyLine(bySlug.rhubarb, fv, YEAR, TODAY), "Forced rhubarb: nearly. Outdoor rhubarb: back in May.",
     "outdoor rhubarb's week 18 starts on 30 April, but its middle is 3 May");
 });
 
@@ -103,7 +103,7 @@ test("potatoes are YES by maincrop until late December; new potatoes are back in
   assert.equal(fv.variety.name, "Maincrop");
   assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-12-31");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Until late December.");
-  assert.equal(V.varietyLine(bySlug.potatoes, fv, YEAR, TODAY), "Maincrop potatoes, yes. New potatoes: first ones in May, properly in June.");
+  assert.equal(V.varietyLine(bySlug.potatoes, fv, YEAR, TODAY), "Maincrop potatoes: yes. New potatoes: first ones in May, properly in June.");
 });
 
 test("a variety is named as a type or a cultivar, in a list and in a sentence", () => {

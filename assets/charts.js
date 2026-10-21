@@ -41,17 +41,14 @@
   // over seven. `at` is a step's index, or null for today itself, which
   // falls between steps and is where the line starts. A step is said
   // "mid-January" (mid always hyphenated), "early January", "late
-  // January"; its third of the month is the 1st to the 10th, the 11th to
-  // the 20th, or the 21st to the month's end.
+  // January".
   var PARTS = ["early", "mid", "late"], DAYS = [5, 15, 25];
   var STEPS = [];
   MONTHS.forEach(function (m, mi) {
     PARTS.forEach(function (p, pi) {
-      var last = new Date(YEAR, mi + 1, 0).getDate();
       STEPS.push({
         key: p + "-" + m.toLowerCase(),
         phrase: (p === "mid" ? "mid-" : p + " ") + m,
-        range: [1, 11, 21][pi] + "–" + [10, 20, last][pi] + " " + m,
         date: new Date(YEAR, mi, DAYS[pi])
       });
     });
@@ -164,17 +161,58 @@
       var handle = makeHandle(el("div", "tt-handle"));
       rail.appendChild(handle);
       head.insertBefore(rail, head.firstChild);
+      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail,
+        x0: x0, cw: cw, cw0: cw, items: items, steps: steps, lines: lines, tick: tick, handle: handle, x: x0,
+        hits: cells.querySelectorAll(".row-hit"), monthLabels: months.querySelectorAll(".month-label") };
       rail.addEventListener("click", function (e) {
         if (e.target !== rail) return;
         stopPlay();
-        setAt(nearest(Finv((e.clientX - months.getBoundingClientRect().left) / cw)));
+        setAt(nearest(Finv((e.clientX - months.getBoundingClientRect().left) / c.cw)));
       });
-      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail,
-        x0: x0, cw: cw, items: items, steps: steps, lines: lines, tick: tick, handle: handle, x: x0 };
       cal.querySelector(".chart-body").addEventListener("scroll", function () { placeHandle(c); }, { passive: true });
       cals.push(c);
     });
-    window.addEventListener("resize", function () { cals.forEach(placeHandle); });
+    window.addEventListener("resize", function () { if (fitWeeks()) cals.forEach(layoutCal); else cals.forEach(placeHandle); });
+  }
+  // The weeks fill the chart's width: on a wide screen, and on a phone
+  // while magnified, a week is as wide as the room the names column
+  // leaves, over 52; on a phone otherwise it is the drawn 14px, and the
+  // chart scrolls. Words keep their size: only places along the year
+  // change. True when a week's width changed, so the chart needs laying
+  // out again.
+  function fitWeeks() {
+    var room = 0;
+    cals.forEach(function (c) { var w = c.cal.parentElement.getBoundingClientRect().width; if (w) room = w; });
+    if (!room) return false;
+    var changed = false;
+    cals.forEach(function (c) {
+      var col = +c.labels.getAttribute("width");
+      // Scrolling, the weeks keep the drawn 8px after December; filling,
+      // only the 1px the last month line needs, so they end on the edge.
+      var scroll = narrow.matches && !state.zoom, tail = scroll ? 8 : 1;
+      var cw = scroll ? c.cw0 : Math.max(1, (room - col - tail) / 52);
+      if (Math.abs(cw - c.cw) < 0.01 && c.fitted) return;
+      c.cw = cw; c.fitted = true; changed = true;
+      var w = (52 * cw + tail).toFixed(2);
+      [c.months, c.cells].forEach(function (svg) {
+        var vb = svg.getAttribute("viewBox").split(" ");
+        vb[2] = w;
+        svg.setAttribute("viewBox", vb.join(" "));
+        svg.setAttribute("width", w);
+      });
+      c.hits.forEach(function (r) { r.setAttribute("width", w); });
+      c.cal.style.setProperty("--cal-w", (col + +w) + "px");
+    });
+    return changed;
+  }
+  // A month name the scrolled weeks have pushed part way under the names
+  // column, or past the chart's right edge, is hidden rather than cut.
+  function cutMonths(c) {
+    var head = c.head.getBoundingClientRect(), from = head.left + c.labels.getBoundingClientRect().width;
+    c.monthLabels.forEach(function (t) {
+      var r = t.getBoundingClientRect();
+      t.classList.toggle("is-cut", !!r.width && (r.left < from - 0.5 || r.right > head.right + 0.5));
+    });
   }
   function layoutCal(c) {
     function X(t) { return c.x0 + F(t) * c.cw; }
@@ -203,6 +241,8 @@
     c.lines.forEach(function (g) { g.style.transform = "translateX(" + x.toFixed(2) + "px)"; });
     var now = X(NOW_T).toFixed(2);
     c.tick.setAttribute("x1", now); c.tick.setAttribute("x2", now);
+    // On today itself the line is the mark; the tick waits under it.
+    c.tick.style.display = state.at === null ? "none" : "";
     // The chart on show scrolls, if it must, to keep the line in view.
     // A place in the weeks' SVG is x0 less than its place in the scrolled
     // row, after the names column.
@@ -226,16 +266,19 @@
     var screen = rail.left + c.x - c.x0 + c.labels.getBoundingClientRect().width - hw / 2;
     screen = Math.max(lo, Math.min(screen, hi));
     c.handle.style.transform = "translateX(" + (screen - rail.left).toFixed(2) + "px)";
+    cutMonths(c);
   }
   function calTime(c, clientX) {
     return Finv((clientX - c.months.getBoundingClientRect().left) / c.cw);
   }
   // On a phone the names are the small size, a row's short name where it
-  // has one, and their column is exactly as wide as the longest name and
-  // 8px: the labels' viewBox starts that far left of the weeks, and the
-  // corner over them matches. Wider, the column is x0 as drawn. The
-  // charts share their rows, so the one on show is measured for all three.
-  var nameW = 0;
+  // has one, and their column is exactly as wide as the longest name, 16px
+  // from the screen's edge and 8px from the weeks: the labels' viewBox
+  // starts that far left of the weeks, and the corner over them matches.
+  // Wider, the column is x0 as drawn. The charts share their rows, so the
+  // one on show is measured for all three. The weeks are then fitted to
+  // what is left.
+  var nameW = 0, EDGE = 16;
   function fitNames() {
     if (!cals.length) return;
     if (narrow.matches) {
@@ -245,7 +288,7 @@
           if (t.getClientRects().length) widest = Math.max(widest, t.getBBox().width);
         });
       });
-      if (widest) nameW = Math.ceil(widest) + 8;
+      if (widest) nameW = EDGE + Math.ceil(widest) + 8;
     }
     var w = narrow.matches && nameW ? nameW : 0;
     cals.forEach(function (c) {
@@ -256,9 +299,10 @@
       c.labels.setAttribute("width", col);
       c.cal.style.setProperty("--cal-x0", col + "px");
       c.cal.style.setProperty("--cal-w", (col + +c.cells.getAttribute("width")) + "px");
-      c.labels.querySelectorAll(".group-label").forEach(function (g) { g.setAttribute("x", c.x0 - col); });
-      placeHandle(c);
+      c.labels.querySelectorAll(".group-label").forEach(function (g) { g.setAttribute("x", c.x0 - col + (w ? EDGE : 0)); });
     });
+    fitWeeks();
+    cals.forEach(function (c) { if (c.ready) layoutCal(c); else placeHandle(c); });
   }
 
   // --- The wheel -----------------------------------------------------------------
@@ -281,8 +325,14 @@
       });
       var hand = svg.querySelector(".hand");
       if (hand) hand.style.display = "none";
+      // The season-length axis and its ring labels move above the arcs
+      // (under the food names), so their halo keeps every arc out of them.
+      var firstLabel = svg.querySelector("a.label");
+      svg.querySelectorAll(".guide-axis, .guide-label").forEach(function (n) { svg.insertBefore(n, firstLabel); });
+      // Under the month names, which wear a halo in the ring's colour, so
+      // the tick never cuts a name.
       var tick = svgEl("line", "tt-today", { x1: C, x2: C, y1: C - RING - 10, y2: C - RING + 10, "aria-hidden": "true" });
-      svg.appendChild(tick);
+      svg.insertBefore(tick, svg.querySelector(".month"));
       var line = svgEl("g", "tt-line", { "aria-hidden": "true" });
       line.appendChild(svgEl("line", "tt-halo", { x1: C, x2: C, y1: C - RING - 12, y2: C - RIM }));
       line.appendChild(svgEl("line", "tt-stroke", { x1: C, x2: C, y1: C - RING - 12, y2: C - RIM }));
@@ -399,16 +449,28 @@
     if (url.href !== location.href) history.replaceState(history.state, "", url);
   }
   // What is in season (YES or JUST) at the line's time, by slug, and how
-  // many: for the floating button and the wheels. Null until foods.json
-  // is in.
+  // many of the foods shown: every food, or on a kind's wheel that kind's.
+  // For the floating button, the list and the wheels. Null until
+  // foods.json is in.
   var inSeason = null, inSeasonCount = 0;
+  var kindOfGroup = {};
+  groups.forEach(function (g) { kindOfGroup[g.key] = g.kind; });
+  function kindShown() {
+    var r = document.querySelector('input[name="kind"]:checked');
+    return WHEEL && r ? r.value : "all";
+  }
+  function shownFoods() {
+    var kind = kindShown();
+    return kind === "all" ? foods : foods.filter(function (f) { return kindOfGroup[f.group] === kind; });
+  }
   function countInSeason() {
     if (!foods) return;
-    var week = V.weekOf(dateOf(state.at));
+    var week = V.weekOf(dateOf(state.at)), shown = {};
+    shownFoods().forEach(function (f) { shown[f.slug] = true; });
     inSeason = {}; inSeasonCount = 0;
     foods.forEach(function (f) {
       var v = V.foodVerdict(f, week).verdict;
-      if (v === "YES" || v === "JUST") { inSeason[f.slug] = true; inSeasonCount++; }
+      if (v === "YES" || v === "JUST") { inSeason[f.slug] = true; if (shown[f.slug]) inSeasonCount++; }
     });
   }
   function draw() {
@@ -427,6 +489,7 @@
     var when = state.at === null ? "this week" : "in " + STEPS[state.at].phrase;
     jump.querySelector(".tt-jump-text").textContent = inSeasonCount + " in season " + when;
     jump.setAttribute("aria-label", inSeasonCount + " in season " + when + ". Go to the list");
+    fitWeeks();
     cals.forEach(layoutCal);
     dials.forEach(layoutDial);
     if (pop) fillPop();
@@ -441,22 +504,25 @@
   // not, and not while a docked popover holds the foot of the screen.
   // Pressed, it scrolls to the list's heading (at once with reduced
   // motion) and gives it focus. It waits for foods.json, for its count.
-  var jump = el("button", "tt-jump caps");
+  // Both pills' arrows are the site's arrow mark, turned down or up; on
+  // the wheel's page, from 820px, the pills sit at the bottom right,
+  // clear of the wheel's 6 o'clock.
+  var jump = el("button", "tt-jump caps" + (WHEEL ? " on-wheel" : ""));
   jump.type = "button";
   jump.hidden = true;
   jump.appendChild(el("span", "tt-jump-text"));
-  jump.appendChild(el("span", "tt-jump-arrow", " ↓")).setAttribute("aria-hidden", "true");
+  jump.appendChild(S.arrowMark()).classList.add("is-down");
   jump.addEventListener("click", toList);
   var chartSeen = false, headSeen = false, headWatch = null;
   // Back to top, the same pill with "Back to top ↑", in the same place
   // once the chart is wholly above the screen, down in the list. Pressed,
   // it goes to the top of the page (at once with reduced motion) and
   // gives the page's title focus.
-  var up = el("button", "tt-jump tt-up caps");
+  var up = el("button", "tt-jump tt-up caps" + (WHEEL ? " on-wheel" : ""));
   up.type = "button";
   up.hidden = true;
   up.appendChild(el("span", "tt-jump-text", "Back to top"));
-  up.appendChild(el("span", "tt-jump-arrow", " ↑")).setAttribute("aria-hidden", "true");
+  up.appendChild(S.arrowMark()).classList.add("is-up");
   up.addEventListener("click", function () {
     var title = document.querySelector("main h1");
     window.scrollTo({ top: 0, behavior: still.matches ? "auto" : "smooth" });
@@ -574,7 +640,7 @@
     var now = partsOf(t);
     now.box.classList.add("is-lit");
     now.parts.forEach(function (p) { p.classList.add("is-hot"); });
-    if (WHEEL && !t.contains(document.activeElement)) t.parentNode.insertBefore(t, t.parentNode.querySelector(".tt-today"));
+    if (WHEEL && !t.contains(document.activeElement)) t.parentNode.insertBefore(t, t.parentNode.querySelector(".tt-line"));
   }
   root.addEventListener("pointerover", function (e) { if (!pinned) { var t = targetOf(e.target); if (t) light(t); } });
   root.addEventListener("pointerout", function (e) {
@@ -721,13 +787,15 @@
 
   // --- The list under the chart -------------------------------------------------------------
   // Now's own header and bands for the line's time. At today, Now itself:
-  // "In season this week" over the week's days. At another time, "In
-  // season in mid-December" over that third of the month, "11–20
-  // December", with Great for Great this week. The ‹ › either side of the
-  // days step the line early, mid, late. The header is made once, so a
-  // stepper keeps its focus; only its words change.
+  // "In season this week". At another time, "In season in mid-December".
+  // Under the title, the days of the data week the line is in, "13–19
+  // January", between ‹ and ›, which step the line early, mid, late. The
+  // header is made once, so a stepper keeps its focus; only its words
+  // change. On a kind's wheel the bands are that kind's foods, and end
+  // with a way to every food at the same time: the All wheel, which the
+  // page opens on, at the same ?when=.
   var listBox = document.getElementById("tt-list");
-  var listTitle, listDates, listBands;
+  var listTitle, listDates, listBands, listAll;
   function makeList() {
     var head = el("header", "page-head now-head tt-list-head");
     listTitle = el("h2", "tt-list-title");
@@ -746,6 +814,8 @@
     listBox.appendChild(head);
     listBands = el("div", "digest");
     listBox.appendChild(listBands);
+    listAll = el("p", "tt-list-all");
+    listBox.appendChild(listAll);
     if (headWatch) headWatch.observe(listTitle);
   }
   function list() {
@@ -753,8 +823,14 @@
     if (!listTitle) makeList();
     var when = dateOf(state.at), week = V.weekOf(when);
     listTitle.textContent = "In season " + (state.at === null ? "this week" : "in " + STEPS[state.at].phrase);
-    listDates.textContent = state.at === null ? V.fmtRange(week, when.getFullYear()) : STEPS[state.at].range;
-    S.fillDigest(listBands, V.nowLists(foods, groups, week, when.getFullYear(), when), state.at === null);
+    listDates.textContent = V.fmtRange(week, when.getFullYear());
+    S.fillDigest(listBands, V.nowLists(shownFoods(), groups, week, when.getFullYear(), when));
+    listAll.textContent = "";
+    listAll.hidden = kindShown() === "all";
+    if (!listAll.hidden) {
+      listAll.appendChild(S.arrowLink(S.BASE + "wheel/" + (state.at === null ? "" : "?when=" + STEPS[state.at].key),
+        "Everything " + (state.at === null ? "this week" : "in " + STEPS[state.at].phrase)));
+    }
     listBox.hidden = false;
   }
 

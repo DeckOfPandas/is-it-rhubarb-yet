@@ -24,8 +24,8 @@ the baked week shows, dated.
     <button type="button" class="week-step" id="prev-week" aria-label="Previous week" hidden>‹</button>
     <span id="week-dates">{{ baked.range }}</span>
     <button type="button" class="week-step" id="next-week" aria-label="Next week" hidden>›</button>
+    <a class="arrow-link week-back" id="week-back" href="{{ '/now/' | relative_url }}" hidden><span class="arrow-text">Back to this week</span>{% include icons/arrow-right.svg class="arrow" %}</a>
   </p>
-  <p class="week-back" id="week-back" hidden><a href="{{ '/now/' | relative_url }}">Back to this week</a></p>
 </header>
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">

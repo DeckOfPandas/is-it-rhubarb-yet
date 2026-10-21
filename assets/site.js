@@ -273,14 +273,17 @@
       var width = word.getBoundingClientRect().width;
       if (!width || !avail) return;
       var size = parseFloat(getComputedStyle(word).fontSize) * (avail / width);
-      size = Math.max(MIN_VERDICT, Math.min(size, avail * 0.9));
+      size = Math.min(size, avail * 0.9);
       word.style.fontSize = size + "px";
       if (!dateLine) return;
+      // Fitting the width always wins: MIN_VERDICT only stops the shrink
+      // for the date line, so LITERALLY NO IDEA. still fits a phone.
+      var floor = Math.min(MIN_VERDICT, size);
       for (var i = 0; i < 3; i++) {
         var over = dateLine.getBoundingClientRect().bottom + window.scrollY - (window.innerHeight - 16);
-        if (over <= 1 || size <= MIN_VERDICT) break;
+        if (over <= 1 || size <= floor) break;
         var tall = word.getBoundingClientRect().height;
-        size = Math.max(MIN_VERDICT, size * (1 - over / tall));
+        size = Math.max(floor, size * (1 - over / tall));
         word.style.fontSize = size + "px";
       }
     }
@@ -297,9 +300,11 @@
   // in. Every food's name counts, even one the ALL wheel has hidden for
   // now, since it may show later; and on the wheel page, where charts.js
   // runs a time line out to the rim (data-rim), so does room for its knob
-  // and the longest time beside it, EARLY SEPTEMBER, at any angle. A
-  // hidden wheel has no box to measure, so the kind switch fits the one
-  // it shows.
+  // and the longest time beside it, EARLY SEPTEMBER, at any angle; the
+  // line and knob themselves are left out of the measure, wherever they
+  // are. A hidden wheel has no box to measure, so the kind switch fits
+  // the one it shows, and a resize fits the one on show again. The room
+  // left over the drawing is --dial-inset on the figure, in pixels.
   var LONGEST_TIME = "Early September";
   function fitDials() {
     var svgs = document.querySelectorAll("figure.dial > svg");
@@ -307,9 +312,12 @@
     function fit(svg) {
       if (svg.dataset.fitted || !svg.getClientRects().length) return;
       var hidden = Array.prototype.filter.call(svg.querySelectorAll("a.label text"), function (t) { return t.style.display === "none"; });
+      var moving = Array.prototype.filter.call(svg.querySelectorAll(".tt-line, .tt-knob, .tt-today"), function (t) { return t.style.display !== "none"; });
       hidden.forEach(function (t) { t.style.display = ""; });
+      moving.forEach(function (t) { t.style.display = "none"; });
       var b = svg.getBBox();
       hidden.forEach(function (t) { t.style.display = "none"; });
+      moving.forEach(function (t) { t.style.display = ""; });
       if (!b.width) return;
       var x0 = b.x, y0 = b.y, x1 = b.x + b.width, y1 = b.y + b.height;
       if (svg.dataset.rim && svg.closest("[data-tt]")) {
@@ -329,12 +337,18 @@
       var m = Math.max(0, 8 - r.left, 8 - (document.documentElement.clientWidth - r.right));
       var pad = Math.max(6, m * W / (S - 2 * m));
       svg.setAttribute("viewBox", [x0 - pad, y0 - pad, W + 2 * pad, y1 - y0 + 2 * pad].join(" "));
+      svg.parentElement.style.setProperty("--dial-inset", ((b.y - (y0 - pad)) * S / (W + 2 * pad)).toFixed(1) + "px");
       svg.dataset.fitted = "1";
     }
     function all() { svgs.forEach(fit); }
     var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     ready.then(all);
     document.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener("change", all); });
+    var timer = null;
+    window.addEventListener("resize", function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { svgs.forEach(function (s) { delete s.dataset.fitted; }); all(); }, 120);
+    });
   }
 
   // --- Calendar and mini charts: the "today" line --------------------------
@@ -577,6 +591,208 @@
     });
   }
 
+  // --- The hook field: home's hero and every other page's wordmark ----------
+  // One input set in a line of Anton, "Is it [rhubarb] yet?". A hidden
+  // span in the same font measures the value, or the placeholder when
+  // there is none. On one line the input is as wide as its word and any
+  // completion, up to the room "Is it" and "yet?" leave; when the hero
+  // stacks on a phone (opts.stacked), the input is the full width. Either
+  // way a word too long for its room is set smaller until it fits, the
+  // completion counted, so accepting it does not make the word jump. The
+  // underline is the typed word's width. While the input is empty the
+  // real caret is hidden and a drawn one stands in: just after RHUBARB at
+  // rest, and at the start of the field once it has focus, where the
+  // first letter will go. The input is a little wider than its word, room
+  // for the real caret after the last letter, so the word sits a normal
+  // space from "Is it" and from "yet?". Its width is set in em, so it
+  // scales with the type wherever the type is resized without this
+  // script, as in print.
+  // Ghost completion: when the lead's name, or one of its aliases, begins
+  // with what is typed, the rest of it shows after the typed text, faded
+  // in its colour. None when the text is already a whole name, while an
+  // input method is composing, or after Escape until the next keystroke.
+  // Folding can change a name's length ("&" is "and"), so the typed part
+  // of the name is the shortest slice that folds to the typed text, and
+  // the space after it too when the typed text ends in one. Tab, End, or →
+  // with the caret at the end accept it, as does a tap on the faded part.
+  // The typed word and its underline take the lead's colour; with no lead
+  // they stay ink over the pink. update(lead) redraws all of it for the
+  // best match, or null; opts.onChange runs on every edit.
+  function hookField(input, opts) {
+    var slot = input.parentElement;
+    var ruler = el("span", "hook-ruler");
+    var underline = el("span", "hook-underline");
+    var caret = el("span", "hook-caret");
+    // The completion lies over the input in the same type: the typed part
+    // is transparent, so the input's own text and caret show through, and
+    // the rest is faded in the food's colour.
+    var layer = el("span", "hook-ghost");
+    var layerTyped = el("span", "ghost-typed"), layerRest = el("span", "ghost-rest");
+    layer.appendChild(layerTyped); layer.appendChild(layerRest);
+    layer.hidden = true;
+    [ruler, underline, caret, layer].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
+    var line = input.closest(".hook-line, .brand-line");
+    var CARET_ROOM = 0.05;
+    var lead = null, ghost = "", ghostFull = "", composing = false, dismissed = false;
+    var WORDY = /[\p{L}\p{N}]/u;
+    function size() {
+      ruler.textContent = input.value || input.placeholder;
+      slot.classList.toggle("has-value", !!input.value);
+      var text = ruler.getBoundingClientRect().width;
+      if (!text) return;
+      var full = text;
+      if (ghost) { ruler.textContent = input.value + ghost; full = ruler.getBoundingClientRect().width; }
+      input.style.fontSize = "";
+      var em = parseFloat(getComputedStyle(input).fontSize);
+      var w = full + CARET_ROOM * em;
+      var room, stacked = opts.stacked();
+      if (stacked) {
+        input.style.width = "";
+        room = input.clientWidth;
+      } else {
+        var gap = parseFloat(getComputedStyle(line).columnGap) || 0;
+        room = line.clientWidth - 2 * gap - 8;
+        line.querySelectorAll(".hook-word").forEach(function (word) { room -= word.getBoundingClientRect().width; });
+      }
+      var scale = w > room ? room / w : 1;
+      if (scale < 1) input.style.fontSize = (em * scale) + "px";
+      if (!stacked) input.style.width = (Math.min(w, room) / (em * scale)).toFixed(3) + "em";
+      underline.style.width = (text * scale / em).toFixed(3) + "em";
+      caret.style.left = document.activeElement === input ? "0" : (text * scale / em).toFixed(3) + "em";
+      layer.style.fontSize = input.style.fontSize;
+      layer.style.top = (input.offsetTop + input.clientTop) + "px";
+      layer.style.height = input.clientHeight + "px";
+    }
+    function complete() {
+      ghost = ghostFull = "";
+      var typed = input.value, q = fold(typed);
+      if (q && !composing && !dismissed && lead) {
+        var names = lead.names;
+        if (!names.some(function (s) { return fold(s) === q; })) {
+          for (var i = 0; i < names.length && !ghostFull; i++) {
+            var s = names[i];
+            if (fold(s).indexOf(q) !== 0) continue;
+            var k = 1;
+            while (k <= s.length && fold(s.slice(0, k)) !== q) k++;
+            if (k > s.length) continue;
+            if (!WORDY.test(typed.slice(-1))) while (k < s.length && !WORDY.test(s.charAt(k))) k++;
+            ghost = s.slice(k); ghostFull = s;
+          }
+        }
+      }
+      layerTyped.textContent = input.value;
+      layerRest.textContent = ghost;
+      layer.hidden = !ghost;
+      if (ghost) layer.style.setProperty("--ghost", lead.colour());
+    }
+    function colour() {
+      input.classList.toggle("is-food", !!lead);
+      if (lead) slot.style.setProperty("--food", lead.colour());
+    }
+    function update(l) { lead = l; complete(); size(); colour(); }
+    function accept() {
+      input.value = ghostFull;
+      input.setSelectionRange(ghostFull.length, ghostFull.length);
+      opts.onChange();
+    }
+    layerRest.addEventListener("pointerdown", function (e) { e.preventDefault(); if (ghost) accept(); });
+    input.addEventListener("compositionstart", function () { composing = true; complete(); size(); });
+    input.addEventListener("compositionend", function () { composing = false; opts.onChange(); });
+    input.addEventListener("input", function () { dismissed = false; opts.onChange(); });
+    // Accepting or dismissing a completion is the field's; anything else
+    // the page's own handler may take, unless this one did.
+    input.addEventListener("keydown", function (e) {
+      var atEnd = input.selectionStart === input.value.length && input.selectionEnd === input.value.length;
+      if (ghost && !e.isComposing && ((e.key === "Tab" && !e.shiftKey) || e.key === "End" || (e.key === "ArrowRight" && atEnd))) {
+        e.preventDefault();
+        accept();
+      } else if (e.key === "Escape" && ghost) {
+        e.preventDefault();
+        dismissed = true;
+        complete();
+        size();
+      }
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
+    window.addEventListener("resize", size);
+    input.addEventListener("focus", size);
+    input.addEventListener("blur", size);
+    return { update: update, size: size };
+  }
+
+  // --- The header's search: the wordmark on every page but home -------------
+  // The same field as home's hero, matched against search.json: a food's
+  // name, the names its varieties are said by, its aliases and shared
+  // words, one food per hit at its best tier. It never answers here; it
+  // asks home, /?q=…, which answers as it always does: as soon as typing
+  // pauses 0.6s on one good match (the one that colours the word), or
+  // 1.5s on two or more letters that find several foods or none; at once
+  // on Enter (a phone's Go), which with nothing typed goes to home as it
+  // is. Escape puts RHUBARB back and leaves the field. Leaving, its slot
+  // takes the hero's view-transition name, so the word flies into the
+  // hero, and on a wide screen home keeps typing where it left off.
+  var CARRY = "hook-carry";
+  function initHeadSearch() {
+    var input = document.getElementById("head-input");
+    if (!input) return;
+    var index = [], timer = null, lead = null, hits = [];
+    loadSearch().then(function (items) {
+      index = items.map(function (it) {
+        return {
+          slug: it.slug,
+          strings: it.terms.map(function (s) { return words(fold(s)); }),
+          names: [it.name].concat(it.names || []),
+          colour: function () { return it.never ? getComputedStyle(document.documentElement).getPropertyValue("--never").trim() : it.colour; },
+        };
+      });
+      change();
+    }).catch(function () {});
+    function search(text) {
+      var q = words(fold(text));
+      if (!q.length) return [];
+      return index.map(function (it) {
+        var t = 0;
+        it.strings.forEach(function (c) { var x = tierOf(c, q); if (x && (!t || x < t)) t = x; });
+        return { it: it, tier: t };
+      }).filter(function (h) { return h.tier; }).sort(function (a, b) { return a.tier - b.tier; });
+    }
+    var field = hookField(input, { stacked: function () { return false; }, onChange: change });
+    function go() {
+      clearTimeout(timer);
+      var q = input.value.trim();
+      input.parentElement.style.viewTransitionName = "search-word";
+      try { sessionStorage.setItem(CARRY, "1"); } catch (e) {}
+      location.href = BASE + (q ? "?q=" + encodeURIComponent(input.value) : "");
+    }
+    function change() {
+      clearTimeout(timer);
+      var q = input.value.trim();
+      hits = search(q);
+      lead = hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier) ? hits[0].it : null;
+      field.update(lead);
+      if (lead) timer = setTimeout(go, 600);
+      else if (fold(q).replace(/ /g, "").length >= 2) timer = setTimeout(go, 1500);
+    }
+    input.form.addEventListener("submit", function (e) { e.preventDefault(); go(); });
+    // One Escape does it all, a completion showing or not.
+    input.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      e.preventDefault();
+      clearTimeout(timer);
+      input.value = "";
+      field.update(null);
+      input.blur();
+    });
+    // Only typing goes: leaving the field stops a pending search.
+    input.addEventListener("blur", function () { clearTimeout(timer); });
+    document.querySelectorAll(".search-link").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        input.focus();
+      });
+    });
+  }
+
   // --- Home: the hook ---------------------------------------------------------
   function initHome() {
     var input = document.getElementById("hook-input");
@@ -669,126 +885,16 @@
     // The links Up and Down move the highlight through, in rank order,
     // and which is lit.
     var picks = [], active = -1;
-
-    // A hidden span in the same font measures the value, or the placeholder
-    // when there is none. On one line the input is as wide as its word and
-    // any completion, up to the room "Is it" and "yet?" leave; when the
-    // question stacks, the input is the full width. Either way a word too
-    // long for its room is set smaller until it fits, the completion
-    // counted, so accepting it does not make the word jump. The underline
-    // is the typed word's width. While the input is empty the real caret
-    // is hidden and a drawn one stands in: just after RHUBARB at rest,
-    // and at the start of the field once it has focus, where the first
-    // letter will go. The input is a little
-    // wider than its word, room for the real caret after the last letter,
-    // so the word sits a normal space from "Is it" and from "yet?". Its
-    // width is set in em, so it scales with the type wherever the type is
-    // resized without this script, as in print.
     var slot = input.parentElement;
-    var ruler = el("span", "hook-ruler");
-    var underline = el("span", "hook-underline");
-    var caret = el("span", "hook-caret");
-    // The completion lies over the input in the same type: the typed part
-    // is transparent, so the input's own text and caret show through, and
-    // the rest is faded in the food's colour.
-    var layer = el("span", "hook-ghost");
-    var layerTyped = el("span", "ghost-typed"), layerRest = el("span", "ghost-rest");
-    layer.appendChild(layerTyped); layer.appendChild(layerRest);
-    layer.hidden = true;
-    [ruler, underline, caret, layer].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
-    var line = input.closest(".hook-line");
     var stacked = matchMedia("(max-width: 37.49rem)");
-    var CARET_ROOM = 0.05;
-    function size() {
-      ruler.textContent = input.value || input.placeholder;
-      slot.classList.toggle("has-value", !!input.value);
-      var text = ruler.getBoundingClientRect().width;
-      if (!text) return;
-      var full = text;
-      if (ghost) { ruler.textContent = input.value + ghost; full = ruler.getBoundingClientRect().width; }
-      input.style.fontSize = "";
-      var em = parseFloat(getComputedStyle(input).fontSize);
-      var w = full + CARET_ROOM * em;
-      var room;
-      if (stacked.matches) {
-        input.style.width = "";
-        room = input.clientWidth;
-      } else {
-        var gap = parseFloat(getComputedStyle(line).columnGap) || 0;
-        room = line.clientWidth - 2 * gap - 8;
-        line.querySelectorAll(".hook-word").forEach(function (word) { room -= word.getBoundingClientRect().width; });
-      }
-      var scale = w > room ? room / w : 1;
-      if (scale < 1) input.style.fontSize = (em * scale) + "px";
-      if (!stacked.matches) input.style.width = (Math.min(w, room) / (em * scale)).toFixed(3) + "em";
-      underline.style.width = (text * scale / em).toFixed(3) + "em";
-      caret.style.left = document.activeElement === input ? "0" : (text * scale / em).toFixed(3) + "em";
-      layer.style.fontSize = input.style.fontSize;
-      layer.style.top = (input.offsetTop + input.clientTop) + "px";
-      layer.style.height = input.clientHeight + "px";
-    }
-
-    // Ghost completion: when the best match's name, or one of its aliases,
-    // begins with what is typed, the rest of it shows after the typed text.
-    // None when the text is already a whole name, while an input method
-    // is composing, or after Escape until the next keystroke. Folding can
-    // change a name's length ("&" is "and"), so the typed part of the name
-    // is the shortest slice that folds to the typed text, and the space
-    // after it too when the typed text ends in one.
-    var ghost = "", ghostFull = "", composing = false, dismissed = false;
-    var WORDY = /[\p{L}\p{N}]/u;
-    function complete() {
-      ghost = ghostFull = "";
-      var typed = input.value, q = fold(typed);
-      if (q && !composing && !dismissed && lead) {
-        var names = lead.names;
-        if (!names.some(function (s) { return fold(s) === q; })) {
-          for (var i = 0; i < names.length && !ghostFull; i++) {
-            var s = names[i];
-            if (fold(s).indexOf(q) !== 0) continue;
-            var k = 1;
-            while (k <= s.length && fold(s.slice(0, k)) !== q) k++;
-            if (k > s.length) continue;
-            if (!WORDY.test(typed.slice(-1))) while (k < s.length && !WORDY.test(s.charAt(k))) k++;
-            ghost = s.slice(k); ghostFull = s;
-          }
-        }
-      }
-      layerTyped.textContent = input.value;
-      layerRest.textContent = ghost;
-      layer.hidden = !ghost;
-      if (ghost) layer.style.setProperty("--ghost", lead.colour());
-    }
-    function accept() {
-      input.value = ghostFull;
-      input.setSelectionRange(ghostFull.length, ghostFull.length);
-      apply();
-    }
-    // A tap on the faded part accepts it; the input keeps its focus.
-    layerRest.addEventListener("pointerdown", function (e) { e.preventDefault(); if (ghost) accept(); });
-    input.addEventListener("compositionstart", function () { composing = true; complete(); size(); });
-    input.addEventListener("compositionend", function () { composing = false; apply(); });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
-    window.addEventListener("resize", size);
-    input.addEventListener("focus", size);
-    input.addEventListener("blur", size);
-
-    // The typed word and its underline take the lead's colour; with no
-    // lead, as when the text is only found inside words, they stay ink
-    // over the pink.
-    function colour() {
-      input.classList.toggle("is-food", !!lead);
-      if (lead) slot.style.setProperty("--food", lead.colour());
-    }
+    var field = hookField(input, { stacked: function () { return stacked.matches; }, onChange: apply });
 
     // The typed text is kept in the address as ?q=, so Back from a food
     // page, or a reload, comes back to the same answer.
     function apply() {
       var q = input.value.trim();
       filter(q);
-      complete();
-      size();
-      colour();
+      field.update(lead);
       var url = new URL(location.href);
       if (q) url.searchParams.set("q", input.value); else url.searchParams.delete("q");
       if (url.href !== location.href) history.replaceState(history.state, "", url);
@@ -897,13 +1003,14 @@
         markWheel(fig, TODAY);
       });
     }
-    // Going to the answer's page, the card's food name, verdict and dial
-    // are named for the view transition, so each moves into the food
-    // page's question, verdict and dial. The names go once this page is
-    // shown again, so no other link borrows them.
+    // Going to the answer's page, the hero's typed word (the card asks no
+    // question of its own here), the card's verdict and its dial are
+    // named for the view transition, so each moves into the food page's
+    // question, verdict and dial. The names go once this page is shown
+    // again, so no other link borrows them.
     var answered = null;
     function nameFor(on) {
-      one.querySelector(".ask-name").style.viewTransitionName = on ? "food-name" : "";
+      slot.style.viewTransitionName = on ? "food-name" : "";
       one.querySelector(".one-word").style.viewTransitionName = on ? "food-verdict" : "";
       dialBox.style.viewTransitionName = on && dialBox.firstChild ? "food-dial" : "";
     }
@@ -919,24 +1026,15 @@
       picks[i].scrollIntoView({ block: "nearest" });
     }
 
-    input.addEventListener("input", function () { dismissed = false; apply(); });
     // Up and Down move the highlight through the results, Enter opens the
-    // lit one (or the best match). Tab, End, or → with the caret at the
-    // end accept a completion; Tab with none showing moves focus as
-    // usual. Escape dismisses a completion, then clears the input.
+    // lit one (or the best match). The field accepts or dismisses a
+    // completion (Tab with none showing moves focus as usual); Escape
+    // with none showing clears the input.
     input.addEventListener("keydown", function (e) {
-      var atEnd = input.selectionStart === input.value.length && input.selectionEnd === input.value.length;
+      if (e.defaultPrevented) return;
       if ((e.key === "ArrowDown" || e.key === "ArrowUp") && picks.length) {
         e.preventDefault();
         light(Math.max(-1, Math.min(picks.length - 1, active + (e.key === "ArrowDown" ? 1 : -1))));
-      } else if (ghost && !e.isComposing && ((e.key === "Tab" && !e.shiftKey) || e.key === "End" || (e.key === "ArrowRight" && atEnd))) {
-        e.preventDefault();
-        accept();
-      } else if (e.key === "Escape" && ghost) {
-        e.preventDefault();
-        dismissed = true;
-        complete();
-        size();
       } else if (e.key === "Escape" && input.value) {
         e.preventDefault();
         input.value = "";
@@ -952,6 +1050,15 @@
     var q = new URL(location.href).searchParams.get("q");
     if (q) input.value = q;
     apply();
+    // Arriving from the header's search on a wide screen, the hero keeps
+    // the focus, the caret after the word, so typing carries on. A phone
+    // is left alone: focus there would open the keyboard over the answer.
+    var carried = false;
+    try { carried = sessionStorage.getItem(CARRY) === "1"; sessionStorage.removeItem(CARRY); } catch (e) {}
+    if (carried && !stacked.matches) {
+      input.focus({ preventScroll: true });
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
     // The input is not focused on load, so the hero rests as the logo; the
     // first letter typed anywhere on the page goes into it instead.
     document.addEventListener("keydown", function (e) {
@@ -1041,15 +1148,14 @@
     }
     return s;
   }
-  // Now's four bands, from nowLists, into `box`. For this week the labels
-  // are Now's own; for another time (`thisWeek` false) Great this week is
-  // just Great.
-  function fillDigest(box, now, thisWeek) {
+  // Now's four bands, from nowLists, into `box`, under Now's own labels
+  // for any week.
+  function fillDigest(box, now) {
     box.textContent = "";
     box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
     box.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
     box.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
-    box.appendChild(band("still", thisWeek ? "Great this week" : "Great", now.still, "kind", "Nothing at all, which cannot be right."));
+    box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
   }
 
   function initNow() {
@@ -1097,7 +1203,7 @@
       redrawn = true;
       loadFoods().then(function (foods) {
         if (weekAt(offset).week !== w || weekAt(offset).year !== y) return;
-        fillDigest(digest, V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y)), true);
+        fillDigest(digest, V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y)));
       });
     }
 
@@ -1146,6 +1252,7 @@
     fitVerdict(document.querySelector("article.food .verdict-word"));
     initAbout();
     initHome();
+    initHeadSearch();
     initNow();
     initNotFound();
     syncChartHeads();
@@ -1161,6 +1268,6 @@
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
     miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest,
-    headerHeight: headerHeight
+    headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink
   };
 })();

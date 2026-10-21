@@ -2,10 +2,10 @@
 layout: default
 ---
 {%- comment -%}
-One food, top to bottom: the question, the verdict word, the date line,
-the quotation, the variety line, the counter note, the dial, three
-foods from the same family that are perfect now, the data, and the way
-on. Everything date-dependent is baked for the build day and
+One food, one column at every width, top to bottom: the question, the
+verdict word, the date line, the variety line, the quotation, the dial,
+the notes (the counter note), three foods from the same family that are
+perfect now, the data, and the way on. Everything date-dependent is baked for the build day and
 recomputed by site.js for the visitor's own day from the food's data in
 data-food and the quotations in data-quotes (the general pools plus the
 lines pinned to this food). The whole page keys off --food, the food's
@@ -31,12 +31,14 @@ colour.
 
   <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
 
-  {%- comment -%} Under the verdict, from 720px wide, the words on the
-     left (date line, quote, variety line, counter note) and the dial and
-     its legend on the right; narrower, one column, the dial after the
-     quote. site.css places them; this is the reading order. {%- endcomment -%}
+  {%- comment -%} Under the verdict, in reading order, 40px apart: the
+     date line with the variety line under it, the quotation, the dial,
+     then the notes. {%- endcomment -%}
   <div class="food-body">
-  <p class="date-line" id="date-line">{{ b.line }}</p>
+  <div class="food-when">
+    <p class="date-line" id="date-line">{{ b.line }}</p>
+    <p class="variety-line" id="variety-line"{% if b.varietyLine == "" %} hidden{% endif %}>{{ b.varietyLine }}</p>
+  </div>
 
   <blockquote class="quote" id="quote"{% unless b.quote %} hidden{% endunless %}>
     {%- if b.quote -%}
@@ -45,11 +47,9 @@ colour.
     {%- endif -%}
   </blockquote>
 
-  <p class="variety-line" id="variety-line"{% if b.varietyLine == "" %} hidden{% endif %}>{{ b.varietyLine }}</p>
+  {%- include season-wheel.html food=food -%}
 
   {%- if food.buy -%}<p class="buy"><strong>At the counter:</strong> {{ food.buy }}</p>{%- endif -%}
-
-  {%- include season-wheel.html food=food -%}
   </div>
 
   {%- comment -%} Three foods of the same family that are perfect now, at
