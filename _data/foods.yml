@@ -191,7 +191,7 @@
         - [23, 43, in]
         - [44, 48, avail]
     - name: "Purple sprouting"
-      short: "Purple sprouting"
+      short: "Purple broccoli"
       colour: "#973fcc"
       weeks:
         - [1, 4, avail]
@@ -684,7 +684,7 @@
         - [31, 35, in]
         - [36, 39, avail]
     - name: "Bramley"
-      short: "Bramley apples"
+      short: "Bramley apple"
       cultivar: true
       colour: "#50931f"
       weeks:
@@ -695,14 +695,14 @@
       weeks:
         - [36, 43, in]
     - name: "Egremont Russet"
-      short: "Apples (Russet)"
+      short: "Russet apple"
       cultivar: true
       colour: "#815e00"
       weeks:
         - [36, 39, avail]
         - [40, 43, in]
     - name: "Braeburn"
-      short: "Braeburn apples"
+      short: "Braeburn apple"
       cultivar: true
       colour: "#cb000e"
       weeks:
@@ -750,7 +750,7 @@
   source: ncgm
   varieties:
     - name: "Williams"
-      short: "Williams pears"
+      short: "Williams pear"
       cultivar: true
       colour: "#869000"
       weeks:
@@ -991,7 +991,7 @@
 
 - name: "Wild strawberries"
   slug: wild-strawberries
-  short: "Wood strawberry"
+  short: "Wild strawberry"
   group: foraged
   colour: "#d93f0d"
   source: general
