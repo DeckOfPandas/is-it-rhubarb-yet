@@ -31,13 +31,13 @@ Google's own subscribe link, since Google does not open webcal://.
 <p>Dates say "about" because the data is weekly or monthly, whereas the weather does its own thing.</p>
 
 <h2>Cool, give me allll the numbers</h2>
-<p><a href="{{ '/foods.json' | relative_url }}">Here is all my food data as JSON</a>. It uses a 52-week year where week 1 starts on 1 January, and the last day or two of December become honorary week 52. My compilation of source dates is <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>: use it however you like, just say where it came from. The sources have their own terms.</p>
+<p><a href="{{ '/foods.json' | relative_url }}">Here is all my food data as JSON</a>. It uses a 52-week year where week 1 starts on 1 January, and the last day or two of December become honorary week 52. My compilation of source dates is <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: use it however you like, just say where it came from. The sources have their own terms.</p>
 
-<h2 id="calendar-feed">Calendar feed</h2>
-<p>You can subscribe to the approximate start of a food's season (rounded to the week) in your calendar app. Each food's page has a feed of its own; the one here has every food. If you add a feed by its address, rather than by downloading the .ics file, it'll magically stay up to date by itself (Google Calendar checks only every several hours to a day).</p>
-<p class="feed-links">Every food: <a href="{{ every }}">subscribe in Apple Calendar</a> &middot; <a href="https://calendar.google.com/calendar/r?cid={{ every | url_encode }}">subscribe in Google Calendar</a> &middot; <a href="{{ '/season-starts.ics' | relative_url }}">download the .ics file</a></p>
-<p>The feeds and verdicts are rebuilt approximately daily, according to the whims of GitHub Actions.</p>
-<p>Unless you, for your own reasons, want several hundred food season events per year arriving in your calendar, add a feed for a particular food rather than the whole calendar. But you do you.</p>
+<h2 id="calendar-feed">Calendar feeds</h2>
+<p>You can subscribe to food season starts (rounded to the week) in your calendar app! How very exciting! <a href="{{ every }}">Apple</a>, <a href="https://calendar.google.com/calendar/r?cid={{ every | url_encode }}">Google</a>, <a href="{{ '/season-starts.ics' | relative_url }}">.ics file</a>.</p>
+<p>Unless you, for your own reasons, want several hundred food season events per year to suddenly arrive in your calendar, add a feed for a particular food rather than the whole calendar. But you do you. Links are on individual food pages.</p>
+<p>Add a feed by its address if you can, rather than by downloading the .ics file, so it magically stays up to date by itself.</p>
+<p>The feeds and verdicts are rebuilt approximately daily, according to the whims of GitHub Actions. Google Calendar will check about once a day.</p>
 <p>Spotted something wrong? I'd be grateful if you could <a href="{{ issues }}">open a GitHub issue</a>.</p>
 
 <h2>Sources</h2>

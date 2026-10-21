@@ -160,7 +160,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   food page's "Sources:" line. "common knowledge*" is one prose link
   to its footnote at the foot of the page, which ends "Back to where I
   was" with the arrow turned up.
-- **Sustainability and carbon** (`sustainability/index.html`, from the
+- **Sustainability and carbon** (`sustainability-and-carbon/index.html`, from the
   footer) is the reference page for the bundle's `sustainability.json`
   and `emissions.json`: for now "Information coming soon." and kept out
   of search engines (`noindex`); its slug is reserved in
@@ -525,7 +525,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   invisible `::before` round it, which no gap counts: the nav items,
   the magnifier, ??, play (a 32px circle), each segment of every switch
   (26px tall inside a 32px pill). The week arrows are 44px boxes.
-- **Footer.** Every word is caps, muted: SOURCE DATA · CALENDAR FEED
+- **Footer.** Every word is caps, muted: SOURCES · CALENDAR FEED
   (to the feed's section on Source data) · JSON; SUSTAINABILITY AND
   CARBON (its own line); ABOUT; the theme
   switch; the GitHub mark (2.2rem, muted ink, pink on hover or focus);
