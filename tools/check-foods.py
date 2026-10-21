@@ -43,6 +43,7 @@ RESERVED_SLUGS = {"now", "calendar", "wheel", "about", "sources", "foods",
 SHED = "#16110e"
 CUSTARD = "#fbf3d9"
 BRAND_PINKS = ("#ff2d78", "#ff045e")
+SHORT_MAX = 15
 CONTRAST_FAIL = 3.0
 CONTRAST_WARN = 3.15
 PINK_DISTANCE = 10.0
@@ -154,6 +155,18 @@ def check_aliases(item, label, problems, seen, slug):
                     problems.append(f"{label}: also {a!r} is an alias of {seen[a.strip().lower()]}")
 
 
+def check_short(item, label, problems, warnings):
+    """`short`, a calendar row's name on a phone, is a phrase of at most
+    SHORT_MAX characters (longer warns, so the column stays narrow)."""
+    if "short" not in item:
+        return
+    short = item["short"]
+    if not isinstance(short, str) or not short.strip():
+        problems.append(f"{label}: short must be a phrase")
+    elif len(short) > SHORT_MAX:
+        warnings.append(f"{label}: short {short!r} is {len(short)} characters, over {SHORT_MAX}")
+
+
 def main() -> int:
     foods = load(DATA)
     groups = {g["key"] for g in load(GROUPS_FILE)}
@@ -188,6 +201,7 @@ def main() -> int:
         check_colour(f.get("colour", ""), where, problems, warnings, slug)
         check_shades(f, where, problems, warnings, slug)
         check_aliases(f, where, problems, aliases, slug)
+        check_short(f, where, problems, warnings)
         if slug not in stubs:
             problems.append(f"{where}: no _foods/{slug}.md stub")
         if not f.get("varieties"):
@@ -210,6 +224,7 @@ def main() -> int:
                 problems.append(f"{label}: cultivar needs a named variety")
             check_shades(v, label, problems, warnings, slug)
             check_aliases(v, label, problems, aliases, slug)
+            check_short(v, label, problems, warnings)
             row_colour = v.get("colour", f.get("colour"))
             if row_colour in colours and colours[row_colour].split(" / ")[0] != where:
                 problems.append(f"{label}: same colour as {colours[row_colour]}")
