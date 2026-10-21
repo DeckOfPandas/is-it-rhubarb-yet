@@ -10,7 +10,7 @@ yearly rule keeps them valid afterwards. Each food has a calendar of its
 own too, at /remind/<slug>.ics.
 {%- endcomment -%}
 {%- assign year = site.time | date: "%Y" -%}
-{%- assign jan1 = year | append: "-01-01" | date: "%s" | plus: 0 %}
+{%- assign jan1 = year | append: "-01-01" | date: "%s" | plus: 0 -%}
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Is It Rhubarb Yet//EN

@@ -46,7 +46,7 @@ SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 # page that forwards to /squirrel/.
 RESERVED_SLUGS = {"now", "calendar", "wheel", "about", "sources", "foods",
                   "remind", "assets", "api", "season-starts", "404", "is-it", "year",
-                  "icons", "cards", "grey-squirrel", "kitchen-sink"}
+                  "icons", "cards", "grey-squirrel", "kitchen-sink", "sustainability"}
 
 SHED = "#16110e"
 CUSTARD = "#fbf3d9"

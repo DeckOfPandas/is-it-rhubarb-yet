@@ -868,10 +868,12 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .about-list li { padding-left: 0.2rem; }
 .about-list li::marker { color: var(--muted); font-weight: 700; }
 .about-ways { padding-left: 1.2rem; }
-/* Source data: the foraging footnote, quiet, behind a bar; the lists of
-   sources, plain, a little apart; the feed links on a line of their own. */
-.footnote-ref { text-decoration: none; font-weight: 700; padding: 0 0.1em; }
-.sources .footnote { margin: 0 0 var(--sp-2); padding-left: var(--sp-2); border-left: 3px solid var(--rule); color: var(--muted); font-size: var(--fs-small); }
+/* Source data: "common knowledge*" is a prose link to its footnote at
+   the foot of the page, quiet, behind a bar, which ends with the way
+   back up (the arrow turned up). The lists of sources are plain, a
+   little apart; the feed links have a line of their own. */
+.sources .footnote { margin: var(--sp-4) 0 0; padding-left: var(--sp-2); border-left: 3px solid var(--rule); color: var(--muted); font-size: var(--fs-small); }
+.back-up .arrow { transform: rotate(-90deg); }
 .sources .footnote p { margin: 0 0 var(--sp-1); }
 .sources .footnote ol { margin: 0 0 var(--sp-1); padding-left: 1.4rem; }
 .source-list { padding-left: 1.2rem; margin: 0 0 var(--sp-2); }

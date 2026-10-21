@@ -157,7 +157,14 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - the full list of sources by kind.
 
   `_data/sources.yml` names each source as that list does, for each
-  food page's "Sources:" line.
+  food page's "Sources:" line. "common knowledge*" is one prose link
+  to its footnote at the foot of the page, which ends "Back to where I
+  was" with the arrow turned up.
+- **Sustainability and carbon** (`sustainability/index.html`, from the
+  footer) is the reference page for the bundle's `sustainability.json`
+  and `emissions.json`: for now "Information coming soon." and kept out
+  of search engines (`noindex`); its slug is reserved in
+  `check-foods.py`.
 - Includes: `food-row.html` (one food in a list, one link: swatch,
   name, variety in brackets, an earlier timing, and with `tag` and
   `leader` on, the default, the verdict tag right-aligned at the row's
@@ -519,7 +526,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   the magnifier, ??, play (a 32px circle), each segment of every switch
   (26px tall inside a 32px pill). The week arrows are 44px boxes.
 - **Footer.** Every word is caps, muted: SOURCE DATA · CALENDAR FEED
-  (to the feed's section on Source data) · JSON; ABOUT; the theme
+  (to the feed's section on Source data) · JSON; SUSTAINABILITY AND
+  CARBON (its own line); ABOUT; the theme
   switch; the GitHub mark (2.2rem, muted ink, pink on hover or focus);
   the licences (CODE: MIT · DATA AND WRITING: CC BY 4.0 · ©, MIT to
   opensource.org's text and CC BY 4.0 to Creative Commons') and the

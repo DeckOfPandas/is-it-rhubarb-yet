@@ -117,8 +117,8 @@
   url: "https://newcoventgardenmarket.com/wp-content/uploads/2022/02/British-seasonal-fruit-veg-calendar-new-covent-garden-market-2.pdf"
 
 - key: northumberland
-  name: "Northumberland Seafood"
-  url: null
+  name: "Northumberland Seafood: Seasonality"
+  url: "https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/"
 
 - key: nrw_salmon
   name: "Natural Resources Wales: Buying and selling salmon and sea trout"
@@ -142,7 +142,7 @@
 
 - key: rhs_planner
   name: "RHS: Crop planner"
-  url: "https://www.rhs.org.uk/"
+  url: "https://www.rhs.org.uk/advice/pdfs/crop-planner.pdf"
 
 - key: rocket_gardens
   name: "Rocket Gardens: Harvesting purple sprouting broccoli"
