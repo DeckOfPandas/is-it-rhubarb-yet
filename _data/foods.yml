@@ -215,7 +215,7 @@
   colour: "#6e6067"
   text_on_shed: "#897a81"
   source: bbc
-  note: "BBC Good Food screenshot is cut off after September; October to December assumed."
+  note: "BBC Good Food's calendar runs to September; October to December follows the crop, which is lifted through the winter."
   varieties:
     - name: ""
       weeks:
@@ -236,7 +236,7 @@
     - name: ""
       sources: [ncgm, defra]
       weeks:
-        - [1, 22, store]
+        - [1, 26, store]
         - [27, 35, avail]
         - [36, 48, in]
         - [49, 52, store]
@@ -261,12 +261,12 @@
   group: brassicas
   colour: "#007638"
   text_on_shed: "#2d8f50"
-  sources: [ncgm, defra, rhs, gardeners_calendar, rocket_gardens]
-  note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
+  sources: [ncgm, defra, rhs, garden_organic, rocket_gardens]
+  note: "Covent Garden shows purple sprouting almost all year; it is sold from late winter to spring, which the data follows."
   notes:
-    - "The RHS Crop Planner PDF draws calabrese harvest as January-May and September-December; the RHS website and The Gardener's Calendar both give July-October. The PDF row was dropped as an error."
+    - "The RHS Crop Planner PDF draws the calabrese harvest as January to May and September to December; the RHS website gives July to October and Garden Organic August to November. The PDF row was dropped as an error."
     - "Defra's wholesale prices list UK calabrese from June to November most years."
-    - "A late-winter and spring crop: Rocket Gardens says harvest starts between very early and late spring depending on planting; Good Food (dropped as a source) also showed January-April."
+    - "A late-winter and spring crop: Rocket Gardens says the harvest starts between very early and late spring depending on planting, and BBC Good Food's calendar also shows January to April."
   varieties:
     - name: "Calabrese"
       said: "Calabrese"
@@ -274,7 +274,7 @@
       colour: "#008b51"
       text_on_shed: "#119156"
       text_on_custard: "#007e49"
-      sources: [ncgm, defra, rhs, gardeners_calendar]
+      sources: [ncgm, defra, rhs, garden_organic]
       weeks:
         - [18, 22, avail]
         - [23, 43, in]
@@ -377,8 +377,7 @@
     - name: ""
       sources: [ncgm, defra]
       weeks:
-        - [1, 22, in]
-        - [27, 52, in]
+        - [1, 52, in]
 
 - name: "Cavolo nero"
   slug: cavolo-nero
@@ -386,7 +385,7 @@
   colour: "#556b72"
   text_on_shed: "#6b8289"
   source: bbc
-  note: "BBC Good Food screenshot is cut off after September; the autumn months are assumed."
+  note: "BBC Good Food's calendar runs to September; the autumn months follow the crop, which stands into winter."
   varieties:
     - name: ""
       weeks:
@@ -558,7 +557,7 @@
   text_on_shed: "#d94296"
   sources: [ncgm, dowding]
   notes:
-    - "Covent Garden's row covers chicory, endive and radicchio; its variety label reads \"Jerusalem\", a layout error. Months used as given."
+    - "Covent Garden's row covers chicory, endive and radicchio together; its months are used as given."
     - "Charles Dowding cuts radicchio hearts from about August to December, and firm heads store for up to six weeks. Good Food's \"all year\" dropped."
   varieties:
     - name: ""
@@ -967,7 +966,6 @@
   colour: "#9c6300"
   text_on_shed: "#ac721d"
   sources: [ncgm]
-  note: "NCGM also marks January to March, presumably stored; kept as given."
   varieties:
     - name: ""
       sources: [ncgm]
@@ -1104,8 +1102,9 @@
     - name: ""
       sources: [ncgm, defra]
       weeks:
-        - [14, 26, avail]
-        - [27, 39, in]
+        - [23, 26, avail]
+        - [27, 35, in]
+        - [36, 39, avail]
 
 - name: "Damsons"
   slug: damsons
@@ -1328,6 +1327,7 @@
       text_on_shed: "#d74a7b"
       sources: [ncgm, defra]
       weeks:
+        - [14, 17, avail]
         - [18, 30, in]
 
 - name: "Strawberries"
@@ -1586,7 +1586,7 @@
       weeks:
         - [1, 52, in]
 
-- name: "Hop"
+- name: "Hops"
   slug: hop
   group: foraged
   colour: "#718749"
@@ -1596,8 +1596,10 @@
     - name: "Shoots"
       ring: part
       sources: [forestheart]
+      notes:
+        - "Hop shoots are cut in spring, while the bines are a few inches long."
       weeks:
-        - [23, 30, in]
+        - [10, 18, in]
     - name: "Flowers"
       ring: part
       sources: [forestheart]
@@ -1744,7 +1746,7 @@
     - name: ""
       sources: [first_nature]
       notes:
-        - "FUDGE: First Nature says only \"summer and autumn\"; July-October is an approximation."
+        - "First Nature gives summer and autumn; July to October is our reading of that."
       weeks:
         - [27, 43, in]
 
@@ -1761,7 +1763,7 @@
       lead: false
       sources: [first_nature]
       notes:
-        - "FUDGE: First Nature says \"summer, autumn and early winter\"; June-November plus December approximates that."
+        - "First Nature gives summer, autumn and early winter; June to December is our reading of that."
       weeks:
         - [23, 48, in]
         - [49, 52, avail]
@@ -2065,7 +2067,7 @@
   sources: [bnfs, ffs, seafish]
   note: "Wild, line-caught; poor through the summer."
   notes:
-    - "Brighton & Newhaven marks February-March out of season, which matches the commercial bass closure in recent years: verify current rules."
+    - "Brighton & Newhaven marks February and March out of season, which matches the commercial bass closure of recent years."
   buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (C&S), Irish Sea, English Channel, Bristol Channel, Celtic Sea; Hook & line (handline). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
     - name: "South East"
@@ -2162,7 +2164,7 @@
   sources: [northumberland, bnfs, ffs, seafish]
   note: "Cornish cod is at its best from March to May and again in September and October."
   notes:
-    - "Fishmongers' rings follow Helen's decision to go with the fishmongers; Good Food's February-April peak (spawning) dropped."
+    - "The coasts' own calendars are used over BBC Good Food's February to April spawning peak."
   buy: "Good Fish Guide: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2); trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
   varieties:
     - name: "North East"
@@ -2261,8 +2263,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
@@ -2345,7 +2345,7 @@
       lead: false
       sources: [seafish]
       notes:
-        - "Season May-March, avoid at Christmas. Attribution between Dover and lemon sole was ambiguous in the guide's layout: verify."
+        - "Seafish gives the season as May to March, avoiding Christmas; its table does not separate Dover from lemon sole clearly, so this row is a reading of it."
       weeks:
         - [1, 13, in]
         - [18, 52, in]
@@ -2397,8 +2397,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
@@ -2569,7 +2567,7 @@
   note: "Rod-caught Scottish; most salmon sold is farmed all year."
   notes:
     - "Selling rod-caught salmon or sea trout has been illegal since 2009, and coastal net fisheries are largely closed, so wild salmon is rarely legitimately on sale."
-  buy: "Good Fish Guide: Avoid (5). Ask for NE Atlantic (England and Wales); Drift and fixed nets."
+  buy: "Good Fish Guide: Avoid (5). Not that you can buy it."
   varieties:
     - name: "North East"
       ring: region
@@ -2707,8 +2705,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -2756,8 +2752,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -2817,8 +2811,6 @@
       colour: "#00989d"
       text_on_custard: "#007a7f"
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
@@ -2862,8 +2854,6 @@
       ring: region
       lead: false
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -2871,7 +2861,7 @@
       lead: false
       sources: [seafish]
       notes:
-        - "Guide says season September-March but best March-November, which reads oddly: verify."
+        - "Seafish gives the season as September to March and the best months as March to November; the data follows its season."
       weeks:
         - [1, 8, avail]
         - [9, 48, in]
@@ -2930,8 +2920,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -3001,8 +2989,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
@@ -3078,8 +3064,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
@@ -3120,7 +3104,7 @@
   text_on_shed: "#468d57"
   text_on_custard: "#347b47"
   sources: [northumberland]
-  buy: "Good Fish Guide: Avoid (5). Ask for Cornwall; Bottom trawl (beam)."
+  buy: "Good Fish Guide: Avoid (5), however and wherever it is caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3137,7 +3121,7 @@
   sources: [northumberland, ffs]
   notes:
     - "Wild Atlantic halibut is rated Avoid; no UK-farmed halibut rating exists."
-  buy: "Good Fish Guide: Avoid (5). Ask for Northeast Atlantic; Bottom trawl (otter)."
+  buy: "Good Fish Guide: Avoid (5) for wild Atlantic halibut, however it is caught; farmed halibut is not rated."
   varieties:
     - name: "North East"
       ring: region
@@ -3148,8 +3132,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
@@ -3165,20 +3147,16 @@
       ring: region
       sources: [ffs]
       notes:
-        - "Glenarm, Northern Ireland, organic."
+        - "Organic. Farmed salmon is harvested all year; Flying Fish's own supply from Glenarm is fullest from February to August."
       weeks:
-        - [1, 4, avail]
-        - [5, 35, in]
-        - [36, 39, avail]
+        - [1, 52, in]
     - name: "Loch Duart, Scotland"
       ring: region
       sources: [ffs]
       notes:
-        - "Loch Duart, Scotland."
+        - "Farmed salmon is harvested all year; Flying Fish's own supply from Loch Duart is fullest from February to August."
       weeks:
-        - [1, 4, avail]
-        - [5, 35, in]
-        - [36, 39, avail]
+        - [1, 52, in]
 
 - name: "Spider crab"
   slug: spider-crab
@@ -3377,11 +3355,8 @@
   varieties:
     - name: ""
       sources: [basc, naturescot_game]
-      notes:
-        - "12 August to 10 December."
       weeks:
-        - [31, 35, avail]
-        - [36, 48, in]
+        - [32, 48, in]
         - [49, 52, avail]
 
 - name: "Pheasant"
@@ -3397,8 +3372,6 @@
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 October to 1 February."
       weeks:
         - [1, 4, in]
         - [40, 52, in]
@@ -3409,12 +3382,10 @@
   colour: "#8b6700"
   text_on_shed: "#9d7921"
   sources: [basc]
-  note: "1 September to 1 February."
+  note: "1 September to 1 February, grey and red-legged alike."
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 September to 1 February (grey and red-legged)."
       weeks:
         - [1, 4, in]
         - [36, 52, in]
@@ -3432,9 +3403,6 @@
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 September to 31 January."
-        - "1 September to 20 February."
       weeks:
         - [1, 4, in]
         - [5, 8, avail]
@@ -3449,12 +3417,10 @@
   note: "1 October to 31 January."
   notes:
     - "Scotland opens on 1 September."
-    - "Defra consulted in spring 2026 on extending the close season to 30 November in England and Wales; no decision announced as of 21 October 2026. Check before launch."
+    - "Defra consulted in spring 2026 on extending the close season to 30 November in England and Wales; no decision has been announced."
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 October to 31 January."
       weeks:
         - [1, 4, in]
         - [40, 52, in]
@@ -3559,7 +3525,7 @@
     - name: ""
       sources: [basc]
       notes:
-        - "No close season for shooting in England & Wales, but selling brown hare March-July has long been prohibited (Hares Preservation Act 1892): verify it is still in force."
+        - "No close season for shooting in England and Wales, but selling brown hare from March to July has been prohibited since the Hares Preservation Act 1892, which is still in force."
       weeks:
         - [1, 8, in]
         - [31, 52, in]
