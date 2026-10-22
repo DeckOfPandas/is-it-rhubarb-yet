@@ -91,14 +91,20 @@ A ring of the food itself, as a fish's coasts or a glasshouse crop has:
   template, `tools/make-foods.py` and `tools/merge-bundle.py`; they must
   agree.
 - **States.** `in` is in season; `avail` is just about, coming in or
-  going out; `store` is sold from storage after the harvest. Within one
-  ring `in` wins where runs overlap, then `store`. The checker refuses
-  overlapping runs and a ring with no `in` week.
+  going out, a shoulder of a few weeks; `store` is sold from storage
+  after the harvest. A fishmonger's "fair" months are `in` (the fish is
+  on the slab), never a months-long `avail`, which would read as coming
+  in or going out all that time. Within one ring `in` wins where runs
+  overlap, then `store`. The checker refuses overlapping runs and a ring
+  with no `in` week.
 - **Rings.** A food's `varieties` are its rings. A named variety or type
   (Bramley, forced, maincrop) has its own colour; a ring of the food
   itself (`ring: region`, `method`, `zone` or `part`) shares the food's
-  colour and is named by itself (GLASSHOUSE, SOUTH WEST). A ring named
-  Glasshouse answers as storage does (`glass`).
+  colour and is named by itself (GLASSHOUSE, SOUTH WEST). A `ring:
+  method` ring says what it is in `method` (glasshouse, outdoor,
+  cultivated, wild, fresh, market, farmed); a `method: glasshouse` ring
+  answers as storage does (`glass`). The verdict reads the key, never
+  the name, so a ring can be renamed without changing what it does.
 - **`lead: false`** keeps a ring off the calendar, the wheel and the
   calendar feeds. It is still drawn on the food's dial, listed in the
   ring list and counts towards the whole food's verdict. Rings marked
@@ -184,10 +190,14 @@ statement):
   December") and names the middle of the data week. Early is the 1st to
   the 10th, mid the 11th to the 20th, late the rest; "mid-" is always
   hyphenated, "early" and "late" never are. The one calendar date on the
-  site is the as-of date. Storage and glasshouse lines: "Until late
-  November, then available from storage until late July."; "Available
-  from storage until late July."; "Glasshouse-grown for now; outdoor from
-  early July." Always "available from storage", never "from store".
+  site is the as-of date. A YES whose fresh run ends softly says so: "At
+  its best for a few more days, then just about until late November."; a
+  JUST that is a just-about tail, or an isolated just-about run, says
+  "Just about, until late November." Storage and glasshouse lines:
+  "Until late November, then available from storage until late July.";
+  "Available from storage until late July."; "Glasshouse-grown for now;
+  outdoor from early July." Always "available from storage", never "from
+  store".
 - **Dates** are ordinals, "22nd October 2026", with the letters raised
   wherever they are shown (`datePieces`, `dateHtml`); a week's days are
   "15th–21st October".
@@ -286,5 +296,39 @@ their own terms.
 
 The bundle's `sustainability.json` and `emissions.json` are not in the
 data yet. `sustainability-and-carbon/index.html` is their reference
-page, "Information coming soon." and `noindex` until then; its slug is
-reserved. Fish `buy` lines already carry the Good Fish Guide's advice.
+page, "Information coming soon.", `noindex` and linked from nowhere
+until then; its slug is reserved. Fish `buy` lines already carry the
+Good Fish Guide's advice.
+
+The shape they will take, decided before they land so that they are
+not merged into `foods.yml` (which would weigh down `foods.json` for
+every visitor and tangle two kinds of data): each in its own file under
+`_data/`, keyed by slug, checked by `tools/check-foods.py` against the
+foods and the source register.
+
+```yaml
+# _data/sustainability.yml: a rating per stock and gear, dated, since
+# the Good Fish Guide changes twice a year.
+- slug: cod
+  body: mcs                      # a key in sources.yml
+  as_of: 2026-10
+  ratings:
+    - ring: South West           # optional: a ring's name
+      stock: "Celtic Sea"
+      method: "Hook & line"
+      rating: 2                  # 1 to 5, as the guide scores
+      label: "Best Choice"
+      url: https://…
+  best: "MSC line-caught Icelandic cod"
+  labels: [msc]                  # marks worth asking for
+
+# _data/emissions.yml: per food, not per ring.
+- slug: beef
+  kg_co2e_per_kg: 60
+  source: owid                   # a key in sources.yml
+  scope: "farm to retail, global mean"
+```
+
+With the ratings structured, a `buy` line keeps only the advice and the
+template writes the rating line; the ring list can show a rating beside
+a coast; the reference page is a table from the data.

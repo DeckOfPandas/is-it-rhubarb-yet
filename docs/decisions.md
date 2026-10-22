@@ -5,6 +5,51 @@ reason, so that nobody relitigates it by accident. What the site does
 now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 `model_instructions/manual.md`. Add to the top.
 
+## 2026-10-22, after the full review
+
+- **The header search goes home on Enter only.** It used to go after
+  0.3s on one good match or 0.8s otherwise; a slow typist was carried
+  off mid-word and a phone lost its keyboard. Typing only colours the
+  word and offers a completion.
+- **A soft end says so.** "YES. For a few more days." one week and
+  "JUST. Until late November." the next read as the verdict getting more
+  urgent while the sentence relaxed. A YES whose fresh run ends into a
+  just-about tail reads "At its best for a few more days, then just
+  about until late November."; a JUST that is the tail, or an isolated
+  just-about run, reads "Just about, until late November." The
+  thresholds are unchanged.
+- **A fishmonger's "fair" months are `in`.** Encoded as `avail`, they
+  made ling NEARLY for 35 weeks, langoustines 31 and herring 26, and
+  carried them on Now's "On the way" for half the year. Every `avail`
+  run of nine weeks or more on a fish ring is now `in`; shoulders of a
+  few weeks stay `avail`.
+- **A never-food's card links to its page**, "Tell me why →": the page
+  has the quotation, the share card and the ways on, and search is how
+  anyone finds it.
+- **The sustainability page is not linked** until it has content; it
+  stays, `noindex`, at its reserved slug.
+- **A keepalive commit on main.** GitHub pauses every scheduled workflow
+  after 60 days without a commit, the daily deploy and its stale check
+  both; `keepalive.yml` pushes an empty commit once the last is 45 days
+  old, which resets the clock for all of them, itself included. It is
+  the one exception to "never commit on main".
+- **Every note in the data file is a sentence for a visitor.** The
+  working notes ("FUDGE:", "verify", "Check before launch") were being
+  printed in the sources disclosure.
+- **Link checks go through `scripts/check-link.sh`**, since a bare curl
+  allow rule cannot be made narrow (a trailing `*` lets a second `-o`
+  write anywhere).
+- **"Cultivated mushrooms"**, not "Mushrooms (cultivated)": the name
+  goes mid-sentence everywhere ("Is it … yet?", "Add … to your
+  calendar", the title), where a bracket read badly. The slug stays
+  `mushrooms-cultivated`.
+- **A method ring says what it is in `method`**, and the verdict reads
+  that key rather than matching the ring's name, so a ring renamed
+  "Under glass" would still answer as storage does.
+- **Sustainability and emissions data live in their own `_data` files**,
+  keyed by slug and never merged into `foods.yml`; the shape is in
+  `docs/data.md` so the bundle lands in it.
+
 ## 2026-10-22
 
 - **A verdict for the whole food.** A food's rings are combined into one
