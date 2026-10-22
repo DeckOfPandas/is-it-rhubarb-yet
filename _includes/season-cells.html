@@ -21,7 +21,7 @@ row so that they inherit its --c.
   {%- if r[2] == "in" -%}
     <rect class="cell in" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: weeks {{ r[0] }} to {{ r[1] }}</title></rect>
   {%- elsif r[2] == "store" -%}
-    <rect class="cell store" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: from storage, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+    <rect class="cell store" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: available from storage, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
   {%- else -%}
     {%- assign before = r[0] | minus: 1 -%}{%- if before == 0 -%}{%- assign before = 52 -%}{%- endif -%}
     {%- assign after = r[1] | plus: 1 -%}{%- if after == 53 -%}{%- assign after = 1 -%}{%- endif -%}

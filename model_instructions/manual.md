@@ -8,10 +8,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - Jekyll, no plugins, vanilla JavaScript, inline SVG, three self-hosted
   fonts. Nothing is fetched from anywhere else.
 - **One verdict function.** `assets/verdict.js` holds the rules: the
-  week grid, the verdict for a variety and for a food, the phrase under
-  it, the variety lines, a variety's runs in words (`runsSaid`), the
-  weekly digest's lists and the quotation
-  pick. Every page loads it as a classic script; `tools/bake.js`
+  week grid, the verdict for a ring and for a whole food, the phrase
+  under it, the rings' order (`ringOrder`), the weekly digest's lists
+  and the quotation pick. Every page loads it as a classic script; `tools/bake.js`
   requires it under Node and writes `_data/baked.json` (gitignored)
   with today's verdicts, which the Liquid templates read. So the build
   is two steps, `sh tools/build.sh`, and the baked HTML is right for
@@ -21,7 +20,34 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   "just about" runs read JUST) are constants at the top of
   `verdict.js`. Tests: `node --test tests/verdict/verdict.test.js`,
   which also checks that every food and variety has a verdict and a
-  date phrase in every week.
+  date phrase in every week, and that the verdict order and the storage
+  words hold for every food in every week.
+- **A verdict for the whole food.** `foodVerdict` combines a food's
+  rings (varieties, coasts, wild and glasshouse rings) into one
+  timeline (`timelineOf`), each week taking the best state any ring has:
+  in > avail > glass > store > none. A ring named Glasshouse counts as
+  `glass`, which answers as storage does. The verdict and date line
+  (`whole`) are worked out on that timeline, so apples are not JUST
+  while Cox ends, because Braeburn carries on; cod answers for all its
+  coasts; a fish with an all-year coast reads "All year.". Each ring
+  keeps its own verdict and phrase (`varieties`), for the ring list and
+  a named variety found by search. No ring leads any more: `lead:
+  false` only keeps a ring off the calendar, the wheel, search and the
+  feed.
+  - **Verdicts:** YES > JUST > YES-ISH > NEARLY > NO (`RANK`). YES-ISH
+    is a week of storage or glasshouse alone. Fresh always beats it,
+    and it beats NEARLY: a week that is both held and coming in is
+    YES-ISH.
+  - **Date lines:** "Until late January."; "Until late November, then
+    available from storage until late July." (`thenSaid`, when storage
+    or a glasshouse follows the fresh season); "For a few more days,
+    then available from storage until late July." for JUST; YES-ISH
+    "Available from storage until late July.", adding "Fresh any day
+    now." once fresh food is within NEARLY's three weeks; a glasshouse
+    "Glasshouse-grown until early November.", or "Glasshouse-grown for
+    now; outdoor from early July." when it lasts until the outdoor
+    season (`heldSaid`). Storage is always "available from storage",
+    never "from store".
 - **No calendar dates for seasons.** The data is weekly and mostly came
   from monthly calendars, so a season boundary is said in words chosen
   by the days from today ("Any day now", "In a week or two", "From
@@ -33,14 +59,16 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   15<sup>th</sup>–21<sup>st</sup> October. `verdict.js` writes the text
   ("22nd October"), `datePieces` marks the letters, and they are set as
   `<sup>` on the page (`setDate` in `site.js`; `dateHtml`, baked as
-  `asofHtml`, `asofDayHtml` and `rangeHtml`, and in the share cards), a
+  `asofHtml` and `rangeHtml`, and in the share cards), a
   raised `tspan` in the wheels' SVG, and left unraised where only text
-  goes (meta tags, a slider's spoken value). In the caps style they are
-  capitals: 22<sup>ND</sup>.
-- **The digest** (`nowLists`) returns each of its four lists split by
-  kind of food, `[{kind, items}]`, just arrived and great now A to Z,
-  still great but on the way out (the `last` list) and on the way
-  soonest first. `flatten` gives one array,
+  goes (meta tags, a slider's spoken value). In the caps style they
+  stay lower-case: VERDICT CORRECT AS OF 22<sup>nd</sup> OCTOBER 2026.
+- **The digest** (`nowLists`) returns six lists, one per band of
+  `bandOf`, each split by kind of food, `[{kind, items}]`: just arrived
+  and great now A to Z, still great but on the way out (the `last`
+  list) and on the way soonest first, then the YES-ISH foods,
+  available from storage (`store`) and glasshouse-grown (`glass`), A to
+  Z. Each item is a whole food, named without a variety. `flatten` gives one array,
   `azList` one array A to Z, and `byPhrase` regroups a list by one
   timing per food, `[{phrase, items}]`, soonest first and A to Z
   within: `timing` splits a two-part phrase into the `when` that groups
@@ -48,8 +76,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   ("first ones any day now", "a few about now"). `bake.js` bakes them
   as `phrases` and `az`. The Now page shows just arrived as one A to Z
   list, still great but on the way out and on the way grouped by
-  timing, and great now
-  grouped by kind with counts.
+  timing, great now grouped by kind with counts, and last, each only
+  when it has foods, AVAILABLE FROM STORAGE and GLASSHOUSE-GROWN,
+  grouped by kind. The calendar's and wheel's floating "N IN SEASON"
+  counts YES and JUST only.
 - **Naming a variety.** A named variety is a type (forced, maincrop)
   or, with `cultivar: true` in the data, a cultivar (Cox, Conference).
   `varietyLabel` gives its list form, in muted brackets after the food,
@@ -131,7 +161,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   names the culinary families and their `kind`. `_data/never.yml` lists
   the foods that are never in season here, each with a line.
   `_data/quotes.yml` holds the pools, one per verdict including
-  `never`. `tools/check-foods.py` validates all four, including the
+  `never`; YES-ISH's is `yesish`. `tools/check-foods.py` validates all four, including the
   colour rules and the `said` and `cultivar` fields; run it after any
   data edit. A food's page needs its `_foods/<slug>.md` stub.
 - `tools/make-foods.py` derived `_data/foods.yml` and the stubs once
@@ -153,32 +183,33 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - **Rings.** A food's `varieties` are its rings. A named variety or type
   has its own colour; a ring of the food itself (`ring: region`,
   `method`, `zone` or `part`) shares the food's (or its variety's) and is
-  named in the variety lines by itself, GLASSHOUSE.
-  - **`lead: false`:** the ring is drawn on the food's dial, listed in
-    its data and has its variety line, but gives no verdict, no
-    calendar row, no wheel dot, no search hit and no calendar-feed
-    event. Rings marked this way:
+  named in the ring list by itself, GLASSHOUSE. Every ring counts
+  towards the whole food's verdict (see "A verdict for the whole food").
+  - **`lead: false`:** the ring is drawn on the food's dial and listed
+    in its ring list, but has no calendar row, no wheel dot, no search
+    hit and no calendar-feed event. Rings marked this way:
     - every coast but a fish's South West, where it has one;
     - glasshouse rings;
     - a wild ring beside a market or cultivated one;
     - provenance (Welsh, salt marsh), Orkney, the Cornish sardine
       fishery, and the national native and Porthilly rock oysters.
-  - **Coasts:** each its own variety line, the South West's first: SOUTH
-    WEST Just, NORTH EAST Until late January.
-  - **Stores and wild salmon:** a `store` week answers YES, its date
-    line "Available from storage until late August." (between two YES, in season
-    beats from store; never "just arrived"). Wild salmon is `unsold`:
-    always NO, its line "It cannot be sold in England, Wales or
-    Scotland."
-  - **Drawing stores:** the calendar and the food's dial draw a store run
-    flat, the colour 30% into the grey.
-  - **Sources:** a food's page names its sources from `sources.yml`,
-    linked, one to a bullet under "Sources:".
+  - **Storage and wild salmon:** a `store` week alone is YES-ISH, its
+    date line "Available from storage until late August." (never "just
+    arrived"). Wild salmon is `unsold`: always NO, its line "It cannot
+    be sold in England, Wales or Scotland."
+  - **Drawing storage:** the calendar and the food's dial draw a storage
+    run flat, the colour 30% into the grey.
+  - **Sources:** each source in `sources.yml` has a `name`, a `short`
+    name (the ring list's) and an address. A food page lists its
+    sources, numbered and linked, in its sources disclosure.
   - **Fungi:** a group of their own, wild and cultivated, on the Wild
     wheel.
 - A renamed food keeps its old address as a page that forwards:
   `grey-squirrel/index.html` sends `/grey-squirrel/` to `/squirrel/`,
-  and the checker keeps that slug from ever being a food's.
+  and `button-mushrooms/index.html` sends `/button-mushrooms/` to
+  `/mushrooms-cultivated/`. The checker keeps such a slug from ever
+  being a food's. A food's old calendar feed has no forward (a feed
+  cannot redirect on Pages), so its subscribers must subscribe again.
 - Pages: `index.html` (the hook: "Is it [ ] yet?" with the live-filtered
   list of every food and its verdict), `_layouts/food.html` (one food
   at `/<slug>/`), `_layouts/never.html` (a never-food at `/<slug>/`),
@@ -191,7 +222,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   suggestions match against), `season-starts.ics`, and each food's own
   calendar, `/remind/<slug>.ics`.
 - **Calendar feeds.** One all-day event, repeating yearly, at the start of
-  each in-season run of each ring that gives the verdict.
+  each in-season run of each ring not marked `lead: false`.
   - **The shared include:** `_includes/ics-events.html`, used by both the
     whole-site feed (`season-starts.ics`) and each food's (layout
     `remind.ics`, from a stub per food in `_remind/`, which
@@ -202,16 +233,15 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), not its date,
     so a calendar updates a moved event rather than adding another.
   - **Wild salmon:** no events.
-  - **The food page:** "Put rhubarb in your calendar: Apple · Google ·
-    download .ics", the lead-in in the instructive style (`.instruct`,
-    as the data summary is): Apple is the `webcal://` link, which Apple
-    Calendar and most apps take as subscribe; Google is Google
+  - **The food page:** one line, "Add rhubarb to your calendar: Apple ·
+    Google · .ics", the lead-in in the instructive style (`.instruct`,
+    as the sources summary is): Apple is the `webcal://` link, which
+    Apple Calendar and most apps take as subscribe; Google is Google
     Calendar's own subscribe link (it does not open `webcal://`); then
-    the file. Under it, small, "Tell me about feeds · feeds for all
-    foods": the feeds' section on Source data and every food's feed.
-    Each dot follows its link after a no-break space, so no line starts
-    with one.
-  - **The Sources page** offers the whole feed the same three ways.
+    the file. Each dot follows its link after a no-break space, so no
+    line starts with one.
+  - **The Sources page** explains feeds and offers the whole feed the
+    same three ways.
 - **Source data page** (`sources/index.html`) is Helen's copy:
   - where each kind of food's dates come from;
   - the foraging footnote;
@@ -354,37 +384,41 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   load and without JavaScript.
 - The question over the verdict is set at `title`, the full width (no
   measure), its lines balanced (`text-wrap: balance`).
-- **Food page layout.** One column at every width, in this order:
-  question, verdict, date line, the quotation, the variety lines, the
-  dial and its key (on the same left edge as the words), the notes (the
-  counter note), then Also; a rule, the data; a rule, VERDICT CORRECT AS
-  OF 22<sup>ND</sup> OCTOBER (the caps style, as the footer's as-of
-  is); a rule, the calendar lines; a rule, "Ask about something else
-  →". Every block is 40px
-  from the next. Text keeps a measure of about 65ch. A date line wraps
-  with `text-wrap: pretty`, so no word sits alone on its last line. The
-  quote bar and every note's bar are the food's full colour.
-  - **Variety lines** (`.named-lines`, `varietyLines` in `verdict.js`):
-    a food with more than one variety lists them one to a line, the
-    name in the caps style in the variety's text colour, in a column,
-    then its phrase, muted (BRAMLEY Available from storage until late
-    July). Those in season come first, the one ending soonest first,
-    then those in season all year, then the rest, the one back soonest
-    first. Below 600px the name sits over its phrase.
-  - **The data** opens to ALL APPLES (Anton `label`) over the chart, a
-    faint rule, the runs, a rule, then the notes and "Sources:" over a
-    bulleted list.
-  - **The runs** take the variety lines' pattern, in
-    fuzzy months (`runsSaid`, baked as `runs`): "In season August to
-    September, available from storage October to July." A run ending
-    the year and one of the same kind starting it are one run; a
-    boundary on a month's edge names the month, one inside it says
-    early, mid- or late. The varieties are grouped by time from now
-    (`varietyBands`, sharing `bandOf` with Now): Now's bands in Now's
-    order, then Out of season, soonest first within a band. With
-    `BAND_VARIETIES` (4) varieties or more in two bands or more, each
-    band is named under an Atkinson caps label, a hairline between; the
-    runs are one grid across the bands, so the names keep one column.
+- **Food page layout.** One shape for every food, one column at every
+  width, in this order:
+  1. question, verdict, date line, for the whole food;
+  2. the quotation;
+  3. the breakdown: the dial (on the same left edge as the words) and,
+     for a food of two rings or more, its ring list;
+  4. the counter note, `small`, full ink, behind the food's bar, with no
+     lead-in;
+  5. Also great this week;
+  6. one hairline, the only rule on the page;
+  7. the sources disclosure, "Great! Show me the sources." (or "Fine,
+     show me the sources." for NO), holding only the numbered sources
+     and the notes on the data, as sentences: the food's, then each
+     ring's under its name;
+  8. the calendar line;
+  9. "Ask about something else →".
+
+  Every block is 40px from the next. Food pages have no as-of line; the
+  footer's says it. Text keeps a measure of about 65ch. A date line
+  wraps with `text-wrap: pretty`, so no word sits alone on its last
+  line. The quote bar and the note's bar are the food's full colour.
+  - **The dial's rings** run from the longest season outside to the
+    shortest inside, as the wheel's do (`ringOrder`, baked as `rings`):
+    the weeks a ring has any state, storage included, ties in data
+    order. Each ring's `data-ring` is its place in the data. The dial
+    has no legend of its own.
+  - **The ring list** (`.ring-list`) is the dial's legend, in the dial's
+    order, outer ring first: a swatch in the ring's colour, its name in
+    the caps style in its text colour, its own phrase without a full
+    stop (baked as `ringLines`), and its sources' short names, `small`
+    and muted: NORTH EAST · Until late January · Northumberland Seafood.
+    Each row is a button. Hovering or focusing a row, or hovering a
+    ring, lights the ring and its row and fades the rest to a quarter,
+    as the charts light a food (`lightRings` in `site.js`); a tap pins
+    the light (`aria-pressed`) until it is tapped again.
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
   in pink, the line exactly the word's width, in the header, the hero
   and the cards. It does not change on hover.
@@ -420,7 +454,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   1–2 match, a long word shrinking to fit the header. It matches
   against `search.json` (names, varieties as said, aliases, shared
   words; `names` for completion) and never answers in place: it goes
-  to `/?q=…` when typing pauses 0.6s on one good match, or 1.5s on two
+  to `/?q=…` when typing pauses 0.3s on one good match, or 0.8s on two
   or more letters with several matches or none, and at once on Enter
   (a phone's Go), which with nothing typed goes to home as it is.
   Leaving the field cancels a pending search. One Escape puts RHUBARB
@@ -453,7 +487,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   so the hero rests as the logo; the first letter typed anywhere on
   home goes into it. On a phone, focusing it scrolls its line near the
   top of the screen, 16px clear, so the keyboard does not hide the
-  results; with reduced motion it jumps.
+  results; with reduced motion it jumps. The first click or tap into a
+  hero that holds a word selects all of it, as an address bar does, so
+  the next word typed replaces it; a click while it has focus places
+  the caret.
 - **Home search.** While the input has text, the teasers, the arrow
   link and the whole Everything section are hidden, and the results
   stand in the teasers' place, at once, with no debounce.
@@ -464,18 +501,24 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   "forced rhubarb"), which joins once `foods.json` is in. Both sides
   are folded (case, accents, punctuation; "&" is "and") and singular
   equals plural. A candidate's best tier: 1, exact; 2, the string
-  starts with the query; 3, a later word starts with it; 4, the query
-  is inside a word, from the first letter typed. The last typed word
-  may be unfinished. A food is one hit at its best tier: found by a
-  variety alone it shows as that variety ("cox" gives "Apples (Cox)"),
-  and found as well or better itself it shows as the food, so
-  "rhubarb" is not followed by "Rhubarb (forced)". Each letter typed
-  only ever takes hits away: "b", "be", "ber", "berr" narrow from 43
-  to 17 to 11 to 9.
+  starts with the query; 3, a later word starts with it. Text found
+  only inside a word is no match anywhere (ranking, results, the card,
+  the hero's colour): "ape" and "lla" find nothing and get LITERALLY NO
+  IDEA. The last typed word may be unfinished. A food is one hit at its
+  best tier: found by a variety alone it shows as that variety ("cox"
+  gives "Apples (Cox)"), and found as well or better itself it shows as
+  the food, so "rhubarb" is not followed by "Rhubarb (forced)". Each
+  letter typed only ever takes hits away.
   - One tier-1 match: answered with the food's card (see "A food at
     three levels"), in the label's place. Under it a quiet line,
     "Also: Crab apples", of the tier 2–3 matches as links in their
-    colours. Tier 4 is dropped.
+    colours.
+  - The card leaves out its question, which the hero asks, only when
+    the hero's text and its completion spell the card's own name
+    (folded, singular and plural alike: "courg" completing to
+    COURGETTES). Otherwise it asks in the food's name (`.asks`):
+    ZUCCHINI is answered "Is it courgettes yet?", COX "Is it Cox apples
+    yet?".
   - Phrases used as labels in lists (Now's groups) have no full stop;
     a date line that answers a question (the home answer, a food
     page) does.
@@ -483,7 +526,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     "mushrooms" finds every fungus) is a row under "N MATCHES", which
     counts them all, a teaser label in the first teaser's spot, in one
     column, by tier then A to Z, with leaders and tags. A list of one
-    is answered as above, without "Also" ("pina" finds spinach).
+    is answered as above, without "Also".
   - No match: a plain card like a never-food's, in ink (its edge
     too): "Is it zzz yet?", LITERALLY NO IDEA., "If that's an actual
     thing, please tell us." (a link to the issues). No dial, no
@@ -493,6 +536,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     its "Also" links or the rows; Enter opens it, or the first. A
     polite live region says the count. Clearing the input brings
     everything back.
+  - Under any of these, "Ask about something else →", as a food page
+    ends, empties the hero and puts the caret in it (back up to it on
+    a wide screen).
 - **A food at three levels.** A food is shown as a row, a card or a
   page, and each is a smaller version of the next, never a different
   design. No fourth way: any new view that needs a food uses one of
@@ -518,15 +564,16 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     card only sets them smaller: question `label`, verdict `title`, date
     line `body` bold (`.one-line`; the page's stays `lead`). The dial is the food page's own
     `figure.wheel` SVG, fetched from the page (`miniDial` in `site.js`,
-    which also warms the page), cut to the one ring whose variety gave
-    the verdict, that ring widened to fill the band and drawn all in the
-    verdict's colour (its shape still the variety's), and cropped to the
-    ring. The card and a list of matches share one width, `--answer-w`.
+    which also warms the page), cropped to the rings. A food's card has
+    the whole dial, as the food answers as a whole; a named variety's
+    (from search, or a calendar row of a food of several) is cut to that
+    variety's ring (found by its `data-ring`), widened to fill the band
+    and drawn all in its colour. The card and a list of matches share one width, `--answer-w`.
     The panel is `--panel`, one step lighter than the page in both
     themes, 12px radius, its left edge `--food-bar-width` (6px) in the
     food's colour; the food page has no matching bar. On home the card
-    asks no question (the hero asks it, and for bananas the two would
-    disagree, BANANA and BANANAS); popovers keep it. Below about 420px of
+    asks its question only when the hero spells another name (see
+    "Search ranking"); popovers keep it. Below about 420px of
     card width (a 452px screen) the dial is 72px at the top right,
     beside the question and verdict, and the date line and action run
     the full width under them. On home, Up and Down reach the action,
@@ -556,8 +603,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   of it shows after the typed text
   in the hero, faded to 35% in the food's colour (ghost grey for a
   never-food): AVOC + ADOS, ZUCC + HINI (an alias, for Courgettes).
-  None for a match only inside a word, for text that is already a
-  whole name, with no match, or while an input method is composing.
+  None for text that is already a whole name, with no match, or while
+  an input method is composing.
   It is an `aria-hidden` layer over the input in the same type, the
   typed part transparent, so the real caret stays after the typed
   text and the underline under it alone. The hero is sized for typed
@@ -578,13 +625,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - **Wording.** "Great this week" everywhere (Now's section, the home
   teaser, a food page's "Also great this week"); never "Great now".
   "Still great but on the way out" everywhere the `last` list is named
-  (Now, the home teaser, the Now share card, a food page's data); never
-  "Last chance". Its anchor stays `#last`.
+  (Now, the home teaser, the Now share card); never "Last chance". Its
+  anchor stays `#last`. "Available from storage", never "from store".
   Every link to Now in prose or as an action reads "Everything in
   season this week →" (the nav's NOW and "and N more" excepted). Page
   titles: CALENDAR; THE SHAPE OF THE YEAR on the wheel page, whose nav
-  item stays WHEEL. The data disclosures are "Great! Show me the data."
-  and "Fine, show me the data.", both with full stops.
+  item stays WHEEL. The sources disclosures are "Great! Show me the
+  sources." and "Fine, show me the sources.", both with full stops.
 - **Links.** Four kinds, in `assets/site.css` under "Links come in four
   kinds":
   - Prose: ink, a 1px pink underline at all times, 3px on hover or
@@ -693,9 +740,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     and opens its card: exactly the home answer's card (same width,
     type and layout; see "A food at three levels"), plus the time it is
     for in caps over the question when that is not today ("IN EARLY
-    APRIL"), and a × button of its own in the top right. Its dial is the
-    single ring of the variety that gave the verdict (on the calendar,
-    the row's own variety). Escape, a click outside or × closes it; focus
+    APRIL"), and a × button of its own in the top right. On the wheel it
+    answers for the whole food, with the whole dial; on the calendar
+    for the row's own variety, its dial cut to that ring (a food of one
+    ring answers as a whole). Escape, a click outside or × closes it; focus
     goes back to the food (after a click outside, only if focus was in
     the card). Wide: beside the food, under its row or right of its dot,
     flipped to stay on the screen. Below 700px: docked at the foot of
@@ -893,11 +941,15 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   wheel at mid-December; About and a
   404. At 390, 820 and 1280, the clock
   frozen at noon on the date (default 2026-10-25), with reduced motion
-  so nothing is caught mid-animation. By default it takes Helen's
+  so nothing is caught mid-animation. Then the food page's three
+  shapes at 390 and 1280 only, raspberries (one ring), apples (many
+  varieties) and cod (coasts), and celeriac on 20 May, when it is
+  YES-ISH. Both tools unstick the header for their full-page shots, so
+  it is not drawn halfway down the page. By default it takes Helen's
   review list: everything dark, the shots she starred light too (the
   kitchen sink, home empty, the basil card and NEVER, the verdict and
   rhubarb food pages, Now, the calendar and the wheel states), and the
-  kitchen sink at 1280 only. `--full yes` takes all 162, every shot in
+  kitchen sink at 1280 only. `--full yes` takes every shot in
   both themes, as a review round should be checked. Not `npm run`:
   the project has no npm.
 - `/kitchen-sink/` (`kitchen-sink/index.html`, `noindex`, linked from

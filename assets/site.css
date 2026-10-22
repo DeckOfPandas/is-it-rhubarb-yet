@@ -125,9 +125,9 @@ body {
 :root { --page: calc(64rem - 2 * var(--sp-2)); }
 main { max-width: 64rem; margin: 0 auto; padding: var(--sp-1) var(--sp-2) var(--sp-5); }
 [hidden] { display: none !important; }
-/* A date's ordinal letters ("22nd"), raised without opening the line; in
-   the caps style they are capitals too. */
-sup { font-size: 0.7em; line-height: 0; vertical-align: 0.45em; }
+/* A date's ordinal letters ("22nd"), raised without opening the line,
+   and lower-case even in the caps style: 22nd OCTOBER. */
+sup { font-size: 0.7em; line-height: 0; vertical-align: 0.45em; text-transform: none; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 /* Form controls take the page's font; left alone, browsers set them in
    their own (Arial, whose straight l stands out beside Atkinson's). */
@@ -172,7 +172,7 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .page-head { margin-bottom: var(--sp-4); }
 /* A section's label: Anton, label size, full ink, 8px above what it
    labels. */
-.section-label, .teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2, .data-title {
+.section-label, .teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
   font: 400 var(--fs-label)/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--ink); margin: 0 0 var(--sp-1);
 }
@@ -323,25 +323,34 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    (lead) and on a card, the search's or a chart's popover (body). */
 .date-line { font: 700 var(--fs-lead)/1.3 var(--text); margin: 0; }
 .one-line { font: 700 var(--fs-body)/1.4 var(--text); margin: 0; }
-/* A food's varieties one to a line: under the date line, each answered,
-   and in the data, each one's runs. The name is in the caps style in the
-   variety's text colour, in a column of its own; the words beside it are
-   muted. Below 600px the name sits over its words. */
-.named-lines { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: max-content 1fr; column-gap: var(--sp-2); row-gap: var(--sp-1); align-items: baseline; }
-.named-lines li { display: contents; }
-.named-lines .line-name {
+/* A food's ring list, the dial's legend: a row per ring, outer ring
+   first, each a button (a tap pins its ring's light). A swatch in the
+   ring's colour, then on one wrapping line its name in the caps style in
+   the ring's text colour, its phrase, and its source, small and muted,
+   joined by dots. */
+.ring-list { list-style: none; padding: 0; margin: var(--sp-2) 0 0; }
+.ring-list li + li { margin-top: var(--sp-1); }
+.ring-row {
+  all: unset; box-sizing: border-box; display: flex; gap: var(--sp-1); align-items: baseline;
+  min-height: 44px; padding: var(--sp-1) 0; cursor: pointer; color: var(--ink); font: 400 var(--fs-body)/1.4 var(--text);
+}
+.ring-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
+.ring-row .swatch { transform: translateY(0.08em); }
+.ring-row .sep { color: var(--muted); }
+.ring-row .line-name {
   --food-ink: var(--food-custard, var(--food)); color: var(--food-ink);
   font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .named-lines .line-name { --food-ink: var(--food-shed, var(--food)); } }
-:root[data-theme="dark"] .named-lines .line-name { --food-ink: var(--food-shed, var(--food)); }
-.named-lines .line-words { color: var(--muted); }
-@media (max-width: 599px) {
-  .named-lines { display: block; }
-  .named-lines li { display: block; }
-  .named-lines li + li { margin-top: var(--sp-1); }
-  .named-lines .line-name, .named-lines .line-words { display: block; }
-}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ring-row .line-name { --food-ink: var(--food-shed, var(--food)); } }
+:root[data-theme="dark"] .ring-row .line-name { --food-ink: var(--food-shed, var(--food)); }
+.ring-source { color: var(--muted); font-size: var(--fs-small); }
+/* A lit ring and its row: the rest fade to a quarter, as on the charts. */
+.breakdown.is-lit .ring:not(.is-hot), .breakdown.is-lit .ring-list li:not(.is-hot) { opacity: 0.25; }
+.breakdown .ring, .ring-list li { transition: opacity 0.15s; }
+/* The dial's spokes, months, hand and date let the pointer through to
+   the rings under them. */
+.breakdown .spoke, .breakdown .month, .breakdown .hand, .breakdown .today-label { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .breakdown .ring, .ring-list li { transition: none; } }
 
 /* --- Home: the hook ------------------------------------------------------- */
 /* The hero is the logo, and the logo is the input. At rest it reads "IS
@@ -490,8 +499,12 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .wheel svg.mono .blend { stroke: var(--c); }
 .one-result.is-plain { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text"; }
 .one-result.is-plain .one-more, .one-result.is-plain .one-hint, .one-result.is-plain .one-dial { display: none; }
+/* On home the hero asks the question, so the answer leaves it out, unless
+   the hero's word is not the food's name (an alias, a later word, a
+   variety): then the card asks it in the food's own name (.asks). */
 .results .one-ask { display: none; }
-.results .one-result .one-word { margin-top: 0; }
+.results .one-result.asks .one-ask { display: block; }
+.results .one-result:not(.asks) .one-word { margin-top: 0; }
 @media (max-width: 37.49rem) {
   .one-result { padding: var(--sp-2); gap: var(--sp-2); }
 }
@@ -509,7 +522,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   .one-result:not(.is-plain) .one-hint { margin-top: var(--sp-1); }
   .one-result:not(.is-plain) .one-dial { width: 72px; height: 72px; }
   .tt-pop .one-dial { margin-top: 36px; }
-  .results .one-result:not(.is-plain) { grid-template-areas: "when when" "word dial" "line line" "more more" "hint hint"; }
+  .results .one-result:not(.is-plain):not(.asks) { grid-template-areas: "when when" "word dial" "line line" "more more" "hint hint"; }
 }
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
 .results-none .food-group { margin-top: var(--sp-4); }
@@ -539,62 +552,42 @@ article.never { --food: var(--never); }
 .verdict + .date-line + .quote { margin-top: var(--sp-4); }
 .not-found .verdict-word, .is-unknown .one-word { color: var(--ink); }
 /* Under the verdict, one column at every width, every block 40px from
-   the next: the date line, the quotation, the variety lines, the dial
-   (on the same left edge as the words), the notes. Text keeps a measure
-   of about 65ch. A date line wraps "pretty", so no word is left alone on
-   its last line. */
+   the next: the date line, the quotation, the breakdown (the dial on the
+   same left edge as the words, its ring list under it), the counter
+   note. Text keeps a measure of about 65ch. A date line wraps "pretty",
+   so no word is left alone on its last line. */
 .food-body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-4); margin-top: var(--sp-3); }
 .food-body > * { margin: 0; max-width: 65ch; }
-.food-body > .wheel { width: min(22rem, 100%); }
+.breakdown .wheel { width: min(22rem, 100%); margin: 0; }
 .date-line, .one-line { text-wrap: pretty; }
 /* A quotation and every note stand behind a bar in the food's colour. */
 .quote { margin: 0; max-width: 34rem; padding-left: var(--sp-2); border-left: 3px solid var(--food); font: italic 400 var(--fs-lead)/1.3 var(--quote); }
 .quote p { margin: 0; max-width: none; }
 .quote cite { display: block; margin-top: var(--sp-1); font: 400 var(--fs-small)/1.4 var(--text); font-style: normal; color: var(--muted); }
 .quote cite::before { content: "— "; }
-.buy { max-width: 36rem; margin: 0; padding: var(--sp-1) var(--sp-2); border-left: 3px solid var(--food); }
+/* The counter note: small, in full ink, behind the food's bar. */
+.buy { max-width: 36rem; margin: 0; padding: var(--sp-1) var(--sp-2); border-left: 3px solid var(--food); color: var(--ink); }
+.buy small { font-size: var(--fs-small); }
 .also, .fine { margin: var(--sp-4) 0 0; }
 .also-more { margin: var(--sp-1) 0 0; color: var(--muted); }
-/* The data disclosure's summary is a control, so it is Atkinson, not Anton. */
+/* The sources disclosure's summary is a control, so it is Atkinson, not
+   Anton. Opened: the numbered sources, then the notes on the data. */
 .fine { color: var(--muted); }
 .fine summary { cursor: pointer; margin: 0; }
-/* The instructive style: the data summary, the as-of line, the calendar
-   line's lead-in. */
+/* The instructive style: the sources summary, the calendar line's
+   lead-in. */
 .fine summary, .instruct { font: 700 var(--fs-body)/1.3 var(--text); color: var(--muted); }
 .fine summary span { display: inline; }
-/* The runs are one grid across their bands, so the names keep one column;
-   a band's label spans it, a hairline above every band but the first. */
-.runs { margin: var(--sp-2) 0; display: grid; grid-template-columns: max-content 1fr; column-gap: var(--sp-2); row-gap: var(--sp-1); align-items: baseline; }
-.runs > div, .runs .named-lines { display: contents; }
-.runs .group-label { grid-column: 1 / -1; margin: 0; }
-.runs .food-group + .food-group .group-label { border-top: 1px solid color-mix(in oklab, var(--ink) 10%, var(--bg)); margin-top: var(--sp-2); padding-top: var(--sp-3); }
-@media (max-width: 599px) {
-  .runs { display: block; }
-  .runs > div { display: block; }
-  .runs > div + div { margin-top: var(--sp-1); }
-  .runs .named-lines { display: block; }
-  .runs .group-label { margin-bottom: var(--sp-1); }
-}
-.runs .ring-note { font-size: var(--fs-small); }
-.note, .source, .as-of { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
-.fine .source { margin-bottom: var(--sp-1); }
+.fine .food-sources { margin-top: var(--sp-2); }
+.note { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
 .food-sources { font-size: var(--fs-small); }
-/* Under the data, in the data summary's instructive style: the as-of line
-   ("22nd October", the letters raised without opening the line), then
-   "Put apples in your calendar:" and its links at body size, a dotted
-   list; under them, small, the feeds page and every food's feed. */
-.food > .as-of { margin: var(--sp-4) 0 0; font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; }
-.food > .page-rule + .calendar-line { margin-top: var(--sp-4); }
-.calendar-line { margin: var(--sp-1) 0 0; color: var(--muted); max-width: 40rem; }
-.calendar-line .sep, .calendar-also .sep { color: var(--muted); }
-.calendar-also { margin: var(--sp-1) 0 0; color: var(--muted); font-size: var(--fs-small); }
-/* The food page's rules: in the data, between the chart and the runs
-   (faint, as a hairline between groups is) and before the notes; then
-   round the as-of and calendar lines, and before the way on. */
+/* "Add apples to your calendar:" and its links, one dotted line. */
+.calendar-line { margin: var(--sp-4) 0 0; color: var(--muted); max-width: 40rem; }
+.calendar-line .sep { color: var(--muted); }
+/* The food page's one rule, between "Also great this week" and the
+   sources. */
 .page-rule { border: 0; border-top: 1px solid var(--rule); margin: var(--sp-3) 0; }
-.page-rule.is-faint { border-top-color: color-mix(in oklab, var(--ink) 10%, var(--bg)); }
 .food > .page-rule { margin: var(--sp-4) 0 0; }
-.fine .data-title { margin: var(--sp-3) 0 var(--sp-1); }
 .suggest { margin: var(--sp-4) 0 0; }
 .onwards { margin: var(--sp-4) 0 0; }
 .onwards + .onwards { margin-top: var(--sp-1); }
@@ -710,9 +703,6 @@ article.never { --food: var(--never); }
 .wheel .today-label { fill: var(--muted); font-family: var(--text); font-size: 12px; font-weight: 700; letter-spacing: var(--track-caps); text-transform: uppercase; text-anchor: middle; }
 .wheel .today-label[hidden] { display: none; }
 .wheel .today-label .date { fill: var(--ink); font-size: 14px; letter-spacing: 0; text-transform: none; }
-.wheel figcaption { color: var(--muted); font-size: var(--fs-small); margin-top: var(--sp-1); }
-.rings { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-3); }
-.rings .swatch { margin-right: var(--sp-1); }
 @media (prefers-reduced-motion: reduce) { .wheel .hand { transition: opacity 0.4s; } }
 
 /* The arrivals wheel: a month ring with food labels radiating from it.

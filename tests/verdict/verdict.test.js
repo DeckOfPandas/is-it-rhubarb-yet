@@ -45,13 +45,14 @@ test("the week grid", () => {
 });
 
 test("every food and every variety has a verdict and a date phrase in every week", () => {
-  const OK = new Set(["YES", "JUST", "NEARLY", "NO"]);
+  const OK = new Set(["YES", "JUST", "YES-ISH", "NEARLY", "NO"]);
   const missing = [];
   for (const f of foods) {
     for (let w = 1; w <= 52; w++) {
       const today = V.midOfToday(w, YEAR);
       const fv = V.foodVerdict(f, w);
       if (!OK.has(fv.verdict)) missing.push(`${f.slug} week ${w}: verdict ${fv.verdict}`);
+      if (!V.phrase(fv.whole, YEAR, today)) missing.push(`${f.slug} week ${w}: no phrase for the whole food`);
       for (const r of fv.varieties) {
         if (!OK.has(r.verdict)) missing.push(`${f.slug}/${r.name} week ${w}: verdict ${r.verdict}`);
         if (!V.phrase(r, YEAR, today)) missing.push(`${f.slug}/${r.name} week ${w}: no phrase`);
@@ -77,35 +78,37 @@ test("a clock change does not move the week", () => {
   assert.equal(V.weekOf(new Date(2026, 9, 26, 0, 0, 0)), 43);
 });
 
+// Each ring's own phrase, by name, in the ring list's order.
+function ringLines(slug, week = WEEK, today = TODAY) {
+  const fv = verdictOf(slug, week);
+  return V.ringOrder(bySlug[slug]).map((i) => [fv.varieties[i].name, V.phrase(fv.varieties[i], YEAR, today)]);
+}
+
 test("rhubarb is NEARLY: forced rhubarb from 29 October, eleven days off", () => {
   const fv = verdictOf("rhubarb");
   assert.equal(fv.verdict, "NEARLY");
-  assert.equal(fv.variety.name, "Forced");
-  assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "In a week or two.");
-  assert.deepEqual(V.varietyLines(bySlug.rhubarb, fv, YEAR, TODAY).map((l) => [l.name, l.answer]),
-    [["Forced", "In a week or two"], ["Outdoor", "Back in May"]],
+  assert.equal(iso(V.startDate(fv.whole.from, YEAR)), "2026-10-29");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "In a week or two.");
+  assert.deepEqual(ringLines("rhubarb"), [["Forced", "In a week or two"], ["Outdoor", "Back in May"]],
     "outdoor rhubarb's week 18 starts on 30 April, but its middle is 3 May");
 });
 
 test("celery is JUST: a hard stop after week 43, ten days off", () => {
   const fv = verdictOf("celery");
   assert.equal(fv.verdict, "JUST");
-  assert.equal(fv.variety.hardStop, true);
-  assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-10-28");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "For another week or two.");
+  assert.equal(fv.whole.hardStop, true);
+  assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-10-28");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "For another week or two.");
   assert.equal(verdictOf("celery", 41).verdict, "YES", "two full weeks left is still YES");
   assert.equal(verdictOf("celery", 43).verdict, "JUST", "the last week is JUST");
 });
 
-test("potatoes are YES by maincrop until late December; new potatoes are back in May", () => {
+test("potatoes are YES until late December, then from storage; new potatoes are back in May", () => {
   const fv = verdictOf("potatoes");
   assert.equal(fv.verdict, "YES");
-  assert.equal(fv.variety.name, "Maincrop");
-  assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-12-31");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Until late December.");
-  assert.deepEqual(V.varietyLines(bySlug.potatoes, fv, YEAR, TODAY).map((l) => [l.name, l.answer]),
-    [["Maincrop", "Until late December"], ["New", "First ones in May, properly in June"]]);
+  assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-12-31");
+  assert.match(V.dateLine(fv.whole, YEAR, TODAY), /^Until late December, then available from storage until /);
+  assert.deepEqual(ringLines("potatoes"), [["Maincrop", "Until late December"], ["New", "First ones in May, properly in June"]]);
 });
 
 test("a variety is named as a type or a cultivar, in a list and in a sentence", () => {
@@ -129,7 +132,7 @@ test("a variety is named as a type or a cultivar, in a list and in a sentence", 
 });
 
 test("a two-part arrival is grouped by when it is properly in", () => {
-  const t = (slug) => V.timing(verdictOf(slug).variety, YEAR, TODAY);
+  const t = (slug) => V.timing(verdictOf(slug).whole, YEAR, TODAY);
   assert.deepEqual(t("jerusalem-artichokes"), { when: "In a week or two", early: "a few about now", days: 11 });
   assert.equal(t("celery").when, "For another week or two");
   assert.equal(t("celery").early, "");
@@ -141,114 +144,147 @@ test("a two-part arrival is grouped by when it is properly in", () => {
 test("Jerusalem artichokes are NEARLY from a just-about week", () => {
   const fv = verdictOf("jerusalem-artichokes");
   assert.equal(fv.verdict, "NEARLY");
-  assert.equal(fv.variety.state, "avail");
-  assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "A few about now, properly in a week or two.");
+  assert.equal(fv.whole.state, "avail");
+  assert.equal(iso(V.startDate(fv.whole.from, YEAR)), "2026-10-29");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "A few about now, properly in a week or two.");
 });
 
 test("basil is JUST: a just-about tail to 28 October", () => {
   const fv = verdictOf("basil");
   assert.equal(fv.verdict, "JUST");
-  assert.equal(fv.variety.tail, true);
-  assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-10-28");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "For another week or two.");
+  assert.equal(fv.whole.tail, true);
+  assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-10-28");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "For another week or two.");
 });
 
 test("asparagus is NO: first ones in April, properly in May", () => {
   const fv = verdictOf("asparagus");
   assert.equal(fv.verdict, "NO");
-  assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2027-04-02");
-  assert.equal(iso(V.startDate(fv.variety.inFrom, YEAR)), "2027-04-30");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "First ones in April, properly in May.");
+  assert.equal(iso(V.startDate(fv.whole.from, YEAR)), "2027-04-02");
+  assert.equal(iso(V.startDate(fv.whole.inFrom, YEAR)), "2027-04-30");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "First ones in April, properly in May.");
 });
 
-test("button mushrooms are YES all year", () => {
-  const fv = verdictOf("button-mushrooms");
+test("cultivated mushrooms are YES all year", () => {
+  const fv = verdictOf("mushrooms-cultivated");
   assert.equal(fv.verdict, "YES");
-  assert.equal(fv.variety.allYear, true);
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "All year.");
+  assert.equal(fv.whole.allYear, true);
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "All year.");
 });
 
-test("celeriac is in season until late January, then from storage until late August", () => {
+test("celeriac: in season until late January, then from storage; YES-ISH in May", () => {
   const fv = verdictOf("celeriac");
   assert.equal(fv.verdict, "YES");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Until late January.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Until late January, then available from storage until late August.");
   const may = verdictOf("celeriac", 20);
-  assert.equal(may.verdict, "YES", "a store week answers as in season does");
-  assert.equal(may.variety.store, true);
-  assert.equal(V.dateLine(may.variety, YEAR, V.midOfToday(20, YEAR)), "Available from storage until late August.");
-  assert.equal(V.foodVerdict(bySlug.celeriac, 20).variety.since, 52, "never just arrived from store");
+  assert.equal(may.verdict, "YES-ISH", "storage alone is YES-ISH");
+  assert.equal(may.whole.store, true);
+  assert.equal(V.dateLine(may.whole, YEAR, V.midOfToday(20, YEAR)), "Available from storage until late August.");
+  assert.equal(may.whole.since, 52, "never just arrived from storage");
 });
 
-test("between two YES, in season beats from store", () => {
+test("apples answer for the whole food: fresh until late November, then storage", () => {
   const fv = verdictOf("apples");
   assert.equal(fv.verdict, "YES");
-  assert.notEqual(fv.variety.store, true);
-  assert.ok(!/storage/.test(V.dateLine(fv.variety, YEAR, TODAY)));
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Until late November, then available from storage until late July.");
+  assert.equal(verdictOf("apples", 20).verdict, "YES-ISH");
+  const july = V.midOfToday(30, YEAR);
+  assert.equal(V.dateLine(verdictOf("apples", 30).whole, YEAR, july),
+    "Available from storage for a few more days. Fresh any day now.", "fresh within NEARLY's threshold is named");
 });
 
-test("a fish answers by its South West ring; the other coasts follow, one to a line", () => {
-  const fv = verdictOf("cod");
-  assert.equal(fv.variety.name, "South West");
-  assert.ok(fv.varieties.filter((r) => !r.lead).length >= 2, "other coasts are rings that do not lead");
-  const lines = V.varietyLines(bySlug.cod, fv, YEAR, TODAY);
-  assert.ok(lines.some((l) => l.name === "South West"));
-  assert.ok(lines.some((l) => l.name === "North East"));
-  assert.equal(lines.length, bySlug.cod.varieties.length);
-  lines.forEach((l) => assert.equal(bySlug.cod.varieties[l.index].name, l.name));
+test("the combined timeline takes each week's best state across the rings", () => {
+  const food = {
+    name: "T", slug: "t", colour: "#000000",
+    varieties: [
+      { name: "A", weeks: [[10, 20, "in"], [21, 30, "store"]] },
+      { name: "B", weeks: [[15, 25, "avail"], [40, 45, "in"]] },
+      { name: "Glasshouse", ring: "method", weeks: [[1, 52, "in"]] }
+    ]
+  };
+  const t = V.timelineOf(food).timeline;
+  assert.equal(t[12], "in", "in beats glass");
+  assert.equal(t[22], "avail", "avail beats store");
+  assert.equal(t[27], "glass", "a glasshouse ring counts as glass, not in, and glass beats store");
+  assert.equal(t[42], "in");
+  assert.equal(t[50], "glass");
+  assert.equal(V.timelineOf({ name: "U", varieties: [{ name: "", weeks: [[5, 8, "store"]] }] }).timeline[6], "store");
 });
 
-test("variety lines: in season ending soonest first, all year next, then the rest back soonest first", () => {
-  const fv = verdictOf("lettuce");
-  const lines = V.varietyLines(bySlug.lettuce, fv, YEAR, TODAY);
-  const byIndex = (l) => fv.varieties[l.index];
-  const rank = (r) => (r.verdict === "YES" || r.verdict === "JUST" ? (r.allYear ? 1 : 0) : 2);
-  const ranks = lines.map((l) => rank(byIndex(l)));
-  assert.deepEqual(ranks, ranks.slice().sort(), "in season, then all year, then not in season");
-  ranks.forEach((k, i) => {
-    if (i && ranks[i - 1] === k && k !== 1) {
-      const a = V.daysTo(byIndex(lines[i - 1]), YEAR, TODAY), b = V.daysTo(byIndex(lines[i]), YEAR, TODAY);
-      assert.ok(a <= b, `${lines[i - 1].name} before ${lines[i].name}`);
+test("verdict order: YES > JUST > YES-ISH > NEARLY > NO", () => {
+  assert.ok(V.RANK.YES > V.RANK.JUST);
+  assert.ok(V.RANK.JUST > V.RANK["YES-ISH"]);
+  assert.ok(V.RANK["YES-ISH"] > V.RANK.NEARLY);
+  assert.ok(V.RANK.NEARLY > V.RANK.NO);
+  // Fresh beats storage: a fresh week over storage is never YES-ISH.
+  const both = { name: "T", slug: "t", colour: "#000000", varieties: [
+    { name: "A", weeks: [[10, 20, "store"]] }, { name: "B", weeks: [[12, 14, "in"]] }] };
+  assert.equal(V.foodVerdict(both, 12).verdict, "YES");
+  // YES-ISH beats NEARLY: storage while fresh food is coming in.
+  const coming = { name: "T", slug: "t", colour: "#000000", varieties: [
+    { name: "A", weeks: [[10, 20, "store"]] }, { name: "B", weeks: [[12, 13, "avail"], [14, 30, "in"]] }] };
+  assert.equal(V.foodVerdict(coming, 12).verdict, "YES-ISH");
+  assert.equal(V.foodVerdict(coming, 11).verdict, "YES-ISH");
+});
+
+test("every food, every week: the order holds and the storage words are right", () => {
+  const wrong = [];
+  for (const f of foods) {
+    if (f.unsold) continue;
+    const t = V.timelineOf(f);
+    for (let w = 1; w <= 52; w++) {
+      const today = V.midOfToday(w, YEAR);
+      const fv = V.foodVerdict(f, w), line = V.dateLine(fv.whole, YEAR, today);
+      const s = t.timeline[w], at = `${f.slug} week ${w}`;
+      if (s === "in" && !["YES", "JUST"].includes(fv.verdict)) wrong.push(`${at}: in season but ${fv.verdict}`);
+      if ((s === "store" || s === "glass") && fv.verdict !== "YES-ISH") wrong.push(`${at}: held alone but ${fv.verdict}`);
+      if (s === "" && !["NEARLY", "NO"].includes(fv.verdict)) wrong.push(`${at}: nothing but ${fv.verdict}`);
+      if (fv.verdict === "YES-ISH" && !/^(Available from storage|Glasshouse-grown)/.test(line)) wrong.push(`${at}: ${line}`);
+      if (/from store\b/.test(line)) wrong.push(`${at}: says "from store": ${line}`);
+      if (/, then /.test(line) && !/, then (available from storage|glasshouse-grown)/.test(line)) wrong.push(`${at}: ${line}`);
+      if (/\d/.test(line)) wrong.push(`${at}: a number in ${line}`);
     }
-  });
-  lines.forEach((l) => assert.equal(l.answer, V.phrase(byIndex(l), YEAR, TODAY)));
+  }
+  assert.deepEqual(wrong, []);
 });
 
-test("one variety has no variety lines, and neither does a food that cannot be sold", () => {
-  assert.deepEqual(V.varietyLines(bySlug.celery, verdictOf("celery"), YEAR, TODAY), []);
-  assert.deepEqual(V.varietyLines(bySlug["wild-salmon"], verdictOf("wild-salmon"), YEAR, TODAY), []);
+test("JUST runs across overlapping rings: one ring ending is not the food ending", () => {
+  const food = { name: "T", slug: "t", colour: "#000000", varieties: [
+    { name: "A", weeks: [[10, 20, "in"]] }, { name: "B", weeks: [[15, 30, "in"]] }] };
+  assert.equal(V.varietyVerdict(food.varieties[0], 20).verdict, "JUST", "ring A on its own ends");
+  assert.equal(V.foodVerdict(food, 20).verdict, "YES", "B carries the food on");
+  assert.equal(V.foodVerdict(food, 30).verdict, "JUST");
+  const stored = { name: "T", slug: "t", colour: "#000000", varieties: [{ name: "", weeks: [[10, 20, "in"], [21, 40, "store"]] }] };
+  const r = V.foodVerdict(stored, 20).whole;
+  assert.equal(r.verdict, "JUST", "storage to follow does not stop a hard stop");
+  assert.equal(V.dateLine(r, YEAR, V.midOfToday(20, YEAR)), "For a few more days, then available from storage until early October.");
 });
 
-test("a food page's data puts its varieties in Now's bands, soonest first", () => {
-  const apples = V.varietyBands(bySlug.apples, verdictOf("apples"), YEAR, TODAY);
-  assert.equal(apples.named, true, "six varieties in more than one band");
-  const order = ["arrived", "last", "onway", "still", "later"];
-  const keys = apples.bands.map((b) => b.key);
-  assert.deepEqual(keys, order.filter((k) => keys.includes(k)), "bands in Now's order");
-  const all = apples.bands.flatMap((b) => b.indexes);
-  assert.deepEqual(all.slice().sort(), bySlug.apples.varieties.map((_, i) => i), "every variety once");
-  const fv = verdictOf("apples");
-  apples.bands.forEach((b) => {
-    const days = b.indexes.map((i) => V.daysTo(fv.varieties[i], YEAR, TODAY) ?? Infinity);
-    days.forEach((d, i) => assert.ok(i === 0 || days[i - 1] <= d, b.key + " is soonest first"));
-  });
-  assert.equal(V.varietyBands(bySlug.celery, verdictOf("celery"), YEAR, TODAY).named, false, "one variety is never banded");
-  assert.equal(V.varietyBands(bySlug.rhubarb, verdictOf("rhubarb"), YEAR, TODAY).named, false, "two are too few");
+test("glasshouse: YES-ISH alone, for now when outdoor follows", () => {
+  const fv = verdictOf("pak-choi");
+  assert.equal(fv.verdict, "YES-ISH");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Glasshouse-grown for now; outdoor from early July.");
+  const food = { name: "T", slug: "t", colour: "#000000", varieties: [
+    { name: "Glasshouse", ring: "method", weeks: [[1, 47, "in"]] }, { name: "Outdoor", weeks: [[20, 40, "in"]] }] };
+  assert.equal(V.dateLine(V.foodVerdict(food, WEEK).whole, YEAR, TODAY), "Glasshouse-grown until late November.");
 });
 
-test("a variety's runs in fuzzy months, the year's ends joined", () => {
-  const v = (slug, name) => bySlug[slug].varieties.find((x) => x.name === name);
-  assert.equal(V.runsSaid(v("apples", "Bramley"), YEAR), "In season August to September, available from storage October to July.");
-  assert.equal(V.runsSaid(v("apples", "Braeburn"), YEAR),
-    "A few about in October, in season in November, available from storage December to April.");
-  assert.equal(V.runsSaid({ weeks: [[1, 52, "in"]] }, YEAR), "In season all year.");
-  assert.equal(V.runsSaid({ weeks: [[47, 52, "in"]] }, YEAR), "In season late November to December.", "week 47's middle is 22 November");
-  assert.equal(V.runsSaid({ weeks: [[42, 42, "in"]] }, YEAR), "In season in mid-October.");
-  assert.equal(V.runsSaid({ weeks: [] }, YEAR), "");
-  for (const f of foods) for (const x of f.varieties) {
-    const s = V.runsSaid(x, YEAR);
-    assert.ok(!/\d/.test(s), `${f.slug}/${x.name}: ${s}`);
-    if (x.weeks.length) assert.match(s, /^[A-Z].*\.$/, `${f.slug}/${x.name}: ${s}`);
+test("a fish answers for all its coasts together", () => {
+  const fv = verdictOf("cod");
+  assert.equal(fv.verdict, "YES");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Until late January.");
+  assert.equal(verdictOf("haddock").whole.allYear, true, "an all-year coast makes the fish all year");
+});
+
+test("rings run from the longest season to the shortest, ties in data order", () => {
+  const food = { name: "T", varieties: [
+    { name: "A", weeks: [[1, 10, "in"]] }, { name: "B", weeks: [[1, 20, "in"], [21, 30, "store"]] },
+    { name: "C", weeks: [[5, 14, "avail"]] }, { name: "D", weeks: [[1, 52, "in"]] }] };
+  assert.deepEqual(V.ringOrder(food), [3, 1, 0, 2]);
+  assert.deepEqual(ringLines("lettuce").slice(0, 2).map((l) => l[0]), ["Iceberg", "Glasshouse"]);
+  for (const f of foods) {
+    const order = V.ringOrder(f);
+    assert.deepEqual(order.slice().sort((a, b) => a - b), f.varieties.map((_, i) => i), f.slug + ": every ring once");
   }
 });
 
@@ -256,15 +292,15 @@ test("wild salmon cannot be sold: always NO, its line says why", () => {
   for (const w of [1, 26, 42]) {
     const fv = verdictOf("wild-salmon", w);
     assert.equal(fv.verdict, "NO");
-    assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "It cannot be sold in England, Wales or Scotland.");
+    assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "It cannot be sold in England, Wales or Scotland.");
   }
 });
 
 test("tomatoes are JUST until late November: week 48 ends on 2 December but its middle is 29 November", () => {
   const fv = verdictOf("tomatoes");
   assert.equal(fv.verdict, "JUST");
-  assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-12-02");
-  assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Until late November.");
+  assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-12-02");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Until late November.");
 });
 
 test("coming in: the phrase coarsens with distance and never names a day", () => {
@@ -293,11 +329,10 @@ test("going out: a few more days, a week or two, two or three weeks, then the mo
 test("the wrap: forced rhubarb in week 52 is YES until April", () => {
   const fv = verdictOf("rhubarb", 52);
   assert.equal(fv.verdict, "YES");
-  assert.equal(fv.variety.name, "Forced");
-  assert.deepEqual(fv.variety.until, { week: 13, years: 1 });
-  assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2027-04-01");
-  assert.equal(V.dateLine(fv.variety, YEAR, on(2026, 12, 27)), "Until late March.");
-  assert.equal(V.foodVerdict(bySlug.rhubarb, 2).variety.since, 10, "weeks since the run began count back over the year end");
+  assert.deepEqual(fv.whole.until, { week: 13, years: 1 });
+  assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2027-04-01");
+  assert.equal(V.dateLine(fv.whole, YEAR, on(2026, 12, 27)), "Until late March.");
+  assert.equal(V.foodVerdict(bySlug.rhubarb, 2).whole.since, 10, "weeks since the run began count back over the year end");
 });
 
 test("thresholds: NEARLY within three weeks, NO before that", () => {
@@ -329,7 +364,7 @@ test("a variety that is only ever just about", () => {
   assert.deepEqual(after.from, { week: 10, years: 1 });
 });
 
-test("ranking across varieties: YES beats JUST beats NEARLY beats NO; sooner wins a tie", () => {
+test("the whole food is NEARLY when its soonest ring is", () => {
   const food = {
     name: "T", slug: "t", colour: "#000000",
     varieties: [
@@ -340,7 +375,7 @@ test("ranking across varieties: YES beats JUST beats NEARLY beats NO; sooner win
   };
   const fv = V.foodVerdict(food, 42);
   assert.equal(fv.verdict, "NEARLY");
-  assert.equal(fv.variety.name, "B");
+  assert.deepEqual(fv.whole.from, { week: 44, years: 0 });
 });
 
 test("calendar dates, for the as-of line and the week range only", () => {
@@ -360,7 +395,7 @@ test("calendar dates, for the as-of line and the week range only", () => {
   assert.deepEqual(ords, ["1st", "2nd", "3rd", "4th", "11th", "12th", "13th", "21st", "22nd", "23rd", "31st"]);
 });
 
-test("the weekly digest for week 42: four lists, by kind, by time left", () => {
+test("the weekly digest for week 42: its lists, by kind, by time left", () => {
   const now = V.nowLists(foods, groups, WEEK, YEAR, TODAY);
   const slugs = (list) => V.flatten(list).map((i) => i.slug);
   assert.ok(slugs(now.onway).includes("rhubarb"));
@@ -374,7 +409,7 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
   V.flatten(now.arrived).forEach((i) => assert.ok(i.since < V.C.NEW_WEEKS));
   // Kinds come in the order of groups.yml, and each kind appears once.
   const order = ["veg", "fruit", "wild", "herbs", "fish", "meat"];
-  ["arrived", "last", "onway", "still"].forEach((name) => {
+  ["arrived", "last", "onway", "still", "store", "glass"].forEach((name) => {
     const kinds = now[name].map((k) => k.kind);
     assert.deepEqual(kinds, order.filter((k) => kinds.includes(k)), name + " is in kind order");
     assert.equal(new Set(kinds).size, kinds.length);
@@ -387,15 +422,18 @@ test("the weekly digest for week 42: four lists, by kind, by time left", () => {
   now.onway.forEach((k) => assert.ok(ascending(k.items), "on the way " + k.kind));
   const keys = (items) => items.map((i) => i.name + " " + i.variety);
   now.arrived.concat(now.still).forEach((k) => assert.deepEqual(keys(k.items), keys(k.items).slice().sort(), k.kind + " is A to Z"));
-  // A variety is named as a list shows it.
-  assert.equal(V.flatten(now.onway).find((i) => i.slug === "rhubarb").variety, "forced");
+  // Each item is the whole food, unnamed by variety.
+  assert.equal(V.flatten(now.onway).find((i) => i.slug === "rhubarb").variety, "");
+  // YES-ISH foods are in the storage and glasshouse lists alone.
+  V.flatten(now.store).concat(V.flatten(now.glass)).forEach((i) => assert.equal(i.verdict, "YES-ISH", i.slug));
+  assert.ok(slugs(now.glass).includes("pak-choi"));
   // Lines are the new phrasing, never a calendar date.
   V.flatten(now.last).concat(V.flatten(now.onway), V.flatten(now.still)).forEach((i) => {
     assert.ok(!/\d/.test(i.line), i.name + ": " + i.line);
   });
   assert.equal(V.flatten(now.last).find((i) => i.slug === "celery").line, "For another week or two");
   // Nothing appears twice.
-  const all = slugs(now.arrived).concat(slugs(now.last), slugs(now.onway), slugs(now.still));
+  const all = slugs(now.arrived).concat(slugs(now.last), slugs(now.onway), slugs(now.still), slugs(now.store), slugs(now.glass));
   assert.equal(new Set(all).size, all.length);
   // With no groups given, everything is one unnamed kind.
   const plain = V.nowLists(foods, [], WEEK, YEAR, TODAY);
@@ -429,9 +467,11 @@ test("last chance and on the way group by one timing, soonest first, A to Z with
 test("quotations are stable for a food for a week and prefer pinned lines", () => {
   const quotes = {
     yes: [{ text: "a", by: "x" }, { text: "b", by: "y" }, { text: "p", by: "z", foods: ["rhubarb"] }],
+    yesish: [{ text: "s", by: "x" }],
     no: [{ text: "c", by: "x" }]
   };
   assert.equal(V.pickQuote(quotes, "YES", "rhubarb", 42).text, "p");
+  assert.equal(V.pickQuote(quotes, "YES-ISH", "apples", 20).text, "s", "YES-ISH draws from yesish");
   const q1 = V.pickQuote(quotes, "YES", "kale", 42), q2 = V.pickQuote(quotes, "YES", "kale", 42);
   assert.equal(q1, q2);
   assert.equal(V.pickQuote(quotes, "NEVER", "bananas", 42), null);

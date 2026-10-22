@@ -35,18 +35,20 @@ SOURCES_FILE = ROOT / "_data" / "sources.yml"
 STUBS = ROOT / "_foods"
 REMIND = ROOT / "_remind"
 NEVER_STUBS = ROOT / "_never"
-VERDICTS = {"yes", "nearly", "just", "no", "never"}
+# The quotation pools, one per verdict; YES-ISH's is "yesish".
+VERDICTS = {"yes", "yesish", "nearly", "just", "no", "never"}
 STATES = {"in", "avail", "store"}
 RINGS = {"region", "method", "zone", "part"}
 COLOUR = re.compile(r"^#[0-9a-f]{6}$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
 # Paths that are not foods. A food with one of these slugs would take the
-# page's URL, because food pages live at /<slug>/. grey-squirrel is the
-# page that forwards to /squirrel/.
+# page's URL, because food pages live at /<slug>/. grey-squirrel and
+# button-mushrooms are pages that forward to a renamed food.
 RESERVED_SLUGS = {"now", "calendar", "wheel", "about", "sources", "foods",
                   "remind", "assets", "api", "season-starts", "404", "is-it", "year",
-                  "icons", "cards", "grey-squirrel", "kitchen-sink", "sustainability-and-carbon"}
+                  "icons", "cards", "grey-squirrel", "button-mushrooms", "kitchen-sink",
+                  "sustainability-and-carbon"}
 
 SHED = "#16110e"
 CUSTARD = "#fbf3d9"

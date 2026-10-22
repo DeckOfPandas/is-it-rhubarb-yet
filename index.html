@@ -68,7 +68,8 @@ site.js adds the varieties from foods.json), the names it completes to
      never-food's card is its question, verdict and line, and no link),
      then "Also:" and the near matches; or, with no match, a plain card
      like a never-food's, LITERALLY NO IDEA. in ink, and the nearest
-     foods.
+     foods. Under any of them, "Ask about something else →" empties the
+     hero.
      {%- endcomment -%}
   <section class="results" id="results" aria-labelledby="results-label" hidden>
     <h2 class="teaser-label" id="results-label"></h2>
@@ -82,6 +83,7 @@ site.js adds the varieties from foods.json), the names it completes to
         <ul class="food-list" id="suggest-list"></ul>
       </div>
     </div>
+    <p class="onwards"><a class="arrow-link" id="ask-again" href="{{ '/' | relative_url }}#search">{% include arrow-words.html text="Ask about something else" %}</a></p>
   </section>
   <p class="visually-hidden" id="results-status" aria-live="polite"></p>
 </section>
