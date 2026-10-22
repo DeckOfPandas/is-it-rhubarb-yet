@@ -31,7 +31,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   "as of" date, which is when an answer was true. Dates are plain
   numbers: "19 October 2026", "15–21 October"; the food page's as-of
   line alone is an ordinal with its letters raised, "Verdict correct
-  as of 22<sup>nd</sup> October." (issue for doing this everywhere).
+  as of 22<sup>nd</sup> October." (#65 does this everywhere).
 - **The digest** (`nowLists`) returns each of its four lists split by
   kind of food, `[{kind, items}]`, just arrived and great now A to Z,
   last chance and on the way soonest first. `flatten` gives one array,
@@ -860,6 +860,8 @@ Each an open issue:
   each), the pollock/pollack spelling, stored crops, long `avail` tails,
   the BBC/NCGM disagreements in the `note` fields.
 - #46 Easter eggs.
+- #65 Ordinal dates, "22<sup>nd</sup> October", everywhere a date is
+  printed.
 
 ## Ways this goes wrong
 
