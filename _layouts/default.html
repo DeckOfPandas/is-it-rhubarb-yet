@@ -2,16 +2,19 @@
 The page chrome. A food or never-food page gets its title and description
 from the baked verdict ("Is it rhubarb yet? Nearly."), so a link preview
 or a search result carries the answer and the date it was true for, and
-its share card, drawn by tools/cards.js into /cards/<slug>.png. Home and
-Now have cards of their own; every other page shows the home card.
+its share card, drawn by tools/cards.js into /cards/<slug>.png. Home,
+Now, the calendar and the wheel have cards of their own, the wheel's a
+JPEG; every other page shows the home card.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign title = page.title -%}
 {%- assign description = page.description | default: site.description -%}
-{%- assign card = "home" -%}
-{%- if page.url == "/now/" -%}{%- assign card = "now" -%}{%- endif -%}
+{%- assign card = "home.png" -%}
+{%- if page.url == "/now/" -%}{%- assign card = "now.png" -%}{%- endif -%}
+{%- if page.url == "/calendar/" -%}{%- assign card = "calendar.png" -%}{%- endif -%}
+{%- if page.url == "/wheel/" -%}{%- assign card = "wheel.jpg" -%}{%- endif -%}
 {%- if page.collection == "foods" or page.collection == "never" -%}
-  {%- assign card = page.slug -%}
+  {%- assign card = page.slug | append: ".png" -%}
   {%- if page.collection == "foods" -%}
     {%- assign thing = site.data.foods | where: "slug", page.slug | first -%}
   {%- else -%}
@@ -48,21 +51,30 @@ Now have cards of their own; every other page shows the home card.
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
-  <meta property="og:image" content="{{ '/cards/' | append: card | append: '.png' | absolute_url }}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="{{ '/cards/' | append: card | absolute_url }}">
+  {%- comment -%} The size tools/cards.js draws every card at;
+     tests/cards/cards.test.js checks each file against it. {%- endcomment %}
+  <meta property="og:image:width" content="2400">
+  <meta property="og:image:height" content="1260">
   <meta property="og:image:alt" content="{{ alt | escape }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ title | default: site.title | escape }}">
   <meta name="twitter:description" content="{{ description | strip | escape }}">
-  <meta name="twitter:image" content="{{ '/cards/' | append: card | append: '.png' | absolute_url }}">
+  <meta name="twitter:image" content="{{ '/cards/' | append: card | absolute_url }}">
   {%- if page.noindex %}
   <meta name="robots" content="noindex">
   {%- endif %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {%- comment -%} One design per size, drawn by tools/icons.js; the browser
+     picks by sizes. No SVG icon: a browser would take it at every size
+     over these. tests/cards/cards.test.js checks each file is its size.
+     {%- endcomment %}
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/icons/favicon-16.png' | relative_url }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/icons/favicon-32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{{ '/icons/favicon-48.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ '/icons/icon-96.png' | relative_url }}">
   <link rel="icon" type="image/png" sizes="192x192" href="{{ '/icons/icon-192.png' | relative_url }}">
-  <link rel="apple-touch-icon" href="{{ '/icons/apple-touch-icon.png' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/icons/apple-touch-icon.png' | relative_url }}">
   <link rel="preload" href="{{ '/assets/fonts/anton-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/atkinson-hyperlegible-next-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
