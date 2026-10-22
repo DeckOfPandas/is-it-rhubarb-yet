@@ -11,6 +11,7 @@
     "allow": [
       "Read(//dev/null)",
       "Edit(//dev/null)",
+      "Bash(sh scripts/check-link.sh *)",
       "Bash(python3 -m pytest)",
       "Bash(python3 -m pytest -q)",
       "Bash(git status *)",

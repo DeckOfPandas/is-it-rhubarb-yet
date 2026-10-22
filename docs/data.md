@@ -230,7 +230,9 @@ text colours, the `said`, `cultivar`, `ring`, `lead`, `short`, `aliases`
 and `also` fields, the source keys, the reserved slugs, every stub, and
 that every verdict has a general quotation. Problems fail; warnings
 print. Run it after every data edit. Python here has no YAML library, so
-Ruby parses each file.
+Ruby parses each file. It does not check that source links resolve:
+`sh scripts/check-link.sh <https-url>` does, one URL at a time, printing
+the status and the final address.
 
 ## Sources
 
