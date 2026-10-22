@@ -154,7 +154,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   - the foraging footnote;
   - the JSON;
   - the calendar feeds;
-  - the full list of sources by kind.
+  - the full list of sources by kind;
+  - the credits, after the footnote: the season icons and the TODAY pin
+    (one sentence) and the three fonts, small and muted, under CREDITS.
 
   `_data/sources.yml` names each source as that list does, for each
   food page's "Sources:" line. "common knowledge*" is one prose link
@@ -546,8 +548,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   sentence a prose link to rhubarb's page. The dinner food in "Coolio,
   I'm off to cook …" is picked at random on every visit from what is
   YES on the visitor's day (just arrived or great this week); the build
-  bakes one for no JavaScript. Credits for the four season icons and the
-  TODAY pin close the page.
+  bakes one for no JavaScript. It ends on the dinner line; the credits
+  are on Source data.
 - **Now.** The title follows the week shown ("this week", "next week",
   "last week", or none), over one muted line, "‹ 15–21 October ›".
   Weeks run through real years, a year either way of this week; the
@@ -730,7 +732,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   others. TODAY's pin (`season-today.svg`) is redrawn by hand, a
   teardrop and a ring, to the proportions of "You Are Here": Helen's
   file is a 416 KB trace, too heavy to inline on every chart page.
-  Credits on About, as the licence asks: sun and leaf, "seasons" by
+  Credits on Source data, as the licence asks: sun and leaf, "seasons" by
   Made by Made from Noun Project; flower and snowflake, "seasons" by
   VectorsLab from Noun Project; the pin, "You Are Here" by BBBL from
   Noun Project; all CC BY 3.0.

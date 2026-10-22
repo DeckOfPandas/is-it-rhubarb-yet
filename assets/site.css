@@ -879,6 +879,8 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .sources .footnote ol { margin: 0 0 var(--sp-1); padding-left: 1.4rem; }
 .source-list { padding-left: 1.2rem; margin: 0 0 var(--sp-2); }
 .source-list li { margin: 0.2rem 0; }
+/* The credits close Source data, under an Anton label, small and muted. */
+.sources .credits p { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
 .about-ways li { margin: var(--sp-1) 0; }
 
 /* --- Footer ---------------------------------------------------------------- */
