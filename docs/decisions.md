@@ -7,6 +7,34 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-22, after the full review
 
+- **A food page says its season in words**: "In season July to
+  October." under the dial, the whole food's fresh weeks (a glasshouse
+  ring counts as held, so it is left out). The page's title asks "When
+  are raspberries in season?" and, for a food of one ring, only the dial
+  picture answered.
+- **The ring list says "From the outside in:"**, since a fish's coasts
+  share one colour and nothing else said which row was which ring.
+- **Shared sources once.** The ring list named the source on every row
+  ("New Covent Garden Market & Defra" four times under apples); a row
+  names only what differs from the sources every ring shares, which are
+  said once under the list. Sources in a sentence join with commas and
+  "and", never "&".
+- **A food's `said` form** for names that must not be lower-cased
+  mid-sentence: "Is it John Dory yet?", "Dover sole", "Brussels
+  sprouts", "Jerusalem artichokes", "runner & French beans", "Brazil
+  nuts".
+- **"Skates and rays"**, not "Skates & rays".
+- **"A yes, a no, or a when"** in the home description: no season here
+  is a date.
+- **"Verdicts correct as of"**: home and Now carry 173 of them.
+- **The signature hearts are not a link.** About is the footer's word
+  and the nav's "??".
+- **A glasshouse ring's just-about weeks count for nothing** in the
+  whole food's timeline: cucumber's headline said "then glasshouse-grown
+  until late November" while its glasshouse row said "for a few more
+  days".
+- **Now's title says the week**: "In season in three weeks", "6 weeks
+  ago"; it said only "In season" beyond next and last week.
 - **The header search goes home on Enter only.** It used to go after
   0.3s on one good match or 0.8s otherwise; a slow typist was carried
   off mid-word and a phone lost its keyboard. Typing only colours the

@@ -879,29 +879,14 @@
 
   // A food's name for a screen reader: "Celery, July to October", from
   // its in-season weeks (any variety's, on the wheel; the row's own on
-  // the calendar), each run named by the months it starts and ends in.
-  function seasonOf(varieties) {
-    var inWeek = [];
-    for (var w = 1; w <= 52; w++) inWeek[w] = varieties.some(function (v) { return V.stateAt(v, w) === "in"; });
-    if (inWeek.slice(1).every(Boolean)) return "all year";
-    var runs = [], w0 = 1;
-    while (w0 <= 52 && inWeek[w0]) w0++;
-    for (var k = 0, w1 = w0; k < 52; k++, w1 = w1 % 52 + 1) {
-      if (inWeek[w1] && !inWeek[w1 === 1 ? 52 : w1 - 1]) runs.push([w1, w1]);
-      if (inWeek[w1] && runs.length) runs[runs.length - 1][1] = w1;
-    }
-    return runs.map(function (r) {
-      var a = MONTHS[V.startOfWeek(r[0], YEAR).getMonth()], b = MONTHS[V.endOfWeek(r[1], YEAR).getMonth()];
-      return a === b ? a : a + " to " + b;
-    }).join(" and ");
-  }
+  // the calendar), in verdict.js's words.
   function nameParts() {
     root.querySelectorAll(WHEEL ? "a.label" : ".cal-labels a.row").forEach(function (a) {
       var f = bySlug[a.dataset.slug];
       if (!f) return;
       var vs = WHEEL ? f.varieties : [f.varieties[+a.dataset.variety]];
       var label = WHEEL ? "" : V.varietyLabel(vs[0]);
-      var season = seasonOf(vs);
+      var season = V.seasonWords(vs, YEAR);
       a.setAttribute("aria-label", f.name + (label ? " (" + label + ")" : "") + (season ? ", " + season : ""));
     });
   }

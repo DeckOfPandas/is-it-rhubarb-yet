@@ -106,6 +106,7 @@
   line: "They need tropical heat. We're all still talking about that hot week in September 2023."
 - name: "Brazil nuts"
   slug: brazil-nuts
+  said: "Brazil nuts"
   aliases: [brazil nut, brazils]
   line: "If you don't know where these are from, you CAN work it out."
 - name: "Pistachios"

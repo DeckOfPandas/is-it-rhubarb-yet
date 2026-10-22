@@ -44,5 +44,5 @@ day.
 
 <p>The site doesn't explain what dinner to make with a kohlrabi, or which drink to float edible flowers in, because I already know, or can find out using my handy triaging websites for <a href="https://deckofpandas.github.io/helen-triages/food/">food</a> and <a href="https://deckofpandas.github.io/helen-triages/cocktails/">cocktails</a>.</p>
 
-<p>Coolio, I'm off to cook (checks site) <a class="food-ref" id="dinner" href="{{ '/' | append: dinner.slug | append: '/' | relative_url }}" style="--food: {{ dinner.colour }}">{{ dinner.name | downcase }}</a> for dinner now, and it's going to be freaking delicious.</p>
+<p>Coolio, I'm off to cook (checks site) <a class="food-ref" id="dinner" href="{{ '/' | append: dinner.slug | append: '/' | relative_url }}" style="--food: {{ dinner.colour }}">{% include said.html food=dinner %}</a> for dinner now, and it's going to be freaking delicious.</p>
 </article>

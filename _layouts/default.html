@@ -21,7 +21,7 @@ JPEG; every other page shows the home card.
     {%- assign thing = site.data.never | where: "slug", page.slug | first -%}
   {%- endif -%}
   {%- assign b = baked.foods[page.slug] -%}
-  {%- capture title -%}Is it {{ thing.name | downcase }} yet?{% if b %} {{ b.word }}.{% endif %}{%- endcapture -%}
+  {%- capture title -%}Is it {% include said.html food=thing %} yet?{% if b %} {{ b.word }}.{% endif %}{%- endcapture -%}
   {%- if b -%}
     {%- capture description -%}{{ b.word }}. {{ b.line }} As of {{ baked.asofText }}.{%- endcapture -%}
     {%- capture alt -%}{{ title }} {{ b.line }} As of {{ baked.asofText }}.{%- endcapture -%}
@@ -30,7 +30,7 @@ JPEG; every other page shows the home card.
      is in season; the link preview (og: and twitter:) keeps the answer.
      {%- endcomment -%}
   {%- if page.collection == "foods" -%}
-    {%- capture page_title -%}{% include when-in.html name=thing.name %}{%- endcapture -%}
+    {%- capture page_title -%}{% include when-in.html name=thing.name said=thing.said %}{%- endcapture -%}
     {%- assign page_title = page_title | strip -%}
     {%- capture meta_description -%}{{ page_title }} {{ description | strip }}{%- endcapture -%}
   {%- endif -%}
@@ -159,9 +159,10 @@ JPEG; every other page shows the home card.
       <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
       <span>&copy; {{ site.time | date: "%Y" }}</span>
     </p>
-    <p class="footer-asof">Verdict correct as of <span data-asof>{{ baked.asofHtml }}</span></p>
-    {%- comment -%} The signature is the way to the About page. {%- endcomment -%}
-    <a class="hearts" href="{{ '/about/' | relative_url }}" aria-label="About this site">{% include icons/hearts.svg %}</a>
+    <p class="footer-asof">Verdicts correct as of <span data-asof>{{ baked.asofHtml }}</span></p>
+    {%- comment -%} The signature is decoration, not a link: About is the
+       footer's word and the nav's "??". {%- endcomment -%}
+    <span class="hearts" aria-hidden="true">{% include icons/hearts.svg %}</span>
   </footer>
   <script src="{{ '/assets/verdict.js' | relative_url }}"></script>
   <script src="{{ '/assets/site.js' | relative_url }}"></script>

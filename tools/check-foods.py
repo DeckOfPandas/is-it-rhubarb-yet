@@ -247,6 +247,8 @@ def main() -> int:
         check_notes(f, where, problems)
         if "unsold" in f and not (isinstance(f["unsold"], str) and f["unsold"].strip()):
             problems.append(f"{where}: unsold must be a sentence")
+        if "said" in f and not (isinstance(f["said"], str) and f["said"].strip()):
+            problems.append(f"{where}: said must be a phrase")
         check_colour(f.get("colour", ""), where, problems, warnings, slug)
         check_text_colours(f, where, problems)
         check_shades(f, where, problems, warnings, slug)

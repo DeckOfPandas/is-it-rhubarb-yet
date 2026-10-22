@@ -168,9 +168,9 @@ function foot(asofText) {
     `<span class="display brand">Is it <span class="pink">rhubarb</span> yet?</span></div>`;
 }
 
-function verdictCard(name, colour, word, line, asofText) {
+function verdictCard(said, colour, word, line, asofText) {
   return page(
-    `<p class="display ask" data-fit data-lines="2" data-min="28">Is it ${esc(name.toLowerCase())} yet?</p>` +
+    `<p class="display ask" data-fit data-lines="2" data-min="28">Is it ${esc(said)} yet?</p>` +
     `<div class="word-box"><span class="display word">${esc(word)}.</span></div>` +
     `<p class="line" data-fit data-lines="3" data-min="22">${esc(line)}</p>` +
     foot(asofText), colour);
@@ -308,10 +308,10 @@ async function main() {
   foods.forEach((f) => {
     const b = baked.foods[f.slug];
     if (!b) return;
-    cards.push({ slug: f.slug, html: verdictCard(f.name, f.colour, b.verdict, b.line, baked.asofText) });
+    cards.push({ slug: f.slug, html: verdictCard(V.foodSaid(f), f.colour, b.verdict, b.line, baked.asofText) });
   });
   never.forEach((n) => {
-    cards.push({ slug: n.slug, html: verdictCard(n.name, NEVER, "NEVER", n.line, baked.asofText) });
+    cards.push({ slug: n.slug, html: verdictCard(V.foodSaid(n), NEVER, "NEVER", n.line, baked.asofText) });
   });
   cards.push({ slug: "home", html: homeCard(baked) });
   cards.push({ slug: "now", html: nowCard(baked) });

@@ -26,9 +26,10 @@ cut to its part: the food names in a column that sticks to the left, the
 weeks beside them, and over both a header of month names that sticks to
 the top of the viewport, with a blank corner (a plain div) over the
 names. A row is two links to its food's page, its name and its weeks;
-only the name takes focus. JavaScript adds the "today" marker, keeps the
-header level with the rows when they are scrolled sideways, and opens
-the chart scrolled to today. The id prefixes the gradient ids, which must
+only the name takes focus. A "today" line is baked at the build day's
+week, for a visitor without JavaScript; charts.js hides it and draws its
+own, which travels, keeps the header level with the rows when they are
+scrolled sideways, and opens the chart scrolled to today. The id prefixes the gradient ids, which must
 be unique on a page that carries several charts.
 {% endcomment %}
 {%- assign x0 = 190 -%}
@@ -38,6 +39,7 @@ be unique on a page that carries several charts.
 {%- assign group_gap = 28 -%}
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
+{%- assign today_x = site.data.baked.week | minus: 1 | times: cw | plus: x0 | plus: 7 -%}
 
 {%- comment -%}
 Rows are "sortkey|slug|variety index" strings, sorted as text, so every
@@ -118,7 +120,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     <text class="month-label" x="{{ mx | plus: 4 }}" y="17">{{ month_names[m] }}</text>
   {%- endfor -%}
   <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="4" x2="{{ x0 | plus: 728 }}" y2="{{ header }}" />
-  <line class="today" x1="0" y1="{{ header | minus: 6 }}" x2="0" y2="{{ header }}" hidden />
+  <line class="today" x1="{{ today_x }}" y1="{{ header | minus: 6 }}" x2="{{ today_x }}" y2="{{ header }}" />
 </svg>
 </div>
 </div>
@@ -172,7 +174,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     </a>
   {%- endfor -%}
   <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="{{ header }}" x2="{{ x0 | plus: 728 }}" y2="{{ height }}" />
-  <line class="today" x1="0" y1="{{ header }}" x2="0" y2="{{ height }}" hidden />
+  <line class="today" x1="{{ today_x }}" y1="{{ header }}" x2="{{ today_x }}" y2="{{ height }}" />
 </svg>
 </div>
 </div>

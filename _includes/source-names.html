@@ -1,0 +1,6 @@
+{%- comment -%}
+Sources' short names joined for a sentence: "Defra", "Defra and RHS",
+"New Covent Garden Market, Defra and RHS". Expects: keys, a list of keys
+from _data/sources.yml.
+{%- endcomment -%}
+{%- for k in include.keys -%}{%- assign sn = site.data.sources | where: "key", k | first -%}{%- if forloop.index > 1 -%}{%- if forloop.last %} and {% else %}, {% endif -%}{%- endif -%}{{ sn.short | default: sn.name | default: k }}{%- endfor -%}

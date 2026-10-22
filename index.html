@@ -1,6 +1,6 @@
 ---
 title:
-description: Is it in season yet? Type a UK food and get a yes, a no, or a date.
+description: Is it in season yet? Type a UK food and get a yes, a no, or a when.
 ---
 {%- comment -%}
 The hook. A huge "Is it [    ] yet?" with the input inline. As the
@@ -121,11 +121,11 @@ site.js adds the varieties from foods.json), the names it completes to
             {%- assign b = baked.foods[food.slug] -%}
             {%- capture terms -%}{{ food.name }}|{% for a in food.aliases %}{{ a }}|{% endfor %}{% for a in food.also %}{{ a }}|{% endfor %}{%- endcapture -%}
             {%- capture names -%}{{ food.name }}|{% for a in food.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
-            {%- include food-row.html item=food verdict=b.verdict terms=terms names=names line=b.line -%}
+            {%- include food-row.html item=food verdict=b.verdict terms=terms names=names said=food.said line=b.line -%}
           {%- endfor -%}
           {%- for n in site.data.never -%}
             {%- capture terms -%}{{ n.name }}|{% for a in n.aliases %}{{ a }}|{% endfor %}{%- endcapture -%}
-            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms names=terms line=n.line -%}
+            {%- include food-row.html item=n verdict="NEVER" never=true terms=terms names=terms said=n.said line=n.line -%}
           {%- endfor -%}
         </ul>
       </div>
