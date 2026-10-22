@@ -61,23 +61,72 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   calendar and the feed. Separate foods keep their own names (Wild
   garlic, Wood pigeon), and paired names capitalise both (Marjoram &
   Oregano).
-- **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
-  and never-food, plus `home.png` and `now.png` (the wordmark or the
-  Now title, then the week's three lines as home's teasers have them,
-  dated; every other page uses the home card), into `_site/cards/`
-  after Jekyll: each is a small HTML page with the fonts inlined,
+- **Share cards.** `tools/cards.js` draws them into `_site/cards/`
+  after Jekyll. Each is a small HTML page with the fonts inlined,
   screenshotted in headless Chromium through the Playwright the
-  container and the deploy both have (never committed: the site has no
-  raster files in the repository). Every page's `og:image` and
-  `twitter:image` point at its card; the card carries the as-of date,
-  because chat apps keep the first preview they fetch. `node
-  tools/cards.js --out tmp/cards --icons tmp/icons --only
-  rhubarb,home,now,icons` draws a few to look at.
-- **Icons.** The favicon (32px), the Android icon (192px) and the
-  Apple touch icon (180px) are "IIRY" in Anton, light ink on the shed,
-  the R in pink and underlined in it. `tools/cards.js` draws them into
-  `_site/icons` at build, like the cards: one square page shot at each
-  size, never committed.
+  container and the deploy both have. They are never committed: the
+  site has no raster files in the repository.
+  - **The cards.**
+    - Per food and never-food, a `<slug>.png`: the question, the
+      verdict word, the line, and a foot of the as-of date and the
+      wordmark.
+    - `home.png`: IS IT / RHUBARB / YET? stacked as home's heading,
+      then "Cook food when it's at its best.".
+    - `now.png`: "In season this week", the week's range, and three
+      lines. They read great this week, still great but on the way
+      out, then just arrived (or on the way, in a week when nothing
+      has arrived), with a random three of each in their colours and
+      "and N more".
+    - `calendar.png` and `wheel.jpg`: a title over a picture of the
+      real chart. Each picture is shot from the built site through a
+      local server of the script's own, at 1280 wide and three times
+      over, with the header and controls hidden. The calendar shows 34
+      rows of its by-start order, centred on the first row whose
+      season starts this week or later. The wheel is the All wheel, as
+      a JPEG at quality 85: as a PNG its arcs come to near a megabyte,
+      and chat apps are reported to drop previews over about 300 KB.
+  - **Every other page** uses the home card. `_layouts/default.html`
+    picks each page's card.
+  - **Size.** A card is laid out at 1200 by 630 and drawn at twice
+    that, 2400 by 1260, which `og:image:width` and `og:image:height`
+    state.
+  - **The middle square.** WhatsApp and some mail apps cut the middle
+    square out of a wide card, so everything to be read sits in a
+    column 4px inside that 630px square, and the sides stay empty.
+    Each block starts at its largest and shrinks to its limit of lines
+    or height (`data-fit`), then the verdict word or the picture takes
+    the height left. The run fails if any card's words stray outside
+    the square or overflow the column.
+  - **Previews.** Every page's `og:image` and `twitter:image` point at
+    its card. The card carries the as-of date, because chat apps keep
+    the first preview they fetch.
+  - **To look at a few:** `node tools/cards.js --out tmp/cards --icons
+    tmp/icons --only rhubarb,home,now,icons`. The calendar and wheel
+    cards need the built site as well: add `--site _site`.
+- **Icons.** `tools/icons.js` draws them in Anton, on the shed, with
+  the R of RHUBARB pink and underlined in it. Each icon is drawn on a
+  canvas exactly its own size, so the type is set at that size, the
+  underline lands on whole pixels, and the block of ink is what is
+  fitted and centred. They step down by size, one design at each:
+  - the R alone at 16px, where IIRY blurs;
+  - IIRY at 32 and 48;
+  - IS IT / RHUBARB / YET? stacked at 96, 180 (Apple touch) and 192.
+
+  A square icon's ink fills 84% of it. The 180 and 192 fit their
+  diagonal to 96% of a circle, because launchers cut them to one.
+  `tools/cards.js` calls `drawIcons` into `_site/icons` at build, never
+  committed. `_layouts/default.html` links each with its `sizes`, and
+  links no SVG icon, which a browser would take over the PNGs at every
+  size.
+- **Profile picture.** `node tools/icons.js` draws `profile-800.png`
+  into `tmp/socials`, with the site's icons, for uploading to social
+  accounts. It is the stack, its diagonal at 98% of the circle every
+  platform cuts it to. The site does not use it.
+- **Card and icon tests.** After a build, `node --test
+  tests/cards/cards.test.js` reads each file's own header. It checks
+  that every page's share image is the size the page states, that
+  `twitter:image` is `og:image`, and that every linked icon is the size
+  its `sizes` states. The deploy runs it after drawing the cards.
 - `_data/foods.yml` is the truth: edit it by hand. `_data/groups.yml`
   names the culinary families and their `kind`. `_data/never.yml` lists
   the foods that are never in season here, each with a line.
@@ -529,7 +578,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - **Wording.** "Great this week" everywhere (Now's section, the home
   teaser, a food page's "Also great this week"); never "Great now".
   "Still great but on the way out" everywhere the `last` list is named
-  (Now, the home teaser, the share card, a food page's data); never
+  (Now, the home teaser, the Now share card, a food page's data); never
   "Last chance". Its anchor stays `#last`.
   Every link to Now in prose or as an action reads "Everything in
   season this week →" (the nav's NOW and "and N more" excepted). Page
@@ -820,7 +869,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   `bundle exec jekyll build` and `node tools/cards.js`. Serve: `bundle
   exec jekyll serve --host 0.0.0.0 --port 9000` (`keep_files` keeps the
   cards through a regeneration). Data check: `python3 -I
-  tools/check-foods.py`.
+  tools/check-foods.py`. Card and icon tests, after a build: `node
+  --test tests/cards/cards.test.js`.
 - Deploys: `.github/workflows/pages.yml` on push and daily at 03:30
   UTC; `stale-check.yml` at 07:00 UTC reads the live `/built.json` and
   opens one "Stale build" issue when the baked date is over two days
