@@ -507,9 +507,12 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     shaft and head, round caps, stroke 2, `currentColor`), included
     with `class="arrow"` and sized 1.05em by 0.63em on the x-height;
     `site.js` draws the same path for the links it builds
-    (`arrowMark`), and turns it down or up on the floating pills. Every
-    "and N more" after a list of foods is one, in ink, never broken
-    across lines.
+    (`arrowMark`), and turns it down or up on the floating pills. An
+    arrow never starts a line: a link's words and arrow are
+    `_includes/arrow-words.html` (`setArrowText` in `site.js`), which
+    puts the last word and the arrow in one nowrap span, since a line
+    may always break beside an inline SVG. Every "and N more" after a
+    list of foods is one, in ink, never broken across lines.
   - Foods in lists: inline lists (`.food-link`: the teasers, "Also:",
     the wheel's "ALL YEAR:")
     set the name in the food's colour; rows (`.food-row`) keep the name
