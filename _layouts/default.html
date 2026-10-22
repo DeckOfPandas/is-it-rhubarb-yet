@@ -52,8 +52,10 @@ JPEG; every other page shows the home card.
   <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:image" content="{{ '/cards/' | append: card | absolute_url }}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  {%- comment -%} The size tools/cards.js draws every card at;
+     tests/cards/cards.test.js checks each file against it. {%- endcomment %}
+  <meta property="og:image:width" content="2400">
+  <meta property="og:image:height" content="1260">
   <meta property="og:image:alt" content="{{ alt | escape }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ title | default: site.title | escape }}">

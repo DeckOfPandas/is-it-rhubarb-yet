@@ -17,6 +17,7 @@ is the only enforcement.
   Jekyll; `bundle exec jekyll build` alone leaves them empty). Check the
   data file: `python3 -I tools/check-foods.py`. Kit tests:
   `python3 -m pytest`. Verdict tests: `node --test tests/verdict/verdict.test.js`.
+  Card and icon tests, after a build: `node --test tests/cards/cards.test.js`.
 - **Serving for me to look at:** read `PORTS` in `.devcontainer/kit.env`
   (`host:container` pairs), listen on `0.0.0.0:<container port>`
   (`bundle exec jekyll serve --host 0.0.0.0 --port 9000`), and give me

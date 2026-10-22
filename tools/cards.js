@@ -39,7 +39,10 @@ const STRIP_PICK = 3;
 const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "_data");
 const FONTS = path.join(ROOT, "assets", "fonts");
-const WIDTH = 1200, HEIGHT = 630, SCALE = 1;
+// A card is laid out at 1200 by 630 and drawn at twice that, 2400 by 1260
+// pixels, so previews are sharp on high-resolution screens.
+// _layouts/default.html states the drawn size, and tests/cards checks it.
+const WIDTH = 1200, HEIGHT = 630, SCALE = 2;
 // The column sits this far inside the middle square on every side, so a
 // crop that rounds a pixel differently still loses nothing.
 const INSET = 4;
