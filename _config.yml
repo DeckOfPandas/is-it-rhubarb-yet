@@ -74,6 +74,7 @@ exclude:
   - screenshots/
   - scripts/
   - model_instructions/
+  - docs/
   - .devcontainer/
   - .claude/
   - vendor/

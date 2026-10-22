@@ -18,10 +18,11 @@ which CSS shows in place of the first below 700px and nowhere else.
 
 The chart is drawn at its own size, never scaled, so its words are never
 smaller than they are set; where it is wider than the page it scrolls
-sideways. It is four SVGs sharing one set of coordinates, each viewBox
+sideways. It is three SVGs sharing one set of coordinates, each viewBox
 cut to its part: the food names in a column that sticks to the left, the
 weeks beside them, and over both a header of month names that sticks to
-the top of the viewport (with a blank corner over the names). A row is two links to its food's page, its name and its weeks;
+the top of the viewport, with a blank corner (a plain div) over the
+names. A row is two links to its food's page, its name and its weeks;
 only the name takes focus. JavaScript adds the "today" marker, keeps the
 header level with the rows when they are scrolled sideways, and opens
 the chart scrolled to today. The id prefixes the gradient ids, which must

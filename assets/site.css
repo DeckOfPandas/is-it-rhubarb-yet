@@ -2,7 +2,8 @@
    the forcing shed (dark); the one brand colour is rhubarb pink, which is
    also rhubarb's own colour and never carries body-size text. Each food's
    colour arrives as --food on its row or page and every colour in the data
-   passes 3:1 on both backgrounds, so a verdict word can simply be set in it.
+   passes 3.15:1 on both backgrounds (tools/check-foods.py enforces it), so
+   a verdict word can simply be set in it.
    Charts keep --c for a row's colour. Never-foods all share --never, ghost
    grey, which is no food's and is never the pink. */
 
@@ -154,8 +155,8 @@ strong { font-weight: 700; }
    Prose: ink, with a 1px pink underline at all times, 3px on hover or
    focus; a prose link to a food's page (.food-ref) is underlined in that
    food's colour instead.
-   Actions (.arrow-link): ink and an arrow, underlined only on hover or
-   focus.
+   Actions (.arrow-link): ink words and an arrow; the words underlined in
+   pink at all times, 1px, 2px on hover or focus, the arrow never.
    Foods in lists (.food-link, .food-row): the food's colour or swatch,
    underlined only on hover or focus.
    Chrome (the nav and the footer): see each. */
