@@ -224,8 +224,13 @@
       } else if (it.kind === "line") {
         it.el.setAttribute("x1", xa.toFixed(2)); it.el.setAttribute("x2", xa.toFixed(2));
       } else {
+        // A month squeezed by the magnifier keeps its initial while it has
+        // room for a letter, and goes only when it has not.
         it.el.setAttribute("x", (xa + 4).toFixed(2));
-        it.el.style.visibility = X(it.b) - xa < 30 ? "hidden" : "";
+        if (it.el.dataset.full === undefined) it.el.dataset.full = it.el.textContent;
+        var room = X(it.b) - xa;
+        it.el.textContent = room < 30 ? it.el.dataset.full.charAt(0) : it.el.dataset.full;
+        it.el.style.visibility = room < 12 ? "hidden" : "";
       }
     });
     // A step's tick shows only where the magnifier has spread its third
@@ -273,21 +278,47 @@
   }
   // On a phone the names are the small size, a row's short name where it
   // has one, and their column is exactly as wide as the longest name, 16px
-  // from the screen's edge and 8px from the weeks: the labels' viewBox
-  // starts that far left of the weeks, and the corner over them matches.
-  // Wider, the column is x0 as drawn. The charts share their rows, so the
-  // one on show is measured for all three. The weeks are then fitted to
-  // what is left.
-  var nameW = 0, EDGE = 16;
+  // from the screen's edge and 8px from the weeks, but never more than
+  // two fifths of the screen: a name that will not fit loses its variety
+  // and then its last letters to an ellipsis (the popover, the lists and
+  // the spoken name keep the full name). The labels' viewBox starts that
+  // far left of the weeks, and the corner over them matches. Wider, the
+  // column is x0 as drawn. The charts share their rows, so the one on
+  // show is measured, and cut, for all three. The weeks are then fitted
+  // to what is left.
+  var nameW = 0, EDGE = 16, NAME_SHARE = 0.4;
+  function cutName(t, maxW) {
+    var ink = t.querySelector(".row-ink"), variety = t.querySelector(".row-variety");
+    if (!ink) return;
+    if (ink.dataset.full === undefined) ink.dataset.full = ink.textContent;
+    ink.textContent = ink.dataset.full;
+    if (variety) variety.style.display = "";
+    if (t.getBBox().width <= maxW) return;
+    if (variety) variety.style.display = "none";
+    var name = ink.dataset.full;
+    while (name.length > 3 && t.getBBox().width > maxW) {
+      name = name.slice(0, -1);
+      ink.textContent = name.replace(/\s+$/, "") + "…";
+    }
+  }
   function fitNames() {
     if (!cals.length) return;
     if (narrow.matches) {
-      var widest = 0;
+      var widest = 0, shown = [];
       cals.forEach(function (c) {
         c.labels.querySelectorAll(".row-label").forEach(function (t) {
-          if (t.getClientRects().length) widest = Math.max(widest, t.getBBox().width);
+          if (!t.getClientRects().length) return;
+          shown.push(t);
+          cutName(t, Infinity);
+          widest = Math.max(widest, t.getBBox().width);
         });
       });
+      var room = cals[0].cal.parentElement.getBoundingClientRect().width;
+      var cap = room ? Math.floor(room * NAME_SHARE) - EDGE - 8 : Infinity;
+      if (widest > cap) {
+        shown.forEach(function (t) { cutName(t, cap); });
+        widest = cap;
+      }
       if (widest) nameW = EDGE + Math.ceil(widest) + 8;
     }
     var w = narrow.matches && nameW ? nameW : 0;
@@ -367,12 +398,20 @@
   }
   function norm(a) { return ((a % 360) + 360) % 360; }
   function layoutDial(d) {
-    var C = d.C, year = litYear && litYear.checked;
+    var C = d.C, year = litYear && litYear.checked, shown = "";
     d.labels.forEach(function (l) {
       var on = year || !inSeason || !!inSeason[l.slug];
       l.text.style.display = on ? "" : "none";
+      shown += on ? "1" : "0";
       if (l.arc) l.arc.classList.toggle("is-on", year || !!(inSeason && inSeason[l.slug]));
     });
+    // The labels on show keep clear of each other; placed again only when
+    // the set on show changes, not on every move of the line, and only
+    // once the fonts are in, since their widths decide it.
+    if (shown !== d.shown && d.svg.getClientRects().length) {
+      d.shown = shown;
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { S.spreadLabels(d.svg); });
+    }
     d.tick.setAttribute("transform", "rotate(" + (NOW_T * 360 / 52).toFixed(2) + " " + C + " " + C + ")");
     var L = tOf(state.at) * 360 / 52;
     if (d.last !== null) L += 360 * Math.round((d.last - L) / 360);

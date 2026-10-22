@@ -784,6 +784,9 @@ article.never { --food: var(--never); }
    is at full strength. */
 .dial .season.is-on { opacity: 1; }
 .dial .label .dot { fill: var(--c); }
+/* A label pushed clear of its neighbours keeps a thin leader to its dot
+   (site.js draws it). */
+.dial .label-leader { stroke: var(--muted); stroke-width: 0.8; opacity: 0.7; }
 .dial .label:hover text { font-weight: 700; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }

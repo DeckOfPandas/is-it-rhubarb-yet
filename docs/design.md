@@ -541,12 +541,15 @@ hidden, since the hero is a form.
   `small` (14px), a row with a `short:` name shows it instead (popovers,
   lists and screen readers keep the full name), and `charts.js` fits the
   names column to the longest name shown, 16px from the screen's edge
-  and 8px from the weeks. The weeks fill the chart's width: on a wide
+  and 8px from the weeks, but never wider than two fifths of the screen:
+  a name that will not fit loses its variety and then its last letters to
+  an ellipsis (`cutName`). The weeks fill the chart's width: on a wide
   screen, and on a phone while magnified, a week is as wide as the room
   after the names column over 52 (`fitWeeks`); on a phone otherwise a
   week is 14px and the chart scrolls. A month name the scrolled weeks have
   pushed part way under the names, or past the right edge, is hidden,
-  never cut.
+  never cut; a month the magnifier has squeezed keeps its initial while
+  it has room for a letter.
 - At 1280×800 the sticky stack while scrolling (site header 45px,
   controls 136px, month row 53px) is 234px, 29% of the screen.
 
@@ -571,6 +574,15 @@ hidden, since the hero is a form.
   marked `lead: false` place a food; a food that cannot be sold is not
   drawn. Foods in season all year are listed under the wheel, "ALL
   YEAR:", as food links in their colours.
+- **Labels keep clear of each other** (`spreadLabels` in `site.js`).
+  Most seasons begin in summer, so the June to September sector would
+  overprint. After the fonts are in, each label on show is compared with
+  those placed before it and one that overlaps is pushed outward along
+  its own ray until it is clear, with a thin leader back to its dot;
+  the dot never moves, since its radius is the season's length. It runs
+  again when the labels on show change (In season, the kind switch), on
+  load and on resize, and not on a phone, where the names are too small
+  to read and the list under the wheel does the reading.
 - Drawn in an 880-unit viewBox with room for the longest label at any
   angle; `site.js` tightens each visible wheel's viewBox to its drawn
   extent (`fitDials`), so the wheel fills its width. The extent counts

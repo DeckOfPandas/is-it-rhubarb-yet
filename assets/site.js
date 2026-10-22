@@ -337,11 +337,68 @@
   // the one it shows, and a resize fits the one on show again. The room
   // left over the drawing is --dial-inset on the figure, in pixels.
   var LONGEST_TIME = "Early September";
+
+  // --- The wheel's labels keep clear of each other ---------------------------
+  // A label is drawn beside its dot, so in a crowded month (July to
+  // September) labels overprint. Each label on show is compared with
+  // those placed before it, in the wheel's order; one that overlaps is
+  // pushed outward along its own ray, away from its dot, until it is
+  // clear, and a thin leader from the dot to the words keeps the two
+  // together. The dot never moves: its radius is the season's length.
+  // Run after the fonts are in, and again when the labels on show change
+  // (In season, the kind switch) or the wheel is refitted. Not on a phone
+  // (below 700px), where the names are too small to read anyway, the list
+  // under the wheel does the reading, and the pushed-out labels would
+  // only shrink the wheel.
+  var SPREAD_STEP = 4, SPREAD_TRIES = 150;
+  var phoneWheel = matchMedia("(max-width: 43.74rem)");
+  function overlaps(a, b) {
+    return a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
+  }
+  function spreadLabels(svg) {
+    var placed = [];
+    svg.querySelectorAll("a.label").forEach(function (a) {
+      var text = a.querySelector("text"), dot = a.querySelector(".dot");
+      var leader = a.querySelector(".label-leader");
+      if (leader) leader.remove();
+      if (text.dataset.x0 === undefined) text.dataset.x0 = text.getAttribute("x");
+      text.setAttribute("x", text.dataset.x0);
+      if (text.style.display === "none" || phoneWheel.matches) return;
+      var outward = text.getAttribute("text-anchor") === "end" ? -1 : 1;
+      var x = +text.dataset.x0, moved = 0, tries = 0;
+      var rect = text.getBoundingClientRect();
+      while (tries++ < SPREAD_TRIES && placed.some(function (r) { return overlaps(r, rect); })) {
+        x += outward * SPREAD_STEP; moved += SPREAD_STEP;
+        text.setAttribute("x", x);
+        rect = text.getBoundingClientRect();
+      }
+      if (moved && dot) {
+        var cx = +dot.getAttribute("cx"), r = +dot.getAttribute("r"), y = dot.getAttribute("cy");
+        leader = document.createElementNS(SVG_NS, "line");
+        leader.setAttribute("class", "label-leader");
+        leader.setAttribute("x1", cx + outward * (r + 2)); leader.setAttribute("y1", y);
+        leader.setAttribute("x2", x - outward * 2); leader.setAttribute("y2", y);
+        text.parentNode.insertBefore(leader, text);
+      }
+      placed.push(rect);
+    });
+  }
+
   function fitDials() {
     var svgs = document.querySelectorAll("figure.dial > svg");
     if (!svgs.length) return;
+    // The labels are spread, the viewBox fitted to the result, and both
+    // done once more, since the first spread was measured on the wheel
+    // before it was fitted.
     function fit(svg) {
       if (svg.dataset.fitted || !svg.getClientRects().length) return;
+      spreadLabels(svg);
+      if (!place(svg)) return;
+      spreadLabels(svg);
+      place(svg);
+      svg.dataset.fitted = "1";
+    }
+    function place(svg) {
       var hidden = Array.prototype.filter.call(svg.querySelectorAll("a.label text"), function (t) { return t.style.display === "none"; });
       var moving = Array.prototype.filter.call(svg.querySelectorAll(".tt-line, .tt-knob, .tt-today"), function (t) { return t.style.display !== "none"; });
       hidden.forEach(function (t) { t.style.display = ""; });
@@ -349,7 +406,7 @@
       var b = svg.getBBox();
       hidden.forEach(function (t) { t.style.display = "none"; });
       moving.forEach(function (t) { t.style.display = ""; });
-      if (!b.width) return;
+      if (!b.width) return false;
       var x0 = b.x, y0 = b.y, x1 = b.x + b.width, y1 = b.y + b.height;
       if (svg.dataset.rim && svg.closest("[data-tt]")) {
         var C = +svg.dataset.c, R = +svg.dataset.rim;
@@ -369,16 +426,21 @@
       var pad = Math.max(6, m * W / (S - 2 * m));
       svg.setAttribute("viewBox", [x0 - pad, y0 - pad, W + 2 * pad, y1 - y0 + 2 * pad].join(" "));
       svg.parentElement.style.setProperty("--dial-inset", ((b.y - (y0 - pad)) * S / (W + 2 * pad)).toFixed(1) + "px");
-      svg.dataset.fitted = "1";
+      return true;
     }
     function all() { svgs.forEach(fit); }
+    function again() { svgs.forEach(function (s) { delete s.dataset.fitted; }); all(); }
     var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     ready.then(all);
+    // Once everything has loaded, the labels are spread and the wheel
+    // fitted once more: a font that arrived after the first pass changes
+    // every word's width.
+    window.addEventListener("load", again);
     document.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener("change", all); });
     var timer = null;
     window.addEventListener("resize", function () {
       clearTimeout(timer);
-      timer = setTimeout(function () { svgs.forEach(function (s) { delete s.dataset.fitted; }); all(); }, 120);
+      timer = setTimeout(again, 120);
     });
   }
 
@@ -1399,7 +1461,7 @@
   window.Site = {
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
-    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest,
+    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest, spreadLabels: spreadLabels,
     headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText, setDate: setDate
   };
 })();
