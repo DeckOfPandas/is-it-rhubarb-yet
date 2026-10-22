@@ -28,20 +28,27 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   early November", "Back in April"; "For a few more days", "Until late
   December") and names the middle of the data week. The rules are the
   comment over `phrase` in `verdict.js`. The one calendar date is the
-  "as of" date, which is when an answer was true. Dates are plain
-  numbers: "19 October 2026", "15–21 October"; the food page's as-of
-  line alone is an ordinal with its letters raised, "Verdict correct
-  as of 22<sup>nd</sup> October." (#65 does this everywhere).
+  "as of" date, which is when an answer was true. Every date is an
+  ordinal with its letters raised: 22<sup>nd</sup> October 2026,
+  15<sup>th</sup>–21<sup>st</sup> October. `verdict.js` writes the text
+  ("22nd October"), `datePieces` marks the letters, and they are set as
+  `<sup>` on the page (`setDate` in `site.js`; `dateHtml`, baked as
+  `asofHtml`, `asofDayHtml` and `rangeHtml`, and in the share cards), a
+  raised `tspan` in the wheels' SVG, and left unraised where only text
+  goes (meta tags, a slider's spoken value). In the caps style they are
+  capitals: 22<sup>ND</sup>.
 - **The digest** (`nowLists`) returns each of its four lists split by
   kind of food, `[{kind, items}]`, just arrived and great now A to Z,
-  last chance and on the way soonest first. `flatten` gives one array,
+  still great but on the way out (the `last` list) and on the way
+  soonest first. `flatten` gives one array,
   `azList` one array A to Z, and `byPhrase` regroups a list by one
   timing per food, `[{phrase, items}]`, soonest first and A to Z
   within: `timing` splits a two-part phrase into the `when` that groups
   the food ("In a week or two") and the `early` part shown beside it
   ("first ones any day now", "a few about now"). `bake.js` bakes them
   as `phrases` and `az`. The Now page shows just arrived as one A to Z
-  list, last chance and on the way grouped by timing, and great now
+  list, still great but on the way out and on the way grouped by
+  timing, and great now
   grouped by kind with counts.
 - **Naming a variety.** A named variety is a type (forced, maincrop)
   or, with `cultivar: true` in the data, a cultivar (Cox, Conference).
@@ -299,26 +306,25 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - The question over the verdict is set at `title`, the full width (no
   measure), its lines balanced (`text-wrap: balance`).
 - **Food page layout.** One column at every width, in this order:
-  question, verdict, date line (the variety lines 8px under it), the
-  quotation, the dial and its key (on the same left edge as the words),
-  the notes (the counter note), then Also, the data, the as-of line
-  ("Verdict correct as of 22<sup>nd</sup> October.", in the instructive
-  style) and the calendar lines between rules, then "Ask about
-  something else →". Every block is 40px
+  question, verdict, date line, the quotation, the variety lines, the
+  dial and its key (on the same left edge as the words), the notes (the
+  counter note), then Also; a rule, the data; a rule, VERDICT CORRECT AS
+  OF 22<sup>ND</sup> OCTOBER (the caps style, as the footer's as-of
+  is); a rule, the calendar lines; a rule, "Ask about something else
+  →". Every block is 40px
   from the next. Text keeps a measure of about 65ch. A date line wraps
   with `text-wrap: pretty`, so no word sits alone on its last line. The
   quote bar and every note's bar are the food's full colour.
   - **Variety lines** (`.named-lines`, `varietyLines` in `verdict.js`):
     a food with more than one variety lists them one to a line, the
     name in the caps style in the variety's text colour, in a column,
-    then its answer, muted: the verdict's variety first, answered by its
-    word (COX Yes), then the rest in data order by their phrases
-    (BRAMLEY Available from storage until late July). Below 600px the
-    name sits over its answer.
+    then its phrase, muted (BRAMLEY Available from storage until late
+    July). Those in season come first, the one ending soonest first,
+    then those in season all year, then the rest, the one back soonest
+    first. Below 600px the name sits over its phrase.
   - **The data** opens to ALL APPLES (Anton `label`) over the chart, a
     faint rule, the runs, a rule, then the notes and "Sources:" over a
-    bulleted list. After it, between rules, the as-of and calendar
-    lines; a last rule before the way on.
+    bulleted list.
   - **The runs** take the variety lines' pattern, in
     fuzzy months (`runsSaid`, baked as `runs`): "In season August to
     September, available from storage October to July." A run ending
@@ -454,7 +460,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     ink with an arrow, its words (not the arrow) underlined in pink at
     rest, 2px on hover or focus, the food's name in its sentence form (lower
     case), the one link, to the food's page. Under it, small and muted,
-    "(⏎)": the Enter key as a keycap holding the return mark, an SVG
+    the Enter key as a keycap holding the return mark, an SVG
     (`_includes/card-hint.html`, `icons/enter.svg`), hidden from screen
     readers. On the right, alone and
     centred, a 110px miniature of the dial with today's hand. The
@@ -514,7 +520,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   input has `aria-autocomplete="both"`; the completion is not
   announced.
 - **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
-  GREAT THIS WEEK and LAST CHANCE, each an Anton label over three foods
+  GREAT THIS WEEK and STILL GREAT BUT ON THE WAY OUT, each an Anton label over three foods
   in their colours, picked afresh at random on every visit by
   `site.js` from the block's `data-all` (the build's own pick stands
   without JavaScript), and "and N more →", which links to its own
@@ -522,6 +528,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   band's id is its class), then "Everything in season this week →".
 - **Wording.** "Great this week" everywhere (Now's section, the home
   teaser, a food page's "Also great this week"); never "Great now".
+  "Still great but on the way out" everywhere the `last` list is named
+  (Now, the home teaser, the share card, a food page's data); never
+  "Last chance". Its anchor stays `#last`.
   Every link to Now in prose or as an action reads "Everything in
   season this week →" (the nav's NOW and "and N more" excepted). Page
   titles: CALENDAR; THE SHAPE OF THE YEAR on the wheel page, whose nav
@@ -591,7 +600,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   chance, On the way, Great this week. Inside a band, groups are
   parted by a hairline and each group's foods flow down each column,
   then across. Just arrived is left out in a week when nothing has
-  arrived. A count beside a section's label (LAST CHANCE 36) is caps,
+  arrived. A count beside a section's label (STILL GREAT BUT ON THE WAY OUT 36) is caps,
   muted, as beside a group's (VEG 29). Away from this week, "Back to
   this week →" ends the stepper's line, so nothing under it moves. An
   On the way note ("first ones in two or three weeks") has a line of
@@ -874,8 +883,6 @@ Each an open issue:
   each), the pollock/pollack spelling, stored crops, long `avail` tails,
   the BBC/NCGM disagreements in the `note` fields.
 - #46 Easter eggs.
-- #65 Ordinal dates, "22<sup>nd</sup> October", everywhere a date is
-  printed.
 
 ## Ways this goes wrong
 
