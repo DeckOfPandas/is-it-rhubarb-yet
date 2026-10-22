@@ -1,5 +1,6 @@
-// Draw the share cards: one 1200 by 630 PNG per food and never-food, one
-// for home and one for the Now page, from the baked verdicts, so a link
+// Draw the share cards: one 1200 by 630 card per food and never-food, one
+// each for home, the Now page, the calendar and the wheel, from the baked
+// verdicts and the built site, so a link
 // pasted into a chat shows the answer and the day it was true for. Chat
 // apps keep the first preview they fetch, so the date on the card lets an
 // old preview read like a dated newspaper rather than a wrong answer. The
@@ -14,15 +15,20 @@
 //
 // It also draws the favicon and the app icon, into _site/icons.
 //
-// usage: node tools/cards.js [--out _site/cards] [--icons _site/icons] [--only rhubarb,home,now,icons]
+// usage: node tools/cards.js [--out _site/cards] [--site _site] [--icons _site/icons]
+//   [--only rhubarb,home,now,calendar,wheel,icons]
 //
 // Each card is a small HTML page with the site's fonts inlined, opened in
 // headless Chromium (Playwright, which the container and the deploy both
-// have) and screenshotted. Runs after `bundle exec jekyll build`, into
-// the built site; tools/build.sh does so. Needs _data/baked.json from
-// tools/bake.js.
+// have) and screenshotted. The calendar and wheel cards carry a picture
+// of the real chart, shot from the built site through a server of its
+// own. The wheel card is a JPEG: its hundreds of arcs make a PNG of near
+// a megabyte, and chat apps are reported to drop previews over about
+// 300 KB. Runs after `bundle exec jekyll build`, into the built site;
+// tools/build.sh does so. Needs _data/baked.json from tools/bake.js.
 "use strict";
 const fs = require("fs");
+const http = require("http");
 const path = require("path");
 const V = require("../assets/verdict.js");
 const { loadYaml } = require("./yaml.js");
@@ -90,13 +96,15 @@ const CSS = [
   .lines p { font-size: 1em; line-height: 1.3; margin: 0 0 4px; color: ${MUTED}; }
   .lines strong { color: ${INK}; }
   .lines .food { font-weight: 700; color: var(--food); }
+  .pic { display: block; }
   `
 ].join("\n");
 
 // Runs in the card's page once its fonts are in. A [data-fit] block keeps
 // its largest font size that fits data-lines lines (or data-max-h pixels)
 // without running out of the column sideways, down to data-min. Then the
-// word takes the height left, up to the column's width. Returns the box
+// word, or the picture, takes the height left, up to the column's width.
+// Returns the box
 // round everything in the column, in card pixels, and whether the column
 // ran out of room.
 function FIT() {
@@ -116,12 +124,17 @@ function FIT() {
     }
     el.style.fontSize = lo + "px";
   });
-  const box = col.querySelector(".word-box");
-  const others = [...col.children].filter((c) => c !== box);
+  const grow = col.querySelector(".word-box, .pic");
+  const others = [...col.children].filter((c) => c !== grow);
   const gap = parseFloat(getComputedStyle(col).rowGap) || 0;
   const availH = col.clientHeight - others.reduce((s, c) => s + c.getBoundingClientRect().height, 0) - gap * others.length;
-  if (box) {
-    const w = box.querySelector(".word");
+  if (grow && grow.classList.contains("pic")) {
+    const aspect = grow.naturalWidth / grow.naturalHeight;
+    const h = Math.min(availH, col.clientWidth / aspect);
+    grow.style.height = h + "px";
+    grow.style.width = h * aspect + "px";
+  } else if (grow) {
+    const w = grow.querySelector(".word");
     const r = w.getBoundingClientRect();
     const size = parseFloat(getComputedStyle(w).fontSize) * Math.min(col.clientWidth / r.width, availH / r.height);
     w.style.fontSize = Math.min(size, 300) + "px";
@@ -189,6 +202,87 @@ function nowCard(baked) {
     `<p class="week">${esc(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
 }
 
+// The calendar and the wheel: a title, the whole picture inside the
+// column, the foot.
+function pictureCard(title, picture, asofText) {
+  return page(`<div class="display title" data-fit data-lines="1" data-min="40">${esc(title)}</div>` +
+    `<img class="pic" src="${picture}" alt="">` + foot(asofText));
+}
+
+// Serves the built site at the baseurl it was built for, which its home
+// page's stylesheet link gives, so the pages load as they do on Pages.
+const TYPES = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".json": "application/json",
+  ".svg": "image/svg+xml", ".png": "image/png", ".woff2": "font/woff2", ".ics": "text/calendar" };
+function serveSite(dir) {
+  const home = fs.readFileSync(path.join(dir, "index.html"), "utf8");
+  const base = (home.match(/href="([^"]*)\/assets\/site\.css"/) || ["", ""])[1];
+  const server = http.createServer((req, res) => {
+    let p = decodeURIComponent(req.url.split("?")[0]);
+    if (p.startsWith(base)) p = p.slice(base.length);
+    let file = path.join(dir, p);
+    if (!file.startsWith(dir)) { res.writeHead(404); res.end(); return; }
+    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
+    fs.readFile(file, (err, data) => {
+      if (err) { res.writeHead(404); res.end(); return; }
+      res.writeHead(200, { "content-type": TYPES[path.extname(file)] || "application/octet-stream" });
+      res.end(data);
+    });
+  });
+  return new Promise((done) => server.listen(0, "127.0.0.1", () =>
+    done({ server, url: `http://127.0.0.1:${server.address().port}${base}` })));
+}
+
+// The pictures for the calendar and wheel cards, shot from the built pages
+// at a desktop width (a narrower one would switch the site to its phone
+// layout) and three times over, with the header and the floating buttons
+// hidden. The calendar is a window of CAL_ROWS rows of its by-start
+// order, centred on the first row whose season starts this week or later,
+// so the card shows the part of the year that is turning now. The rows
+// and their order are _includes/calendar.html's: a lead variety's first
+// "in" week, then the food's name.
+const CAL_ROWS = 34, CAL_ROW_H = 22;
+const SHOT_CSS = `.site-header, .tt-jump, .tt-controls, .page-head, .site-footer { display: none !important; }
+  .chart-head { position: static !important; }`;
+function turningRow(foods, week) {
+  const rows = [];
+  foods.forEach((f) => f.varieties.forEach((v, vi) => {
+    if (v.lead === false) return;
+    const ins = (v.weeks || []).filter((r) => r[2] === "in").map((r) => r[0]);
+    rows.push({ id: `${f.slug}-${vi}`, first: ins.length ? Math.min(...ins) : 99, name: f.name, vi });
+  }));
+  rows.sort((a, b) => a.first - b.first || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0) || a.vi - b.vi);
+  return (rows.find((r) => r.first >= week && r.first < 99) || rows[0]).id;
+}
+async function sitePictures(browser, siteDir, baked, foods) {
+  if (!fs.existsSync(path.join(siteDir, "calendar", "index.html"))) return null;
+  const { server, url } = await serveSite(siteDir);
+  const tab = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 3 });
+  const shots = {};
+  try {
+    await tab.goto(url + "/calendar/", { waitUntil: "networkidle" });
+    await tab.addStyleTag({ content: SHOT_CSS });
+    await tab.evaluate(({ id, rows, rowH }) => {
+      const fig = document.querySelector("figure.by-start");
+      const row = fig.querySelector(`.cal-labels a.row[data-row="${id}"]`);
+      const body = fig.querySelector(".chart-body");
+      const grid = body.querySelector(".cal-grid");
+      const top = row.getBoundingClientRect().top - grid.getBoundingClientRect().top;
+      const shift = rowH * Math.round(Math.max(0, Math.min(top - (rows * rowH) / 2, grid.scrollHeight - rows * rowH)) / rowH);
+      body.style.height = rows * rowH + "px";
+      body.style.overflow = "hidden";
+      grid.style.transform = `translateY(${-shift}px)`;
+    }, { id: turningRow(foods, baked.week), rows: CAL_ROWS, rowH: CAL_ROW_H });
+    shots.calendar = await tab.locator("figure.by-start .cal").screenshot();
+    await tab.goto(url + "/wheel/", { waitUntil: "networkidle" });
+    await tab.addStyleTag({ content: SHOT_CSS });
+    shots.wheel = await tab.locator("figure.by-all svg").first().screenshot();
+  } finally {
+    await tab.close();
+    server.close();
+  }
+  return Object.fromEntries(Object.entries(shots).map(([k, b]) => [k, "data:image/png;base64," + b.toString("base64")]));
+}
+
 // The favicon and the app icon: IIRY, light ink on the forcing shed, the R
 // in rhubarb pink and underlined in it. One square page, shot at each size
 // in ICONS, so Chromium sets the type at that size rather than shrinking a
@@ -207,6 +301,7 @@ function iconPage() {
 
 async function main() {
   const out = path.resolve(ROOT, arg("--out", path.join("_site", "cards")));
+  const siteDir = path.resolve(ROOT, arg("--site", path.dirname(out)));
   const only = arg("--only", "").split(",").filter(Boolean);
   const want = (slug) => !only.length || only.includes(slug);
   const bakedPath = path.join(DATA, "baked.json");
@@ -234,6 +329,12 @@ async function main() {
   }
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch();
+  if (want("calendar") || want("wheel")) {
+    const pics = await sitePictures(browser, siteDir, baked, foods);
+    if (!pics) throw new Error("no built calendar in " + path.relative(ROOT, siteDir) + ": run jekyll build first, or pass --site");
+    cards.push({ slug: "calendar", html: pictureCard("UK-produced foods, week by week", pics.calendar, baked.asofText) });
+    cards.push({ slug: "wheel", type: "jpeg", html: pictureCard("The shape of the year", pics.wheel, baked.asofText) });
+  }
   const tab = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: SCALE });
   const strays = [];
   let drawn = 0;
@@ -244,7 +345,11 @@ async function main() {
     if (overflow || box.left < SQUARE_X || box.right > SQUARE_X + HEIGHT || box.top < 0 || box.bottom > HEIGHT) {
       strays.push(`${card.slug} (x ${Math.round(box.left)}-${Math.round(box.right)}, y ${Math.round(box.top)}-${Math.round(box.bottom)}${overflow ? ", overflows" : ""})`);
     }
-    await tab.screenshot({ path: path.join(out, card.slug + ".png"), type: "png" });
+    if (card.type === "jpeg") {
+      await tab.screenshot({ path: path.join(out, card.slug + ".jpg"), type: "jpeg", quality: 85 });
+    } else {
+      await tab.screenshot({ path: path.join(out, card.slug + ".png"), type: "png" });
+    }
     drawn++;
   }
   if (want("icons")) {
