@@ -531,12 +531,17 @@ hidden, since the hero is a form.
   coordinates (the months, the names, the weeks) and a blank corner over
   the names; the header hides its own overflow and `site.js` scrolls it
   in step, since a sticky block cannot sit inside a scrolling one.
-- Three orders, each a copy of the chart built at build time and shown by
-  the order switch: by start (one row per ring not marked `lead: false`,
-  sorted by its first in-season week), by family (grouped, a food's rings
-  together) and A to Z. A row is two links to its food's page, its name
-  and its weeks; only the name takes focus. A food page links here with
-  `#<slug>`, which marks the food's rows and scrolls to the first.
+- Three orders from one baked chart: by start (one row per ring not
+  marked `lead: false`, sorted by its first in-season week), by family
+  (grouped under a label, a food's rings together) and A to Z. The chart
+  is baked by start; `charts.js` reorders its rows in place for the
+  other two (`orderRows`, moving each row's name and weeks by a
+  translate and adding the family labels), by the same keys as the
+  include, once `foods.json` is in. The switch needs JavaScript and
+  appears only with it. A row is two links to its food's page, its name
+  and its weeks; only the name takes focus; its cells carry no tooltips.
+  A food page links here with `#<slug>`, which marks the food's rows and
+  scrolls to the first.
 - On a phone (below 700px) it runs to the screen's edges, the names are
   `small` (14px), a row with a `short:` name shows it instead (popovers,
   lists and screen readers keep the full name), and `charts.js` fits the

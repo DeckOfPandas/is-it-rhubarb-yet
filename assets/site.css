@@ -297,6 +297,10 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .switch .icon { width: 15px; height: 15px; stroke-width: 1.6; }
 .theme { display: none; }
 .js .theme { display: inline-flex; margin: 0; }
+/* A control that does nothing without JavaScript (the calendar's order
+   switch) appears only with it. */
+.needs-js { display: none; }
+.js .needs-js { display: inline-flex; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
@@ -807,7 +811,7 @@ article.never { --food: var(--never); }
    none. The line glides between steps unless motion is reduced, and
    never while it is being dragged. */
 .tt-stage { display: flex; flex-direction: column; gap: var(--sp-4); }
-.tt-stage > .ordered > .chart { margin-top: 0; margin-bottom: 0; }
+.tt-stage > .ordered > .chart, .tt-stage > .chart-stage > .chart { margin-top: 0; margin-bottom: 0; }
 .tt-controls { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
 .tt-controls .switch { margin: 0; }
 .tt-time { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--sp-3); align-self: stretch; }

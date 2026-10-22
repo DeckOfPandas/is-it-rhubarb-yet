@@ -161,7 +161,7 @@
       var handle = makeHandle(el("div", "tt-handle"));
       rail.appendChild(handle);
       head.insertBefore(rail, head.firstChild);
-      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail,
+      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail, header: header,
         x0: x0, cw: cw, cw0: cw, items: items, steps: steps, lines: lines, tick: tick, handle: handle, x: x0,
         hits: cells.querySelectorAll(".row-hit"), monthLabels: months.querySelectorAll(".month-label") };
       rail.addEventListener("click", function (e) {
@@ -334,6 +334,70 @@
     });
     fitWeeks();
     cals.forEach(function (c) { if (c.ready) layoutCal(c); else placeHandle(c); });
+  }
+
+  // --- One chart, three orders -----------------------------------------------------
+  // The calendar is baked once, by start, and By family and A to Z reorder
+  // its rows in place: each row's two parts, its name and its weeks, are
+  // moved down or up by a translate, and a family's label and gap are
+  // added above its rows. The keys are _includes/calendar.html's: by
+  // start, a ring's first in-season week, then the food's name, then the
+  // ring's place in the data; by family, the family's place, the food's
+  // first in-season week over all its rings, its name, the ring's place;
+  // A to Z, the name then the ring's label. Needs foods.json, so the
+  // baked order stands until it is in, and without JavaScript the switch
+  // does not appear.
+  var ROW_H = 22, GROUP_GAP = 28;
+  function firstIn(weeks) {
+    var first = 99;
+    (weeks || []).forEach(function (r) { if (r[2] === "in" && r[0] < first) first = r[0]; });
+    return first;
+  }
+  function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
+  function orderRows(order) {
+    if (!foods || !cals.length) return;
+    var c = cals[0];
+    var rows = Array.prototype.map.call(c.labels.querySelectorAll("a.row"), function (a) {
+      var f = bySlug[a.dataset.slug], vi = +a.dataset.variety, v = f.varieties[vi];
+      var foodFirst = 99;
+      f.varieties.forEach(function (x) { foodFirst = Math.min(foodFirst, firstIn(x.weeks)); });
+      var gi = 0;
+      groups.forEach(function (g, i) { if (g.key === f.group) gi = i; });
+      return {
+        a: a, cells: c.cells.querySelector('a.row[data-row="' + a.dataset.row + '"]'),
+        y0: +a.querySelector(".row-hit").getAttribute("y"),
+        first: firstIn(v.weeks), foodFirst: foodFirst, gi: gi, group: f.group,
+        name: f.name, label: V.varietyLabel(v), vi: vi
+      };
+    });
+    rows.sort(function (p, q) {
+      if (order === "group") return cmp(p.gi, q.gi) || cmp(p.foodFirst, q.foodFirst) || cmp(p.name, q.name) || cmp(p.vi, q.vi);
+      if (order === "alpha") return cmp(p.name.toLowerCase(), q.name.toLowerCase()) || cmp(p.label.toLowerCase(), q.label.toLowerCase()) || cmp(p.vi, q.vi);
+      return cmp(p.first, q.first) || cmp(p.name, q.name) || cmp(p.vi, q.vi);
+    });
+    c.labels.querySelectorAll(".group-label").forEach(function (t) { t.remove(); });
+    var y = c.header, lastGroup = null;
+    rows.forEach(function (r) {
+      if (order === "group" && r.group !== lastGroup) {
+        lastGroup = r.group;
+        y += GROUP_GAP;
+        var t = svgEl("text", "group-label", { x: 0, y: y - 9, "aria-hidden": "true" });
+        t.textContent = groups[r.gi].name;
+        c.labels.appendChild(t);
+      }
+      var dy = y - r.y0, move = dy ? "translate(0 " + dy + ")" : "";
+      r.a.setAttribute("transform", move);
+      r.cells.setAttribute("transform", move);
+      y += ROW_H;
+    });
+    // The two scrolling SVGs are as tall as the rows now laid out.
+    var body = y + 10 - c.header;
+    [c.labels, c.cells].forEach(function (svg) {
+      var vb = svg.getAttribute("viewBox").split(" ");
+      vb[3] = body;
+      svg.setAttribute("viewBox", vb.join(" "));
+      svg.setAttribute("height", body);
+    });
   }
 
   // --- The wheel -----------------------------------------------------------------
@@ -588,7 +652,7 @@
   function showJump() {
     var docked = !!(pop && pop.classList.contains("is-docked"));
     jump.hidden = !foods || !chartSeen || headSeen || docked;
-    var chart = root.querySelector(".ordered");
+    var chart = root.querySelector(".ordered, .chart-stage");
     up.hidden = !jump.hidden || docked || chart.getBoundingClientRect().bottom > S.headerHeight();
   }
   function toList() {
@@ -895,7 +959,11 @@
   document.addEventListener("DOMContentLoaded", function () {
     if (WHEEL) initWheel(); else initCalendar();
     document.querySelectorAll('input[name="order"], input[name="kind"]').forEach(function (r) {
-      r.addEventListener("change", function () { fitNames(); draw(); });
+      r.addEventListener("change", function () {
+        if (r.name === "order") orderRows(r.value);
+        fitNames();
+        draw();
+      });
     });
     var controls = document.getElementById("tt-controls");
     document.getElementById("tt-time").hidden = false;
@@ -916,7 +984,7 @@
       new IntersectionObserver(function (entries) {
         chartSeen = entries.some(function (e) { return e.isIntersecting; });
         showJump();
-      }).observe(root.querySelector(".ordered"));
+      }).observe(root.querySelector(".ordered, .chart-stage"));
       headWatch = new IntersectionObserver(function (entries) {
         headSeen = entries[0].isIntersecting;
         showJump();
@@ -945,6 +1013,8 @@
       foods = all;
       all.forEach(function (f) { bySlug[f.slug] = f; });
       nameParts();
+      var order = document.querySelector('input[name="order"]:checked');
+      if (order && order.value !== "start") { orderRows(order.value); fitNames(); }
       draw();
     });
   });
