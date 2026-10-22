@@ -786,18 +786,17 @@
   // The same field as home's hero, matched against search.json: a food's
   // name, the names its varieties are said by, its aliases and shared
   // words, one food per hit at its best tier. It never answers here; it
-  // asks home, /?q=…, which answers as it always does: as soon as typing
-  // pauses 0.3s on one good match (the one that colours the word), or
-  // 0.8s on two or more letters that find several foods or none; at once
-  // on Enter (a phone's Go), which with nothing typed goes to home as it
-  // is. Escape puts RHUBARB back and leaves the field. Leaving, its slot
+  // asks home, /?q=…, which answers as it always does, on Enter (a
+  // phone's Go), which with nothing typed goes to home as it is. Typing
+  // only colours the word for one good match and offers its completion.
+  // Escape puts RHUBARB back and leaves the field. Leaving, its slot
   // takes the hero's view-transition name, so the word flies into the
   // hero, and on a wide screen home keeps typing where it left off.
   var CARRY = "hook-carry";
   function initHeadSearch() {
     var input = document.getElementById("head-input");
     if (!input) return;
-    var index = [], timer = null, lead = null, hits = [];
+    var index = [], lead = null, hits = [];
     // The index is fetched when the field is first touched, not on every
     // page load; a field that already holds text fetches at once.
     var indexIn = null;
@@ -830,33 +829,29 @@
     }
     var field = hookField(input, { stacked: function () { return false; }, onChange: change });
     function go() {
-      clearTimeout(timer);
       var q = input.value.trim();
       input.parentElement.style.viewTransitionName = "search-word";
       try { sessionStorage.setItem(CARRY, "1"); } catch (e) {}
       location.href = BASE + (q ? "?q=" + encodeURIComponent(input.value) : "");
     }
+    // Typing only colours the word and offers a completion; the page
+    // changes on Enter (a phone's Go) alone, never on a timer, so a slow
+    // typist is not carried off mid-word.
     function change() {
-      clearTimeout(timer);
       var q = input.value.trim();
       hits = search(q);
       lead = hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier) ? hits[0].it : null;
       field.update(lead);
-      if (lead) timer = setTimeout(go, 300);
-      else if (fold(q).replace(/ /g, "").length >= 2) timer = setTimeout(go, 800);
     }
     input.form.addEventListener("submit", function (e) { e.preventDefault(); go(); });
     // One Escape does it all, a completion showing or not.
     input.addEventListener("keydown", function (e) {
       if (e.key !== "Escape") return;
       e.preventDefault();
-      clearTimeout(timer);
       input.value = "";
       field.update(null);
       input.blur();
     });
-    // Only typing goes: leaving the field stops a pending search.
-    input.addEventListener("blur", function () { clearTimeout(timer); });
     document.querySelectorAll(".search-link").forEach(function (a) {
       a.addEventListener("click", function (e) {
         e.preventDefault();
@@ -1043,14 +1038,16 @@
         one.classList.toggle("asks", !sameWords(heroWord(it, q), it.ask));
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
-        oneMore.hidden = !!it.never;
+        // A never-food's card links to its page too ("Tell me why"), which
+        // carries the quotation and the ways on; only the dial is left out.
+        oneMore.hidden = false;
         oneMore.href = foodUrl(it.slug);
-        setArrowText(oneMore, tellMeAbout(it.name));
+        setArrowText(oneMore, it.never ? "Tell me why" : tellMeAbout(it.name));
         var ring = it.ring();
         dialFor(it.never ? null : it.slug, ring, ring >= 0 ? it.colour() : null);
         one.hidden = false;
-        answered = it.never ? "never" : "link";
-        picks = it.never ? [] : [oneMore];
+        answered = "link";
+        picks = [oneMore];
         status.textContent = "1 match: " + it.name + (it.label ? " (" + it.label + ")" : "") + ", " + verdict.toLowerCase() + ".";
         if (also.length) {
           alsoLine.appendChild(document.createTextNode("Also: "));
@@ -1149,7 +1146,7 @@
     });
     input.form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var go = active >= 0 ? picks[active] : results.hidden || !none.hidden || answered === "never" ? null : picks[0];
+      var go = active >= 0 ? picks[active] : results.hidden || !none.hidden ? null : picks[0];
       if (go === oneMore) nameFor(true);
       if (go) location.href = go.href;
     });
