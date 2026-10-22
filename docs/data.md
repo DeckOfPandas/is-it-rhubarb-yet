@@ -148,7 +148,8 @@ A ring of the food itself, as a fish's coasts or a glasshouse crop has:
   never a working note.
 - **Reserved slugs** that no food may take are listed in
   `tools/check-foods.py` (`RESERVED_SLUGS`): the pages, the endpoints and
-  every old address that forwards (`grey-squirrel`, `button-mushrooms`).
+  every old address that forwards (`grey-squirrel`, `button-mushrooms`,
+  `cobnuts`).
 
 ## Colours
 
@@ -283,8 +284,8 @@ their own terms.
 
 1. Edit `_data/foods.yml` (or `never.yml`, `quotes.yml`, `sources.yml`).
    A new food needs its three stubs: `_foods/<slug>.md`,
-   `_remind/<slug>.ics` and, for a never-food, `_never/<slug>.md` instead
-   (copy any existing one and change the slug).
+   `_remind/<slug>.ics` and `_wheels/<slug>.svg`; a never-food needs
+   `_never/<slug>.md` instead (copy any existing one and change the slug).
 2. `python3 -I tools/check-foods.py` until it reports 0 problems.
 3. `node --test tests/verdict/verdict.test.js`.
 4. `sh tools/build.sh` and look at the food's page, the calendar and the

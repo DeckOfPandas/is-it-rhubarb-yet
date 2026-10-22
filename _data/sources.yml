@@ -10,6 +10,11 @@
   short: "AHDB"
   url: "https://web.archive.org/web/20250323181601/https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change"
 
+- key: ashridge
+  name: "Ashridge Nurseries: Growing figs"
+  short: "Ashridge Nurseries"
+  url: "https://www.ashridgetrees.co.uk/blogs/fruit/how-grow-brown-turkey-fig-trees/"
+
 - key: bap
   name: "British Apples & Pears: Apple varieties"
   short: "British Apples & Pears"
@@ -70,6 +75,11 @@
   short: "Flying Fish Seafoods"
   url: "https://flyingfishseafoods.co.uk/seasonality/"
 
+- key: fif_figs
+  name: "Food Ingredients First: Sainsbury's Essex-grown figs (2013)"
+  short: "Food Ingredients First"
+  url: "https://www.foodingredientsfirst.com/news/sainsburys-keeps-it-british-with-essex-grown-figs.html"
+
 - key: first_nature
   name: "First Nature: Fungi"
   short: "First Nature"
@@ -80,10 +90,20 @@
   short: "Forestheart"
   url: "https://substack.com/@forestheart"
 
+- key: freshplaza_grapes
+  name: "FreshPlaza: British grapes on shelves (2015)"
+  short: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2150006/british-grapes-on-shelves-after-3-years/"
+
 - key: fsa_lead
   name: "Food Standards Agency: Game shot with lead"
   short: "Food Standards Agency"
   url: "https://web.archive.org/web/20240530220237/https://www.food.gov.uk/safety-hygiene/lead-shot-game"
+
+- key: galloway
+  name: "Galloway Wild Foods: Sea kale"
+  short: "Galloway Wild Foods"
+  url: "https://gallowaywildfoods.com/sea-kale-identification-edibility-and-distribution/"
 
 - key: garden_organic
   name: "Garden Organic: How to grow calabrese"
@@ -130,6 +150,16 @@
   short: "Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/"
 
+- key: mcs_sprat
+  name: "Marine Conservation Society: Good Fish Guide, sprat (English Channel)"
+  short: "Good Fish Guide"
+  url: "https://www.mcsuk.org/goodfishguide/species/sprat/wild/202/"
+
+- key: mjseafood
+  name: "M&J Seafood: Anchovies and sprats"
+  short: "M&J Seafood"
+  url: "https://www.mjseafood.com/the-fish-book/39/anchovies-and-sprats"
+
 - key: msc_sardine
   name: "MSC: Cornish sardine fishery"
   short: "MSC"
@@ -175,6 +205,16 @@
   short: "RHS"
   url: "https://rhs.org.uk/vegetables/calabrese/grow-your-own"
 
+- key: rhs_figs
+  name: "RHS: Figs, grow your own"
+  short: "RHS"
+  url: "https://www.rhs.org.uk/fruit/figs/grow-your-own"
+
+- key: rhs_grapes
+  name: "RHS: Grapes, grow your own"
+  short: "RHS"
+  url: "https://www.rhs.org.uk/fruit/grapes/grow-your-own"
+
 - key: rhs_planner
   name: "RHS: Crop planner"
   short: "RHS"
@@ -214,3 +254,18 @@
   name: "Traditional Farmfresh Turkey Association"
   short: "Traditional Farmfresh Turkey Association"
   url: "https://www.kiwa.com/en/services/certification/traditional-farmfresh-turkey-association/"
+
+- key: tregothnan
+  name: "Tregothnan: Frequently asked questions"
+  short: "Tregothnan"
+  url: "https://tregothnan.co.uk/pages/frequently-asked-questions"
+
+- key: westlands
+  name: "The Staff Canteen: The British sea kale season (Westlands, 2017)"
+  short: "Westlands"
+  url: "https://www.thestaffcanteen.com/Editorials-and-Advertorials/the-british-sea-kale-season-is-now-upon-us-advertorial-by-westlands"
+
+- key: wikipedia_sea_kale
+  name: "Wikipedia: Crambe maritima"
+  short: "Wikipedia"
+  url: "https://en.wikipedia.org/wiki/Crambe_maritima"
