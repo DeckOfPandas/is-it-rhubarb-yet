@@ -83,7 +83,8 @@ test("rhubarb is NEARLY: forced rhubarb from 29 October, eleven days off", () =>
   assert.equal(fv.variety.name, "Forced");
   assert.equal(iso(V.startDate(fv.variety.from, YEAR)), "2026-10-29");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "In a week or two.");
-  assert.equal(V.varietyLine(bySlug.rhubarb, fv, YEAR, TODAY), "Forced rhubarb: nearly. Outdoor rhubarb: back in May.",
+  assert.deepEqual(V.varietyLines(bySlug.rhubarb, fv, YEAR, TODAY).map((l) => [l.name, l.answer]),
+    [["Forced", "Nearly"], ["Outdoor", "Back in May"]],
     "outdoor rhubarb's week 18 starts on 30 April, but its middle is 3 May");
 });
 
@@ -103,7 +104,8 @@ test("potatoes are YES by maincrop until late December; new potatoes are back in
   assert.equal(fv.variety.name, "Maincrop");
   assert.equal(iso(V.endDate(fv.variety.until, YEAR)), "2026-12-31");
   assert.equal(V.dateLine(fv.variety, YEAR, TODAY), "Until late December.");
-  assert.equal(V.varietyLine(bySlug.potatoes, fv, YEAR, TODAY), "Maincrop potatoes: yes. New potatoes: first ones in May, properly in June.");
+  assert.deepEqual(V.varietyLines(bySlug.potatoes, fv, YEAR, TODAY).map((l) => [l.name, l.answer]),
+    [["Maincrop", "Yes"], ["New", "First ones in May, properly in June"]]);
 });
 
 test("a variety is named as a type or a cultivar, in a list and in a sentence", () => {
@@ -113,7 +115,7 @@ test("a variety is named as a type or a cultivar, in a list and in a sentence", 
   assert.equal(V.varietyLabel(v("venison", "Red & fallow")), "red & fallow");
   assert.equal(V.varietyLabel(v("cod", "South West")), "South West", "a coast keeps its capitals");
   assert.equal(V.varietyLabel(v("apples", "Cox")), "Cox");
-  assert.equal(V.varietyLabel(v("apples", "Egremont Russet")), "Egremont Russet");
+  assert.equal(V.varietyLabel(v("apples", "Golden Delicious")), "Golden Delicious");
   assert.equal(V.varietyLabel({ name: "", weeks: [] }), "");
   assert.equal(V.varietySaid(bySlug.rhubarb, v("rhubarb", "Forced")), "Forced rhubarb");
   assert.equal(V.varietySaid(bySlug.rhubarb, v("rhubarb", "Forced"), true), "forced rhubarb");
@@ -174,7 +176,7 @@ test("celeriac is in season until late January, then from storage until late Aug
   const may = verdictOf("celeriac", 20);
   assert.equal(may.verdict, "YES", "a store week answers as in season does");
   assert.equal(may.variety.store, true);
-  assert.equal(V.dateLine(may.variety, YEAR, V.midOfToday(20, YEAR)), "From storage until late August.");
+  assert.equal(V.dateLine(may.variety, YEAR, V.midOfToday(20, YEAR)), "Available from storage until late August.");
   assert.equal(V.foodVerdict(bySlug.celeriac, 20).variety.since, 52, "never just arrived from store");
 });
 
@@ -185,14 +187,37 @@ test("between two YES, in season beats from store", () => {
   assert.ok(!/storage/.test(V.dateLine(fv.variety, YEAR, TODAY)));
 });
 
-test("a fish answers by its South West ring; the other coasts are said in words", () => {
+test("a fish answers by its South West ring; the other coasts follow, one to a line", () => {
   const fv = verdictOf("cod");
   assert.equal(fv.variety.name, "South West");
   assert.ok(fv.varieties.filter((r) => !r.lead).length >= 2, "other coasts are rings that do not lead");
-  const line = V.varietyLine(bySlug.cod, fv, YEAR, TODAY);
-  assert.match(line, /^\w+ in the South West, (but|and) /);
-  assert.match(line, /in the North East/);
-  assert.match(line, /nationally\.$/);
+  const lines = V.varietyLines(bySlug.cod, fv, YEAR, TODAY);
+  assert.equal(lines[0].name, "South West");
+  assert.match(lines[0].answer, /^(Yes|Just|Nearly|No)$/);
+  assert.ok(lines.some((l) => l.name === "North East"));
+  assert.equal(lines.length, bySlug.cod.varieties.length);
+  lines.forEach((l) => assert.equal(bySlug.cod.varieties[l.index].name, l.name));
+});
+
+test("one variety has no variety lines, and neither does a food that cannot be sold", () => {
+  assert.deepEqual(V.varietyLines(bySlug.celery, verdictOf("celery"), YEAR, TODAY), []);
+  assert.deepEqual(V.varietyLines(bySlug["wild-salmon"], verdictOf("wild-salmon"), YEAR, TODAY), []);
+});
+
+test("a variety's runs in fuzzy months, the year's ends joined", () => {
+  const v = (slug, name) => bySlug[slug].varieties.find((x) => x.name === name);
+  assert.equal(V.runsSaid(v("apples", "Bramley"), YEAR), "In season August to September, available from storage October to July.");
+  assert.equal(V.runsSaid(v("apples", "Braeburn"), YEAR),
+    "A few about in October, in season in November, available from storage December to April.");
+  assert.equal(V.runsSaid({ weeks: [[1, 52, "in"]] }, YEAR), "In season all year.");
+  assert.equal(V.runsSaid({ weeks: [[47, 52, "in"]] }, YEAR), "In season late November to December.", "week 47's middle is 22 November");
+  assert.equal(V.runsSaid({ weeks: [[42, 42, "in"]] }, YEAR), "In season in mid-October.");
+  assert.equal(V.runsSaid({ weeks: [] }, YEAR), "");
+  for (const f of foods) for (const x of f.varieties) {
+    const s = V.runsSaid(x, YEAR);
+    assert.ok(!/\d/.test(s), `${f.slug}/${x.name}: ${s}`);
+    if (x.weeks.length) assert.match(s, /^[A-Z].*\.$/, `${f.slug}/${x.name}: ${s}`);
+  }
 });
 
 test("wild salmon cannot be sold: always NO, its line says why", () => {
@@ -295,6 +320,8 @@ test("calendar dates, for the as-of line and the week range only", () => {
   assert.equal(V.fmtRange(5, 2026), "29 January – 4 February");
   assert.equal(V.fmtRange(52, 2026), "24–31 December");
   assert.equal(V.fmtRange(1, 2027), "1–7 January");
+  const ords = [1, 2, 3, 4, 11, 12, 13, 21, 22, 23, 31].map((n) => n + V.ordinal(n));
+  assert.deepEqual(ords, ["1st", "2nd", "3rd", "4th", "11th", "12th", "13th", "21st", "22nd", "23rd", "31st"]);
 });
 
 test("the weekly digest for week 42: four lists, by kind, by time left", () => {

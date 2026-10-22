@@ -3,9 +3,10 @@ layout: default
 ---
 {%- comment -%}
 One food, one column at every width, top to bottom: the question, the
-verdict word, the date line, the variety line, the quotation, the dial,
-the notes (the counter note), three foods from the same family that are
-perfect now, the data, and the way on. Everything date-dependent is baked for the build day and
+verdict word, the date line, the varieties one to a line, the quotation,
+the dial, the notes (the counter note), three foods from the same family
+that are perfect now, the data, the as-of line, the calendar line, a
+rule, and the way on. Everything date-dependent is baked for the build day and
 recomputed by site.js for the visitor's own day from the food's data in
 data-food and the quotations in data-quotes (the general pools plus the
 lines pinned to this food). The whole page keys off --food, the food's
@@ -33,12 +34,18 @@ colour.
   <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
 
   {%- comment -%} Under the verdict, in reading order, 40px apart: the
-     date line with the variety line under it, the quotation, the dial,
-     then the notes. {%- endcomment -%}
+     date line with the varieties under it, the quotation, the dial, then
+     the notes. Each variety is a line: its name in caps in its colour,
+     then its answer. {%- endcomment -%}
   <div class="food-body">
   <div class="food-when">
     <p class="date-line" id="date-line">{{ b.line }}</p>
-    <p class="variety-line" id="variety-line"{% if b.varietyLine == "" %} hidden{% endif %}>{{ b.varietyLine }}</p>
+    <ul class="named-lines variety-lines" id="variety-lines"{% if b.varietyLines.size == 0 %} hidden{% endif %}>
+    {%- for l in b.varietyLines -%}
+      {%- assign v = food.varieties[l.index] -%}
+      <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ l.name }}</span> <span class="line-words">{{ l.answer }}</span></li>
+    {%- endfor -%}
+    </ul>
   </div>
 
   <blockquote class="quote" id="quote"{% unless b.quote %} hidden{% endunless %}>
@@ -81,14 +88,14 @@ colour.
 
   <details class="fine">
     <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the data.</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the data.</span></summary>
-    <ul class="runs">
+    {%- comment -%} Each variety's runs in fuzzy months, baked by
+       runsSaid in verdict.js, named as the variety lines name them. {%- endcomment -%}
+    <ul class="named-lines runs">
     {%- for v in food.varieties -%}
-      <li><span class="swatch" style="--food: {{ v.colour | default: food.colour }}" aria-hidden="true"></span>{% if v.name != "" %}<strong>{{ v.name }}:</strong> {% endif -%}
-        {%- for r in v.weeks -%}
-          {%- if r[2] == "in" %}in season{% elsif r[2] == "store" %}from storage{% else %}just about{% endif %} weeks {{ r[0] }} to {{ r[1] }}{% unless forloop.last %}, {% endunless -%}
-        {%- endfor -%}.
+      {%- assign i = forloop.index0 -%}
+      <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="line-words">{{ b.runs[i] }}
         {%- if v.notes %} <span class="ring-note">{{ v.notes | join: " " }}</span>{% endif -%}
-      </li>
+      </span></li>
     {%- endfor -%}
     </ul>
     <figure class="chart mini">
@@ -118,24 +125,31 @@ colour.
        food's `sources` (from its rings) or its one older `source`. {%- endcomment -%}
     {%- assign keys = food.sources | default: "" -%}
     {%- if keys == "" -%}{%- assign keys = "" | split: "" | push: food.source -%}{%- endif -%}
-    <p class="source">{% if keys.size > 1 %}Sources{% else %}Source{% endif %}: {% for k in keys -%}
+    <p class="source">{% if keys.size > 1 %}Sources{% else %}Source{% endif %}:</p>
+    <ul class="source-list food-sources">
+    {%- for k in keys -%}
       {%- assign s = site.data.sources | where: "key", k | first -%}
-      {%- if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name | default: k }}{% endif -%}
-      {%- unless forloop.last -%}; {% endunless -%}
-    {%- endfor -%}. <a href="{{ '/sources/' | relative_url }}">About the sources</a>.</p>
-    <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
+      <li>{% if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name | default: k }}{% endif %}</li>
+    {%- endfor -%}
+    </ul>
   </details>
 
-  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search">{% include arrow-words.html text="Ask about something else" %}</a></p>
-  <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}">{% include arrow-words.html text="See the whole year" %}</a></p>
+  {%- comment -%} The day the verdict was worked out, as an ordinal with
+     its letters raised; site.js sets the visitor's own day. {%- endcomment -%}
+  <p class="as-of">Verdict correct as of <span data-asof-ordinal>{{ baked.asofDay }}<sup>{{ baked.asofOrdinal }}</sup> {{ baked.asofMonth }}</span>.</p>
+
   {%- comment -%} The food's own calendar of season starts, to subscribe
      to: webcal:// for Apple's Calendar and most others, Google's own
-     subscribe link (Google does not open webcal://), the file itself, and
-     every food's at once. Not for a food that cannot be sold. {%- endcomment -%}
+     subscribe link (Google does not open webcal://), the file itself,
+     every food's at once, and the Source data page's section on feeds.
+     Each dot is glued to the link before it by a no-break space, so a
+     line never starts with one. Not for a food that cannot be sold. {%- endcomment -%}
   {%- unless food.unsold -%}
   {%- capture feed -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/remind/{{ food.slug }}.ics{%- endcapture -%}
   {%- capture every -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/season-starts.ics{%- endcapture -%}
-  <p class="onwards"><a class="arrow-link" href="{{ feed }}">{% capture put_text %}Put {{ food.name | downcase }} in your calendar{% endcapture %}{% include arrow-words.html text=put_text %}</a></p>
-  <p class="calendar-also">Or <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">in Google Calendar</a>, as <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">a file</a>, or <a href="{{ every }}">every food's season</a> at once. About <a href="{{ '/sources/' | relative_url }}#calendar-feed">the calendar feeds</a>.</p>
+  <p class="calendar-line">Put {{ food.name | downcase }} in your calendar: <a href="{{ feed }}">Apple</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">Google</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">.ics</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ every }}">all foods</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ '/sources/' | relative_url }}#calendar-feed">about feeds</a>.</p>
   {%- endunless -%}
+
+  <hr class="onwards-rule">
+  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search">{% include arrow-words.html text="Ask about something else" %}</a></p>
 </article>

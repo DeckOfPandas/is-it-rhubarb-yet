@@ -9,7 +9,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   fonts. Nothing is fetched from anywhere else.
 - **One verdict function.** `assets/verdict.js` holds the rules: the
   week grid, the verdict for a variety and for a food, the phrase under
-  it, the variety line, the weekly digest's lists and the quotation
+  it, the variety lines, a variety's runs in words (`runsSaid`), the
+  weekly digest's lists and the quotation
   pick. Every page loads it as a classic script; `tools/bake.js`
   requires it under Node and writes `_data/baked.json` (gitignored)
   with today's verdicts, which the Liquid templates read. So the build
@@ -28,7 +29,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   December") and names the middle of the data week. The rules are the
   comment over `phrase` in `verdict.js`. The one calendar date is the
   "as of" date, which is when an answer was true. Dates are plain
-  numbers, never ordinals: "19 October 2026", "15–21 October".
+  numbers: "19 October 2026", "15–21 October"; the food page's as-of
+  line alone is an ordinal with its letters raised, "Verdict correct
+  as of 22<sup>nd</sup> October." (issue for doing this everywhere).
 - **The digest** (`nowLists`) returns each of its four lists split by
   kind of food, `[{kind, items}]`, just arrived and great now A to Z,
   last chance and on the way soonest first. `flatten` gives one array,
@@ -94,9 +97,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - **Rings.** A food's `varieties` are its rings. A named variety or type
   has its own colour; a ring of the food itself (`ring: region`,
   `method`, `zone` or `part`) shares the food's (or its variety's) and is
-  named in the variety line by itself, "Glasshouse: all year."
+  named in the variety lines by itself, GLASSHOUSE.
   - **`lead: false`:** the ring is drawn on the food's dial, listed in
-    its data and said in its variety line, but gives no verdict, no
+    its data and has its variety line, but gives no verdict, no
     calendar row, no wheel dot, no search hit and no calendar-feed
     event. Rings marked this way:
     - every coast but a fish's South West, where it has one;
@@ -104,18 +107,17 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     - a wild ring beside a market or cultivated one;
     - provenance (Welsh, salt marsh), Orkney, the Cornish sardine
       fishery, and the national native and Porthilly rock oysters.
-  - **Coasts in the variety line:** said as places, "Just in the South
-    West, but yes in the North East, nearly in the South East and yes
-    nationally."
+  - **Coasts:** each its own variety line, the South West's first: SOUTH
+    WEST Just, NORTH EAST Until late January.
   - **Stores and wild salmon:** a `store` week answers YES, its date
-    line "From storage until late August." (between two YES, in season
+    line "Available from storage until late August." (between two YES, in season
     beats from store; never "just arrived"). Wild salmon is `unsold`:
     always NO, its line "It cannot be sold in England, Wales or
     Scotland."
   - **Drawing stores:** the calendar and the food's dial draw a store run
     flat, the colour 30% into the grey.
   - **Sources:** a food's page names its sources from `sources.yml`,
-    linked.
+    linked, one to a bullet under "Sources:".
   - **Fungi:** a group of their own, wild and cultivated, on the Wild
     wheel.
 - A renamed food keeps its old address as a page that forwards:
@@ -144,10 +146,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), not its date,
     so a calendar updates a moved event rather than adding another.
   - **Wild salmon:** no events.
-  - **The food page:** "Put rhubarb in your calendar →" (a `webcal://`
-    link, which Apple Calendar and most apps take as subscribe), then a
-    small line with Google Calendar's own subscribe link (it does not
-    open `webcal://`), the file, and every food's feed.
+  - **The food page:** one small line, "Put rhubarb in your calendar:
+    Apple · Google · .ics · all foods · about feeds.": Apple is the
+    `webcal://` link, which Apple Calendar and most apps take as
+    subscribe; Google is Google Calendar's own subscribe link (it does
+    not open `webcal://`); then the file, every food's feed, and the
+    feeds' section on Source data. Each dot follows its link after a
+    no-break space, so no line starts with one.
   - **The Sources page** offers the whole feed the same three ways.
 - **Source data page** (`sources/index.html`) is Helen's copy:
   - where each kind of food's dates come from;
@@ -292,14 +297,28 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - The question over the verdict is set at `title`, the full width (no
   measure), its lines balanced (`text-wrap: balance`).
 - **Food page layout.** One column at every width, in this order:
-  question, verdict, date line (the variety line 8px under it), the
-  quotation, the dial (on the same left edge as the words), the notes
-  (the counter note), then Also, the data and the way on. Every block
-  is 40px from the next. Text keeps a measure of about 65ch. A date
-  line wraps with `text-wrap: pretty`, so no word sits alone on its last
-  line. The variety line is one pattern: "Forced rhubarb: nearly.
-  Outdoor rhubarb: back in May." The quote bar and every note's bar are
-  the food's full colour.
+  question, verdict, date line (the variety lines 8px under it), the
+  quotation, the dial and its key (on the same left edge as the words),
+  the notes (the counter note), then Also, the data, the as-of line
+  ("Verdict correct as of 22<sup>nd</sup> October."), the calendar line,
+  a faint rule and "Ask about something else →". Every block is 40px
+  from the next. Text keeps a measure of about 65ch. A date line wraps
+  with `text-wrap: pretty`, so no word sits alone on its last line. The
+  quote bar and every note's bar are the food's full colour.
+  - **Variety lines** (`.named-lines`, `varietyLines` in `verdict.js`):
+    a food with more than one variety lists them one to a line, the
+    name in the caps style in the variety's text colour, in a column,
+    then its answer, muted: the verdict's variety first, answered by its
+    word (COX Yes), then the rest in data order by their phrases
+    (BRAMLEY Available from storage until late July). Below 600px the
+    name sits over its answer.
+  - **The data** opens to the same pattern, each variety's runs in
+    fuzzy months (`runsSaid`, baked as `runs`): "In season August to
+    September, available from storage October to July." A run ending
+    the year and one of the same kind starting it are one run; a
+    boundary on a month's edge names the month, one inside it says
+    early, mid- or late. Then the chart, the notes, and "Sources:" over
+    a bulleted list.
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
   in pink, the line exactly the word's width, in the header, the hero
   and the cards. It does not change on hover.

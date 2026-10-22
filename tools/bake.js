@@ -47,6 +47,10 @@ function main() {
   const baked = {
     asof: isoDate(date),
     asofText: V.fmtDateYear(date),
+    // The food page's as-of line: "22nd October", the letters raised.
+    asofDay: date.getDate(),
+    asofOrdinal: V.ordinal(date.getDate()),
+    asofMonth: V.fmtDate(date).split(" ")[1],
     week: week,
     year: year,
     range: V.fmtRange(week, year),
@@ -64,7 +68,8 @@ function main() {
       verdict: fv.verdict,
       word: titleWord(fv.verdict),
       line: V.dateLine(fv.variety, year, date),
-      varietyLine: V.varietyLine(f, fv, year, date),
+      varietyLines: V.varietyLines(f, fv, year, date),
+      runs: f.varieties.map((v) => V.runsSaid(v, year)),
       variety: fv.variety.name || "",
       said: fv.variety.name ? V.varietySaid(f, fv.variety.v, true) : "",
       since: fv.variety.since === undefined ? null : fv.variety.since,
@@ -77,7 +82,7 @@ function main() {
   never.forEach((n) => {
     const q = V.pickQuote(quotes, "NEVER", n.slug, week);
     baked.foods[n.slug] = {
-      verdict: "NEVER", word: "Never", line: n.line, varietyLine: "", variety: "", said: "", since: null,
+      verdict: "NEVER", word: "Never", line: n.line, varietyLines: [], runs: [], variety: "", said: "", since: null,
       quote: q ? { text: q.text, by: q.by } : null
     };
   });

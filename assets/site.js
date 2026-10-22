@@ -541,9 +541,20 @@
     var fv = V.foodVerdict(food, WEEK);
     document.getElementById("verdict").textContent = fv.verdict + ".";
     document.getElementById("date-line").textContent = V.dateLine(fv.variety, YEAR, TODAY);
-    var vl = document.getElementById("variety-line");
-    var vline = V.varietyLine(food, fv, YEAR, TODAY);
-    vl.textContent = vline; vl.hidden = !vline;
+    // The varieties one to a line, as _layouts/food.html draws them.
+    var vl = document.getElementById("variety-lines");
+    var lines = V.varietyLines(food, fv, YEAR, TODAY);
+    vl.textContent = "";
+    lines.forEach(function (l) {
+      var v = food.varieties[l.index], own = v.colour ? v : food;
+      var li = el("li");
+      foodColours(li, own.colour, own.text_on_shed, own.text_on_custard);
+      li.appendChild(el("span", "line-name", l.name));
+      li.appendChild(document.createTextNode(" "));
+      li.appendChild(el("span", "line-words", l.answer));
+      vl.appendChild(li);
+    });
+    vl.hidden = !lines.length;
     showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
     var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
@@ -1266,6 +1277,13 @@
     document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, TODAY); });
     fitDials();
     document.querySelectorAll("[data-asof]").forEach(function (n) { n.textContent = V.fmtDateYear(TODAY); });
+    // "22nd October", the letters raised, on a food page's as-of line.
+    document.querySelectorAll("[data-asof-ordinal]").forEach(function (n) {
+      var day = TODAY.getDate();
+      n.textContent = day;
+      n.appendChild(el("sup", null, V.ordinal(day)));
+      n.appendChild(document.createTextNode(" " + V.fmtDate(TODAY).split(" ")[1]));
+    });
     initSwitches();
     initFood();
     fitVerdict(document.querySelector("article.food .verdict-word"));
