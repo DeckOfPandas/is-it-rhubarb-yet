@@ -106,7 +106,7 @@ to this food). The whole page keys off --food, the food's colour.
     </ol>
     {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
     {%- for n in food.notes -%}<p class="note">{{ n }}</p>{%- endfor -%}
-    {%- for v in food.varieties -%}{%- if v.notes -%}<p class="note">{% if v.name %}<strong>{{ v.name }}:</strong> {% endif %}{{ v.notes | join: " " }}</p>{%- endif -%}{%- endfor -%}
+    {%- for v in food.varieties -%}{%- if v.notes -%}<p class="note">{% if v.name != "" %}<strong>{{ v.name }}:</strong> {% endif %}{{ v.notes | join: " " }}</p>{%- endif -%}{%- endfor -%}
   </details>
 
   {%- comment -%} The food's own calendar of season starts, to subscribe
