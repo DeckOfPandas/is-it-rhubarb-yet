@@ -203,9 +203,10 @@ statement):
   JUST that is a just-about tail, or an isolated just-about run, says
   "Just about, until late November." Storage and glasshouse lines:
   "Until late November, then available from storage until late July.";
-  "Available from storage until late July."; "Glasshouse-grown for now;
-  outdoor from early July." Always "available from storage", never "from
-  store".
+  "Available from storage until late July."; "Glasshouse-grown for now,
+  and outdoor from early July." Always "available from storage", never
+  "from store". No semicolons in anything a visitor reads: a note, a
+  counter line or a date line is two sentences instead.
 - **Dates** are ordinals, "22nd October 2026", with the letters raised
   wherever they are shown (`datePieces`, `dateHtml`); a week's days are
   "15th–21st October".

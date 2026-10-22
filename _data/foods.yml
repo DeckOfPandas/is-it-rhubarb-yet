@@ -345,7 +345,7 @@
   also: ["veg", "vegetables", "greens"]
   colour: "#688e5d"
   text_on_custard: "#527748"
-  sources: [ncgm, defra]
+  sources: [ncgm, defra, rhs_savoy]
   notes:
     - "Defra's wholesale prices list UK cabbage in every month most years."
     - "Defra's wholesale prices list UK spring greens in every month most years."
@@ -362,11 +362,14 @@
     - name: "Savoy"
       colour: "#696700"
       text_on_shed: "#83822a"
-      sources: [ncgm, defra]
+      sources: [ncgm, defra, rhs_savoy]
+      notes:
+        - "Winter savoys are cut from October into March, and overwintered plants give an early-summer crop from June, so the spring gap is April and May."
       weeks:
         - [1, 13, in]
-        - [14, 30, avail]
-        - [31, 52, in]
+        - [14, 17, avail]
+        - [23, 26, avail]
+        - [27, 52, in]
     - name: "Winter white"
       short: "White cabbage"
       colour: "#729263"
@@ -384,7 +387,7 @@
   colour: "#649700"
   text_on_custard: "#507900"
   sources: [ncgm, defra]
-  note: "NCGM has these most of the year; BBC Good Food gives March to June."
+  note: "NCGM has these most of the year, and BBC Good Food gives March to June. Defra lists them in May too, the month they are named for."
   notes:
     - "Defra's wholesale prices list UK cabbage in every month most years."
     - "Defra's wholesale prices list UK spring greens in every month most years."
@@ -392,7 +395,7 @@
     - name: ""
       sources: [ncgm, defra]
       weeks:
-        - [1, 17, in]
+        - [1, 22, in]
         - [23, 30, avail]
         - [31, 52, in]
 
@@ -419,11 +422,13 @@
   also: ["veg", "vegetables", "greens"]
   colour: "#556b72"
   text_on_shed: "#6b8289"
-  source: bbc
-  note: "BBC Good Food's calendar runs to September; the autumn months follow the crop, which stands into winter."
+  sources: [bbc, gbc_cavolo]
+  note: "BBC Good Food's calendar runs to September, but the crop stands through winter and is cut until March."
   varieties:
     - name: ""
+      sources: [bbc, gbc_cavolo]
       weeks:
+        - [1, 13, in]
         - [18, 22, avail]
         - [23, 52, in]
 
@@ -505,12 +510,15 @@
   also: ["veg", "vegetables"]
   colour: "#8b857e"
   text_on_custard: "#736d67"
-  sources: [ncgm]
+  sources: [ncgm, rhs_garlic]
+  notes:
+    - "British garlic is lifted from early summer into autumn and dried. The stored bulbs keep for months, softnecks up to a year, so it is sold from store through spring, and green (wet) garlic comes before the main crop."
   varieties:
     - name: ""
-      sources: [ncgm]
+      sources: [ncgm, rhs_garlic]
       weeks:
-        - [1, 4, avail]
+        - [1, 22, store]
+        - [23, 30, avail]
         - [31, 52, in]
 
 - name: "Leeks"
@@ -666,7 +674,7 @@
   also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#829100"
   text_on_custard: "#687400"
-  sources: [ncgm, defra]
+  sources: [ncgm, defra, fpj_iceberg]
   note: "NCGM lists five types; this row is their union."
   notes:
     - "Defra's wholesale prices list UK lettuce in every month most years."
@@ -690,9 +698,11 @@
     - name: "Iceberg"
       colour: "#7d8c8b"
       text_on_custard: "#627070"
-      sources: [ncgm]
+      sources: [ncgm, fpj_iceberg]
+      notes:
+        - "British iceberg is a field crop on sale from about the first week of May to mid-October. The winter's comes from Spain."
       weeks:
-        - [1, 52, in]
+        - [18, 43, in]
     - name: "Little gem"
       colour: "#2f9b59"
       text_on_custard: "#007f40"
@@ -1120,11 +1130,13 @@
   varieties:
     - name: ""
       shades: ["#5d8f00", "#e44500", "#b4344e"]
-      sources: [ncgm]
+      sources: [ncgm, defra]
+      notes:
+        - "The outdoor crop ripens from July and is over by October. The glasshouse ring carries the rest of the British season, which Defra lists to November."
       weeks:
-        - [9, 26, avail]
-        - [27, 35, in]
-        - [36, 48, avail]
+        - [23, 26, avail]
+        - [27, 39, in]
+        - [40, 43, avail]
     - name: "Glasshouse"
       ring: method
       method: glasshouse
@@ -2241,7 +2253,7 @@
   note: "Flying Fish Seafoods have Cornish handline mackerel poor from June to September and only fair the rest of the year; the summer mackerel of common knowledge is a different fishery."
   notes:
     - "The coasts disagree: Northumberland peaks June-August and has none November-April, while Flying Fish marks Cornish mackerel poor June-September and varying the rest of the year."
-  buy: "Good Fish Guide: every mackerel rating is Avoid."
+  buy: "Good Fish Guide, October 2026: every mackerel is rated Avoid, wherever and however it is caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2284,7 +2296,7 @@
   note: "Wild, line-caught; poor through the summer."
   notes:
     - "Brighton & Newhaven marks February and March out of season, which matches the commercial bass closure of recent years."
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (C&S), Irish Sea, English Channel, Bristol Channel, Celtic Sea; Hook & line (handline). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) when it is caught by handline in the North Sea, the Irish Sea, the Channel, the Bristol Channel or the Celtic Sea. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "South East"
       ring: region
@@ -2320,7 +2332,7 @@
   note: "Cornish sardines, best in the cold months."
   notes:
     - "Flying Fish shows Cornish sardines good most of the year (varying April-June), best quality in the cold months; Brighton & Newhaven has none March-July."
-  buy: "Good Fish Guide: Best Choice (2). Ask for Southern Celtic Seas and English Channel; Net (purse seine or ring)."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the southern Celtic Seas and the Channel, caught by purse seine or ring net."
   varieties:
     - name: "South East"
       ring: region
@@ -2354,7 +2366,7 @@
   text_on_custard: "#196dcc"
   sources: [northumberland, ffs]
   note: "Poor from January to March."
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea Autumn Spawners (North Sea, eastern Channel); Net (drift). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) for North Sea autumn spawners (the North Sea and the eastern Channel) caught by drift net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2378,7 +2390,7 @@
   text_on_custard: "#6062c9"
   sources: [mjseafood, mcs_sprat]
   note: "A winter fish. The Thames Estuary is the traditional fishery."
-  buy: "Channel sprats are the better choice: the Good Fish Guide rates them 3. North Sea and West of Scotland sprats rate 4."
+  buy: "Good Fish Guide, October 2026: Channel sprats are the better choice, rated 3 (1 is the best, 5 is the worst). North Sea and West of Scotland sprats rate 4."
   varieties:
     - name: ""
       sources: [mjseafood]
@@ -2396,7 +2408,7 @@
   note: "Cornish cod is at its best from March to May and again in September and October."
   notes:
     - "The coasts' own calendars are used over BBC Good Food's February to April spawning peak."
-  buy: "Good Fish Guide: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2); trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
+  buy: "Good Fish Guide, October 2026: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2). Trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
   varieties:
     - name: "North East"
       ring: region
@@ -2435,7 +2447,7 @@
   text_on_custard: "#756a7c"
   sources: [northumberland, bnfs, ffs]
   note: "Two peaks: late winter and late summer."
-  buy: "Good Fish Guide: Best Choice (1). Ask for North Sea, West of Scotland, Skagerrak; Net (demersal seine). Ratings run from 1 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 1) from the North Sea, the west of Scotland or the Skagerrak, caught by seine net. Other stocks and methods rate from 1 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2464,7 +2476,7 @@
   text_on_custard: "#43738f"
   sources: [northumberland, bnfs, ffs]
   note: "Consistent all year."
-  buy: "Good Fish Guide: Best Choice (2). Ask for Northern stock (North Sea, Celtic Seas, northern Biscay); Net (gill or fixed)."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern stock (the North Sea, the Celtic Seas and northern Biscay), caught by gill or fixed net."
   varieties:
     - name: "North East"
       ring: region
@@ -2498,7 +2510,7 @@
   note: "Poor in January and February after spawning."
   notes:
     - "Flying Fish marks January-February poor, in line with Seafish's advice to avoid plaice in roe (February-April)."
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Skagerrak; Bottom trawl (otter). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the Skagerrak, caught by otter trawl. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2538,7 +2550,7 @@
   text_on_shed: "#bb6565"
   sources: [northumberland, bnfs, ffs, seafish]
   note: "Poor in January and February after spawning; best in spring and again from July."
-  buy: "Good Fish Guide: Best Choice (2). Ask for English Channel (West); Net (gill or fixed). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the western Channel, caught by gill or fixed net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2581,7 +2593,7 @@
   note: "Poor in January and February; good from March."
   notes:
     - "Northumberland's row covers pollack and saithe (coley) together."
-  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for English Channel and Celtic Seas; Hook & line (handline). Ratings run from 3 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: rated 3 at best (1 is the best, 5 is the worst), caught by handline in the Channel or the Celtic Seas. Other stocks and methods rate up to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2603,7 +2615,7 @@
   text_on_custard: "#6767a7"
   sources: [northumberland, ffs]
   note: "Consistent all year."
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, English Channel (East); Bottom trawl (otter). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the eastern Channel, caught by otter trawl. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2624,7 +2636,7 @@
   colour: "#7e596c"
   text_on_shed: "#9a7386"
   sources: [northumberland, bnfs, ffs, seafish]
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Rockall & West of Scotland, Kattegat & Skagerrak; Bottom trawl (otter)."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, Rockall and the west of Scotland, or the Kattegat and Skagerrak, caught by otter trawl."
   varieties:
     - name: "North East"
       ring: region
@@ -2661,7 +2673,7 @@
   text_on_custard: "#7a6f00"
   sources: [northumberland, bnfs, ffs]
   note: "Poor from January to March and from October."
-  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for North Sea, Skagerrak & Kattegat, English Channel (East); Bottom trawl (otter)."
+  buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the North Sea, the Skagerrak and Kattegat or the eastern Channel, caught by otter trawl."
   varieties:
     - name: "North East"
       ring: region
@@ -2692,7 +2704,7 @@
   sources: [northumberland, bnfs, ffs]
   notes:
     - "The coasts disagree sharply: North East peak June-August, South East out of season June-September."
-  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for Northeast Atlantic; Bottom trawl (otter). Ratings run from 3 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: rated 3 at best (1 is the best, 5 is the worst), from the north-east Atlantic, caught by otter trawl. Other methods rate up to 5, so ask how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2724,7 +2736,7 @@
   text_on_shed: "#718643"
   sources: [northumberland, bnfs, ffs]
   note: "Poor in January and February."
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Skagerrak & Kattegat, English Channel; Net (gill or fixed). Ratings run from 2 to 4 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, the Skagerrak and Kattegat or the Channel, caught by gill or fixed net. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2752,7 +2764,7 @@
   text_on_custard: "#8e6456"
   sources: [bnfs, ffs]
   note: "Poor from May to July."
-  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for English Channel and Celtic Seas; Pot, trap or creel."
+  buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Channel or the Celtic Seas, caught by pot, trap or creel."
   varieties:
     - name: "South East"
       ring: region
@@ -2778,7 +2790,7 @@
   note: "Rod-caught Scottish; most salmon sold is farmed all year."
   notes:
     - "Selling rod-caught salmon or sea trout has been illegal since 2009, and coastal net fisheries are largely closed, so wild salmon is rarely legitimately on sale."
-  buy: "Good Fish Guide: Avoid (5). Not that you can buy it."
+  buy: "Good Fish Guide, October 2026: rated Avoid. Not that you can buy it."
   varieties:
     - name: "North East"
       ring: region
@@ -2793,10 +2805,10 @@
   colour: "#cc5356"
   text_on_shed: "#d05659"
   text_on_custard: "#bd454a"
-  sources: [northumberland]
+  sources: [northumberland, nrw_salmon]
   notes:
-    - "As for wild salmon, rod-caught sea trout cannot be sold."
-  buy: "Good Fish Guide: not rated."
+    - "Rod-caught sea trout cannot be sold, as for wild salmon. What is sold comes from licensed net fisheries and carries an Environment Agency or Natural Resources Wales tag."
+  buy: "Good Fish Guide, October 2026: not rated."
   varieties:
     - name: "North East"
       ring: region
@@ -2812,7 +2824,7 @@
   colour: "#ac77ad"
   text_on_custard: "#8f5c91"
   sources: [northumberland, bnfs, ffs, seafish]
-  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for Celtic Seas; Hook & line (jig)."
+  buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Celtic Seas, caught by jig."
   varieties:
     - name: "North East"
       ring: region
@@ -2851,7 +2863,7 @@
   note: "Poor in January."
   notes:
     - "The coasts disagree: Northumberland peaks in winter (November-February); Flying Fish and Seafish say April-September, with Flying Fish marking October-January poor; Brighton & Newhaven has it all year."
-  buy: "Good Fish Guide: Best Choice (2). Ask for Scotland (Shetland); Pot, trap or creel. Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from Shetland, caught by pot, trap or creel. Other stocks rate from 2 to 5, so ask where it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2889,7 +2901,7 @@
   note: "Native Cornish lobster is of consistent quality all year; the summer peak is one of supply and price."
   notes:
     - "Minimum landing size rising to 90 mm, phased in 2026-28 (Defra)."
-  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for England (Northwest); Pot, trap or creel. Ratings run from 3 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: rated 3 at best (1 is the best, 5 is the worst), from north-west England, caught by pot, trap or creel. Other stocks rate up to 5, so ask where it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2926,7 +2938,7 @@
   colour: "#c76e85"
   text_on_custard: "#a8536a"
   sources: [northumberland]
-  buy: "Good Fish Guide: Best Choice (2). Ask for South Minch (FU 12); Pot, trap or creel. Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the South Minch, caught by pot, trap or creel. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -2942,7 +2954,7 @@
   text_on_shed: "#6b72e5"
   sources: [bnfs, ffs, seafish]
   note: "Rope-grown mussels are good all year and at their best from October to March."
-  buy: "Good Fish Guide: Best Choice (1). Ask for UK and Ireland; Suspension (rope) culture (farmed). Ratings run from 1 to 3 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 1) when rope-grown in the UK or Ireland. Other methods rate from 1 to 3, so ask how they were grown."
   varieties:
     - name: "South East"
       ring: region
@@ -3026,7 +3038,7 @@
   note: "Cornish scallops are poor in midwinter and best in September and October; Orkney hand-dived scallops are consistent all year."
   notes:
     - "Devon & Severn IFCA closes scallop dredging 1 July-30 September in its district."
-  buy: "Good Fish Guide: Best Choice (1). Ask for UK: Scotland; Bottom and suspension culture (farmed). Ratings run from 1 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 1) when farmed in Scotland, on the seabed or on ropes. Wild stocks and methods rate from 1 to 5, so ask where and how they were caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3103,7 +3115,7 @@
   text_on_shed: "#748361"
   text_on_custard: "#647252"
   sources: [northumberland, bnfs, ffs, seafish]
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea; Bottom trawl (otter). Ratings run from 2 to 4 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, caught by otter trawl. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3139,7 +3151,7 @@
   colour: "#bf2d52"
   text_on_shed: "#db4968"
   sources: [northumberland, ffs, seafish]
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, eastern Channel, Skagerrak & Kattegat (Northern Area); Net (demersal seine). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern area (the North Sea, the eastern Channel and the Skagerrak and Kattegat), caught by seine net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3173,7 +3185,7 @@
   text_on_shed: "#8d73a9"
   text_on_custard: "#7c6398"
   sources: [northumberland, bnfs, ffs]
-  buy: "Good Fish Guide: Best Choice (2). Ask for Irish Sea, Bristol Channel, Celtic Sea North; Bottom trawl (otter). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the Irish Sea, the Bristol Channel or the northern Celtic Sea, caught by otter trawl. Other species, stocks and methods rate from 2 to 5, so ask which it is and where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3201,7 +3213,7 @@
   text_on_shed: "#73808b"
   text_on_custard: "#646f7a"
   sources: [bnfs, ffs]
-  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for Cornwall; Net (beach seine)."
+  buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from Cornwall, caught by beach seine."
   varieties:
     - name: "South East"
       ring: region
@@ -3224,7 +3236,7 @@
   text_on_shed: "#828218"
   text_on_custard: "#727100"
   sources: [ffs]
-  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for North East Atlantic; Net (gill or fixed)."
+  buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the north-east Atlantic, caught by gill or fixed net."
   varieties:
     - name: "South West"
       ring: region
@@ -3239,7 +3251,7 @@
   colour: "#9d4d82"
   text_on_shed: "#b56298"
   sources: [ffs]
-  buy: "Good Fish Guide: not rated."
+  buy: "Good Fish Guide, October 2026: not rated."
   varieties:
     - name: "South West"
       ring: region
@@ -3254,7 +3266,7 @@
   colour: "#948253"
   text_on_custard: "#7e6c3e"
   sources: [northumberland, ffs]
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea, Skagerrak & Kattegat; Bottom trawl (otter). Ratings run from 2 to 4 depending on where and how it is caught, so ask."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the Skagerrak and Kattegat, caught by otter trawl. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3277,7 +3289,7 @@
   text_on_custard: "#925f71"
   sources: [northumberland]
   aliases: ["witch", "torbay sole"]
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (North), West of Scotland; Bottom trawl (otter)."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern North Sea or the west of Scotland, caught by otter trawl."
   varieties:
     - name: ""
       sources: [northumberland]
@@ -3293,7 +3305,7 @@
   text_on_custard: "#8954bf"
   sources: [northumberland]
   aliases: ["megrim sole", "cornish sole"]
-  buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (North), West of Scotland; Bottom trawl (otter)."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern North Sea or the west of Scotland, caught by otter trawl."
   varieties:
     - name: ""
       sources: [northumberland]
@@ -3308,7 +3320,7 @@
   text_on_shed: "#468d57"
   text_on_custard: "#347b47"
   sources: [northumberland]
-  buy: "Good Fish Guide: Avoid (5), however and wherever it is caught."
+  buy: "Good Fish Guide, October 2026: rated Avoid, however and wherever it is caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3325,7 +3337,7 @@
   sources: [northumberland, ffs]
   notes:
     - "Wild Atlantic halibut is rated Avoid; no UK-farmed halibut rating exists."
-  buy: "Good Fish Guide: Avoid (5) for wild Atlantic halibut, however it is caught; farmed halibut is not rated."
+  buy: "Good Fish Guide, October 2026: wild Atlantic halibut is rated Avoid, however it is caught. Farmed halibut is not rated."
   varieties:
     - name: "North East"
       ring: region
@@ -3346,7 +3358,7 @@
   colour: "#e15f24"
   text_on_custard: "#bf4600"
   sources: [ffs]
-  buy: "Good Fish Guide: Best Choice (2). Ask for Ireland; UK: Scotland; Open net pen, marine (organic certified) (farmed)."
+  buy: "Good Fish Guide, October 2026: a best choice (rated 2) when it is organic-certified and farmed in open sea pens in Scotland or Ireland."
   varieties:
     - name: "Glenarm, Northern Ireland"
       ring: region
@@ -3371,7 +3383,7 @@
   text_on_shed: "#c86117"
   text_on_custard: "#b25200"
   sources: [bnfs]
-  buy: "Good Fish Guide: OK - Needs Improvement (3). Ask for Cornwall; Pot, trap or creel."
+  buy: "Good Fish Guide, October 2026: rated 3 (1 is the best, 5 is the worst) from Cornwall, caught by pot, trap or creel."
   varieties:
     - name: "South East"
       ring: region
@@ -3386,7 +3398,7 @@
   colour: "#728f7f"
   text_on_custard: "#587465"
   sources: [bnfs, ffs]
-  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for Scotland; Hand-gathering (diving, shore)."
+  buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from Scotland, gathered by hand by divers or from the shore."
   varieties:
     - name: "South East"
       ring: region
@@ -3412,7 +3424,7 @@
   text_on_shed: "#9e755d"
   text_on_custard: "#8d654e"
   sources: [bnfs]
-  buy: "Good Fish Guide: OK - Needs Improvement (4). Ask for England (Sussex coast); Pot, trap or creel."
+  buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Sussex coast, caught by pot, trap or creel."
   varieties:
     - name: "South East"
       ring: region
@@ -3427,7 +3439,7 @@
   colour: "#c74650"
   text_on_shed: "#d4525b"
   text_on_custard: "#c1404b"
-  sources: [nsa_lamb, ahdb_lamb, lishmans, hcc, saltmarsh]
+  sources: [nsa_lamb, ahdb_lamb, ahdb_lamb_market, lishmans, hcc, saltmarsh]
   notes:
     - "Easter \"spring lamb\" is usually winter-born or imported; grass-fed British lamb is at its best from late summer. Mutton (over two years) has no stated season."
   varieties:
@@ -3436,12 +3448,12 @@
       short: "New-season lamb"
       colour: "#d8655d"
       text_on_custard: "#b94944"
-      sources: [nsa_lamb, ahdb_lamb]
+      sources: [nsa_lamb, ahdb_lamb, ahdb_lamb_market]
       notes:
-        - "First new-season lamb reaches shops around Easter; the lamb kill peaks late summer to early autumn."
+        - "First new-season lamb reaches shops around Easter. It is in the shops in numbers from June, and the lamb kill peaks late summer to early autumn."
       weeks:
-        - [14, 30, avail]
-        - [31, 48, in]
+        - [14, 22, avail]
+        - [23, 48, in]
         - [49, 52, avail]
     - name: "Milk-fed spring"
       colour: "#988673"

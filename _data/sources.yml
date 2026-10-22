@@ -10,6 +10,11 @@
   short: "AHDB"
   url: "https://web.archive.org/web/20250323181601/https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change"
 
+- key: ahdb_lamb_market
+  name: "AHDB: Lamb market update, August 2026"
+  short: "AHDB"
+  url: "https://ahdb.org.uk/news/high-prices-encourage-early-store-lamb-sales-lamb-market-update"
+
 - key: ashridge
   name: "Ashridge Nurseries: Growing figs"
   short: "Ashridge Nurseries"
@@ -80,6 +85,11 @@
   short: "Food Ingredients First"
   url: "https://www.foodingredientsfirst.com/news/sainsburys-keeps-it-british-with-essex-grown-figs.html"
 
+- key: fpj_iceberg
+  name: "Fresh Produce Journal: UK iceberg supplies tighten"
+  short: "Fresh Produce Journal"
+  url: "https://www.fruitnet.com/fresh-produce-journal/uk-iceberg-supplies-tighten/152139.article"
+
 - key: first_nature
   name: "First Nature: Fungi"
   short: "First Nature"
@@ -109,6 +119,11 @@
   name: "Garden Organic: How to grow calabrese"
   short: "Garden Organic"
   url: "https://www.gardenorganic.org.uk/expert-advice/how-to-grow/growing-guides/vegetables-herbs-guides/how-to-grow-calabrese"
+
+- key: gbc_cavolo
+  name: "Great British Chefs: How to cook cavolo nero"
+  short: "Great British Chefs"
+  url: "https://www.greatbritishchefs.com/how-to-cook/how-to-cook-cavolo-nero"
 
 - key: general
   name: "Common knowledge, not yet checked against a named source"
@@ -210,6 +225,11 @@
   short: "RHS"
   url: "https://www.rhs.org.uk/fruit/figs/grow-your-own"
 
+- key: rhs_garlic
+  name: "RHS: Garlic, grow your own"
+  short: "RHS"
+  url: "https://www.rhs.org.uk/vegetables/garlic/grow-your-own"
+
 - key: rhs_grapes
   name: "RHS: Grapes, grow your own"
   short: "RHS"
@@ -219,6 +239,11 @@
   name: "RHS: Crop planner"
   short: "RHS"
   url: "https://www.rhs.org.uk/advice/pdfs/crop-planner.pdf"
+
+- key: rhs_savoy
+  name: "RHS: Savoy cabbage 'Tundra'"
+  short: "RHS"
+  url: "https://www.rhs.org.uk/plants/139298/brassica-oleracea-capitata-group-tundra/details"
 
 - key: rocket_gardens
   name: "Rocket Gardens: Harvesting purple sprouting broccoli"
