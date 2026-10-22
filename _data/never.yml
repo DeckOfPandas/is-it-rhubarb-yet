@@ -12,7 +12,7 @@
 - name: "Bananas"
   slug: bananas
   aliases: [banana, plantain, plantains]
-  line: "Not in this country. Not in this lifetime."
+  line: "All Cavendish bananas worldwide can claim they're British, but they never visit."
 - name: "Avocados"
   slug: avocados
   aliases: [avocado, guacamole]
@@ -91,7 +91,7 @@
 - name: "Peanuts"
   slug: peanuts
   aliases: [peanut, groundnuts]
-  line: "They need a long hot summer. We've had, like, two. Sadly we're on for more, but still probably no peanuts for the foreseeable."
+  line: "They need a long hot summer. These days they can in theory be grown indoors and in polytunnels if you're really committed, so maybe this won't be a never forever."
 - name: "Lychees"
   slug: lychees
   aliases: [lychee, litchi, litchis]
@@ -103,7 +103,7 @@
 - name: "Cashews"
   slug: cashews
   aliases: [cashew, cashew nuts]
-  line: "They need tropical heat. We're all still talking about that hot week in September 2023."
+  line: "They need tropical heat. We're all still talking about that hot week in September 2023, and we still haven't beaten it."
 - name: "Brazil nuts"
   slug: brazil-nuts
   said: "Brazil nuts"

@@ -309,7 +309,7 @@ test("rings run from the longest season to the shortest, ties in data order", ()
     { name: "A", weeks: [[1, 10, "in"]] }, { name: "B", weeks: [[1, 20, "in"], [21, 30, "store"]] },
     { name: "C", weeks: [[5, 14, "avail"]] }, { name: "D", weeks: [[1, 52, "in"]] }] };
   assert.deepEqual(V.ringOrder(food), [3, 1, 0, 2]);
-  assert.deepEqual(ringLines("lettuce").slice(0, 2).map((l) => l[0]), ["Iceberg", "Glasshouse"]);
+  assert.deepEqual(ringLines("lettuce").slice(0, 2).map((l) => l[0]), ["Glasshouse", "Little gem"]);
   for (const f of foods) {
     const order = V.ringOrder(f);
     assert.deepEqual(order.slice().sort((a, b) => a - b), f.varieties.map((_, i) => i), f.slug + ": every ring once");
@@ -324,11 +324,17 @@ test("wild salmon cannot be sold: always NO, its line says why", () => {
   }
 });
 
-test("tomatoes are JUST until late November: week 48 ends on 2 December but its middle is 29 November", () => {
-  const fv = verdictOf("tomatoes");
+test("a tail to week 48 is JUST until late November: the week ends on 2 December but its middle is 29 November", () => {
+  const food = { name: "T", slug: "t", colour: "#000000", varieties: [{ name: "", weeks: [[27, 35, "in"], [36, 48, "avail"]] }] };
+  const fv = V.foodVerdict(food, WEEK);
   assert.equal(fv.verdict, "JUST");
   assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-12-02");
   assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Just about, until late November.", "a tail is just about, not a last fortnight");
+  // Tomatoes themselves: the outdoor crop's tail ends in October and the
+  // glasshouse ring carries November.
+  const t = verdictOf("tomatoes");
+  assert.equal(t.verdict, "JUST");
+  assert.equal(V.dateLine(t.whole, YEAR, TODAY), "Just about, for another week or two, then glasshouse-grown until late November.");
 });
 
 test("a soft end says so once it is near: at its best, then just about", () => {
