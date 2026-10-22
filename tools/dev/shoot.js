@@ -84,6 +84,9 @@ function usage(message) {
           await box.pressSequentially(opts.type, { delay: 20 });
           await page.waitForTimeout(400);
         }
+        // A full-page shot is one tall screen, so a sticky header would be
+        // drawn wherever the page was scrolled to: it is unstuck.
+        await page.addStyleTag({ content: '.site-header { position: static !important; }' });
         await page.waitForTimeout(300);
         await page.screenshot({ path: file, fullPage: true });
         console.log(`${name} ${p} -> ${file}`);

@@ -22,8 +22,11 @@
 // from the site's own foods.json and assets/verdict.js: the first food in
 // data order that is YES, NO, JUST and NEARLY (not rhubarb), the first
 // never-food, rhubarb itself, the first food with a buy note and the first
-// whose source is general. Motion is reduced, so the wheel's hand and the
-// hero's caret hold still.
+// whose source is general. Then the food page's three shapes at 390 and
+// 1280: raspberries (one ring), apples (many varieties) and cod (coasts),
+// and celeriac on a day in May, when it is YES-ISH. Motion is reduced, so
+// the wheel's hand and the hero's caret hold still. The sticky header is
+// unstuck for the shots.
 //
 // Needs WITH_PLAYWRIGHT=1 in kit.env and a site being served.
 const fs = require('fs');
@@ -32,6 +35,8 @@ const V = require('../../assets/verdict.js');
 
 const WIDTHS = [390, 820, 1280];
 const THEMES = ['light', 'dark'];
+// A day celeriac is sold from storage alone, so its page is YES-ISH.
+const YESISH_DAY = '2026-05-20';
 
 function parse(argv) {
   const opts = { base: 'http://localhost:9000/is-it-rhubarb-yet/', date: '2026-10-25', out: 'screenshots', full: 'no' };
@@ -81,29 +86,38 @@ async function pickFoods(base, day) {
   const browser = await chromium.launch();
   let failed = false, count = 0;
 
+  // One shot of a page in this context. both: taken light as well as
+  // dark. wide: taken at 1280 only. widths: the only widths it is taken
+  // at.
+  function shooter(page, theme, width) {
+    return async function shot(name, url, { both = false, wide = false, widths = null, act } = {}) {
+      if (widths && !widths.includes(width)) return;
+      if (!opts.full && ((theme === 'light' && !both) || (wide && width !== 1280))) return;
+      const file = path.join(opts.out, `${name}-${width}-${theme}.png`);
+      try {
+        await page.goto(opts.base + url, { waitUntil: 'networkidle' });
+        if (act) await act();
+        // A full-page shot is one tall screen, so a sticky header would be
+        // drawn wherever the page was scrolled to: it is unstuck, and the
+        // shot taken from the top.
+        await page.addStyleTag({ content: '.site-header { position: static !important; }' });
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.waitForTimeout(400);
+        await page.screenshot({ path: file, fullPage: true });
+        count++;
+      } catch (e) {
+        failed = true;
+        console.log(`${file} ERROR ${e.message.split('\n')[0]}`);
+      }
+    };
+  }
+
   for (const theme of THEMES) {
     for (const width of WIDTHS) {
       const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme, reducedMotion: 'reduce' });
       await context.clock.install({ time: day });
       const page = await context.newPage();
-      // both: taken light as well as dark. wide: taken at 1280 only.
-      async function shot(name, url, { both = false, wide = false, act } = {}) {
-        if (!opts.full && ((theme === 'light' && !both) || (wide && width !== 1280))) return;
-        const file = path.join(opts.out, `${name}-${width}-${theme}.png`);
-        try {
-          await page.goto(opts.base + url, { waitUntil: 'networkidle' });
-          if (act) await act();
-          // A full-page shot draws the sticky header where the screen was
-          // scrolled to, so every shot is taken from the top.
-          await page.evaluate(() => window.scrollTo(0, 0));
-          await page.waitForTimeout(400);
-          await page.screenshot({ path: file, fullPage: true });
-          count++;
-        } catch (e) {
-          failed = true;
-          console.log(`${file} ERROR ${e.message.split('\n')[0]}`);
-        }
-      }
+      const shot = shooter(page, theme, width);
       const type = (text) => async () => {
         await page.fill('#hook-input', text);
         await page.waitForLoadState('networkidle');
@@ -118,6 +132,10 @@ async function pickFoods(base, day) {
       await shot('home-search-never', '', { both: true, act: type('banana') });
       await shot('home-search-unknown', '', { act: type('zzz') });
       for (const [name, slug, both] of foodPages) await shot(name, `${slug}/`, { both });
+      // The food page's three shapes: one ring, many varieties, coasts.
+      for (const slug of ['raspberries', 'apples', 'cod']) {
+        await shot(`food-shape-${slug}`, `${slug}/`, { both: true, widths: [390, 1280] });
+      }
       await shot('now-this-week', 'now/', { both: true });
       await shot('now-next-week', 'now/', { both: true, act: async () => {
         await page.click('#next-week');
@@ -139,6 +157,16 @@ async function pickFoods(base, day) {
       } });
       await shot('about', 'about/');
       await shot('404', 'not-a-food-at-all/');
+      await context.close();
+    }
+  }
+  // A food that is YES-ISH, on a day it is: celeriac from storage in May.
+  for (const theme of THEMES) {
+    for (const width of [390, 1280]) {
+      const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme, reducedMotion: 'reduce' });
+      await context.clock.install({ time: new Date(`${YESISH_DAY}T12:00:00`) });
+      const shot = shooter(await context.newPage(), theme, width);
+      await shot('food-yesish-celeriac-may', 'celeriac/', { both: true });
       await context.close();
     }
   }
