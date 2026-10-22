@@ -170,16 +170,16 @@ function verdictCard(name, colour, word, line, asofText) {
     foot(asofText), colour);
 }
 
-// The week's three lines, as the home page's blocks: just arrived (or on
-// the way, in a week when nothing has arrived), great now and last
-// chance, a random three of each in their colours and how many more there
-// are. A list with nothing in it is left out.
+// The week's three lines: great this week, last chance, then just arrived
+// (or on the way, in a week when nothing has arrived), a random three of
+// each in their colours and how many more there are. A list with nothing
+// in it is left out.
 function sample(items) {
   return items.slice().sort(() => Math.random() - 0.5).slice(0, STRIP_PICK);
 }
 function lines(baked) {
-  const first = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
-  const specs = [first, ["still", "Great this week"], ["last", "Last chance"]];
+  const fresh = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
+  const specs = [["still", "Great this week"], ["last", "Last chance"], fresh];
   return `<div class="lines" data-fit data-max-h="300" data-min="18">` + specs.map(([key, label]) => {
     const all = V.flatten(baked.now[key] || []);
     if (!all.length) return "";
