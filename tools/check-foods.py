@@ -51,7 +51,7 @@ SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 # button-mushrooms are pages that forward to a renamed food.
 RESERVED_SLUGS = {"now", "calendar", "wheel", "about", "sources", "foods",
                   "remind", "assets", "api", "season-starts", "404", "is-it", "year",
-                  "icons", "cards", "grey-squirrel", "button-mushrooms", "kitchen-sink",
+                  "icons", "cards", "grey-squirrel", "button-mushrooms", "cobnuts", "kitchen-sink",
                   "sustainability-and-carbon"}
 
 SHED = "#16110e"

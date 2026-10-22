@@ -495,7 +495,7 @@ hidden, since the hero is a form.
   every `:hover` and `:focus-visible` rule onto the `.is-hover` and
   `.is-focus` columns. The search input's states are home itself in
   frames, by `?q=`. A new shared component goes on this page too.
-- `/grey-squirrel/` and `/button-mushrooms/`: a renamed food's old
+- `/grey-squirrel/`, `/button-mushrooms/` and `/cobnuts/`: a renamed food's old
   address, a page that forwards at once (meta refresh), `noindex`, with
   the canonical pointing at the new page.
 

@@ -939,6 +939,33 @@
         - [31, 43, in]
         - [44, 48, avail]
 
+- name: "Sea kale"
+  slug: sea-kale
+  aliases: ["seakale", "sea-kale", "crambe"]
+  group: shoots
+  also: ["veg", "vegetables"]
+  colour: "#137ba8"
+  text_on_shed: "#2687b4"
+  text_on_custard: "#0575a2"
+  sources: [westlands, galloway, wikipedia_sea_kale]
+  note: "Forced sea kale is grown in the dark like forced rhubarb. Wild sea kale was so over-harvested by Victorian forcers that the practice was banned in the early 20th century. Take one or two shoots from a big colony, never from a lone plant, and never dig up the root."
+  varieties:
+    - name: "Forced"
+      short: "Forced sea kale"
+      sources: [westlands]
+      weeks:
+        - [1, 22, in]
+        - [49, 52, in]
+    - name: "Wild"
+      short: "Wild sea kale"
+      colour: "#2e8b57"
+      text_on_shed: "#2f8f59"
+      text_on_custard: "#297c4d"
+      sources: [galloway, wikipedia_sea_kale]
+      weeks:
+        - [9, 22, in]
+        - [23, 26, avail]
+
 - name: "Aubergine"
   slug: aubergine
   aliases: ["eggplant"]
@@ -1292,6 +1319,21 @@
       weeks:
         - [40, 48, in]
 
+- name: "Figs"
+  slug: figs
+  aliases: ["fig"]
+  group: orchard
+  also: ["fruit"]
+  colour: "#884f92"
+  text_on_shed: "#a369ad"
+  sources: [ashridge, rhs_figs, fif_figs]
+  note: "Outdoor figs ripen one crop a year, at the end of summer. A second crop only ripens under glass or in a freak summer."
+  varieties:
+    - name: ""
+      sources: [ashridge, rhs_figs, fif_figs]
+      weeks:
+        - [31, 39, in]
+
 - name: "Blackberries"
   slug: blackberries
   aliases: ["brambles"]
@@ -1452,9 +1494,25 @@
         - [23, 35, in]
         - [36, 39, avail]
 
-- name: "Cobnuts"
-  slug: cobnuts
-  aliases: ["hazelnuts", "filberts", "cob nuts"]
+- name: "Grapes"
+  slug: grapes
+  aliases: ["grape", "table grapes", "dessert grapes"]
+  group: soft
+  also: ["fruit"]
+  colour: "#9c7836"
+  text_on_custard: "#8b6824"
+  sources: [rhs_grapes, freshplaza_grapes]
+  note: "Dessert grapes ripen from August to October, depending on the variety. British table grapes are rare in shops."
+  varieties:
+    - name: ""
+      sources: [rhs_grapes, freshplaza_grapes]
+      weeks:
+        - [31, 35, avail]
+        - [36, 43, in]
+
+- name: "Hazelnuts"
+  slug: hazelnuts
+  aliases: ["cobnuts", "filberts", "cob nuts", "cobnut", "hazelnut"]
   group: nuts
   also: ["nuts"]
   colour: "#a26930"
@@ -2152,6 +2210,20 @@
         - [18, 43, in]
         - [44, 48, avail]
 
+- name: "Tea"
+  slug: tea
+  aliases: ["cornish tea", "british tea", "tea leaves"]
+  group: herbs
+  colour: "#bf775a"
+  text_on_custard: "#a15b3f"
+  sources: [tregothnan]
+  note: "Tregothnan in Cornwall plucks from April to October, taking two leaves and a bud from each bush about monthly."
+  varieties:
+    - name: ""
+      sources: [tregothnan]
+      weeks:
+        - [14, 43, in]
+
 - name: "Mackerel"
   slug: mackerel
   group: fish
@@ -2289,6 +2361,24 @@
       sources: [ffs]
       weeks:
         - [14, 48, in]
+
+- name: "Sprats"
+  slug: sprats
+  aliases: ["sprat", "brisling"]
+  group: fish
+  also: ["fish"]
+  colour: "#6c70d8"
+  text_on_shed: "#6f73dc"
+  text_on_custard: "#6062c9"
+  sources: [mjseafood, mcs_sprat]
+  note: "A winter fish. The Thames Estuary is the traditional fishery."
+  buy: "Channel sprats are the better choice: the Good Fish Guide rates them 3. North Sea and West of Scotland sprats rate 4."
+  varieties:
+    - name: ""
+      sources: [mjseafood]
+      weeks:
+        - [1, 13, in]
+        - [36, 52, in]
 
 - name: "Cod"
   slug: cod

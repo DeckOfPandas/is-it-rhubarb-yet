@@ -82,7 +82,7 @@ footer is the last line of defence.
 | A food page, a never-food page, the chrome | `_layouts/food.html`, `never.html`, `default.html` |
 | Rows, groups, bands, the charts, the time controls | `_includes/` |
 | Endpoints: the data, the search index, the baked day, the feeds | `foods.json`, `search.json`, `built.json`, `season-starts.ics`, `/remind/<slug>.ics` |
-| A renamed food's old address | `grey-squirrel/`, `button-mushrooms/` (a page that forwards) |
+| A renamed food's old address | `grey-squirrel/`, `button-mushrooms/`, `cobnuts/` (a page that forwards) |
 | Provenance scripts, never rerun | `tools/make-foods.py`, `tools/merge-bundle.py` |
 
 ## The rules that matter most
