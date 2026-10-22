@@ -801,6 +801,9 @@ Now's bands from `site.js` through `window.Site`, and every date through
   sources." and "Fine, show me the sources.", with full stops.
 - Phrases used as labels in lists have no full stop; a date line that
   answers a question (the home answer, a food page, a card) does.
+- No semicolons in anything a visitor reads: two sentences, or a comma
+  and "and". A rating from a scale says the scale where nothing else
+  orients the reader: "rated 3 at best (1 is the best, 5 is the worst)".
 
 ## Accessibility notes
 

@@ -478,7 +478,7 @@
   // the outdoor season says when that comes.
   function heldSaid(r, year, today) {
     if (r.glass) {
-      if ((r.allYear || r.heldOn) && r.fresh) return "Glasshouse-grown for now; outdoor " + fromSaid(r.fresh.at, year, today);
+      if ((r.allYear || r.heldOn) && r.fresh) return "Glasshouse-grown for now, and outdoor " + fromSaid(r.fresh.at, year, today);
       if (r.allYear) return "Glasshouse-grown all year";
       return "Glasshouse-grown " + leaving(r.until, year, today);
     }

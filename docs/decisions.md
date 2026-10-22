@@ -9,11 +9,17 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 - **The Good Fish Guide lines are sentences, dated.** "Good Fish Guide,
   October 2026: a best choice (rated 2) from the North Sea, caught by
-  otter trawl; other stocks and methods rate from 2 to 4, so ask where
-  and how it was caught." They were the guide's export ("Ask for North
-  Sea (C&S), Irish Sea …; Hook & line (handline)"). The Source data page
-  says the ratings are the guide's as of October 2026 and change. No
-  email to the MCS: the ratings are restated and credited.
+  otter trawl. Other stocks and methods rate from 2 to 4, so ask where
+  and how it was caught." A line with no "best choice" to orient the
+  reader says the scale: "rated 3 at best (1 is the best, 5 is the
+  worst)". They were the guide's export ("Ask for North Sea (C&S), Irish
+  Sea …; Hook & line (handline)"). The Source data page says the
+  ratings are the guide's as of October 2026 and change. No email to
+  the MCS: the ratings are restated and credited.
+- **No semicolons in anything a visitor reads.** Helen dislikes them:
+  two sentences, or a comma and "and". The counter lines, the glasshouse
+  date line and the Source data page follow; the data file's older notes
+  still carry about fifty, awaiting her word.
 - **Seasons checked against named sources**: British iceberg is a
   May-to-October field crop (winter YES-ISH from the glasshouse ring);
   cavolo nero stands through winter to March; spring greens are in in

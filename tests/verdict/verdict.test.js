@@ -289,7 +289,7 @@ test("JUST runs across overlapping rings: one ring ending is not the food ending
 test("glasshouse: YES-ISH alone, for now when outdoor follows", () => {
   const fv = verdictOf("pak-choi");
   assert.equal(fv.verdict, "YES-ISH");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Glasshouse-grown for now; outdoor from early July.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Glasshouse-grown for now, and outdoor from early July.");
   const food = { name: "T", slug: "t", colour: "#000000", varieties: [
     { name: "Glasshouse", ring: "method", method: "glasshouse", weeks: [[1, 47, "in"]] }, { name: "Outdoor", weeks: [[20, 40, "in"]] }] };
   assert.equal(V.dateLine(V.foodVerdict(food, WEEK).whole, YEAR, TODAY), "Glasshouse-grown until late November.");
