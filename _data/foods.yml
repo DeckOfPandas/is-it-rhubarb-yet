@@ -1021,7 +1021,6 @@
   colour: "#c81800"
   text_on_shed: "#e7402a"
   sources: [ncgm, defra, bap]
-  note: "NCGM marks Discovery as only available in August and September. It is sold in August, so here August is in season."
   notes:
     - "British Apples & Pears lists Bramleys as available all year, harvested in August and September and the rest from store."
   varieties:
@@ -1055,15 +1054,6 @@
         - [1, 17, store]
         - [36, 43, in]
         - [44, 52, store]
-    - name: "Discovery"
-      cultivar: true
-      short: "Discovery apples"
-      colour: "#fe4200"
-      text_on_custard: "#cd3400"
-      sources: [ncgm, defra]
-      weeks:
-        - [31, 35, in]
-        - [36, 39, avail]
     - name: "Golden Delicious"
       cultivar: true
       colour: "#968900"
@@ -1077,8 +1067,8 @@
     - name: "Royal Gala"
       cultivar: true
       short: "Royal Gala apples"
-      colour: "#cc6084"
-      text_on_custard: "#ac5170"
+      colour: "#ff3318"
+      text_on_custard: "#d52b14"
       sources: [ncgm]
       weeks:
         - [1, 22, store]
