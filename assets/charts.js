@@ -709,7 +709,7 @@
     pop.querySelector(".one-line").textContent = V.dateLine(r, when.getFullYear(), when);
     var go = pop.querySelector(".one-more");
     go.href = S.foodUrl(f.slug);
-    go.querySelector(".arrow-text").textContent = S.tellMeAbout(f.name);
+    S.setArrowText(go, S.tellMeAbout(f.name));
     var box = pop.querySelector(".one-dial"), key = f.slug + "/" + vi + "/" + (state.at === null ? "now" : state.at);
     if (box.dataset.key !== key) {
       box.dataset.key = key;

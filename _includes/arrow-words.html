@@ -1,0 +1,11 @@
+{%- comment -%}
+An action's words and its arrow, the inside of an .arrow-link. The last
+word and the arrow share a nowrap span, since a line may always break
+beside an inline SVG, even after a no-break space. setArrowText in
+site.js builds the same markup.
+{%- endcomment -%}
+{%- assign aw_words = include.text | split: " " -%}
+{%- assign aw_last = aw_words | last -%}
+{%- assign aw_head = aw_words | pop | join: " " -%}
+<span class="arrow-text">{% if aw_head != "" %}{{ aw_head }} {% endif %}<span class="arrow-end">{{ aw_last }}{% include icons/arrow-right.svg class="arrow" %}</span></span>
+{%- comment -%} No newline after the markup, which would sit inside the link. {%- endcomment -%}

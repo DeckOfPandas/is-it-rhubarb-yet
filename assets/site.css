@@ -400,17 +400,18 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .teaser + .teaser { margin-top: var(--sp-3); }
 .teaser-foods { margin: 0; max-width: none; }
 .this-week .this-week-more { margin: var(--sp-4) 0 0; }
-/* An action: ink words and an arrow. The words are underlined in pink at
-   all times, 1px, 2px on hover or focus; the arrow, inside the link but
-   an inline block, never is. "and N more" after a list of foods is one,
-   in ink, and never breaks across lines. */
+/* An action: ink words and an arrow (_includes/arrow-words.html). The
+   words are underlined in pink at all times, 1px, 2px on hover or focus;
+   the arrow, an inline block, never is. The arrow never starts a line: it
+   shares a nowrap span with the last word. "and N more" after a list of
+   foods is one, in ink, and never breaks across lines at all. */
 .arrow-link { color: var(--ink); text-decoration: none; }
 .arrow-link .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
 .arrow-link:hover .arrow-text, .arrow-link:focus-visible .arrow-text { text-decoration-thickness: 2px; }
 /* The arrow is Helen's mark (_includes/icons/arrow-right.svg), 20 by 12,
    sized to the text it follows and sitting on its x-height. */
 .arrow-link .arrow { display: inline-block; width: 1.05em; height: 0.63em; margin-left: 0.35em; vertical-align: 0.05em; overflow: visible; }
-.arrow-link.more-link { white-space: nowrap; }
+.arrow-link .arrow-end, .arrow-link.more-link { white-space: nowrap; }
 /* A food's name set in its colour at text size takes the food's text
    colour for the theme (--food-custard light, --food-shed dark), the same
    hue made darker or lighter to 4.5:1 where its colour falls short; the

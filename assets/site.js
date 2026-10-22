@@ -174,9 +174,10 @@
   // A card's way on to the food's page, the name in its sentence form.
   function tellMeAbout(name) { return "Tell me everything about " + name.toLowerCase(); }
 
-  // A link with an arrow after its words, the same markup as the templates'
-  // .arrow-link and _includes/icons/arrow-right.svg: the words underline
-  // on hover, the arrow never does.
+  // A link with an arrow after its words, the same markup as
+  // _includes/arrow-words.html: the words are underlined, the arrow never
+  // is, and the last word and the arrow share a nowrap span so the arrow
+  // never starts a line.
   var SVG_NS = "http://www.w3.org/2000/svg";
   function arrowMark() {
     var svg = document.createElementNS(SVG_NS, "svg");
@@ -194,11 +195,18 @@
     svg.appendChild(path);
     return svg;
   }
+  function setArrowText(a, text) {
+    var words = text.split(" ");
+    var end = el("span", "arrow-end", words.pop());
+    end.appendChild(arrowMark());
+    var span = el("span", "arrow-text", words.length ? words.join(" ") + " " : "");
+    span.appendChild(end);
+    a.replaceChildren(span);
+  }
   function arrowLink(href, text) {
     var a = el("a", "arrow-link");
     a.href = href;
-    a.appendChild(el("span", "arrow-text", text));
-    a.appendChild(arrowMark());
+    setArrowText(a, text);
     return a;
   }
 
@@ -576,7 +584,7 @@
       picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" }, { tag: false })); });
       var more = all.length - picks.length;
       section.querySelector(".also-more").hidden = !more;
-      section.querySelector(".more-link .arrow-text").textContent = "and " + more + " more";
+      setArrowText(section.querySelector(".more-link"), "and " + more + " more");
       section.hidden = false;
     }
   }
@@ -952,7 +960,7 @@
         one.querySelector(".one-line").textContent = it.line();
         oneMore.hidden = !!it.never;
         oneMore.href = foodUrl(it.slug);
-        oneMore.querySelector(".arrow-text").textContent = tellMeAbout(it.name);
+        setArrowText(oneMore, tellMeAbout(it.name));
         dialFor(it.never ? null : it.slug, it.ring(), it.colour());
         one.hidden = false;
         answered = it.never ? "never" : "link";
@@ -1279,6 +1287,6 @@
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
     miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest,
-    headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink
+    headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText
   };
 })();

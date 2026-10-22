@@ -75,7 +75,7 @@ colour.
     <ul class="food-list">
       {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>
-    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still"><span class="arrow-text">and {{ also_more }} more</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
+    <p class="also-more"{% if also_more == 0 %} hidden{% endif %}><a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still">{% capture more_text %}and {{ also_more }} more{% endcapture %}{% include arrow-words.html text=more_text %}</a></p>
   </section>
   {%- endif -%}
 
@@ -126,8 +126,8 @@ colour.
     <p class="as-of">As of <span data-asof>{{ baked.asofText }}</span>.</p>
   </details>
 
-  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search"><span class="arrow-text">Ask about something else</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
-  <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}"><span class="arrow-text">See the whole year</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search">{% include arrow-words.html text="Ask about something else" %}</a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ '/calendar/' | relative_url }}#{{ food.slug }}">{% include arrow-words.html text="See the whole year" %}</a></p>
   {%- comment -%} The food's own calendar of season starts, to subscribe
      to: webcal:// for Apple's Calendar and most others, Google's own
      subscribe link (Google does not open webcal://), the file itself, and
@@ -135,7 +135,7 @@ colour.
   {%- unless food.unsold -%}
   {%- capture feed -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/remind/{{ food.slug }}.ics{%- endcapture -%}
   {%- capture every -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/season-starts.ics{%- endcapture -%}
-  <p class="onwards"><a class="arrow-link" href="{{ feed }}"><span class="arrow-text">Put {{ food.name | downcase }} in your calendar</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
+  <p class="onwards"><a class="arrow-link" href="{{ feed }}">{% capture put_text %}Put {{ food.name | downcase }} in your calendar{% endcapture %}{% include arrow-words.html text=put_text %}</a></p>
   <p class="calendar-also">Or <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">in Google Calendar</a>, as <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">a file</a>, or <a href="{{ every }}">every food's season</a> at once. About <a href="{{ '/sources/' | relative_url }}#calendar-feed">the calendar feeds</a>.</p>
   {%- endunless -%}
 </article>
