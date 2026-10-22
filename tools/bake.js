@@ -70,6 +70,7 @@ function main() {
       line: V.dateLine(fv.variety, year, date),
       varietyLines: V.varietyLines(f, fv, year, date),
       runs: f.varieties.map((v) => V.runsSaid(v, year)),
+      runBands: V.varietyBands(f, fv, year, date),
       variety: fv.variety.name || "",
       said: fv.variety.name ? V.varietySaid(f, fv.variety.v, true) : "",
       since: fv.variety.since === undefined ? null : fv.variety.since,
@@ -82,7 +83,7 @@ function main() {
   never.forEach((n) => {
     const q = V.pickQuote(quotes, "NEVER", n.slug, week);
     baked.foods[n.slug] = {
-      verdict: "NEVER", word: "Never", line: n.line, varietyLines: [], runs: [], variety: "", said: "", since: null,
+      verdict: "NEVER", word: "Never", line: n.line, varietyLines: [], runs: [], runBands: { named: false, bands: [] }, variety: "", said: "", since: null,
       quote: q ? { text: q.text, by: q.by } : null
     };
   });

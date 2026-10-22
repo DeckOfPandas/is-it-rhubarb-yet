@@ -24,11 +24,14 @@
   //   of its in-season run.
   // ISOLATED_AVAIL: the verdict for a "just about" run touching no
   //   in-season run (scallops in spring).
+  // BAND_VARIETIES: a food page's data heads its varieties with Now's
+  //   band names once it has this many.
   var C = {
     NEARLY_WEEKS: 3,
     JUST_WEEKS: 2,
     NEW_WEEKS: 2,
-    ISOLATED_AVAIL: "JUST"
+    ISOLATED_AVAIL: "JUST",
+    BAND_VARIETIES: 4
   };
   var RANK = { YES: 4, JUST: 3, NEARLY: 2, NO: 1, NEVER: 0 };
   var MS_PER_DAY = 86400000;
@@ -441,6 +444,44 @@
     var x = a.name + " " + a.variety, y = b.name + " " + b.variety;
     return x < y ? -1 : x > y ? 1 : 0;
   }
+  // Which of Now's bands a variety's verdict puts it in: arrived (YES, its
+  // in-season run began within NEW_WEEKS), last (chance: JUST), onway
+  // (NEARLY), still (great now: the rest of YES), or later (NO), which
+  // Now leaves out and a food page's data names.
+  var BANDS = { arrived: "Just arrived", last: "Last chance", onway: "On the way",
+    still: "Great this week", later: "Out of season" };
+  var BAND_ORDER = ["arrived", "last", "onway", "still", "later"];
+  function bandOf(r) {
+    if (r.verdict === "YES") return !r.allYear && r.since < C.NEW_WEEKS ? "arrived" : "still";
+    if (r.verdict === "JUST") return "last";
+    if (r.verdict === "NEARLY") return "onway";
+    return "later";
+  }
+  // Soonest first, a boundary that never comes (all year, unsold) last.
+  function soonest(a, b) {
+    if (a === null && b === null) return 0;
+    if (a === null) return 1;
+    if (b === null) return -1;
+    return a - b;
+  }
+
+  // A food's varieties for its page's data, in Now's bands and Now's
+  // order, soonest first within a band, data order breaking ties:
+  // [{key, label, indexes}]. `named` is true when the bands are worth
+  // naming: BAND_VARIETIES varieties or more, in two bands or more.
+  function varietyBands(food, fv, year, today) {
+    var bands = {};
+    fv.varieties.forEach(function (r) {
+      var key = bandOf(r);
+      (bands[key] = bands[key] || []).push({ index: r.index, days: daysTo(r, year, today) });
+    });
+    var out = BAND_ORDER.filter(function (k) { return bands[k]; }).map(function (k) {
+      var items = bands[k].sort(function (a, b) { return soonest(a.days, b.days) || a.index - b.index; });
+      return { key: k, label: BANDS[k], indexes: items.map(function (i) { return i.index; }) };
+    });
+    return { named: food.varieties.length >= C.BAND_VARIETIES && out.length > 1, bands: out };
+  }
+
   // Four lists for one week: arrived (YES, in-season run began within
   // NEW_WEEKS), last (chance: JUST), onway (NEARLY), still (great now:
   // the rest of YES). Each list is split by kind of food (veg, fruit,
@@ -473,19 +514,10 @@
         line: phrase(v, year, today), since: v.since === undefined ? null : v.since,
         days: daysTo(v, year, today), when: t.when, early: t.early, whenDays: t.days
       };
-      var list = null;
-      if (fv.verdict === "YES" && !v.allYear && v.since < C.NEW_WEEKS) list = "arrived";
-      else if (fv.verdict === "YES") list = "still";
-      else if (fv.verdict === "JUST") list = "last";
-      else if (fv.verdict === "NEARLY") list = "onway";
-      if (list) (buckets[list][kind] = buckets[list][kind] || []).push(item);
+      var list = bandOf(v);
+      if (list !== "later") (buckets[list][kind] = buckets[list][kind] || []).push(item);
     });
-    var byDays = function (a, b) {
-      if (a.days === null && b.days === null) return byFood(a, b);
-      if (a.days === null) return 1;
-      if (b.days === null) return -1;
-      return (a.days - b.days) || byFood(a, b);
-    };
+    var byDays = function (a, b) { return soonest(a.days, b.days) || byFood(a, b); };
     var out = {};
     Object.keys(buckets).forEach(function (list) {
       out[list] = [];
@@ -546,7 +578,7 @@
     fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange, ordinal: ordinal,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
     phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLines: varietyLines,
-    runsSaid: runsSaid, daysTo: daysTo,
+    runsSaid: runsSaid, varietyBands: varietyBands, daysTo: daysTo,
     timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid,
     nowLists: nowLists, flatten: flatten, azList: azList, byPhrase: byPhrase, pickQuote: pickQuote
   };

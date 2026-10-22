@@ -204,6 +204,23 @@ test("one variety has no variety lines, and neither does a food that cannot be s
   assert.deepEqual(V.varietyLines(bySlug["wild-salmon"], verdictOf("wild-salmon"), YEAR, TODAY), []);
 });
 
+test("a food page's data puts its varieties in Now's bands, soonest first", () => {
+  const apples = V.varietyBands(bySlug.apples, verdictOf("apples"), YEAR, TODAY);
+  assert.equal(apples.named, true, "six varieties in more than one band");
+  const order = ["arrived", "last", "onway", "still", "later"];
+  const keys = apples.bands.map((b) => b.key);
+  assert.deepEqual(keys, order.filter((k) => keys.includes(k)), "bands in Now's order");
+  const all = apples.bands.flatMap((b) => b.indexes);
+  assert.deepEqual(all.slice().sort(), bySlug.apples.varieties.map((_, i) => i), "every variety once");
+  const fv = verdictOf("apples");
+  apples.bands.forEach((b) => {
+    const days = b.indexes.map((i) => V.daysTo(fv.varieties[i], YEAR, TODAY) ?? Infinity);
+    days.forEach((d, i) => assert.ok(i === 0 || days[i - 1] <= d, b.key + " is soonest first"));
+  });
+  assert.equal(V.varietyBands(bySlug.celery, verdictOf("celery"), YEAR, TODAY).named, false, "one variety is never banded");
+  assert.equal(V.varietyBands(bySlug.rhubarb, verdictOf("rhubarb"), YEAR, TODAY).named, false, "two are too few");
+});
+
 test("a variety's runs in fuzzy months, the year's ends joined", () => {
   const v = (slug, name) => bySlug[slug].varieties.find((x) => x.name === name);
   assert.equal(V.runsSaid(v("apples", "Bramley"), YEAR), "In season August to September, available from storage October to July.");

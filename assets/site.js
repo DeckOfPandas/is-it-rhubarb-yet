@@ -541,20 +541,41 @@
     var fv = V.foodVerdict(food, WEEK);
     document.getElementById("verdict").textContent = fv.verdict + ".";
     document.getElementById("date-line").textContent = V.dateLine(fv.variety, YEAR, TODAY);
-    // The varieties one to a line, as _layouts/food.html draws them.
+    // The varieties one to a line, and in the data their runs in Now's
+    // bands, as _layouts/food.html draws them.
+    function namedLine(v, name, words) {
+      var own = v.colour ? v : food, li = el("li"), w = el("span", "line-words", words);
+      foodColours(li, own.colour, own.text_on_shed, own.text_on_custard);
+      li.appendChild(el("span", "line-name", name));
+      li.appendChild(document.createTextNode(" "));
+      li.appendChild(w);
+      return { li: li, words: w };
+    }
     var vl = document.getElementById("variety-lines");
     var lines = V.varietyLines(food, fv, YEAR, TODAY);
     vl.textContent = "";
-    lines.forEach(function (l) {
-      var v = food.varieties[l.index], own = v.colour ? v : food;
-      var li = el("li");
-      foodColours(li, own.colour, own.text_on_shed, own.text_on_custard);
-      li.appendChild(el("span", "line-name", l.name));
-      li.appendChild(document.createTextNode(" "));
-      li.appendChild(el("span", "line-words", l.answer));
-      vl.appendChild(li);
-    });
+    lines.forEach(function (l) { vl.appendChild(namedLine(food.varieties[l.index], l.name, l.answer).li); });
     vl.hidden = !lines.length;
+    var runs = document.getElementById("runs");
+    if (runs) {
+      var vb = V.varietyBands(food, fv, YEAR, TODAY);
+      runs.textContent = "";
+      vb.bands.forEach(function (band) {
+        var box = el("div", vb.named ? "food-group" : "run-band");
+        if (vb.named) box.appendChild(el("h3", "group-label", band.label));
+        var ul = el("ul", "named-lines");
+        band.indexes.forEach(function (i) {
+          var v = food.varieties[i], line = namedLine(v, v.name || food.name, V.runsSaid(v, YEAR));
+          if (v.notes) {
+            line.words.appendChild(document.createTextNode(" "));
+            line.words.appendChild(el("span", "ring-note", v.notes.join(" ")));
+          }
+          ul.appendChild(line.li);
+        });
+        box.appendChild(ul);
+        runs.appendChild(box);
+      });
+    }
     showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
     var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }

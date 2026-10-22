@@ -89,15 +89,25 @@ colour.
   <details class="fine">
     <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the data.</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the data.</span></summary>
     {%- comment -%} Each variety's runs in fuzzy months, baked by
-       runsSaid in verdict.js, named as the variety lines name them. {%- endcomment -%}
-    <ul class="named-lines runs">
-    {%- for v in food.varieties -%}
-      {%- assign i = forloop.index0 -%}
-      <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="line-words">{{ b.runs[i] }}
-        {%- if v.notes %} <span class="ring-note">{{ v.notes | join: " " }}</span>{% endif -%}
-      </span></li>
+       runsSaid in verdict.js, named as the variety lines name them, in
+       Now's bands soonest first (varietyBands), the bands named under
+       Atkinson caps labels when there are enough varieties. site.js
+       redraws it for the visitor's day in showRuns. {%- endcomment -%}
+    <div class="runs" id="runs">
+    {%- for band in b.runBands.bands -%}
+      <div class="{% if b.runBands.named %}food-group{% else %}run-band{% endif %}">
+        {%- if b.runBands.named %}<h3 class="group-label">{{ band.label }}</h3>{% endif -%}
+        <ul class="named-lines">
+        {%- for i in band.indexes -%}
+          {%- assign v = food.varieties[i] -%}
+          <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="line-words">{{ b.runs[i] }}
+            {%- if v.notes %} <span class="ring-note">{{ v.notes | join: " " }}</span>{% endif -%}
+          </span></li>
+        {%- endfor -%}
+        </ul>
+      </div>
     {%- endfor -%}
-    </ul>
+    </div>
     <figure class="chart mini">
     <svg viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-label="Season of {{ food.name }} by week" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="26">
       {%- for m in (0..11) -%}
@@ -136,18 +146,20 @@ colour.
 
   {%- comment -%} The day the verdict was worked out, as an ordinal with
      its letters raised; site.js sets the visitor's own day. {%- endcomment -%}
-  <p class="as-of">Verdict correct as of <span data-asof-ordinal>{{ baked.asofDay }}<sup>{{ baked.asofOrdinal }}</sup> {{ baked.asofMonth }}</span>.</p>
+  <p class="as-of instruct">Verdict correct as of <span data-asof-ordinal>{{ baked.asofDay }}<sup>{{ baked.asofOrdinal }}</sup> {{ baked.asofMonth }}</span>.</p>
 
   {%- comment -%} The food's own calendar of season starts, to subscribe
      to: webcal:// for Apple's Calendar and most others, Google's own
-     subscribe link (Google does not open webcal://), the file itself,
-     every food's at once, and the Source data page's section on feeds.
-     Each dot is glued to the link before it by a no-break space, so a
-     line never starts with one. Not for a food that cannot be sold. {%- endcomment -%}
+     subscribe link (Google does not open webcal://) and the file itself.
+     Under it, small, the Source data page's section on feeds and every
+     food's feed at once. Each dot is glued to the link before it by a
+     no-break space, so a line never starts with one. Not for a food that
+     cannot be sold. {%- endcomment -%}
   {%- unless food.unsold -%}
   {%- capture feed -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/remind/{{ food.slug }}.ics{%- endcapture -%}
   {%- capture every -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/season-starts.ics{%- endcapture -%}
-  <p class="calendar-line">Put {{ food.name | downcase }} in your calendar: <a href="{{ feed }}">Apple</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">Google</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">.ics</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ every }}">all foods</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ '/sources/' | relative_url }}#calendar-feed">about feeds</a>.</p>
+  <p class="calendar-line"><span class="instruct">Put {{ food.name | downcase }} in your calendar:</span> <a href="{{ feed }}">Apple</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">Google</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">download .ics</a></p>
+  <p class="calendar-also"><a href="{{ '/sources/' | relative_url }}#calendar-feed">Tell me about feeds</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ every }}">feeds for all foods</a></p>
   {%- endunless -%}
 
   <hr class="onwards-rule">
