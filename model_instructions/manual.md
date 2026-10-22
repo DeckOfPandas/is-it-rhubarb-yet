@@ -420,7 +420,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   1–2 match, a long word shrinking to fit the header. It matches
   against `search.json` (names, varieties as said, aliases, shared
   words; `names` for completion) and never answers in place: it goes
-  to `/?q=…` when typing pauses 0.6s on one good match, or 1.5s on two
+  to `/?q=…` when typing pauses 0.3s on one good match, or 0.8s on two
   or more letters with several matches or none, and at once on Enter
   (a phone's Go), which with nothing typed goes to home as it is.
   Leaving the field cancels a pending search. One Escape puts RHUBARB
@@ -453,7 +453,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   so the hero rests as the logo; the first letter typed anywhere on
   home goes into it. On a phone, focusing it scrolls its line near the
   top of the screen, 16px clear, so the keyboard does not hide the
-  results; with reduced motion it jumps.
+  results; with reduced motion it jumps. The first click or tap into a
+  hero that holds a word selects all of it, as an address bar does, so
+  the next word typed replaces it; a click while it has focus places
+  the caret.
 - **Home search.** While the input has text, the teasers, the arrow
   link and the whole Everything section are hidden, and the results
   stand in the teasers' place, at once, with no debounce.
@@ -493,6 +496,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     its "Also" links or the rows; Enter opens it, or the first. A
     polite live region says the count. Clearing the input brings
     everything back.
+  - Under any of these, "Ask about something else →", as a food page
+    ends, empties the hero and puts the caret in it (back up to it on
+    a wide screen).
 - **A food at three levels.** A food is shown as a row, a card or a
   page, and each is a smaller version of the next, never a different
   design. No fourth way: any new view that needs a food uses one of

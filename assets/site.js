@@ -787,8 +787,8 @@
   // name, the names its varieties are said by, its aliases and shared
   // words, one food per hit at its best tier. It never answers here; it
   // asks home, /?q=…, which answers as it always does: as soon as typing
-  // pauses 0.6s on one good match (the one that colours the word), or
-  // 1.5s on two or more letters that find several foods or none; at once
+  // pauses 0.3s on one good match (the one that colours the word), or
+  // 0.8s on two or more letters that find several foods or none; at once
   // on Enter (a phone's Go), which with nothing typed goes to home as it
   // is. Escape puts RHUBARB back and leaves the field. Leaving, its slot
   // takes the hero's view-transition name, so the word flies into the
@@ -832,8 +832,8 @@
       hits = search(q);
       lead = hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier) ? hits[0].it : null;
       field.update(lead);
-      if (lead) timer = setTimeout(go, 600);
-      else if (fold(q).replace(/ /g, "").length >= 2) timer = setTimeout(go, 1500);
+      if (lead) timer = setTimeout(go, 300);
+      else if (fold(q).replace(/ /g, "").length >= 2) timer = setTimeout(go, 800);
     }
     input.form.addEventListener("submit", function (e) { e.preventDefault(); go(); });
     // One Escape does it all, a completion showing or not.
@@ -1111,6 +1111,24 @@
       var go = active >= 0 ? picks[active] : results.hidden || !none.hidden || answered === "never" ? null : picks[0];
       if (go === oneMore) nameFor(true);
       if (go) location.href = go.href;
+    });
+    // The first click or tap into a hero that holds a word selects all of
+    // it, as an address bar does, so the next word typed replaces it. A
+    // click while it has focus places the caret as usual.
+    var selectAll = false;
+    input.addEventListener("pointerdown", function () { selectAll = document.activeElement !== input && !!input.value; });
+    input.addEventListener("click", function () {
+      if (selectAll) input.setSelectionRange(0, input.value.length);
+      selectAll = false;
+    });
+    // "Ask about something else", under every answer, empties the hero
+    // and puts the caret in it.
+    document.getElementById("ask-again").addEventListener("click", function (e) {
+      e.preventDefault();
+      input.value = "";
+      apply();
+      if (!stacked.matches) window.scrollTo({ top: 0, behavior: still() ? "auto" : "smooth" });
+      input.focus({ preventScroll: true });
     });
     var q = new URL(location.href).searchParams.get("q");
     if (q) input.value = q;
