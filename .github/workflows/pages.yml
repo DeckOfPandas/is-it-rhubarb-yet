@@ -22,9 +22,11 @@ permissions:
   pages: write
   id-token: write
 
+# A push during the scheduled build queues behind it rather than cancelling
+# it, so a day's bake is never lost to a push whose own run then fails.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -46,6 +48,7 @@ jobs:
       # container does it. The version matches .devcontainer/kit.env.
       - run: npm install --no-save --no-audit --no-fund --prefix tmp/playwright playwright@1.63.0
       - run: node tmp/playwright/node_modules/playwright/cli.js install --with-deps chromium
+      - run: python3 -I tools/check-foods.py
       - run: node --test tests/verdict/verdict.test.js
       - run: node tools/bake.js
         env:
