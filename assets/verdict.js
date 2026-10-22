@@ -191,13 +191,14 @@
   // A food answers as a whole. Its rings (varieties, coasts, wild and
   // glasshouse) are combined into one timeline, each week taking the best
   // state any ring has: "in" > "avail" > "glass" > "store" > "". A
-  // glasshouse ring's weeks count as "glass", grown under cover, which
-  // answers as storage does. The verdict and the date line are worked out
+  // ring whose `method` is glasshouse has its weeks count as "glass",
+  // grown under cover, which answers as storage does; the ring's name
+  // is only its label. The verdict and the date line are worked out
   // on that timeline, so a food is not JUST while one ring ends and
   // another carries on. `held` keeps each week's storage or glasshouse
   // state under any fresh one, for the clause that follows a fresh season
   // and for a week that is both coming in and held.
-  function isGlasshouse(v) { return /^glasshouse$/i.test(v.name || ""); }
+  function isGlasshouse(v) { return v.method === "glasshouse"; }
   var STATE_RANK = { "in": 3, "avail": 2, "glass": 1, "store": 1, "": 0 };
   var combined = typeof WeakMap === "function" ? new WeakMap() : null;
   function timelineOf(food) {
@@ -483,13 +484,28 @@
     return s;
   }
 
+  // A YES whose fresh run ends softly, into a just-about tail, says so
+  // once the end is near enough to be said in weeks ("At its best for a
+  // few more days, then just about until late November"), since "for a
+  // few more days" alone is the JUST line and a reader would expect the
+  // food to be gone, not JUST next week; further off it is "Until late
+  // October" as before. A JUST that is the tail itself, or an isolated
+  // just-about run, says "Just about, until late November": JUST is for
+  // a hard stop within two weeks, and a tail can last a quarter.
+  function softEnd(r, year, today) {
+    return r.hardStop === false && daysBetween(today, endDate(r.until, year)) <= 27;
+  }
   function phrase(r, year, today) {
     if (r.unsold) return r.unsold;
     switch (r.verdict) {
       case "YES":
         if (r.allYear) return "All year";
+        if (softEnd(r, year, today)) {
+          return "At its best " + leaving(r.until, year, today) + ", then just about " + leaving(r.spanUntil, year, today) + thenSaid(r, year, today);
+        }
         return cap(leaving(r.until, year, today)) + thenSaid(r, year, today);
       case "JUST":
+        if (r.tail || r.isolated) return "Just about, " + leaving(r.until, year, today) + thenSaid(r, year, today);
         return cap(leaving(r.until, year, today)) + thenSaid(r, year, today);
       case "YES-ISH":
         return heldSaid(r, year, today);
