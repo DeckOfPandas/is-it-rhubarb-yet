@@ -46,10 +46,15 @@ function main() {
 
   const baked = {
     asof: isoDate(date),
+    // Dates as text ("22nd October 2026", for meta tags) and as HTML with
+    // the ordinal's letters raised, for the page.
     asofText: V.fmtDateYear(date),
+    asofHtml: V.dateHtml(V.fmtDateYear(date)),
+    asofDayHtml: V.dateHtml(V.fmtDate(date)),
     week: week,
     year: year,
     range: V.fmtRange(week, year),
+    rangeHtml: V.dateHtml(V.fmtRange(week, year)),
     foods: {},
     labels: {},
     now: V.nowLists(foods, groups, week, year, date)
@@ -64,7 +69,9 @@ function main() {
       verdict: fv.verdict,
       word: titleWord(fv.verdict),
       line: V.dateLine(fv.variety, year, date),
-      varietyLine: V.varietyLine(f, fv, year, date),
+      varietyLines: V.varietyLines(f, fv, year, date),
+      runs: f.varieties.map((v) => V.runsSaid(v, year)),
+      runBands: V.varietyBands(f, fv, year, date),
       variety: fv.variety.name || "",
       said: fv.variety.name ? V.varietySaid(f, fv.variety.v, true) : "",
       since: fv.variety.since === undefined ? null : fv.variety.since,
@@ -77,7 +84,7 @@ function main() {
   never.forEach((n) => {
     const q = V.pickQuote(quotes, "NEVER", n.slug, week);
     baked.foods[n.slug] = {
-      verdict: "NEVER", word: "Never", line: n.line, varietyLine: "", variety: "", said: "", since: null,
+      verdict: "NEVER", word: "Never", line: n.line, varietyLines: [], runs: [], runBands: { named: false, bands: [] }, variety: "", said: "", since: null,
       quote: q ? { text: q.text, by: q.by } : null
     };
   });

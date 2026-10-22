@@ -24,11 +24,14 @@
   //   of its in-season run.
   // ISOLATED_AVAIL: the verdict for a "just about" run touching no
   //   in-season run (scallops in spring).
+  // BAND_VARIETIES: a food page's data heads its varieties with Now's
+  //   band names once it has this many.
   var C = {
     NEARLY_WEEKS: 3,
     JUST_WEEKS: 2,
     NEW_WEEKS: 2,
-    ISOLATED_AVAIL: "JUST"
+    ISOLATED_AVAIL: "JUST",
+    BAND_VARIETIES: 4
   };
   var RANK = { YES: 4, JUST: 3, NEARLY: 2, NO: 1, NEVER: 0 };
   var MS_PER_DAY = 86400000;
@@ -189,15 +192,16 @@
   // sooner wins; otherwise data order. A ring
   // marked `lead: false` (another coast than a fish's South West, a
   // glasshouse, a wild ring beside a market one) is answered for too, for
-  // the variety line, but never gives the verdict. A food that cannot be
+  // the variety lines, but never gives the verdict. A food that cannot be
   // sold (`unsold`) is NO, its line that sentence.
   function foodVerdict(food, week) {
     if (food.never) return { verdict: "NEVER", variety: null, varieties: [] };
-    var results = food.varieties.map(function (v) {
+    var results = food.varieties.map(function (v, i) {
       var r = varietyVerdict(v, week);
       if (food.unsold) r = { verdict: "NO", state: "", unsold: food.unsold };
       r.name = v.name || "";
       r.v = v;
+      r.index = i;
       r.colour = v.colour || food.colour;
       r.lead = v.lead !== false;
       return r;
@@ -218,16 +222,39 @@
 
   // --- Dates in words -------------------------------------------------------
 
-  // Plain numbers, never ordinals: "19 October", "19 October 2026".
-  function fmtDate(d) { return d.getDate() + " " + MONTHS[d.getMonth()]; }
+  // Ordinals: "19th October", "19th October 2026". Wherever a date is
+  // shown its letters are raised: datePieces marks them, and the page,
+  // the cards and the wheels set them as superscript.
+  function fmtDay(d) { return d.getDate() + ordinal(d.getDate()); }
+  function fmtDate(d) { return fmtDay(d) + " " + MONTHS[d.getMonth()]; }
   function fmtDateYear(d) { return fmtDate(d) + " " + d.getFullYear(); }
-  // A week's days, with an en dash: "15–21 October", "29 October – 4
-  // November", and the years only when it crosses one.
+  // A week's days, with an en dash: "15th–21st October", "29th October –
+  // 4th November", and the years only when it crosses one.
   function fmtRange(week, year) {
     var a = startOfWeek(week, year), b = endOfWeek(week, year);
     if (a.getFullYear() !== b.getFullYear()) return fmtDateYear(a) + " – " + fmtDateYear(b);
-    if (a.getMonth() === b.getMonth()) return a.getDate() + "–" + fmtDate(b);
+    if (a.getMonth() === b.getMonth()) return fmtDay(a) + "–" + fmtDate(b);
     return fmtDate(a) + " – " + fmtDate(b);
+  }
+  // An ordinal's letters: 1 "st", 22 "nd", 13 "th".
+  function ordinal(n) {
+    if (n % 100 >= 11 && n % 100 <= 13) return "th";
+    return { 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th";
+  }
+  // A date's text in pieces, each [text, raised]: "22nd October" is
+  // [["22", false], ["nd", true], [" October", false]].
+  function datePieces(s) {
+    var out = [], re = /(\d)(st|nd|rd|th)\b/g, last = 0, m;
+    while ((m = re.exec(s))) {
+      out.push([s.slice(last, m.index + 1), false], [m[2], true]);
+      last = m.index + m[0].length;
+    }
+    out.push([s.slice(last), false]);
+    return out.filter(function (p) { return p[0]; });
+  }
+  // The same as HTML, for what the build writes: "22<sup>nd</sup> October".
+  function dateHtml(s) {
+    return datePieces(s).map(function (p) { return p[1] ? "<sup>" + p[0] + "</sup>" : p[0]; }).join("");
   }
   // The date a {week, years} stands for, given the reference year.
   function startDate(at, year) { return startOfWeek(at.week, year + at.years); }
@@ -312,8 +339,8 @@
     if (r.unsold) return r.unsold;
     switch (r.verdict) {
       case "YES":
-        if (r.allYear) return r.store ? "From storage all year" : "All year";
-        if (r.store) return "From storage " + leaving(r.until, year, today);
+        if (r.allYear) return r.store ? "Available from storage all year" : "All year";
+        if (r.store) return "Available from storage " + leaving(r.until, year, today);
         return cap(leaving(r.until, year, today));
       case "JUST":
         return cap(leaving(r.until, year, today));
@@ -382,37 +409,53 @@
     return mid && !v.cultivar ? s.charAt(0).toLowerCase() + s.slice(1) : s;
   }
 
-  // The variety line for a food with more than one variety, one pattern
-  // throughout: the variety that gave the verdict, then the others, each
-  // "Name: phrase." "Maincrop potatoes: yes. New potatoes: first ones in
-  // May, properly in June." A ring is named by itself: "Glasshouse: yes."
-  // Coasts are said as places, the verdict's first, the rest after it in
-  // data order: "No in the South West, but yes in the North East, yes in
-  // the South East and no nationally."
-  function where(v) { return v.name === "National" ? "nationally" : "in the " + v.name; }
-  function andList(xs) { return xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " and " + xs[xs.length - 1]; }
-  function varietyLine(food, fv, year, today) {
-    if (!fv.variety || food.varieties.length < 2 || food.unsold) return "";
-    var others = fv.varieties.filter(function (r) { return r !== fv.variety; });
-    var named = function (r) { return r.v.ring ? r.v.name : varietySaid(food, r.v); };
-    var coasts = fv.variety.v.ring === "region" && others.filter(function (r) { return r.v.ring === "region" && REGION_WORDS[r.v.name]; });
-    var out = [];
-    if (coasts && coasts.length && REGION_WORDS[fv.variety.v.name]) {
-      var head = cap(fv.verdict.toLowerCase()) + " " + where(fv.variety.v);
-      var rest = coasts.map(function (r) { return r.verdict.toLowerCase() + " " + where(r.v); });
-      var differs = coasts.some(function (r) { return r.verdict !== fv.verdict; });
-      out.push(head + ", " + (differs ? "but " : "and ") + andList(rest) + ".");
-      others = others.filter(function (r) { return coasts.indexOf(r) < 0; });
-    } else {
-      out.push(named(fv.variety) + ": " + fv.verdict.toLowerCase() + ".");
-    }
-    others.forEach(function (r) {
-      var s = phrase(r, year, today);
-      out.push(named(r) + ": " + s.charAt(0).toLowerCase() + s.slice(1) + ".");
+  // The varieties of a food with more than one, one to a line, each
+  // answered by its phrase: those in season first, the one ending soonest
+  // first and all year after them, then the rest, the one back soonest
+  // first; data order breaks ties. `index` is the variety's place in the
+  // data, for its colours.
+  function varietyLines(food, fv, year, today) {
+    if (!fv.variety || food.varieties.length < 2 || food.unsold) return [];
+    var rank = function (r) {
+      if (r.verdict === "YES" || r.verdict === "JUST") return r.allYear ? 1 : 0;
+      return 2;
+    };
+    return fv.varieties.slice().sort(function (a, b) {
+      return rank(a) - rank(b) || soonest(daysTo(a, year, today), daysTo(b, year, today)) || a.index - b.index;
+    }).map(function (r) {
+      return { index: r.index, name: r.v.name, answer: phrase(r, year, today) };
     });
-    return out.join(" ");
   }
-  var REGION_WORDS = { "North East": true, "South East": true, "South West": true, "National": true };
+
+  // A variety's runs in words, for the data under a food page: "In season
+  // August to September, available from storage October to July." A run
+  // that ends the year and one of the same kind that starts it are one
+  // run. A boundary on a month's edge names the month; one inside a month
+  // says early, mid- or late, read from the middle of its week, as
+  // `phrase` does.
+  var RUN_WORDS = { "in": "in season", "store": "available from storage", "avail": "a few about" };
+  function runsSaid(v, year) {
+    var runs = v.weeks.map(function (r) { return { from: r[0], to: r[1], state: r[2] }; })
+      .sort(function (a, b) { return a.from - b.from; });
+    if (!runs.length) return "";
+    var first = runs[0], last = runs[runs.length - 1];
+    if (runs.length > 1 && first.from === 1 && last.to === 52 && first.state === last.state) {
+      last.to = first.to;
+      runs.shift();
+    }
+    var month = function (w) { return midOfWeek({ week: w, years: 0 }, year).getMonth(); };
+    var side = function (w, edge) {
+      return edge ? MONTHS[month(w)] : monthPart(midOfWeek({ week: w, years: 0 }, year));
+    };
+    var said = runs.map(function (r) {
+      var words = RUN_WORDS[r.state];
+      if (r.from === 1 && r.to === 52) return words + " all year";
+      var a = side(r.from, r.from === 1 || month(r.from - 1) !== month(r.from));
+      var b = side(r.to, r.to === 52 || month(r.to + 1) !== month(r.to));
+      return words + (a === b ? " in " + a : " " + a + " to " + b);
+    });
+    return cap(said.join(", ")) + ".";
+  }
 
   // --- The weekly digest --------------------------------------------------
   // Foods in a list run A to Z by food, then by variety, so all the
@@ -421,6 +464,44 @@
     var x = a.name + " " + a.variety, y = b.name + " " + b.variety;
     return x < y ? -1 : x > y ? 1 : 0;
   }
+  // Which of Now's bands a variety's verdict puts it in: arrived (YES, its
+  // in-season run began within NEW_WEEKS), last (chance: JUST), onway
+  // (NEARLY), still (great now: the rest of YES), or later (NO), which
+  // Now leaves out and a food page's data names.
+  var BANDS = { arrived: "Just arrived", last: "Still great but on the way out", onway: "On the way",
+    still: "Great this week", later: "Out of season" };
+  var BAND_ORDER = ["arrived", "last", "onway", "still", "later"];
+  function bandOf(r) {
+    if (r.verdict === "YES") return !r.allYear && r.since < C.NEW_WEEKS ? "arrived" : "still";
+    if (r.verdict === "JUST") return "last";
+    if (r.verdict === "NEARLY") return "onway";
+    return "later";
+  }
+  // Soonest first, a boundary that never comes (all year, unsold) last.
+  function soonest(a, b) {
+    if (a === null && b === null) return 0;
+    if (a === null) return 1;
+    if (b === null) return -1;
+    return a - b;
+  }
+
+  // A food's varieties for its page's data, in Now's bands and Now's
+  // order, soonest first within a band, data order breaking ties:
+  // [{key, label, indexes}]. `named` is true when the bands are worth
+  // naming: BAND_VARIETIES varieties or more, in two bands or more.
+  function varietyBands(food, fv, year, today) {
+    var bands = {};
+    fv.varieties.forEach(function (r) {
+      var key = bandOf(r);
+      (bands[key] = bands[key] || []).push({ index: r.index, days: daysTo(r, year, today) });
+    });
+    var out = BAND_ORDER.filter(function (k) { return bands[k]; }).map(function (k) {
+      var items = bands[k].sort(function (a, b) { return soonest(a.days, b.days) || a.index - b.index; });
+      return { key: k, label: BANDS[k], indexes: items.map(function (i) { return i.index; }) };
+    });
+    return { named: food.varieties.length >= C.BAND_VARIETIES && out.length > 1, bands: out };
+  }
+
   // Four lists for one week: arrived (YES, in-season run began within
   // NEW_WEEKS), last (chance: JUST), onway (NEARLY), still (great now:
   // the rest of YES). Each list is split by kind of food (veg, fruit,
@@ -453,19 +534,10 @@
         line: phrase(v, year, today), since: v.since === undefined ? null : v.since,
         days: daysTo(v, year, today), when: t.when, early: t.early, whenDays: t.days
       };
-      var list = null;
-      if (fv.verdict === "YES" && !v.allYear && v.since < C.NEW_WEEKS) list = "arrived";
-      else if (fv.verdict === "YES") list = "still";
-      else if (fv.verdict === "JUST") list = "last";
-      else if (fv.verdict === "NEARLY") list = "onway";
-      if (list) (buckets[list][kind] = buckets[list][kind] || []).push(item);
+      var list = bandOf(v);
+      if (list !== "later") (buckets[list][kind] = buckets[list][kind] || []).push(item);
     });
-    var byDays = function (a, b) {
-      if (a.days === null && b.days === null) return byFood(a, b);
-      if (a.days === null) return 1;
-      if (b.days === null) return -1;
-      return (a.days - b.days) || byFood(a, b);
-    };
+    var byDays = function (a, b) { return soonest(a.days, b.days) || byFood(a, b); };
     var out = {};
     Object.keys(buckets).forEach(function (list) {
       out[list] = [];
@@ -523,9 +595,11 @@
     weekOf: weekOf, startOfWeek: startOfWeek, endOfWeek: endOfWeek,
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,
-    fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange,
+    fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange, ordinal: ordinal,
+    datePieces: datePieces, dateHtml: dateHtml,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
-    phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLine: varietyLine, daysTo: daysTo,
+    phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLines: varietyLines,
+    runsSaid: runsSaid, varietyBands: varietyBands, daysTo: daysTo,
     timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid,
     nowLists: nowLists, flatten: flatten, azList: azList, byPhrase: byPhrase, pickQuote: pickQuote
   };

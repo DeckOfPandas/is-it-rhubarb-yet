@@ -63,7 +63,7 @@ copied from. Expects: wheel (true on the wheel).
 <template id="tt-pop">
   <div class="one-result tt-pop" role="dialog">
     <span class="one-text"><span class="tt-pop-when"></span><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span>
-    <a class="arrow-link one-more"><span class="arrow-text"></span>{% include icons/arrow-right.svg class="arrow" %}</a><span class="one-dial" aria-hidden="true"></span>
+    <a class="arrow-link one-more">{% include arrow-words.html text="" %}</a>{% include card-hint.html %}<span class="one-dial" aria-hidden="true"></span>
     <button type="button" class="tt-close" aria-label="Close">×</button>
   </div>
 </template>

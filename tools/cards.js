@@ -4,8 +4,9 @@
 // pasted into a chat shows the answer and the day it was true for. Chat
 // apps keep the first preview they fetch, so the date on the card lets an
 // old preview read like a dated newspaper rather than a wrong answer. The
-// Now card carries the week's three lines, as the home page does: just
-// arrived, great this week, last chance, a random handful of each.
+// Now card carries the week's three lines, as the home page does: great
+// this week, still great but on the way out, just arrived, a random
+// handful of each.
 //
 // WhatsApp and some mail apps cut the middle square out of a wide card,
 // and a page can send only the one image. So everything that must be read
@@ -101,6 +102,7 @@ const CSS = [
   .lines strong { color: ${INK}; }
   .lines .food { font-weight: 700; color: var(--food); }
   .pic { display: block; }
+  sup { font-size: 0.7em; line-height: 0; vertical-align: 0.45em; }
   `
 ].join("\n");
 
@@ -157,8 +159,11 @@ function page(body, food) {
   return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><style>${CSS}</style></head>` +
     `<body style="--food: ${food || RHUBARB}"><div class="col">${body}</div></body></html>`;
 }
+// A date, escaped, its ordinal letters raised.
+function date(text) { return V.dateHtml(esc(text)); }
+
 function foot(asofText) {
-  return `<div class="foot"><p class="asof">as of ${esc(asofText)}</p>` +
+  return `<div class="foot"><p class="asof">as of ${date(asofText)}</p>` +
     `<span class="display brand">Is it <span class="pink">rhubarb</span> yet?</span></div>`;
 }
 
@@ -170,16 +175,16 @@ function verdictCard(name, colour, word, line, asofText) {
     foot(asofText), colour);
 }
 
-// The week's three lines: great this week, last chance, then just arrived
-// (or on the way, in a week when nothing has arrived), a random three of
-// each in their colours and how many more there are. A list with nothing
-// in it is left out.
+// The week's three lines: great this week, still great but on the way
+// out, then just arrived (or on the way, in a week when nothing has
+// arrived), a random three of each in their colours and how many more
+// there are. A list with nothing in it is left out.
 function sample(items) {
   return items.slice().sort(() => Math.random() - 0.5).slice(0, STRIP_PICK);
 }
 function lines(baked) {
   const fresh = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
-  const specs = [["still", "Great this week"], ["last", "Last chance"], fresh];
+  const specs = [["still", "Great this week"], ["last", "Still great but on the way out"], fresh];
   return `<div class="lines" data-fit data-max-h="300" data-min="18">` + specs.map(([key, label]) => {
     const all = V.flatten(baked.now[key] || []);
     if (!all.length) return "";
@@ -203,7 +208,7 @@ function homeCard(baked) {
 function nowCard(baked) {
   return page(
     `<div class="display title" data-fit data-lines="2" data-min="40">In season this week</div>` +
-    `<p class="week">${esc(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
+    `<p class="week">${date(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
 }
 
 // The calendar and the wheel: a title, the whole picture inside the

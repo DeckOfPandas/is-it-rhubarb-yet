@@ -9,14 +9,14 @@
 # ring: region (a coast, a producer, a provenance), method (glasshouse,
 #   outdoor, cultivated, wild), zone (a legal zone) or part (shoots,
 #   flowers). Unset on a named variety or the food's one ring.
-# lead: false on a ring that is shown (the food's dial, its data, the
-#   variety line) but does not give the verdict, a calendar row, a wheel
-#   dot or a search hit: every coast but a fish's South West, a glasshouse,
-#   a wild ring beside a market one, a provenance ring.
+# lead: false on a ring that is shown (the food's dial, its data, its
+#   line under the date line) but does not give the verdict, a calendar
+#   row, a wheel dot or a search hit: every coast but a fish's South West,
+#   a glasshouse, a wild ring beside a market one, a provenance ring.
 # weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
 # state: in = in season, avail = just coming in or going out, store = sold
 #   from store after the harvest (it answers as in season does, its date
-#   line "From storage until ...").
+#   line "Available from storage until ...").
 # colour: per food; a variety may carry its own colour to stand apart.
 #   Every colour reaches 3.15:1 on both backgrounds, forcing shed #16110E
 #   and custard #FBF3D9, because the verdict word is set in it. Pink
@@ -1021,11 +1021,8 @@
   colour: "#c81800"
   text_on_shed: "#e7402a"
   sources: [ncgm, defra, bap]
-  note: "NCGM lists eight varieties; three early-eater rows (Early Windsor, Golden Delicious, Royal Gala) are left out. NCGM marks Discovery as only 'available' in August and September; here August is in season, as it is sold."
   notes:
-    - "British Apples & Pears lists Bramleys as available all year: harvested August-September, the rest from store. Good Food's \"not in season August-October\" dropped."
-    - "Defra wholesale data: UK-grown apples quoted in every month (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown apples quoted in Jan, Feb, Mar, Apr, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
+    - "British Apples & Pears lists Bramleys as available all year, harvested in August and September and the rest from store."
   varieties:
     - name: "Bramley"
       cultivar: true
@@ -1057,16 +1054,28 @@
         - [1, 17, store]
         - [36, 43, in]
         - [44, 52, store]
-    - name: "Discovery"
+    - name: "Golden Delicious"
       cultivar: true
-      short: "Discovery apples"
-      colour: "#fe4200"
-      text_on_custard: "#cd3400"
-      sources: [ncgm, defra]
+      colour: "#968900"
+      text_on_custard: "#7b7000"
+      sources: [ncgm]
       weeks:
-        - [31, 35, in]
+        - [1, 8, store]
+        - [40, 43, avail]
+        - [44, 48, in]
+        - [49, 52, store]
+    - name: "Royal Gala"
+      cultivar: true
+      short: "Royal Gala apples"
+      colour: "#ff3318"
+      text_on_custard: "#d52b14"
+      sources: [ncgm]
+      weeks:
+        - [1, 22, store]
         - [36, 39, avail]
-    - name: "Egremont Russet"
+        - [40, 43, in]
+        - [44, 52, store]
+    - name: "Russet"
       cultivar: true
       short: "Russet apples"
       colour: "#726422"

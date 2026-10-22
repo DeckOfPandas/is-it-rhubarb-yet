@@ -91,13 +91,20 @@ photographs it.
   {%- for s in states -%}
     <div class="ks-state is-{{ s }}">
       <p class="ks-state-name">{{ s }}</p>
-      <div class="one-result" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <a class="arrow-link one-more" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}"><span class="arrow-text">Tell me everything about {{ yes0.name | downcase }}</span>{% include icons/arrow-right.svg class="arrow" %}</a><span class="one-dial" aria-hidden="true"></span></div>
+      <div class="one-result" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <a class="arrow-link one-more" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}">{% capture tell_text %}Tell me everything about {{ yes0.name | downcase }}{% endcapture %}{% include arrow-words.html text=tell_text %}</a><span class="one-dial" aria-hidden="true"></span></div>
     </div>
   {%- endfor -%}
   </div>
   <div class="ks-row">
     <div class="one-result is-plain is-never" style="--food: var(--never)"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ never0.name | downcase }}</span> yet?</span> <span class="one-word">NEVER.</span> <span class="one-line">{{ never0.line }}</span></span></div>
     <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">zzz</span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>
+  </div>
+</section>
+
+<section class="ks-section">
+  <h2 class="ks-title">Card at full width, with its hint</h2>
+  <div class="ks-card">
+    <div class="one-result" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <a class="arrow-link one-more" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}">{% capture tell_text %}Tell me everything about {{ yes0.name | downcase }}{% endcapture %}{% include arrow-words.html text=tell_text %}</a>{% include card-hint.html %}<span class="one-dial" aria-hidden="true"></span></div>
   </div>
 </section>
 
@@ -124,9 +131,9 @@ photographs it.
         <a class="about-link" href="{{ '/about/' | relative_url }}" aria-label="About">??</a>
         <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
       </nav>
-      <p><a class="arrow-link" href="{{ '/now/' | relative_url }}"><span class="arrow-text">Everything in season this week</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
-      <p class="teaser-foods"><a class="food-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}{% if yes0.text_on_shed %}; --food-shed: {{ yes0.text_on_shed }}{% endif %}{% if yes0.text_on_custard %}; --food-custard: {{ yes0.text_on_custard }}{% endif %}">{{ yes0.name }}</a> <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still"><span class="arrow-text">and 4 more</span>{% include icons/arrow-right.svg class="arrow" %}</a></p>
-      <p class="week-line"><button type="button" class="week-step" aria-label="Previous week">‹</button><span>{{ baked.range }}</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
+      <p><a class="arrow-link" href="{{ '/now/' | relative_url }}">{% include arrow-words.html text="Everything in season this week" %}</a></p>
+      <p class="teaser-foods"><a class="food-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}{% if yes0.text_on_shed %}; --food-shed: {{ yes0.text_on_shed }}{% endif %}{% if yes0.text_on_custard %}; --food-custard: {{ yes0.text_on_custard }}{% endif %}">{{ yes0.name }}</a> <a class="arrow-link more-link" href="{{ '/now/' | relative_url }}#still">{% include arrow-words.html text="and 4 more" %}</a></p>
+      <p class="week-line"><button type="button" class="week-step" aria-label="Previous week">‹</button><span>{{ baked.rangeHtml }}</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
       <p class="week-line"><button type="button" class="week-step" aria-label="Previous week" disabled>‹</button><span>Last week in range</span><button type="button" class="week-step" aria-label="Next week">›</button></p>
       <div class="site-footer ks-footer">
         <nav class="footer-links" aria-label="Sample footer links, {{ s }}">

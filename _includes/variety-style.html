@@ -1,0 +1,10 @@
+{%- comment -%}
+A variety's colours as a style attribute's value: its own colour and text
+colours, or the food's where the variety has no colour of its own.
+Takes food= and v=.
+{%- endcomment -%}
+{%- if include.v.colour -%}
+--food: {{ include.v.colour }}{% if include.v.text_on_shed %}; --food-shed: {{ include.v.text_on_shed }}{% endif %}{% if include.v.text_on_custard %}; --food-custard: {{ include.v.text_on_custard }}{% endif %}
+{%- else -%}
+--food: {{ include.food.colour }}{% if include.food.text_on_shed %}; --food-shed: {{ include.food.text_on_shed }}{% endif %}{% if include.food.text_on_custard %}; --food-custard: {{ include.food.text_on_custard }}{% endif %}
+{%- endif -%}

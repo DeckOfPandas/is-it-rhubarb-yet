@@ -171,12 +171,27 @@
     return li;
   }
 
+  // A date in a node, its ordinal letters raised: <sup> in HTML, a
+  // shifted tspan in SVG.
+  function setDate(node, text) {
+    var svg = node instanceof SVGElement;
+    node.textContent = "";
+    V.datePieces(text).forEach(function (p) {
+      if (!p[1]) { node.appendChild(document.createTextNode(p[0])); return; }
+      var s = svg ? document.createElementNS(SVG_NS, "tspan") : el("sup");
+      s.textContent = p[0];
+      if (svg) { s.setAttribute("baseline-shift", "super"); s.setAttribute("font-size", "70%"); }
+      node.appendChild(s);
+    });
+  }
+
   // A card's way on to the food's page, the name in its sentence form.
   function tellMeAbout(name) { return "Tell me everything about " + name.toLowerCase(); }
 
-  // A link with an arrow after its words, the same markup as the templates'
-  // .arrow-link and _includes/icons/arrow-right.svg: the words underline
-  // on hover, the arrow never does.
+  // A link with an arrow after its words, the same markup as
+  // _includes/arrow-words.html: the words are underlined, the arrow never
+  // is, and the last word and the arrow share a nowrap span so the arrow
+  // never starts a line.
   var SVG_NS = "http://www.w3.org/2000/svg";
   function arrowMark() {
     var svg = document.createElementNS(SVG_NS, "svg");
@@ -194,11 +209,18 @@
     svg.appendChild(path);
     return svg;
   }
+  function setArrowText(a, text) {
+    var words = text.split(" ");
+    var end = el("span", "arrow-end", words.pop());
+    end.appendChild(arrowMark());
+    var span = el("span", "arrow-text", words.length ? words.join(" ") + " " : "");
+    span.appendChild(end);
+    a.replaceChildren(span);
+  }
   function arrowLink(href, text) {
     var a = el("a", "arrow-link");
     a.href = href;
-    a.appendChild(el("span", "arrow-text", text));
-    a.appendChild(arrowMark());
+    setArrowText(a, text);
     return a;
   }
 
@@ -436,7 +458,7 @@
     var doy = V.dayOfYear(today) - 1;
     var deg = Math.min(doy, 364) / 364 * 360;
     if (label) {
-      label.querySelector(".date").textContent = V.fmtDate(today);
+      setDate(label.querySelector(".date"), V.fmtDate(today));
       label.removeAttribute("hidden");
     }
     if (!hand) return;
@@ -533,9 +555,41 @@
     var fv = V.foodVerdict(food, WEEK);
     document.getElementById("verdict").textContent = fv.verdict + ".";
     document.getElementById("date-line").textContent = V.dateLine(fv.variety, YEAR, TODAY);
-    var vl = document.getElementById("variety-line");
-    var vline = V.varietyLine(food, fv, YEAR, TODAY);
-    vl.textContent = vline; vl.hidden = !vline;
+    // The varieties one to a line, and in the data their runs in Now's
+    // bands, as _layouts/food.html draws them.
+    function namedLine(v, name, words) {
+      var own = v.colour ? v : food, li = el("li"), w = el("span", "line-words", words);
+      foodColours(li, own.colour, own.text_on_shed, own.text_on_custard);
+      li.appendChild(el("span", "line-name", name));
+      li.appendChild(document.createTextNode(" "));
+      li.appendChild(w);
+      return { li: li, words: w };
+    }
+    var vl = document.getElementById("variety-lines");
+    var lines = V.varietyLines(food, fv, YEAR, TODAY);
+    vl.textContent = "";
+    lines.forEach(function (l) { vl.appendChild(namedLine(food.varieties[l.index], l.name, l.answer).li); });
+    vl.hidden = !lines.length;
+    var runs = document.getElementById("runs");
+    if (runs) {
+      var vb = V.varietyBands(food, fv, YEAR, TODAY);
+      runs.textContent = "";
+      vb.bands.forEach(function (band) {
+        var box = el("div", vb.named ? "food-group" : "run-band");
+        if (vb.named) box.appendChild(el("h3", "group-label", band.label));
+        var ul = el("ul", "named-lines");
+        band.indexes.forEach(function (i) {
+          var v = food.varieties[i], line = namedLine(v, v.name || food.name, V.runsSaid(v, YEAR));
+          if (v.notes) {
+            line.words.appendChild(document.createTextNode(" "));
+            line.words.appendChild(el("span", "ring-note", v.notes.join(" ")));
+          }
+          ul.appendChild(line.li);
+        });
+        box.appendChild(ul);
+        runs.appendChild(box);
+      });
+    }
     showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
     var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
@@ -576,7 +630,7 @@
       picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" }, { tag: false })); });
       var more = all.length - picks.length;
       section.querySelector(".also-more").hidden = !more;
-      section.querySelector(".more-link .arrow-text").textContent = "and " + more + " more";
+      setArrowText(section.querySelector(".more-link"), "and " + more + " more");
       section.hidden = false;
     }
   }
@@ -952,7 +1006,7 @@
         one.querySelector(".one-line").textContent = it.line();
         oneMore.hidden = !!it.never;
         oneMore.href = foodUrl(it.slug);
-        oneMore.querySelector(".arrow-text").textContent = tellMeAbout(it.name);
+        setArrowText(oneMore, tellMeAbout(it.name));
         dialFor(it.never ? null : it.slug, it.ring(), it.colour());
         one.hidden = false;
         answered = it.never ? "never" : "link";
@@ -1126,7 +1180,7 @@
         if (V.flatten(now.arrived).length) block("arrived", "Just arrived", now.arrived);
         else block("onway", "On the way", now.onway);
         block("still", "Great this week", now.still);
-        block("last", "Last chance", now.last);
+        block("last", "Still great but on the way out", now.last);
         var p = el("p", "this-week-more");
         p.appendChild(arrowLink(BASE + "now/", "Everything in season this week"));
         strip.appendChild(p);
@@ -1164,7 +1218,7 @@
   function fillDigest(box, now) {
     box.textContent = "";
     box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
-    box.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
+    box.appendChild(band("last", "Still great but on the way out", now.last, "phrase", "Nothing on its way out."));
     box.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
     box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
   }
@@ -1201,7 +1255,7 @@
       var at = weekAt(offset), w = at.week, y = at.year;
       title.textContent = "In season" + (offset === 0 ? " this week" : offset === 1 ? " next week" : offset === -1 ? " last week" : "");
       document.title = title.textContent + (site ? " · " + site : "");
-      dates.textContent = V.fmtRange(w, y);
+      setDate(dates, V.fmtRange(w, y));
       prev.disabled = offset <= -RANGE;
       next.disabled = offset >= RANGE;
       back.hidden = offset === 0;
@@ -1257,7 +1311,8 @@
     document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, WEEK); });
     document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, TODAY); });
     fitDials();
-    document.querySelectorAll("[data-asof]").forEach(function (n) { n.textContent = V.fmtDateYear(TODAY); });
+    document.querySelectorAll("[data-asof]").forEach(function (n) { setDate(n, V.fmtDateYear(TODAY)); });
+    document.querySelectorAll("[data-asof-day]").forEach(function (n) { setDate(n, V.fmtDate(TODAY)); });
     initSwitches();
     initFood();
     fitVerdict(document.querySelector("article.food .verdict-word"));
@@ -1279,6 +1334,6 @@
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
     miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest,
-    headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink
+    headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText, setDate: setDate
   };
 })();

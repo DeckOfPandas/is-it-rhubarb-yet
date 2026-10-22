@@ -9,7 +9,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   fonts. Nothing is fetched from anywhere else.
 - **One verdict function.** `assets/verdict.js` holds the rules: the
   week grid, the verdict for a variety and for a food, the phrase under
-  it, the variety line, the weekly digest's lists and the quotation
+  it, the variety lines, a variety's runs in words (`runsSaid`), the
+  weekly digest's lists and the quotation
   pick. Every page loads it as a classic script; `tools/bake.js`
   requires it under Node and writes `_data/baked.json` (gitignored)
   with today's verdicts, which the Liquid templates read. So the build
@@ -27,18 +28,27 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   early November", "Back in April"; "For a few more days", "Until late
   December") and names the middle of the data week. The rules are the
   comment over `phrase` in `verdict.js`. The one calendar date is the
-  "as of" date, which is when an answer was true. Dates are plain
-  numbers, never ordinals: "19 October 2026", "15–21 October".
+  "as of" date, which is when an answer was true. Every date is an
+  ordinal with its letters raised: 22<sup>nd</sup> October 2026,
+  15<sup>th</sup>–21<sup>st</sup> October. `verdict.js` writes the text
+  ("22nd October"), `datePieces` marks the letters, and they are set as
+  `<sup>` on the page (`setDate` in `site.js`; `dateHtml`, baked as
+  `asofHtml`, `asofDayHtml` and `rangeHtml`, and in the share cards), a
+  raised `tspan` in the wheels' SVG, and left unraised where only text
+  goes (meta tags, a slider's spoken value). In the caps style they are
+  capitals: 22<sup>ND</sup>.
 - **The digest** (`nowLists`) returns each of its four lists split by
   kind of food, `[{kind, items}]`, just arrived and great now A to Z,
-  last chance and on the way soonest first. `flatten` gives one array,
+  still great but on the way out (the `last` list) and on the way
+  soonest first. `flatten` gives one array,
   `azList` one array A to Z, and `byPhrase` regroups a list by one
   timing per food, `[{phrase, items}]`, soonest first and A to Z
   within: `timing` splits a two-part phrase into the `when` that groups
   the food ("In a week or two") and the `early` part shown beside it
   ("first ones any day now", "a few about now"). `bake.js` bakes them
   as `phrases` and `az`. The Now page shows just arrived as one A to Z
-  list, last chance and on the way grouped by timing, and great now
+  list, still great but on the way out and on the way grouped by
+  timing, and great now
   grouped by kind with counts.
 - **Naming a variety.** A named variety is a type (forced, maincrop)
   or, with `cultivar: true` in the data, a cultivar (Cox, Conference).
@@ -51,23 +61,72 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   calendar and the feed. Separate foods keep their own names (Wild
   garlic, Wood pigeon), and paired names capitalise both (Marjoram &
   Oregano).
-- **Share cards.** `tools/cards.js` draws a 1200 by 630 PNG per food
-  and never-food, plus `home.png` and `now.png` (the wordmark or the
-  Now title, then the week's three lines as home's teasers have them,
-  dated; every other page uses the home card), into `_site/cards/`
-  after Jekyll: each is a small HTML page with the fonts inlined,
+- **Share cards.** `tools/cards.js` draws them into `_site/cards/`
+  after Jekyll. Each is a small HTML page with the fonts inlined,
   screenshotted in headless Chromium through the Playwright the
-  container and the deploy both have (never committed: the site has no
-  raster files in the repository). Every page's `og:image` and
-  `twitter:image` point at its card; the card carries the as-of date,
-  because chat apps keep the first preview they fetch. `node
-  tools/cards.js --out tmp/cards --icons tmp/icons --only
-  rhubarb,home,now,icons` draws a few to look at.
-- **Icons.** The favicon (32px), the Android icon (192px) and the
-  Apple touch icon (180px) are "IIRY" in Anton, light ink on the shed,
-  the R in pink and underlined in it. `tools/cards.js` draws them into
-  `_site/icons` at build, like the cards: one square page shot at each
-  size, never committed.
+  container and the deploy both have. They are never committed: the
+  site has no raster files in the repository.
+  - **The cards.**
+    - Per food and never-food, a `<slug>.png`: the question, the
+      verdict word, the line, and a foot of the as-of date and the
+      wordmark.
+    - `home.png`: IS IT / RHUBARB / YET? stacked as home's heading,
+      then "Cook food when it's at its best.".
+    - `now.png`: "In season this week", the week's range, and three
+      lines. They read great this week, still great but on the way
+      out, then just arrived (or on the way, in a week when nothing
+      has arrived), with a random three of each in their colours and
+      "and N more".
+    - `calendar.png` and `wheel.jpg`: a title over a picture of the
+      real chart. Each picture is shot from the built site through a
+      local server of the script's own, at 1280 wide and three times
+      over, with the header and controls hidden. The calendar shows 34
+      rows of its by-start order, centred on the first row whose
+      season starts this week or later. The wheel is the All wheel, as
+      a JPEG at quality 85: as a PNG its arcs come to near a megabyte,
+      and chat apps are reported to drop previews over about 300 KB.
+  - **Every other page** uses the home card. `_layouts/default.html`
+    picks each page's card.
+  - **Size.** A card is laid out at 1200 by 630 and drawn at twice
+    that, 2400 by 1260, which `og:image:width` and `og:image:height`
+    state.
+  - **The middle square.** WhatsApp and some mail apps cut the middle
+    square out of a wide card, so everything to be read sits in a
+    column 4px inside that 630px square, and the sides stay empty.
+    Each block starts at its largest and shrinks to its limit of lines
+    or height (`data-fit`), then the verdict word or the picture takes
+    the height left. The run fails if any card's words stray outside
+    the square or overflow the column.
+  - **Previews.** Every page's `og:image` and `twitter:image` point at
+    its card. The card carries the as-of date, because chat apps keep
+    the first preview they fetch.
+  - **To look at a few:** `node tools/cards.js --out tmp/cards --icons
+    tmp/icons --only rhubarb,home,now,icons`. The calendar and wheel
+    cards need the built site as well: add `--site _site`.
+- **Icons.** `tools/icons.js` draws them in Anton, on the shed, with
+  the R of RHUBARB pink and underlined in it. Each icon is drawn on a
+  canvas exactly its own size, so the type is set at that size, the
+  underline lands on whole pixels, and the block of ink is what is
+  fitted and centred. They step down by size, one design at each:
+  - the R alone at 16px, where IIRY blurs;
+  - IIRY at 32 and 48;
+  - IS IT / RHUBARB / YET? stacked at 96, 180 (Apple touch) and 192.
+
+  A square icon's ink fills 84% of it. The 180 and 192 fit their
+  diagonal to 96% of a circle, because launchers cut them to one.
+  `tools/cards.js` calls `drawIcons` into `_site/icons` at build, never
+  committed. `_layouts/default.html` links each with its `sizes`, and
+  links no SVG icon, which a browser would take over the PNGs at every
+  size.
+- **Profile picture.** `node tools/icons.js` draws `profile-800.png`
+  into `tmp/socials`, with the site's icons, for uploading to social
+  accounts. It is the stack, its diagonal at 98% of the circle every
+  platform cuts it to. The site does not use it.
+- **Card and icon tests.** After a build, `node --test
+  tests/cards/cards.test.js` reads each file's own header. It checks
+  that every page's share image is the size the page states, that
+  `twitter:image` is `og:image`, and that every linked icon is the size
+  its `sizes` states. The deploy runs it after drawing the cards.
 - `_data/foods.yml` is the truth: edit it by hand. `_data/groups.yml`
   names the culinary families and their `kind`. `_data/never.yml` lists
   the foods that are never in season here, each with a line.
@@ -94,9 +153,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - **Rings.** A food's `varieties` are its rings. A named variety or type
   has its own colour; a ring of the food itself (`ring: region`,
   `method`, `zone` or `part`) shares the food's (or its variety's) and is
-  named in the variety line by itself, "Glasshouse: all year."
+  named in the variety lines by itself, GLASSHOUSE.
   - **`lead: false`:** the ring is drawn on the food's dial, listed in
-    its data and said in its variety line, but gives no verdict, no
+    its data and has its variety line, but gives no verdict, no
     calendar row, no wheel dot, no search hit and no calendar-feed
     event. Rings marked this way:
     - every coast but a fish's South West, where it has one;
@@ -104,18 +163,17 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     - a wild ring beside a market or cultivated one;
     - provenance (Welsh, salt marsh), Orkney, the Cornish sardine
       fishery, and the national native and Porthilly rock oysters.
-  - **Coasts in the variety line:** said as places, "Just in the South
-    West, but yes in the North East, nearly in the South East and yes
-    nationally."
+  - **Coasts:** each its own variety line, the South West's first: SOUTH
+    WEST Just, NORTH EAST Until late January.
   - **Stores and wild salmon:** a `store` week answers YES, its date
-    line "From storage until late August." (between two YES, in season
+    line "Available from storage until late August." (between two YES, in season
     beats from store; never "just arrived"). Wild salmon is `unsold`:
     always NO, its line "It cannot be sold in England, Wales or
     Scotland."
   - **Drawing stores:** the calendar and the food's dial draw a store run
     flat, the colour 30% into the grey.
   - **Sources:** a food's page names its sources from `sources.yml`,
-    linked.
+    linked, one to a bullet under "Sources:".
   - **Fungi:** a group of their own, wild and cultivated, on the Wild
     wheel.
 - A renamed food keeps its old address as a page that forwards:
@@ -144,17 +202,24 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), not its date,
     so a calendar updates a moved event rather than adding another.
   - **Wild salmon:** no events.
-  - **The food page:** "Put rhubarb in your calendar →" (a `webcal://`
-    link, which Apple Calendar and most apps take as subscribe), then a
-    small line with Google Calendar's own subscribe link (it does not
-    open `webcal://`), the file, and every food's feed.
+  - **The food page:** "Put rhubarb in your calendar: Apple · Google ·
+    download .ics", the lead-in in the instructive style (`.instruct`,
+    as the data summary is): Apple is the `webcal://` link, which Apple
+    Calendar and most apps take as subscribe; Google is Google
+    Calendar's own subscribe link (it does not open `webcal://`); then
+    the file. Under it, small, "Tell me about feeds · feeds for all
+    foods": the feeds' section on Source data and every food's feed.
+    Each dot follows its link after a no-break space, so no line starts
+    with one.
   - **The Sources page** offers the whole feed the same three ways.
 - **Source data page** (`sources/index.html`) is Helen's copy:
   - where each kind of food's dates come from;
   - the foraging footnote;
   - the JSON;
   - the calendar feeds;
-  - the full list of sources by kind.
+  - the full list of sources by kind;
+  - the credits, after the footnote: the season icons and the TODAY pin
+    (one sentence) and the three fonts, small and muted, under CREDITS.
 
   `_data/sources.yml` names each source as that list does, for each
   food page's "Sources:" line. "common knowledge*" is one prose link
@@ -290,14 +355,36 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
 - The question over the verdict is set at `title`, the full width (no
   measure), its lines balanced (`text-wrap: balance`).
 - **Food page layout.** One column at every width, in this order:
-  question, verdict, date line (the variety line 8px under it), the
-  quotation, the dial (on the same left edge as the words), the notes
-  (the counter note), then Also, the data and the way on. Every block
-  is 40px from the next. Text keeps a measure of about 65ch. A date
-  line wraps with `text-wrap: pretty`, so no word sits alone on its last
-  line. The variety line is one pattern: "Forced rhubarb: nearly.
-  Outdoor rhubarb: back in May." The quote bar and every note's bar are
-  the food's full colour.
+  question, verdict, date line, the quotation, the variety lines, the
+  dial and its key (on the same left edge as the words), the notes (the
+  counter note), then Also; a rule, the data; a rule, VERDICT CORRECT AS
+  OF 22<sup>ND</sup> OCTOBER (the caps style, as the footer's as-of
+  is); a rule, the calendar lines; a rule, "Ask about something else
+  →". Every block is 40px
+  from the next. Text keeps a measure of about 65ch. A date line wraps
+  with `text-wrap: pretty`, so no word sits alone on its last line. The
+  quote bar and every note's bar are the food's full colour.
+  - **Variety lines** (`.named-lines`, `varietyLines` in `verdict.js`):
+    a food with more than one variety lists them one to a line, the
+    name in the caps style in the variety's text colour, in a column,
+    then its phrase, muted (BRAMLEY Available from storage until late
+    July). Those in season come first, the one ending soonest first,
+    then those in season all year, then the rest, the one back soonest
+    first. Below 600px the name sits over its phrase.
+  - **The data** opens to ALL APPLES (Anton `label`) over the chart, a
+    faint rule, the runs, a rule, then the notes and "Sources:" over a
+    bulleted list.
+  - **The runs** take the variety lines' pattern, in
+    fuzzy months (`runsSaid`, baked as `runs`): "In season August to
+    September, available from storage October to July." A run ending
+    the year and one of the same kind starting it are one run; a
+    boundary on a month's edge names the month, one inside it says
+    early, mid- or late. The varieties are grouped by time from now
+    (`varietyBands`, sharing `bandOf` with Now): Now's bands in Now's
+    order, then Out of season, soonest first within a band. With
+    `BAND_VARIETIES` (4) varieties or more in two bands or more, each
+    band is named under an Atkinson caps label, a hairline between; the
+    runs are one grid across the bands, so the names keep one column.
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
   in pink, the line exactly the word's width, in the header, the hero
   and the cards. It does not change on hover.
@@ -421,7 +508,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     full stop), then an action, "Tell me everything about apples →",
     ink with an arrow, its words (not the arrow) underlined in pink at
     rest, 2px on hover or focus, the food's name in its sentence form (lower
-    case), the one link, to the food's page. On the right, alone and
+    case), the one link, to the food's page. Under it, small and muted,
+    the Enter key as a keycap holding the return mark, an SVG
+    (`_includes/card-hint.html`, `icons/enter.svg`), hidden from screen
+    readers. On the right, alone and
     centred, a 110px miniature of the dial with today's hand. The
     question, verdict and date line share the food page's rules
     (`.ask`, `.verdict-word`, `.date-line` in `assets/site.css`) and the
@@ -479,7 +569,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   input has `aria-autocomplete="both"`; the completion is not
   announced.
 - **Home teasers.** JUST ARRIVED (or ON THE WAY when nothing has),
-  GREAT THIS WEEK and LAST CHANCE, each an Anton label over three foods
+  GREAT THIS WEEK and STILL GREAT BUT ON THE WAY OUT, each an Anton label over three foods
   in their colours, picked afresh at random on every visit by
   `site.js` from the block's `data-all` (the build's own pick stands
   without JavaScript), and "and N more →", which links to its own
@@ -487,6 +577,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   band's id is its class), then "Everything in season this week →".
 - **Wording.** "Great this week" everywhere (Now's section, the home
   teaser, a food page's "Also great this week"); never "Great now".
+  "Still great but on the way out" everywhere the `last` list is named
+  (Now, the home teaser, the Now share card, a food page's data); never
+  "Last chance". Its anchor stays `#last`.
   Every link to Now in prose or as an action reads "Everything in
   season this week →" (the nav's NOW and "and N more" excepted). Page
   titles: CALENDAR; THE SHAPE OF THE YEAR on the wheel page, whose nav
@@ -507,9 +600,12 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     shaft and head, round caps, stroke 2, `currentColor`), included
     with `class="arrow"` and sized 1.05em by 0.63em on the x-height;
     `site.js` draws the same path for the links it builds
-    (`arrowMark`), and turns it down or up on the floating pills. Every
-    "and N more" after a list of foods is one, in ink, never broken
-    across lines.
+    (`arrowMark`), and turns it down or up on the floating pills. An
+    arrow never starts a line: a link's words and arrow are
+    `_includes/arrow-words.html` (`setArrowText` in `site.js`), which
+    puts the last word and the arrow in one nowrap span, since a line
+    may always break beside an inline SVG. Every "and N more" after a
+    list of foods is one, in ink, never broken across lines.
   - Foods in lists: inline lists (`.food-link`: the teasers, "Also:",
     the wheel's "ALL YEAR:")
     set the name in the food's colour; rows (`.food-row`) keep the name
@@ -543,8 +639,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   sentence a prose link to rhubarb's page. The dinner food in "Coolio,
   I'm off to cook …" is picked at random on every visit from what is
   YES on the visitor's day (just arrived or great this week); the build
-  bakes one for no JavaScript. Credits for the four season icons and the
-  TODAY pin close the page.
+  bakes one for no JavaScript. It ends on the dinner line; the credits
+  are on Source data.
 - **Now.** The title follows the week shown ("this week", "next week",
   "last week", or none), over one muted line, "‹ 15–21 October ›".
   Weeks run through real years, a year either way of this week; the
@@ -553,7 +649,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   chance, On the way, Great this week. Inside a band, groups are
   parted by a hairline and each group's foods flow down each column,
   then across. Just arrived is left out in a week when nothing has
-  arrived. A count beside a section's label (LAST CHANCE 36) is caps,
+  arrived. A count beside a section's label (STILL GREAT BUT ON THE WAY OUT 36) is caps,
   muted, as beside a group's (VEG 29). Away from this week, "Back to
   this week →" ends the stepper's line, so nothing under it moves. An
   On the way note ("first ones in two or three weeks") has a line of
@@ -727,7 +823,7 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   others. TODAY's pin (`season-today.svg`) is redrawn by hand, a
   teardrop and a ring, to the proportions of "You Are Here": Helen's
   file is a 416 KB trace, too heavy to inline on every chart page.
-  Credits on About, as the licence asks: sun and leaf, "seasons" by
+  Credits on Source data, as the licence asks: sun and leaf, "seasons" by
   Made by Made from Noun Project; flower and snowflake, "seasons" by
   VectorsLab from Noun Project; the pin, "You Are Here" by BBBL from
   Noun Project; all CC BY 3.0.
@@ -773,7 +869,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   `bundle exec jekyll build` and `node tools/cards.js`. Serve: `bundle
   exec jekyll serve --host 0.0.0.0 --port 9000` (`keep_files` keeps the
   cards through a regeneration). Data check: `python3 -I
-  tools/check-foods.py`.
+  tools/check-foods.py`. Card and icon tests, after a build: `node
+  --test tests/cards/cards.test.js`.
 - Deploys: `.github/workflows/pages.yml` on push and daily at 03:30
   UTC; `stale-check.yml` at 07:00 UTC reads the live `/built.json` and
   opens one "Stale build" issue when the baked date is over two days

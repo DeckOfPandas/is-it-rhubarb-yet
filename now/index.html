@@ -22,15 +22,15 @@ the baked week shows, dated.
   <h1 id="week-title">In season this week</h1>
   <p class="week-line">
     <button type="button" class="week-step" id="prev-week" aria-label="Previous week" hidden>‹</button>
-    <span id="week-dates">{{ baked.range }}</span>
+    <span id="week-dates">{{ baked.rangeHtml }}</span>
     <button type="button" class="week-step" id="next-week" aria-label="Next week" hidden>›</button>
-    <a class="arrow-link week-back" id="week-back" href="{{ '/now/' | relative_url }}" hidden><span class="arrow-text">Back to this week</span>{% include icons/arrow-right.svg class="arrow" %}</a>
+    <a class="arrow-link week-back" id="week-back" href="{{ '/now/' | relative_url }}" hidden>{% include arrow-words.html text="Back to this week" %}</a>
   </p>
 </header>
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
   {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived shape="plain" az=baked.az.arrived -%}
-  {%- include band.html cls="last" heading="Last chance" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
+  {%- include band.html cls="last" heading="Still great but on the way out" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
   {%- include band.html cls="onway" heading="On the way" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
   {%- include band.html cls="still" heading="Great this week" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}
 </div>
