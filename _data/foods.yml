@@ -60,6 +60,7 @@
 - name: "Beetroot"
   slug: beetroot
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#bd0588"
   text_on_shed: "#dd38a3"
   sources: [ncgm, defra]
@@ -77,6 +78,7 @@
 - name: "Carrots"
   slug: carrots
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#c86000"
   text_on_custard: "#b05300"
   sources: [ncgm, defra]
@@ -93,7 +95,9 @@
 
 - name: "Celeriac"
   slug: celeriac
+  aliases: ["celery root"]
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#867461"
   text_on_shed: "#8d7b67"
   text_on_custard: "#7c6b58"
@@ -114,6 +118,7 @@
 - name: "Horseradish"
   slug: horseradish
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#719173"
   text_on_custard: "#567559"
   sources: [ncgm]
@@ -132,7 +137,9 @@
 
 - name: "Jerusalem artichokes"
   slug: jerusalem-artichokes
+  aliases: ["sunchokes"]
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#855b2f"
   text_on_shed: "#a17549"
   sources: [ncgm]
@@ -147,6 +154,7 @@
 - name: "Parsnips"
   slug: parsnips
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#ad7e4a"
   text_on_custard: "#926430"
   sources: [ncgm, defra]
@@ -163,7 +171,9 @@
 
 - name: "Potatoes"
   slug: potatoes
+  aliases: ["spuds", "jersey royals"]
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#aa5e48"
   text_on_shed: "#b76953"
   text_on_custard: "#a55944"
@@ -188,7 +198,9 @@
 
 - name: "Radishes"
   slug: radishes
+  aliases: ["daikon"]
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#d52f26"
   text_on_shed: "#e64135"
   text_on_custard: "#d22b23"
@@ -212,10 +224,11 @@
 - name: "Salsify"
   slug: salsify
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#6e6067"
   text_on_shed: "#897a81"
   source: bbc
-  note: "BBC Good Food screenshot is cut off after September; October to December assumed."
+  note: "BBC Good Food's calendar runs to September; October to December follows the crop, which is lifted through the winter."
   varieties:
     - name: ""
       weeks:
@@ -225,7 +238,9 @@
 
 - name: "Swede"
   slug: swede
+  aliases: ["rutabaga", "neeps", "neep"]
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#916f00"
   text_on_shed: "#9c7917"
   text_on_custard: "#8a6900"
@@ -236,14 +251,16 @@
     - name: ""
       sources: [ncgm, defra]
       weeks:
-        - [1, 22, store]
+        - [1, 26, store]
         - [27, 35, avail]
         - [36, 48, in]
         - [49, 52, store]
 
 - name: "Turnips"
   slug: turnips
+  aliases: ["turnip tops"]
   group: roots
+  also: ["veg", "vegetables"]
   colour: "#907ba4"
   text_on_custard: "#7a668d"
   sources: [ncgm, defra]
@@ -258,15 +275,17 @@
 
 - name: "Broccoli"
   slug: broccoli
+  aliases: ["tenderstem", "psb", "purple sprouting broccoli"]
   group: brassicas
+  also: ["veg", "vegetables"]
   colour: "#007638"
   text_on_shed: "#2d8f50"
-  sources: [ncgm, defra, rhs, gardeners_calendar, rocket_gardens]
-  note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
+  sources: [ncgm, defra, rhs, garden_organic, rocket_gardens]
+  note: "Covent Garden shows purple sprouting almost all year; it is sold from late winter to spring, which the data follows."
   notes:
-    - "The RHS Crop Planner PDF draws calabrese harvest as January-May and September-December; the RHS website and The Gardener's Calendar both give July-October. The PDF row was dropped as an error."
+    - "The RHS Crop Planner PDF draws the calabrese harvest as January to May and September to December; the RHS website gives July to October and Garden Organic August to November. The PDF row was dropped as an error."
     - "Defra's wholesale prices list UK calabrese from June to November most years."
-    - "A late-winter and spring crop: Rocket Gardens says harvest starts between very early and late spring depending on planting; Good Food (dropped as a source) also showed January-April."
+    - "A late-winter and spring crop: Rocket Gardens says the harvest starts between very early and late spring depending on planting, and BBC Good Food's calendar also shows January to April."
   varieties:
     - name: "Calabrese"
       said: "Calabrese"
@@ -274,7 +293,7 @@
       colour: "#008b51"
       text_on_shed: "#119156"
       text_on_custard: "#007e49"
-      sources: [ncgm, defra, rhs, gardeners_calendar]
+      sources: [ncgm, defra, rhs, garden_organic]
       weeks:
         - [18, 22, avail]
         - [23, 43, in]
@@ -293,7 +312,9 @@
 
 - name: "Brussels sprouts"
   slug: brussels-sprouts
+  aliases: ["sprout tops", "kalettes", "flower sprouts"]
   group: brassicas
+  also: ["veg", "vegetables"]
   colour: "#5b7d00"
   text_on_shed: "#668919"
   text_on_custard: "#587800"
@@ -311,7 +332,9 @@
 
 - name: "Cabbage"
   slug: cabbage
+  aliases: ["hispi", "sweetheart cabbage", "pointed cabbage", "spring cabbage"]
   group: brassicas
+  also: ["veg", "vegetables", "greens"]
   colour: "#688e5d"
   text_on_custard: "#527748"
   sources: [ncgm, defra]
@@ -349,6 +372,7 @@
 - name: "Spring greens"
   slug: spring-greens
   group: brassicas
+  also: ["veg", "vegetables", "greens"]
   colour: "#649700"
   text_on_custard: "#507900"
   sources: [ncgm, defra]
@@ -367,6 +391,7 @@
 - name: "Cauliflower"
   slug: cauliflower
   group: brassicas
+  also: ["veg", "vegetables"]
   colour: "#a2845f"
   text_on_custard: "#856944"
   sources: [ncgm, defra]
@@ -377,16 +402,17 @@
     - name: ""
       sources: [ncgm, defra]
       weeks:
-        - [1, 22, in]
-        - [27, 52, in]
+        - [1, 52, in]
 
 - name: "Cavolo nero"
   slug: cavolo-nero
+  aliases: ["black kale"]
   group: brassicas
+  also: ["veg", "vegetables", "greens"]
   colour: "#556b72"
   text_on_shed: "#6b8289"
   source: bbc
-  note: "BBC Good Food screenshot is cut off after September; the autumn months are assumed."
+  note: "BBC Good Food's calendar runs to September; the autumn months follow the crop, which stands into winter."
   varieties:
     - name: ""
       weeks:
@@ -396,6 +422,7 @@
 - name: "Kale"
   slug: kale
   group: brassicas
+  also: ["veg", "vegetables", "greens"]
   colour: "#007a6e"
   text_on_shed: "#268d80"
   sources: [ncgm, defra]
@@ -412,6 +439,7 @@
 - name: "Kohlrabi"
   slug: kohlrabi
   group: brassicas
+  also: ["veg", "vegetables"]
   colour: "#7b7447"
   text_on_shed: "#867f51"
   text_on_custard: "#756f42"
@@ -425,7 +453,9 @@
 
 - name: "Pak choi"
   slug: pak-choi
+  aliases: ["bok choy"]
   group: brassicas
+  also: ["veg", "vegetables"]
   colour: "#009a86"
   text_on_custard: "#007c6c"
   sources: [ncgm, defra]
@@ -449,6 +479,7 @@
 - name: "Romanesco"
   slug: romanesco
   group: brassicas
+  also: ["veg", "vegetables"]
   colour: "#8f8300"
   text_on_custard: "#7a6f00"
   sources: [ncgm]
@@ -461,6 +492,7 @@
 - name: "Garlic"
   slug: garlic
   group: alliums
+  also: ["veg", "vegetables"]
   colour: "#8b857e"
   text_on_custard: "#736d67"
   sources: [ncgm]
@@ -474,6 +506,7 @@
 - name: "Leeks"
   slug: leeks
   group: alliums
+  also: ["veg", "vegetables"]
   colour: "#3d8534"
   text_on_shed: "#468e3c"
   text_on_custard: "#347c2b"
@@ -492,6 +525,7 @@
 - name: "Onions"
   slug: onions
   group: alliums
+  also: ["veg", "vegetables"]
   colour: "#b36a2c"
   text_on_shed: "#b66c2f"
   text_on_custard: "#a35c1a"
@@ -511,6 +545,7 @@
 - name: "Shallots"
   slug: shallots
   group: alliums
+  also: ["veg", "vegetables"]
   colour: "#b3492d"
   text_on_shed: "#ca5e41"
   sources: [ncgm]
@@ -523,7 +558,9 @@
 
 - name: "Spring onions"
   slug: spring-onions
+  aliases: ["scallions", "salad onions"]
   group: alliums
+  also: ["veg", "vegetables"]
   colour: "#7e8900"
   text_on_custard: "#6a7400"
   sources: [ncgm, defra]
@@ -540,7 +577,9 @@
 
 - name: "Chard"
   slug: chard
+  aliases: ["swiss chard", "rainbow chard"]
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves", "greens"]
   colour: "#008453"
   text_on_shed: "#1c905e"
   text_on_custard: "#007e4f"
@@ -554,11 +593,12 @@
 - name: "Chicory & Radicchio"
   slug: chicory-radicchio
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#b91f7b"
   text_on_shed: "#d94296"
   sources: [ncgm, dowding]
   notes:
-    - "Covent Garden's row covers chicory, endive and radicchio; its variety label reads \"Jerusalem\", a layout error. Months used as given."
+    - "Covent Garden's row covers chicory, endive and radicchio together; its months are used as given."
     - "Charles Dowding cuts radicchio hearts from about August to December, and firm heads store for up to six weeks. Good Food's \"all year\" dropped."
   varieties:
     - name: ""
@@ -571,6 +611,7 @@
 - name: "Cucumber"
   slug: cucumber
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#00931a"
   text_on_custard: "#008015"
   sources: [ncgm, defra]
@@ -597,6 +638,7 @@
 - name: "Edible flowers"
   slug: edible-flowers
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#b343cb"
   text_on_shed: "#bc4dd5"
   text_on_custard: "#aa3ac2"
@@ -610,6 +652,7 @@
 - name: "Lettuce"
   slug: lettuce
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#829100"
   text_on_custard: "#687400"
   sources: [ncgm, defra]
@@ -664,7 +707,9 @@
 
 - name: "Rocket"
   slug: rocket
+  aliases: ["arugula", "rucola"]
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#726e00"
   text_on_shed: "#858122"
   sources: [ncgm, defra]
@@ -679,6 +724,7 @@
 - name: "Spinach"
   slug: spinach
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#326f52"
   text_on_shed: "#4d8a6b"
   sources: [ncgm, defra]
@@ -693,6 +739,7 @@
 - name: "Watercress"
   slug: watercress
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#2a8981"
   text_on_shed: "#2d8c83"
   text_on_custard: "#157b73"
@@ -720,6 +767,7 @@
 - name: "Cress"
   slug: cress
   group: leaves
+  also: ["veg", "vegetables", "salad", "salad leaves"]
   colour: "#5c8500"
   text_on_shed: "#618b0e"
   text_on_custard: "#547900"
@@ -733,6 +781,7 @@
 - name: "Asparagus"
   slug: asparagus
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#607100"
   text_on_shed: "#738624"
   sources: [ncgm, defra, farming_uk_asparagus]
@@ -749,7 +798,9 @@
 
 - name: "Broad beans"
   slug: broad-beans
+  aliases: ["fava beans"]
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#379a6b"
   text_on_custard: "#0b7d50"
   sources: [ncgm, defra]
@@ -766,7 +817,9 @@
 
 - name: "Runner & French beans"
   slug: runner-french-beans
+  aliases: ["runner beans", "green beans"]
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#007c4b"
   text_on_shed: "#268f5c"
   sources: [ncgm, defra]
@@ -785,6 +838,7 @@
 - name: "Celery"
   slug: celery
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#828f50"
   text_on_custard: "#677335"
   sources: [ncgm, defra]
@@ -800,6 +854,7 @@
 - name: "Fennel"
   slug: fennel
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#887433"
   text_on_shed: "#917d3c"
   text_on_custard: "#806c2b"
@@ -813,6 +868,7 @@
 - name: "Globe artichokes"
   slug: globe-artichokes
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#557763"
   text_on_shed: "#638671"
   sources: [ncgm]
@@ -827,7 +883,9 @@
 
 - name: "Mangetout"
   slug: mangetout
+  aliases: ["snow peas"]
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#6f8700"
   text_on_custard: "#617600"
   source: bbc
@@ -838,7 +896,9 @@
 
 - name: "Peas"
   slug: peas
+  aliases: ["sugar snap peas", "sugar snaps", "petits pois"]
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#009135"
   text_on_custard: "#007f2e"
   sources: [ncgm, defra]
@@ -854,7 +914,9 @@
 
 - name: "Sweetcorn"
   slug: sweetcorn
+  aliases: ["corn", "corn on the cob", "maize"]
   group: shoots
+  also: ["veg", "vegetables"]
   colour: "#b37600"
   text_on_custard: "#976300"
   sources: [ncgm, defra]
@@ -870,7 +932,9 @@
 
 - name: "Aubergine"
   slug: aubergine
+  aliases: ["eggplant"]
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#8a39cc"
   text_on_shed: "#a557eb"
   sources: [ncgm]
@@ -883,7 +947,9 @@
 
 - name: "Chillies"
   slug: chillies
+  aliases: ["chili", "chile", "chilli peppers"]
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#ca0024"
   text_on_shed: "#eb3840"
   sources: [ncgm]
@@ -897,6 +963,7 @@
 - name: "Courgettes"
   slug: courgettes
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#007f3a"
   text_on_shed: "#23904a"
   sources: [ncgm, defra]
@@ -914,6 +981,7 @@
 - name: "Courgette flowers"
   slug: courgette-flowers
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#9f8000"
   text_on_custard: "#856b00"
   source: bbc
@@ -925,6 +993,7 @@
 - name: "Marrow"
   slug: marrow
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#677e33"
   text_on_shed: "#6f873c"
   text_on_custard: "#5f762b"
@@ -940,6 +1009,7 @@
 - name: "Peppers"
   slug: peppers
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#b94900"
   text_on_shed: "#ce5c21"
   sources: [ncgm, defra]
@@ -964,10 +1034,10 @@
 - name: "Pumpkin"
   slug: pumpkin
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#9c6300"
   text_on_shed: "#ac721d"
   sources: [ncgm]
-  note: "NCGM also marks January to March, presumably stored; kept as given."
   varieties:
     - name: ""
       sources: [ncgm]
@@ -979,7 +1049,9 @@
 
 - name: "Squash"
   slug: squash
+  aliases: ["butternut", "butternut squash"]
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#c87500"
   text_on_custard: "#a25d00"
   sources: [ncgm]
@@ -995,6 +1067,7 @@
 - name: "Tomatoes"
   slug: tomatoes
   group: fruiting
+  also: ["veg", "vegetables"]
   colour: "#e03900"
   text_on_shed: "#e7410f"
   text_on_custard: "#ce3300"
@@ -1021,6 +1094,7 @@
 - name: "Apples"
   slug: apples
   group: orchard
+  also: ["fruit"]
   colour: "#c81800"
   text_on_shed: "#e7402a"
   sources: [ncgm, defra, bap]
@@ -1094,6 +1168,7 @@
 - name: "Cherries"
   slug: cherries
   group: orchard
+  also: ["fruit"]
   colour: "#c50a53"
   text_on_shed: "#e63a6c"
   sources: [ncgm, defra]
@@ -1104,12 +1179,14 @@
     - name: ""
       sources: [ncgm, defra]
       weeks:
-        - [14, 26, avail]
-        - [27, 39, in]
+        - [23, 26, avail]
+        - [27, 35, in]
+        - [36, 39, avail]
 
 - name: "Damsons"
   slug: damsons
   group: orchard
+  also: ["fruit"]
   colour: "#6d49d2"
   text_on_shed: "#8566f0"
   sources: [ncgm]
@@ -1123,6 +1200,7 @@
 - name: "Medlars"
   slug: medlars
   group: orchard
+  also: ["fruit"]
   colour: "#82655b"
   text_on_shed: "#95786d"
   sources: [ncgm]
@@ -1138,6 +1216,7 @@
 - name: "Pears"
   slug: pears
   group: orchard
+  also: ["fruit"]
   colour: "#7f7f00"
   text_on_shed: "#82830a"
   text_on_custard: "#727100"
@@ -1177,6 +1256,7 @@
 - name: "Plums"
   slug: plums
   group: orchard
+  also: ["fruit"]
   colour: "#9a2fc4"
   text_on_shed: "#b64ee1"
   sources: [ncgm, defra]
@@ -1191,6 +1271,7 @@
 - name: "Quince"
   slug: quince
   group: orchard
+  also: ["fruit"]
   colour: "#ae8200"
   text_on_custard: "#8d6800"
   sources: [ncgm]
@@ -1202,7 +1283,9 @@
 
 - name: "Blackberries"
   slug: blackberries
+  aliases: ["brambles"]
   group: soft
+  also: ["fruit", "berries"]
   colour: "#7c45c7"
   text_on_shed: "#9662e5"
   sources: [ncgm, defra, forestheart]
@@ -1226,6 +1309,7 @@
 - name: "Blackcurrants & Redcurrants"
   slug: blackcurrants-redcurrants
   group: soft
+  also: ["fruit", "berries"]
   colour: "#9d31b4"
   text_on_shed: "#ba50d1"
   sources: [ncgm, defra]
@@ -1244,6 +1328,7 @@
 - name: "Blueberries"
   slug: blueberries
   group: soft
+  also: ["fruit", "berries"]
   colour: "#4862dc"
   text_on_shed: "#5774f0"
   sources: [ncgm, defra]
@@ -1258,6 +1343,7 @@
 - name: "Gooseberries"
   slug: gooseberries
   group: soft
+  also: ["fruit", "berries"]
   colour: "#6a902b"
   text_on_custard: "#547806"
   sources: [ncgm, defra, forestheart]
@@ -1279,6 +1365,7 @@
 - name: "Loganberries & Tayberries"
   slug: loganberries-tayberries
   group: soft
+  also: ["fruit", "berries"]
   colour: "#b70d99"
   text_on_shed: "#d63bb6"
   source: bbc
@@ -1290,6 +1377,7 @@
 - name: "Raspberries"
   slug: raspberries
   group: soft
+  also: ["fruit", "berries"]
   colour: "#d8009b"
   text_on_shed: "#e623a7"
   text_on_custard: "#cf0095"
@@ -1304,7 +1392,9 @@
 
 - name: "Rhubarb"
   slug: rhubarb
+  aliases: ["rhubard"]
   group: soft
+  also: ["fruit"]
   colour: "#ff2d78"
   text_on_custard: "#d8005f"
   sources: [ncgm, defra]
@@ -1328,11 +1418,13 @@
       text_on_shed: "#d74a7b"
       sources: [ncgm, defra]
       weeks:
+        - [14, 17, avail]
         - [18, 30, in]
 
 - name: "Strawberries"
   slug: strawberries
   group: soft
+  also: ["fruit", "berries"]
   colour: "#da0007"
   text_on_shed: "#f12e25"
   sources: [ncgm, defra]
@@ -1349,7 +1441,9 @@
 
 - name: "Cobnuts"
   slug: cobnuts
+  aliases: ["hazelnuts", "filberts", "cob nuts"]
   group: nuts
+  also: ["nuts"]
   colour: "#a26930"
   text_on_shed: "#ab7239"
   text_on_custard: "#9a6127"
@@ -1370,6 +1464,7 @@
 - name: "Walnuts"
   slug: walnuts
   group: nuts
+  also: ["nuts"]
   colour: "#815d49"
   text_on_shed: "#9b7661"
   sources: [ncgm, forestheart]
@@ -1391,6 +1486,7 @@
 
 - name: "Wild garlic"
   slug: wild-garlic
+  aliases: ["ramsons"]
   group: foraged
   colour: "#008b0a"
   text_on_shed: "#159218"
@@ -1483,6 +1579,7 @@
 - name: "Wild strawberries"
   slug: wild-strawberries
   group: foraged
+  also: ["berries"]
   colour: "#db472e"
   text_on_shed: "#df4a31"
   text_on_custard: "#cb371f"
@@ -1494,7 +1591,9 @@
 
 - name: "Bilberries"
   slug: bilberries
+  aliases: ["whortleberries", "blaeberries", "whinberries"]
   group: foraged
+  also: ["berries"]
   colour: "#5654d9"
   text_on_shed: "#6b6ef5"
   source: general
@@ -1506,6 +1605,7 @@
 - name: "Elderberries"
   slug: elderberries
   group: foraged
+  also: ["berries"]
   colour: "#8c3fba"
   text_on_shed: "#a85cd8"
   source: general
@@ -1564,6 +1664,7 @@
 
 - name: "Sweet chestnuts"
   slug: sweet-chestnuts
+  aliases: ["chestnuts"]
   group: foraged
   colour: "#9b4e33"
   text_on_shed: "#b8694d"
@@ -1586,7 +1687,7 @@
       weeks:
         - [1, 52, in]
 
-- name: "Hop"
+- name: "Hops"
   slug: hop
   group: foraged
   colour: "#718749"
@@ -1596,8 +1697,10 @@
     - name: "Shoots"
       ring: part
       sources: [forestheart]
+      notes:
+        - "Hop shoots are cut in spring, while the bines are a few inches long."
       weeks:
-        - [23, 30, in]
+        - [10, 18, in]
     - name: "Flowers"
       ring: part
       sources: [forestheart]
@@ -1744,7 +1847,7 @@
     - name: ""
       sources: [first_nature]
       notes:
-        - "FUDGE: First Nature says only \"summer and autumn\"; July-October is an approximation."
+        - "First Nature gives summer and autumn; July to October is our reading of that."
       weeks:
         - [27, 43, in]
 
@@ -1761,7 +1864,7 @@
       lead: false
       sources: [first_nature]
       notes:
-        - "FUDGE: First Nature says \"summer, autumn and early winter\"; June-November plus December approximates that."
+        - "First Nature gives summer, autumn and early winter; June to December is our reading of that."
       weeks:
         - [23, 48, in]
         - [49, 52, avail]
@@ -1818,6 +1921,7 @@
 - name: "Basil"
   slug: basil
   group: herbs
+  also: ["herbs"]
   colour: "#008426"
   text_on_shed: "#1e9134"
   text_on_custard: "#008024"
@@ -1831,7 +1935,9 @@
 
 - name: "Bay"
   slug: bay
+  aliases: ["bay leaves", "bay leaf"]
   group: herbs
+  also: ["herbs"]
   colour: "#556a4e"
   text_on_shed: "#6e8466"
   source: general
@@ -1844,6 +1950,7 @@
 - name: "Chervil"
   slug: chervil
   group: herbs
+  also: ["herbs"]
   colour: "#769400"
   text_on_custard: "#5e7600"
   source: general
@@ -1857,6 +1964,7 @@
 - name: "Chives"
   slug: chives
   group: herbs
+  also: ["herbs"]
   colour: "#008b65"
   text_on_shed: "#0f9069"
   text_on_custard: "#007d5b"
@@ -1870,7 +1978,9 @@
 
 - name: "Coriander"
   slug: coriander
+  aliases: ["cilantro"]
   group: herbs
+  also: ["herbs"]
   colour: "#009e42"
   text_on_custard: "#007f34"
   source: general
@@ -1884,6 +1994,7 @@
 - name: "Dill"
   slug: dill
   group: herbs
+  also: ["herbs"]
   colour: "#997b00"
   text_on_custard: "#856b00"
   source: general
@@ -1896,6 +2007,7 @@
 - name: "Lovage"
   slug: lovage
   group: herbs
+  also: ["herbs"]
   colour: "#516d00"
   text_on_shed: "#6a882a"
   source: general
@@ -1909,6 +2021,7 @@
 - name: "Marjoram & Oregano"
   slug: marjoram-oregano
   group: herbs
+  also: ["herbs"]
   colour: "#7e6700"
   text_on_shed: "#947c25"
   source: general
@@ -1923,6 +2036,7 @@
 - name: "Mint"
   slug: mint
   group: herbs
+  also: ["herbs"]
   colour: "#008b94"
   text_on_custard: "#007a83"
   source: general
@@ -1936,6 +2050,7 @@
 - name: "Parsley"
   slug: parsley
   group: herbs
+  also: ["herbs"]
   colour: "#00734d"
   text_on_shed: "#2f8e66"
   source: general
@@ -1949,6 +2064,7 @@
 - name: "Rosemary"
   slug: rosemary
   group: herbs
+  also: ["herbs"]
   colour: "#537482"
   text_on_shed: "#618391"
   source: general
@@ -1961,6 +2077,7 @@
 - name: "Sage"
   slug: sage
   group: herbs
+  also: ["herbs"]
   colour: "#77867d"
   text_on_custard: "#637169"
   source: general
@@ -1974,6 +2091,7 @@
 - name: "Sorrel"
   slug: sorrel
   group: herbs
+  also: ["herbs"]
   colour: "#6a7f00"
   text_on_shed: "#718712"
   text_on_custard: "#627600"
@@ -1988,6 +2106,7 @@
 - name: "Tarragon"
   slug: tarragon
   group: herbs
+  also: ["herbs"]
   colour: "#5c9663"
   text_on_custard: "#417a49"
   source: general
@@ -2001,6 +2120,7 @@
 - name: "Thyme"
   slug: thyme
   group: herbs
+  also: ["herbs"]
   colour: "#806c56"
   text_on_shed: "#8f7b64"
   source: general
@@ -2014,6 +2134,7 @@
 - name: "Mackerel"
   slug: mackerel
   group: fish
+  also: ["fish"]
   colour: "#007e8d"
   text_on_shed: "#1e8a9a"
   text_on_custard: "#007988"
@@ -2059,13 +2180,14 @@
 - name: "Sea bass"
   slug: sea-bass
   group: fish
+  also: ["fish"]
   colour: "#5a76af"
   text_on_shed: "#617eb7"
   text_on_custard: "#526da6"
   sources: [bnfs, ffs, seafish]
   note: "Wild, line-caught; poor through the summer."
   notes:
-    - "Brighton & Newhaven marks February-March out of season, which matches the commercial bass closure in recent years: verify current rules."
+    - "Brighton & Newhaven marks February and March out of season, which matches the commercial bass closure of recent years."
   buy: "Good Fish Guide: Best Choice (2). Ask for North Sea (C&S), Irish Sea, English Channel, Bristol Channel, Celtic Sea; Hook & line (handline). Ratings run from 2 to 5 depending on where and how it is caught, so ask."
   varieties:
     - name: "South East"
@@ -2095,7 +2217,9 @@
 
 - name: "Sardines"
   slug: sardines
+  aliases: ["pilchards"]
   group: fish
+  also: ["fish"]
   colour: "#008ab9"
   text_on_custard: "#00769f"
   sources: [bnfs, ffs, msc_sardine]
@@ -2131,7 +2255,9 @@
 
 - name: "Herring"
   slug: herring
+  aliases: ["kippers", "bloaters"]
   group: fish
+  also: ["fish"]
   colour: "#2476d5"
   text_on_shed: "#2e7ede"
   text_on_custard: "#196dcc"
@@ -2157,12 +2283,13 @@
 - name: "Cod"
   slug: cod
   group: fish
+  also: ["fish"]
   colour: "#229271"
   text_on_custard: "#007d5f"
   sources: [northumberland, bnfs, ffs, seafish]
   note: "Cornish cod is at its best from March to May and again in September and October."
   notes:
-    - "Fishmongers' rings follow Helen's decision to go with the fishmongers; Good Food's February-April peak (spawning) dropped."
+    - "The coasts' own calendars are used over BBC Good Food's February to April spawning peak."
   buy: "Good Fish Guide: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2); trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
   varieties:
     - name: "North East"
@@ -2204,6 +2331,7 @@
 - name: "Haddock"
   slug: haddock
   group: fish
+  also: ["fish"]
   colour: "#8e8396"
   text_on_custard: "#756a7c"
   sources: [northumberland, bnfs, ffs]
@@ -2236,6 +2364,7 @@
 - name: "Hake"
   slug: hake
   group: fish
+  also: ["fish"]
   colour: "#5e8fac"
   text_on_custard: "#43738f"
   sources: [northumberland, bnfs, ffs]
@@ -2261,14 +2390,13 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Plaice"
   slug: plaice
   group: fish
+  also: ["fish"]
   colour: "#9f6d00"
   text_on_shed: "#a77513"
   text_on_custard: "#936500"
@@ -2313,6 +2441,7 @@
 - name: "Dover sole"
   slug: dover-sole
   group: fish
+  also: ["fish"]
   colour: "#a14e4f"
   text_on_shed: "#bb6565"
   sources: [northumberland, bnfs, ffs, seafish]
@@ -2345,14 +2474,16 @@
       lead: false
       sources: [seafish]
       notes:
-        - "Season May-March, avoid at Christmas. Attribution between Dover and lemon sole was ambiguous in the guide's layout: verify."
+        - "Seafish gives the season as May to March, avoiding Christmas; its table does not separate Dover from lemon sole clearly, so this row is a reading of it."
       weeks:
         - [1, 13, in]
         - [18, 52, in]
 
 - name: "Pollock"
   slug: pollock
+  aliases: ["pollack", "coley", "saithe"]
   group: fish
+  also: ["fish"]
   colour: "#4d658a"
   text_on_shed: "#6680a6"
   sources: [northumberland, ffs]
@@ -2380,6 +2511,7 @@
 - name: "Whiting"
   slug: whiting
   group: fish
+  also: ["fish"]
   colour: "#8283c5"
   text_on_custard: "#6767a7"
   sources: [northumberland, ffs]
@@ -2397,14 +2529,13 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Monkfish"
   slug: monkfish
   group: fish
+  also: ["fish"]
   colour: "#7e596c"
   text_on_shed: "#9a7386"
   sources: [northumberland, bnfs, ffs, seafish]
@@ -2445,6 +2576,7 @@
 - name: "Lemon sole"
   slug: lemon-sole
   group: fish
+  also: ["fish"]
   colour: "#978a00"
   text_on_custard: "#7a6f00"
   sources: [northumberland, bnfs, ffs]
@@ -2474,6 +2606,7 @@
 - name: "Gurnard"
   slug: gurnard
   group: fish
+  also: ["fish"]
   colour: "#cc2e00"
   text_on_shed: "#e34623"
   sources: [northumberland, bnfs, ffs]
@@ -2510,6 +2643,7 @@
 - name: "Brill"
   slug: brill
   group: fish
+  also: ["fish"]
   colour: "#586b28"
   text_on_shed: "#718643"
   sources: [northumberland, bnfs, ffs]
@@ -2539,6 +2673,7 @@
 - name: "Cuttlefish"
   slug: cuttlefish
   group: fish
+  also: ["fish", "seafood"]
   colour: "#ab7f70"
   text_on_custard: "#8e6456"
   sources: [bnfs, ffs]
@@ -2562,6 +2697,7 @@
 - name: "Wild salmon"
   slug: wild-salmon
   group: fish
+  also: ["fish"]
   colour: "#b8684f"
   text_on_custard: "#a75840"
   sources: [northumberland]
@@ -2569,7 +2705,7 @@
   note: "Rod-caught Scottish; most salmon sold is farmed all year."
   notes:
     - "Selling rod-caught salmon or sea trout has been illegal since 2009, and coastal net fisheries are largely closed, so wild salmon is rarely legitimately on sale."
-  buy: "Good Fish Guide: Avoid (5). Ask for NE Atlantic (England and Wales); Drift and fixed nets."
+  buy: "Good Fish Guide: Avoid (5). Not that you can buy it."
   varieties:
     - name: "North East"
       ring: region
@@ -2580,6 +2716,7 @@
 - name: "Sea trout"
   slug: sea-trout
   group: fish
+  also: ["fish"]
   colour: "#cc5356"
   text_on_shed: "#d05659"
   text_on_custard: "#bd454a"
@@ -2597,7 +2734,9 @@
 
 - name: "Squid"
   slug: squid
+  aliases: ["calamari"]
   group: fish
+  also: ["fish", "seafood"]
   colour: "#ac77ad"
   text_on_custard: "#8f5c91"
   sources: [northumberland, bnfs, ffs, seafish]
@@ -2638,6 +2777,7 @@
 - name: "Brown crab"
   slug: brown-crab
   group: fish
+  also: ["fish", "shellfish", "seafood", "crab"]
   colour: "#9d4f00"
   text_on_shed: "#ba6a2a"
   sources: [northumberland, bnfs, ffs, seafish]
@@ -2680,6 +2820,7 @@
 - name: "Lobster"
   slug: lobster
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#0066b1"
   text_on_shed: "#2d82cf"
   sources: [northumberland, bnfs, ffs, seafish]
@@ -2707,8 +2848,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -2724,7 +2863,9 @@
 
 - name: "Langoustines"
   slug: langoustines
+  aliases: ["scampi", "dublin bay prawns", "nephrops"]
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#c76e85"
   text_on_custard: "#a8536a"
   sources: [northumberland]
@@ -2741,6 +2882,7 @@
 - name: "Mussels"
   slug: mussels
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#5457c7"
   text_on_shed: "#6b72e5"
   sources: [bnfs, ffs, seafish]
@@ -2756,8 +2898,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -2773,6 +2913,7 @@
 - name: "Oysters"
   slug: oysters
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#3f6d63"
   text_on_shed: "#58877c"
   sources: [shellfish_act, seafish, ffs]
@@ -2817,14 +2958,13 @@
       colour: "#00989d"
       text_on_custard: "#007a7f"
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Scallops"
   slug: scallops
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#be7a28"
   text_on_custard: "#9f5f00"
   sources: [northumberland, bnfs, ffs, seafish]
@@ -2862,8 +3002,6 @@
       ring: region
       lead: false
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -2871,7 +3009,7 @@
       lead: false
       sources: [seafish]
       notes:
-        - "Guide says season September-March but best March-November, which reads oddly: verify."
+        - "Seafish gives the season as September to March and the best months as March to November; the data follows its season."
       weeks:
         - [1, 8, avail]
         - [9, 48, in]
@@ -2880,6 +3018,7 @@
 - name: "Cockles"
   slug: cockles
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#6a914a"
   text_on_custard: "#537832"
   source: general
@@ -2892,7 +3031,9 @@
 
 - name: "Brown shrimp"
   slug: brown-shrimp
+  aliases: ["prawns", "shrimps", "potted shrimp"]
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#7f5f00"
   text_on_shed: "#9a7a2b"
   source: general
@@ -2907,6 +3048,7 @@
 - name: "Turbot"
   slug: turbot
   group: fish
+  also: ["fish"]
   colour: "#6c7b5a"
   text_on_shed: "#748361"
   text_on_custard: "#647252"
@@ -2930,8 +3072,6 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
     - name: "National"
@@ -2947,6 +3087,7 @@
 - name: "Red mullet"
   slug: red-mullet
   group: fish
+  also: ["fish"]
   colour: "#bf2d52"
   text_on_shed: "#db4968"
   sources: [northumberland, ffs, seafish]
@@ -2979,7 +3120,9 @@
 
 - name: "Skates & rays"
   slug: skates-rays
+  aliases: ["skate wing", "skate wings"]
   group: fish
+  also: ["fish"]
   colour: "#7e659a"
   text_on_shed: "#8d73a9"
   text_on_custard: "#7c6398"
@@ -3001,14 +3144,13 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Grey mullet"
   slug: grey-mullet
   group: fish
+  also: ["fish"]
   colour: "#6a7681"
   text_on_shed: "#73808b"
   text_on_custard: "#646f7a"
@@ -3033,6 +3175,7 @@
 - name: "John Dory"
   slug: john-dory
   group: fish
+  also: ["fish"]
   colour: "#787800"
   text_on_shed: "#828218"
   text_on_custard: "#727100"
@@ -3048,6 +3191,7 @@
 - name: "Octopus"
   slug: octopus
   group: fish
+  also: ["fish", "seafood"]
   colour: "#9d4d82"
   text_on_shed: "#b56298"
   sources: [ffs]
@@ -3062,6 +3206,7 @@
 - name: "Dab"
   slug: dab
   group: fish
+  also: ["fish"]
   colour: "#948253"
   text_on_custard: "#7e6c3e"
   sources: [northumberland, ffs]
@@ -3078,14 +3223,13 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Witch sole"
   slug: witch-sole
   group: fish
+  also: ["fish"]
   colour: "#9e6a7c"
   text_on_shed: "#a46f81"
   text_on_custard: "#925f71"
@@ -3101,6 +3245,7 @@
 - name: "Megrim"
   slug: megrim
   group: fish
+  also: ["fish"]
   colour: "#9561cd"
   text_on_shed: "#9966d2"
   text_on_custard: "#8954bf"
@@ -3116,11 +3261,12 @@
 - name: "Ling"
   slug: ling
   group: fish
+  also: ["fish"]
   colour: "#377e49"
   text_on_shed: "#468d57"
   text_on_custard: "#347b47"
   sources: [northumberland]
-  buy: "Good Fish Guide: Avoid (5). Ask for Cornwall; Bottom trawl (beam)."
+  buy: "Good Fish Guide: Avoid (5), however and wherever it is caught."
   varieties:
     - name: "North East"
       ring: region
@@ -3132,12 +3278,13 @@
 - name: "Halibut"
   slug: halibut
   group: fish
+  also: ["fish"]
   colour: "#70624e"
   text_on_shed: "#8a7c67"
   sources: [northumberland, ffs]
   notes:
     - "Wild Atlantic halibut is rated Avoid; no UK-farmed halibut rating exists."
-  buy: "Good Fish Guide: Avoid (5). Ask for Northeast Atlantic; Bottom trawl (otter)."
+  buy: "Good Fish Guide: Avoid (5) for wild Atlantic halibut, however it is caught; farmed halibut is not rated."
   varieties:
     - name: "North East"
       ring: region
@@ -3148,14 +3295,13 @@
     - name: "South West"
       ring: region
       sources: [ffs]
-      notes:
-        - "Flying Fish shows good availability all year."
       weeks:
         - [1, 52, in]
 
 - name: "Farmed salmon"
   slug: salmon-farmed
   group: fish
+  also: ["fish"]
   colour: "#e15f24"
   text_on_custard: "#bf4600"
   sources: [ffs]
@@ -3165,24 +3311,21 @@
       ring: region
       sources: [ffs]
       notes:
-        - "Glenarm, Northern Ireland, organic."
+        - "Organic. Farmed salmon is harvested all year; Flying Fish's own supply from Glenarm is fullest from February to August."
       weeks:
-        - [1, 4, avail]
-        - [5, 35, in]
-        - [36, 39, avail]
+        - [1, 52, in]
     - name: "Loch Duart, Scotland"
       ring: region
       sources: [ffs]
       notes:
-        - "Loch Duart, Scotland."
+        - "Farmed salmon is harvested all year; Flying Fish's own supply from Loch Duart is fullest from February to August."
       weeks:
-        - [1, 4, avail]
-        - [5, 35, in]
-        - [36, 39, avail]
+        - [1, 52, in]
 
 - name: "Spider crab"
   slug: spider-crab
   group: fish
+  also: ["fish", "shellfish", "seafood", "crab"]
   colour: "#bc5700"
   text_on_shed: "#c86117"
   text_on_custard: "#b25200"
@@ -3198,6 +3341,7 @@
 - name: "Clams"
   slug: clams
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#728f7f"
   text_on_custard: "#587465"
   sources: [bnfs, ffs]
@@ -3222,6 +3366,7 @@
 - name: "Whelks"
   slug: whelks
   group: fish
+  also: ["fish", "shellfish", "seafood"]
   colour: "#906850"
   text_on_shed: "#9e755d"
   text_on_custard: "#8d654e"
@@ -3237,6 +3382,7 @@
 - name: "Lamb"
   slug: lamb
   group: meat
+  also: ["meat"]
   colour: "#c74650"
   text_on_shed: "#d4525b"
   text_on_custard: "#c1404b"
@@ -3307,6 +3453,7 @@
 - name: "Beef"
   slug: beef
   group: meat
+  also: ["meat"]
   colour: "#c90039"
   text_on_shed: "#ea3752"
   source: general
@@ -3322,6 +3469,7 @@
 - name: "Pork"
   slug: pork
   group: meat
+  also: ["meat"]
   colour: "#a77c99"
   text_on_custard: "#8b617e"
   source: general
@@ -3337,6 +3485,7 @@
 - name: "Goose"
   slug: goose
   group: meat
+  also: ["meat"]
   colour: "#5c7442"
   text_on_shed: "#6d8653"
   sources: [goose]
@@ -3353,6 +3502,7 @@
 - name: "Turkey"
   slug: turkey
   group: meat
+  also: ["meat"]
   colour: "#808331"
   text_on_custard: "#70721d"
   sources: [tfta]
@@ -3368,6 +3518,7 @@
 - name: "Grouse"
   slug: grouse
   group: meat
+  also: ["meat", "game"]
   colour: "#94514a"
   text_on_shed: "#b16b64"
   sources: [basc, naturescot_game]
@@ -3377,16 +3528,14 @@
   varieties:
     - name: ""
       sources: [basc, naturescot_game]
-      notes:
-        - "12 August to 10 December."
       weeks:
-        - [31, 35, avail]
-        - [36, 48, in]
+        - [32, 48, in]
         - [49, 52, avail]
 
 - name: "Pheasant"
   slug: pheasant
   group: meat
+  also: ["meat", "game"]
   colour: "#b06000"
   text_on_shed: "#ba6a16"
   text_on_custard: "#a75a00"
@@ -3397,8 +3546,6 @@
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 October to 1 February."
       weeks:
         - [1, 4, in]
         - [40, 52, in]
@@ -3406,22 +3553,23 @@
 - name: "Partridge"
   slug: partridge
   group: meat
+  also: ["meat", "game"]
   colour: "#8b6700"
   text_on_shed: "#9d7921"
   sources: [basc]
-  note: "1 September to 1 February."
+  note: "1 September to 1 February, grey and red-legged alike."
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 September to 1 February (grey and red-legged)."
       weeks:
         - [1, 4, in]
         - [36, 52, in]
 
 - name: "Wild duck"
   slug: wild-duck
+  aliases: ["mallard", "teal", "wigeon"]
   group: meat
+  also: ["meat", "game"]
   colour: "#008269"
   text_on_shed: "#1d8e74"
   text_on_custard: "#007c64"
@@ -3432,9 +3580,6 @@
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 September to 31 January."
-        - "1 September to 20 February."
       weeks:
         - [1, 4, in]
         - [5, 8, avail]
@@ -3443,25 +3588,26 @@
 - name: "Woodcock"
   slug: woodcock
   group: meat
+  also: ["meat", "game"]
   colour: "#726971"
   text_on_shed: "#857b83"
   sources: [basc]
   note: "1 October to 31 January."
   notes:
     - "Scotland opens on 1 September."
-    - "Defra consulted in spring 2026 on extending the close season to 30 November in England and Wales; no decision announced as of 21 October 2026. Check before launch."
+    - "Defra consulted in spring 2026 on extending the close season to 30 November in England and Wales; no decision has been announced."
   varieties:
     - name: ""
       sources: [basc]
-      notes:
-        - "1 October to 31 January."
       weeks:
         - [1, 4, in]
         - [40, 52, in]
 
 - name: "Venison"
   slug: venison
+  aliases: ["deer", "red deer", "fallow deer"]
   group: meat
+  also: ["meat", "game"]
   colour: "#af3f00"
   text_on_shed: "#ce5b2b"
   sources: [basc]
@@ -3515,6 +3661,7 @@
 - name: "Wood pigeon"
   slug: wood-pigeon
   group: meat
+  also: ["meat", "game"]
   colour: "#7e70a0"
   text_on_shed: "#8577a7"
   text_on_custard: "#746696"
@@ -3534,6 +3681,7 @@
 - name: "Rabbit"
   slug: rabbit
   group: meat
+  also: ["meat", "game"]
   colour: "#7b8aa0"
   text_on_custard: "#606f84"
   sources: [basc, naturescot_game]
@@ -3549,6 +3697,7 @@
 - name: "Hare"
   slug: hare
   group: meat
+  also: ["meat", "game"]
   colour: "#c97333"
   text_on_custard: "#ab570d"
   sources: [basc]
@@ -3559,7 +3708,7 @@
     - name: ""
       sources: [basc]
       notes:
-        - "No close season for shooting in England & Wales, but selling brown hare March-July has long been prohibited (Hares Preservation Act 1892): verify it is still in force."
+        - "No close season for shooting in England and Wales, but selling brown hare from March to July has been prohibited since the Hares Preservation Act 1892, which is still in force."
       weeks:
         - [1, 8, in]
         - [31, 52, in]
@@ -3567,6 +3716,7 @@
 - name: "Squirrel"
   slug: squirrel
   group: meat
+  also: ["meat", "game"]
   colour: "#467f90"
   text_on_shed: "#4c8697"
   text_on_custard: "#3c7586"
@@ -3581,6 +3731,7 @@
 - name: "Chicken"
   slug: chicken
   group: meat
+  also: ["meat"]
   colour: "#a78438"
   text_on_custard: "#8a6916"
   source: general
@@ -3595,6 +3746,7 @@
 - name: "Duck"
   slug: duck
   group: meat
+  also: ["meat"]
   colour: "#9d6957"
   text_on_shed: "#a6725f"
   text_on_custard: "#956150"

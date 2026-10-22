@@ -111,6 +111,29 @@
   --panel-hover: color-mix(in oklab, var(--ink) 11%, var(--bg));
 }
 :root[data-theme="light"] { color-scheme: light; }
+/* A browser without color-mix() drops every mixed declaration, which
+   leaves black fills and missing strokes on the charts, so the tokens
+   are given as the same mixes worked out in oklab, and the per-row
+   mixes on the charts become opacities. Keep these in step with the
+   mixes above. */
+@supports not (color: color-mix(in oklab, red, blue)) {
+  :root { --rule: #d3cbb5; --off: #dfd7c0; --band: #f1e9d0; --panel: #fdf8ea; --panel-hover: #fefbf4; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --rule: #332e2a; --off: #2a2421; --band: #1d1815; --panel: #221d1a; --panel-hover: #2a2421; }
+  }
+  :root[data-theme="dark"] { --rule: #332e2a; --off: #2a2421; --band: #1d1815; --panel: #221d1a; --panel-hover: #2a2421; }
+  .leader { border-bottom-color: var(--rule); }
+  .food-group + .food-group { border-top-color: var(--rule); }
+  .chart .cell.avail { fill: var(--c); opacity: 0.45; }
+  .chart .cell.store { fill: var(--c); opacity: 0.3; }
+  .wheel .fade { stroke: var(--c); stroke-opacity: var(--t); }
+  .wheel .store { stroke: var(--c); stroke-opacity: 0.3; }
+  .wheel .blend { stroke: var(--b); }
+  .chart .cal a.row.is-hot .row-hit { fill: var(--band); }
+  .results .food-row a.is-active, .also-line .food-link.is-active { background: var(--band); }
+  .one-hint kbd { border-color: var(--muted); }
+  .tt-jump, .tt-pop { box-shadow: 0 4px 16px rgba(22, 17, 14, 0.3); }
+}
 
 /* --- Base ----------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -161,7 +184,10 @@ strong { font-weight: 700; }
    underlined only on hover or focus.
    Chrome (the nav and the footer): see each. */
 a { color: inherit; text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
-a:hover, a:focus-visible { text-decoration-thickness: 3px; }
+/* Hover and focus share a rule through :is(), so a browser that does not
+   know :focus-visible keeps the hover rather than dropping the whole
+   list. */
+a:is(:hover, :focus-visible) { text-decoration-thickness: 3px; }
 a.food-ref { text-decoration-color: var(--food); }
 :focus-visible { outline: 2px solid var(--rhubarb); outline-offset: 2px; }
 
@@ -173,7 +199,7 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .page-head { margin-bottom: var(--sp-4); }
 /* A section's label: Anton, label size, full ink, 8px above what it
    labels. */
-.section-label, .teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
+.teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
   font: 400 var(--fs-label)/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--ink); margin: 0 0 var(--sp-1);
 }
@@ -189,10 +215,12 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
    the values here are its height before then. Every element a link or
    a script jumps to stops below it. */
 :root { --header-h: 45px; }
-@media (max-width: 28rem) { :root:not(:has(.site-header.is-home)) { --header-h: 85px; } }
+@media (max-width: 28rem) { :root:not(:has(.site-header.is-home)) { --header-h: 90px; } }
 .site-header { position: sticky; top: 0; z-index: 10; padding: 0 var(--sp-2); background: var(--bg); border-bottom: 1px solid var(--rule); }
 [id] { scroll-margin-top: var(--header-h); }
-.site-header-inner { max-width: var(--page); min-height: 44px; margin: 0 auto; display: flex; align-items: center; gap: var(--sp-2); }
+/* The row may wrap, so a large default font (text-only zoom) stacks the
+   nav under the wordmark instead of printing one over the other. */
+.site-header-inner { max-width: var(--page); min-height: 44px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sp-2); }
 /* The wordmark is the logo, sized as a logo, outside the type scale, and
    the search: its RHUBARB is the hero's field in small (see Home: the
    hook), its IS IT and YET? links home. It takes
@@ -229,9 +257,9 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .site-nav a::before { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: 44px; transform: translate(-50%, -50%); }
 .site-nav .search-link::before { left: -8px; transform: translateY(-50%); }
 .site-nav a[aria-current] { color: var(--ink); }
-.site-nav a:hover, .site-nav a:focus-visible, .site-nav a[aria-current] { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
+.site-nav a:is(:hover, :focus-visible, [aria-current]) { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 2px; }
 .site-nav .search-link { color: var(--ink); }
-.site-nav .search-link:hover, .site-nav .search-link:focus-visible { color: var(--rhubarb); }
+.site-nav .search-link:is(:hover, :focus-visible) { color: var(--rhubarb); }
 .icon { width: 1.4rem; height: 1.4rem; flex: none; }
 .search-link .icon { width: 1.25rem; height: 1.25rem; }
 
@@ -263,10 +291,12 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .switch input:checked + label { color: var(--bg); }
 .switch input:checked + label::after { background: var(--ink); }
 .switch input:focus-visible + label::after { outline: 2px solid var(--rhubarb); outline-offset: 1px; }
+/* The inputs are invisible, so without :focus-visible a plain :focus
+   ring is the only sign a segment has the keyboard. */
+@supports not selector(:focus-visible) { .switch input:focus + label::after { outline: 2px solid var(--rhubarb); outline-offset: 1px; } }
 .switch .icon { width: 15px; height: 15px; stroke-width: 1.6; }
 .theme { display: none; }
 .js .theme { display: inline-flex; margin: 0; }
-.switches { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); align-items: center; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
@@ -278,14 +308,22 @@ main:has(#kind-wild:checked) .ordered > .by-wild,
 main:has(#kind-herbs:checked) .ordered > .by-herbs,
 main:has(#kind-fish:checked) .ordered > .by-fish,
 main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
+/* A browser without :has() drops the whole list above and would show
+   nothing: it shows the default order or kind, and the switch is inert. */
+@supports not selector(:has(a)) { .ordered > :first-child { display: block; } }
 
 /* --- Shared components ---------------------------------------------------- */
 /* The verdict word, at any size, is Anton in the food's colour. A row's
-   tag is the small size, the one Anton set below the label size. */
+   tag is the small size, the one Anton set below the label size, where a
+   food colour's 3.15:1 is not enough, so it takes the food's text colour
+   for the theme (as .food-link does), and a never-food's the muted ink. */
 .verdict-tag {
   font: 400 var(--fs-small)/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
-  color: var(--food); white-space: nowrap;
+  --food-ink: var(--food-custard, var(--food)); color: var(--food-ink); white-space: nowrap;
 }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .verdict-tag { --food-ink: var(--food-shed, var(--food)); } }
+:root[data-theme="dark"] .verdict-tag { --food-ink: var(--food-shed, var(--food)); }
+.food-row.never .verdict-tag { color: var(--muted); }
 .swatch { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 2px; background: var(--food); flex: none; transform: translateY(0.02em); }
 
 /* A food in a list, one link: swatch, name, variety, and in a list that
@@ -299,7 +337,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .food-list { list-style: none; margin: 0; padding: 0; columns: 15rem; column-gap: var(--sp-4); }
 .food-list > li { break-inside: avoid; padding: 0.2rem 0; }
 .food-row a { display: flex; align-items: baseline; gap: var(--sp-1); text-decoration: none; }
-.food-row a:hover .food-title, .food-row a:focus-visible .food-title { text-decoration: underline; text-decoration-color: var(--food); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+.food-row a:is(:hover, :focus-visible) .food-title { text-decoration: underline; text-decoration-color: var(--food); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .food-name { flex: 0 1 auto; min-width: 0; }
 .variety { color: var(--muted); }
 /* An On the way note ("first ones in two or three weeks") has a line of
@@ -438,7 +476,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    foods is one, in ink, and never breaks across lines at all. */
 .arrow-link { color: var(--ink); text-decoration: none; }
 .arrow-link .arrow-text { text-decoration: underline; text-decoration-color: var(--rhubarb); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
-.arrow-link:hover .arrow-text, .arrow-link:focus-visible .arrow-text { text-decoration-thickness: 2px; }
+.arrow-link:is(:hover, :focus-visible) .arrow-text { text-decoration-thickness: 2px; }
 /* The arrow is Helen's mark (_includes/icons/arrow-right.svg), 20 by 12,
    sized to the text it follows and sitting on its x-height. */
 .arrow-link .arrow { display: inline-block; width: 1.05em; height: 0.63em; margin-left: 0.35em; vertical-align: 0.05em; overflow: visible; }
@@ -450,7 +488,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .food-link { --food-ink: var(--food-custard, var(--food)); color: var(--food-ink); text-decoration: none; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .food-link { --food-ink: var(--food-shed, var(--food)); } }
 :root[data-theme="dark"] .food-link { --food-ink: var(--food-shed, var(--food)); }
-.food-link:hover, .food-link:focus-visible { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
+.food-link:is(:hover, :focus-visible) { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 /* What is typed, answered where the this-week blocks were. Two or more
    matches: the count in their label's style and place, then the rows in
    one column, in rank order; the one Up and Down reach sits on a wash
@@ -522,7 +560,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   .one-result:not(.is-plain) .one-more { margin-top: var(--sp-2); }
   .one-result:not(.is-plain) .one-hint { margin-top: var(--sp-1); }
   .one-result:not(.is-plain) .one-dial { width: 72px; height: 72px; }
-  .tt-pop .one-dial { margin-top: 36px; }
+  .tt-pop .one-dial { margin-top: var(--sp-4); }
   .results .one-result:not(.is-plain):not(.asks) { grid-template-areas: "when when" "word dial" "line line" "more more" "hint hint"; }
 }
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
@@ -676,7 +714,7 @@ article.never { --food: var(--never); }
    colour, so a hovered row's name turns pink for the line while the
    tspan inside it keeps the words in ink. The variety is not underlined,
    as in a food list. */
-.chart a.row:hover .row-name, .chart a.row:focus-visible .row-name { fill: var(--rhubarb); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.15em; }
+.chart a.row:is(:hover, :focus-visible) .row-name { fill: var(--rhubarb); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.15em; }
 .chart a.row.is-target .row-label { font-weight: 700; }
 .chart a.row:hover .row-hit, .chart a.row.is-target .row-hit { fill: var(--band); }
 .chart .month-line { stroke: var(--rule); }
@@ -797,7 +835,7 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
   border: 0; border-radius: 999px; background: var(--rhubarb); color: var(--shed); cursor: pointer; white-space: nowrap;
   box-shadow: 0 4px 16px color-mix(in oklab, var(--shed) 30%, transparent);
 }
-.tt-jump:hover .tt-jump-text, .tt-jump:focus-visible .tt-jump-text { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.3em; }
+.tt-jump:is(:hover, :focus-visible) .tt-jump-text { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.3em; }
 .tt-jump:focus-visible { outline-color: var(--ink); }
 .tt-jump .arrow { width: 1.4em; height: 0.84em; margin-left: 0.5em; flex: none; }
 .tt-jump .arrow.is-down { transform: rotate(90deg); }
@@ -815,7 +853,7 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
   position: relative; display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--rule); border-radius: 50%;
   background: none; color: var(--ink); font: 400 var(--fs-caps)/1 var(--text); cursor: pointer;
 }
-.tt-play::before { content: ""; position: absolute; inset: -6px; }
+.tt-play::before { content: ""; position: absolute; inset: -7px; }
 .tt-play[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .tt-line .tt-halo { stroke: var(--bg); stroke-width: 6; }
 .tt-line .tt-stroke { stroke: var(--rhubarb); stroke-width: 2; }
@@ -842,6 +880,10 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .tt-knob { cursor: grab; touch-action: none; outline: none; }
 .tt-knob-dot { fill: var(--rhubarb); stroke: var(--bg); stroke-width: 2; }
 .tt-knob-ring { fill: transparent; }
+/* The knob's tap area: an invisible disc under it, 44px across at any
+   width (charts.js sizes it), since an SVG element cannot carry the
+   ::before the other controls use. */
+.tt-knob-hit { fill: transparent; pointer-events: all; }
 .tt-knob:focus-visible .tt-knob-ring { stroke: var(--ink); stroke-width: 2; }
 .tt-knob-label {
   font: 700 12px var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
@@ -871,7 +913,7 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
   position: absolute; top: 0; right: 0; width: 44px; height: 44px; padding: 0; border: 0; background: none;
   color: var(--muted); font: 400 1.5rem/1 var(--text); cursor: pointer; border-radius: 0 12px 0 8px;
 }
-.tt-close:hover, .tt-close:focus-visible { color: var(--ink); }
+.tt-close:is(:hover, :focus-visible) { color: var(--ink); }
 /* The list under the chart opens with Now's own header: a title, "In
    season in mid-January", over the stepper and that third of the
    month's days. */
@@ -916,7 +958,6 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .about-list { margin: calc(-1 * var(--sp-1)) 0 var(--sp-2); padding-left: 1.6rem; }
 .about-list li { padding-left: 0.2rem; }
 .about-list li::marker { color: var(--muted); font-weight: 700; }
-.about-ways { padding-left: 1.2rem; }
 /* Source data: "common knowledge*" is a prose link to its footnote at
    the foot of the page, quiet, behind a bar, which ends with the way
    back up (the arrow turned up). The lists of sources are plain, a
@@ -929,7 +970,6 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .source-list li { margin: 0.2rem 0; }
 /* The credits close Source data, under an Anton label, small and muted. */
 .sources .credits p { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
-.about-ways li { margin: var(--sp-1) 0; }
 
 /* --- Footer ---------------------------------------------------------------- */
 /* Every word in the footer is caps, muted. Every text link is underlined
@@ -946,15 +986,15 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
   color: var(--muted); text-decoration: underline; text-decoration-color: var(--rhubarb);
   text-decoration-thickness: 1px; text-underline-offset: 0.3em;
 }
-.site-footer a:not(.hearts):not(.footer-github):hover, .site-footer a:not(.hearts):not(.footer-github):focus-visible { color: var(--ink); text-decoration-thickness: 2px; }
+.site-footer a:not(.hearts):not(.footer-github):is(:hover, :focus-visible) { color: var(--ink); text-decoration-thickness: 2px; }
 /* A dotted list's separator follows an item, never leads one, so a line
    that wraps never starts with a dot. */
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--sp-1); }
 .footer-links a:not(:last-child)::after { content: "·"; display: inline-block; margin-left: var(--sp-1); color: var(--muted); }
 .footer-github { display: inline-flex; color: var(--muted); }
-.footer-github:hover, .footer-github:focus-visible { color: var(--rhubarb); }
+.footer-github:is(:hover, :focus-visible) { color: var(--rhubarb); }
 .footer-icon { width: 2.2rem; height: 2.2rem; fill: currentColor; }
-.licence, .footer-asof { color: color-mix(in oklab, var(--muted) 75%, var(--bg)); }
+.licence, .footer-asof { color: var(--muted); }
 .licence { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-1); }
 .licence span { white-space: nowrap; }
 .licence span:not(:last-child)::after { content: "·"; margin-left: var(--sp-1); }

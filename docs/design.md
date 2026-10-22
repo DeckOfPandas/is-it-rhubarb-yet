@@ -51,8 +51,8 @@ component at rest, hovered and focused.
   head the fonts section of `site.css`.
 - **The files** under `assets/fonts/` are Google's Latin subsets, 113 KB
   in all against a budget of 150 KB, self-hosted, `font-display: swap`,
-  Anton and Atkinson preloaded on every page; Newsreader (62 KB) loads
-  after the stylesheet on food pages. Atkinson's is the variable font (200 to
+  Anton and Atkinson preloaded on every page and Newsreader (62 KB) on
+  the food and never-food pages, the only ones with a quotation. Atkinson's is the variable font (200 to
   800), so 400 and 700 are one file; its l has a curled foot at every
   weight, which is why buttons and inputs take the page's font (`font:
   inherit`): browsers otherwise set them in Arial, whose l is straight.
@@ -143,8 +143,10 @@ Every control is at least 44×44px to tap, the glyphs unchanged. Where
 the mark is smaller, the target is an invisible `::before` round it,
 which no gap counts: the nav items, the magnifier, ??, play (a 32px
 circle), each segment of every switch (26px tall inside a 32px pill),
-the calendar's handle. The week arrows are 44px boxes; a ring-list row
-is 44px tall.
+the calendar's handle. The wheel's knob, an SVG element, has an
+invisible disc under it that `charts.js` keeps at 44px across whatever
+the wheel's scale. The week arrows are 44px boxes; a ring-list row is
+44px tall.
 
 ## Components
 
@@ -163,8 +165,10 @@ is 44px tall.
   a phone on a row of its own under the nav, so the nav never moves. Home
   has no wordmark. The header sticks to the top of every page on a solid
   page-colour background over a 1px rule; `site.js` measures its height
-  into `--header-h` (CSS guesses 45px, 85px on a phone with the wordmark,
-  until then). What sticks below it sits at `--header-h`, and every
+  into `--header-h` (CSS guesses 45px, 90px on a phone with the wordmark,
+  until then); the row may wrap, so a large default font stacks the nav
+  under the wordmark instead of overprinting it. What sticks below it
+  sits at `--header-h`, and every
   element with an id has `scroll-margin-top: var(--header-h)`, so a jump
   stops below the header. The magnifier links to `/#search`; with
   JavaScript it focuses the wordmark's search, and on home the hero.
@@ -391,9 +395,9 @@ One shape for every food, one column at every width, in this order:
 3. the breakdown: the dial (on the same left edge as the words) and, for
    a food of two rings or more, its ring list;
 4. the counter note;
-5. Also great this week ("Great this week" when this food is NO): three
-   foods of the same family that are YES, a fresh pick on every visit, A
-   to Z, and "and N more →" to Now;
+5. Also great this week ("Great this week" unless this food is YES too):
+   three foods of the same family that are YES, a fresh pick on every
+   visit, A to Z, and "and N more →" to Now;
 6. one hairline, the only rule on the page;
 7. the sources disclosure, "Great! Show me the sources." ("Fine, show me
    the sources." for NO), in the instructive style, holding the numbered
@@ -472,7 +476,9 @@ icons and the fonts, small and muted.
 `404.html`, served by GitHub Pages for any address it cannot find: "Is
 it [what was asked] yet?", LITERALLY NO IDEA., "If that's an actual
 thing, please tell us.", then up to five nearest foods from
-`search.json` under DID YOU MEAN, and two ways on.
+`search.json` under DID YOU MEAN, and two ways on. It names no
+canonical. Home's one heading, "Is it in season yet?", is visually
+hidden, since the hero is a form.
 
 ### Other pages
 
@@ -709,9 +715,9 @@ Now's bands from `site.js` through `window.Site`, and every date through
   server of the script's own at 1280 wide and three times over, with the
   header and controls hidden; the calendar shows 34 rows of its by-start
   order centred on the first row whose season starts this week or later;
-  the wheel is the All wheel as a JPEG at quality 85, since as a PNG its
+  the wheel is the All wheel as a JPEG at quality 80, since as a PNG its
   arcs come to near a megabyte and chat apps are reported to drop
-  previews over about 300 KB. Every other page uses the home card;
+  previews over about 300 KB (quality 85 came within 4% of it). Every other page uses the home card;
   `_layouts/default.html` picks each page's card.
 - **Size.** A card is laid out at 1200 by 630 and drawn at twice that,
   2400 by 1260, which `og:image:width` and `og:image:height` state.

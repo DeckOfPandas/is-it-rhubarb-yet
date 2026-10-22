@@ -64,7 +64,13 @@ JPEG; every other page shows the home card.
   {%- if page.noindex %}
   <meta name="robots" content="noindex">
   {%- endif %}
+  {%- comment -%} The not-found page is served at every missing address,
+     so it names no canonical. {%- endcomment %}
+  {%- if page.url != "/404.html" %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {%- endif %}
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbf3d9">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16110e">
   {%- comment -%} One design per size, drawn by tools/icons.js; the browser
      picks by sizes. No SVG icon: a browser would take it at every size
      over these. tests/cards/cards.test.js checks each file is its size.
@@ -77,6 +83,11 @@ JPEG; every other page shows the home card.
   <link rel="apple-touch-icon" sizes="180x180" href="{{ '/icons/apple-touch-icon.png' | relative_url }}">
   <link rel="preload" href="{{ '/assets/fonts/anton-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/atkinson-hyperlegible-next-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  {%- comment -%} Newsreader sets only the quotation, so only the pages
+     with one preload it. {%- endcomment %}
+  {%- if page.collection == "foods" or page.collection == "never" %}
+  <link rel="preload" href="{{ '/assets/fonts/newsreader-italic-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  {%- endif %}
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
   <link rel="alternate" type="application/json" href="{{ '/foods.json' | relative_url }}" title="Season data">
   <script>
@@ -104,7 +115,7 @@ JPEG; every other page shows the home card.
             enterkeyhint="go" placeholder="rhubarb" aria-label="Search foods" aria-autocomplete="both" size="7"></span>
           <a class="hook-word" href="{{ '/' | relative_url }}" tabindex="-1" aria-hidden="true">yet?</a>
         </label>
-        <button type="submit" class="visually-hidden">Search</button>
+        <button type="submit" class="visually-hidden" tabindex="-1">Search</button>
       </form>
       {%- endif -%}
       <nav class="site-nav" aria-label="Site">

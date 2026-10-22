@@ -8,7 +8,7 @@
 - key: ahdb_lamb
   name: "AHDB: Patterns in sheep slaughter"
   short: "AHDB"
-  url: "https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change"
+  url: "https://web.archive.org/web/20250323181601/https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change"
 
 - key: bap
   name: "British Apples & Pears: Apple varieties"
@@ -28,7 +28,7 @@
 - key: bnfs
   name: "Brighton & Newhaven Fish Sales"
   short: "Brighton & Newhaven Fish Sales"
-  url: "https://www.bnfs.co.uk/"
+  url: "https://www.brighton-fish-sales.co.uk/"
 
 - key: countrylife_salmon
   name: "Country Life, Selling rod-caught salmon made illegal (2009)"
@@ -38,7 +38,7 @@
 - key: defra
   name: "Defra: Wholesale fruit and vegetable prices"
   short: "Defra"
-  url: "https://www.gov.uk/government/statistics/wholesale-fruit-and-vegetable-prices"
+  url: "https://www.gov.uk/government/statistical-data-sets/wholesale-fruit-and-vegetable-prices-weekly-average"
 
 - key: defra_lobster
   name: "Defra: Lobster size rules are changing"
@@ -53,7 +53,7 @@
 - key: dowding
   name: "Charles Dowding: Chicory and radicchio"
   short: "Charles Dowding"
-  url: "https://charlesdowding.co.uk/growing-guide/chicory-radicchio"
+  url: "https://courses.charlesdowding.co.uk/product/growing-guide-12-chicory-radicchio/"
 
 - key: eating_better
   name: "Eating Better: Sourcing Better framework"
@@ -83,12 +83,12 @@
 - key: fsa_lead
   name: "Food Standards Agency: Game shot with lead"
   short: "Food Standards Agency"
-  url: "https://www.food.gov.uk/science/advice-to-frequent-eaters-of-game-shot-with-lead"
+  url: "https://web.archive.org/web/20240530220237/https://www.food.gov.uk/safety-hygiene/lead-shot-game"
 
-- key: gardeners_calendar
-  name: "The Gardener's Calendar: Calabrese"
-  short: "The Gardener's Calendar"
-  url: "https://the-gardeners-calendar.co.uk/plants/calabrese"
+- key: garden_organic
+  name: "Garden Organic: How to grow calabrese"
+  short: "Garden Organic"
+  url: "https://www.gardenorganic.org.uk/expert-advice/how-to-grow/growing-guides/vegetables-herbs-guides/how-to-grow-calabrese"
 
 - key: general
   name: "Common knowledge, not yet checked against a named source"
@@ -113,7 +113,7 @@
 - key: hcc
   name: "Hybu Cig Cymru, via Business Wales"
   short: "Hybu Cig Cymru"
-  url: "https://businesswales.gov.wales/foodanddrink/node/652"
+  url: "https://businesswales.gov.wales/foodanddrink/news-and-events/news/pgi-welsh-lamb-bonanza-londons-borough-market-mark-start-lamb-day"
 
 - key: ifca_scallop
   name: "Devon & Severn IFCA: King scallop closure"
@@ -166,9 +166,9 @@
   url: "https://ourworldindata.org/grapher/ghg-per-kg-poore"
 
 - key: pfl
-  name: "Pasture for Life: Standards"
+  name: "Pasture for Life: Certification standards"
   short: "Pasture for Life"
-  url: "https://www.pastureforlife.org/certification/the-pasture-for-life-standards/"
+  url: "https://pastureforlife.org/resources/standards-51"
 
 - key: rhs
   name: "RHS: Calabrese, grow your own"
@@ -198,12 +198,12 @@
 - key: scot_salmon_sale
   name: "Conservation of Salmon (Prohibition of Sale) (Scotland) Regulations 2002"
   short: "Scottish salmon regulations"
-  url: "https://www.legislation.gov.uk/ssi/2002/418"
+  url: "https://www.legislation.gov.uk/ssi/2002/418/made"
 
 - key: seafish
   name: "Seafish: Seafood guide"
   short: "Seafish"
-  url: "https://seafoodacademy.org/pdfs/seafood-guide.pdf"
+  url: "https://www.seafish.org/document/?id=33802"
 
 - key: shellfish_act
   name: "Sea Fisheries (Shellfish) Act 1967, section 16"

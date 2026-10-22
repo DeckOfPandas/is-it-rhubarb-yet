@@ -23,9 +23,10 @@
 // headless Chromium (Playwright, which the container and the deploy both
 // have) and screenshotted. The calendar and wheel cards carry a picture
 // of the real chart, shot from the built site through a server of its
-// own. The wheel card is a JPEG: its hundreds of arcs make a PNG of near
-// a megabyte, and chat apps are reported to drop previews over about
-// 300 KB. Runs after `bundle exec jekyll build`, into the built site;
+// own. The wheel card is a JPEG at quality 80: its hundreds of arcs make
+// a PNG of near a megabyte, and chat apps are reported to drop previews
+// over about 300 KB, which quality 85 came within 4% of. Runs after
+// `bundle exec jekyll build`, into the built site;
 // tools/build.sh does so. Needs _data/baked.json from tools/bake.js.
 "use strict";
 const fs = require("fs");
@@ -338,7 +339,7 @@ async function main() {
       strays.push(`${card.slug} (x ${Math.round(box.left)}-${Math.round(box.right)}, y ${Math.round(box.top)}-${Math.round(box.bottom)}${overflow ? ", overflows" : ""})`);
     }
     if (card.type === "jpeg") {
-      await tab.screenshot({ path: path.join(out, card.slug + ".jpg"), type: "jpeg", quality: 85 });
+      await tab.screenshot({ path: path.join(out, card.slug + ".jpg"), type: "jpeg", quality: 80 });
     } else {
       await tab.screenshot({ path: path.join(out, card.slug + ".png"), type: "png" });
     }

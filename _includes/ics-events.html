@@ -7,13 +7,16 @@ week 52 into week 1 is one season, which starts in its autumn run, not
 again on 1 January. Each event's UID is the food, the ring and which of
 the ring's seasons it is ("rhubarb-forced-1@is-it-rhubarb-yet"), not its
 date, so a calendar updates the event when the date moves rather than
-adding another. Expects: food, jan1 (1 January of the build year, in
-seconds). Tags trim only the whitespace after themselves so that each
-property keeps its own line.
+adding another. The description says the run in months, the site's own
+words, never its week numbers. Expects: food, jan1 (1 January of the
+build year, in seconds). Tags trim only the whitespace after themselves
+so that each property keeps its own line.
 {%- endcomment -%}
 {% unless include.food.unsold -%}
 {% assign food = include.food -%}
 {% assign vlabels = site.data.baked.labels[food.slug] -%}
+{% assign ics_month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
+{% assign ics_months = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," -%}
 {% for v in food.varieties -%}
 {% if v.lead == false -%}{% continue -%}{% endif -%}
 {% assign vlabel = vlabels[forloop.index0] -%}
@@ -27,6 +30,9 @@ property keeps its own line.
 {% assign offset = r[0] | minus: 1 | times: 604800 -%}
 {% assign start = include.jan1 | plus: offset | date: "%Y%m%d" -%}
 {% assign stop = include.jan1 | plus: offset | plus: 86400 | date: "%Y%m%d" -%}
+{% assign from_month = 0 -%}{% assign to_month = 0 -%}
+{% for ms in ics_month_starts -%}{% assign msn = ms | plus: 0 -%}{% if r[0] >= msn -%}{% assign from_month = forloop.index0 -%}{% endif -%}{% if r[1] >= msn -%}{% assign to_month = forloop.index0 -%}{% endif -%}{% endfor -%}
+{% if from_month == to_month -%}{% assign when_said = ics_months[from_month] -%}{% else -%}{% assign when_said = ics_months[from_month] | append: " to " | append: ics_months[to_month] -%}{% endif -%}
 BEGIN:VEVENT
 UID:{{ food.slug }}{% if v.name != "" %}-{{ v.name | slugify }}{% endif %}-{{ n }}@is-it-rhubarb-yet
 DTSTAMP:{{ site.time | date: "%Y%m%dT%H%M%SZ" }}
@@ -34,7 +40,7 @@ DTSTART;VALUE=DATE:{{ start }}
 DTEND;VALUE=DATE:{{ stop }}
 RRULE:FREQ=YEARLY
 SUMMARY:In season: {{ food.name }}{% if vlabel != "" %} ({{ vlabel }}){% endif %}
-DESCRIPTION:Week {{ r[0] }} to {{ r[1] }}. {{ site.url }}{{ site.baseurl }}/{{ food.slug }}/
+DESCRIPTION:In season {{ when_said }}. {{ site.url }}{{ site.baseurl }}/{{ food.slug }}/
 END:VEVENT
 {% endif -%}
 {% endfor -%}

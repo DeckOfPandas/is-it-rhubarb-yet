@@ -89,8 +89,8 @@ test("rhubarb is NEARLY: forced rhubarb from 29 October, eleven days off", () =>
   assert.equal(fv.verdict, "NEARLY");
   assert.equal(iso(V.startDate(fv.whole.from, YEAR)), "2026-10-29");
   assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "In a week or two.");
-  assert.deepEqual(ringLines("rhubarb"), [["Forced", "In a week or two"], ["Outdoor", "Back in May"]],
-    "outdoor rhubarb's week 18 starts on 30 April, but its middle is 3 May");
+  assert.deepEqual(ringLines("rhubarb"), [["Forced", "In a week or two"], ["Outdoor", "First ones in April, properly in May"]],
+    "outdoor rhubarb is about from week 14 and in from week 18, which starts on 30 April but whose middle is 3 May");
 });
 
 test("celery is JUST: a hard stop after week 43, ten days off", () => {
