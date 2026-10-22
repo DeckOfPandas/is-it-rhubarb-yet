@@ -88,26 +88,9 @@ colour.
 
   <details class="fine">
     <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the data.</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the data.</span></summary>
-    {%- comment -%} Each variety's runs in fuzzy months, baked by
-       runsSaid in verdict.js, named as the variety lines name them, in
-       Now's bands soonest first (varietyBands), the bands named under
-       Atkinson caps labels when there are enough varieties. site.js
-       redraws it for the visitor's day in showRuns. {%- endcomment -%}
-    <div class="runs" id="runs">
-    {%- for band in b.runBands.bands -%}
-      <div class="{% if b.runBands.named %}food-group{% else %}run-band{% endif %}">
-        {%- if b.runBands.named %}<h3 class="group-label">{{ band.label }}</h3>{% endif -%}
-        <ul class="named-lines">
-        {%- for i in band.indexes -%}
-          {%- assign v = food.varieties[i] -%}
-          <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="line-words">{{ b.runs[i] }}
-            {%- if v.notes %} <span class="ring-note">{{ v.notes | join: " " }}</span>{% endif -%}
-          </span></li>
-        {%- endfor -%}
-        </ul>
-      </div>
-    {%- endfor -%}
-    </div>
+    {%- comment -%} Opened, top to bottom: ALL APPLES and the chart, a
+       faint rule, the runs, a rule, the notes and the sources. {%- endcomment -%}
+    <h2 class="data-title">All {{ food.name | downcase }}</h2>
     <figure class="chart mini">
     <svg viewBox="0 0 {{ width }} {{ height }}" width="{{ width }}" role="img" aria-label="Season of {{ food.name }} by week" data-x0="{{ x0 }}" data-cw="{{ cw }}" data-header="26">
       {%- for m in (0..11) -%}
@@ -129,6 +112,28 @@ colour.
       <line class="today" x1="0" y1="20" x2="0" y2="{{ height }}" hidden />
     </svg>
     </figure>
+    <hr class="page-rule is-faint">
+    {%- comment -%} Each variety's runs in fuzzy months, baked by
+       runsSaid in verdict.js, named as the variety lines name them, in
+       Now's bands soonest first (varietyBands), the bands named under
+       Atkinson caps labels when there are enough varieties. site.js
+       redraws it for the visitor's day. {%- endcomment -%}
+    <div class="runs" id="runs">
+    {%- for band in b.runBands.bands -%}
+      <div class="{% if b.runBands.named %}food-group{% else %}run-band{% endif %}">
+        {%- if b.runBands.named %}<h3 class="group-label">{{ band.label }}</h3>{% endif -%}
+        <ul class="named-lines">
+        {%- for i in band.indexes -%}
+          {%- assign v = food.varieties[i] -%}
+          <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="line-words">{{ b.runs[i] }}
+            {%- if v.notes %} <span class="ring-note">{{ v.notes | join: " " }}</span>{% endif -%}
+          </span></li>
+        {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+    </div>
+    <hr class="page-rule">
     {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
     {%- for n in food.notes -%}<p class="note">{{ n }}</p>{%- endfor -%}
     {%- comment -%} The sources, named as _data/sources.yml names them: a
@@ -144,8 +149,10 @@ colour.
     </ul>
   </details>
 
-  {%- comment -%} The day the verdict was worked out, as an ordinal with
-     its letters raised; site.js sets the visitor's own day. {%- endcomment -%}
+  {%- comment -%} Between rules: the day the verdict was worked out, as an
+     ordinal with its letters raised (site.js sets the visitor's own day),
+     and the calendar lines. {%- endcomment -%}
+  <hr class="page-rule">
   <p class="as-of instruct">Verdict correct as of <span data-asof-ordinal>{{ baked.asofDay }}<sup>{{ baked.asofOrdinal }}</sup> {{ baked.asofMonth }}</span>.</p>
 
   {%- comment -%} The food's own calendar of season starts, to subscribe
@@ -162,6 +169,6 @@ colour.
   <p class="calendar-also"><a href="{{ '/sources/' | relative_url }}#calendar-feed">Tell me about feeds</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ every }}">feeds for all foods</a></p>
   {%- endunless -%}
 
-  <hr class="onwards-rule">
+  <hr class="page-rule">
   <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search">{% include arrow-words.html text="Ask about something else" %}</a></p>
 </article>

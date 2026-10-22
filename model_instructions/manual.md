@@ -303,8 +303,8 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   quotation, the dial and its key (on the same left edge as the words),
   the notes (the counter note), then Also, the data, the as-of line
   ("Verdict correct as of 22<sup>nd</sup> October.", in the instructive
-  style), the calendar lines, a faint rule and "Ask about something
-  else →". Every block is 40px
+  style) and the calendar lines between rules, then "Ask about
+  something else →". Every block is 40px
   from the next. Text keeps a measure of about 65ch. A date line wraps
   with `text-wrap: pretty`, so no word sits alone on its last line. The
   quote bar and every note's bar are the food's full colour.
@@ -315,7 +315,11 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     word (COX Yes), then the rest in data order by their phrases
     (BRAMLEY Available from storage until late July). Below 600px the
     name sits over its answer.
-  - **The data** opens to the same pattern, each variety's runs in
+  - **The data** opens to ALL APPLES (Anton `label`) over the chart, a
+    faint rule, the runs, a rule, then the notes and "Sources:" over a
+    bulleted list. After it, between rules, the as-of and calendar
+    lines; a last rule before the way on.
+  - **The runs** take the variety lines' pattern, in
     fuzzy months (`runsSaid`, baked as `runs`): "In season August to
     September, available from storage October to July." A run ending
     the year and one of the same kind starting it are one run; a
@@ -326,7 +330,6 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     `BAND_VARIETIES` (4) varieties or more in two bands or more, each
     band is named under an Atkinson caps label, a hairline between; the
     runs are one grid across the bands, so the names keep one column.
-    Then the chart, the notes, and "Sources:" over a bulleted list.
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
   in pink, the line exactly the word's width, in the header, the hero
   and the cards. It does not change on hover.
