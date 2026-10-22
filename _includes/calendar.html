@@ -6,6 +6,9 @@ season, so the chart reads top to bottom as the year unfolds.
 order "group": rows gathered by culinary family, each family sorted by the
 food's first in-season week, a food's varieties together.
 order "alpha": by food name, then variety, a food's varieties together.
+The calendar page bakes the chart once, by start; assets/charts.js
+reorders its rows in place for the other two, by the same keys
+(orderRows), so the keys here and there must agree.
 
 A row is labelled with the food, and a named variety follows in muted
 brackets as tools/bake.js names it, "Rhubarb (forced)", "Apples (Cox)".
@@ -162,13 +165,10 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
     {%- assign vi = parts[2] | plus: 0 -%}
     {%- assign v = food.varieties[vi] -%}
-    {%- assign vlabels = site.data.baked.labels[food.slug] -%}
-    {%- assign vlabel = vlabels[vi] -%}
-    {%- if vlabel != "" -%}{%- assign label = food.name | append: " (" | append: vlabel | append: ")" -%}{%- else -%}{%- assign label = food.name -%}{%- endif -%}
     {%- assign gid = include.id | append: "-" | append: food.slug | append: "-" | append: vi -%}
     <a class="row" data-row="{{ food.slug }}-{{ vi }}" data-slug="{{ food.slug }}" href="{{ '/' | append: food.slug | append: '/' | relative_url }}" tabindex="-1" aria-hidden="true" style="--c: {{ v.colour | default: food.colour }}">
       <rect class="row-hit" x="{{ x0 }}" y="{{ y }}" width="{{ cells_w }}" height="{{ rh }}" />
-      {%- include season-cells.html variety=v label=label y=y x0=x0 cw=cw rh=rh gid=gid -%}
+      {%- include season-cells.html variety=v y=y x0=x0 cw=cw rh=rh gid=gid -%}
     </a>
   {%- endfor -%}
   <line class="month-line" x1="{{ x0 | plus: 728 }}" y1="{{ header }}" x2="{{ x0 | plus: 728 }}" y2="{{ height }}" />

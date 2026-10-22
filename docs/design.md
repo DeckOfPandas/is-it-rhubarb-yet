@@ -239,9 +239,10 @@ needs a food uses one of these as it is.
   and muted, the Enter key as a keycap holding the return mark
   (`_includes/card-hint.html`, `icons/enter.svg`), hidden from screen
   readers. On the right, alone and centred, a 110px miniature of the
-  dial with today's hand: the food page's own `figure.wheel` SVG, fetched
-  from the page (`miniDial` in `site.js`, which also warms the page). A
-  food's card has the whole dial; a named variety's (from search, or a
+  dial with today's hand: the food's standalone dial, `/wheel/<slug>.svg`
+  (the same include as the page's, 10 KB where the page is 50), fetched
+  once per food (`miniDial` in `site.js`), its own stylesheet and script
+  dropped. A food's card has the whole dial; a named variety's (from search, or a
   calendar row of a food of several) is cut to that ring, widened to fill
   the band and drawn all in its colour. The card and a list of matches
   share one width, `--answer-w` (40rem). Below about 420px of card width
@@ -256,12 +257,17 @@ needs a food uses one of these as it is.
 ### The verdict word
 
 The verdict word, at any size, is Anton in the food's colour. On a food
-page it fills the line: `site.js` sizes it to the width after the fonts
-are in (CSS's clamp stands in before that and without JavaScript), then
-makes it smaller, if it must, until the date line under it is wholly on
-the first screen, 16px clear, never below 64px for that; fitting the
-width always wins, so LITERALLY NO IDEA. fits a 390px phone. The question
-over it is set at `title`, the full width, muted, its lines balanced.
+page it fills the line from the first paint: the line is a container
+and the stylesheet sizes the word from the line's width over the word's
+width in em (`_data/word_em.yml`, measured by `tools/dev/word-em.js`,
+set as `--word-em` by the layout and by `site.js` when the day's verdict
+differs), so nothing under it moves when the fonts arrive. `site.js`
+then makes it smaller, if it must, until the date line under it is
+wholly on the first screen, 16px clear, never below 64px for that;
+fitting the width always wins, so LITERALLY NO IDEA. fits a 390px phone.
+A browser without container units keeps the display clamp until
+`site.js` fits the word. The question over it is set at `title`, the
+full width, muted, its lines balanced.
 
 ### Quotation and notes
 
@@ -526,22 +532,30 @@ hidden, since the hero is a form.
   coordinates (the months, the names, the weeks) and a blank corner over
   the names; the header hides its own overflow and `site.js` scrolls it
   in step, since a sticky block cannot sit inside a scrolling one.
-- Three orders, each a copy of the chart built at build time and shown by
-  the order switch: by start (one row per ring not marked `lead: false`,
-  sorted by its first in-season week), by family (grouped, a food's rings
-  together) and A to Z. A row is two links to its food's page, its name
-  and its weeks; only the name takes focus. A food page links here with
-  `#<slug>`, which marks the food's rows and scrolls to the first.
+- Three orders from one baked chart: by start (one row per ring not
+  marked `lead: false`, sorted by its first in-season week), by family
+  (grouped under a label, a food's rings together) and A to Z. The chart
+  is baked by start; `charts.js` reorders its rows in place for the
+  other two (`orderRows`, moving each row's name and weeks by a
+  translate and adding the family labels), by the same keys as the
+  include, once `foods.json` is in. The switch needs JavaScript and
+  appears only with it. A row is two links to its food's page, its name
+  and its weeks; only the name takes focus; its cells carry no tooltips.
+  A food page links here with `#<slug>`, which marks the food's rows and
+  scrolls to the first.
 - On a phone (below 700px) it runs to the screen's edges, the names are
   `small` (14px), a row with a `short:` name shows it instead (popovers,
   lists and screen readers keep the full name), and `charts.js` fits the
   names column to the longest name shown, 16px from the screen's edge
-  and 8px from the weeks. The weeks fill the chart's width: on a wide
+  and 8px from the weeks, but never wider than two fifths of the screen:
+  a name that will not fit loses its variety and then its last letters to
+  an ellipsis (`cutName`). The weeks fill the chart's width: on a wide
   screen, and on a phone while magnified, a week is as wide as the room
   after the names column over 52 (`fitWeeks`); on a phone otherwise a
   week is 14px and the chart scrolls. A month name the scrolled weeks have
   pushed part way under the names, or past the right edge, is hidden,
-  never cut.
+  never cut; a month the magnifier has squeezed keeps its initial while
+  it has room for a letter.
 - At 1280×800 the sticky stack while scrolling (site header 45px,
   controls 136px, month row 53px) is 234px, 29% of the screen.
 
@@ -566,6 +580,15 @@ hidden, since the hero is a form.
   marked `lead: false` place a food; a food that cannot be sold is not
   drawn. Foods in season all year are listed under the wheel, "ALL
   YEAR:", as food links in their colours.
+- **Labels keep clear of each other** (`spreadLabels` in `site.js`).
+  Most seasons begin in summer, so the June to September sector would
+  overprint. After the fonts are in, each label on show is compared with
+  those placed before it and one that overlaps is pushed outward along
+  its own ray until it is clear, with a thin leader back to its dot;
+  the dot never moves, since its radius is the season's length. It runs
+  again when the labels on show change (In season, the kind switch), on
+  load and on resize, and not on a phone, where the names are too small
+  to read and the list under the wheel does the reading.
 - Drawn in an 880-unit viewBox with room for the longest label at any
   angle; `site.js` tightens each visible wheel's viewBox to its drawn
   extent (`fitDials`), so the wheel fills its width. The extent counts

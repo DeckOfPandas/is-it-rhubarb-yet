@@ -1,7 +1,8 @@
 {% comment %}
-The shapes for one chart row (one variety). Expects: variety, label, y, x0,
-cw, rh, gid (an id unique to this row on the page). Colour comes from the
-enclosing element's --c custom property.
+The shapes for one chart row (one variety). Expects: variety, y, x0, cw,
+rh, gid (an id unique to this row on the page). Colour comes from the
+enclosing element's --c custom property. The cells carry no <title>: a
+browser would show it as a tooltip, and the row's name says its season.
 
 A fully in-season range is a bar in the row's colour. A "just about" range
 is a bar of the same height fading between the off-season grey and the
@@ -19,9 +20,9 @@ row so that they inherit its --c.
   {%- assign x1 = r[0] | minus: 1 | times: include.cw | plus: include.x0 -%}
   {%- assign x2 = r[1] | times: include.cw | plus: include.x0 -%}
   {%- if r[2] == "in" -%}
-    <rect class="cell in" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+    <rect class="cell in" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}" />
   {%- elsif r[2] == "store" -%}
-    <rect class="cell store" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: available from storage, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+    <rect class="cell store" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}" />
   {%- else -%}
     {%- assign before = r[0] | minus: 1 -%}{%- if before == 0 -%}{%- assign before = 52 -%}{%- endif -%}
     {%- assign after = r[1] | plus: 1 -%}{%- if after == 53 -%}{%- assign after = 1 -%}{%- endif -%}
@@ -33,11 +34,11 @@ row so that they inherit its --c.
       {%- endif -%}
     {%- endfor -%}
     {%- if rising and falling == false -%}
-      <rect class="cell ramp" fill="url(#{{ include.gid }}-up)" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: coming in, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+      <rect class="cell ramp" fill="url(#{{ include.gid }}-up)" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}" />
     {%- elsif falling and rising == false -%}
-      <rect class="cell ramp" fill="url(#{{ include.gid }}-down)" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: going out, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+      <rect class="cell ramp" fill="url(#{{ include.gid }}-down)" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}" />
     {%- else -%}
-      <rect class="cell avail" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}"><title>{{ include.label }}: just about, weeks {{ r[0] }} to {{ r[1] }}</title></rect>
+      <rect class="cell avail" x="{{ x1 }}" y="{{ include.y }}" width="{{ x2 | minus: x1 }}" height="{{ h }}" />
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}

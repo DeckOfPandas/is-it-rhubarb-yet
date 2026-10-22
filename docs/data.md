@@ -24,9 +24,9 @@ is `docs/design.md`; the decision log is `docs/decisions.md`.
   checked, with no address.
 - Stubs, one per food, which the checker requires: `_foods/<slug>.md`
   (the page at `/<slug>/`), `_remind/<slug>.ics` (the food's calendar at
-  `/remind/<slug>.ics`), `_never/<slug>.md` (a never-food's page). A stub
-  under `_wheels/` gives a standalone SVG of the food's dial at
-  `/wheel/<slug>.svg` (`_layouts/wheel.svg`); only rhubarb has one.
+  `/remind/<slug>.ics`), `_wheels/<slug>.svg` (a standalone SVG of the
+  food's dial at `/wheel/<slug>.svg`, `_layouts/wheel.svg`, which the
+  cards' dials are cut from), `_never/<slug>.md` (a never-food's page).
 - `_data/baked.json` is written by `tools/bake.js` before every build and
   gitignored: today's verdicts, which the Liquid templates read. Never
   edit it.

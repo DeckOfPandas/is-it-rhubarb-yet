@@ -287,10 +287,12 @@
   }
 
   // --- The verdict word fills the line --------------------------------------
-  // Measured after the fonts are in, so that YES and NEARLY both reach the
-  // right edge; CSS's clamp() stands in before that and without JavaScript.
-  // The word is then made smaller, if it must be, until the date line
-  // under it is wholly on the first screen, 16px clear of its foot.
+  // CSS already sizes the word to its line from its width in em
+  // (word_em.yml, --word-em), so this measure, after the fonts are in,
+  // normally confirms that size; in a browser without container units
+  // it is what fits YES and NEARLY to the right edge. The word is then
+  // made smaller, if it must be, until the date line under it is wholly
+  // on the first screen, 16px clear of its foot.
   var MIN_VERDICT = 64;
   function fitVerdict(word) {
     if (!word) return;
@@ -335,11 +337,68 @@
   // the one it shows, and a resize fits the one on show again. The room
   // left over the drawing is --dial-inset on the figure, in pixels.
   var LONGEST_TIME = "Early September";
+
+  // --- The wheel's labels keep clear of each other ---------------------------
+  // A label is drawn beside its dot, so in a crowded month (July to
+  // September) labels overprint. Each label on show is compared with
+  // those placed before it, in the wheel's order; one that overlaps is
+  // pushed outward along its own ray, away from its dot, until it is
+  // clear, and a thin leader from the dot to the words keeps the two
+  // together. The dot never moves: its radius is the season's length.
+  // Run after the fonts are in, and again when the labels on show change
+  // (In season, the kind switch) or the wheel is refitted. Not on a phone
+  // (below 700px), where the names are too small to read anyway, the list
+  // under the wheel does the reading, and the pushed-out labels would
+  // only shrink the wheel.
+  var SPREAD_STEP = 4, SPREAD_TRIES = 150;
+  var phoneWheel = matchMedia("(max-width: 43.74rem)");
+  function overlaps(a, b) {
+    return a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
+  }
+  function spreadLabels(svg) {
+    var placed = [];
+    svg.querySelectorAll("a.label").forEach(function (a) {
+      var text = a.querySelector("text"), dot = a.querySelector(".dot");
+      var leader = a.querySelector(".label-leader");
+      if (leader) leader.remove();
+      if (text.dataset.x0 === undefined) text.dataset.x0 = text.getAttribute("x");
+      text.setAttribute("x", text.dataset.x0);
+      if (text.style.display === "none" || phoneWheel.matches) return;
+      var outward = text.getAttribute("text-anchor") === "end" ? -1 : 1;
+      var x = +text.dataset.x0, moved = 0, tries = 0;
+      var rect = text.getBoundingClientRect();
+      while (tries++ < SPREAD_TRIES && placed.some(function (r) { return overlaps(r, rect); })) {
+        x += outward * SPREAD_STEP; moved += SPREAD_STEP;
+        text.setAttribute("x", x);
+        rect = text.getBoundingClientRect();
+      }
+      if (moved && dot) {
+        var cx = +dot.getAttribute("cx"), r = +dot.getAttribute("r"), y = dot.getAttribute("cy");
+        leader = document.createElementNS(SVG_NS, "line");
+        leader.setAttribute("class", "label-leader");
+        leader.setAttribute("x1", cx + outward * (r + 2)); leader.setAttribute("y1", y);
+        leader.setAttribute("x2", x - outward * 2); leader.setAttribute("y2", y);
+        text.parentNode.insertBefore(leader, text);
+      }
+      placed.push(rect);
+    });
+  }
+
   function fitDials() {
     var svgs = document.querySelectorAll("figure.dial > svg");
     if (!svgs.length) return;
+    // The labels are spread, the viewBox fitted to the result, and both
+    // done once more, since the first spread was measured on the wheel
+    // before it was fitted.
     function fit(svg) {
       if (svg.dataset.fitted || !svg.getClientRects().length) return;
+      spreadLabels(svg);
+      if (!place(svg)) return;
+      spreadLabels(svg);
+      place(svg);
+      svg.dataset.fitted = "1";
+    }
+    function place(svg) {
       var hidden = Array.prototype.filter.call(svg.querySelectorAll("a.label text"), function (t) { return t.style.display === "none"; });
       var moving = Array.prototype.filter.call(svg.querySelectorAll(".tt-line, .tt-knob, .tt-today"), function (t) { return t.style.display !== "none"; });
       hidden.forEach(function (t) { t.style.display = ""; });
@@ -347,7 +406,7 @@
       var b = svg.getBBox();
       hidden.forEach(function (t) { t.style.display = "none"; });
       moving.forEach(function (t) { t.style.display = ""; });
-      if (!b.width) return;
+      if (!b.width) return false;
       var x0 = b.x, y0 = b.y, x1 = b.x + b.width, y1 = b.y + b.height;
       if (svg.dataset.rim && svg.closest("[data-tt]")) {
         var C = +svg.dataset.c, R = +svg.dataset.rim;
@@ -367,16 +426,21 @@
       var pad = Math.max(6, m * W / (S - 2 * m));
       svg.setAttribute("viewBox", [x0 - pad, y0 - pad, W + 2 * pad, y1 - y0 + 2 * pad].join(" "));
       svg.parentElement.style.setProperty("--dial-inset", ((b.y - (y0 - pad)) * S / (W + 2 * pad)).toFixed(1) + "px");
-      svg.dataset.fitted = "1";
+      return true;
     }
     function all() { svgs.forEach(fit); }
+    function again() { svgs.forEach(function (s) { delete s.dataset.fitted; }); all(); }
     var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     ready.then(all);
+    // Once everything has loaded, the labels are spread and the wheel
+    // fitted once more: a font that arrived after the first pass changes
+    // every word's width.
+    window.addEventListener("load", again);
     document.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener("change", all); });
     var timer = null;
     window.addEventListener("resize", function () {
       clearTimeout(timer);
-      timer = setTimeout(function () { svgs.forEach(function (s) { delete s.dataset.fitted; }); all(); }, 120);
+      timer = setTimeout(again, 120);
     });
   }
 
@@ -476,15 +540,24 @@
   // one variety draws it: _includes/season-wheel.html's R 140 and R0 78,
   // less its 3 units of gap; it keeps its shape but is drawn in one
   // colour (`colour`), shades and all. For a whole food (ring -1) it is
-  // the dial as it is. The page is fetched once per food and kept.
-  // Resolves to a span.wheel for markWheel, or null.
-  var dialPages = {};
+  // the dial as it is. It is cut from the food's standalone dial,
+  // /wheel/<slug>.svg (the same include as the page's), fetched once per
+  // food and kept; the standalone's own stylesheet and script, there for
+  // when the file is opened by itself, are dropped so the page's styles
+  // colour it. Resolves to a span.wheel for markWheel, or null.
+  var dials = {};
   var RING_THICK = 140 - 78 - 3, RING_MID = 140 - RING_THICK / 2;
   function miniDial(slug, ring, colour) {
-    if (!dialPages[slug]) dialPages[slug] = fetch(foodUrl(slug)).then(function (r) { return r.text(); }).then(function (page) {
-      return new DOMParser().parseFromString(page, "text/html").querySelector("figure.wheel svg");
+    if (!dials[slug]) dials[slug] = fetch(BASE + "wheel/" + slug + ".svg").then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(function (text) {
+      var svg = new DOMParser().parseFromString(text, "image/svg+xml").documentElement;
+      if (!svg || svg.localName !== "svg") return null;
+      svg.querySelectorAll("style, script").forEach(function (n) { n.remove(); });
+      return svg;
     }).catch(function () { return null; });
-    return dialPages[slug].then(function (svg) {
+    return dials[slug].then(function (svg) {
       if (!svg) return null;
       var copy = document.importNode(svg, true);
       copy.setAttribute("viewBox", "30 30 300 300");
@@ -583,7 +656,12 @@
     var food = JSON.parse(article.dataset.food);
     var quotes = JSON.parse(article.dataset.quotes || "{}");
     var fv = V.foodVerdict(food, WEEK);
-    document.getElementById("verdict").textContent = fv.verdict + ".";
+    var word = document.getElementById("verdict");
+    word.textContent = fv.verdict + ".";
+    // The word's width in em sizes it to the line in CSS (word_em.yml);
+    // the day's verdict may not be the baked one.
+    var wordEm = JSON.parse(article.dataset.wordEm || "{}")[fv.verdict];
+    if (wordEm) word.style.setProperty("--word-em", wordEm);
     document.getElementById("date-line").textContent = V.dateLine(fv.whole, YEAR, TODAY);
     // Each ring's own phrase, for the visitor's day.
     document.querySelectorAll("#ring-list li[data-ring]").forEach(function (li) {
@@ -1088,9 +1166,8 @@
         suggest.hidden = !close.length;
       }
     }
-    // The answer's dial is its food page's own, cut to the one ring whose
-    // variety gave the verdict; the fetch also warms the page the answer
-    // leads to. Its box holds the space while it comes.
+    // The answer's dial is its food's own, cut to the one ring whose
+    // variety gave the verdict. Its box holds the space while it comes.
     var dialBox = one.querySelector(".one-dial"), dialKey = null;
     function dialFor(slug, ring, colour) {
       var key = slug + "/" + ring + "/" + colour;
@@ -1392,7 +1469,7 @@
   window.Site = {
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
-    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest,
+    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest, spreadLabels: spreadLabels,
     headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText, setDate: setDate
   };
 })();

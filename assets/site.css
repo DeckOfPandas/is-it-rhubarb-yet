@@ -297,6 +297,10 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .switch .icon { width: 15px; height: 15px; stroke-width: 1.6; }
 .theme { display: none; }
 .js .theme { display: inline-flex; margin: 0; }
+/* A control that does nothing without JavaScript (the calendar's order
+   switch) appears only with it. */
+.needs-js { display: none; }
+.js .needs-js { display: inline-flex; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
@@ -589,6 +593,18 @@ article.food { padding-top: var(--sp-1); }
   letter-spacing: var(--track-large); text-transform: uppercase; color: var(--food); white-space: nowrap;
   padding-top: 0.08em;
 }
+/* On a food page the verdict fills its line from the start: the line is a
+   container and the word's size is its width over the word's width in em
+   (--word-em, from _data/word_em.yml, set by the layout and by site.js
+   when the day's verdict differs), capped at nine tenths of the line for
+   a short word. So the word is its final size before the fonts arrive
+   and nothing under it moves; site.js only shrinks it for the date-line
+   rule. A browser without container units keeps the display clamp and
+   site.js's fit. */
+h1.verdict { container-type: inline-size; }
+@supports (font-size: 1cqw) {
+  h1.verdict > .verdict-word { font-size: min(calc(100cqw / var(--word-em, 2.5)), 90cqw); }
+}
 article.never { --food: var(--never); }
 .verdict + .date-line { margin-top: var(--sp-3); }
 .verdict + .date-line + .quote { margin-top: var(--sp-4); }
@@ -772,6 +788,9 @@ article.never { --food: var(--never); }
    is at full strength. */
 .dial .season.is-on { opacity: 1; }
 .dial .label .dot { fill: var(--c); }
+/* A label pushed clear of its neighbours keeps a thin leader to its dot
+   (site.js draws it). */
+.dial .label-leader { stroke: var(--muted); stroke-width: 0.8; opacity: 0.7; }
 .dial .label:hover text { font-weight: 700; }
 .dial .guide { stroke: var(--rule); stroke-dasharray: 2 4; }
 .dial .guide-label { font-size: 9px; fill: var(--muted); letter-spacing: 0.04em; }
@@ -792,7 +811,7 @@ article.never { --food: var(--never); }
    none. The line glides between steps unless motion is reduced, and
    never while it is being dragged. */
 .tt-stage { display: flex; flex-direction: column; gap: var(--sp-4); }
-.tt-stage > .ordered > .chart { margin-top: 0; margin-bottom: 0; }
+.tt-stage > .ordered > .chart, .tt-stage > .chart-stage > .chart { margin-top: 0; margin-bottom: 0; }
 .tt-controls { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
 .tt-controls .switch { margin: 0; }
 .tt-time { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--sp-3); align-self: stretch; }

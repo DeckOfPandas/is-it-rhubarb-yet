@@ -5,13 +5,14 @@ permalink: /calendar/
 charts: true
 ---
 {%- comment -%}
-Three copies of the chart, one per ordering, built at build time. The
-order switch, the first row of the controls, is a radio group; CSS shows
-the chart whose radio is checked, so it works without JavaScript.
+One chart, baked by start. The order switch, the first row of the
+controls, is a radio group that assets/charts.js answers by reordering
+the chart's rows in place (By family, A to Z); it needs JavaScript, so
+it is shown only with it, and a no-JS visitor gets the chart by start.
 site.js draws the today line, keeps the sticky month header level with
-the chart and opens it at today; assets/charts.js adds the time travel,
-the zoom and the food popover, and the list of foods for the chosen
-time under the chart. Every visit opens by start: the choice is not
+the chart and opens it at today; charts.js adds the time travel, the
+zoom and the food popover, and the list of foods for the chosen time
+under the chart. Every visit opens by start: the choice is not
 remembered.
 {%- endcomment -%}
 <header class="page-head">
@@ -25,10 +26,8 @@ remembered.
 <div class="tt-stage">
 {% include time-controls.html %}
 
-<div class="ordered">
-  <figure class="chart by-start">{% include calendar.html order="start" id="cal-start" %}</figure>
-  <figure class="chart by-group">{% include calendar.html order="group" id="cal-group" %}</figure>
-  <figure class="chart by-alpha">{% include calendar.html order="alpha" id="cal-alpha" %}</figure>
+<div class="chart-stage">
+  <figure class="chart by-start">{% include calendar.html order="start" id="cal" %}</figure>
 </div>
 </div>
 

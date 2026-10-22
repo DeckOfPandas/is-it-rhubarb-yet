@@ -161,7 +161,7 @@
       var handle = makeHandle(el("div", "tt-handle"));
       rail.appendChild(handle);
       head.insertBefore(rail, head.firstChild);
-      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail,
+      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail, header: header,
         x0: x0, cw: cw, cw0: cw, items: items, steps: steps, lines: lines, tick: tick, handle: handle, x: x0,
         hits: cells.querySelectorAll(".row-hit"), monthLabels: months.querySelectorAll(".month-label") };
       rail.addEventListener("click", function (e) {
@@ -224,8 +224,13 @@
       } else if (it.kind === "line") {
         it.el.setAttribute("x1", xa.toFixed(2)); it.el.setAttribute("x2", xa.toFixed(2));
       } else {
+        // A month squeezed by the magnifier keeps its initial while it has
+        // room for a letter, and goes only when it has not.
         it.el.setAttribute("x", (xa + 4).toFixed(2));
-        it.el.style.visibility = X(it.b) - xa < 30 ? "hidden" : "";
+        if (it.el.dataset.full === undefined) it.el.dataset.full = it.el.textContent;
+        var room = X(it.b) - xa;
+        it.el.textContent = room < 30 ? it.el.dataset.full.charAt(0) : it.el.dataset.full;
+        it.el.style.visibility = room < 12 ? "hidden" : "";
       }
     });
     // A step's tick shows only where the magnifier has spread its third
@@ -273,21 +278,47 @@
   }
   // On a phone the names are the small size, a row's short name where it
   // has one, and their column is exactly as wide as the longest name, 16px
-  // from the screen's edge and 8px from the weeks: the labels' viewBox
-  // starts that far left of the weeks, and the corner over them matches.
-  // Wider, the column is x0 as drawn. The charts share their rows, so the
-  // one on show is measured for all three. The weeks are then fitted to
-  // what is left.
-  var nameW = 0, EDGE = 16;
+  // from the screen's edge and 8px from the weeks, but never more than
+  // two fifths of the screen: a name that will not fit loses its variety
+  // and then its last letters to an ellipsis (the popover, the lists and
+  // the spoken name keep the full name). The labels' viewBox starts that
+  // far left of the weeks, and the corner over them matches. Wider, the
+  // column is x0 as drawn. The charts share their rows, so the one on
+  // show is measured, and cut, for all three. The weeks are then fitted
+  // to what is left.
+  var nameW = 0, EDGE = 16, NAME_SHARE = 0.4;
+  function cutName(t, maxW) {
+    var ink = t.querySelector(".row-ink"), variety = t.querySelector(".row-variety");
+    if (!ink) return;
+    if (ink.dataset.full === undefined) ink.dataset.full = ink.textContent;
+    ink.textContent = ink.dataset.full;
+    if (variety) variety.style.display = "";
+    if (t.getBBox().width <= maxW) return;
+    if (variety) variety.style.display = "none";
+    var name = ink.dataset.full;
+    while (name.length > 3 && t.getBBox().width > maxW) {
+      name = name.slice(0, -1);
+      ink.textContent = name.replace(/\s+$/, "") + "…";
+    }
+  }
   function fitNames() {
     if (!cals.length) return;
     if (narrow.matches) {
-      var widest = 0;
+      var widest = 0, shown = [];
       cals.forEach(function (c) {
         c.labels.querySelectorAll(".row-label").forEach(function (t) {
-          if (t.getClientRects().length) widest = Math.max(widest, t.getBBox().width);
+          if (!t.getClientRects().length) return;
+          shown.push(t);
+          cutName(t, Infinity);
+          widest = Math.max(widest, t.getBBox().width);
         });
       });
+      var room = cals[0].cal.parentElement.getBoundingClientRect().width;
+      var cap = room ? Math.floor(room * NAME_SHARE) - EDGE - 8 : Infinity;
+      if (widest > cap) {
+        shown.forEach(function (t) { cutName(t, cap); });
+        widest = cap;
+      }
       if (widest) nameW = EDGE + Math.ceil(widest) + 8;
     }
     var w = narrow.matches && nameW ? nameW : 0;
@@ -303,6 +334,70 @@
     });
     fitWeeks();
     cals.forEach(function (c) { if (c.ready) layoutCal(c); else placeHandle(c); });
+  }
+
+  // --- One chart, three orders -----------------------------------------------------
+  // The calendar is baked once, by start, and By family and A to Z reorder
+  // its rows in place: each row's two parts, its name and its weeks, are
+  // moved down or up by a translate, and a family's label and gap are
+  // added above its rows. The keys are _includes/calendar.html's: by
+  // start, a ring's first in-season week, then the food's name, then the
+  // ring's place in the data; by family, the family's place, the food's
+  // first in-season week over all its rings, its name, the ring's place;
+  // A to Z, the name then the ring's label. Needs foods.json, so the
+  // baked order stands until it is in, and without JavaScript the switch
+  // does not appear.
+  var ROW_H = 22, GROUP_GAP = 28;
+  function firstIn(weeks) {
+    var first = 99;
+    (weeks || []).forEach(function (r) { if (r[2] === "in" && r[0] < first) first = r[0]; });
+    return first;
+  }
+  function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
+  function orderRows(order) {
+    if (!foods || !cals.length) return;
+    var c = cals[0];
+    var rows = Array.prototype.map.call(c.labels.querySelectorAll("a.row"), function (a) {
+      var f = bySlug[a.dataset.slug], vi = +a.dataset.variety, v = f.varieties[vi];
+      var foodFirst = 99;
+      f.varieties.forEach(function (x) { foodFirst = Math.min(foodFirst, firstIn(x.weeks)); });
+      var gi = 0;
+      groups.forEach(function (g, i) { if (g.key === f.group) gi = i; });
+      return {
+        a: a, cells: c.cells.querySelector('a.row[data-row="' + a.dataset.row + '"]'),
+        y0: +a.querySelector(".row-hit").getAttribute("y"),
+        first: firstIn(v.weeks), foodFirst: foodFirst, gi: gi, group: f.group,
+        name: f.name, label: V.varietyLabel(v), vi: vi
+      };
+    });
+    rows.sort(function (p, q) {
+      if (order === "group") return cmp(p.gi, q.gi) || cmp(p.foodFirst, q.foodFirst) || cmp(p.name, q.name) || cmp(p.vi, q.vi);
+      if (order === "alpha") return cmp(p.name.toLowerCase(), q.name.toLowerCase()) || cmp(p.label.toLowerCase(), q.label.toLowerCase()) || cmp(p.vi, q.vi);
+      return cmp(p.first, q.first) || cmp(p.name, q.name) || cmp(p.vi, q.vi);
+    });
+    c.labels.querySelectorAll(".group-label").forEach(function (t) { t.remove(); });
+    var y = c.header, lastGroup = null;
+    rows.forEach(function (r) {
+      if (order === "group" && r.group !== lastGroup) {
+        lastGroup = r.group;
+        y += GROUP_GAP;
+        var t = svgEl("text", "group-label", { x: 0, y: y - 9, "aria-hidden": "true" });
+        t.textContent = groups[r.gi].name;
+        c.labels.appendChild(t);
+      }
+      var dy = y - r.y0, move = dy ? "translate(0 " + dy + ")" : "";
+      r.a.setAttribute("transform", move);
+      r.cells.setAttribute("transform", move);
+      y += ROW_H;
+    });
+    // The two scrolling SVGs are as tall as the rows now laid out.
+    var body = y + 10 - c.header;
+    [c.labels, c.cells].forEach(function (svg) {
+      var vb = svg.getAttribute("viewBox").split(" ");
+      vb[3] = body;
+      svg.setAttribute("viewBox", vb.join(" "));
+      svg.setAttribute("height", body);
+    });
   }
 
   // --- The wheel -----------------------------------------------------------------
@@ -367,12 +462,20 @@
   }
   function norm(a) { return ((a % 360) + 360) % 360; }
   function layoutDial(d) {
-    var C = d.C, year = litYear && litYear.checked;
+    var C = d.C, year = litYear && litYear.checked, shown = "";
     d.labels.forEach(function (l) {
       var on = year || !inSeason || !!inSeason[l.slug];
       l.text.style.display = on ? "" : "none";
+      shown += on ? "1" : "0";
       if (l.arc) l.arc.classList.toggle("is-on", year || !!(inSeason && inSeason[l.slug]));
     });
+    // The labels on show keep clear of each other; placed again only when
+    // the set on show changes, not on every move of the line, and only
+    // once the fonts are in, since their widths decide it.
+    if (shown !== d.shown && d.svg.getClientRects().length) {
+      d.shown = shown;
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { S.spreadLabels(d.svg); });
+    }
     d.tick.setAttribute("transform", "rotate(" + (NOW_T * 360 / 52).toFixed(2) + " " + C + " " + C + ")");
     var L = tOf(state.at) * 360 / 52;
     if (d.last !== null) L += 360 * Math.round((d.last - L) / 360);
@@ -549,7 +652,7 @@
   function showJump() {
     var docked = !!(pop && pop.classList.contains("is-docked"));
     jump.hidden = !foods || !chartSeen || headSeen || docked;
-    var chart = root.querySelector(".ordered");
+    var chart = root.querySelector(".ordered, .chart-stage");
     up.hidden = !jump.hidden || docked || chart.getBoundingClientRect().bottom > S.headerHeight();
   }
   function toList() {
@@ -856,7 +959,11 @@
   document.addEventListener("DOMContentLoaded", function () {
     if (WHEEL) initWheel(); else initCalendar();
     document.querySelectorAll('input[name="order"], input[name="kind"]').forEach(function (r) {
-      r.addEventListener("change", function () { fitNames(); draw(); });
+      r.addEventListener("change", function () {
+        if (r.name === "order") orderRows(r.value);
+        fitNames();
+        draw();
+      });
     });
     var controls = document.getElementById("tt-controls");
     document.getElementById("tt-time").hidden = false;
@@ -877,7 +984,7 @@
       new IntersectionObserver(function (entries) {
         chartSeen = entries.some(function (e) { return e.isIntersecting; });
         showJump();
-      }).observe(root.querySelector(".ordered"));
+      }).observe(root.querySelector(".ordered, .chart-stage"));
       headWatch = new IntersectionObserver(function (entries) {
         headSeen = entries[0].isIntersecting;
         showJump();
@@ -906,6 +1013,8 @@
       foods = all;
       all.forEach(function (f) { bySlug[f.slug] = f; });
       nameParts();
+      var order = document.querySelector('input[name="order"]:checked');
+      if (order && order.value !== "start") { orderRows(order.value); fitNames(); }
       draw();
     });
   });

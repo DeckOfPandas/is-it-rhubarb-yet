@@ -39,6 +39,16 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 - **Link checks go through `scripts/check-link.sh`**, since a bare curl
   allow rule cannot be made narrow (a trailing `*` lets a second `-o`
   write anywhere).
+- **One baked calendar, reordered by script.** Three baked copies, so
+  the order switch could work by CSS alone, made the page 759 KB and
+  over 10,000 SVG nodes; the no-JS visitor paid most for a switch they
+  rarely use. The chart is baked by start and `charts.js` reorders it in
+  place; without JavaScript the switch is not shown.
+- **No tooltips on the calendar's cells.** Every cell carried a
+  `<title>` ("Parsley: going out, weeks 44 to 48"), a native hover
+  tooltip with week numbers the site shows nowhere else, against the
+  rule that nothing is behind hover; the row's spoken name says the
+  season.
 - **"Cultivated mushrooms"**, not "Mushrooms (cultivated)": the name
   goes mid-sentence everywhere ("Is it … yet?", "Add … to your
   calendar", the title), where a bracket read badly. The slug stays

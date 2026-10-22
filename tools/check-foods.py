@@ -1,5 +1,5 @@
 """Validate the data files: _data/foods.yml, groups.yml, never.yml, quotes.yml,
-sources.yml and the _foods/, _remind/ and _never/ stubs.
+sources.yml and the _foods/, _remind/, _wheels/ and _never/ stubs.
 
 usage: python3 -I tools/check-foods.py
 
@@ -34,6 +34,7 @@ QUOTES_FILE = ROOT / "_data" / "quotes.yml"
 SOURCES_FILE = ROOT / "_data" / "sources.yml"
 STUBS = ROOT / "_foods"
 REMIND = ROOT / "_remind"
+WHEELS = ROOT / "_wheels"
 NEVER_STUBS = ROOT / "_never"
 # The quotation pools, one per verdict; YES-ISH's is "yesish".
 VERDICTS = {"yes", "yesish", "nearly", "just", "no", "never"}
@@ -222,6 +223,7 @@ def main() -> int:
     aliases = {}
     stubs = {p.stem for p in STUBS.glob("*.md")}
     reminders = {p.stem for p in REMIND.glob("*.ics")}
+    wheels = {p.stem for p in WHEELS.glob("*.svg")}
     never_stubs = {p.stem for p in NEVER_STUBS.glob("*.md")} if NEVER_STUBS.exists() else set()
 
     for f in foods:
@@ -254,6 +256,8 @@ def main() -> int:
             problems.append(f"{where}: no _foods/{slug}.md stub")
         if slug not in reminders:
             problems.append(f"{where}: no _remind/{slug}.ics stub")
+        if slug not in wheels:
+            problems.append(f"{where}: no _wheels/{slug}.svg stub")
         if not f.get("varieties"):
             problems.append(f"{where}: no varieties")
         variety_colours = []
@@ -324,6 +328,8 @@ def main() -> int:
         problems.append(f"_foods/{extra}.md: no such food in the data file")
     for extra in sorted(reminders - slugs):
         problems.append(f"_remind/{extra}.ics: no such food in the data file")
+    for extra in sorted(wheels - slugs):
+        problems.append(f"_wheels/{extra}.svg: no such food in the data file")
 
     # Never-foods: their own slugs and aliases, clashing with nothing.
     never_slugs = set()

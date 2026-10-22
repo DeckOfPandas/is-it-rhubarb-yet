@@ -1,8 +1,9 @@
 {%- comment -%}
 The controls over the calendar and the wheel, one component on both
 pages: a column of rows 24px apart, in the same order on each. (1) The
-calendar's order switch or the wheel's kind switch, which work without
-JavaScript. (2) TODAY and the season buttons, and (3) play and the other
+calendar's order switch (which needs JavaScript, since the chart is
+baked once and reordered in place) or the wheel's kind switch (which
+works without it). (2) TODAY and the season buttons, and (3) play and the other
 switches (the calendar's Whole year · Magnify; the wheel's Arcs · Dots
 and In season · Whole year): rows 2 and 3 share a wrapping row, so a
 wide screen puts row 3 at the right of row 2, and are hidden until
@@ -22,7 +23,10 @@ copied from. Expects: wheel (true on the wheel).
     <input type="radio" name="kind" id="kind-meat" value="meat"><label for="kind-meat">Meat</label>
   </fieldset>
   {%- else %}
-  <fieldset class="switch">
+  {%- comment -%} The calendar is baked by start and reordered by
+     charts.js, so its switch needs JavaScript and appears only with it.
+     {%- endcomment %}
+  <fieldset class="switch needs-js">
     <legend>Order</legend>
     <input type="radio" name="order" id="order-start" value="start" checked><label for="order-start">By start</label>
     <input type="radio" name="order" id="order-group" value="group"><label for="order-group">By family</label>

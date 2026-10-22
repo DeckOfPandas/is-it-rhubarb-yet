@@ -23,10 +23,13 @@ to this food). The whole page keys off --food, the food's colour.
   "{{ pool[0] }}": {{ both | jsonify }}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%} }{%- endcapture -%}
 
-<article class="food" style="--food: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ quotes_json | escape }}'>
+<article class="food" style="--food: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ quotes_json | escape }}' data-word-em='{{ site.data.word_em | jsonify | escape }}'>
   <p class="ask">Is it <span class="ask-name">{{ food.name | downcase }}</span> yet?</p>
 
-  <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
+  {%- comment -%} The verdict's width in em (word_em.yml) sizes it to the
+     line in CSS; site.js resets it when the visitor's verdict differs.
+     {%- endcomment -%}
+  <h1 class="verdict"><span class="verdict-word" id="verdict" style="--word-em: {{ site.data.word_em[b.verdict] | default: 2.5 }}">{{ b.verdict | default: "…" }}.</span></h1>
 
   <div class="food-body">
   <p class="date-line" id="date-line">{{ b.line }}</p>
