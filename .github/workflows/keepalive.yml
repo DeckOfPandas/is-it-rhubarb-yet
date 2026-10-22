@@ -1,0 +1,28 @@
+# GitHub pauses every scheduled workflow in a public repository after 60
+# days without a commit, and the daily deploy and the stale check are both
+# schedules. This one runs weekly and, once the last commit is more than
+# 45 days old, pushes an empty commit to main, which resets that clock for
+# every schedule, itself included. It is the one thing allowed to commit
+# on main without a pull request. A push by the workflow's own token does
+# not start the deploy workflow; the daily schedule carries on as before.
+name: Keep the schedules alive
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  touch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh tools/keepalive.sh 45
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com

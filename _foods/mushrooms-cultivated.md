@@ -1,4 +1,4 @@
 ---
 slug: mushrooms-cultivated
-title: "Is it mushrooms (cultivated) yet?"
+title: "Is it cultivated mushrooms yet?"
 ---

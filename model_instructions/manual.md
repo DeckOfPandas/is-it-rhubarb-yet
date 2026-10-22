@@ -66,8 +66,10 @@ focused; a new shared component goes there too.
 for the build day. `stale-check.yml` at 07:00 UTC reads the live
 `built.json` and opens one "Stale build" issue when the baked day is over
 two days old. Both are schedules, which GitHub pauses after 60 days
-without a commit; the as-of date in every footer is the last line of
-defence.
+without a commit, so `keepalive.yml` runs weekly and pushes an empty
+commit to `main` once the last commit is 45 days old (the one thing
+that commits on `main` without a pull request); the as-of date in every
+footer is the last line of defence.
 
 ## Where things live
 

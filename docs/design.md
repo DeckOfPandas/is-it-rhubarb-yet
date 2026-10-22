@@ -180,11 +180,10 @@ the wheel's scale. The week arrows are 44px boxes; a ring-list row is
   capitals, the faded completion, the word and underline in the food's
   colour on one tier 1–2 match, a long word shrinking to fit. It matches
   against `search.json` and never answers in place: it goes to `/?q=…`
-  when typing pauses 0.3s on one good match, or 0.8s on two or more
-  letters with several matches or none, and at once on Enter (a phone's
-  Go), which with nothing typed goes to home as it is. Leaving the field
-  cancels a pending search. One Escape puts RHUBARB back and leaves the
-  field. Leaving for home, its slot takes the hero's view-transition
+  on Enter (a phone's Go), which with nothing typed goes to home as it
+  is, and never on a timer, so a slow typist is not carried off
+  mid-word. Typing only colours the word and offers a completion. One
+  Escape puts RHUBARB back and leaves the field. Leaving for home, its slot takes the hero's view-transition
   name (`search-word`), so the word flies into the hero (not with reduced
   motion), and on a wide screen home keeps the focus in the hero with the
   caret at the end (`sessionStorage` carries that); a phone is left
@@ -248,9 +247,10 @@ needs a food uses one of these as it is.
   share one width, `--answer-w` (40rem). Below about 420px of card width
   the dial is 72px at the top right beside the question and verdict, and
   the date line and action run the full width under them. A never-food's
-  card and the no-match card (`.is-plain`) are question, verdict and
-  line only, padded as any card, no link and no dial; the never-food's in
-  ghost grey, nothing found in ink.
+  card (`.is-plain`) is question, verdict and line in ghost grey, no dial
+  and no keycap, and one action, "Tell me why →", to its page, which
+  carries the quotation and the ways on. The no-match card
+  (`.is-unknown`) is the same in ink with no action at all.
 - **Page** (`/<slug>/`): everything, below.
 
 ### The verdict word
@@ -272,8 +272,7 @@ The counter note (`.buy`) is `small` in full ink behind the same bar.
 ### Footer
 
 Every word is caps, muted: SOURCES · CALENDAR FEED (to the feed's
-section on Source data) · JSON; SUSTAINABILITY AND CARBON (its own
-line); ABOUT; the theme switch; the GitHub mark (2.2rem, muted ink, pink
+section on Source data) · JSON; ABOUT; the theme switch; the GitHub mark (2.2rem, muted ink, pink
 on hover or focus); the licences (CODE: MIT · DATA AND WRITING: CC BY 4.0
 · © year) and the as-of date, fainter; the signature hearts, the way to
 About, which do not change on hover. Every text link is underlined in
@@ -482,8 +481,8 @@ hidden, since the hero is a form.
 
 ### Other pages
 
-- `/sustainability-and-carbon/`: a placeholder, `noindex`, from the
-  footer.
+- `/sustainability-and-carbon/`: a placeholder, `noindex`, linked from
+  nowhere until it has content.
 - `/kitchen-sink/`: every shared component from its real include or
   classes, at rest, hovered and focused; `noindex`, linked from nowhere.
   The forced states are the stylesheet's own: a script on the page copies

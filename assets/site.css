@@ -536,8 +536,11 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .one-dial .wheel { display: block; width: 100%; margin: 0; }
 .one-dial .month, .one-dial .today-label { display: none; }
 .wheel svg.mono .blend { stroke: var(--c); }
-.one-result.is-plain { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text"; }
-.one-result.is-plain .one-more, .one-result.is-plain .one-hint, .one-result.is-plain .one-dial { display: none; }
+/* A plain card keeps its action ("Tell me why →" on a never-food's) but
+   not the keycap or the dial; nothing found has no action at all. */
+.one-result.is-plain { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text" "more"; }
+.one-result.is-plain .one-hint, .one-result.is-plain .one-dial, .one-result.is-unknown .one-more { display: none; }
+.one-result.is-unknown { grid-template-areas: "text"; }
 /* On home the hero asks the question, so the answer leaves it out, unless
    the hero's word is not the food's name (an alias, a later word, a
    variety): then the card asks it in the food's own name (.asks). */

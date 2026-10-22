@@ -154,7 +154,7 @@ test("basil is JUST: a just-about tail to 28 October", () => {
   assert.equal(fv.verdict, "JUST");
   assert.equal(fv.whole.tail, true);
   assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-10-28");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "For another week or two.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Just about, for another week or two.");
 });
 
 test("asparagus is NO: first ones in April, properly in May", () => {
@@ -199,7 +199,7 @@ test("the combined timeline takes each week's best state across the rings", () =
     varieties: [
       { name: "A", weeks: [[10, 20, "in"], [21, 30, "store"]] },
       { name: "B", weeks: [[15, 25, "avail"], [40, 45, "in"]] },
-      { name: "Glasshouse", ring: "method", weeks: [[1, 52, "in"]] }
+      { name: "Glasshouse", ring: "method", method: "glasshouse", weeks: [[1, 52, "in"]] }
     ]
   };
   const t = V.timelineOf(food).timeline;
@@ -241,7 +241,7 @@ test("every food, every week: the order holds and the storage words are right", 
       if (s === "" && !["NEARLY", "NO"].includes(fv.verdict)) wrong.push(`${at}: nothing but ${fv.verdict}`);
       if (fv.verdict === "YES-ISH" && !/^(Available from storage|Glasshouse-grown)/.test(line)) wrong.push(`${at}: ${line}`);
       if (/from store\b/.test(line)) wrong.push(`${at}: says "from store": ${line}`);
-      if (/, then /.test(line) && !/, then (available from storage|glasshouse-grown)/.test(line)) wrong.push(`${at}: ${line}`);
+      if (/, then /.test(line) && !/, then (available from storage|glasshouse-grown|just about)/.test(line)) wrong.push(`${at}: ${line}`);
       if (/\d/.test(line)) wrong.push(`${at}: a number in ${line}`);
     }
   }
@@ -265,15 +265,17 @@ test("glasshouse: YES-ISH alone, for now when outdoor follows", () => {
   assert.equal(fv.verdict, "YES-ISH");
   assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Glasshouse-grown for now; outdoor from early July.");
   const food = { name: "T", slug: "t", colour: "#000000", varieties: [
-    { name: "Glasshouse", ring: "method", weeks: [[1, 47, "in"]] }, { name: "Outdoor", weeks: [[20, 40, "in"]] }] };
+    { name: "Glasshouse", ring: "method", method: "glasshouse", weeks: [[1, 47, "in"]] }, { name: "Outdoor", weeks: [[20, 40, "in"]] }] };
   assert.equal(V.dateLine(V.foodVerdict(food, WEEK).whole, YEAR, TODAY), "Glasshouse-grown until late November.");
 });
 
 test("a fish answers for all its coasts together", () => {
   const fv = verdictOf("cod");
   assert.equal(fv.verdict, "YES");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Until late January.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "All year.", "cod is landed somewhere all year");
   assert.equal(verdictOf("haddock").whole.allYear, true, "an all-year coast makes the fish all year");
+  const sw = fv.varieties.find((r) => r.name === "South West");
+  assert.equal(V.phrase(sw, YEAR, TODAY), "For another week or two", "its Cornish ring still has its own season, to week 43");
 });
 
 test("rings run from the longest season to the shortest, ties in data order", () => {
@@ -300,7 +302,19 @@ test("tomatoes are JUST until late November: week 48 ends on 2 December but its 
   const fv = verdictOf("tomatoes");
   assert.equal(fv.verdict, "JUST");
   assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-12-02");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Until late November.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Just about, until late November.", "a tail is just about, not a last fortnight");
+});
+
+test("a soft end says so once it is near: at its best, then just about", () => {
+  // In season to week 43, just about to week 48: a YES that becomes a
+  // tail JUST, which the sentence admits in its last weeks only.
+  const soft = [[23, 43, "in"], [44, 48, "avail"]];
+  assert.equal(say(soft, on(2026, 9, 10)), "Until late October", "far off, as before");
+  assert.equal(say(soft, on(2026, 10, 18)), "At its best for another week or two, then just about until late November");
+  assert.equal(say(soft, on(2026, 10, 25)), "At its best for a few more days, then just about until late November");
+  assert.equal(say(soft, on(2026, 11, 5)), "Just about, for another two or three weeks", "the tail itself");
+  assert.equal(say(soft, on(2026, 11, 28)), "Just about, for a few more days");
+  assert.equal(say([[23, 43, "in"]], on(2026, 10, 25)), "For a few more days", "a hard stop is the JUST line");
 });
 
 test("coming in: the phrase coarsens with distance and never names a day", () => {
