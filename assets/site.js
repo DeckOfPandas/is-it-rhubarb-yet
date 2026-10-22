@@ -540,15 +540,24 @@
   // one variety draws it: _includes/season-wheel.html's R 140 and R0 78,
   // less its 3 units of gap; it keeps its shape but is drawn in one
   // colour (`colour`), shades and all. For a whole food (ring -1) it is
-  // the dial as it is. The page is fetched once per food and kept.
-  // Resolves to a span.wheel for markWheel, or null.
-  var dialPages = {};
+  // the dial as it is. It is cut from the food's standalone dial,
+  // /wheel/<slug>.svg (the same include as the page's), fetched once per
+  // food and kept; the standalone's own stylesheet and script, there for
+  // when the file is opened by itself, are dropped so the page's styles
+  // colour it. Resolves to a span.wheel for markWheel, or null.
+  var dials = {};
   var RING_THICK = 140 - 78 - 3, RING_MID = 140 - RING_THICK / 2;
   function miniDial(slug, ring, colour) {
-    if (!dialPages[slug]) dialPages[slug] = fetch(foodUrl(slug)).then(function (r) { return r.text(); }).then(function (page) {
-      return new DOMParser().parseFromString(page, "text/html").querySelector("figure.wheel svg");
+    if (!dials[slug]) dials[slug] = fetch(BASE + "wheel/" + slug + ".svg").then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(function (text) {
+      var svg = new DOMParser().parseFromString(text, "image/svg+xml").documentElement;
+      if (!svg || svg.localName !== "svg") return null;
+      svg.querySelectorAll("style, script").forEach(function (n) { n.remove(); });
+      return svg;
     }).catch(function () { return null; });
-    return dialPages[slug].then(function (svg) {
+    return dials[slug].then(function (svg) {
       if (!svg) return null;
       var copy = document.importNode(svg, true);
       copy.setAttribute("viewBox", "30 30 300 300");
@@ -1157,9 +1166,8 @@
         suggest.hidden = !close.length;
       }
     }
-    // The answer's dial is its food page's own, cut to the one ring whose
-    // variety gave the verdict; the fetch also warms the page the answer
-    // leads to. Its box holds the space while it comes.
+    // The answer's dial is its food's own, cut to the one ring whose
+    // variety gave the verdict. Its box holds the space while it comes.
     var dialBox = one.querySelector(".one-dial"), dialKey = null;
     function dialFor(slug, ring, colour) {
       var key = slug + "/" + ring + "/" + colour;

@@ -239,9 +239,10 @@ needs a food uses one of these as it is.
   and muted, the Enter key as a keycap holding the return mark
   (`_includes/card-hint.html`, `icons/enter.svg`), hidden from screen
   readers. On the right, alone and centred, a 110px miniature of the
-  dial with today's hand: the food page's own `figure.wheel` SVG, fetched
-  from the page (`miniDial` in `site.js`, which also warms the page). A
-  food's card has the whole dial; a named variety's (from search, or a
+  dial with today's hand: the food's standalone dial, `/wheel/<slug>.svg`
+  (the same include as the page's, 10 KB where the page is 50), fetched
+  once per food (`miniDial` in `site.js`), its own stylesheet and script
+  dropped. A food's card has the whole dial; a named variety's (from search, or a
   calendar row of a food of several) is cut to that ring, widened to fill
   the band and drawn all in its colour. The card and a list of matches
   share one width, `--answer-w` (40rem). Below about 420px of card width

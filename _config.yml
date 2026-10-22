@@ -10,10 +10,10 @@ timezone: Europe/London
 # stub only names the slug. _never/ stubs do the same for _data/never.yml,
 # the foods that are never in season here. tools/check-foods.py keeps a
 # food's slug off the page URLs (now, calendar, wheel, about, sources).
-# A stub under _wheels/ (make-foods.py --wheels) becomes a standalone SVG
-# of the food's season wheel. A stub under _remind/ becomes the food's own
-# calendar of season starts, /remind/<slug>.ics; check-foods.py keeps one
-# for every food.
+# A stub under _wheels/ becomes a standalone SVG of the food's season
+# wheel, /wheel/<slug>.svg, which the cards' dials are cut from. A stub
+# under _remind/ becomes the food's own calendar of season starts,
+# /remind/<slug>.ics. check-foods.py keeps one of each for every food.
 collections:
   foods:
     output: true

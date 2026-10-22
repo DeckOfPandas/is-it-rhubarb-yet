@@ -28,6 +28,8 @@ hairline seam, so only the last dash of a run is allowed to end.
 With standalone=true the SVG is a file of its own, for /wheel/<slug>.svg:
 no figure or legend, an xmlns, its own styles in fixed colours, and a
 script that points the hand at today when the file is opened directly.
+The cards' dials are cut from that file (miniDial in site.js), so it is
+parsed as XML: every name is escaped and no attribute is bare.
 {% endcomment %}
 {%- assign food = include.food -%}
 {%- assign C = 180 -%}{%- assign R = 140 -%}{%- assign R0 = 78 -%}
@@ -37,7 +39,7 @@ script that points the hand at today when the file is opened directly.
 {%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
 {%- assign month_names = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," -%}
 {%- unless include.standalone -%}<figure class="wheel">{%- endunless -%}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-label="Season of {{ food.name }} around the year">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-label="Season of {{ food.name | escape }} around the year">
   {%- if include.standalone -%}
   <style>
     .arc { fill: none; }
@@ -67,7 +69,7 @@ script that points the hand at today when the file is opened directly.
     {%- assign outer = band | times: k -%}{%- assign outer = R | minus: outer -%}
     {%- assign mid = thick | divided_by: 2.0 -%}{%- assign mid = outer | minus: mid | round: 2 -%}
     <g class="ring" data-ring="{{ vi }}" fill="none" stroke-width="{{ thick }}" style="--c: {{ c }}">
-      <title>{{ v.name | default: food.name }}</title>
+      <title>{{ v.name | default: food.name | escape }}</title>
       <circle class="arc off" cx="{{ C }}" cy="{{ C }}" r="{{ mid }}" />
       {%- for r in v.weeks -%}
         {%- assign start = r[0] | minus: 1 -%}
@@ -131,7 +133,7 @@ script that points the hand at today when the file is opened directly.
     <text class="month" x="{{ C }}" y="{{ ly }}" text-anchor="middle" dominant-baseline="middle" transform="rotate({{ mid_deg }} {{ C }} {{ C }})">{{ month_names[m] }}</text>
     {%- endif -%}
   {%- endfor -%}
-  <text class="today-label" x="{{ C }}" y="{{ C }}" hidden><tspan x="{{ C }}" dy="-0.5em">today</tspan><tspan class="date" x="{{ C }}" dy="1.3em"></tspan></text>
+  <text class="today-label" x="{{ C }}" y="{{ C }}" hidden="hidden"><tspan x="{{ C }}" dy="-0.5em">today</tspan><tspan class="date" x="{{ C }}" dy="1.3em"></tspan></text>
   <g transform="translate({{ C }} {{ C }})">
     <g class="hand">
       <line x1="0" y1="{{ 0 | minus: R0 | plus: 4 }}" x2="0" y2="{{ 0 | minus: R | minus: 4 }}" />
