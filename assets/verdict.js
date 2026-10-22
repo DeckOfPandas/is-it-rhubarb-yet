@@ -222,17 +222,39 @@
 
   // --- Dates in words -------------------------------------------------------
 
-  // Plain numbers: "19 October", "19 October 2026". The food page's as-of
-  // line alone uses an ordinal (`ordinal`).
-  function fmtDate(d) { return d.getDate() + " " + MONTHS[d.getMonth()]; }
+  // Ordinals: "19th October", "19th October 2026". Wherever a date is
+  // shown its letters are raised: datePieces marks them, and the page,
+  // the cards and the wheels set them as superscript.
+  function fmtDay(d) { return d.getDate() + ordinal(d.getDate()); }
+  function fmtDate(d) { return fmtDay(d) + " " + MONTHS[d.getMonth()]; }
   function fmtDateYear(d) { return fmtDate(d) + " " + d.getFullYear(); }
-  // A week's days, with an en dash: "15–21 October", "29 October – 4
-  // November", and the years only when it crosses one.
+  // A week's days, with an en dash: "15th–21st October", "29th October –
+  // 4th November", and the years only when it crosses one.
   function fmtRange(week, year) {
     var a = startOfWeek(week, year), b = endOfWeek(week, year);
     if (a.getFullYear() !== b.getFullYear()) return fmtDateYear(a) + " – " + fmtDateYear(b);
-    if (a.getMonth() === b.getMonth()) return a.getDate() + "–" + fmtDate(b);
+    if (a.getMonth() === b.getMonth()) return fmtDay(a) + "–" + fmtDate(b);
     return fmtDate(a) + " – " + fmtDate(b);
+  }
+  // An ordinal's letters: 1 "st", 22 "nd", 13 "th".
+  function ordinal(n) {
+    if (n % 100 >= 11 && n % 100 <= 13) return "th";
+    return { 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th";
+  }
+  // A date's text in pieces, each [text, raised]: "22nd October" is
+  // [["22", false], ["nd", true], [" October", false]].
+  function datePieces(s) {
+    var out = [], re = /(\d)(st|nd|rd|th)\b/g, last = 0, m;
+    while ((m = re.exec(s))) {
+      out.push([s.slice(last, m.index + 1), false], [m[2], true]);
+      last = m.index + m[0].length;
+    }
+    out.push([s.slice(last), false]);
+    return out.filter(function (p) { return p[0]; });
+  }
+  // The same as HTML, for what the build writes: "22<sup>nd</sup> October".
+  function dateHtml(s) {
+    return datePieces(s).map(function (p) { return p[1] ? "<sup>" + p[0] + "</sup>" : p[0]; }).join("");
   }
   // The date a {week, years} stands for, given the reference year.
   function startDate(at, year) { return startOfWeek(at.week, year + at.years); }
@@ -387,18 +409,22 @@
     return mid && !v.cultivar ? s.charAt(0).toLowerCase() + s.slice(1) : s;
   }
 
-  // The varieties of a food with more than one, one to a line, under the
-  // date line: the variety that gave the verdict, answered by its verdict
-  // word ("Yes"), then the others in data order, each by its phrase
-  // ("Back in August"). `index` is the variety's place in the data, for
-  // its colours.
+  // The varieties of a food with more than one, one to a line, each
+  // answered by its phrase: those in season first, the one ending soonest
+  // first and all year after them, then the rest, the one back soonest
+  // first; data order breaks ties. `index` is the variety's place in the
+  // data, for its colours.
   function varietyLines(food, fv, year, today) {
     if (!fv.variety || food.varieties.length < 2 || food.unsold) return [];
-    var lines = [{ index: fv.variety.index, name: fv.variety.v.name, answer: cap(fv.verdict.toLowerCase()) }];
-    fv.varieties.forEach(function (r) {
-      if (r !== fv.variety) lines.push({ index: r.index, name: r.v.name, answer: phrase(r, year, today) });
+    var rank = function (r) {
+      if (r.verdict === "YES" || r.verdict === "JUST") return r.allYear ? 1 : 0;
+      return 2;
+    };
+    return fv.varieties.slice().sort(function (a, b) {
+      return rank(a) - rank(b) || soonest(daysTo(a, year, today), daysTo(b, year, today)) || a.index - b.index;
+    }).map(function (r) {
+      return { index: r.index, name: r.v.name, answer: phrase(r, year, today) };
     });
-    return lines;
   }
 
   // A variety's runs in words, for the data under a food page: "In season
@@ -431,12 +457,6 @@
     return cap(said.join(", ")) + ".";
   }
 
-  // An ordinal's letters, for the as-of line: 1 "st", 22 "nd", 13 "th".
-  function ordinal(n) {
-    if (n % 100 >= 11 && n % 100 <= 13) return "th";
-    return { 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th";
-  }
-
   // --- The weekly digest --------------------------------------------------
   // Foods in a list run A to Z by food, then by variety, so all the
   // potatoes sit together.
@@ -448,7 +468,7 @@
   // in-season run began within NEW_WEEKS), last (chance: JUST), onway
   // (NEARLY), still (great now: the rest of YES), or later (NO), which
   // Now leaves out and a food page's data names.
-  var BANDS = { arrived: "Just arrived", last: "Last chance", onway: "On the way",
+  var BANDS = { arrived: "Just arrived", last: "Still great but on the way out", onway: "On the way",
     still: "Great this week", later: "Out of season" };
   var BAND_ORDER = ["arrived", "last", "onway", "still", "later"];
   function bandOf(r) {
@@ -576,6 +596,7 @@
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,
     fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange, ordinal: ordinal,
+    datePieces: datePieces, dateHtml: dateHtml,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
     phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLines: varietyLines,
     runsSaid: runsSaid, varietyBands: varietyBands, daysTo: daysTo,

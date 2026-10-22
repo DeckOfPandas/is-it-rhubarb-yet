@@ -74,6 +74,7 @@ const CSS = [
   .lines p { font-size: 29px; line-height: 1.3; margin: 0 0 6px; color: ${MUTED}; }
   .lines strong { color: ${INK}; }
   .lines .food { font-weight: 700; color: var(--food); }
+  sup { font-size: 0.7em; line-height: 0; vertical-align: 0.45em; }
   `
 ].join("\n");
 
@@ -81,8 +82,11 @@ function page(body, food) {
   return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><style>${CSS}</style></head>` +
     `<body><div class="card" style="--food: ${food || RHUBARB}">${body}</div></body></html>`;
 }
+// A date, escaped, its ordinal letters raised.
+function date(text) { return V.dateHtml(esc(text)); }
+
 function foot(asofText) {
-  return `<div class="foot"><p class="asof">as of ${esc(asofText)}</p>` +
+  return `<div class="foot"><p class="asof">as of ${date(asofText)}</p>` +
     `<div class="display brand">Is it <span class="pink">rhubarb</span> yet?</div></div>`;
 }
 
@@ -103,7 +107,7 @@ function sample(items) {
 }
 function lines(baked) {
   const first = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
-  const specs = [first, ["still", "Great this week"], ["last", "Last chance"]];
+  const specs = [first, ["still", "Great this week"], ["last", "Still great but on the way out"]];
   return `<div class="lines">` + specs.map(([key, label]) => {
     const all = V.flatten(baked.now[key] || []);
     if (!all.length) return "";
@@ -119,7 +123,7 @@ function homeCard(baked) {
   return page(
     `<div class="display hook">Is it <span class="pink">rhubarb</span> yet?</div>` +
     `<p class="strap">Cook food when it's at its best.</p>` + lines(baked) +
-    `<div class="foot"><p class="asof">as of ${esc(baked.asofText)}</p></div>`);
+    `<div class="foot"><p class="asof">as of ${date(baked.asofText)}</p></div>`);
 }
 
 // The favicon and the app icon: IIRY, light ink on the forcing shed, the R
@@ -141,7 +145,7 @@ function iconPage() {
 function nowCard(baked) {
   return page(
     `<div class="display title">In season this week</div>` +
-    `<p class="week">${esc(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
+    `<p class="week">${date(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
 }
 
 async function main() {

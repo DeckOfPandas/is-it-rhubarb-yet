@@ -46,14 +46,15 @@ function main() {
 
   const baked = {
     asof: isoDate(date),
+    // Dates as text ("22nd October 2026", for meta tags) and as HTML with
+    // the ordinal's letters raised, for the page.
     asofText: V.fmtDateYear(date),
-    // The food page's as-of line: "22nd October", the letters raised.
-    asofDay: date.getDate(),
-    asofOrdinal: V.ordinal(date.getDate()),
-    asofMonth: V.fmtDate(date).split(" ")[1],
+    asofHtml: V.dateHtml(V.fmtDateYear(date)),
+    asofDayHtml: V.dateHtml(V.fmtDate(date)),
     week: week,
     year: year,
     range: V.fmtRange(week, year),
+    rangeHtml: V.dateHtml(V.fmtRange(week, year)),
     foods: {},
     labels: {},
     now: V.nowLists(foods, groups, week, year, date)

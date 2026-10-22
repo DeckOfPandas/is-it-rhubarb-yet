@@ -823,7 +823,7 @@
     if (!listTitle) makeList();
     var when = dateOf(state.at), week = V.weekOf(when);
     listTitle.textContent = "In season " + (state.at === null ? "this week" : "in " + STEPS[state.at].phrase);
-    listDates.textContent = V.fmtRange(week, when.getFullYear());
+    S.setDate(listDates, V.fmtRange(week, when.getFullYear()));
     S.fillDigest(listBands, V.nowLists(shownFoods(), groups, week, when.getFullYear(), when));
     listAll.textContent = "";
     listAll.hidden = kindShown() === "all";

@@ -125,6 +125,9 @@ body {
 :root { --page: calc(64rem - 2 * var(--sp-2)); }
 main { max-width: 64rem; margin: 0 auto; padding: var(--sp-1) var(--sp-2) var(--sp-5); }
 [hidden] { display: none !important; }
+/* A date's ordinal letters ("22nd"), raised without opening the line; in
+   the caps style they are capitals too. */
+sup { font-size: 0.7em; line-height: 0; vertical-align: 0.45em; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 /* Form controls take the page's font; left alone, browsers set them in
    their own (Arial, whose straight l stands out beside Atkinson's). */
@@ -475,10 +478,10 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .one-result .one-word { display: block; margin-top: var(--sp-1); font-size: var(--fs-title); line-height: 1; padding-top: 0; white-space: normal; }
 .one-result .one-line { display: block; margin: var(--sp-1) 0 0; }
 .one-more { grid-area: more; align-self: start; }
-/* Under the action, how to take it: "(⏎)", the Enter key as a keycap
-   holding the return mark (_includes/card-hint.html), small and muted. */
+/* Under the action, how to take it: the Enter key as a keycap holding the
+   return mark (_includes/card-hint.html), small and muted. */
 .one-hint { grid-area: hint; align-self: start; margin-top: calc(-1 * var(--sp-1)); color: var(--muted); font: 400 var(--fs-small)/1.3 var(--text); }
-.one-hint kbd { display: inline-block; margin: 0 0.15em; padding: 0.1em 0.4em; border: 1px solid color-mix(in oklab, var(--muted) 60%, var(--bg)); border-bottom-width: 2px; border-radius: 4px; line-height: 1; }
+.one-hint kbd { display: inline-block; padding: 0.1em 0.4em; border: 1px solid color-mix(in oklab, var(--muted) 60%, var(--bg)); border-bottom-width: 2px; border-radius: 4px; line-height: 1; }
 .one-hint .enter-mark { display: block; width: 1.05em; height: 0.74em; overflow: visible; }
 .one-more.is-active .arrow-text { text-decoration-thickness: 2px; }
 .one-dial { grid-area: dial; width: 110px; height: 110px; }
@@ -536,14 +539,12 @@ article.never { --food: var(--never); }
 .verdict + .date-line + .quote { margin-top: var(--sp-4); }
 .not-found .verdict-word, .is-unknown .one-word { color: var(--ink); }
 /* Under the verdict, one column at every width, every block 40px from
-   the next: the date line with the variety line under it, the
-   quotation, the dial (on the same left edge as the words), the notes.
-   Text keeps a measure of about 65ch. A date line wraps "pretty", so no
-   word is left alone on its last line. */
+   the next: the date line, the quotation, the variety lines, the dial
+   (on the same left edge as the words), the notes. Text keeps a measure
+   of about 65ch. A date line wraps "pretty", so no word is left alone on
+   its last line. */
 .food-body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-4); margin-top: var(--sp-3); }
 .food-body > * { margin: 0; max-width: 65ch; }
-.food-when { display: flex; flex-direction: column; gap: var(--sp-1); }
-.food-when > * { max-width: none; }
 .food-body > .wheel { width: min(22rem, 100%); }
 .date-line, .one-line { text-wrap: pretty; }
 /* A quotation and every note stand behind a bar in the food's colour. */
@@ -582,8 +583,8 @@ article.never { --food: var(--never); }
    ("22nd October", the letters raised without opening the line), then
    "Put apples in your calendar:" and its links at body size, a dotted
    list; under them, small, the feeds page and every food's feed. */
-.food > .as-of { margin: var(--sp-4) 0 0; font-size: var(--fs-body); }
-.as-of sup { font-size: 0.7em; line-height: 0; vertical-align: 0.45em; }
+.food > .as-of { margin: var(--sp-4) 0 0; font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; }
+.food > .page-rule + .calendar-line { margin-top: var(--sp-4); }
 .calendar-line { margin: var(--sp-1) 0 0; color: var(--muted); max-width: 40rem; }
 .calendar-line .sep, .calendar-also .sep { color: var(--muted); }
 .calendar-also { margin: var(--sp-1) 0 0; color: var(--muted); font-size: var(--fs-small); }

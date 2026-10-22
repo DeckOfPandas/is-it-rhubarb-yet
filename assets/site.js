@@ -171,6 +171,20 @@
     return li;
   }
 
+  // A date in a node, its ordinal letters raised: <sup> in HTML, a
+  // shifted tspan in SVG.
+  function setDate(node, text) {
+    var svg = node instanceof SVGElement;
+    node.textContent = "";
+    V.datePieces(text).forEach(function (p) {
+      if (!p[1]) { node.appendChild(document.createTextNode(p[0])); return; }
+      var s = svg ? document.createElementNS(SVG_NS, "tspan") : el("sup");
+      s.textContent = p[0];
+      if (svg) { s.setAttribute("baseline-shift", "super"); s.setAttribute("font-size", "70%"); }
+      node.appendChild(s);
+    });
+  }
+
   // A card's way on to the food's page, the name in its sentence form.
   function tellMeAbout(name) { return "Tell me everything about " + name.toLowerCase(); }
 
@@ -444,7 +458,7 @@
     var doy = V.dayOfYear(today) - 1;
     var deg = Math.min(doy, 364) / 364 * 360;
     if (label) {
-      label.querySelector(".date").textContent = V.fmtDate(today);
+      setDate(label.querySelector(".date"), V.fmtDate(today));
       label.removeAttribute("hidden");
     }
     if (!hand) return;
@@ -1166,7 +1180,7 @@
         if (V.flatten(now.arrived).length) block("arrived", "Just arrived", now.arrived);
         else block("onway", "On the way", now.onway);
         block("still", "Great this week", now.still);
-        block("last", "Last chance", now.last);
+        block("last", "Still great but on the way out", now.last);
         var p = el("p", "this-week-more");
         p.appendChild(arrowLink(BASE + "now/", "Everything in season this week"));
         strip.appendChild(p);
@@ -1204,7 +1218,7 @@
   function fillDigest(box, now) {
     box.textContent = "";
     box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
-    box.appendChild(band("last", "Last chance", now.last, "phrase", "Nothing on its way out."));
+    box.appendChild(band("last", "Still great but on the way out", now.last, "phrase", "Nothing on its way out."));
     box.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
     box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
   }
@@ -1241,7 +1255,7 @@
       var at = weekAt(offset), w = at.week, y = at.year;
       title.textContent = "In season" + (offset === 0 ? " this week" : offset === 1 ? " next week" : offset === -1 ? " last week" : "");
       document.title = title.textContent + (site ? " · " + site : "");
-      dates.textContent = V.fmtRange(w, y);
+      setDate(dates, V.fmtRange(w, y));
       prev.disabled = offset <= -RANGE;
       next.disabled = offset >= RANGE;
       back.hidden = offset === 0;
@@ -1297,14 +1311,8 @@
     document.querySelectorAll("svg[data-x0]").forEach(function (svg) { markToday(svg, WEEK); });
     document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, TODAY); });
     fitDials();
-    document.querySelectorAll("[data-asof]").forEach(function (n) { n.textContent = V.fmtDateYear(TODAY); });
-    // "22nd October", the letters raised, on a food page's as-of line.
-    document.querySelectorAll("[data-asof-ordinal]").forEach(function (n) {
-      var day = TODAY.getDate();
-      n.textContent = day;
-      n.appendChild(el("sup", null, V.ordinal(day)));
-      n.appendChild(document.createTextNode(" " + V.fmtDate(TODAY).split(" ")[1]));
-    });
+    document.querySelectorAll("[data-asof]").forEach(function (n) { setDate(n, V.fmtDateYear(TODAY)); });
+    document.querySelectorAll("[data-asof-day]").forEach(function (n) { setDate(n, V.fmtDate(TODAY)); });
     initSwitches();
     initFood();
     fitVerdict(document.querySelector("article.food .verdict-word"));
@@ -1326,6 +1334,6 @@
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
     miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest,
-    headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText
+    headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText, setDate: setDate
   };
 })();

@@ -136,7 +136,7 @@ Now have cards of their own; every other page shows the home card.
       <span>Data and writing: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
       <span>&copy; {{ site.time | date: "%Y" }}</span>
     </p>
-    <p class="footer-asof">Answers as of <span data-asof>{{ baked.asofText }}</span></p>
+    <p class="footer-asof">Answers as of <span data-asof>{{ baked.asofHtml }}</span></p>
     {%- comment -%} The signature is the way to the About page. {%- endcomment -%}
     <a class="hearts" href="{{ '/about/' | relative_url }}" aria-label="About this site">{% include icons/hearts.svg %}</a>
   </footer>

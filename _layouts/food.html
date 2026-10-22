@@ -34,19 +34,11 @@ colour.
   <h1 class="verdict"><span class="verdict-word" id="verdict">{{ b.verdict | default: "…" }}.</span></h1>
 
   {%- comment -%} Under the verdict, in reading order, 40px apart: the
-     date line with the varieties under it, the quotation, the dial, then
-     the notes. Each variety is a line: its name in caps in its colour,
-     then its answer. {%- endcomment -%}
+     date line, the quotation, the varieties, the dial, then the notes.
+     Each variety is a line: its name in caps in its colour, then its
+     answer, the one ending soonest first (varietyLines). {%- endcomment -%}
   <div class="food-body">
-  <div class="food-when">
-    <p class="date-line" id="date-line">{{ b.line }}</p>
-    <ul class="named-lines variety-lines" id="variety-lines"{% if b.varietyLines.size == 0 %} hidden{% endif %}>
-    {%- for l in b.varietyLines -%}
-      {%- assign v = food.varieties[l.index] -%}
-      <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ l.name }}</span> <span class="line-words">{{ l.answer }}</span></li>
-    {%- endfor -%}
-    </ul>
-  </div>
+  <p class="date-line" id="date-line">{{ b.line }}</p>
 
   <blockquote class="quote" id="quote"{% unless b.quote %} hidden{% endunless %}>
     {%- if b.quote -%}
@@ -54,6 +46,13 @@ colour.
     <cite>{{ b.quote.by }}</cite>
     {%- endif -%}
   </blockquote>
+
+  <ul class="named-lines variety-lines" id="variety-lines"{% if b.varietyLines.size == 0 %} hidden{% endif %}>
+  {%- for l in b.varietyLines -%}
+    {%- assign v = food.varieties[l.index] -%}
+    <li style="{% include variety-style.html food=food v=v %}"><span class="line-name">{{ l.name }}</span> <span class="line-words">{{ l.answer }}</span></li>
+  {%- endfor -%}
+  </ul>
 
   {%- include season-wheel.html food=food -%}
 
@@ -86,6 +85,7 @@ colour.
   </section>
   {%- endif -%}
 
+  <hr class="page-rule">
   <details class="fine">
     <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the data.</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the data.</span></summary>
     {%- comment -%} Opened, top to bottom: ALL APPLES and the chart, a
@@ -149,11 +149,12 @@ colour.
     </ul>
   </details>
 
-  {%- comment -%} Between rules: the day the verdict was worked out, as an
-     ordinal with its letters raised (site.js sets the visitor's own day),
-     and the calendar lines. {%- endcomment -%}
+  {%- comment -%} Between rules, in the caps style as the footer's is: the
+     day the verdict was worked out (site.js sets the visitor's own day).
+     Then the calendar lines. {%- endcomment -%}
   <hr class="page-rule">
-  <p class="as-of instruct">Verdict correct as of <span data-asof-ordinal>{{ baked.asofDay }}<sup>{{ baked.asofOrdinal }}</sup> {{ baked.asofMonth }}</span>.</p>
+  <p class="as-of">Verdict correct as of <span data-asof-day>{{ baked.asofDayHtml }}</span></p>
+  <hr class="page-rule">
 
   {%- comment -%} The food's own calendar of season starts, to subscribe
      to: webcal:// for Apple's Calendar and most others, Google's own

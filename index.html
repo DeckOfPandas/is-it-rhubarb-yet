@@ -42,7 +42,7 @@ site.js adds the varieties from foods.json), the names it completes to
     {%- assign arrived_count = 0 -%}
     {%- for k in baked.now.arrived -%}{%- assign arrived_count = arrived_count | plus: k.items.size -%}{%- endfor -%}
     {%- if arrived_count == 0 -%}{%- assign first = "onway|On the way" -%}{%- endif -%}
-    {%- assign blocks = first | append: ",still|Great this week,last|Last chance" | split: "," -%}
+    {%- assign blocks = first | append: ",still|Great this week,last|Still great but on the way out" | split: "," -%}
     {%- for entry in blocks -%}
       {%- assign parts = entry | split: "|" -%}
       {%- assign key = parts[0] -%}

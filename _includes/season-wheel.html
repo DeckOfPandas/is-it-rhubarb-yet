@@ -141,7 +141,15 @@ script that points the hand at today when the file is opened directly.
       hand.setAttribute("transform", "rotate(" + deg.toFixed(2) + ")");
       hand.classList.add("on");
       var label = document.querySelector(".today-label");
-      label.querySelector(".date").textContent = d.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
+      // "22nd October", the letters raised, as verdict.js says it.
+      var n = d.getDate(), sfx = n % 100 >= 11 && n % 100 <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th");
+      var date = label.querySelector(".date"), ns = "http://www.w3.org/2000/svg", sup = document.createElementNS(ns, "tspan");
+      sup.setAttribute("baseline-shift", "super");
+      sup.setAttribute("font-size", "70%");
+      sup.textContent = sfx;
+      date.textContent = n;
+      date.appendChild(sup);
+      date.appendChild(document.createTextNode(" " + d.toLocaleDateString("en-GB", { month: "long" })));
       label.removeAttribute("hidden");
     })();
   ]]></script>
