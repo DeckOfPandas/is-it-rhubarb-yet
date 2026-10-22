@@ -3,8 +3,14 @@
 // pasted into a chat shows the answer and the day it was true for. Chat
 // apps keep the first preview they fetch, so the date on the card lets an
 // old preview read like a dated newspaper rather than a wrong answer. The
-// home and Now cards carry the week's three lines, as the home page does:
-// just arrived, great this week, last chance, a random handful of each.
+// Now card carries the week's three lines, as the home page does: just
+// arrived, great this week, last chance, a random handful of each.
+//
+// WhatsApp and some mail apps cut the middle square out of a wide card,
+// and a page can send only the one image. So everything that must be read
+// sits in a column inside that square, and the sides are left empty. Each
+// card measures the box round its words, and the run fails if one strays
+// outside the square.
 //
 // It also draws the favicon and the app icon, into _site/icons.
 //
@@ -27,7 +33,12 @@ const STRIP_PICK = 3;
 const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "_data");
 const FONTS = path.join(ROOT, "assets", "fonts");
-const WIDTH = 1200, HEIGHT = 630;
+const WIDTH = 1200, HEIGHT = 630, SCALE = 1;
+// The column sits this far inside the middle square on every side, so a
+// crop that rounds a pixel differently still loses nothing.
+const INSET = 4;
+const SQUARE_X = (WIDTH - HEIGHT) / 2;
+const COL = { x: SQUARE_X + INSET, y: INSET, size: HEIGHT - 2 * INSET };
 // NEVER is every never-food's colour, as --never is on the site.
 const CUSTARD = "#fbf3d9", INK = "#1c1714", MUTED = "#5e544b", RHUBARB = "#ff2d78", NEVER = "#857f78";
 
@@ -46,8 +57,10 @@ function fontFace(family, file, style, weight) {
     `src: url(data:font/woff2;base64,${data}) format("woff2"); }`;
 }
 
-// The same type and colours as the site, at card size. The verdict word
-// starts large and is fitted to the line before the shot.
+// The same type and colours as the site, at card size. Every block in the
+// column starts at its largest and FIT shrinks it to its limit; the
+// verdict word then takes the height that is left. The wordmark's line is
+// as tall as Anton's glyph box (1.55em), so the measured box holds it.
 const CSS = [
   fontFace("Anton", "anton-latin.woff2", "normal", "400"),
   fontFace("Atkinson Hyperlegible Next", "atkinson-hyperlegible-next-latin.woff2", "normal", "200 800"),
@@ -55,43 +68,89 @@ const CSS = [
   * { box-sizing: border-box; }
   html, body { margin: 0; width: ${WIDTH}px; height: ${HEIGHT}px; overflow: hidden; }
   body { background: ${CUSTARD}; color: ${INK}; font: 400 32px/1.3 "Atkinson Hyperlegible Next", sans-serif; }
-  .card { position: relative; width: ${WIDTH}px; height: ${HEIGHT}px; padding: 52px 56px 44px 80px; }
-  .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 22px; background: var(--food); }
+  .col { position: absolute; left: ${COL.x}px; top: ${COL.y}px; width: ${COL.size}px; height: ${COL.size}px;
+    display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .col > * { margin: 0; flex: none; }
   .display { font-family: Anton, Impact, sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0; }
-  .ask { font-size: 54px; line-height: 1; color: ${MUTED}; margin: 0; }
-  .word-box { width: 100%; margin-top: 10px; }
+  .ask { font-size: 52px; line-height: 1.04; color: ${MUTED}; }
+  .word-box { line-height: 0; }
   .word { display: inline-block; font-size: 300px; line-height: 0.86; color: var(--food); white-space: nowrap; padding-top: 0.06em; }
-  .line { font-weight: 700; font-size: 44px; line-height: 1.2; margin: 18px 0 0; max-width: 1000px; }
-  .foot { position: absolute; left: 80px; right: 56px; bottom: 40px; display: flex; justify-content: space-between; align-items: baseline; }
-  .asof { font-size: 26px; color: ${MUTED}; margin: 0; }
-  .brand { font-size: 36px; line-height: 1; color: ${INK}; }
+  .line { font-weight: 700; font-size: 36px; line-height: 1.2; }
+  .foot { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .asof { font-size: 22px; color: ${MUTED}; margin: 0; white-space: nowrap; }
+  .brand { font-size: 32px; line-height: 1.55; white-space: nowrap; color: ${INK}; }
   .pink { color: ${RHUBARB}; text-decoration: underline ${RHUBARB} 0.08em; text-underline-offset: 0.12em; text-decoration-skip-ink: none; }
-  .hook { font-size: 128px; line-height: 1.05; margin: 10px 0 0; white-space: nowrap; }
-  .title { font-size: 104px; line-height: 1.05; margin: 16px 0 0; white-space: nowrap; }
-  .strap { font-size: 40px; font-weight: 700; line-height: 1.25; margin: 20px 0 0; max-width: 1000px; }
-  .week { font-size: 40px; font-weight: 700; margin: 20px 0 0; }
-  .lines { margin: 26px 0 0; max-width: 1060px; }
-  .lines p { font-size: 29px; line-height: 1.3; margin: 0 0 6px; color: ${MUTED}; }
+  .hook { font-size: 200px; line-height: 0.98; }
+  .hook span { display: block; white-space: nowrap; }
+  .hook .pink { display: inline-block; text-underline-offset: 0.06em; text-decoration-thickness: 0.05em; margin-bottom: 0.1em; }
+  .title { font-size: 80px; line-height: 1.02; }
+  .strap { font-size: 32px; font-weight: 700; line-height: 1.25; }
+  .week { font-size: 32px; font-weight: 700; }
+  .lines { font-size: 26px; }
+  .lines p { font-size: 1em; line-height: 1.3; margin: 0 0 4px; color: ${MUTED}; }
   .lines strong { color: ${INK}; }
   .lines .food { font-weight: 700; color: var(--food); }
   `
 ].join("\n");
 
+// Runs in the card's page once its fonts are in. A [data-fit] block keeps
+// its largest font size that fits data-lines lines (or data-max-h pixels)
+// without running out of the column sideways, down to data-min. Then the
+// word takes the height left, up to the column's width. Returns the box
+// round everything in the column, in card pixels, and whether the column
+// ran out of room.
+function FIT() {
+  const col = document.querySelector(".col");
+  const tooBig = (el) => {
+    const cs = getComputedStyle(el);
+    const limit = el.dataset.lines ? el.dataset.lines * parseFloat(cs.lineHeight) : parseFloat(el.dataset.maxH);
+    return el.scrollWidth > el.clientWidth + 0.5 || el.getBoundingClientRect().height > limit + 0.5;
+  };
+  document.querySelectorAll("[data-fit]").forEach((el) => {
+    let hi = parseFloat(getComputedStyle(el).fontSize), lo = parseFloat(el.dataset.min);
+    if (!tooBig(el)) return;
+    for (let i = 0; i < 14; i++) {
+      const mid = (lo + hi) / 2;
+      el.style.fontSize = mid + "px";
+      if (tooBig(el)) hi = mid; else lo = mid;
+    }
+    el.style.fontSize = lo + "px";
+  });
+  const box = col.querySelector(".word-box");
+  const others = [...col.children].filter((c) => c !== box);
+  const gap = parseFloat(getComputedStyle(col).rowGap) || 0;
+  const availH = col.clientHeight - others.reduce((s, c) => s + c.getBoundingClientRect().height, 0) - gap * others.length;
+  if (box) {
+    const w = box.querySelector(".word");
+    const r = w.getBoundingClientRect();
+    const size = parseFloat(getComputedStyle(w).fontSize) * Math.min(col.clientWidth / r.width, availH / r.height);
+    w.style.fontSize = Math.min(size, 300) + "px";
+  }
+  const rects = [...col.querySelectorAll("*")].map((e) => e.getBoundingClientRect()).filter((r) => r.width && r.height);
+  return {
+    box: {
+      left: Math.min(...rects.map((r) => r.left)), right: Math.max(...rects.map((r) => r.right)),
+      top: Math.min(...rects.map((r) => r.top)), bottom: Math.max(...rects.map((r) => r.bottom)),
+    },
+    overflow: col.scrollHeight > col.clientHeight + 0.5 || availH < 0,
+  };
+}
+
 function page(body, food) {
   return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><style>${CSS}</style></head>` +
-    `<body><div class="card" style="--food: ${food || RHUBARB}">${body}</div></body></html>`;
+    `<body style="--food: ${food || RHUBARB}"><div class="col">${body}</div></body></html>`;
 }
 function foot(asofText) {
   return `<div class="foot"><p class="asof">as of ${esc(asofText)}</p>` +
-    `<div class="display brand">Is it <span class="pink">rhubarb</span> yet?</div></div>`;
+    `<span class="display brand">Is it <span class="pink">rhubarb</span> yet?</span></div>`;
 }
 
 function verdictCard(name, colour, word, line, asofText) {
   return page(
-    `<div class="bar"></div>` +
-    `<p class="display ask">Is it ${esc(name.toLowerCase())} yet?</p>` +
+    `<p class="display ask" data-fit data-lines="2" data-min="28">Is it ${esc(name.toLowerCase())} yet?</p>` +
     `<div class="word-box"><span class="display word">${esc(word)}.</span></div>` +
-    `<p class="line">${esc(line)}</p>` + foot(asofText), colour);
+    `<p class="line" data-fit data-lines="3" data-min="22">${esc(line)}</p>` +
+    foot(asofText), colour);
 }
 
 // The week's three lines, as the home page's blocks: just arrived (or on
@@ -104,7 +163,7 @@ function sample(items) {
 function lines(baked) {
   const first = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
   const specs = [first, ["still", "Great this week"], ["last", "Last chance"]];
-  return `<div class="lines">` + specs.map(([key, label]) => {
+  return `<div class="lines" data-fit data-max-h="300" data-min="18">` + specs.map(([key, label]) => {
     const all = V.flatten(baked.now[key] || []);
     if (!all.length) return "";
     const pick = sample(all);
@@ -115,11 +174,19 @@ function lines(baked) {
   }).join("") + `</div>`;
 }
 
+// Home is the question, stacked three lines high as the home page's
+// heading is.
 function homeCard(baked) {
   return page(
-    `<div class="display hook">Is it <span class="pink">rhubarb</span> yet?</div>` +
-    `<p class="strap">Cook food when it's at its best.</p>` + lines(baked) +
-    `<div class="foot"><p class="asof">as of ${esc(baked.asofText)}</p></div>`);
+    `<div class="display hook" data-fit data-max-h="430" data-min="60"><span>Is it</span><span><span class="pink">rhubarb</span></span><span>yet?</span></div>` +
+    `<p class="strap" data-fit data-lines="2" data-min="22">Cook food when it's at its best.</p>` +
+    foot(baked.asofText));
+}
+
+function nowCard(baked) {
+  return page(
+    `<div class="display title" data-fit data-lines="2" data-min="40">In season this week</div>` +
+    `<p class="week">${esc(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
 }
 
 // The favicon and the app icon: IIRY, light ink on the forcing shed, the R
@@ -138,15 +205,10 @@ function iconPage() {
   </style></head><body><div class="mark">II<span class="r">R</span>Y</div></body></html>`;
 }
 
-function nowCard(baked) {
-  return page(
-    `<div class="display title">In season this week</div>` +
-    `<p class="week">${esc(baked.range)}</p>` + lines(baked) + foot(baked.asofText));
-}
-
 async function main() {
   const out = path.resolve(ROOT, arg("--out", path.join("_site", "cards")));
   const only = arg("--only", "").split(",").filter(Boolean);
+  const want = (slug) => !only.length || only.includes(slug);
   const bakedPath = path.join(DATA, "baked.json");
   if (!fs.existsSync(bakedPath)) throw new Error("no _data/baked.json: run node tools/bake.js first");
   const baked = JSON.parse(fs.readFileSync(bakedPath, "utf8"));
@@ -172,23 +234,20 @@ async function main() {
   }
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch();
-  const tab = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: 1 });
+  const tab = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: SCALE });
+  const strays = [];
   let drawn = 0;
   for (const card of cards) {
-    if (only.length && !only.includes(card.slug)) continue;
+    if (!want(card.slug)) continue;
     await tab.setContent(card.html, { waitUntil: "load" });
-    await tab.evaluate(() => document.fonts.ready.then(() => {
-      const w = document.querySelector(".word");
-      if (!w) return;
-      const avail = w.parentElement.clientWidth;
-      const width = w.getBoundingClientRect().width;
-      const size = parseFloat(getComputedStyle(w).fontSize) * avail / width;
-      w.style.fontSize = Math.min(size, 300) + "px";
-    }));
+    const { box, overflow } = await tab.evaluate(`document.fonts.ready.then(${FIT.toString()})`);
+    if (overflow || box.left < SQUARE_X || box.right > SQUARE_X + HEIGHT || box.top < 0 || box.bottom > HEIGHT) {
+      strays.push(`${card.slug} (x ${Math.round(box.left)}-${Math.round(box.right)}, y ${Math.round(box.top)}-${Math.round(box.bottom)}${overflow ? ", overflows" : ""})`);
+    }
     await tab.screenshot({ path: path.join(out, card.slug + ".png"), type: "png" });
     drawn++;
   }
-  if (!only.length || only.includes("icons")) {
+  if (want("icons")) {
     const icons = path.resolve(ROOT, arg("--icons", path.join(path.dirname(out), "icons")));
     fs.mkdirSync(icons, { recursive: true });
     for (const [file, size] of Object.entries(ICONS)) {
@@ -202,6 +261,10 @@ async function main() {
   }
   await browser.close();
   console.log(`drew ${drawn} share cards for ${baked.asofText} into ${path.relative(ROOT, out)}`);
+  if (strays.length) {
+    console.error(`cards.js: ${strays.length} cards have words outside the middle square: ${strays.join(", ")}`);
+    process.exit(1);
+  }
 }
 
 main().catch((e) => { console.error("cards.js: " + e.message); process.exit(1); });
