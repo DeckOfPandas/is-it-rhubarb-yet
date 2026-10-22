@@ -597,9 +597,9 @@
     // a fresh pick on every visit, A to Z, then how many more there are.
     // In the baked week they come from the section's data-all; for another
     // week, or a page baked with none, from foods.json. It is "Also great
-    // this week" unless this food is NO.
+    // this week" only when this food is YES too.
     function alsoHeading(h) {
-      h.textContent = fv.verdict === "NO" ? "Great this week" : "Also great this week";
+      h.textContent = fv.verdict === "YES" ? "Also great this week" : "Great this week";
     }
     var section = article.querySelector(".also");
     if (section) alsoHeading(section.querySelector("h2"));
@@ -1013,7 +1013,10 @@
       if (hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier)) lead = hits[0].it;
       if (answer) {
         var it = answer.it, verdict = it.verdict();
+        // The label names the results region, so a hidden label must not
+        // keep an old count.
         label.hidden = true;
+        label.textContent = "";
         one.classList.toggle("is-never", !!it.never);
         one.classList.toggle("is-plain", !!it.never);
         one.style.setProperty("--food", it.colour());
@@ -1053,6 +1056,7 @@
         });
       } else {
         label.hidden = true;
+        label.textContent = "";
         noneAsk.textContent = q.toLowerCase();
         none.hidden = false;
         status.textContent = "No matches.";

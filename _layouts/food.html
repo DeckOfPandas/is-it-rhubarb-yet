@@ -52,7 +52,7 @@ to this food). The whole page keys off --food, the food's colour.
     {%- assign v = food.varieties[vi] -%}
     {%- assign keys = v.sources | default: food.sources -%}
     {%- if keys == nil or keys == "" -%}{%- assign keys = "" | split: "" | push: food.source -%}{%- endif -%}
-    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span><span class="sep" aria-hidden="true"> · </span><span class="ring-words">{{ b.ringLines[vi] }}</span><span class="sep" aria-hidden="true"> · </span><small class="ring-source">
+    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span> <span class="sep" aria-hidden="true">·</span> <small class="ring-source">
       {%- for k in keys -%}{%- assign s = site.data.sources | where: "key", k | first -%}{% unless forloop.first %} &amp; {% endunless %}{{ s.short | default: s.name | default: k }}{%- endfor -%}
     </small></span></button></li>
   {%- endfor -%}
@@ -66,9 +66,9 @@ to this food). The whole page keys off --food, the food's colour.
   {%- comment -%} Three foods of the same family that are perfect now, at
      random from the baked verdicts, A to Z, and how many more there are,
      which links to Now. All are YES, as the heading says, so no row
-     carries a tag. The heading is "Also great this week" unless this food
-     is NO. All of them are in data-all, and site.js picks a fresh three
-     on every visit. {%- endcomment -%}
+     carries a tag. The heading is "Also great this week" only when this
+     food is YES too. All of them are in data-all, and site.js picks a
+     fresh three on every visit. {%- endcomment -%}
   {%- assign also_all = "" | split: "" -%}
   {%- for other in site.data.foods -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
@@ -81,7 +81,7 @@ to this food). The whole page keys off --food, the food's colour.
   {%- assign also_more = also_all.size | minus: also.size -%}
   {%- capture also_json -%}[{% for o in also_all %}{"slug":{{ o.slug | jsonify }},"name":{{ o.name | jsonify }},"colour":{{ o.colour | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
   <section class="also" data-all='{{ also_json | escape }}'>
-    <h2><span data-also-no{% if b.verdict != "NO" %} hidden{% endif %}>Great this week</span><span data-also-yes{% if b.verdict == "NO" %} hidden{% endif %}>Also great this week</span></h2>
+    <h2><span data-also-no{% if b.verdict == "YES" %} hidden{% endif %}>Great this week</span><span data-also-yes{% if b.verdict != "YES" %} hidden{% endif %}>Also great this week</span></h2>
     <ul class="food-list">
       {%- for other in also -%}{%- include food-row.html item=other verdict="YES" tag=false -%}{%- endfor -%}
     </ul>

@@ -391,9 +391,9 @@ One shape for every food, one column at every width, in this order:
 3. the breakdown: the dial (on the same left edge as the words) and, for
    a food of two rings or more, its ring list;
 4. the counter note;
-5. Also great this week ("Great this week" when this food is NO): three
-   foods of the same family that are YES, a fresh pick on every visit, A
-   to Z, and "and N more →" to Now;
+5. Also great this week ("Great this week" unless this food is YES too):
+   three foods of the same family that are YES, a fresh pick on every
+   visit, A to Z, and "and N more →" to Now;
 6. one hairline, the only rule on the page;
 7. the sources disclosure, "Great! Show me the sources." ("Fine, show me
    the sources." for NO), in the instructive style, holding the numbered
@@ -472,7 +472,9 @@ icons and the fonts, small and muted.
 `404.html`, served by GitHub Pages for any address it cannot find: "Is
 it [what was asked] yet?", LITERALLY NO IDEA., "If that's an actual
 thing, please tell us.", then up to five nearest foods from
-`search.json` under DID YOU MEAN, and two ways on.
+`search.json` under DID YOU MEAN, and two ways on. It names no
+canonical. Home's one heading, "Is it in season yet?", is visually
+hidden, since the hero is a form.
 
 ### Other pages
 

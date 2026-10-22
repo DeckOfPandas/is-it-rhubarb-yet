@@ -21,6 +21,9 @@ site.js adds the varieties from foods.json), the names it completes to
 {%- assign baked = site.data.baked -%}
 {%- assign foods = site.data.foods | sort: "name" -%}
 <section class="hook">
+  {%- comment -%} The hero is a form, not a heading, so the page's one
+     heading is spoken but not seen. {%- endcomment -%}
+  <h1 class="visually-hidden">Is it in season yet?</h1>
   <form class="hook-form" role="search" method="get" action="{{ '/' | relative_url }}">
     <label class="hook-line" for="hook-input">
       <span class="hook-word">Is it</span>
@@ -28,7 +31,7 @@ site.js adds the varieties from foods.json), the names it completes to
         placeholder="rhubarb" aria-label="Is it … yet? Type a food" aria-autocomplete="both" size="7"></span>
       <span class="hook-word">yet?</span>
     </label>
-    <button type="submit" class="visually-hidden">Ask</button>
+    <button type="submit" class="visually-hidden" tabindex="-1">Ask</button>
   </form>
   {%- comment -%} This week in three blocks, from the baked digest: just
      arrived (or, in a week when nothing has, on the way), great this week and

@@ -115,7 +115,18 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
 {%- endfor -%}
 {%- assign labels = "" | split: "" -%}
 {%- if table -%}{%- assign ar = table[45] | plus: R0 -%}{%- else -%}{%- assign ar = 46 | times: PER_WEEK | plus: R0 -%}{%- endif -%}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" data-kind="{{ include.kind }}" data-c="{{ C }}" data-ring="{{ RING }}" data-rim="{{ ar }}" role="img" aria-label="When each {% if include.kind == 'all' %}food's{% else %}{{ include.kind }}{% endif %} season begins, and how long it lasts" style="--arc-w: {{ include.arc_w | default: 1.2 }}; --arc-o: {{ include.arc_o | default: 0.4 }}">
+{%- comment -%} The wheel's spoken name says whose seasons it shows, in words
+   rather than the kind's key: "each vegetable's", "each wild food's". {%- endcomment -%}
+{%- case include.kind -%}
+  {%- when "veg" -%}{%- assign whose = "vegetable's" -%}
+  {%- when "fruit" -%}{%- assign whose = "fruit's" -%}
+  {%- when "wild" -%}{%- assign whose = "wild food's" -%}
+  {%- when "herbs" -%}{%- assign whose = "herb's" -%}
+  {%- when "fish" -%}{%- assign whose = "fish's" -%}
+  {%- when "meat" -%}{%- assign whose = "meat's" -%}
+  {%- else -%}{%- assign whose = "food's" -%}
+{%- endcase -%}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" data-kind="{{ include.kind }}" data-c="{{ C }}" data-ring="{{ RING }}" data-rim="{{ ar }}" role="img" aria-label="When each {{ whose }} season begins, and how long it lasts" style="--arc-w: {{ include.arc_w | default: 1.2 }}; --arc-o: {{ include.arc_o | default: 0.4 }}">
   {%- for g in guides -%}
     {%- assign gw = g | plus: 0 -%}
     {%- if table -%}{%- assign gi = gw | minus: 1 -%}{%- assign gr = table[gi] | plus: R0 -%}
