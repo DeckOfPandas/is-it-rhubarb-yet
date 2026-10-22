@@ -210,7 +210,10 @@
       for (var i = 0; i < food.varieties.length; i++) {
         var v = food.varieties[i], s = stateAt(v, w);
         if (!s) continue;
-        if (isGlasshouse(v)) s = "glass";
+        // A glasshouse ring is held while it is in; its just-about weeks
+        // count for nothing, so the whole food's "then glasshouse-grown
+        // until" ends where the ring's own line says it does.
+        if (isGlasshouse(v)) { if (s !== "in") continue; s = "glass"; }
         if (STATE_RANK[s] > STATE_RANK[b] || (s === "glass" && b === "store")) b = s;
         if ((s === "glass" || s === "store") && h !== "glass") h = s;
       }
@@ -565,11 +568,40 @@
     if (!v || !v.name) return "";
     return v.cultivar || v.ring === "region" ? v.name : v.name.toLowerCase();
   }
+  // A food's name mid-sentence: its `said` form where lower-casing the
+  // name is wrong (John Dory, Dover sole), else the name in lower case.
+  function foodSaid(food) { return food.said || food.name.toLowerCase(); }
   function varietySaid(food, v, mid) {
-    if (!v || !v.name) return mid ? food.name.toLowerCase() : food.name;
-    if (v.ring) return (mid ? food.name.toLowerCase() : food.name) + " (" + varietyLabel(v) + ")";
-    var s = v.said || (v.cultivar ? v.name : cap(v.name.toLowerCase())) + " " + food.name.toLowerCase();
+    if (!v || !v.name) return mid ? foodSaid(food) : food.name;
+    if (v.ring) return (mid ? foodSaid(food) : food.name) + " (" + varietyLabel(v) + ")";
+    var s = v.said || (v.cultivar ? v.name : cap(v.name.toLowerCase())) + " " + foodSaid(food);
     return mid && !v.cultivar ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+  }
+
+  // --- A season in months ---------------------------------------------------
+  // The in-season weeks of the given rings as a sentence's months: "July
+  // to October", "all year", "May to July and October to March", each
+  // run named by the months its first and last weeks fall in (by their
+  // middle day, so a week that ends on the 1st belongs to the month it
+  // is mostly in); "" when nothing is ever in. A glasshouse ring counts
+  // as held, not fresh, and is left out. The food page's season line and
+  // the charts' spoken names.
+  function seasonWords(varieties, year) {
+    var fresh = varieties.filter(function (v) { return !isGlasshouse(v); });
+    var inWeek = [];
+    for (var w = 1; w <= 52; w++) inWeek[w] = fresh.some(function (v) { return stateAt(v, w) === "in"; });
+    if (inWeek.slice(1).every(Boolean)) return "all year";
+    var runs = [], w0 = 1;
+    while (w0 <= 52 && inWeek[w0]) w0++;
+    for (var k = 0, w1 = w0; k < 52; k++, w1 = w1 % 52 + 1) {
+      if (inWeek[w1] && !inWeek[w1 === 1 ? 52 : w1 - 1]) runs.push([w1, w1]);
+      if (inWeek[w1] && runs.length) runs[runs.length - 1][1] = w1;
+    }
+    return runs.map(function (r) {
+      var a = MONTHS[midOfWeek({ week: r[0], years: 0 }, year).getMonth()];
+      var b = MONTHS[midOfWeek({ week: r[1], years: 0 }, year).getMonth()];
+      return a === b ? a : a + " to " + b;
+    }).join(" and ");
   }
 
   // --- The weekly digest --------------------------------------------------
@@ -694,7 +726,7 @@
     datePieces: datePieces, dateHtml: dateHtml,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
     phrase: phrase, dateLine: dateLine, daysTo: daysTo, bandOf: bandOf,
-    timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid,
+    timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid, foodSaid: foodSaid, seasonWords: seasonWords,
     nowLists: nowLists, flatten: flatten, azList: azList, byPhrase: byPhrase, pickQuote: pickQuote
   };
 }));

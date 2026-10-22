@@ -280,8 +280,9 @@ The counter note (`.buy`) is `small` in full ink behind the same bar.
 Every word is caps, muted: SOURCES · CALENDAR FEED (to the feed's
 section on Source data) · JSON; ABOUT; the theme switch; the GitHub mark (2.2rem, muted ink, pink
 on hover or focus); the licences (CODE: MIT · DATA AND WRITING: CC BY 4.0
-· © year) and the as-of date, fainter; the signature hearts, the way to
-About, which do not change on hover. Every text link is underlined in
+· © year) and the as-of date ("Verdicts correct as of …"), fainter; the
+signature hearts, decoration and not a link (About is the footer's word
+and the nav's "??"). Every text link is underlined in
 pink at all times, 1px, 0.3em below the capitals; on hover or focus it is
 ink with a 2px line. No line ever starts with a separator dot: a dot
 follows its item. On a phone the licences stack with no dots. The theme
@@ -397,8 +398,10 @@ One shape for every food, one column at every width, in this order:
 
 1. the question, the verdict and the date line, for the whole food;
 2. the quotation;
-3. the breakdown: the dial (on the same left edge as the words) and, for
-   a food of two rings or more, its ring list;
+3. the breakdown: the dial (on the same left edge as the words), the
+   season line under it ("In season July to October.", the whole food's
+   fresh weeks in months, baked as `season`; not for a food that cannot
+   be sold) and, for a food of two rings or more, its ring list;
 4. the counter note;
 5. Also great this week ("Great this week" unless this food is YES too):
    three foods of the same family that are YES, a fresh pick on every
@@ -430,14 +433,19 @@ with `text-wrap: pretty`.
   in-season run. The hand is hidden until JavaScript points it at today,
   then sweeps round from January; the date sits in the hole. The dial has
   no legend of its own.
-- **The ring list** (`.ring-list`) is the dial's legend, outer ring
-  first: a swatch in the ring's colour, its name in the caps style in its
-  text colour, its own phrase without a full stop (baked as `ringLines`),
-  and its sources' short names, small and muted, joined by dots: NORTH
-  EAST · Until late January · Northumberland Seafood. Each row is a
-  button. Hovering or focusing a row, or hovering a ring, lights the ring
-  and its row and fades the rest to a quarter (`lightRings`); a tap pins
-  the light (`aria-pressed`) until it is tapped again.
+- **The ring list** (`.ring-list`) is the dial's legend, led by "From
+  the outside in:" (small, muted), outer ring first: a swatch in the
+  ring's colour, its name in the caps style in its text colour, its own
+  phrase without a full stop (baked as `ringLines`) and, only where its
+  sources are not the ones every ring shares, its own sources' short
+  names, small and muted, joined by dots: NORTH EAST · Until late
+  January · Northumberland Seafood. The sources every ring shares are
+  said once under the list, "Dates from New Covent Garden Market and
+  Defra." Sources in a sentence are joined with commas and "and"
+  (`_includes/source-names.html`). Each row is a button. Hovering or
+  focusing a row, or hovering a ring, lights the ring and its row and
+  fades the rest to a quarter (`lightRings`); a tap pins the light
+  (`aria-pressed`) until it is tapped again.
 - A never-food's page (`_layouts/never.html`) is the question, NEVER, its
   line, a quotation and two ways on, all in ghost grey, no dial.
 - "When are apples in season?" is the food page's `<title>` and the start
@@ -498,6 +506,15 @@ hidden, since the hero is a form.
 - `/grey-squirrel/`, `/button-mushrooms/` and `/cobnuts/`: a renamed food's old
   address, a page that forwards at once (meta refresh), `noindex`, with
   the canonical pointing at the new page.
+
+### Print
+
+A short `@media print` block in `site.css`: the sticky header and nav,
+every switch, the time controls and rails, the GitHub mark, the signature,
+the keycap hint and the ways on are not printed; nothing sticks; the page
+is black on white; and the calendar, drawn at its own size on screen, is
+scaled (`zoom: 0.72`) to fit a portrait sheet. The baked "today" line
+stands on a printed or script-less calendar.
 
 ## Charts
 

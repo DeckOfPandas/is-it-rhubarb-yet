@@ -387,6 +387,12 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ring-row .line-name { --food-ink: var(--food-shed, var(--food)); } }
 :root[data-theme="dark"] .ring-row .line-name { --food-ink: var(--food-shed, var(--food)); }
 .ring-source { color: var(--muted); font-size: var(--fs-small); }
+/* Under the dial: the season in months, then the ring list's lead ("From
+   the outside in:") and, after the list, the sources every ring shares. */
+.season-line { margin: var(--sp-2) 0 0; }
+.ring-lead, .ring-shared { color: var(--muted); font-size: var(--fs-small); margin: var(--sp-1) 0 0; }
+.ring-lead { margin-top: var(--sp-2); }
+.ring-lead + .ring-list { margin-top: var(--sp-1); }
 /* A lit ring and its row: the rest fade to a quarter, as on the charts. */
 .breakdown.is-lit .ring:not(.is-hot), .breakdown.is-lit .ring-list li:not(.is-hot) { opacity: 0.25; }
 .breakdown .ring, .ring-list li { transition: opacity 0.15s; }
@@ -440,6 +446,11 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   background: var(--rhubarb); transition: width 0.12s, background-color 0.25s; pointer-events: none;
 }
 .hook-input.is-food ~ .hook-underline { background: var(--food); }
+/* Keyboard focus thickens the underline (without JavaScript, inks the
+   input's own border), so the field is marked once a word is typed and
+   the placeholder has dimmed. */
+.hook-input:focus-visible ~ .hook-underline { height: 0.11em; }
+html:not(.js) .hook-input:focus-visible { border-bottom-color: var(--ink); }
 .hook-caret {
   position: absolute; left: 0; top: 0.12em; bottom: 0.16em; width: 0.045em; margin-left: 0.04em; background: var(--muted);
   pointer-events: none; animation: hook-blink 1.1s steps(1) infinite;
@@ -451,6 +462,17 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   .hook-caret { animation: none; }
 }
 @media print { .hook-caret { display: none; } }
+/* Printing: the chrome and the controls go (the sticky header and nav,
+   the switches, the time controls, the GitHub mark, the signature, the
+   ways on), nothing sticks, and the calendar, drawn at its own size, is
+   scaled to fit a portrait sheet. */
+@media print {
+  .site-header, .switch, .tt-controls, .tt-rail, .tt-handle, .tt-jump, .footer-github, .hearts, .card-hint, .onwards, .this-week-more, .also-more { display: none !important; }
+  .chart-head, .cal-corner, .cal-labels { position: static; }
+  .chart-body { overflow: visible; }
+  .cal { zoom: 0.72; }
+  body { background: #fff; color: #000; }
+}
 @media (max-width: 37.49rem) {
   .hook-line { flex-direction: column; align-items: stretch; font-size: clamp(3rem, 19vw, 6rem); line-height: 1; }
   .hook-line .hook-slot { display: flex; align-items: flex-end; width: 100%; height: 1.26em; margin-bottom: 0.1em; }

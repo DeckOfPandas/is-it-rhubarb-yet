@@ -115,6 +115,13 @@ A ring of the food itself, as a fish's coasts or a glasshouse crop has:
   governed by `ring`, not `lead`: a named variety with no `ring` is
   searchable by its name and how it is said; a ring (a coast, a
   glasshouse) is not.
+- **Naming a food mid-sentence.** A food's name is lower-cased wherever
+  it goes mid-sentence ("Is it apples yet?", "Add apples to your
+  calendar", "When are apples in season?", the card's way on). Where
+  that is wrong, `said` on the food gives the form: "John Dory", "Dover
+  sole", "Brussels sprouts", "Jerusalem artichokes", "runner & French
+  beans"; a never-food takes it too ("Brazil nuts"). `_includes/said.html`
+  and `foodSaid` in `verdict.js` are the one rule.
 - **Naming a variety.** A named variety is a type (forced, maincrop) or,
   with `cultivar: true`, a cultivar (Cox, Conference). In a list it
   follows the food in brackets, a type lower-cased and a cultivar as

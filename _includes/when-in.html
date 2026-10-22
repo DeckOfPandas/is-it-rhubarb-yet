@@ -4,7 +4,8 @@ A name is plural when it joins two foods with " & ", or ends in s but not
 ss or us (watercress, sea bass, asparagus and hedgehog fungus are each
 one thing). A qualifier in brackets after the name is left out of the
 test, and a name in `wi_singular` is one thing whatever it ends in (hen
-of the woods). A food page's title and meta description.
+of the woods). The name is said as `said` when given (John Dory), else
+in lower case. A food page's title and meta description.
 {%- endcomment -%}
 {%- assign wi_singular = "hen of the woods" | split: "|" -%}
 {%- assign wi_head = include.name | split: " (" | first -%}
@@ -15,4 +16,4 @@ of the woods). A food page's title and meta description.
 {%- if wi_singular contains wi_lower -%}{%- assign wi_be = "is" -%}
 {%- elsif include.name contains " & " -%}{%- assign wi_be = "are" -%}
 {%- elsif wi_end1 == "s" and wi_end2 != "ss" and wi_end2 != "us" -%}{%- assign wi_be = "are" -%}{%- endif -%}
-When {{ wi_be }} {{ include.name | downcase }} in season?
+When {{ wi_be }} {% if include.said %}{{ include.said }}{% else %}{{ include.name | downcase }}{% endif %} in season?

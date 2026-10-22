@@ -62,9 +62,11 @@ function main() {
   baked.phrases = { last: V.byPhrase(baked.now.last), onway: V.byPhrase(baked.now.onway) };
   baked.az = { arrived: V.azList(baked.now.arrived) };
 
-  // Per food: the verdict and date line for the whole food, and its rings
-  // longest season first (`rings`, indexes into its varieties), each with
-  // its own phrase (`ringLines`, by index), for the dial and its ring list.
+  // Per food: the verdict and date line for the whole food, its season in
+  // months (`season`, the page's "In season July to October."), and its
+  // rings longest season first (`rings`, indexes into its varieties), each
+  // with its own phrase (`ringLines`, by index), for the dial and its ring
+  // list.
   foods.forEach((f) => {
     const fv = V.foodVerdict(f, week);
     const q = V.pickQuote(quotes, fv.verdict, f.slug, week);
@@ -72,6 +74,7 @@ function main() {
       verdict: fv.verdict,
       word: titleWord(fv.verdict),
       line: V.dateLine(fv.whole, year, date),
+      season: V.seasonWords(f.varieties, year),
       rings: V.ringOrder(f),
       ringLines: fv.varieties.map((r) => V.phrase(r, year, date)),
       since: fv.whole.since === undefined ? null : fv.whole.since,

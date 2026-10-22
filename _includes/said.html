@@ -1,0 +1,6 @@
+{%- comment -%}
+A food's (or never-food's) name mid-sentence: its `said` form where
+lower-casing the name is wrong (John Dory, Dover sole), else the name in
+lower case. verdict.js's foodSaid is the same rule. Expects: food.
+{%- endcomment -%}
+{%- if include.food.said -%}{{ include.food.said }}{%- else -%}{{ include.food.name | downcase }}{%- endif -%}

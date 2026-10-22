@@ -124,11 +124,37 @@ test("a variety is named as a type or a cultivar, in a list and in a sentence", 
   assert.equal(V.varietySaid(bySlug.rhubarb, v("rhubarb", "Forced"), true), "forced rhubarb");
   assert.equal(V.varietySaid(bySlug.apples, v("apples", "Cox")), "Cox apples");
   assert.equal(V.varietySaid(bySlug.apples, v("apples", "Cox"), true), "Cox apples", "a cultivar is never lower-cased");
+  assert.equal(V.foodSaid(bySlug.apples), "apples");
+  assert.equal(V.foodSaid(bySlug["john-dory"]), "John Dory", "a proper noun keeps its capitals mid-sentence");
+  assert.equal(V.varietySaid(bySlug["john-dory"], v("john-dory", "South West"), true), "John Dory (South West)");
+  assert.equal(V.foodSaid(bySlug["dover-sole"]), "Dover sole");
+  assert.equal(V.foodSaid(bySlug["runner-french-beans"]), "runner & French beans");
   assert.equal(V.varietySaid(bySlug.lamb, v("lamb", "New-season")), "New-season lamb", "said wins");
   assert.equal(V.varietySaid(bySlug.lamb, v("lamb", "New-season"), true), "new-season lamb");
   assert.equal(V.varietySaid(bySlug.venison, v("venison", "Roe"), true), "roe deer");
   assert.equal(V.varietySaid(bySlug.cabbage, v("cabbage", "Savoy"), true), "savoy cabbage");
   ["apples", "pears"].forEach((slug) => bySlug[slug].varieties.forEach((x) => assert.equal(x.cultivar, true, slug + " " + x.name)));
+});
+
+test("a season in months: each fresh run by the months its weeks are mostly in", () => {
+  assert.equal(V.seasonWords(bySlug.raspberries.varieties, YEAR), "May to October");
+  assert.equal(V.seasonWords(bySlug.cod.varieties, YEAR), "all year");
+  assert.equal(V.seasonWords(bySlug.rhubarb.varieties, YEAR), "May to July and November to March", "the wrap is one run, listed after the first gap");
+  assert.equal(V.seasonWords(bySlug.cucumber.varieties, YEAR), "April to September", "a glasshouse ring is held, not fresh, so it is left out");
+  assert.equal(V.seasonWords([{ name: "", weeks: [[1, 13, "in"]] }], YEAR), "January to March", "week 13 ends on 1 April but is mostly March");
+  assert.equal(V.seasonWords([{ name: "", weeks: [[10, 20, "avail"]] }], YEAR), "", "nothing ever in");
+});
+
+test("a glasshouse ring's just-about tail does not carry the whole food", () => {
+  // Cucumber: outdoor just about to week 43, glasshouse in to 43 and
+  // just about to 48. The whole food ends with the fresh food, and
+  // never says "then glasshouse-grown" past where the glasshouse row's
+  // own line ends.
+  const fv = verdictOf("cucumber", 43);
+  const line = V.dateLine(fv.whole, YEAR, new Date(2026, 9, 22, 12));
+  assert.equal(line, "Just about, for a few more days.");
+  const glass = fv.varieties.find((r) => r.name === "Glasshouse");
+  assert.equal(V.phrase(glass, YEAR, new Date(2026, 9, 22, 12)), "At its best for a few more days, then just about until late November");
 });
 
 test("a two-part arrival is grouped by when it is properly in", () => {

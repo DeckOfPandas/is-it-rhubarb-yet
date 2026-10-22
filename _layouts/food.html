@@ -24,7 +24,7 @@ to this food). The whole page keys off --food, the food's colour.
 {%- endfor -%} }{%- endcapture -%}
 
 <article class="food" style="--food: {{ food.colour }}" data-food='{{ food | jsonify | escape }}' data-quotes='{{ quotes_json | escape }}' data-word-em='{{ site.data.word_em | jsonify | escape }}'>
-  <p class="ask">Is it <span class="ask-name">{{ food.name | downcase }}</span> yet?</p>
+  <p class="ask">Is it <span class="ask-name">{% include said.html food=food %}</span> yet?</p>
 
   {%- comment -%} The verdict's width in em (word_em.yml) sizes it to the
      line in CSS; site.js resets it when the visitor's verdict differs.
@@ -41,25 +41,47 @@ to this food). The whole page keys off --food, the food's colour.
     {%- endif -%}
   </blockquote>
 
-  {%- comment -%} The breakdown: the dial, and under it, for a food of two
-     rings or more, the dial's legend. One row per ring in the dial's
-     order, outer ring first: a swatch, the ring's name, its own phrase
-     and its source's short name, small and muted. A row and its ring
-     light each other, the rest fading to a quarter (site.js); a tap
-     pins the light. {%- endcomment -%}
+  {%- comment -%} The breakdown: the dial; under it the food's season in
+     months (baked by tools/bake.js from verdict.js's seasonWords: the
+     whole food's fresh weeks, a glasshouse ring left out as held), which
+     answers the title's question in words; and, for a food of two rings
+     or more, the dial's legend, "From the outside in". One row per ring
+     in the dial's order, outer ring first: a swatch, the ring's name,
+     its own phrase and, only where its sources are not the ones every
+     ring shares, its own, small and muted; the shared sources are said
+     once under the list. A row and its ring light each other, the rest
+     fading to a quarter (site.js); a tap pins the light. {%- endcomment -%}
   <div class="breakdown" id="breakdown">
   {%- include season-wheel.html food=food -%}
+  {%- if b.season and b.season != "" and food.unsold == nil -%}
+  <p class="season-line">In season {{ b.season }}.</p>
+  {%- endif -%}
   {%- if food.varieties.size > 1 -%}
+  {%- assign food_keys = food.sources | default: "" -%}
+  {%- if food_keys == "" -%}{%- assign food_keys = "" | split: "" | push: food.source -%}{%- endif -%}
+  {%- assign shared = "" | split: "" -%}
+  {%- for k in food_keys -%}
+    {%- assign everywhere = true -%}
+    {%- for vi in b.rings -%}
+      {%- assign rv = food.varieties[vi] -%}
+      {%- assign rk = rv.sources | default: food_keys -%}
+      {%- unless rk contains k -%}{%- assign everywhere = false -%}{%- endunless -%}
+    {%- endfor -%}
+    {%- if everywhere -%}{%- assign shared = shared | push: k -%}{%- endif -%}
+  {%- endfor -%}
+  <p class="ring-lead">From the outside in:</p>
   <ol class="ring-list" id="ring-list">
   {%- for vi in b.rings -%}
     {%- assign v = food.varieties[vi] -%}
-    {%- assign keys = v.sources | default: food.sources -%}
-    {%- if keys == nil or keys == "" -%}{%- assign keys = "" | split: "" | push: food.source -%}{%- endif -%}
-    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span> <span class="sep" aria-hidden="true">·</span> <small class="ring-source">
-      {%- for k in keys -%}{%- assign s = site.data.sources | where: "key", k | first -%}{% unless forloop.first %} &amp; {% endunless %}{{ s.short | default: s.name | default: k }}{%- endfor -%}
-    </small></span></button></li>
+    {%- assign rk = v.sources | default: food_keys -%}
+    {%- assign own = "" | split: "" -%}
+    {%- for k in rk -%}{%- unless shared contains k -%}{%- assign own = own | push: k -%}{%- endunless -%}{%- endfor -%}
+    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span>{% if own.size > 0 %} <span class="sep" aria-hidden="true">·</span> <small class="ring-source">{% include source-names.html keys=own %}</small>{% endif %}</span></button></li>
   {%- endfor -%}
   </ol>
+  {%- if shared.size > 0 -%}
+  <p class="ring-shared">Dates from {% include source-names.html keys=shared %}.</p>
+  {%- endif -%}
   {%- endif -%}
   </div>
 
@@ -121,7 +143,7 @@ to this food). The whole page keys off --food, the food's colour.
      {%- endcomment -%}
   {%- unless food.unsold -%}
   {%- capture feed -%}{{ site.url | replace: "https://", "webcal://" | replace: "http://", "webcal://" }}{{ site.baseurl }}/remind/{{ food.slug }}.ics{%- endcapture -%}
-  <p class="calendar-line"><span class="instruct">Add {{ food.name | downcase }} to your calendar:</span> <a href="{{ feed }}">Apple</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">Google</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">.ics</a></p>
+  <p class="calendar-line"><span class="instruct">Add {% include said.html food=food %} to your calendar:</span> <a href="{{ feed }}">Apple</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="https://calendar.google.com/calendar/r?cid={{ feed | url_encode }}">Google</a><span class="sep" aria-hidden="true">&nbsp;·</span> <a href="{{ '/remind/' | append: food.slug | append: '.ics' | relative_url }}">.ics</a></p>
   {%- endunless -%}
 
   <p class="onwards"><a class="arrow-link" href="{{ '/' | relative_url }}#search">{% include arrow-words.html text="Ask about something else" %}</a></p>

@@ -184,8 +184,8 @@
     });
   }
 
-  // A card's way on to the food's page, the name in its sentence form.
-  function tellMeAbout(name) { return "Tell me everything about " + name.toLowerCase(); }
+  // A card's way on to the food's page, the name as it is said mid-sentence.
+  function tellMeAbout(said) { return "Tell me everything about " + said; }
 
   // A link with an arrow after its words, the same markup as
   // _includes/arrow-words.html: the words are underlined, the arrow never
@@ -725,7 +725,7 @@
       var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
       var pick = pickSome(V.flatten(now.arrived).concat(V.flatten(now.still)), 1)[0];
       if (!pick) return;
-      a.textContent = pick.name.toLowerCase();
+      a.textContent = V.foodSaid(pick);
       a.href = foodUrl(pick.slug);
       a.style.setProperty("--food", pick.colour);
     });
@@ -973,7 +973,7 @@
     var index = rows.map(function (li) {
       var name = li.querySelector(".food-title").textContent;
       return {
-        name: name, label: "", slug: li.dataset.slug, ask: name.toLowerCase(), never: li.classList.contains("never"),
+        name: name, label: "", slug: li.dataset.slug, ask: li.dataset.said || name.toLowerCase(), never: li.classList.contains("never"),
         strings: terms(li.dataset.terms.split("|").filter(Boolean)),
         names: (li.dataset.names || "").split("|").filter(Boolean),
         colour: function () { return getComputedStyle(li).getPropertyValue("--food").trim(); },
@@ -1120,7 +1120,7 @@
         // carries the quotation and the ways on; only the dial is left out.
         oneMore.hidden = false;
         oneMore.href = foodUrl(it.slug);
-        setArrowText(oneMore, it.never ? "Tell me why" : tellMeAbout(it.name));
+        setArrowText(oneMore, it.never ? "Tell me why" : tellMeAbout(it.ask));
         var ring = it.ring();
         dialFor(it.never ? null : it.slug, ring, ring >= 0 ? it.colour() : null);
         one.hidden = false;
@@ -1373,6 +1373,16 @@
     // RANGE either way; the address carries week= and, in another year,
     // year=.
     var RANGE = 52;
+    // The title's week, in words up to twelve weeks either way and in
+    // figures beyond: "this week", "in three weeks", "6 weeks ago".
+    var SMALL = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+    function whenWords(offset) {
+      var n = Math.abs(offset), words = n <= 12 ? SMALL[n] : String(n);
+      if (offset === 0) return "this week";
+      if (offset === 1) return "next week";
+      if (offset === -1) return "last week";
+      return offset > 0 ? "in " + words + " weeks" : words + " weeks ago";
+    }
     function weekAt(offset) {
       var w = WEEK + offset, y = YEAR;
       while (w > 52) { w -= 52; y++; }
@@ -1390,7 +1400,7 @@
     // while nothing else has been drawn over it.
     function render() {
       var at = weekAt(offset), w = at.week, y = at.year;
-      title.textContent = "In season" + (offset === 0 ? " this week" : offset === 1 ? " next week" : offset === -1 ? " last week" : "");
+      title.textContent = "In season " + whenWords(offset);
       document.title = title.textContent + (site ? " · " + site : "");
       setDate(dates, V.fmtRange(w, y));
       prev.disabled = offset <= -RANGE;

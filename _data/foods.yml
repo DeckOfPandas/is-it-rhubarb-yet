@@ -43,10 +43,13 @@
 #   line this sentence (wild salmon).
 # buy: optional, what to ask for at the counter; for fish, the Marine
 #   Conservation Society's Good Fish Guide.
-# said: optional on a variety, how it is said in full. Unset, a variety
-#   is its name then the food's: "Bramley apples", "Forced rhubarb".
-#   Set it when the name is a noun on its own (Mooli, Calabrese,
-#   Mutton) or the phrase hyphenates (New-season lamb).
+# said: optional, how a name is said mid-sentence. On a food, set it
+#   where lower-casing the name is wrong: "John Dory", "Dover sole",
+#   "Brussels sprouts" (unset, a food is its name in lower case). On a
+#   variety, how it is said in full; unset, a variety is its name then
+#   the food's: "Bramley apples", "Forced rhubarb". Set it when the name
+#   is a noun on its own (Mooli, Calabrese, Mutton) or the phrase
+#   hyphenates (New-season lamb).
 # aliases: optional, other names a food is asked for by (zucchini). An
 #   alias belongs to one food; tools/check-foods.py enforces it.
 # also: optional, broader words a food should answer to as well, shared
@@ -140,6 +143,7 @@
 
 - name: "Jerusalem artichokes"
   slug: jerusalem-artichokes
+  said: "Jerusalem artichokes"
   aliases: ["sunchokes"]
   group: roots
   also: ["veg", "vegetables"]
@@ -315,6 +319,7 @@
 
 - name: "Brussels sprouts"
   slug: brussels-sprouts
+  said: "Brussels sprouts"
   aliases: ["sprout tops", "kalettes", "flower sprouts"]
   group: brassicas
   also: ["veg", "vegetables"]
@@ -826,6 +831,7 @@
 
 - name: "Runner & French beans"
   slug: runner-french-beans
+  said: "runner & French beans"
   aliases: ["runner beans", "green beans"]
   group: shoots
   also: ["veg", "vegetables"]
@@ -2525,6 +2531,7 @@
 
 - name: "Dover sole"
   slug: dover-sole
+  said: "Dover sole"
   group: fish
   also: ["fish"]
   colour: "#a14e4f"
@@ -3157,7 +3164,7 @@
         - [18, 22, avail]
         - [23, 48, in]
 
-- name: "Skates & rays"
+- name: "Skates and rays"
   slug: skates-rays
   aliases: ["skate wing", "skate wings"]
   group: fish
@@ -3210,6 +3217,7 @@
 
 - name: "John Dory"
   slug: john-dory
+  said: "John Dory"
   group: fish
   also: ["fish"]
   colour: "#787800"
