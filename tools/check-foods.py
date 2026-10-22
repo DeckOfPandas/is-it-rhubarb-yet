@@ -39,6 +39,9 @@ NEVER_STUBS = ROOT / "_never"
 VERDICTS = {"yes", "yesish", "nearly", "just", "no", "never"}
 STATES = {"in", "avail", "store"}
 RINGS = {"region", "method", "zone", "part"}
+# What a `ring: method` ring is: `glasshouse` answers as storage does
+# (assets/verdict.js reads the key, never the name).
+METHODS = {"glasshouse", "outdoor", "cultivated", "wild", "fresh", "market", "farmed"}
 COLOUR = re.compile(r"^#[0-9a-f]{6}$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
@@ -264,6 +267,11 @@ def main() -> int:
                 check_text_colours(v, label, problems)
             if "ring" in v and v["ring"] not in RINGS:
                 problems.append(f"{label}: ring is one of {sorted(RINGS)}")
+            if v.get("ring") == "method":
+                if v.get("method") not in METHODS:
+                    problems.append(f"{label}: a method ring needs method, one of {sorted(METHODS)}")
+            elif "method" in v:
+                problems.append(f"{label}: method belongs on a ring: method")
             if "lead" in v and v["lead"] is not False:
                 problems.append(f"{label}: lead is false or left out")
             if "sources" in v:

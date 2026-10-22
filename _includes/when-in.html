@@ -2,9 +2,9 @@
 "When is basil in season?", "When are apples in season?". Expects: name.
 A name is plural when it joins two foods with " & ", or ends in s but not
 ss or us (watercress, sea bass, asparagus and hedgehog fungus are each
-one thing). A qualifier in brackets, "Mushrooms (cultivated)", is left
-out of the test, and a name in `wi_singular` is one thing whatever it
-ends in (hen of the woods). A food page's title and meta description.
+one thing). A qualifier in brackets after the name is left out of the
+test, and a name in `wi_singular` is one thing whatever it ends in (hen
+of the woods). A food page's title and meta description.
 {%- endcomment -%}
 {%- assign wi_singular = "hen of the woods" | split: "|" -%}
 {%- assign wi_head = include.name | split: " (" | first -%}

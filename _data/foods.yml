@@ -9,13 +9,16 @@
 # ring: region (a coast, a producer, a provenance), method (glasshouse,
 #   outdoor, cultivated, wild), zone (a legal zone) or part (shoots,
 #   flowers). Unset on a named variety or the food's one ring.
+# method: on a `ring: method` ring, what it is: glasshouse, outdoor,
+#   cultivated, wild, fresh, market or farmed. A glasshouse ring answers
+#   as storage does (assets/verdict.js reads this key, never the name).
 # lead: false on a ring that is shown (the food's dial and ring list) but
 #   gives no calendar row, wheel dot or calendar event: every coast but a
 #   fish's South West, a glasshouse, a wild ring beside a market one, a
 #   provenance ring. Every ring counts towards the verdict, which answers
-#   for the whole food (assets/verdict.js); a ring named Glasshouse counts
-#   as storage does. Search finds a named variety with no `ring` by its
-#   name and how it is said; a ring is never a search hit.
+#   for the whole food (assets/verdict.js); a `method: glasshouse` ring
+#   counts as storage does. Search finds a named variety with no `ring`
+#   by its name and how it is said; a ring is never a search hit.
 # weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
 # state: in = in season, avail = just coming in or going out, store =
 #   available from storage after the harvest (a week of storage alone is
@@ -464,11 +467,13 @@
   varieties:
     - name: "Outdoor"
       ring: method
+      method: outdoor
       sources: [ncgm]
       weeks:
         - [27, 39, in]
     - name: "Glasshouse"
       ring: method
+      method: glasshouse
       lead: false
       sources: [defra]
       notes:
@@ -626,6 +631,7 @@
         - [40, 43, avail]
     - name: "Glasshouse"
       ring: method
+      method: glasshouse
       lead: false
       sources: [defra]
       notes:
@@ -698,6 +704,7 @@
         - [14, 39, in]
     - name: "Glasshouse"
       ring: method
+      method: glasshouse
       lead: false
       sources: [defra]
       notes:
@@ -749,6 +756,7 @@
   varieties:
     - name: "Cultivated"
       ring: method
+      method: cultivated
       sources: [ncgm]
       weeks:
         - [18, 26, avail]
@@ -756,6 +764,7 @@
         - [40, 48, avail]
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [forestheart]
       notes:
@@ -1022,6 +1031,7 @@
         - [18, 43, in]
     - name: "Glasshouse"
       ring: method
+      method: glasshouse
       lead: false
       sources: [defra]
       notes:
@@ -1084,6 +1094,7 @@
         - [36, 48, avail]
     - name: "Glasshouse"
       ring: method
+      method: glasshouse
       lead: false
       sources: [defra]
       notes:
@@ -1301,6 +1312,7 @@
         - [44, 48, avail]
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [forestheart]
       weeks:
@@ -1357,6 +1369,7 @@
         - [27, 35, in]
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [forestheart]
       weeks:
@@ -1456,6 +1469,7 @@
         - [36, 43, in]
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [forestheart]
       weeks:
@@ -1472,11 +1486,13 @@
   varieties:
     - name: "Fresh"
       ring: method
+      method: fresh
       sources: [ncgm]
       weeks:
         - [40, 43, in]
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [forestheart]
       notes:
@@ -1778,6 +1794,7 @@
   varieties:
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [first_nature]
       notes:
@@ -1787,6 +1804,7 @@
         - [44, 48, avail]
     - name: "Market"
       ring: method
+      method: market
       sources: [ncgm]
       weeks:
         - [27, 48, in]
@@ -1820,6 +1838,7 @@
   varieties:
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [first_nature]
       notes:
@@ -1861,6 +1880,7 @@
   varieties:
     - name: "Wild"
       ring: method
+      method: wild
       lead: false
       sources: [first_nature]
       notes:
@@ -1870,11 +1890,12 @@
         - [49, 52, avail]
     - name: "Cultivated"
       ring: method
+      method: cultivated
       sources: [ncgm]
       weeks:
         - [1, 52, in]
 
-- name: "Mushrooms (cultivated)"
+- name: "Cultivated mushrooms"
   slug: mushrooms-cultivated
   aliases: ["button mushrooms", "cup mushrooms", "flat mushrooms"]
   also: ["mushrooms"]
@@ -2158,8 +2179,7 @@
       sources: [bnfs]
       weeks:
         - [1, 8, avail]
-        - [14, 39, in]
-        - [40, 48, avail]
+        - [14, 48, in]
     - name: "South West"
       ring: region
       sources: [ffs]
@@ -2173,9 +2193,7 @@
       notes:
         - "All year round, at its best in summer."
       weeks:
-        - [1, 22, avail]
-        - [23, 35, in]
-        - [36, 52, avail]
+        - [1, 52, in]
 
 - name: "Sea bass"
   slug: sea-bass
@@ -2201,10 +2219,8 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [1, 13, in]
-        - [14, 22, avail]
-        - [40, 48, avail]
-        - [49, 52, in]
+        - [1, 22, in]
+        - [40, 52, in]
     - name: "National"
       ring: region
       lead: false
@@ -2234,15 +2250,12 @@
       sources: [bnfs]
       weeks:
         - [1, 8, avail]
-        - [31, 35, in]
-        - [36, 52, avail]
+        - [31, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
       weeks:
-        - [1, 13, in]
-        - [14, 26, avail]
-        - [27, 52, in]
+        - [1, 52, in]
     - name: "Cornish fishery (MSC)"
       ring: region
       lead: false
@@ -2270,15 +2283,12 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 39, avail]
-        - [40, 52, in]
+        - [1, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
       weeks:
-        - [14, 26, avail]
-        - [27, 39, in]
-        - [40, 48, avail]
+        - [14, 48, in]
 
 - name: "Cod"
   slug: cod
@@ -2297,25 +2307,19 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 4, in]
-        - [5, 35, avail]
-        - [36, 52, in]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
       sources: [bnfs]
       weeks:
-        - [1, 4, in]
-        - [5, 48, avail]
-        - [49, 52, in]
+        - [1, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
       weeks:
         - [1, 8, avail]
-        - [9, 22, in]
-        - [23, 35, avail]
-        - [36, 43, in]
+        - [9, 43, in]
     - name: "National"
       ring: region
       lead: false
@@ -2325,8 +2329,7 @@
       weeks:
         - [1, 8, avail]
         - [23, 26, avail]
-        - [27, 43, in]
-        - [44, 52, avail]
+        - [27, 52, in]
 
 - name: "Haddock"
   slug: haddock
@@ -2343,9 +2346,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 4, in]
-        - [5, 35, avail]
-        - [36, 52, in]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
@@ -2357,9 +2358,7 @@
       sources: [ffs]
       weeks:
         - [1, 4, avail]
-        - [5, 17, in]
-        - [18, 30, avail]
-        - [31, 43, in]
+        - [5, 43, in]
 
 - name: "Hake"
   slug: hake
@@ -2377,8 +2376,7 @@
       sources: [northumberland]
       weeks:
         - [1, 8, avail]
-        - [9, 35, in]
-        - [36, 52, avail]
+        - [9, 52, in]
     - name: "South East"
       ring: region
       lead: false
@@ -2411,9 +2409,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 17, avail]
-        - [18, 43, in]
-        - [44, 52, avail]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
@@ -2424,8 +2420,7 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [9, 17, avail]
-        - [18, 35, in]
+        - [9, 35, in]
         - [36, 43, avail]
         - [44, 52, in]
     - name: "National"
@@ -2453,8 +2448,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 35, avail]
-        - [36, 52, in]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
@@ -2497,16 +2491,12 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 22, avail]
-        - [23, 35, in]
-        - [36, 52, avail]
+        - [1, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
       weeks:
-        - [9, 22, in]
-        - [23, 43, avail]
-        - [44, 52, in]
+        - [9, 52, in]
 
 - name: "Whiting"
   slug: whiting
@@ -2523,9 +2513,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 4, in]
-        - [5, 39, avail]
-        - [40, 52, in]
+        - [1, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
@@ -2546,8 +2534,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 30, avail]
-        - [31, 48, in]
+        - [1, 48, in]
         - [49, 52, avail]
     - name: "South East"
       ring: region
@@ -2559,9 +2546,7 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [5, 13, avail]
-        - [14, 39, in]
-        - [40, 48, avail]
+        - [5, 48, in]
     - name: "National"
       ring: region
       lead: false
@@ -2569,9 +2554,7 @@
       notes:
         - "All year round, best quality October-May."
       weeks:
-        - [1, 22, in]
-        - [23, 39, avail]
-        - [40, 52, in]
+        - [1, 52, in]
 
 - name: "Lemon sole"
   slug: lemon-sole
@@ -2619,18 +2602,14 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 22, avail]
-        - [23, 35, in]
-        - [36, 52, avail]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
       sources: [bnfs]
       weeks:
-        - [1, 13, avail]
-        - [14, 22, in]
-        - [40, 43, in]
-        - [44, 52, avail]
+        - [1, 22, in]
+        - [40, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
@@ -2666,9 +2645,7 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [9, 17, avail]
-        - [18, 39, in]
-        - [40, 48, avail]
+        - [9, 48, in]
 
 - name: "Cuttlefish"
   slug: cuttlefish
@@ -2690,8 +2667,7 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [1, 8, in]
-        - [9, 17, avail]
+        - [1, 17, in]
         - [36, 43, avail]
 
 - name: "Wild salmon"
@@ -2729,8 +2705,7 @@
       ring: region
       sources: [northumberland]
       weeks:
-        - [14, 22, avail]
-        - [23, 35, in]
+        - [14, 35, in]
 
 - name: "Squid"
   slug: squid
@@ -2747,9 +2722,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 4, in]
-        - [5, 22, avail]
-        - [23, 52, in]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
@@ -2760,9 +2733,7 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [1, 4, in]
-        - [5, 39, avail]
-        - [40, 52, in]
+        - [1, 52, in]
     - name: "National"
       ring: region
       lead: false
@@ -2771,8 +2742,7 @@
         - "Season May-October, but best availability and quality October-March."
       weeks:
         - [1, 13, in]
-        - [18, 39, avail]
-        - [40, 52, in]
+        - [18, 52, in]
 
 - name: "Brown crab"
   slug: brown-crab
@@ -2791,9 +2761,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 8, in]
-        - [9, 43, avail]
-        - [44, 52, in]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
@@ -2804,8 +2772,7 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [5, 13, avail]
-        - [14, 39, in]
+        - [5, 39, in]
     - name: "National"
       ring: region
       lead: false
@@ -2813,9 +2780,7 @@
       notes:
         - "All year round; season and best availability April-September."
       weeks:
-        - [1, 13, avail]
-        - [14, 39, in]
-        - [40, 52, avail]
+        - [1, 52, in]
 
 - name: "Lobster"
   slug: lobster
@@ -2834,17 +2799,13 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 13, avail]
-        - [14, 43, in]
-        - [44, 52, avail]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
       sources: [bnfs]
       weeks:
-        - [1, 13, avail]
-        - [14, 43, in]
-        - [44, 52, avail]
+        - [1, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
@@ -2857,8 +2818,7 @@
       notes:
         - "All year round; season April-November."
       weeks:
-        - [1, 13, avail]
-        - [14, 48, in]
+        - [1, 48, in]
         - [49, 52, avail]
 
 - name: "Langoustines"
@@ -2875,9 +2835,7 @@
       ring: region
       sources: [northumberland]
       weeks:
-        - [1, 4, in]
-        - [5, 35, avail]
-        - [36, 52, in]
+        - [1, 52, in]
 
 - name: "Mussels"
   slug: mussels
@@ -2978,17 +2936,13 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 22, avail]
-        - [23, 35, in]
-        - [36, 52, avail]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
       sources: [bnfs]
       weeks:
-        - [1, 8, in]
-        - [9, 39, avail]
-        - [40, 52, in]
+        - [1, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
@@ -2996,8 +2950,7 @@
         - [9, 13, avail]
         - [14, 22, in]
         - [23, 26, avail]
-        - [27, 39, in]
-        - [40, 48, avail]
+        - [27, 48, in]
     - name: "Orkney, hand-dived"
       ring: region
       lead: false
@@ -3060,9 +3013,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 22, avail]
-        - [23, 43, in]
-        - [44, 52, avail]
+        - [1, 52, in]
     - name: "South East"
       ring: region
       lead: false
@@ -3105,8 +3056,7 @@
       ring: region
       sources: [ffs]
       weeks:
-        - [1, 22, avail]
-        - [23, 39, in]
+        - [1, 39, in]
     - name: "National"
       ring: region
       lead: false
@@ -3115,8 +3065,7 @@
         - "UK season May-November, best in summer."
       weeks:
         - [18, 22, avail]
-        - [23, 35, in]
-        - [36, 48, avail]
+        - [23, 48, in]
 
 - name: "Skates & rays"
   slug: skates-rays
@@ -3162,15 +3111,12 @@
       lead: false
       sources: [bnfs]
       weeks:
-        - [14, 35, in]
-        - [36, 48, avail]
+        - [14, 48, in]
     - name: "South West"
       ring: region
       sources: [ffs]
       weeks:
-        - [14, 22, avail]
-        - [23, 39, in]
-        - [40, 48, avail]
+        - [14, 48, in]
 
 - name: "John Dory"
   slug: john-dory
@@ -3217,9 +3163,7 @@
       lead: false
       sources: [northumberland]
       weeks:
-        - [1, 22, avail]
-        - [23, 35, in]
-        - [36, 52, avail]
+        - [1, 52, in]
     - name: "South West"
       ring: region
       sources: [ffs]
@@ -3272,8 +3216,7 @@
       ring: region
       sources: [northumberland]
       weeks:
-        - [1, 17, in]
-        - [18, 52, avail]
+        - [1, 52, in]
 
 - name: "Halibut"
   slug: halibut
