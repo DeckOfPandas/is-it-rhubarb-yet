@@ -1,7 +1,7 @@
 # Is It Rhubarb Yet?
 
 A website that answers the question. Also the same question about
-147 other things that grow, swim or run about in the UK, and 21 that
+172 other things that grow, swim or run about in the UK, and 31 that
 never will.
 
 **https://deckofpandas.github.io/is-it-rhubarb-yet/**
@@ -39,9 +39,9 @@ a small amount of JavaScript. Everything is hosted here, nothing fetched
 from anywhere else.
 
 **Hand-curated data, from named sources.** The seasons come from the
-New Covent Garden Market calendar, cross-checked against BBC Good Food,
-with the shooting seasons from BASC and the fish from a Cornish
-wholesaler's chart. Every row says where it came from, and a row that
+New Covent Garden Market calendar and Defra's wholesale prices, with the
+shooting seasons from BASC and the fish from three fishmongers on three
+coasts and Seafish. Every row says where it came from, and a row that
 is still only common knowledge says that too.
 
 ## Data
