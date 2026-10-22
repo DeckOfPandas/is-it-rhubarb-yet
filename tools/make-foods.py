@@ -413,8 +413,8 @@ FOODS = [
 ]
 
 # What to ask for at the counter, by slug: the better-managed stock or
-# gentler catch method in a sentence, for fish and shellfish. Shown on
-# the food's page. Helen's steer: useful, not preachy.
+# gentler catch method in one useful, unpreachy sentence, for fish and
+# shellfish. Shown on the food's page.
 BUY = {
     "mackerel": "Handline-caught from the South West is the good choice, and most UK mackerel is.",
     "sea-bass": "Wild bass is line-caught in small numbers; farmed is the everyday fish. Ask which you are getting.",

@@ -10,11 +10,12 @@
 #   outdoor, cultivated, wild), zone (a legal zone) or part (shoots,
 #   flowers). Unset on a named variety or the food's one ring.
 # lead: false on a ring that is shown (the food's dial and ring list) but
-#   gives no calendar row, wheel dot, search hit or calendar event: every
-#   coast but a fish's South West, a glasshouse, a wild ring beside a
-#   market one, a provenance ring. Every ring counts towards the verdict,
-#   which answers for the whole food (assets/verdict.js); a ring named
-#   Glasshouse counts as storage does.
+#   gives no calendar row, wheel dot or calendar event: every coast but a
+#   fish's South West, a glasshouse, a wild ring beside a market one, a
+#   provenance ring. Every ring counts towards the verdict, which answers
+#   for the whole food (assets/verdict.js); a ring named Glasshouse counts
+#   as storage does. Search finds a named variety with no `ring` by its
+#   name and how it is said; a ring is never a search hit.
 # weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
 # state: in = in season, avail = just coming in or going out, store =
 #   available from storage after the harvest (a week of storage alone is
