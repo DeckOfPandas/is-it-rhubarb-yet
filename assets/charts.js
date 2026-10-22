@@ -339,14 +339,31 @@
       line.style.transformOrigin = C + "px " + C + "px";
       svg.appendChild(line);
       var knob = makeHandle(svgEl("g", "tt-handle tt-knob"));
+      // An invisible disc first, so the knob is a 44px target at every
+      // width: its radius is set in wheel units from the wheel's drawn
+      // scale by layoutDial, since a fixed radius would be 21px on a
+      // phone and a hand's width over the labels on a desktop (a
+      // non-scaling stroke is not hit-tested).
+      var hit = svgEl("circle", "tt-knob-hit", { r: 22 });
+      knob.appendChild(hit);
       knob.appendChild(svgEl("circle", "tt-knob-ring", { r: 15 }));
       knob.appendChild(svgEl("circle", "tt-knob-dot", { r: 9 }));
       var word = svgEl("text", "tt-knob-label", { "dominant-baseline": "middle" });
       knob.appendChild(word);
       svg.appendChild(knob);
-      dials.push({ svg: svg, C: C, RING: RING, RIM: RIM, labels: labels, tick: tick, line: line, knob: knob, word: word, last: null });
+      dials.push({ svg: svg, C: C, RING: RING, RIM: RIM, labels: labels, tick: tick, line: line, knob: knob, hit: hit, word: word, last: null });
     });
     if (litYear) document.querySelectorAll('input[name="lit"]').forEach(function (r) { r.addEventListener("change", draw); });
+    // The wheel's drawn scale changes with the window (site.js refits the
+    // viewBox 120ms after a resize), and the knob's tap disc with it.
+    var timer = null;
+    window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(function () { dials.forEach(layoutDial); }, 200); });
+  }
+  // The knob's tap disc: 22 screen pixels in wheel units, for the wheel
+  // on show (a hidden wheel has no width and keeps its last radius).
+  function sizeKnobHit(d) {
+    var width = d.svg.getBoundingClientRect().width, units = d.svg.viewBox.baseVal.width;
+    if (width && units) d.hit.setAttribute("r", (22 * units / width).toFixed(1));
   }
   function norm(a) { return ((a % 360) + 360) % 360; }
   function layoutDial(d) {
@@ -367,6 +384,7 @@
     d.word.setAttribute("y", (-cos * 10).toFixed(2));
     d.word.setAttribute("text-anchor", sin >= 0 ? "start" : "end");
     d.word.textContent = whenLabel().toUpperCase();
+    sizeKnobHit(d);
   }
   function wheelTime(d, clientX, clientY) {
     var p = d.svg.createSVGPoint();
@@ -843,7 +861,9 @@
     var controls = document.getElementById("tt-controls");
     document.getElementById("tt-time").hidden = false;
     fitNames();
-    if (document.fonts) document.fonts.ready.then(fitNames);
+    // After the fonts, site.js tightens each wheel's viewBox (its handler
+    // was registered first), so the knob's tap disc is sized again then.
+    if (document.fonts) document.fonts.ready.then(function () { fitNames(); dials.forEach(sizeKnobHit); });
     narrow.addEventListener("change", fitNames);
     document.body.appendChild(jump);
     document.body.appendChild(up);

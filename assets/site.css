@@ -199,7 +199,7 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .page-head { margin-bottom: var(--sp-4); }
 /* A section's label: Anton, label size, full ink, 8px above what it
    labels. */
-.section-label, .teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
+.teaser-label, .list-title, .band h2, .also h2, .suggest h2, .about h2 {
   font: 400 var(--fs-label)/1.1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
   color: var(--ink); margin: 0 0 var(--sp-1);
 }
@@ -215,10 +215,12 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
    the values here are its height before then. Every element a link or
    a script jumps to stops below it. */
 :root { --header-h: 45px; }
-@media (max-width: 28rem) { :root:not(:has(.site-header.is-home)) { --header-h: 85px; } }
+@media (max-width: 28rem) { :root:not(:has(.site-header.is-home)) { --header-h: 90px; } }
 .site-header { position: sticky; top: 0; z-index: 10; padding: 0 var(--sp-2); background: var(--bg); border-bottom: 1px solid var(--rule); }
 [id] { scroll-margin-top: var(--header-h); }
-.site-header-inner { max-width: var(--page); min-height: 44px; margin: 0 auto; display: flex; align-items: center; gap: var(--sp-2); }
+/* The row may wrap, so a large default font (text-only zoom) stacks the
+   nav under the wordmark instead of printing one over the other. */
+.site-header-inner { max-width: var(--page); min-height: 44px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sp-2); }
 /* The wordmark is the logo, sized as a logo, outside the type scale, and
    the search: its RHUBARB is the hero's field in small (see Home: the
    hook), its IS IT and YET? links home. It takes
@@ -295,7 +297,6 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .switch .icon { width: 15px; height: 15px; stroke-width: 1.6; }
 .theme { display: none; }
 .js .theme { display: inline-flex; margin: 0; }
-.switches { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); align-items: center; }
 .ordered > * { display: none; }
 main:has(#order-start:checked) .ordered > .by-start,
 main:has(#order-group:checked) .ordered > .by-group,
@@ -559,7 +560,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   .one-result:not(.is-plain) .one-more { margin-top: var(--sp-2); }
   .one-result:not(.is-plain) .one-hint { margin-top: var(--sp-1); }
   .one-result:not(.is-plain) .one-dial { width: 72px; height: 72px; }
-  .tt-pop .one-dial { margin-top: 36px; }
+  .tt-pop .one-dial { margin-top: var(--sp-4); }
   .results .one-result:not(.is-plain):not(.asks) { grid-template-areas: "when when" "word dial" "line line" "more more" "hint hint"; }
 }
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
@@ -852,7 +853,7 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
   position: relative; display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--rule); border-radius: 50%;
   background: none; color: var(--ink); font: 400 var(--fs-caps)/1 var(--text); cursor: pointer;
 }
-.tt-play::before { content: ""; position: absolute; inset: -6px; }
+.tt-play::before { content: ""; position: absolute; inset: -7px; }
 .tt-play[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .tt-line .tt-halo { stroke: var(--bg); stroke-width: 6; }
 .tt-line .tt-stroke { stroke: var(--rhubarb); stroke-width: 2; }
@@ -879,6 +880,10 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .tt-knob { cursor: grab; touch-action: none; outline: none; }
 .tt-knob-dot { fill: var(--rhubarb); stroke: var(--bg); stroke-width: 2; }
 .tt-knob-ring { fill: transparent; }
+/* The knob's tap area: an invisible disc under it, 44px across at any
+   width (charts.js sizes it), since an SVG element cannot carry the
+   ::before the other controls use. */
+.tt-knob-hit { fill: transparent; pointer-events: all; }
 .tt-knob:focus-visible .tt-knob-ring { stroke: var(--ink); stroke-width: 2; }
 .tt-knob-label {
   font: 700 12px var(--text); letter-spacing: var(--track-caps); text-transform: uppercase;
@@ -953,7 +958,6 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .about-list { margin: calc(-1 * var(--sp-1)) 0 var(--sp-2); padding-left: 1.6rem; }
 .about-list li { padding-left: 0.2rem; }
 .about-list li::marker { color: var(--muted); font-weight: 700; }
-.about-ways { padding-left: 1.2rem; }
 /* Source data: "common knowledge*" is a prose link to its footnote at
    the foot of the page, quiet, behind a bar, which ends with the way
    back up (the arrow turned up). The lists of sources are plain, a
@@ -966,7 +970,6 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .source-list li { margin: 0.2rem 0; }
 /* The credits close Source data, under an Anton label, small and muted. */
 .sources .credits p { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
-.about-ways li { margin: var(--sp-1) 0; }
 
 /* --- Footer ---------------------------------------------------------------- */
 /* Every word in the footer is caps, muted. Every text link is underlined

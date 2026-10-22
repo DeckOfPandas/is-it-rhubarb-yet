@@ -798,17 +798,27 @@
     var input = document.getElementById("head-input");
     if (!input) return;
     var index = [], timer = null, lead = null, hits = [];
-    loadSearch().then(function (items) {
-      index = items.map(function (it) {
-        return {
-          slug: it.slug,
-          strings: it.terms.map(function (s) { return words(fold(s)); }),
-          names: [it.name].concat(it.names || []),
-          colour: function () { return it.never ? getComputedStyle(document.documentElement).getPropertyValue("--never").trim() : it.colour; },
-        };
-      });
-      change();
-    }).catch(function () {});
+    // The index is fetched when the field is first touched, not on every
+    // page load; a field that already holds text fetches at once.
+    var indexIn = null;
+    function ensureIndex() {
+      if (indexIn) return indexIn;
+      indexIn = loadSearch().then(function (items) {
+        index = items.map(function (it) {
+          return {
+            slug: it.slug,
+            strings: it.terms.map(function (s) { return words(fold(s)); }),
+            names: [it.name].concat(it.names || []),
+            colour: function () { return it.never ? getComputedStyle(document.documentElement).getPropertyValue("--never").trim() : it.colour; },
+          };
+        });
+        change();
+      }).catch(function () {});
+      return indexIn;
+    }
+    input.addEventListener("focus", ensureIndex);
+    input.addEventListener("input", ensureIndex);
+    if (input.value) ensureIndex();
     function search(text) {
       var q = words(fold(text));
       if (!q.length) return [];
@@ -901,7 +911,12 @@
         row: function () { var c = li.cloneNode(true); c.hidden = false; return c; },
       };
     });
-    loadFoods().then(function (foods) {
+    // The varieties join the index when the hero is first touched, or at
+    // once when it already holds a word, so an idle visit fetches nothing.
+    var foodsIn = null;
+    function ensureFoods() {
+      if (foodsIn) return foodsIn;
+      foodsIn = loadFoods().then(function (foods) {
       foods.forEach(function (f) {
         var fv = V.foodVerdict(f, WEEK);
         lineOf[f.slug] = V.dateLine(fv.whole, YEAR, TODAY);
@@ -921,7 +936,11 @@
         });
       });
       if (input.value.trim()) apply();
-    });
+      });
+      return foodsIn;
+    }
+    input.addEventListener("focus", ensureFoods);
+    input.addEventListener("input", ensureFoods);
     // One hit per food, at its best tier, by tier and then A to Z by food
     // and variety. A food found by a variety alone shows as that variety,
     // the best one; a food found as well or better itself shows as the
@@ -1154,6 +1173,7 @@
     });
     var q = new URL(location.href).searchParams.get("q");
     if (q) input.value = q;
+    if (input.value) ensureFoods();
     apply();
     // Arriving from the header's search on a wide screen, the hero keeps
     // the focus, the caret after the word, so typing carries on. A phone

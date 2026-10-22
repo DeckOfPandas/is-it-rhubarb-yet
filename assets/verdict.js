@@ -509,8 +509,6 @@
     var p = phrase(r, year, today);
     return p ? p + "." : "";
   }
-  var shortLine = phrase;
-
   // Days from today to the boundary the phrase is about: the end for YES,
   // JUST and YES-ISH, the start for NEARLY and NO; null for all year and
   // never. Lists sort by it.
@@ -679,7 +677,7 @@
     fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange, ordinal: ordinal,
     datePieces: datePieces, dateHtml: dateHtml,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
-    phrase: phrase, dateLine: dateLine, shortLine: shortLine, daysTo: daysTo, bandOf: bandOf,
+    phrase: phrase, dateLine: dateLine, daysTo: daysTo, bandOf: bandOf,
     timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid,
     nowLists: nowLists, flatten: flatten, azList: azList, byPhrase: byPhrase, pickQuote: pickQuote
   };

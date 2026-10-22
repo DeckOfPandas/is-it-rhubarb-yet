@@ -46,6 +46,12 @@ jobs:
       # needs the same Playwright the container has, installed outside the
       # repository (tmp/ is ignored) and reached through NODE_PATH, as the
       # container does it. The version matches .devcontainer/kit.env.
+      # The browser download is kept between runs, keyed on the version;
+      # the install step then only checks it is there.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-1.63.0
       - run: npm install --no-save --no-audit --no-fund --prefix tmp/playwright playwright@1.63.0
       - run: node tmp/playwright/node_modules/playwright/cli.js install --with-deps chromium
       - run: python3 -I tools/check-foods.py
