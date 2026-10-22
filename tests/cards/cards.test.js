@@ -1,5 +1,7 @@
 // Every built page's share image exists at the size its og:image:width
-// and og:image:height state, read from the file's own header.
+// and og:image:height state, and every icon it links at the size its
+// sizes= states, each read from the file's own header. No page links an
+// SVG icon, which a browser would take over the PNGs at every size.
 //
 // usage: node --test tests/cards/   (after sh tools/build.sh)
 "use strict";
@@ -66,5 +68,32 @@ test("every page's share image is the size the page states", () => {
     }
     if (meta(html, "twitter:image") !== url) wrong.push(`${rel}: twitter:image is not og:image`);
   }
+  assert.deepStrictEqual(wrong, []);
+});
+
+test("every linked icon is the size its sizes= states, and none is SVG", () => {
+  const wrong = [];
+  const seen = new Set();
+  let checked = 0;
+  for (const page of pages()) {
+    const html = fs.readFileSync(page, "utf8");
+    const rel = path.relative(SITE, page);
+    for (const [tag] of html.matchAll(/<link [^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g)) {
+      if (seen.has(tag)) continue;
+      seen.add(tag);
+      const href = (tag.match(/href="([^"]*)"/) || [])[1];
+      const sizes = (tag.match(/sizes="(\d+)x(\d+)"/) || []).slice(1).map(Number);
+      if (/svg/.test(tag)) { wrong.push(`${rel}: links an SVG icon, ${href}`); continue; }
+      if (sizes.length !== 2) { wrong.push(`${rel}: ${href} has no sizes=`); continue; }
+      const file = siteFile(href, "icons");
+      if (!file || !fs.existsSync(file)) { wrong.push(`${rel}: ${href} is not in _site`); continue; }
+      const size = imageSize(file);
+      if (size.width !== sizes[0] || size.height !== sizes[1]) {
+        wrong.push(`${rel}: ${path.basename(file)} is ${size.width}x${size.height}, sizes= says ${sizes.join("x")}`);
+      }
+      checked++;
+    }
+  }
+  assert.ok(checked > 0, "no page links an icon");
   assert.deepStrictEqual(wrong, []);
 });

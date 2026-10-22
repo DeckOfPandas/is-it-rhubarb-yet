@@ -13,7 +13,7 @@
 // card measures the box round its words, and the run fails if one strays
 // outside the square.
 //
-// It also draws the favicon and the app icon, into _site/icons.
+// It also draws the site's icons, with tools/icons.js, into _site/icons.
 //
 // usage: node tools/cards.js [--out _site/cards] [--site _site] [--icons _site/icons]
 //   [--only rhubarb,home,now,calendar,wheel,icons]
@@ -32,6 +32,7 @@ const http = require("http");
 const path = require("path");
 const V = require("../assets/verdict.js");
 const { loadYaml } = require("./yaml.js");
+const { drawIcons, SITE_ICONS } = require("./icons.js");
 
 // How many foods each line names, as index.html samples and site.js draws.
 const STRIP_PICK = 3;
@@ -286,22 +287,6 @@ async function sitePictures(browser, siteDir, baked, foods) {
   return Object.fromEntries(Object.entries(shots).map(([k, b]) => [k, "data:image/png;base64," + b.toString("base64")]));
 }
 
-// The favicon and the app icon: IIRY, light ink on the forcing shed, the R
-// in rhubarb pink and underlined in it. One square page, shot at each size
-// in ICONS, so Chromium sets the type at that size rather than shrinking a
-// large picture. The header keeps the full wordmark; IIRY is only for here.
-const ICONS = { "favicon-32.png": 32, "icon-192.png": 192, "apple-touch-icon.png": 180 };
-const SHED = "#16110e", SHED_INK = "#f3ede4";
-function iconPage() {
-  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><style>${fontFace("Anton", "anton-latin.woff2", "normal", "400")}
-  html, body { margin: 0; width: 512px; height: 512px; overflow: hidden; background: ${SHED}; }
-  body { display: flex; align-items: center; justify-content: center; }
-  .mark { font: 400 330px/1 Anton, sans-serif; letter-spacing: 0.01em; color: ${SHED_INK}; transform: translateY(-0.04em); }
-  .r { position: relative; color: ${RHUBARB}; }
-  .r::after { content: ""; position: absolute; left: 0.02em; right: 0.04em; bottom: 0.2em; height: 0.07em; background: ${RHUBARB}; }
-  </style></head><body><div class="mark">II<span class="r">R</span>Y</div></body></html>`;
-}
-
 async function main() {
   const out = path.resolve(ROOT, arg("--out", path.join("_site", "cards")));
   const siteDir = path.resolve(ROOT, arg("--site", path.dirname(out)));
@@ -357,15 +342,8 @@ async function main() {
   }
   if (want("icons")) {
     const icons = path.resolve(ROOT, arg("--icons", path.join(path.dirname(out), "icons")));
-    fs.mkdirSync(icons, { recursive: true });
-    for (const [file, size] of Object.entries(ICONS)) {
-      const shot = await browser.newPage({ viewport: { width: 512, height: 512 }, deviceScaleFactor: size / 512 });
-      await shot.setContent(iconPage(), { waitUntil: "load" });
-      await shot.evaluate(() => document.fonts.ready);
-      await shot.screenshot({ path: path.join(icons, file), type: "png" });
-      await shot.close();
-    }
-    console.log(`drew ${Object.keys(ICONS).length} icons into ${path.relative(ROOT, icons)}`);
+    await drawIcons(browser, icons, SITE_ICONS);
+    console.log(`drew ${SITE_ICONS.length} icons into ${path.relative(ROOT, icons)}`);
   }
   await browser.close();
   console.log(`drew ${drawn} share cards for ${baked.asofText} into ${path.relative(ROOT, out)}`);
