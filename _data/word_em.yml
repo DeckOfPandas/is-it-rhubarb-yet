@@ -1,0 +1,14 @@
+# Each verdict word's width in Anton, in em, with its full stop, measured
+# by `node tools/dev/word-em.js <base-url>` on the running site. A food
+# page's verdict is sized from its line's width and this ratio in the
+# stylesheet, so the word fills the line before any script runs and
+# nothing shifts when the fonts arrive. Re-measure if the font or the
+# verdict words change; NOTFOUND is the not-found page's line. The keys
+# are quoted because YAML reads YES and NO as booleans.
+"YES": 1.55
+"JUST": 2.03
+"YES-ISH": 3.05
+"NEARLY": 2.93
+"NO": 1.22
+"NEVER": 2.5
+"NOTFOUND": 6.93

@@ -287,10 +287,12 @@
   }
 
   // --- The verdict word fills the line --------------------------------------
-  // Measured after the fonts are in, so that YES and NEARLY both reach the
-  // right edge; CSS's clamp() stands in before that and without JavaScript.
-  // The word is then made smaller, if it must be, until the date line
-  // under it is wholly on the first screen, 16px clear of its foot.
+  // CSS already sizes the word to its line from its width in em
+  // (word_em.yml, --word-em), so this measure, after the fonts are in,
+  // normally confirms that size; in a browser without container units
+  // it is what fits YES and NEARLY to the right edge. The word is then
+  // made smaller, if it must be, until the date line under it is wholly
+  // on the first screen, 16px clear of its foot.
   var MIN_VERDICT = 64;
   function fitVerdict(word) {
     if (!word) return;
@@ -583,7 +585,12 @@
     var food = JSON.parse(article.dataset.food);
     var quotes = JSON.parse(article.dataset.quotes || "{}");
     var fv = V.foodVerdict(food, WEEK);
-    document.getElementById("verdict").textContent = fv.verdict + ".";
+    var word = document.getElementById("verdict");
+    word.textContent = fv.verdict + ".";
+    // The word's width in em sizes it to the line in CSS (word_em.yml);
+    // the day's verdict may not be the baked one.
+    var wordEm = JSON.parse(article.dataset.wordEm || "{}")[fv.verdict];
+    if (wordEm) word.style.setProperty("--word-em", wordEm);
     document.getElementById("date-line").textContent = V.dateLine(fv.whole, YEAR, TODAY);
     // Each ring's own phrase, for the visitor's day.
     document.querySelectorAll("#ring-list li[data-ring]").forEach(function (li) {

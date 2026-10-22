@@ -11,7 +11,7 @@ grey, --never, the colour every never-food shares and no food has.
 {%- assign b = baked.foods[page.slug] -%}
 <article class="food never" data-never='{{ thing | jsonify | escape }}'>
   <p class="ask">Is it {{ thing.name | downcase }} yet?</p>
-  <h1 class="verdict"><span class="verdict-word" id="verdict">Never.</span></h1>
+  <h1 class="verdict"><span class="verdict-word" id="verdict" style="--word-em: {{ site.data.word_em.NEVER }}">Never.</span></h1>
   <p class="date-line">{{ thing.line }}</p>
   <blockquote class="quote" id="quote"{% unless b.quote %} hidden{% endunless %}>
     {%- if b.quote -%}

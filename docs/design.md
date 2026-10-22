@@ -256,12 +256,17 @@ needs a food uses one of these as it is.
 ### The verdict word
 
 The verdict word, at any size, is Anton in the food's colour. On a food
-page it fills the line: `site.js` sizes it to the width after the fonts
-are in (CSS's clamp stands in before that and without JavaScript), then
-makes it smaller, if it must, until the date line under it is wholly on
-the first screen, 16px clear, never below 64px for that; fitting the
-width always wins, so LITERALLY NO IDEA. fits a 390px phone. The question
-over it is set at `title`, the full width, muted, its lines balanced.
+page it fills the line from the first paint: the line is a container
+and the stylesheet sizes the word from the line's width over the word's
+width in em (`_data/word_em.yml`, measured by `tools/dev/word-em.js`,
+set as `--word-em` by the layout and by `site.js` when the day's verdict
+differs), so nothing under it moves when the fonts arrive. `site.js`
+then makes it smaller, if it must, until the date line under it is
+wholly on the first screen, 16px clear, never below 64px for that;
+fitting the width always wins, so LITERALLY NO IDEA. fits a 390px phone.
+A browser without container units keeps the display clamp until
+`site.js` fits the word. The question over it is set at `title`, the
+full width, muted, its lines balanced.
 
 ### Quotation and notes
 
