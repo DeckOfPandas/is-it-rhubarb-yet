@@ -102,6 +102,13 @@ photographs it.
 </section>
 
 <section class="ks-section">
+  <h2 class="ks-title">Card at full width, with its hint</h2>
+  <div class="ks-card">
+    <div class="one-result" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <a class="arrow-link one-more" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}">{% capture tell_text %}Tell me everything about {{ yes0.name | downcase }}{% endcapture %}{% include arrow-words.html text=tell_text %}</a>{% include card-hint.html %}<span class="one-dial" aria-hidden="true"></span></div>
+  </div>
+</section>
+
+<section class="ks-section">
   <h2 class="ks-title">Date phrase, labels</h2>
   <p class="date-line">{{ yb.line }}</p>
   <p>Prose with <a href="{{ '/about/' | relative_url }}">a link</a> and <a class="food-ref" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}" style="--food: {{ yes0.colour }}">a link to a food</a>.</p>

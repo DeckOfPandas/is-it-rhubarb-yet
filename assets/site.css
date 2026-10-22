@@ -464,7 +464,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
    beside the question and verdict, and the line and action run the
    full width under them. */
 .one-result {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "more dial";
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "more dial" "hint dial";
   align-items: center; gap: var(--sp-2) var(--sp-3); max-width: var(--answer-w);
   padding: var(--sp-3); background: var(--panel); border-radius: 12px; border-left: var(--food-bar-width) solid var(--food);
   color: var(--ink);
@@ -475,13 +475,18 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .one-result .one-word { display: block; margin-top: var(--sp-1); font-size: var(--fs-title); line-height: 1; padding-top: 0; white-space: normal; }
 .one-result .one-line { display: block; margin: var(--sp-1) 0 0; }
 .one-more { grid-area: more; align-self: start; }
+/* Under the action, how to take it: "(⏎)", the Enter key as a keycap
+   holding the return mark (_includes/card-hint.html), small and muted. */
+.one-hint { grid-area: hint; align-self: start; margin-top: calc(-1 * var(--sp-1)); color: var(--muted); font: 400 var(--fs-small)/1.3 var(--text); }
+.one-hint kbd { display: inline-block; margin: 0 0.15em; padding: 0.1em 0.4em; border: 1px solid color-mix(in oklab, var(--muted) 60%, var(--bg)); border-bottom-width: 2px; border-radius: 4px; line-height: 1; }
+.one-hint .enter-mark { display: block; width: 1.05em; height: 0.74em; overflow: visible; }
 .one-more.is-active .arrow-text { text-decoration-thickness: 2px; }
 .one-dial { grid-area: dial; width: 110px; height: 110px; }
 .one-dial .wheel { display: block; width: 100%; margin: 0; }
 .one-dial .month, .one-dial .today-label { display: none; }
 .wheel svg.mono .blend { stroke: var(--c); }
 .one-result.is-plain { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text"; }
-.one-result.is-plain .one-more, .one-result.is-plain .one-dial { display: none; }
+.one-result.is-plain .one-more, .one-result.is-plain .one-hint, .one-result.is-plain .one-dial { display: none; }
 .results .one-ask { display: none; }
 .results .one-result .one-word { margin-top: 0; }
 @media (max-width: 37.49rem) {
@@ -489,7 +494,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 }
 @media (max-width: 28.25rem) {
   .one-result:not(.is-plain) {
-    grid-template-columns: minmax(0, 1fr) 72px; grid-template-areas: "when when" "ask dial" "word dial" "line line" "more more";
+    grid-template-columns: minmax(0, 1fr) 72px; grid-template-areas: "when when" "ask dial" "word dial" "line line" "more more" "hint hint";
     align-items: start; row-gap: 0;
   }
   .one-result:not(.is-plain) .one-text { display: contents; }
@@ -498,9 +503,10 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
   .one-result:not(.is-plain) .one-word { grid-area: word; }
   .one-result:not(.is-plain) .one-line { grid-area: line; margin-top: var(--sp-2); }
   .one-result:not(.is-plain) .one-more { margin-top: var(--sp-2); }
+  .one-result:not(.is-plain) .one-hint { margin-top: var(--sp-1); }
   .one-result:not(.is-plain) .one-dial { width: 72px; height: 72px; }
   .tt-pop .one-dial { margin-top: 36px; }
-  .results .one-result:not(.is-plain) { grid-template-areas: "when when" "word dial" "line line" "more more"; }
+  .results .one-result:not(.is-plain) { grid-template-areas: "when when" "word dial" "line line" "more more" "hint hint"; }
 }
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
 .results-none .food-group { margin-top: var(--sp-4); }
@@ -890,6 +896,9 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .ks-state .food-list { columns: auto; }
 .ks-state .one-result { padding: var(--sp-2); grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text go" "sub go"; }
 .ks-state .one-dial { display: none; }
+/* A card at its real width, its dial drawn as a plain ring, which the
+   kitchen sink cannot fetch. */
+.ks-card .one-dial { width: 110px; height: 110px; border-radius: 50%; border: 14px solid color-mix(in oklab, var(--food) 35%, var(--panel)); }
 .ks-nav { margin: 0 0 var(--sp-2); justify-content: flex-start; }
 .ks-footer { padding: var(--sp-2) 0 0; margin: var(--sp-2) 0 0; }
 .ks-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-2) var(--sp-3); margin: var(--sp-2) 0; }

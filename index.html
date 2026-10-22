@@ -73,7 +73,7 @@ site.js adds the varieties from foods.json), the names it completes to
   <section class="results" id="results" aria-labelledby="results-label" hidden>
     <h2 class="teaser-label" id="results-label"></h2>
     <ul class="food-list" id="found"></ul>
-    <div class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <a class="arrow-link one-more">{% include arrow-words.html text="" %}</a><span class="one-dial" aria-hidden="true"></span></div>
+    <div class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <a class="arrow-link one-more">{% include arrow-words.html text="" %}</a>{% include card-hint.html %}<span class="one-dial" aria-hidden="true"></span></div>
     <p class="also-line" id="also-line" hidden></p>
     <div class="results-none" id="hook-none" hidden>
       <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>
