@@ -2390,7 +2390,7 @@
   text_on_custard: "#6062c9"
   sources: [mjseafood, mcs_sprat]
   note: "A winter fish. The Thames Estuary is the traditional fishery."
-  buy: "Channel sprats are the better choice: the Good Fish Guide rates them 3. North Sea and West of Scotland sprats rate 4."
+  buy: "Good Fish Guide, October 2026: Channel sprats are the better choice, rated 3 (1 is the best, 5 is the worst). North Sea and West of Scotland sprats rate 4."
   varieties:
     - name: ""
       sources: [mjseafood]
