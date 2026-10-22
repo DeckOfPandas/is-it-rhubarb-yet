@@ -9,14 +9,16 @@
 # ring: region (a coast, a producer, a provenance), method (glasshouse,
 #   outdoor, cultivated, wild), zone (a legal zone) or part (shoots,
 #   flowers). Unset on a named variety or the food's one ring.
-# lead: false on a ring that is shown (the food's dial, its data, its
-#   line under the date line) but does not give the verdict, a calendar
-#   row, a wheel dot or a search hit: every coast but a fish's South West,
-#   a glasshouse, a wild ring beside a market one, a provenance ring.
+# lead: false on a ring that is shown (the food's dial and ring list) but
+#   gives no calendar row, wheel dot, search hit or calendar event: every
+#   coast but a fish's South West, a glasshouse, a wild ring beside a
+#   market one, a provenance ring. Every ring counts towards the verdict,
+#   which answers for the whole food (assets/verdict.js); a ring named
+#   Glasshouse counts as storage does.
 # weeks: [from, to, state] on a 52-week year (week 1 starts 1 January).
-# state: in = in season, avail = just coming in or going out, store = sold
-#   from store after the harvest (it answers as in season does, its date
-#   line "Available from storage until ...").
+# state: in = in season, avail = just coming in or going out, store =
+#   available from storage after the harvest (a week of storage alone is
+#   YES-ISH, its date line "Available from storage until ...").
 # colour: per food; a variety may carry its own colour to stand apart.
 #   Every colour reaches 3.15:1 on both backgrounds, forcing shed #16110E
 #   and custard #FBF3D9, because the verdict word is set in it. Pink
@@ -61,7 +63,7 @@
   text_on_shed: "#dd38a3"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown beetroot quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK beetroot in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -78,7 +80,7 @@
   text_on_custard: "#b05300"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown carrots quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK carrots in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -96,12 +98,12 @@
   text_on_custard: "#7c6b58"
   sources: [ncgm, rhs_planner, defra]
   notes:
-    - "Defra wholesale data: UK-grown celeriac quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK celeriac in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, rhs_planner, defra]
       notes:
-        - "In season September-January with February tailing off, from the RHS harvest window; Covent Garden's all-year \"in season\" recoded as from store for March-August."
+        - "In season September-January with February tailing off, from the RHS harvest window; Covent Garden's all-year \"in season\" recoded as available from storage for March-August."
       weeks:
         - [1, 4, in]
         - [5, 8, avail]
@@ -148,7 +150,7 @@
   text_on_custard: "#926430"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown parsnips quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK parsnips in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -228,7 +230,7 @@
   text_on_custard: "#8a6900"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown swede quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK swede in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -245,7 +247,7 @@
   text_on_custard: "#7a668d"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown turnip quoted in Jan, Feb, Mar, Jun, Jul, Aug, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK turnip from June to March most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -262,7 +264,7 @@
   note: "NCGM shows purple sprouting almost all year; BBC Good Food has it January to April, which matches how it is sold. BBC used here."
   notes:
     - "The RHS Crop Planner PDF draws calabrese harvest as January-May and September-December; the RHS website and The Gardener's Calendar both give July-October. The PDF row was dropped as an error."
-    - "Defra wholesale data: UK-grown calabrese quoted in Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK calabrese from June to November most years."
     - "A late-winter and spring crop: Rocket Gardens says harvest starts between very early and late spring depending on planting; Good Food (dropped as a source) also showed January-April."
   varieties:
     - name: "Calabrese"
@@ -297,7 +299,7 @@
   sources: [ncgm, defra]
   short: "Sprouts"
   notes:
-    - "Defra wholesale data: UK-grown brussels sprouts quoted in Jan, Feb, Mar, Apr, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK Brussels sprouts from September to April most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -313,8 +315,8 @@
   text_on_custard: "#527748"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown cabbage quoted in every month (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown spring greens quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK cabbage in every month most years."
+    - "Defra's wholesale prices list UK spring greens in every month most years."
   varieties:
     - name: "Red"
       colour: "#ac299d"
@@ -351,8 +353,8 @@
   sources: [ncgm, defra]
   note: "NCGM has these most of the year; BBC Good Food gives March to June."
   notes:
-    - "Defra wholesale data: UK-grown cabbage quoted in every month (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown spring greens quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK cabbage in every month most years."
+    - "Defra's wholesale prices list UK spring greens in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -369,7 +371,7 @@
   sources: [ncgm, defra]
   notes:
     - "Good Food left out May-September; Covent Garden, the RHS and Defra all show summer cauliflower, so Good Food was dropped here."
-    - "Defra wholesale data: UK-grown cauliflower quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK cauliflower in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -397,7 +399,7 @@
   text_on_shed: "#268d80"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown curly kale quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK curly kale in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -427,7 +429,7 @@
   text_on_custard: "#007c6c"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown pak choi quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK pak choi in every month most years."
   varieties:
     - name: "Outdoor"
       ring: method
@@ -476,7 +478,7 @@
   text_on_custard: "#347c2b"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown leeks quoted in Jan, Feb, Mar, Apr, May, Jul, Aug, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK leeks from July to May most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -494,7 +496,7 @@
   text_on_custard: "#a35c1a"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown onion quoted in every month (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK onion in every month most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -526,7 +528,7 @@
   sources: [ncgm, defra]
   notes:
     - "Good Food showed all year; Defra confirms April-October, so it was dropped."
-    - "Defra wholesale data: UK-grown onion quoted in Apr, May, Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK onion from April to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -572,7 +574,7 @@
   text_on_custard: "#008015"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown cucumbers quoted in Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK cucumbers from February to November most years."
   varieties:
     - name: ""
       sources: [ncgm]
@@ -612,8 +614,8 @@
   sources: [ncgm, defra]
   note: "NCGM lists five types; this row is their union."
   notes:
-    - "Defra wholesale data: UK-grown lettuce quoted in every month (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown lettuce quoted in May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK lettuce in every month most years."
+    - "Defra's wholesale prices list UK lettuce from May to November most years."
   varieties:
     - name: "Cos"
       colour: "#3d7100"
@@ -666,7 +668,7 @@
   text_on_shed: "#858122"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown rocket quoted in May, Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK rocket from May to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -680,7 +682,7 @@
   text_on_shed: "#4d8a6b"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown spinach leaf quoted in May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK spinach leaf from May to November most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -736,7 +738,7 @@
   notes:
     - "Growers traditionally cut British asparagus from St George's Day (23 April) to 21 June, then stop so the crowns can recover; weather moves the start (Farming UK)."
     - "Good Food showed a July peak; dropped. Defra prices are lowest in May and June."
-    - "Defra wholesale data: UK-grown asparagus quoted in Mar, Apr, May, Jun (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK asparagus from March to June most years."
   varieties:
     - name: ""
       sources: [ncgm, defra, farming_uk_asparagus]
@@ -751,8 +753,8 @@
   text_on_custard: "#0b7d50"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown beans quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown beans quoted in Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK beans from June to October most years."
+    - "Defra's wholesale prices list UK beans from July to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -769,8 +771,8 @@
   sources: [ncgm, defra]
   short: "Green beans"
   notes:
-    - "Defra wholesale data: UK-grown beans quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown beans quoted in Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK beans from June to October most years."
+    - "Defra's wholesale prices list UK beans from July to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -786,7 +788,7 @@
   text_on_custard: "#677335"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown celery quoted in Jun, Jul, Aug, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK celery from June to December most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -840,7 +842,7 @@
   text_on_custard: "#007f2e"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown peas quoted in Jun, Jul, Aug, Sep (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK peas from June to September most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -856,7 +858,7 @@
   text_on_custard: "#976300"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown sweetcorn quoted in Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK sweetcorn from August to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -899,7 +901,7 @@
   sources: [ncgm, defra]
   aliases: ["zucchini"]
   notes:
-    - "Defra wholesale data: UK-grown courgettes quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK courgettes from June to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -941,7 +943,7 @@
   text_on_shed: "#ce5c21"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown capsicum quoted in Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK capsicum from June to November most years."
   varieties:
     - name: ""
       sources: [ncgm]
@@ -969,7 +971,7 @@
     - name: ""
       sources: [ncgm]
       notes:
-        - "Covent Garden marks pumpkins in season January-March and July-August as well as September-December. January-March recoded as from store (its own squash row shows stored stock then); July-August dropped."
+        - "Covent Garden marks pumpkins in season January-March and July-August as well as September-December. January-March recoded as available from storage (its own squash row shows stored stock then); July-August dropped."
       weeks:
         - [1, 13, store]
         - [36, 52, in]
@@ -997,7 +999,7 @@
   text_on_custard: "#ce3300"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown tomatoes quoted in Apr, May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK tomatoes from April to November most years."
   varieties:
     - name: ""
       shades: ["#5d8f00", "#e44500", "#b4344e"]
@@ -1022,7 +1024,7 @@
   text_on_shed: "#e7402a"
   sources: [ncgm, defra, bap]
   notes:
-    - "British Apples & Pears lists Bramleys as available all year, harvested in August and September and the rest from store."
+    - "British Apples & Pears lists Bramleys as available all year, harvested in August and September and the rest from storage."
   varieties:
     - name: "Bramley"
       cultivar: true
@@ -1056,8 +1058,8 @@
         - [44, 52, store]
     - name: "Golden Delicious"
       cultivar: true
-      colour: "#968900"
-      text_on_custard: "#7b7000"
+      colour: "#89864c"
+      text_on_custard: "#737037"
       sources: [ncgm]
       weeks:
         - [1, 8, store]
@@ -1067,8 +1069,9 @@
     - name: "Royal Gala"
       cultivar: true
       short: "Royal Gala apples"
-      colour: "#ff3318"
-      text_on_custard: "#d52b14"
+      colour: "#bb5e60"
+      text_on_shed: "#c06264"
+      text_on_custard: "#ad5254"
       sources: [ncgm]
       weeks:
         - [1, 22, store]
@@ -1095,7 +1098,7 @@
   sources: [ncgm, defra]
   note: "BBC Good Food has cherries June to July; NCGM runs later."
   notes:
-    - "Defra wholesale data: UK-grown cherries quoted in Jun, Jul, Aug (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK cherries from June to August most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1139,8 +1142,8 @@
   text_on_custard: "#727100"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown pears quoted in Jan, Feb, Mar, Apr, May, Sep, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown pears quoted in Jan, Feb, Oct, Nov, Dec (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK pears from September to May most years."
+    - "Defra's wholesale prices list UK pears from October to February most years."
   varieties:
     - name: "Comice & Concorde"
       cultivar: true
@@ -1177,7 +1180,7 @@
   text_on_shed: "#b64ee1"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown plums quoted in Aug, Sep (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK plums from August to September most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1204,7 +1207,7 @@
   sources: [ncgm, defra, forestheart]
   notes:
     - "Market blackberries run later than wild ones (cultivated and polytunnel crops)."
-    - "Defra wholesale data: UK-grown blackberries quoted in Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK blackberries from June to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1228,8 +1231,8 @@
   short: "Currants"
   note: "BBC Good Food has blackcurrants from late May to July; NCGM has July to August."
   notes:
-    - "Defra wholesale data: UK-grown currants quoted in Jul, Aug (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown currants quoted in Aug (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK currants from July to August most years."
+    - "Defra's wholesale prices list UK currants in August most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1244,7 +1247,7 @@
   text_on_shed: "#5774f0"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown blueberries quoted in Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK blueberries from July to October most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1258,7 +1261,7 @@
   text_on_custard: "#547806"
   sources: [ncgm, defra, forestheart]
   notes:
-    - "Defra wholesale data: UK-grown gooseberries quoted in Jun, Jul (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK gooseberries from June to July most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1291,7 +1294,7 @@
   text_on_custard: "#cf0095"
   sources: [ncgm, defra]
   notes:
-    - "Defra wholesale data: UK-grown raspberries quoted in Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK raspberries from June to November most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1307,8 +1310,8 @@
   note: "BBC Good Food has rhubarb January to June with no forced/outdoor split."
   notes:
     - "Yorkshire Forced Rhubarb has PDO status (2010), but the registration contains no season dates; growers' practice is roughly January to March."
-    - "Defra wholesale data: UK-grown rhubarb quoted in Jan, Feb, Mar, Apr, May (>=50% of reports, 2017-2026)."
-    - "Defra wholesale data: UK-grown rhubarb quoted in Mar, Apr, May, Jun, Jul, Aug, Sep, Oct (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK rhubarb from January to May most years."
+    - "Defra's wholesale prices list UK rhubarb from March to October most years."
   varieties:
     - name: "Forced"
       short: "Forced rhubarb"
@@ -1334,7 +1337,7 @@
   sources: [ncgm, defra]
   notes:
     - "Defra shows UK strawberries March-December, which includes protected and table-top crops; it cannot separate them, so no glasshouse ring."
-    - "Defra wholesale data: UK-grown strawberries quoted in Apr, May, Jun, Jul, Aug, Sep, Oct, Nov (>=50% of reports, 2017-2026)."
+    - "Defra's wholesale prices list UK strawberries from April to November most years."
   varieties:
     - name: ""
       sources: [ncgm, defra]
@@ -1767,8 +1770,10 @@
       weeks:
         - [1, 52, in]
 
-- name: "Button, cup and flat mushrooms"
-  slug: button-mushrooms
+- name: "Mushrooms (cultivated)"
+  slug: mushrooms-cultivated
+  aliases: ["button mushrooms", "cup mushrooms", "flat mushrooms"]
+  also: ["mushrooms"]
   group: fungi
   colour: "#a08281"
   text_on_custard: "#846766"

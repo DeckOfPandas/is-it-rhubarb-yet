@@ -14,7 +14,8 @@
 # in one search, and a line that cannot be traced says "attributed to";
 # it is short; it is a whole sentence or a deliberate fragment.
 #
-# yes: indulge.  nearly: anticipation.  just: hurry.  no: patience.
+# yes: indulge.  yesish: making do (storage, a glasshouse).
+# nearly: anticipation.  just: hurry.  no: patience.
 # never: resignation, played for laughs.
 #
 # A food's page picks from the pool by a hash of its slug and the week,
@@ -265,6 +266,16 @@
   - text: "Rhubarb, rhubarb, rhubarb."
     by: "the crowd, in every theatre"
     foods: [rhubarb]
+
+"yesish":
+  - text: "Store is no sore."
+    by: "proverb"
+  - text: "Waste not, want not."
+    by: "proverb"
+  - text: "Make do and mend."
+    by: "Ministry of Information, 1943"
+  - text: "Necessity is the mother of invention."
+    by: "proverb"
 
 "nearly":
   - text: "If Winter comes, can Spring be far behind?"
