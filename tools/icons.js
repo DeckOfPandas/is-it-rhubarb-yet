@@ -1,4 +1,4 @@
-// Draw the site's icons as PNGs, in Anton, which
+// Draw the site's icons and the profile picture as PNGs, in Anton, which
 // a favicon cannot load for itself. Each is drawn on a canvas exactly its
 // own size, so the type is set at that size (not shrunk from a large
 // picture), the underline bar lands on whole pixels, and no browser
@@ -18,8 +18,9 @@
 // a circle. _layouts/default.html links each with its sizes, and
 // tests/cards checks every linked file is that size.
 //
-// usage: node tools/icons.js [--out tmp/socials]   draws the site's icons
-//   there, for review.
+// usage: node tools/icons.js [--out tmp/socials]   draws the profile picture,
+//   profile-800.png, and the site's icons there, for uploading. The site
+//   does not use the profile picture, and tmp/ is not committed.
 // tools/cards.js calls drawIcons() with SITE_ICONS for the site's own.
 "use strict";
 const fs = require("fs");
@@ -133,7 +134,9 @@ async function drawIcons(browser, dir, list) {
 }
 
 // A square icon's ink fills 84% of it; one cut to a circle fits its
-// diagonal to 96% of the circle.
+// diagonal to 96% of the circle. The profile picture, which every platform
+// cuts to a circle and shows at every size from 40px up, is the stack on
+// the shed with its diagonal at 98%.
 const SITE_ICONS = [
   { file: "favicon-16.png", design: "r", size: 16, fill: 0.84 },
   { file: "favicon-32.png", design: "iiry", size: 32, fill: 0.84 },
@@ -142,8 +145,9 @@ const SITE_ICONS = [
   { file: "apple-touch-icon.png", design: "stack", size: 180, fill: 0.96, circle: true },
   { file: "icon-192.png", design: "stack", size: 192, fill: 0.96, circle: true },
 ];
+const PROFILE = { file: "profile-800.png", design: "stack", size: 800, fill: 0.98, circle: true };
 
-module.exports = { drawIcons, DESIGNS, SITE_ICONS };
+module.exports = { drawIcons, DESIGNS, SITE_ICONS, PROFILE };
 
 if (require.main === module) {
   const at = process.argv.indexOf("--out");
@@ -151,8 +155,8 @@ if (require.main === module) {
   (async () => {
     const { chromium } = require("playwright");
     const browser = await chromium.launch();
-    await drawIcons(browser, out, SITE_ICONS);
+    await drawIcons(browser, out, [PROFILE, ...SITE_ICONS]);
     await browser.close();
-    console.log(`drew ${SITE_ICONS.length} icons into ${path.relative(ROOT, out)}`);
+    console.log(`drew the profile picture and ${SITE_ICONS.length} icons into ${path.relative(ROOT, out)}`);
   })().catch((e) => { console.error("icons.js: " + e.message); process.exit(1); });
 }
