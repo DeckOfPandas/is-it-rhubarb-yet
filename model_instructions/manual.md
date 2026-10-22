@@ -146,13 +146,15 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), not its date,
     so a calendar updates a moved event rather than adding another.
   - **Wild salmon:** no events.
-  - **The food page:** one small line, "Put rhubarb in your calendar:
-    Apple · Google · .ics · all foods · about feeds.": Apple is the
-    `webcal://` link, which Apple Calendar and most apps take as
-    subscribe; Google is Google Calendar's own subscribe link (it does
-    not open `webcal://`); then the file, every food's feed, and the
-    feeds' section on Source data. Each dot follows its link after a
-    no-break space, so no line starts with one.
+  - **The food page:** "Put rhubarb in your calendar: Apple · Google ·
+    download .ics", the lead-in in the instructive style (`.instruct`,
+    as the data summary is): Apple is the `webcal://` link, which Apple
+    Calendar and most apps take as subscribe; Google is Google
+    Calendar's own subscribe link (it does not open `webcal://`); then
+    the file. Under it, small, "Tell me about feeds · feeds for all
+    foods": the feeds' section on Source data and every food's feed.
+    Each dot follows its link after a no-break space, so no line starts
+    with one.
   - **The Sources page** offers the whole feed the same three ways.
 - **Source data page** (`sources/index.html`) is Helen's copy:
   - where each kind of food's dates come from;
@@ -300,8 +302,9 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
   question, verdict, date line (the variety lines 8px under it), the
   quotation, the dial and its key (on the same left edge as the words),
   the notes (the counter note), then Also, the data, the as-of line
-  ("Verdict correct as of 22<sup>nd</sup> October."), the calendar line,
-  a faint rule and "Ask about something else →". Every block is 40px
+  ("Verdict correct as of 22<sup>nd</sup> October.", in the instructive
+  style), the calendar lines, a faint rule and "Ask about something
+  else →". Every block is 40px
   from the next. Text keeps a measure of about 65ch. A date line wraps
   with `text-wrap: pretty`, so no word sits alone on its last line. The
   quote bar and every note's bar are the food's full colour.
@@ -317,8 +320,13 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     September, available from storage October to July." A run ending
     the year and one of the same kind starting it are one run; a
     boundary on a month's edge names the month, one inside it says
-    early, mid- or late. Then the chart, the notes, and "Sources:" over
-    a bulleted list.
+    early, mid- or late. The varieties are grouped by time from now
+    (`varietyBands`, sharing `bandOf` with Now): Now's bands in Now's
+    order, then Out of season, soonest first within a band. With
+    `BAND_VARIETIES` (4) varieties or more in two bands or more, each
+    band is named under an Atkinson caps label, a hairline between; the
+    runs are one grid across the bands, so the names keep one column.
+    Then the chart, the notes, and "Sources:" over a bulleted list.
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined
   in pink, the line exactly the word's width, in the header, the hero
   and the cards. It does not change on hover.
@@ -442,7 +450,10 @@ in `CLAUDE.md`; design work arrives as GitHub issues; this is the map.
     full stop), then an action, "Tell me everything about apples →",
     ink with an arrow, its words (not the arrow) underlined in pink at
     rest, 2px on hover or focus, the food's name in its sentence form (lower
-    case), the one link, to the food's page. On the right, alone and
+    case), the one link, to the food's page. Under it, small and muted,
+    "(⏎)": the Enter key as a keycap holding the return mark, an SVG
+    (`_includes/card-hint.html`, `icons/enter.svg`), hidden from screen
+    readers. On the right, alone and
     centred, a 110px miniature of the dial with today's hand. The
     question, verdict and date line share the food page's rules
     (`.ask`, `.verdict-word`, `.date-line` in `assets/site.css`) and the
