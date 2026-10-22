@@ -121,8 +121,9 @@
   // The hero ranks a candidate (a food's name, alias or shared word, a
   // variety's name or how it is said, each as folded words) by how the
   // typed words meet it: 1, exactly; 2, at its start; 3, at the start of
-  // a later word; 4, inside a word. Singular and plural are equal, and the
-  // last typed word, still being typed, may also begin its word.
+  // a later word. Text found only inside a word is no match: "ape" finds
+  // nothing. Singular and plural are equal, and the last typed word,
+  // still being typed, may also begin its word.
   function singular(w) { return w.replace(/ies$/, "y").replace(/oes$/, "o").replace(/([^s])s$/, "$1"); }
   function wordsAt(c, q, i) {
     if (i + q.length > c.length) return false;
@@ -137,8 +138,6 @@
     if (c.length === q.length && c.every(function (w, i) { return singular(w) === singular(q[i]); })) return 1;
     if (wordsAt(c, q, 0)) return 2;
     for (var i = 1; i < c.length; i++) if (wordsAt(c, q, i)) return 3;
-    var qs = q.join(" ");
-    if (c.join(" ").indexOf(qs) >= 0 || c.map(singular).join(" ").indexOf(q.map(singular).join(" ")) >= 0) return 4;
     return 0;
   }
 
@@ -470,14 +469,15 @@
   }
 
   // --- A food's card dial ------------------------------------------------------
-  // A copy of the food page's own dial, cut to one ring (the variety that
-  // gave the verdict, by its place in the food's varieties) and that ring
-  // widened to fill the band all the rings share, as a food of one variety
-  // draws it: _includes/season-wheel.html's R 140 and R0 78, less its 3
-  // units of gap. The ring keeps its variety's shape but is drawn in one
-  // colour, the verdict's (`colour`), shades and all. The page is fetched
-  // once per food and kept. Resolves to a span.wheel for markWheel, or
-  // null.
+  // A copy of the food page's own dial. For a variety it is cut to that
+  // ring (`ring`, the variety's place in the food's varieties, which the
+  // ring's data-ring gives, since the dial orders its rings by length) and
+  // that ring widened to fill the band all the rings share, as a food of
+  // one variety draws it: _includes/season-wheel.html's R 140 and R0 78,
+  // less its 3 units of gap; it keeps its shape but is drawn in one
+  // colour (`colour`), shades and all. For a whole food (ring -1) it is
+  // the dial as it is. The page is fetched once per food and kept.
+  // Resolves to a span.wheel for markWheel, or null.
   var dialPages = {};
   var RING_THICK = 140 - 78 - 3, RING_MID = 140 - RING_THICK / 2;
   function miniDial(slug, ring, colour) {
@@ -491,8 +491,8 @@
       copy.removeAttribute("role"); copy.removeAttribute("aria-label");
       var rings = copy.querySelectorAll(".ring");
       if (rings.length > 1 && ring >= 0 && ring < rings.length) {
-        rings.forEach(function (g, k) {
-          if (k !== ring) { g.remove(); return; }
+        rings.forEach(function (g) {
+          if (+g.dataset.ring !== ring) { g.remove(); return; }
           g.setAttribute("stroke-width", RING_THICK);
           g.querySelectorAll("circle").forEach(function (c) { c.setAttribute("r", RING_MID); });
         });
@@ -547,6 +547,36 @@
     box.hidden = false;
   }
 
+  // The breakdown's dial and ring list light each other, as the charts
+  // light a food: hovering or focusing a row, or hovering a ring, lights
+  // that ring and its row and fades the rest to a quarter. Tapping a row
+  // pins its light until it is tapped again or another row is.
+  function lightRings(box) {
+    var list = box && box.querySelector(".ring-list");
+    if (!list) return;
+    var pinned = null;
+    function partsOf(ring) { return box.querySelectorAll('[data-ring="' + ring + '"]'); }
+    function light(ring) {
+      box.querySelectorAll(".is-hot").forEach(function (n) { n.classList.remove("is-hot"); });
+      box.classList.toggle("is-lit", ring !== null);
+      if (ring !== null) partsOf(ring).forEach(function (n) { n.classList.add("is-hot"); });
+    }
+    function ringOf(n) { var t = n && n.closest && n.closest("[data-ring]"); return t && box.contains(t) ? t.dataset.ring : null; }
+    box.addEventListener("pointerover", function (e) { if (pinned === null) light(ringOf(e.target)); });
+    box.addEventListener("pointerout", function (e) { if (pinned === null && ringOf(e.relatedTarget) === null) light(null); });
+    list.addEventListener("focusin", function (e) { if (pinned === null) light(ringOf(e.target)); });
+    list.addEventListener("focusout", function (e) { if (pinned === null && ringOf(e.relatedTarget) === null) light(null); });
+    list.addEventListener("click", function (e) {
+      var ring = ringOf(e.target);
+      if (ring === null) return;
+      pinned = pinned === ring ? null : ring;
+      list.querySelectorAll(".ring-row").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.closest("[data-ring]").dataset.ring === pinned));
+      });
+      light(pinned === null ? ring : pinned);
+    });
+  }
+
   function initFood() {
     var article = document.querySelector("article.food[data-food]");
     if (!article) return;
@@ -554,42 +584,12 @@
     var quotes = JSON.parse(article.dataset.quotes || "{}");
     var fv = V.foodVerdict(food, WEEK);
     document.getElementById("verdict").textContent = fv.verdict + ".";
-    document.getElementById("date-line").textContent = V.dateLine(fv.variety, YEAR, TODAY);
-    // The varieties one to a line, and in the data their runs in Now's
-    // bands, as _layouts/food.html draws them.
-    function namedLine(v, name, words) {
-      var own = v.colour ? v : food, li = el("li"), w = el("span", "line-words", words);
-      foodColours(li, own.colour, own.text_on_shed, own.text_on_custard);
-      li.appendChild(el("span", "line-name", name));
-      li.appendChild(document.createTextNode(" "));
-      li.appendChild(w);
-      return { li: li, words: w };
-    }
-    var vl = document.getElementById("variety-lines");
-    var lines = V.varietyLines(food, fv, YEAR, TODAY);
-    vl.textContent = "";
-    lines.forEach(function (l) { vl.appendChild(namedLine(food.varieties[l.index], l.name, l.answer).li); });
-    vl.hidden = !lines.length;
-    var runs = document.getElementById("runs");
-    if (runs) {
-      var vb = V.varietyBands(food, fv, YEAR, TODAY);
-      runs.textContent = "";
-      vb.bands.forEach(function (band) {
-        var box = el("div", vb.named ? "food-group" : "run-band");
-        if (vb.named) box.appendChild(el("h3", "group-label", band.label));
-        var ul = el("ul", "named-lines");
-        band.indexes.forEach(function (i) {
-          var v = food.varieties[i], line = namedLine(v, v.name || food.name, V.runsSaid(v, YEAR));
-          if (v.notes) {
-            line.words.appendChild(document.createTextNode(" "));
-            line.words.appendChild(el("span", "ring-note", v.notes.join(" ")));
-          }
-          ul.appendChild(line.li);
-        });
-        box.appendChild(ul);
-        runs.appendChild(box);
-      });
-    }
+    document.getElementById("date-line").textContent = V.dateLine(fv.whole, YEAR, TODAY);
+    // Each ring's own phrase, for the visitor's day.
+    document.querySelectorAll("#ring-list li[data-ring]").forEach(function (li) {
+      li.querySelector(".ring-words").textContent = V.phrase(fv.varieties[+li.dataset.ring], YEAR, TODAY);
+    });
+    lightRings(document.getElementById("breakdown"));
     showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
     var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
@@ -622,7 +622,7 @@
         m.classList.add("more-link");
         p.appendChild(m);
         section.appendChild(p);
-        article.insertBefore(section, article.querySelector(".fine"));
+        article.insertBefore(section, article.querySelector(".page-rule"));
       }
       alsoHeading(section.querySelector("h2"));
       var ul = section.querySelector("ul");
@@ -882,8 +882,10 @@
     // alias; its row, verdict, line and colours come from the list. Each
     // named variety (not a ring: a coast, a glasshouse) joins once
     // foods.json is in, by its own name and how it is said ("cox",
-    // "forced rhubarb"), and shows as "Apples (Cox)".
-    var lineOf = {}, ringOf = {};
+    // "forced rhubarb"), and shows as "Apples (Cox)". A food answers as a
+    // whole, with its whole dial (ring -1); a variety answers for itself,
+    // its dial cut to its ring.
+    var lineOf = {};
     function terms(list) { return list.map(function (s) { return words(fold(s)); }); }
     var index = rows.map(function (li) {
       var name = li.querySelector(".food-title").textContent;
@@ -895,15 +897,14 @@
         ink: function () { var s = getComputedStyle(li); return [s.getPropertyValue("--food-shed").trim(), s.getPropertyValue("--food-custard").trim()]; },
         verdict: function () { return li.dataset.verdict; },
         line: function () { return lineOf[li.dataset.slug] || li.dataset.line; },
-        ring: function () { return ringOf[li.dataset.slug]; },
+        ring: function () { return -1; },
         row: function () { var c = li.cloneNode(true); c.hidden = false; return c; },
       };
     });
     loadFoods().then(function (foods) {
       foods.forEach(function (f) {
         var fv = V.foodVerdict(f, WEEK);
-        lineOf[f.slug] = V.dateLine(fv.variety, YEAR, TODAY);
-        ringOf[f.slug] = f.varieties.indexOf(fv.variety.v);
+        lineOf[f.slug] = V.dateLine(fv.whole, YEAR, TODAY);
         fv.varieties.forEach(function (r, k) {
           if (!r.v.name || r.v.ring) return;
           var said = V.varietySaid(f, r.v), label = V.varietyLabel(r.v);
@@ -947,6 +948,19 @@
     // and nothing else is found as well: it alone colours the hero and
     // completes the typed word.
     var lead = null;
+    // What the hero spells for an answer: the typed text and, when the
+    // answer leads, the completion hookField shows, the first of its names
+    // that begins with the text (none once the text is a whole name).
+    function heroWord(it, q) {
+      var f = fold(q);
+      if (lead !== it || it.names.some(function (s) { return fold(s) === f; })) return q;
+      for (var i = 0; i < it.names.length; i++) if (fold(it.names[i]).indexOf(f) === 0) return it.names[i];
+      return q;
+    }
+    // Two names the same once folded, singular and plural alike.
+    function sameWords(a, b) {
+      return words(fold(a)).map(singular).join(" ") === words(fold(b)).map(singular).join(" ");
+    }
     // The links Up and Down move the highlight through, in rank order,
     // and which is lit.
     var picks = [], active = -1;
@@ -973,7 +987,9 @@
     // every match, of every tier, is a row under a count, in rank order,
     // so each letter typed only ever takes rows away; a list of one is
     // answered too. Nothing at all is the not-found line, with the foods
-    // that share its first three letters.
+    // that share its first three letters. The card leaves out its question,
+    // which the hero asks, unless the hero spells another name for it:
+    // ZUCCHINI is answered "Is it courgettes yet?".
     function filter(q) {
       found.textContent = "";
       suggestList.textContent = "";
@@ -1002,12 +1018,14 @@
         one.classList.toggle("is-plain", !!it.never);
         one.style.setProperty("--food", it.colour());
         one.querySelector(".ask-name").textContent = it.ask;
+        one.classList.toggle("asks", !sameWords(heroWord(it, q), it.ask));
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
         oneMore.hidden = !!it.never;
         oneMore.href = foodUrl(it.slug);
         setArrowText(oneMore, tellMeAbout(it.name));
-        dialFor(it.never ? null : it.slug, it.ring(), it.colour());
+        var ring = it.ring();
+        dialFor(it.never ? null : it.slug, ring, ring >= 0 ? it.colour() : null);
         one.hidden = false;
         answered = it.never ? "never" : "link";
         picks = it.never ? [] : [oneMore];
@@ -1231,14 +1249,17 @@
     }
     return s;
   }
-  // Now's four bands, from nowLists, into `box`, under Now's own labels
-  // for any week.
+  // Now's bands, from nowLists, into `box`, under Now's own labels for
+  // any week. The YES-ISH foods come last, from storage and then from a
+  // glasshouse, each band left out when it is empty.
   function fillDigest(box, now) {
     box.textContent = "";
     box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
     box.appendChild(band("last", "Still great but on the way out", now.last, "phrase", "Nothing on its way out."));
     box.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
     box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
+    box.appendChild(band("store", "Available from storage", now.store, "kind"));
+    box.appendChild(band("glass", "Glasshouse-grown", now.glass, "kind"));
   }
 
   function initNow() {
@@ -1330,7 +1351,6 @@
     document.querySelectorAll("figure.wheel").forEach(function (f) { markWheel(f, TODAY); });
     fitDials();
     document.querySelectorAll("[data-asof]").forEach(function (n) { setDate(n, V.fmtDateYear(TODAY)); });
-    document.querySelectorAll("[data-asof-day]").forEach(function (n) { setDate(n, V.fmtDate(TODAY)); });
     initSwitches();
     initFood();
     fitVerdict(document.querySelector("article.food .verdict-word"));

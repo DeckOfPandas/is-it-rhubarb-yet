@@ -689,20 +689,20 @@
     if (pop && !pop.contains(e.target) && !targetOf(e.target)) close(pop.contains(document.activeElement));
   });
   // The card for the pinned food at the line's time: its verdict, date
-  // line and dial (the ring of the variety that gave the verdict, or on
-  // the calendar the row's own), and the time it is for when that is not
-  // today.
+  // line and dial (on the wheel the whole food's, on the calendar the
+  // row's own variety, its dial cut to that ring), and the time it is for
+  // when that is not today.
   function fillPop() {
     if (!pop || !pinned || !foods) return;
     var f = bySlug[pinned.dataset.slug];
     if (!f) return;
     var when = dateOf(state.at), fv = V.foodVerdict(f, V.weekOf(when));
-    var vi = WHEEL ? f.varieties.indexOf(fv.variety.v) : +pinned.dataset.variety;
-    var r = fv.varieties[vi] || fv.variety;
-    var label = r.v.name ? V.varietyLabel(r.v) : "";
+    var vi = WHEEL || f.varieties.length < 2 ? -1 : +pinned.dataset.variety;
+    var r = vi >= 0 ? fv.varieties[vi] : fv.whole;
+    var label = vi >= 0 && r.v.name ? V.varietyLabel(r.v) : "";
     var name = f.name + (label ? " (" + label + ")" : "");
     pop.setAttribute("aria-label", name);
-    pop.style.setProperty("--food", r.colour);
+    pop.style.setProperty("--food", vi >= 0 ? r.colour : f.colour);
     pop.querySelector(".tt-pop-when").textContent = state.at === null ? "" : "In " + STEPS[state.at].phrase;
     pop.querySelector(".ask-name").textContent = label ? V.varietySaid(f, r.v, true) : f.name.toLowerCase();
     pop.querySelector(".one-word").textContent = r.verdict + ".";
@@ -713,7 +713,7 @@
     var box = pop.querySelector(".one-dial"), key = f.slug + "/" + vi + "/" + (state.at === null ? "now" : state.at);
     if (box.dataset.key !== key) {
       box.dataset.key = key;
-      S.miniDial(f.slug, vi, r.colour).then(function (fig) {
+      S.miniDial(f.slug, vi, vi >= 0 ? r.colour : null).then(function (fig) {
         if (!fig || box.dataset.key !== key) return;
         box.textContent = "";
         box.appendChild(fig);

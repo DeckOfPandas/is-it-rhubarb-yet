@@ -1,7 +1,11 @@
 {% comment %}
 The season wheel for one food: the year as a ring, January at twelve
-o'clock, clockwise, one ring per variety (the first variety outermost),
-the centre cut out. Expects: food.
+o'clock, clockwise, one ring per variety, the centre cut out. The rings
+run from the longest season outside to the shortest inside, as the
+wheel's do (further out is longer): the baked `rings` order, from
+ringOrder in verdict.js. Each ring's data-ring is its variety's place in
+the data, which the ring list and the cards' dials look it up by.
+Expects: food.
 
 No trigonometry: every arc is a dashed circle. pathLength puts the dash
 units in weeks (52) or days (364), so a range from week a to b is a dash
@@ -54,13 +58,15 @@ script that points the hand at today when the file is opened directly.
   </style>
   {%- endif -%}
   <g transform="rotate(-90 {{ C }} {{ C }})">
-  {%- for v in food.varieties -%}
+  {%- assign ring_order = site.data.baked.foods[food.slug].rings -%}
+  {%- for vi in ring_order -%}
+    {%- assign v = food.varieties[vi] -%}
     {%- assign k = forloop.index0 -%}
     {%- assign shades = v.shades | default: food.shades -%}
     {%- assign c = v.colour | default: food.colour -%}
     {%- assign outer = band | times: k -%}{%- assign outer = R | minus: outer -%}
     {%- assign mid = thick | divided_by: 2.0 -%}{%- assign mid = outer | minus: mid | round: 2 -%}
-    <g class="ring" fill="none" stroke-width="{{ thick }}" style="--c: {{ c }}">
+    <g class="ring" data-ring="{{ vi }}" fill="none" stroke-width="{{ thick }}" style="--c: {{ c }}">
       <title>{{ v.name | default: food.name }}</title>
       <circle class="arc off" cx="{{ C }}" cy="{{ C }}" r="{{ mid }}" />
       {%- for r in v.weeks -%}
@@ -155,14 +161,4 @@ script that points the hand at today when the file is opened directly.
   ]]></script>
   {%- endif -%}
 </svg>
-{%- if include.standalone -%}{%- assign n = 0 -%}{%- endif -%}
-{%- if n > 1 -%}
-<figcaption>
-  <ol class="rings">
-    {%- for v in food.varieties -%}
-    <li><span class="swatch" style="--food: {{ v.colour | default: food.colour }}"></span>{{ v.name }}{% if forloop.first %} (outer){% elsif forloop.last %} (inner){% endif %}</li>
-    {%- endfor -%}
-  </ol>
-</figcaption>
-{%- endif -%}
 {%- unless include.standalone -%}</figure>{%- endunless -%}

@@ -31,6 +31,7 @@ function isoDate(d) {
   return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
 }
 
+// "Yes", "Yes-ish", "Nearly".
 function titleWord(verdict) {
   return verdict.charAt(0) + verdict.slice(1).toLowerCase();
 }
@@ -50,7 +51,6 @@ function main() {
     // the ordinal's letters raised, for the page.
     asofText: V.fmtDateYear(date),
     asofHtml: V.dateHtml(V.fmtDateYear(date)),
-    asofDayHtml: V.dateHtml(V.fmtDate(date)),
     week: week,
     year: year,
     range: V.fmtRange(week, year),
@@ -62,19 +62,19 @@ function main() {
   baked.phrases = { last: V.byPhrase(baked.now.last), onway: V.byPhrase(baked.now.onway) };
   baked.az = { arrived: V.azList(baked.now.arrived) };
 
+  // Per food: the verdict and date line for the whole food, and its rings
+  // longest season first (`rings`, indexes into its varieties), each with
+  // its own phrase (`ringLines`, by index), for the dial and its ring list.
   foods.forEach((f) => {
     const fv = V.foodVerdict(f, week);
     const q = V.pickQuote(quotes, fv.verdict, f.slug, week);
     baked.foods[f.slug] = {
       verdict: fv.verdict,
       word: titleWord(fv.verdict),
-      line: V.dateLine(fv.variety, year, date),
-      varietyLines: V.varietyLines(f, fv, year, date),
-      runs: f.varieties.map((v) => V.runsSaid(v, year)),
-      runBands: V.varietyBands(f, fv, year, date),
-      variety: fv.variety.name || "",
-      said: fv.variety.name ? V.varietySaid(f, fv.variety.v, true) : "",
-      since: fv.variety.since === undefined ? null : fv.variety.since,
+      line: V.dateLine(fv.whole, year, date),
+      rings: V.ringOrder(f),
+      ringLines: fv.varieties.map((r) => V.phrase(r, year, date)),
+      since: fv.whole.since === undefined ? null : fv.whole.since,
       quote: q ? { text: q.text, by: q.by } : null
     };
   });
@@ -84,7 +84,7 @@ function main() {
   never.forEach((n) => {
     const q = V.pickQuote(quotes, "NEVER", n.slug, week);
     baked.foods[n.slug] = {
-      verdict: "NEVER", word: "Never", line: n.line, varietyLines: [], runs: [], runBands: { named: false, bands: [] }, variety: "", said: "", since: null,
+      verdict: "NEVER", word: "Never", line: n.line, rings: [], ringLines: [], since: null,
       quote: q ? { text: q.text, by: q.by } : null
     };
   });

@@ -24,16 +24,15 @@
   //   of its in-season run.
   // ISOLATED_AVAIL: the verdict for a "just about" run touching no
   //   in-season run (scallops in spring).
-  // BAND_VARIETIES: a food page's data heads its varieties with Now's
-  //   band names once it has this many.
   var C = {
     NEARLY_WEEKS: 3,
     JUST_WEEKS: 2,
     NEW_WEEKS: 2,
-    ISOLATED_AVAIL: "JUST",
-    BAND_VARIETIES: 4
+    ISOLATED_AVAIL: "JUST"
   };
-  var RANK = { YES: 4, JUST: 3, NEARLY: 2, NO: 1, NEVER: 0 };
+  // YES-ISH: only storage or a glasshouse this week. Fresh beats it, and
+  // it beats NEARLY.
+  var RANK = { YES: 5, JUST: 4, "YES-ISH": 3, NEARLY: 2, NO: 1, NEVER: 0 };
   var MS_PER_DAY = 86400000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
@@ -60,8 +59,10 @@
 
   // "in", "store", "avail" or "" for one week; "in" wins where runs
   // overlap, then "store". A store run is sold from store after the
-  // harvest, and answers as in season does.
+  // harvest. A whole food's combined timeline (see foodVerdict) is read
+  // from its array.
   function stateAt(variety, week) {
+    if (variety.timeline) return variety.timeline[week];
     var best = "";
     for (var i = 0; i < variety.weeks.length; i++) {
       var r = variety.weeks[i];
@@ -119,14 +120,14 @@
   //   until    the last week it is in season (YES) or present at all (JUST)
   //   since    weeks since the in-season run began (YES, JUST from "in")
   //   weeksUntil  weeks until `from` (NEARLY, NO)
-  //   store    true when the week is sold from store (YES, until the end
-  //            of the store run)
+  //   store    true when the week is sold from store (YES-ISH, until the
+  //            end of the store run)
   function varietyVerdict(variety, week) {
     var s = stateAt(variety, week);
     var r = { state: s };
     if (s === "store") {
       var storeEnd = walk(variety, week, 1, isStore);
-      r.verdict = "YES"; r.store = true; r.since = 52;
+      r.verdict = "YES-ISH"; r.store = true; r.since = 52;
       if (storeEnd.all) { r.allYear = true; return r; }
       r.until = ahead(storeEnd);
       r.spanUntil = ahead(walk(variety, week, 1, covered));
@@ -187,15 +188,135 @@
   }
 
   // --- The verdict for a food -----------------------------------------------
-  // The best lead variety's verdict, YES > JUST > NEARLY > NO. Between two
-  // YES, one in season beats one from store; between two NEARLY or NO the
-  // sooner wins; otherwise data order. A ring
-  // marked `lead: false` (another coast than a fish's South West, a
-  // glasshouse, a wild ring beside a market one) is answered for too, for
-  // the variety lines, but never gives the verdict. A food that cannot be
-  // sold (`unsold`) is NO, its line that sentence.
+  // A food answers as a whole. Its rings (varieties, coasts, wild and
+  // glasshouse) are combined into one timeline, each week taking the best
+  // state any ring has: "in" > "avail" > "glass" > "store" > "". A
+  // glasshouse ring's weeks count as "glass", grown under cover, which
+  // answers as storage does. The verdict and the date line are worked out
+  // on that timeline, so a food is not JUST while one ring ends and
+  // another carries on. `held` keeps each week's storage or glasshouse
+  // state under any fresh one, for the clause that follows a fresh season
+  // and for a week that is both coming in and held.
+  function isGlasshouse(v) { return /^glasshouse$/i.test(v.name || ""); }
+  var STATE_RANK = { "in": 3, "avail": 2, "glass": 1, "store": 1, "": 0 };
+  var combined = typeof WeakMap === "function" ? new WeakMap() : null;
+  function timelineOf(food) {
+    var hit = combined && combined.get(food);
+    if (hit) return hit;
+    var best = [""], held = [""];
+    for (var w = 1; w <= 52; w++) {
+      var b = "", h = "";
+      for (var i = 0; i < food.varieties.length; i++) {
+        var v = food.varieties[i], s = stateAt(v, w);
+        if (!s) continue;
+        if (isGlasshouse(v)) s = "glass";
+        if (STATE_RANK[s] > STATE_RANK[b] || (s === "glass" && b === "store")) b = s;
+        if ((s === "glass" || s === "store") && h !== "glass") h = s;
+      }
+      best.push(b); held.push(h);
+    }
+    var t = { name: "", timeline: best, held: { timeline: held } };
+    if (combined) combined.set(food, t);
+    return t;
+  }
+  function isFresh(s) { return s === "in" || s === "avail"; }
+  function notFresh(s) { return !isFresh(s); }
+
+  // The next fresh week after `week`, within NEARLY_WEEKS or not:
+  // {at, weeks}, or null when nothing is ever fresh.
+  function nextFresh(t, week) {
+    var gap = walk(t, week, 1, notFresh);
+    if (gap.all) return null;
+    return { at: { week: nextWeek(gap.week), years: (gap.wrapped || gap.week === 52) ? 1 : 0 }, weeks: gap.steps + 1 };
+  }
+  // A week of storage or glasshouse alone: YES-ISH, until that kind ends.
+  // `fresh` is the next fresh week. `heldOn` is true when the held run
+  // lasts until fresh food is back, so a glasshouse line says "for now".
+  function heldVerdict(t, week, kind) {
+    var r = { verdict: "YES-ISH", state: kind, held: kind, store: kind === "store", glass: kind === "glass", since: 52 };
+    var end = walk(t.held, week, 1, function (s) { return s === kind; });
+    r.fresh = nextFresh(t, week);
+    if (end.all) { r.allYear = true; return r; }
+    r.until = ahead(end);
+    r.heldOn = isFresh(stateAt(t, nextWeek(end.week)));
+    return r;
+  }
+  // What follows a fresh season that ends at `freshEnd`: storage or a
+  // glasshouse, and until when, as {kind, until}, or {kind, on: true}
+  // when it never ends; null when nothing follows.
+  function thenHeld(t, week, freshEnd) {
+    var n = nextWeek(freshEnd.week);
+    var kind = stateAt(t.held, n);
+    if (!kind || freshEnd.all) return null;
+    var years = (freshEnd.wrapped || freshEnd.week === 52) ? 1 : 0;
+    var end = walk(t.held, n, 1, function (s) { return s === kind; });
+    if (end.all) return { kind: kind, on: true };
+    return { kind: kind, until: { week: end.week, years: years + (end.wrapped ? 1 : 0) } };
+  }
+  function wholeVerdict(t, week) {
+    var s = stateAt(t, week);
+    if (s === "store" || s === "glass") return heldVerdict(t, week, stateAt(t.held, week));
+    var r = { state: s };
+    if (s === "in") {
+      var inEnd = walk(t, week, 1, isIn);
+      if (inEnd.all) { r.verdict = "YES"; r.allYear = true; r.since = 52; return r; }
+      var freshEnd = walk(t, week, 1, isFresh);
+      var began = walk(t, week, -1, isIn);
+      r.hardStop = freshEnd.steps === inEnd.steps;
+      r.until = ahead(inEnd);
+      r.spanUntil = ahead(freshEnd);
+      r.since = began.steps;
+      r.began = behind(began);
+      r.verdict = (r.hardStop && inEnd.steps < C.JUST_WEEKS) ? "JUST" : "YES";
+      r.then = thenHeld(t, week, freshEnd);
+      return r;
+    }
+    if (s === "avail") {
+      var span = walk(t, week, 1, isFresh);
+      var w = week, years = 0, i;
+      for (i = 0; i < span.steps; i++) {
+        var n = nextWeek(w);
+        if (n === 1) years = 1;
+        w = n;
+        if (stateAt(t, w) === "in") {
+          // Coming in while storage or a glasshouse still sells it: held
+          // food beats NEARLY.
+          var kind = stateAt(t.held, week);
+          if (kind) return heldVerdict(t, week, kind);
+          r.verdict = "NEARLY"; r.from = { week: w, years: years }; r.weeksUntil = i + 1;
+          r.spanUntil = ahead(span);
+          return r;
+        }
+      }
+      var back = walk(t, week, -1, isFresh);
+      var inBehind = false;
+      w = week;
+      for (i = 0; i < back.steps; i++) {
+        w = prevWeek(w);
+        if (stateAt(t, w) === "in") { inBehind = true; break; }
+      }
+      r.until = ahead(span);
+      r.spanUntil = r.until;
+      if (inBehind) { r.verdict = "JUST"; r.tail = true; }
+      else { r.verdict = C.ISOLATED_AVAIL; r.isolated = true; }
+      r.then = thenHeld(t, week, span);
+      return r;
+    }
+    var gap = walk(t, week, 1, empty);
+    if (gap.all) { r.verdict = "NO"; r.never = true; return r; }
+    var start = { week: nextWeek(gap.week), years: (gap.wrapped || gap.week === 52) ? 1 : 0 };
+    r.from = start;
+    r.inFrom = firstInFrom(t, start);
+    r.weeksUntil = gap.steps + 1;
+    r.verdict = r.weeksUntil <= C.NEARLY_WEEKS ? "NEARLY" : "NO";
+    return r;
+  }
+
+  // Each ring is answered on its own too, for the ring list and for a
+  // named variety found by search. A food that cannot be sold (`unsold`)
+  // is NO, its line that sentence. `whole` is the food's own answer.
   function foodVerdict(food, week) {
-    if (food.never) return { verdict: "NEVER", variety: null, varieties: [] };
+    if (food.never) return { verdict: "NEVER", whole: null, varieties: [] };
     var results = food.varieties.map(function (v, i) {
       var r = varietyVerdict(v, week);
       if (food.unsold) r = { verdict: "NO", state: "", unsold: food.unsold };
@@ -203,21 +324,21 @@
       r.v = v;
       r.index = i;
       r.colour = v.colour || food.colour;
-      r.lead = v.lead !== false;
       return r;
     });
-    var leads = results.filter(function (r) { return r.lead; });
-    var best = null;
-    (leads.length ? leads : results).forEach(function (r) {
-      if (!best) { best = r; return; }
-      var a = RANK[r.verdict], b = RANK[best.verdict];
-      if (a > b) best = r;
-      // Between two YES, one in season beats one from store.
-      else if (a === b && best.store && !r.store) best = r;
-      else if (a === b && (r.verdict === "NEARLY" || r.verdict === "NO") &&
-        r.weeksUntil < best.weeksUntil) best = r;
-    });
-    return { verdict: best.verdict, variety: best, varieties: results };
+    var whole = food.unsold ? { verdict: "NO", state: "", unsold: food.unsold } : wholeVerdict(timelineOf(food), week);
+    return { verdict: whole.verdict, whole: whole, varieties: results };
+  }
+
+  // A food's rings from the longest season to the shortest, as the dial
+  // draws them outside in and the ring list lists them: the number of
+  // weeks a ring has any state, storage included. Ties keep data order.
+  function ringOrder(food) {
+    return food.varieties.map(function (v, i) {
+      var n = 0;
+      for (var w = 1; w <= 52; w++) if (stateAt(v, w)) n++;
+      return { i: i, n: n };
+    }).sort(function (a, b) { return b.n - a.n || a.i - b.i; }).map(function (x) { return x.i; });
   }
 
   // --- Dates in words -------------------------------------------------------
@@ -335,15 +456,43 @@
   // line on a food page, the line under a food in a list. `year` is the
   // year of the week asked about and `today` the day the question is
   // asked on; a digest for another week passes the middle of that week.
+  // A start said for a clause after a semicolon or a full stop: near, as
+  // `arriving` says it; further off, "from early July".
+  function fromSaid(at, year, today) {
+    if (daysBetween(today, startDate(at, year)) <= 27) return arriving(at, year, today).soon;
+    return "from " + monthPart(midOfWeek(at, year));
+  }
+  // What follows a fresh season, after its end: ", then available from
+  // storage until late July".
+  function thenSaid(r, year, today) {
+    if (!r.then) return "";
+    var words = r.then.kind === "glass" ? ", then glasshouse-grown" : ", then available from storage";
+    return r.then.on ? words : words + " " + leaving(r.then.until, year, today);
+  }
+  // A week of storage or glasshouse alone. Storage says when fresh food is
+  // back once that is within NEARLY_WEEKS; a glasshouse that lasts until
+  // the outdoor season says when that comes.
+  function heldSaid(r, year, today) {
+    if (r.glass) {
+      if ((r.allYear || r.heldOn) && r.fresh) return "Glasshouse-grown for now; outdoor " + fromSaid(r.fresh.at, year, today);
+      if (r.allYear) return "Glasshouse-grown all year";
+      return "Glasshouse-grown " + leaving(r.until, year, today);
+    }
+    var s = r.allYear ? "Available from storage all year" : "Available from storage " + leaving(r.until, year, today);
+    if (r.fresh && r.fresh.weeks <= C.NEARLY_WEEKS) s += ". Fresh " + arriving(r.fresh.at, year, today).soon;
+    return s;
+  }
+
   function phrase(r, year, today) {
     if (r.unsold) return r.unsold;
     switch (r.verdict) {
       case "YES":
-        if (r.allYear) return r.store ? "Available from storage all year" : "All year";
-        if (r.store) return "Available from storage " + leaving(r.until, year, today);
-        return cap(leaving(r.until, year, today));
+        if (r.allYear) return "All year";
+        return cap(leaving(r.until, year, today)) + thenSaid(r, year, today);
       case "JUST":
-        return cap(leaving(r.until, year, today));
+        return cap(leaving(r.until, year, today)) + thenSaid(r, year, today);
+      case "YES-ISH":
+        return heldSaid(r, year, today);
       case "NEARLY":
         if (r.state === "avail") return "A few about now, properly " + arriving(r.from, year, today).soon;
         if (r.inFrom && r.inFrom.week !== r.from.week) return firstOnes(r, year, today);
@@ -362,12 +511,12 @@
   }
   var shortLine = phrase;
 
-  // Days from today to the boundary the phrase is about: the end for YES
-  // and JUST, the start for NEARLY and NO; null for all year and never.
-  // Lists sort by it.
+  // Days from today to the boundary the phrase is about: the end for YES,
+  // JUST and YES-ISH, the start for NEARLY and NO; null for all year and
+  // never. Lists sort by it.
   function daysTo(r, year, today) {
     if (r.allYear || r.never || r.unsold) return null;
-    if (r.verdict === "YES" || r.verdict === "JUST") return daysBetween(today, endDate(r.until, year));
+    if (r.verdict === "YES" || r.verdict === "JUST" || r.verdict === "YES-ISH") return r.until ? daysBetween(today, endDate(r.until, year)) : null;
     if (r.from) return daysBetween(today, startDate(r.from, year));
     return null;
   }
@@ -409,54 +558,6 @@
     return mid && !v.cultivar ? s.charAt(0).toLowerCase() + s.slice(1) : s;
   }
 
-  // The varieties of a food with more than one, one to a line, each
-  // answered by its phrase: those in season first, the one ending soonest
-  // first and all year after them, then the rest, the one back soonest
-  // first; data order breaks ties. `index` is the variety's place in the
-  // data, for its colours.
-  function varietyLines(food, fv, year, today) {
-    if (!fv.variety || food.varieties.length < 2 || food.unsold) return [];
-    var rank = function (r) {
-      if (r.verdict === "YES" || r.verdict === "JUST") return r.allYear ? 1 : 0;
-      return 2;
-    };
-    return fv.varieties.slice().sort(function (a, b) {
-      return rank(a) - rank(b) || soonest(daysTo(a, year, today), daysTo(b, year, today)) || a.index - b.index;
-    }).map(function (r) {
-      return { index: r.index, name: r.v.name, answer: phrase(r, year, today) };
-    });
-  }
-
-  // A variety's runs in words, for the data under a food page: "In season
-  // August to September, available from storage October to July." A run
-  // that ends the year and one of the same kind that starts it are one
-  // run. A boundary on a month's edge names the month; one inside a month
-  // says early, mid- or late, read from the middle of its week, as
-  // `phrase` does.
-  var RUN_WORDS = { "in": "in season", "store": "available from storage", "avail": "a few about" };
-  function runsSaid(v, year) {
-    var runs = v.weeks.map(function (r) { return { from: r[0], to: r[1], state: r[2] }; })
-      .sort(function (a, b) { return a.from - b.from; });
-    if (!runs.length) return "";
-    var first = runs[0], last = runs[runs.length - 1];
-    if (runs.length > 1 && first.from === 1 && last.to === 52 && first.state === last.state) {
-      last.to = first.to;
-      runs.shift();
-    }
-    var month = function (w) { return midOfWeek({ week: w, years: 0 }, year).getMonth(); };
-    var side = function (w, edge) {
-      return edge ? MONTHS[month(w)] : monthPart(midOfWeek({ week: w, years: 0 }, year));
-    };
-    var said = runs.map(function (r) {
-      var words = RUN_WORDS[r.state];
-      if (r.from === 1 && r.to === 52) return words + " all year";
-      var a = side(r.from, r.from === 1 || month(r.from - 1) !== month(r.from));
-      var b = side(r.to, r.to === 52 || month(r.to + 1) !== month(r.to));
-      return words + (a === b ? " in " + a : " " + a + " to " + b);
-    });
-    return cap(said.join(", ")) + ".";
-  }
-
   // --- The weekly digest --------------------------------------------------
   // Foods in a list run A to Z by food, then by variety, so all the
   // potatoes sit together.
@@ -464,16 +565,14 @@
     var x = a.name + " " + a.variety, y = b.name + " " + b.variety;
     return x < y ? -1 : x > y ? 1 : 0;
   }
-  // Which of Now's bands a variety's verdict puts it in: arrived (YES, its
-  // in-season run began within NEW_WEEKS), last (chance: JUST), onway
-  // (NEARLY), still (great now: the rest of YES), or later (NO), which
-  // Now leaves out and a food page's data names.
-  var BANDS = { arrived: "Just arrived", last: "Still great but on the way out", onway: "On the way",
-    still: "Great this week", later: "Out of season" };
-  var BAND_ORDER = ["arrived", "last", "onway", "still", "later"];
+  // Which of Now's bands a food's verdict puts it in: arrived (YES, its
+  // in-season run began within NEW_WEEKS), last (JUST), onway (NEARLY),
+  // still (the rest of YES), store and glass (YES-ISH, from storage or a
+  // glasshouse), or later (NO), which Now leaves out.
   function bandOf(r) {
     if (r.verdict === "YES") return !r.allYear && r.since < C.NEW_WEEKS ? "arrived" : "still";
     if (r.verdict === "JUST") return "last";
+    if (r.verdict === "YES-ISH") return r.glass ? "glass" : "store";
     if (r.verdict === "NEARLY") return "onway";
     return "later";
   }
@@ -485,33 +584,14 @@
     return a - b;
   }
 
-  // A food's varieties for its page's data, in Now's bands and Now's
-  // order, soonest first within a band, data order breaking ties:
-  // [{key, label, indexes}]. `named` is true when the bands are worth
-  // naming: BAND_VARIETIES varieties or more, in two bands or more.
-  function varietyBands(food, fv, year, today) {
-    var bands = {};
-    fv.varieties.forEach(function (r) {
-      var key = bandOf(r);
-      (bands[key] = bands[key] || []).push({ index: r.index, days: daysTo(r, year, today) });
-    });
-    var out = BAND_ORDER.filter(function (k) { return bands[k]; }).map(function (k) {
-      var items = bands[k].sort(function (a, b) { return soonest(a.days, b.days) || a.index - b.index; });
-      return { key: k, label: BANDS[k], indexes: items.map(function (i) { return i.index; }) };
-    });
-    return { named: food.varieties.length >= C.BAND_VARIETIES && out.length > 1, bands: out };
-  }
-
-  // Four lists for one week: arrived (YES, in-season run began within
-  // NEW_WEEKS), last (chance: JUST), onway (NEARLY), still (great now:
-  // the rest of YES). Each list is split by kind of food (veg, fruit,
-  // wild, herbs, fish, meat, in the order of groups.yml) as [{kind,
-  // items}], kinds with nothing in them left out. Within a kind, just
-  // arrived and great now run A to Z, and last chance and on the way by
-  // time left, soonest first, names breaking ties. Each item names the
-  // variety that produced the verdict, as a list shows it, and carries its
-  // phrase and its timing. `today` defaults to the middle of the week asked
-  // about.
+  // Six lists for one week, one per band of bandOf but later. Each list
+  // is split by kind of food (veg, fruit, wild, herbs, fish, meat, in the
+  // order of groups.yml) as [{kind, items}], kinds with nothing in them
+  // left out. Within a kind, just arrived, great now, storage and
+  // glasshouse run A to Z, and last chance and on the way by time left,
+  // soonest first, names breaking ties. Each item is a whole food, with
+  // its phrase and its timing. `today` defaults to the middle of the week
+  // asked about.
   function nowLists(foods, groups, week, year, today) {
     today = today || midOfToday(week, year);
     var kindOf = {}, kinds = [];
@@ -519,10 +599,10 @@
       kindOf[g.key] = g.kind;
       if (kinds.indexOf(g.kind) < 0) kinds.push(g.kind);
     });
-    var buckets = { arrived: {}, last: {}, onway: {}, still: {} };
+    var buckets = { arrived: {}, last: {}, onway: {}, still: {}, store: {}, glass: {} };
     foods.forEach(function (f) {
       var fv = foodVerdict(f, week);
-      var v = fv.variety;
+      var v = fv.whole;
       if (!v) return;
       var kind = kindOf[f.group] || "";
       if (kinds.indexOf(kind) < 0) kinds.push(kind);
@@ -530,7 +610,7 @@
       var item = {
         slug: f.slug, name: f.name, colour: f.colour, textShed: f.text_on_shed || "", textCustard: f.text_on_custard || "",
         group: f.group, kind: kind,
-        variety: varietyLabel(v.v), verdict: fv.verdict,
+        variety: "", verdict: fv.verdict,
         line: phrase(v, year, today), since: v.since === undefined ? null : v.since,
         days: daysTo(v, year, today), when: t.when, early: t.early, whenDays: t.days
       };
@@ -544,7 +624,7 @@
       kinds.forEach(function (k) {
         var items = buckets[list][k];
         if (!items) return;
-        items.sort(list === "arrived" || list === "still" ? byFood : byDays);
+        items.sort(list === "last" || list === "onway" ? byDays : byFood);
         out[list].push({ kind: k, items: items });
       });
     });
@@ -578,9 +658,9 @@
   // --- Quotations ------------------------------------------------------------
   // Stable for a food for a week and different between foods: a small
   // hash of slug and week picks from the verdict's pool, preferring
-  // lines pinned to the food.
+  // lines pinned to the food. YES-ISH's pool is `yesish`.
   function pickQuote(quotes, verdict, slug, week) {
-    var pool = (quotes && quotes[verdict.toLowerCase()]) || [];
+    var pool = (quotes && quotes[verdict.toLowerCase().replace("-", "")]) || [];
     var pinned = pool.filter(function (q) { return q.foods && q.foods.indexOf(slug) >= 0; });
     var general = pool.filter(function (q) { return !q.foods; });
     var from = pinned.length ? pinned : general;
@@ -595,11 +675,11 @@
     weekOf: weekOf, startOfWeek: startOfWeek, endOfWeek: endOfWeek,
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,
+    timelineOf: timelineOf, ringOrder: ringOrder, isGlasshouse: isGlasshouse,
     fmtDate: fmtDate, fmtDateYear: fmtDateYear, fmtRange: fmtRange, ordinal: ordinal,
     datePieces: datePieces, dateHtml: dateHtml,
     startDate: startDate, endDate: endDate, midOfWeek: midOfWeek, midOfToday: midOfToday,
-    phrase: phrase, dateLine: dateLine, shortLine: shortLine, varietyLines: varietyLines,
-    runsSaid: runsSaid, varietyBands: varietyBands, daysTo: daysTo,
+    phrase: phrase, dateLine: dateLine, shortLine: shortLine, daysTo: daysTo, bandOf: bandOf,
     timing: timing, varietyLabel: varietyLabel, varietySaid: varietySaid,
     nowLists: nowLists, flatten: flatten, azList: azList, byPhrase: byPhrase, pickQuote: pickQuote
   };

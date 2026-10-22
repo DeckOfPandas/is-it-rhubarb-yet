@@ -307,8 +307,7 @@ async function main() {
   foods.forEach((f) => {
     const b = baked.foods[f.slug];
     if (!b) return;
-    const colour = (b.variety && (f.varieties.find((v) => v.name === b.variety) || {}).colour) || f.colour;
-    cards.push({ slug: f.slug, html: verdictCard(f.name, colour, b.verdict, b.line, baked.asofText) });
+    cards.push({ slug: f.slug, html: verdictCard(f.name, f.colour, b.verdict, b.line, baked.asofText) });
   });
   never.forEach((n) => {
     cards.push({ slug: n.slug, html: verdictCard(n.name, NEVER, "NEVER", n.line, baked.asofText) });

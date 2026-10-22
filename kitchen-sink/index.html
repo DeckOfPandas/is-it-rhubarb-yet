@@ -17,7 +17,7 @@ photographs it.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
 {%- assign states = "rest,hover,focus" | split: "," -%}
-{%- assign verdicts = "YES,JUST,NEARLY,NO" | split: "," -%}
+{%- assign verdicts = "YES,JUST,YES-ISH,NEARLY,NO" | split: "," -%}
 {%- assign examples = "" | split: "" -%}
 {%- for v in verdicts -%}
   {%- assign found = false -%}
@@ -25,6 +25,9 @@ photographs it.
     {%- assign b = baked.foods[f.slug] -%}
     {%- if found == false and b.verdict == v and f.slug != "rhubarb" -%}{%- assign found = f -%}{%- endif -%}
   {%- endfor -%}
+  {%- comment -%} A verdict no food has this week still shows, in the
+     first food's colour. {%- endcomment -%}
+  {%- if found == false -%}{%- assign found = site.data.foods | first -%}{%- endif -%}
   {%- assign examples = examples | push: found -%}
 {%- endfor -%}
 {%- assign never0 = site.data.never | first -%}
