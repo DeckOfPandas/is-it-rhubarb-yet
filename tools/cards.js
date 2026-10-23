@@ -184,8 +184,8 @@ function sample(items) {
   return items.slice().sort(() => Math.random() - 0.5).slice(0, STRIP_PICK);
 }
 function lines(baked) {
-  const fresh = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way"];
-  const specs = [["still", "Great this week"], ["last", "Still great but on the way out"], fresh];
+  const fresh = V.flatten(baked.now.arrived || []).length ? ["arrived", "Just arrived"] : ["onway", "On the way in"];
+  const specs = [["still", "Great this week"], ["last", "On the way out"], fresh];
   return `<div class="lines" data-fit data-max-h="300" data-min="18">` + specs.map(([key, label]) => {
     const all = V.flatten(baked.now[key] || []);
     if (!all.length) return "";

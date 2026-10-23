@@ -193,27 +193,34 @@ statement):
   (touching no in-season run) reads JUST.
 - **No calendar dates for seasons.** The data is weekly and mostly came
   from monthly calendars, so a boundary is said in words chosen by the
-  days from today ("Any day now", "In a week or two", "From early
-  November", "Back in April"; "For a few more days", "Until late
-  December") and names the middle of the data week. Early is the 1st to
-  the 10th, mid the 11th to the 20th, late the rest; "mid-" is always
-  hyphenated, "early" and "late" never are. The one calendar date on the
-  site is the as-of date. A YES whose fresh run ends softly says so: "At
-  its best for a few more days, then just about until late November."; a
-  JUST that is a just-about tail, or an isolated just-about run, says
-  "Just about, until late November." Storage and glasshouse lines:
-  "Until late November, then available from storage until late July.";
-  "Available from storage until late July."; "Glasshouse-grown for now,
-  and outdoor from early July." Always "available from storage", never
-  "from store". No semicolons in anything a visitor reads: a note, a
-  counter line or a date line is two sentences instead.
+  days from today, the same four steps coming and going ("A few days
+  away", "A week or two away", "Two or three weeks away", "From early
+  November", then "In April" or "Back in April"; "A few days left", "A
+  week or two left", "Two or three weeks left", "Until late December")
+  and names the middle of the data week. Early is the 1st to the 10th,
+  mid the 11th to the 20th, late the rest; "mid-" is always hyphenated,
+  "early" and "late" never are. The one calendar date on the site is the
+  as-of date. A two-part start: "First ones in April, in earnest in
+  May.", "A few about now, in earnest in a week or two." A YES whose
+  fresh run ends softly says so once the end is near: "A few days left,
+  then tailing off until late November."; a JUST that is a just-about
+  tail, or an isolated just-about run, says "Tailing off until late
+  November." or "Tailing off, a few days left." Storage and glasshouse
+  lines: "Until late November, then available from storage until late
+  July."; "Available from storage until late July."; "Under glass for
+  now. Outdoor from early July." Always "available from storage", never
+  "from store"; "under glass", never "glasshouse-grown". No semicolons
+  in anything a visitor reads: a note, a counter line or a date line is
+  two sentences instead.
 - **Dates** are ordinals, "22nd October 2026", with the letters raised
   wherever they are shown (`datePieces`, `dateHtml`); a week's days are
   "15th–21st October".
 - **The digest** (`nowLists`) gives six lists for a week, one per band:
-  just arrived, still great but on the way out, on the way, great this
-  week, available from storage, glasshouse-grown; each split by kind of
-  food. `byPhrase` regroups a list by one timing per food.
+  just arrived, on the way out, on the way in, great this week,
+  available from storage, under glass; each split by kind of food.
+  `byPhrase` regroups a list by one timing per food (`timing`: the
+  distance to the one boundary as `when`, the rest of the phrase as
+  `aside`).
 - **Quotations** are picked by a hash of slug and week, so a shared link
   shows the same line all week.
 
