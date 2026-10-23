@@ -814,8 +814,16 @@ Now's bands from `site.js` through `window.Site`, and every date through
   complete events, unique UIDs). `tests/build/charts.test.js` loads
   home, a food page, the calendar and the wheel in Chromium at 390, 820
   and 1280 wide, served from `_site`, and fails on any console error;
-  without Playwright it is skipped. `tests/site/search.test.js` needs no
-  build: it runs the search ranking over the data.
+  without Playwright it is skipped. `tests/build/shots.test.js` shoots
+  eight pages at 390 and 1280 (home, About, Source data, the not-found
+  page, the calendar and the wheel at mid-December, rhubarb and Now),
+  the clock frozen on 25 October 2026, motion reduced and `Math.random`
+  seeded, and compares each shot's dHash (nine by eight greys, 64 bits)
+  with `tests/build/shot-hashes.json`; more than 6 bits apart fails. A
+  change meant to move things rewrites the baseline with `node
+  tools/dev/shot-hash.js --write`. `tests/site/search.test.js` and
+  `tests/site/magnifier.test.js` need no build: they run the search
+  ranking over the data and the magnifier's maths.
 
 ## Wording
 

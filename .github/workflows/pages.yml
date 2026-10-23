@@ -67,7 +67,7 @@ jobs:
       - run: node tools/cards.js --out _site/cards
         env:
           NODE_PATH: ${{ github.workspace }}/tmp/playwright/node_modules
-      - run: node --test tests/cards/cards.test.js tests/build/endpoints.test.js tests/build/charts.test.js
+      - run: node --test tests/cards/cards.test.js tests/build/endpoints.test.js tests/build/charts.test.js tests/build/shots.test.js
         env:
           NODE_PATH: ${{ github.workspace }}/tmp/playwright/node_modules
       - uses: actions/upload-pages-artifact@v3

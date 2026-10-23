@@ -56,6 +56,8 @@ node --test tests/site/magnifier.test.js            # the calendar's magnifier m
 node --test tests/cards/cards.test.js               # card and icon sizes, after a build
 node --test tests/build/endpoints.test.js           # search.json, foods.json, the per-food JSON and the feeds, after a build
 node --test tests/build/charts.test.js              # the charts draw with no console error, after a build (Playwright)
+node --test tests/build/shots.test.js               # the pages still look as tests/build/shot-hashes.json says (Playwright)
+node tools/dev/shot-hash.js --write                 # after a change meant to move things: rewrite that baseline
 python3 -m pytest                                   # the dev-container kit, not the site
 ```
 
