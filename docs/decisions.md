@@ -7,6 +7,36 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **"All year, from the North East and South East."** A food in season
+  all year from some coasts and not others names them on its top line,
+  so cod no longer reads "All year." while its Cornish ring and its
+  counter line say otherwise. Only coasts and places (`ring: region`)
+  are named: rock oysters make oysters' "All year" the food's own.
+  Helen: "that's fine, isn't it".
+- **Today is the UK's day.** The seasons are British, so `ukToday`
+  reads the date in Europe/London for the site, the bake and the cards;
+  a visitor in Sydney at breakfast on Monday is answered for London's
+  Sunday. Without Intl's time zones it is the clock's own day.
+- **The hero is a combobox and its highlight is heard.** Up and Down
+  moved a highlight no screen reader heard. The links it reaches are
+  options with ids, the lit one is named in `aria-activedescendant`, and
+  the status line says its words as the highlight moves.
+- **The magnifier is home's alone.** On every other page the wordmark's
+  RHUBARB is the search and focuses the same input 40px away. The
+  forwarding pages carry the viewport meta and the stylesheet.
+- **The magnifier's maths is a module** (`assets/magnifier.js`) with
+  tests under Node, and `charts.js` names its calendar, dial, label,
+  handle and part rather than c, d, t and h; `reduceMotion` is the one
+  name for the reduced-motion query in both scripts. Home's hero is
+  three functions: what can be found, the results, the hero's rules.
+- **One JSON file per food** (#43): `/foods/<slug>.json`, the data plus
+  an `asOf` block with the bake's verdict, line, season and ring lines,
+  written after Jekyll by `tools/food-json.js`, never recomputed.
+- **Screenshot regression by perceptual hash.** `tests/build/shots.test.js`
+  compares eight pages at two widths with `tests/build/shot-hashes.json`
+  (dHash, 6 bits of 64 allowed), the clock frozen and the random picks
+  seeded, on every deploy; no raster file is committed. A deliberate
+  change rewrites the baseline with `tools/dev/shot-hash.js --write`.
 - **`sources` and `notes` everywhere; no singular `source` or `note`.**
   Forty-two foods carried the older `source: key` and fifty-five a
   `note` beside their `notes`; the page printed both the same way. The

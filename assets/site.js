@@ -1,12 +1,12 @@
 // Everything on the site that needs today's date or a typed word happens
 // here, in the visitor's browser, on top of HTML that was baked for the
 // build day. The rules themselves live in assets/verdict.js, loaded first.
-// No dependencies.
+// Today is the UK's day, not the visitor's clock's. No dependencies.
 (function () {
   "use strict";
   var V = window.Verdict;
   var html = document.documentElement;
-  var TODAY = new Date();
+  var TODAY = V.ukToday();
   var WEEK = V.weekOf(TODAY), YEAR = TODAY.getFullYear();
   var BAKED_WEEK = parseInt(html.dataset.bakedWeek, 10);
   var BAKED_YEAR = parseInt(html.dataset.bakedYear, 10);
@@ -845,38 +845,18 @@
     });
   }
 
-  // --- Home: the hook ---------------------------------------------------------
-  function initHome() {
-    var input = document.getElementById("hook-input");
-    var list = document.getElementById("food-list");
-    if (!input || !list) return;
-    // The A to Z list holds every food and never-food with its search terms
-    // and line; matches are copied from it into the results, best first.
-    var rows = Array.prototype.slice.call(list.querySelectorAll(".food-row"));
-    var lists = document.getElementById("food-lists");
-    var strip = document.getElementById("this-week");
-    var everything = document.getElementById("all-foods");
-    var results = document.getElementById("results");
-    var label = document.getElementById("results-label");
-    var found = document.getElementById("found");
-    var one = document.getElementById("one-result");
-    var oneMore = one.querySelector(".one-more");
-    var none = document.getElementById("hook-none");
-    var noneAsk = none.querySelector(".ask-name");
-    var suggest = document.getElementById("suggest");
-    var suggestList = document.getElementById("suggest-list");
-    var status = document.getElementById("results-status");
-    var alsoLine = document.getElementById("also-line");
-    // What can be found: every food and never-food in the A to Z list, by
-    // its name, aliases and shared words, completing to its name or an
-    // alias; its row, verdict, line and colours come from the list. Each
-    // named variety (not a ring: a coast, a glasshouse) joins once
-    // foods.json is in, by its own name and how it is said ("cox",
-    // "forced rhubarb"), and shows as "Apples (Cox)". A food answers as a
-    // whole, with its whole dial (ring -1); a variety answers for itself,
-    // its dial cut to its ring.
+  // --- Home: what can be found --------------------------------------------------
+  // Every food and never-food in the A to Z list, by its name, aliases and
+  // shared words, completing to its name or an alias; its row, verdict,
+  // line and colours come from the list. Each named variety (not a ring:
+  // a coast, a glasshouse) joins once foods.json is in, by its own name
+  // and how it is said ("cox", "forced rhubarb"), and shows as "Apples
+  // (Cox)". A food answers as a whole, with its whole dial (ring -1); a
+  // variety answers for itself, its dial cut to its ring. `items` is the
+  // index assets/search.js ranks.
+  function homeIndex(rows) {
     var lineOf = {};
-    var index = rows.map(function (li) {
+    var items = rows.map(function (li) {
       var name = li.querySelector(".food-title").textContent;
       return {
         name: name, label: "", slug: li.dataset.slug, ask: li.dataset.said || name.toLowerCase(), never: li.classList.contains("never"),
@@ -890,19 +870,15 @@
         row: function () { var c = li.cloneNode(true); c.hidden = false; return c; },
       };
     });
-    // The varieties join the index when the hero is first touched, or at
-    // once when it already holds a word, so an idle visit fetches nothing.
-    var foodsIn = null;
-    function ensureFoods() {
-      if (foodsIn) return foodsIn;
-      foodsIn = loadFoods().then(function (foods) {
+    // The varieties, from the data; each food's line is today's too.
+    function addFoods(foods) {
       foods.forEach(function (f) {
         var fv = V.foodVerdict(f, WEEK);
         lineOf[f.slug] = V.dateLine(fv.whole, YEAR, TODAY);
         fv.varieties.forEach(function (r, k) {
           if (!r.v.name || r.v.ring) return;
           var said = V.varietySaid(f, r.v), label = V.varietyLabel(r.v);
-          index.push({
+          items.push({
             name: f.name, label: label, slug: f.slug, ask: V.varietySaid(f, r.v, true),
             strings: S.strings([r.v.name, said]), names: [r.v.name, said],
             colour: function () { return r.colour; },
@@ -914,54 +890,82 @@
           });
         });
       });
-      if (input.value.trim()) apply();
-      });
-      return foodsIn;
     }
-    input.addEventListener("focus", ensureFoods);
-    input.addEventListener("input", ensureFoods);
-    // The single best match (S.leadOf): it alone colours the hero and
-    // completes the typed word.
-    var lead = null;
+    return { items: items, addFoods: addFoods };
+  }
+
+  // --- Home: the results ------------------------------------------------------------
+  // While there is text, the results take the this-week blocks' place
+  // and the Everything list is hidden, so matches show in one place,
+  // straight away. One exact match is answered: its question, as a food
+  // page asks it, its verdict and its date line (a never-food's own
+  // line), all one link, then "Also:" and what begins with the text or
+  // a later word of it; what has it inside a word is left out. Otherwise
+  // every match, of every tier, is a row under a count, in rank order,
+  // so each letter typed only ever takes rows away; a list of one is
+  // answered too. Nothing at all is the not-found line, with the foods
+  // that share its first three letters. The card leaves out its question,
+  // which the hero asks, unless the hero spells another name for it:
+  // ZUCCHINI is answered "Is it courgettes yet?". `show` draws the results
+  // for a typed text and gives back the links a highlight can move
+  // through, in rank order, and the lead (S.leadOf), which alone colours
+  // the hero and completes the typed word.
+  function homeResults(input) {
+    var strip = document.getElementById("this-week");
+    var everything = document.getElementById("all-foods");
+    var results = document.getElementById("results");
+    var label = document.getElementById("results-label");
+    var found = document.getElementById("found");
+    var one = document.getElementById("one-result");
+    var oneMore = one.querySelector(".one-more");
+    var none = document.getElementById("hook-none");
+    var noneAsk = none.querySelector(".ask-name");
+    var suggest = document.getElementById("suggest");
+    var suggestList = document.getElementById("suggest-list");
+    var status = document.getElementById("results-status");
+    var alsoLine = document.getElementById("also-line");
     // What the hero spells for an answer: the typed text and, when the
     // answer leads, the completion hookField shows, the first of its names
     // that begins with the text (none once the text is a whole name).
-    function heroWord(it, q) {
+    function heroWord(it, q, lead) {
       var f = fold(q);
       if (lead !== it || it.names.some(function (s) { return fold(s) === f; })) return q;
       for (var i = 0; i < it.names.length; i++) if (fold(it.names[i]).indexOf(f) === 0) return it.names[i];
       return q;
     }
-    // The links Up and Down move the highlight through, in rank order,
-    // and which is lit.
-    var picks = [], active = -1;
-    var slot = input.parentElement;
-    var stacked = matchMedia("(max-width: 37.49rem)");
-    var field = hookField(input, { stacked: function () { return stacked.matches; }, onChange: apply });
-
-    // The typed text is kept in the address as ?q=, so Back from a food
-    // page, or a reload, comes back to the same answer.
-    function apply() {
-      var q = input.value.trim();
-      filter(q);
-      field.update(lead);
-      var url = new URL(location.href);
-      if (q) url.searchParams.set("q", input.value); else url.searchParams.delete("q");
-      if (url.href !== location.href) history.replaceState(history.state, "", url);
+    // The answer's dial is its food's own, cut to the one ring whose
+    // variety gave the verdict. Its box holds the space while it comes.
+    var dialBox = one.querySelector(".one-dial"), dialKey = null;
+    function dialFor(slug, ring, colour) {
+      var key = slug + "/" + ring + "/" + colour;
+      if (key === dialKey && dialBox.firstChild) return;
+      dialKey = key;
+      dialBox.textContent = "";
+      dialBox.hidden = !slug;
+      if (!slug) return;
+      miniDial(slug, ring, colour).then(function (fig) {
+        if (!fig || dialKey !== key) return;
+        dialBox.textContent = "";
+        dialBox.appendChild(fig);
+        markWheel(fig, TODAY);
+      });
     }
-    // While there is text, the results take the this-week blocks' place
-    // and the Everything list is hidden, so matches show in one place,
-    // straight away. One exact match is answered: its question, as a food
-    // page asks it, its verdict and its date line (a never-food's own
-    // line), all one link, then "Also:" and what begins with the text or
-    // a later word of it; what has it inside a word is left out. Otherwise
-    // every match, of every tier, is a row under a count, in rank order,
-    // so each letter typed only ever takes rows away; a list of one is
-    // answered too. Nothing at all is the not-found line, with the foods
-    // that share its first three letters. The card leaves out its question,
-    // which the hero asks, unless the hero spells another name for it:
-    // ZUCCHINI is answered "Is it courgettes yet?".
-    function filter(q) {
+    // Going to the answer's page, the hero's typed word (the card asks no
+    // question of its own here), the card's verdict and its dial are
+    // named for the view transition, so each moves into the food page's
+    // question, verdict and dial. The names go once this page is shown
+    // again, so no other link borrows them.
+    function nameFor(on) {
+      input.parentElement.style.viewTransitionName = on ? "food-name" : "";
+      one.querySelector(".one-word").style.viewTransitionName = on ? "food-verdict" : "";
+      dialBox.style.viewTransitionName = on && dialBox.firstChild ? "food-dial" : "";
+    }
+    oneMore.addEventListener("click", function () { nameFor(true); });
+    window.addEventListener("pagereveal", function (e) {
+      (e.viewTransition ? e.viewTransition.finished : Promise.resolve()).then(function () { nameFor(false); });
+    });
+
+    function show(q, index) {
       found.textContent = "";
       suggestList.textContent = "";
       alsoLine.textContent = "";
@@ -969,11 +973,8 @@
       results.hidden = !q;
       one.hidden = none.hidden = suggest.hidden = alsoLine.hidden = true;
       label.hidden = false;
-      light(-1);
-      picks = [];
-      lead = null;
-      answered = null;
-      if (!q) { status.textContent = ""; return; }
+      var picks = [], lead = null;
+      if (!q) { status.textContent = ""; return { picks: picks, lead: lead }; }
       var hits = S.search(index, q);
       var exact = hits.filter(function (h) { return h.tier === 1; });
       var near = hits.filter(function (h) { return h.tier === 2 || h.tier === 3; });
@@ -992,7 +993,7 @@
         one.classList.toggle("is-plain", !!it.never);
         one.style.setProperty("--food", it.colour());
         one.querySelector(".ask-name").textContent = it.ask;
-        one.classList.toggle("asks", !S.sameWords(heroWord(it, q), it.ask));
+        one.classList.toggle("asks", !S.sameWords(heroWord(it, q, lead), it.ask));
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
         // A never-food's card links to its page too ("Tell me why"), which
@@ -1003,7 +1004,6 @@
         var ring = it.ring();
         dialFor(it.never ? null : it.slug, ring, ring >= 0 ? it.colour() : null);
         one.hidden = false;
-        answered = "link";
         picks = [oneMore];
         status.textContent = "1 match: " + it.name + (it.label ? " (" + it.label + ")" : "") + ", " + verdict.toLowerCase() + ".";
         if (also.length) {
@@ -1041,44 +1041,87 @@
         });
         suggest.hidden = !close.length;
       }
+      return { picks: picks, lead: lead };
     }
-    // The answer's dial is its food's own, cut to the one ring whose
-    // variety gave the verdict. Its box holds the space while it comes.
-    var dialBox = one.querySelector(".one-dial"), dialKey = null;
-    function dialFor(slug, ring, colour) {
-      var key = slug + "/" + ring + "/" + colour;
-      if (key === dialKey && dialBox.firstChild) return;
-      dialKey = key;
-      dialBox.textContent = "";
-      dialBox.hidden = !slug;
-      if (!slug) return;
-      miniDial(slug, ring, colour).then(function (fig) {
-        if (!fig || dialKey !== key) return;
-        dialBox.textContent = "";
-        dialBox.appendChild(fig);
-        markWheel(fig, TODAY);
+    // True while an answer or a list is on show (not the not-found card),
+    // so Enter with nothing lit may open the best match.
+    function answering() { return !results.hidden && none.hidden; }
+    return { show: show, answering: answering, nameFor: nameFor, oneMore: oneMore, results: results, status: status };
+  }
+
+  // --- Home: the hero ------------------------------------------------------------
+  // The hero's own rules: when the data is fetched, what the keyboard does
+  // (Up, Down, Enter, Escape, the first letter typed anywhere), the typed
+  // text kept in the address, and the focus a phone or a carried-over
+  // search gets. The index is homeIndex, the drawing homeResults.
+  function initHome() {
+    var input = document.getElementById("hook-input");
+    var list = document.getElementById("food-list");
+    if (!input || !list) return;
+    // The A to Z list holds every food and never-food with its search terms
+    // and line; matches are copied from it into the results, best first.
+    var rows = Array.prototype.slice.call(list.querySelectorAll(".food-row"));
+    var lists = document.getElementById("food-lists");
+    var strip = document.getElementById("this-week");
+    var index = homeIndex(rows);
+    var view = homeResults(input);
+    // The varieties join the index when the hero is first touched, or at
+    // once when it already holds a word, so an idle visit fetches nothing.
+    var foodsIn = null;
+    function ensureFoods() {
+      if (foodsIn) return foodsIn;
+      foodsIn = loadFoods().then(function (foods) {
+        index.addFoods(foods);
+        if (input.value.trim()) apply();
       });
+      return foodsIn;
     }
-    // Going to the answer's page, the hero's typed word (the card asks no
-    // question of its own here), the card's verdict and its dial are
-    // named for the view transition, so each moves into the food page's
-    // question, verdict and dial. The names go once this page is shown
-    // again, so no other link borrows them.
-    var answered = null;
-    function nameFor(on) {
-      slot.style.viewTransitionName = on ? "food-name" : "";
-      one.querySelector(".one-word").style.viewTransitionName = on ? "food-verdict" : "";
-      dialBox.style.viewTransitionName = on && dialBox.firstChild ? "food-dial" : "";
+    input.addEventListener("focus", ensureFoods);
+    input.addEventListener("input", ensureFoods);
+    // The links Up and Down move the highlight through, in rank order,
+    // which is lit, and the lead, which colours the hero.
+    var picks = [], active = -1, lead = null;
+    var slot = input.parentElement;
+    var stacked = matchMedia("(max-width: 37.49rem)");
+    var field = hookField(input, { stacked: function () { return stacked.matches; }, onChange: apply });
+
+    // The typed text is kept in the address as ?q=, so Back from a food
+    // page, or a reload, comes back to the same answer.
+    function apply() {
+      var q = input.value.trim();
+      light(-1);
+      var shown = view.show(q, index.items);
+      picks = shown.picks;
+      lead = shown.lead;
+      markPicks();
+      field.update(lead);
+      var url = new URL(location.href);
+      if (q) url.searchParams.set("q", input.value); else url.searchParams.delete("q");
+      if (url.href !== location.href) history.replaceState(history.state, "", url);
     }
-    oneMore.addEventListener("click", function () { nameFor(true); });
-    window.addEventListener("pagereveal", function (e) {
-      (e.viewTransition ? e.viewTransition.finished : Promise.resolve()).then(function () { nameFor(false); });
-    });
+    // The links Up and Down reach are the hero's options: each has an id
+    // and the option role, and the hero (a combobox) names the lit one
+    // in aria-activedescendant and says its words through the status
+    // line, so a screen reader hears the highlight move.
+    function markPicks() {
+      picks.forEach(function (p, i) {
+        p.id = "pick-" + i;
+        p.setAttribute("role", "option");
+        p.setAttribute("aria-selected", "false");
+      });
+      input.setAttribute("aria-expanded", String(!view.results.hidden));
+    }
     function light(i) {
-      if (active >= 0) picks[active].classList.remove("is-active");
+      if (active >= 0 && picks[active]) {
+        picks[active].classList.remove("is-active");
+        picks[active].setAttribute("aria-selected", "false");
+      }
       active = i;
-      if (i < 0) return;
+      if (i < 0) { input.removeAttribute("aria-activedescendant"); return; }
       picks[i].classList.add("is-active");
+      picks[i].setAttribute("aria-selected", "true");
+      input.setAttribute("aria-activedescendant", picks[i].id);
+      view.status.textContent = picks[i].textContent.replace(/\s+/g, " ").trim();
       picks[i].scrollIntoView({ block: "nearest" });
     }
 
@@ -1099,8 +1142,8 @@
     });
     input.form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var go = active >= 0 ? picks[active] : results.hidden || !none.hidden ? null : picks[0];
-      if (go === oneMore) nameFor(true);
+      var go = active >= 0 ? picks[active] : view.answering() ? picks[0] : null;
+      if (go === view.oneMore) view.nameFor(true);
       if (go) location.href = go.href;
     });
     // The first click or tap into a hero that holds a word selects all of
@@ -1118,7 +1161,7 @@
       e.preventDefault();
       input.value = "";
       apply();
-      if (!stacked.matches) window.scrollTo({ top: 0, behavior: still() ? "auto" : "smooth" });
+      if (!stacked.matches) window.scrollTo({ top: 0, behavior: reduceMotion() ? "auto" : "smooth" });
       input.focus({ preventScroll: true });
     });
     var q = new URL(location.href).searchParams.get("q");
@@ -1138,8 +1181,8 @@
     // first letter typed anywhere on the page goes into it instead.
     document.addEventListener("keydown", function (e) {
       if (e.key.length !== 1 || e.ctrlKey || e.metaKey || e.altKey || e.key === " ") return;
-      var t = e.target;
-      if (t === input || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable) return;
+      var target = e.target;
+      if (target === input || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName) || target.isContentEditable) return;
       input.focus({ preventScroll: true });
     });
     // The magnifier and "Ask about something else" link to #search, which
@@ -1149,17 +1192,17 @@
     // On a phone, focus brings the input's line near the top of the
     // screen, a little room between it and the header, so the keyboard
     // does not cover the results.
-    function still() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
+    function reduceMotion() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
     input.addEventListener("focus", function () {
       if (!stacked.matches) return;
       var top = slot.getBoundingClientRect().top + window.scrollY - headerHeight() - 16;
-      window.scrollTo({ top: Math.max(0, top), behavior: still() ? "auto" : "smooth" });
+      window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion() ? "auto" : "smooth" });
     });
     if (location.hash === "#search" || location.hash === "#hook-input") input.focus({ preventScroll: true });
     document.querySelectorAll(".search-link").forEach(function (a) {
       a.addEventListener("click", function (e) {
         e.preventDefault();
-        if (!stacked.matches) window.scrollTo({ top: 0, behavior: still() ? "auto" : "smooth" });
+        if (!stacked.matches) window.scrollTo({ top: 0, behavior: reduceMotion() ? "auto" : "smooth" });
         input.focus({ preventScroll: true });
       });
     });

@@ -71,6 +71,15 @@ test("leap years: the grid is by day of year, week 52 takes nine days", () => {
   assert.equal(iso(V.endOfWeek(52, 2028)), "2028-12-31");
 });
 
+test("today is the UK's day: late on 1 July UTC is already 2 July in London, late on 1 January is not", () => {
+  const summer = V.ukToday(new Date(Date.UTC(2026, 6, 1, 23, 30)));
+  assert.deepEqual([summer.getFullYear(), summer.getMonth(), summer.getDate(), summer.getHours()], [2026, 6, 2, 12]);
+  const winter = V.ukToday(new Date(Date.UTC(2026, 0, 1, 23, 30)));
+  assert.deepEqual([winter.getMonth(), winter.getDate()], [0, 1]);
+  const dawn = V.ukToday(new Date(Date.UTC(2026, 6, 2, 0, 30)));
+  assert.equal(dawn.getDate(), 2);
+});
+
 test("a clock change does not move the week", () => {
   // British Summer Time ends on 25 October 2026; local midnight after it is
   // an hour "short" of a whole number of days since 1 January.
@@ -298,8 +307,10 @@ test("glasshouse: YES-ISH alone, for now when outdoor follows", () => {
 test("a fish answers for all its coasts together", () => {
   const fv = verdictOf("cod");
   assert.equal(fv.verdict, "YES");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "All year.", "cod is landed somewhere all year");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "All year, from the North East and South East.", "cod is landed somewhere all year, and the line says where");
   assert.equal(verdictOf("haddock").whole.allYear, true, "an all-year coast makes the fish all year");
+  assert.equal(V.dateLine(verdictOf("oysters").whole, YEAR, TODAY), "All year.", "a variety in all year (rock oysters) makes the food's all year its own");
+  assert.equal(V.dateLine(verdictOf("salmon-farmed").whole, YEAR, TODAY), "All year.", "every ring all year names none");
   const sw = fv.varieties.find((r) => r.name === "South West");
   assert.equal(V.phrase(sw, YEAR, TODAY), "A week or two left", "its Cornish ring still has its own season, to week 43");
 });

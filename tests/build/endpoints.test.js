@@ -48,6 +48,27 @@ test("foods.json parses and is the data file, one entry per food", () => {
   }
 });
 
+test("each food and never-food has its own JSON, its data plus the bake's answer", () => {
+  const baked = JSON.parse(fs.readFileSync(path.join(ROOT, "_data", "baked.json"), "utf8"));
+  const all = JSON.parse(read("foods.json"));
+  for (const f of all) {
+    const one = JSON.parse(read(path.join("foods", f.slug + ".json")));
+    assert.deepEqual(Object.assign({}, one, { asOf: undefined }), Object.assign({}, f, { asOf: undefined }), `${f.slug}: its own data`);
+    assert.equal(one.asOf.date, baked.asof, `${f.slug}: the as-of date`);
+    assert.equal(one.asOf.verdict, baked.foods[f.slug].verdict, `${f.slug}: the baked verdict`);
+    assert.equal(one.asOf.line, baked.foods[f.slug].line, `${f.slug}: the baked line`);
+    assert.equal(one.asOf.rings.length, f.varieties.length, `${f.slug}: a line per ring`);
+  }
+  for (const n of never) {
+    const one = JSON.parse(read(path.join("foods", n.slug + ".json")));
+    assert.equal(one.never, true, n.slug);
+    assert.equal(one.asOf.verdict, "NEVER", n.slug);
+    assert.equal(one.asOf.line, n.line, n.slug);
+  }
+  const rhubarb = JSON.parse(read(path.join("foods", "rhubarb.json")));
+  assert.ok(rhubarb.asOf.rings.some((r) => r.name === "Forced" && r.line), "rhubarb's forced ring has its own line");
+});
+
 // Unfold a feed's lines: a line starting with a space continues the one
 // before.
 function unfold(text) {

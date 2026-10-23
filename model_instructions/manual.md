@@ -35,8 +35,10 @@ https://deckofpandas.github.io/is-it-rhubarb-yet/.
   in one is found in the others the same way.
 - `assets/site.js` runs on every page (search, the fitted verdict, the
   dials, Now for other weeks); `assets/charts.js` only on the calendar
-  and wheel pages (time travel, popovers, the magnifier). `assets/site.css`
-  holds every token; its comments are the design system's source.
+  and wheel pages (time travel, popovers, the magnifier), with the
+  magnifier's maths in `assets/magnifier.js`, a module `tests/site/`
+  checks under Node. `assets/site.css` holds every token; its comments
+  are the design system's source.
 - `tools/cards.js` draws the share cards and the icons into `_site/`
   after Jekyll, with the Playwright the container and the deploy have.
   `tools/fold-ics.js` folds the built calendar feeds to RFC 5545's
@@ -45,14 +47,17 @@ https://deckofpandas.github.io/is-it-rhubarb-yet/.
 ## Build, serve, test
 
 ```
-sh tools/build.sh                                   # bake, Jekyll, fold the feeds, cards
+sh tools/build.sh                                   # bake, Jekyll, fold the feeds, per-food JSON, cards
 bundle exec jekyll serve --host 0.0.0.0 --port 9000 # serve _site (keep_files keeps the cards)
 python3 -I tools/check-foods.py                     # the data checker, after any data edit
 node --test tests/verdict/verdict.test.js           # the verdict rules
 node --test tests/site/search.test.js               # the search ranking, over the data
+node --test tests/site/magnifier.test.js            # the calendar's magnifier maths
 node --test tests/cards/cards.test.js               # card and icon sizes, after a build
-node --test tests/build/endpoints.test.js           # search.json, foods.json and the feeds, after a build
+node --test tests/build/endpoints.test.js           # search.json, foods.json, the per-food JSON and the feeds, after a build
 node --test tests/build/charts.test.js              # the charts draw with no console error, after a build (Playwright)
+node --test tests/build/shots.test.js               # the pages still look as tests/build/shot-hashes.json says (Playwright)
+node tools/dev/shot-hash.js --write                 # after a change meant to move things: rewrite that baseline
 python3 -m pytest                                   # the dev-container kit, not the site
 ```
 

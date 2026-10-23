@@ -55,11 +55,13 @@ defaults:
       layout: remind
 
 # The share cards and the icons are drawn into _site/cards and _site/icons
-# by tools/cards.js after the build; a regenerating `jekyll serve` must
+# by tools/cards.js after the build, and the per-food JSON into
+# _site/foods by tools/food-json.js; a regenerating `jekyll serve` must
 # not sweep them away.
 keep_files:
   - cards
   - icons
+  - foods
 
 exclude:
   - Gemfile

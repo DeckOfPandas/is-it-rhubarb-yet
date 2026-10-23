@@ -97,17 +97,17 @@ JPEG; every other page shows the home card.
   </script>
 </head>
 <body>
-  {%- comment -%} The nav and the magnifier sit at the right of every page,
-     home included, so nothing moves between pages. On home the hero
-     question is the logo, so the header has no wordmark; elsewhere the
-     wordmark is on the left, and its RHUBARB is the search, as the hero
-     is: the input's placeholder. IS IT and YET? are links home (one tab
-     stop, named Home). Without JavaScript it is a form that lands on
-     home's Everything list, which cannot filter, so the typed word is
-     carried in ?q= for a visitor who turns JavaScript on and the list
-     is what the no-JS visitor gets. The header sticks to the top of
-     every page. The magnifier goes to the wordmark's input (on home, to
-     the hero's). {%- endcomment -%}
+  {%- comment -%} The nav sits at the right of every page, home included,
+     so nothing moves between pages. On home the hero question is the
+     logo, so the header has no wordmark, and a magnifier at the end of
+     the nav goes back up to the hero; elsewhere the wordmark is on the
+     left, and its RHUBARB is the search, as the hero is: the input's
+     placeholder, so no magnifier is needed beside it. IS IT and YET?
+     are links home (one tab stop, named Home). Without JavaScript the
+     wordmark is a form that lands on home's Everything list, which
+     cannot filter, so the typed word is carried in ?q= for a visitor
+     who turns JavaScript on and the list is what the no-JS visitor
+     gets. The header sticks to the top of every page. {%- endcomment -%}
   <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
       {%- if page.url != '/' -%}
@@ -126,7 +126,9 @@ JPEG; every other page shows the home card.
         <a href="{{ '/calendar/' | relative_url }}"{% if page.url == '/calendar/' %} aria-current="page"{% endif %}>Calendar</a>
         <a href="{{ '/wheel/' | relative_url }}"{% if page.url == '/wheel/' %} aria-current="page"{% endif %}>Wheel</a>
         <a class="about-link" href="{{ '/about/' | relative_url }}" aria-label="About"{% if page.url == '/about/' %} aria-current="page"{% endif %}>??</a>
+        {%- if page.url == '/' %}
         <a class="search-link" href="{{ '/' | relative_url }}#search" aria-label="Search foods">{% include icons/search.svg %}</a>
+        {%- endif %}
       </nav>
     </div>
   </header>
@@ -171,6 +173,7 @@ JPEG; every other page shows the home card.
   <script src="{{ '/assets/search.js' | relative_url }}"></script>
   <script src="{{ '/assets/site.js' | relative_url }}"></script>
   {%- if page.charts %}
+  <script src="{{ '/assets/magnifier.js' | relative_url }}"></script>
   <script src="{{ '/assets/charts.js' | relative_url }}"></script>
   {%- endif %}
 </body>
