@@ -207,15 +207,16 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 /* --- Header ---------------------------------------------------------------- */
 /* The nav and the magnifier sit at the top right of every page, where
    they stay from page to page; the wordmark (not on home, where the hero
-   is the logo) is on the left of the same row, or on a phone, where the
-   row cannot hold all three, on a row of its own under them. The header
+   is the logo) is on the left of the same row. Below 700px the nav spans
+   the content width, its first item on the left edge and its last on the
+   right, and the wordmark has a row of its own under it. The header
    sticks to the top of every page, solid, over a 1px rule. Whatever
    sticks below it (the calendar's controls and month row) sits at
    --header-h, its height with the rule, which site.js keeps measured;
    the values here are its height before then. Every element a link or
    a script jumps to stops below it. */
 :root { --header-h: 45px; }
-@media (max-width: 28rem) { :root:not(:has(.site-header.is-home)) { --header-h: 90px; } }
+@media (max-width: 43.74rem) { :root:not(:has(.site-header.is-home)) { --header-h: 90px; } }
 .site-header { position: sticky; top: 0; z-index: 10; padding: 0 var(--sp-2); background: var(--bg); border-bottom: 1px solid var(--rule); }
 [id] { scroll-margin-top: var(--header-h); }
 /* The row may wrap, so a large default font (text-only zoom) stacks the
@@ -224,8 +225,8 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 /* The wordmark is the logo, sized as a logo, outside the type scale, and
    the search: its RHUBARB is the hero's field in small (see Home: the
    hook), its IS IT and YET? links home. It takes
-   the row's room the nav leaves, and a long word shrinks to fit it. On a
-   phone it has a row of its own under the nav. */
+   the row's room the nav leaves, and a long word shrinks to fit it.
+   Below 700px it has a row of its own under the nav. */
 .brand {
   flex: 1 1 auto; min-width: 0; margin: 0;
   font: 400 clamp(1.2rem, 4.4vw, 1.5rem)/1 var(--display); letter-spacing: var(--track-small); text-transform: uppercase;
@@ -237,9 +238,9 @@ h1 { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; lett
 .brand-line a.hook-word { color: inherit; text-decoration: none; cursor: pointer; }
 .brand .hook-slot { display: inline-flex; position: relative; max-width: 100%; }
 .brand .hook-input { height: 1.15em; }
-@media (max-width: 28rem) {
+@media (max-width: 43.74rem) {
   .site-header-inner { flex-wrap: wrap; row-gap: 0; }
-  .site-nav { order: -1; width: 100%; justify-content: flex-end; }
+  .site-nav { order: -1; width: 100%; justify-content: space-between; }
   .brand { padding: 0 0 var(--sp-2); font-size: 1.5rem; }
 }
 /* The nav: caps in muted ink, no underline; the current page in full ink

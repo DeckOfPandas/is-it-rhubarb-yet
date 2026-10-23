@@ -100,10 +100,10 @@ component at rest, hovered and focused.
 - **One page width.** The header's row, main's content and the footer
   (its rule too) share `--page`, 64rem less the two 16px gutters, so
   every left and right edge lines up at every width.
-- **Breakpoints**, as the stylesheet uses them: 28rem (448px, the header
-  wraps), 37.49rem (600px, the hero stacks, the licences stack), 42rem
-  (Anton's large tracking on titles), 43.74rem (700px, the calendar runs
-  to the edges, the chip docks, the controls stop sticking), 51.25rem
+- **Breakpoints**, as the stylesheet uses them: 37.49rem (600px, the
+  hero stacks, the licences stack), 42rem (Anton's large tracking on
+  titles), 43.74rem (700px, the header wraps, the calendar runs to the
+  edges, the chip docks, the controls stop sticking), 51.25rem
   (820px, the wheel is the content's width and its pills sit at the
   right).
 
@@ -163,11 +163,13 @@ the wheel's scale. The week arrows are 44px boxes; a ring-list row is
   is drawn only as big as what it shows, 24px from the next, the last
   one's right edge on the page's; its tap area reaches 44px, the
   magnifier's into the gutter so it never meets ??'s. The wordmark is on
-  the left of the same row, or on a phone on a row of its own under the
-  nav, so the nav never moves. Home has no wordmark. The header sticks
+  the left of the same row. Below 700px the nav spans the content width,
+  NOW on the left edge and the last item on the right, evenly spaced,
+  and the wordmark has a row of its own under it, left on the same edge
+  as the page title. Home has no wordmark. The header sticks
   to the top of every page on a solid page-colour background over a 1px
   rule; `site.js` measures its height into `--header-h` (CSS guesses
-  45px, 90px on a phone with the wordmark, until then); the row may
+  45px, 90px below 700px with the wordmark, until then); the row may
   wrap, so a large default font stacks the nav under the wordmark
   instead of overprinting it. What sticks below it sits at
   `--header-h`, and every element with an id has `scroll-margin-top:
