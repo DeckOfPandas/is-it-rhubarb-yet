@@ -248,7 +248,9 @@ words holding throughout.
   seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), never its date,
   so a calendar updates a moved event rather than adding one. A renamed
   food's old feed has no forward (a feed cannot redirect on Pages), so
-  its subscribers must subscribe again.
+  its subscribers must subscribe again. After Jekyll, `tools/fold-ics.js`
+  folds every feed to RFC 5545's 75-octet lines with CRLF ends;
+  `tests/build/endpoints.test.js` checks the built feeds and endpoints.
 
 ## Checking the data
 
