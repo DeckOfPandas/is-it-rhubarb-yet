@@ -5,14 +5,14 @@
 // with a stepper of its own; TODAY brings it back. While the chart is on
 // screen a pink button at the foot of the screen counts what is in
 // season and jumps to the list; down in the list, another takes you back
-// to the top. On the calendar a magnifier spreads the
-// weeks round the line and squeezes the rest, and the four season
+// to the top. On the calendar a magnifier (assets/magnifier.js) spreads
+// the weeks round the line and squeezes the rest, and the four season
 // buttons jump to mid-season and zoom in; on a phone its names column is
 // fitted to its longest name. The wheel never turns; In season names and
 // lights only what is in season, Whole year everything. Everything here
-// is added to charts that work without it. Loaded after verdict.js and
+// is added to charts that work without it. Loaded after verdict.js,
 // site.js, whose window.Site lends the card's dial, the hand and Now's
-// lists.
+// lists, and magnifier.js.
 (function () {
   "use strict";
   var S = window.Site, V = window.Verdict;
@@ -77,35 +77,14 @@
   }
 
   // --- The magnifier (the calendar's) -------------------------------------------
-  // A focus and context distortion of the year: each slice of it is drawn
-  // as wide as 1 + MAG * exp(-(d / SPREAD)^2), d its distance in weeks from
-  // the line, and the whole scaled back to 52. F maps a place on the year
-  // to where it is drawn, Finv back again; both are the identity with the
-  // magnifier off, as they always are on the wheel. A table of N slices is
-  // rebuilt whenever the line moves.
-  var MAG = 5, SPREAD = 2.6, N = 520, table = null;
-  function buildF() {
-    if (!state.zoom) { table = null; return; }
-    var c = tOf(state.at), sum = 0, acc = [0];
-    for (var k = 0; k < N; k++) {
-      var d = (k + 0.5) * 52 / N - c;
-      sum += 1 + MAG * Math.exp(-(d * d) / (SPREAD * SPREAD));
-      acc.push(sum);
-    }
-    table = acc.map(function (v) { return v / sum * 52; });
-  }
-  function F(t) {
-    if (!table) return t;
-    var lap = Math.floor(t / 52), u = (t - lap * 52) / 52 * N;
-    var k = Math.min(N - 1, Math.floor(u));
-    return table[k] + (table[k + 1] - table[k]) * (u - k) + lap * 52;
-  }
-  function Finv(y) {
-    if (!table) return y;
-    var lap = Math.floor(y / 52), v = y - lap * 52, lo = 0, hi = N;
-    while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (table[mid] <= v) lo = mid; else hi = mid; }
-    return (lo + (v - table[lo]) / ((table[lo + 1] - table[lo]) || 1)) * 52 / N + lap * 52;
-  }
+  // The maths is assets/magnifier.js (window.Magnifier): F maps a place
+  // on the year to where it is drawn, Finv back again, both the identity
+  // with the magnifier off, as they always are on the wheel. It is
+  // centred on the line whenever the line moves.
+  var magnifier = window.Magnifier.create({ mag: 5, spread: 2.6, slices: 520 });
+  function buildF() { magnifier.set(state.zoom ? tOf(state.at) : null); }
+  function F(t) { return magnifier.F(t); }
+  function Finv(y) { return magnifier.Finv(y); }
 
   // --- The calendar --------------------------------------------------------------
   // Every bar, month line and label keeps the place on the year it was

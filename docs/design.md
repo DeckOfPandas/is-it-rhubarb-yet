@@ -493,7 +493,8 @@ JavaScript. It ends on the dinner line; the credits are on Source data.
 
 ### Source data
 
-Helen's copy: where each kind of food's dates come from; the JSON; the
+Helen's copy: where each kind of food's dates come from; the JSON, the
+whole file and the per-food files with their `asOf` block; the
 calendar feeds, offered three ways; the full list of sources by kind;
 the foraging footnote ("common knowledge*" is a prose link to it, and it
 ends "Back to where I was" with the arrow turned up); then CREDITS, the
@@ -739,7 +740,10 @@ Now's bands from `site.js` through `window.Site`, and every date through
 - **Magnifier** (the calendar only). A focus and context distortion
   centred on the line: each slice of the year is drawn as wide as
   1 + 5 × exp(−(d / 2.6)²), d its distance in weeks from the line, and the
-  whole scaled back to 52 weeks. On a phone, magnifying fits all 52 weeks
+  whole scaled back to 52 weeks. The maths is `assets/magnifier.js`, a
+  module with no DOM that `tests/site/magnifier.test.js` checks under
+  Node (the year keeps its length, places keep their order, Finv undoes
+  F); `charts.js` centres it on the line. On a phone, magnifying fits all 52 weeks
   to the screen's width round the line. It follows the line as it is
   dragged or played. Month names with no room are hidden. In the
   magnified stretch only (where a third of a month is drawn at twice its

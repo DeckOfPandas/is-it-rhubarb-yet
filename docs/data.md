@@ -248,6 +248,12 @@ words holding throughout.
 
 - `foods.json`: the whole data file. Linked from every page as the
   alternate and from the footer.
+- `/foods/<slug>.json`: one file per food and never-food, written into
+  `_site` after Jekyll by `tools/food-json.js`: the food's data as
+  `foods.yml` has it, plus `asOf` (the build day and its week, the
+  baked verdict and date line, the season in months, a line per ring),
+  read from `_data/baked.json` and never recomputed. A never-food reads
+  NEVER with its line. The Source data page says what the fields mean.
 - `search.json`: what the header search and the not-found page match
   against: every food and never-food with its name, its varieties as
   said (not its rings), aliases, shared words and the baked verdict.
