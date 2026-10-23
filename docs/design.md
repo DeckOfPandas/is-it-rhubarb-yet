@@ -403,9 +403,10 @@ One shape for every food, one column at every width, in this order:
    fresh weeks in months, baked as `season`; not for a food that cannot
    be sold) and, for a food of two rings or more, its ring list;
 4. the counter note;
-5. Also great this week ("Great this week" unless this food is YES too):
-   three foods of the same family that are YES, a fresh pick on every
-   visit, A to Z, and "and N more →" to Now;
+5. Also this week: three foods of the same family that are YES or JUST,
+   a fresh pick on every visit, A to Z, each with its verdict tag, and
+   "and N more →" (the rest of the family) to Now; no section when the
+   family has nothing else in;
 6. one hairline, the only rule on the page;
 7. the sources disclosure, "Great! Show me the sources." ("Fine, show me
    the sources." for NO), in the instructive style, holding the numbered
@@ -435,14 +436,13 @@ with `text-wrap: pretty`.
   no legend of its own.
 - **The ring list** (`.ring-list`) is the dial's legend, led by "From
   the outside in:" (small, muted), outer ring first: a swatch in the
-  ring's colour, its name in the caps style in its text colour, its own
-  phrase without a full stop (baked as `ringLines`) and, only where its
-  sources are not the ones every ring shares, its own sources' short
-  names, small and muted, joined by dots: NORTH EAST · Until late
-  January · Northumberland Seafood. The sources every ring shares are
-  said once under the list, "Dates from New Covent Garden Market and
-  Defra." Sources in a sentence are joined with commas and "and"
-  (`_includes/source-names.html`). Each row is a button. Hovering or
+  ring's colour, its name in the caps style in its text colour and its
+  own phrase without a full stop (baked as `ringLines`), joined by a
+  dot: NORTH EAST · Until late January, OUTDOOR · A few days left. Every
+  ring of a food with two or more is named in the data (a food's one
+  ring is unnamed and shows the food's name), so no template invents a
+  name. It names no source: the sources are behind "Show me the
+  sources". Each row is a button. Hovering or
   focusing a row, or hovering a ring, lights the ring and its row and
   fades the rest to a quarter (`lightRings`); a tap pins the light
   (`aria-pressed`) until it is tapped again.
