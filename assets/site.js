@@ -11,7 +11,7 @@
   var BAKED_WEEK = parseInt(html.dataset.bakedWeek, 10);
   var BAKED_YEAR = parseInt(html.dataset.bakedYear, 10);
   var SAME_WEEK = WEEK === BAKED_WEEK && YEAR === BAKED_YEAR;
-  // Verdicts change by the week; the phrases under them ("any day now")
+  // Verdicts change by the week; the phrases under them ("a few days away")
   // change by the day, so a list that carries phrases is redrawn unless
   // the page was baked today.
   var SAME_DAY = html.dataset.bakedAsof === isoDate(TODAY);
@@ -156,7 +156,7 @@
     var name = el("span", "food-name");
     name.appendChild(el("span", "food-title", item.name));
     if (item.variety) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "variety", "(" + item.variety + ")")); }
-    if (item.early) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "early", item.early)); }
+    if (item.aside) { name.appendChild(document.createTextNode(" ")); name.appendChild(el("span", "aside", item.aside)); }
     a.appendChild(name);
     if (opts.tag !== false) {
       if (opts.leader !== false) {
@@ -1312,9 +1312,9 @@
           strip.appendChild(s);
         }
         if (V.flatten(now.arrived).length) block("arrived", "Just arrived", now.arrived);
-        else block("onway", "On the way", now.onway);
+        else block("onway", "On the way in", now.onway);
         block("still", "Great this week", now.still);
-        block("last", "Still great but on the way out", now.last);
+        block("last", "On the way out", now.last);
         var p = el("p", "this-week-more");
         p.appendChild(arrowLink(BASE + "now/", "Everything in season this week"));
         strip.appendChild(p);
@@ -1353,11 +1353,11 @@
   function fillDigest(box, now) {
     box.textContent = "";
     box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
-    box.appendChild(band("last", "Still great but on the way out", now.last, "phrase", "Nothing on its way out."));
-    box.appendChild(band("onway", "On the way", now.onway, "phrase", "Nothing due in the next few weeks."));
+    box.appendChild(band("last", "On the way out", now.last, "phrase", "Nothing on its way out."));
+    box.appendChild(band("onway", "On the way in", now.onway, "phrase", "Nothing due in the next few weeks."));
     box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
     box.appendChild(band("store", "Available from storage", now.store, "kind"));
-    box.appendChild(band("glass", "Glasshouse-grown", now.glass, "kind"));
+    box.appendChild(band("glass", "Under glass", now.glass, "kind"));
   }
 
   function initNow() {

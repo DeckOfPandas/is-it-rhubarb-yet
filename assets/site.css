@@ -344,9 +344,10 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .food-row a:is(:hover, :focus-visible) .food-title { text-decoration: underline; text-decoration-color: var(--food); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .food-name { flex: 0 1 auto; min-width: 0; }
 .variety { color: var(--muted); }
-/* An On the way note ("first ones in two or three weeks") has a line of
+/* The rest of a food's phrase on Now ("first ones in two or three
+   weeks", "then available from storage until late April") has a line of
    its own under the food's name, never wrapping beside it. */
-.early { display: block; color: var(--muted); font-size: var(--fs-small); }
+.aside { display: block; color: var(--muted); font-size: var(--fs-small); }
 .leader { flex: 1 1 16px; min-width: 16px; border-bottom: 2px dotted color-mix(in oklab, var(--ink) 28%, var(--bg)); }
 .food-row .verdict-tag { flex: none; margin-left: auto; }
 .food-row.never { --food: var(--never); }

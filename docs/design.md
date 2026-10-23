@@ -460,12 +460,16 @@ boxes; away from this week, "Back to this week →" ends the line, so
 nothing under it moves. Weeks run through real years, a year either way;
 the address carries `week=` and, in another year, `year=`. The bands,
 each the full width, 40px apart, each left out when empty unless it has
-an empty line: Just arrived (A to Z), Still great but on the way out and
-On the way (grouped by one timing, soonest first), Great this week (by
-kind with counts), Available from storage and Glasshouse-grown (by
-kind). A count beside a section's label is caps, muted, as beside a
-group's. The digest for another week reads its phrases from the middle
-of that week, since it has no today.
+an empty line: Just arrived (A to Z), On the way out and On the way in
+(grouped by one timing, soonest first), Great this week (by kind with
+counts), Available from storage and Under glass (by kind). A count
+beside a section's label is caps, muted, as beside a group's. On the way
+out and On the way in group by the distance to the one boundary alone
+("A few days left", "A week or two away"); the rest of a food's phrase
+("then available from storage until late April", "first ones in a week
+or two") is an aside under its name, so a band is one group per
+distance, not one per sentence. The digest for another week reads its
+phrases from the middle of that week, since it has no today.
 
 ### About
 
@@ -790,10 +794,17 @@ Now's bands from `site.js` through `window.Site`, and every date through
 
 ## Wording
 
-- "Great this week" everywhere; never "Great now". "Still great but on
-  the way out" everywhere the `last` list is named; never "Last chance";
-  its anchor stays `#last`. "Available from storage", never "from store".
-  "Mid-" always hyphenated; "early" and "late" never.
+- "Great this week" everywhere; never "Great now". "On the way out" and
+  "On the way in" everywhere the `last` and `onway` lists are named;
+  never "Last chance" or "Still great but"; the anchors stay `#last` and
+  `#onway`. "Available from storage", never "from store". "Under glass",
+  never "glasshouse-grown", though the ring in the data is still
+  "Glasshouse". "Mid-" always hyphenated; "early" and "late" never.
+- The phrases are deadpan, not matey: "A few days left", "Tailing off
+  until late November", "in earnest", never "At its best", "Just about",
+  "properly" or "any day now". The four distances are the same shape
+  coming and going: "a few days", "a week or two", "two or three weeks",
+  then the month.
 - Every link to Now in prose or as an action reads "Everything in season
   this week →" (the nav's NOW and "and N more" excepted).
 - Page titles: CALENDAR; THE SHAPE OF THE YEAR on the wheel page, whose

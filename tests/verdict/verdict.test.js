@@ -88,8 +88,8 @@ test("rhubarb is NEARLY: forced rhubarb from 29 October, eleven days off", () =>
   const fv = verdictOf("rhubarb");
   assert.equal(fv.verdict, "NEARLY");
   assert.equal(iso(V.startDate(fv.whole.from, YEAR)), "2026-10-29");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "In a week or two.");
-  assert.deepEqual(ringLines("rhubarb"), [["Forced", "In a week or two"], ["Outdoor", "First ones in April, properly in May"]],
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "A week or two away.");
+  assert.deepEqual(ringLines("rhubarb"), [["Forced", "A week or two away"], ["Outdoor", "First ones in April, in earnest in May"]],
     "outdoor rhubarb is about from week 14 and in from week 18, which starts on 30 April but whose middle is 3 May");
 });
 
@@ -98,7 +98,7 @@ test("celery is JUST: a hard stop after week 43, ten days off", () => {
   assert.equal(fv.verdict, "JUST");
   assert.equal(fv.whole.hardStop, true);
   assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-10-28");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "For another week or two.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "A week or two left.");
   assert.equal(verdictOf("celery", 41).verdict, "YES", "two full weeks left is still YES");
   assert.equal(verdictOf("celery", 43).verdict, "JUST", "the last week is JUST");
 });
@@ -108,7 +108,7 @@ test("potatoes are YES until late December, then from storage; new potatoes are 
   assert.equal(fv.verdict, "YES");
   assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-12-31");
   assert.match(V.dateLine(fv.whole, YEAR, TODAY), /^Until late December, then available from storage until /);
-  assert.deepEqual(ringLines("potatoes"), [["Maincrop", "Until late December"], ["New", "First ones in May, properly in June"]]);
+  assert.deepEqual(ringLines("potatoes"), [["Maincrop", "Until late December"], ["New", "First ones in May, in earnest in June"]]);
 });
 
 test("a variety is named as a type or a cultivar, in a list and in a sentence", () => {
@@ -152,19 +152,19 @@ test("a glasshouse ring's just-about tail does not carry the whole food", () => 
   // own line ends.
   const fv = verdictOf("cucumber", 43);
   const line = V.dateLine(fv.whole, YEAR, new Date(2026, 9, 22, 12));
-  assert.equal(line, "Just about, for a few more days.");
+  assert.equal(line, "Tailing off, a few days left.");
   const glass = fv.varieties.find((r) => r.name === "Glasshouse");
-  assert.equal(V.phrase(glass, YEAR, new Date(2026, 9, 22, 12)), "At its best for a few more days, then just about until late November");
+  assert.equal(V.phrase(glass, YEAR, new Date(2026, 9, 22, 12)), "A few days left, then tailing off until late November");
 });
 
-test("a two-part arrival is grouped by when it is properly in", () => {
+test("a two-part arrival is grouped by when it is in in earnest", () => {
   const t = (slug) => V.timing(verdictOf(slug).whole, YEAR, TODAY);
-  assert.deepEqual(t("jerusalem-artichokes"), { when: "In a week or two", early: "a few about now", days: 11 });
-  assert.equal(t("celery").when, "For another week or two");
-  assert.equal(t("celery").early, "");
+  assert.deepEqual(t("jerusalem-artichokes"), { when: "A week or two away", aside: "a few about now", days: 11 });
+  assert.equal(t("celery").when, "A week or two left");
+  assert.equal(t("celery").aside, "");
   const turkey = t("turkey");
-  assert.match(turkey.early, /^first ones /);
-  assert.ok(!/first ones|properly/i.test(turkey.when), turkey.when);
+  assert.match(turkey.aside, /^first ones /);
+  assert.ok(!/first ones|in earnest/i.test(turkey.when), turkey.when);
 });
 
 test("Jerusalem artichokes are NEARLY from a just-about week", () => {
@@ -172,7 +172,7 @@ test("Jerusalem artichokes are NEARLY from a just-about week", () => {
   assert.equal(fv.verdict, "NEARLY");
   assert.equal(fv.whole.state, "avail");
   assert.equal(iso(V.startDate(fv.whole.from, YEAR)), "2026-10-29");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "A few about now, properly in a week or two.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "A few about now, in earnest in a week or two.");
 });
 
 test("basil is JUST: a just-about tail to 28 October", () => {
@@ -180,15 +180,15 @@ test("basil is JUST: a just-about tail to 28 October", () => {
   assert.equal(fv.verdict, "JUST");
   assert.equal(fv.whole.tail, true);
   assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-10-28");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Just about, for another week or two.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Tailing off, a week or two left.");
 });
 
-test("asparagus is NO: first ones in April, properly in May", () => {
+test("asparagus is NO: first ones in April, in earnest in May", () => {
   const fv = verdictOf("asparagus");
   assert.equal(fv.verdict, "NO");
   assert.equal(iso(V.startDate(fv.whole.from, YEAR)), "2027-04-02");
   assert.equal(iso(V.startDate(fv.whole.inFrom, YEAR)), "2027-04-30");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "First ones in April, properly in May.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "First ones in April, in earnest in May.");
 });
 
 test("cultivated mushrooms are YES all year", () => {
@@ -216,7 +216,7 @@ test("apples answer for the whole food: fresh until late November, then storage"
   assert.equal(verdictOf("apples", 20).verdict, "YES-ISH");
   const july = V.midOfToday(30, YEAR);
   assert.equal(V.dateLine(verdictOf("apples", 30).whole, YEAR, july),
-    "Available from storage for a few more days. Fresh any day now.", "fresh within NEARLY's threshold is named");
+    "Available from storage, a few days left. Fresh a few days away.", "fresh within NEARLY's threshold is named");
 });
 
 test("the combined timeline takes each week's best state across the rings", () => {
@@ -265,9 +265,9 @@ test("every food, every week: the order holds and the storage words are right", 
       if (s === "in" && !["YES", "JUST"].includes(fv.verdict)) wrong.push(`${at}: in season but ${fv.verdict}`);
       if ((s === "store" || s === "glass") && fv.verdict !== "YES-ISH") wrong.push(`${at}: held alone but ${fv.verdict}`);
       if (s === "" && !["NEARLY", "NO"].includes(fv.verdict)) wrong.push(`${at}: nothing but ${fv.verdict}`);
-      if (fv.verdict === "YES-ISH" && !/^(Available from storage|Glasshouse-grown)/.test(line)) wrong.push(`${at}: ${line}`);
+      if (fv.verdict === "YES-ISH" && !/^(Available from storage|Under glass)/.test(line)) wrong.push(`${at}: ${line}`);
       if (/from store\b/.test(line)) wrong.push(`${at}: says "from store": ${line}`);
-      if (/, then /.test(line) && !/, then (available from storage|glasshouse-grown|just about)/.test(line)) wrong.push(`${at}: ${line}`);
+      if (/, then /.test(line) && !/, then (available from storage|under glass|tailing off)/.test(line)) wrong.push(`${at}: ${line}`);
       if (/\d/.test(line)) wrong.push(`${at}: a number in ${line}`);
     }
   }
@@ -283,16 +283,16 @@ test("JUST runs across overlapping rings: one ring ending is not the food ending
   const stored = { name: "T", slug: "t", colour: "#000000", varieties: [{ name: "", weeks: [[10, 20, "in"], [21, 40, "store"]] }] };
   const r = V.foodVerdict(stored, 20).whole;
   assert.equal(r.verdict, "JUST", "storage to follow does not stop a hard stop");
-  assert.equal(V.dateLine(r, YEAR, V.midOfToday(20, YEAR)), "For a few more days, then available from storage until early October.");
+  assert.equal(V.dateLine(r, YEAR, V.midOfToday(20, YEAR)), "A few days left, then available from storage until early October.");
 });
 
 test("glasshouse: YES-ISH alone, for now when outdoor follows", () => {
   const fv = verdictOf("pak-choi");
   assert.equal(fv.verdict, "YES-ISH");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Glasshouse-grown for now, and outdoor from early July.");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Under glass for now. Outdoor from early July.");
   const food = { name: "T", slug: "t", colour: "#000000", varieties: [
     { name: "Glasshouse", ring: "method", method: "glasshouse", weeks: [[1, 47, "in"]] }, { name: "Outdoor", weeks: [[20, 40, "in"]] }] };
-  assert.equal(V.dateLine(V.foodVerdict(food, WEEK).whole, YEAR, TODAY), "Glasshouse-grown until late November.");
+  assert.equal(V.dateLine(V.foodVerdict(food, WEEK).whole, YEAR, TODAY), "Under glass until late November.");
 });
 
 test("a fish answers for all its coasts together", () => {
@@ -301,7 +301,7 @@ test("a fish answers for all its coasts together", () => {
   assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "All year.", "cod is landed somewhere all year");
   assert.equal(verdictOf("haddock").whole.allYear, true, "an all-year coast makes the fish all year");
   const sw = fv.varieties.find((r) => r.name === "South West");
-  assert.equal(V.phrase(sw, YEAR, TODAY), "For another week or two", "its Cornish ring still has its own season, to week 43");
+  assert.equal(V.phrase(sw, YEAR, TODAY), "A week or two left", "its Cornish ring still has its own season, to week 43");
 });
 
 test("rings run from the longest season to the shortest, ties in data order", () => {
@@ -329,44 +329,44 @@ test("a tail to week 48 is JUST until late November: the week ends on 2 December
   const fv = V.foodVerdict(food, WEEK);
   assert.equal(fv.verdict, "JUST");
   assert.equal(iso(V.endDate(fv.whole.until, YEAR)), "2026-12-02");
-  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Just about, until late November.", "a tail is just about, not a last fortnight");
+  assert.equal(V.dateLine(fv.whole, YEAR, TODAY), "Tailing off until late November.", "a tail is tailing off, not a last fortnight");
   // Tomatoes themselves: the outdoor crop's tail ends in October and the
   // glasshouse ring carries November.
   const t = verdictOf("tomatoes");
   assert.equal(t.verdict, "JUST");
-  assert.equal(V.dateLine(t.whole, YEAR, TODAY), "Just about, for another week or two, then glasshouse-grown until late November.");
+  assert.equal(V.dateLine(t.whole, YEAR, TODAY), "Tailing off, a week or two left, then under glass until late November.");
 });
 
-test("a soft end says so once it is near: at its best, then just about", () => {
+test("a soft end says so once it is near: days left, then tailing off", () => {
   // In season to week 43, just about to week 48: a YES that becomes a
   // tail JUST, which the sentence admits in its last weeks only.
   const soft = [[23, 43, "in"], [44, 48, "avail"]];
   assert.equal(say(soft, on(2026, 9, 10)), "Until late October", "far off, as before");
-  assert.equal(say(soft, on(2026, 10, 18)), "At its best for another week or two, then just about until late November");
-  assert.equal(say(soft, on(2026, 10, 25)), "At its best for a few more days, then just about until late November");
-  assert.equal(say(soft, on(2026, 11, 5)), "Just about, for another two or three weeks", "the tail itself");
-  assert.equal(say(soft, on(2026, 11, 28)), "Just about, for a few more days");
-  assert.equal(say([[23, 43, "in"]], on(2026, 10, 25)), "For a few more days", "a hard stop is the JUST line");
+  assert.equal(say(soft, on(2026, 10, 18)), "A week or two left, then tailing off until late November");
+  assert.equal(say(soft, on(2026, 10, 25)), "A few days left, then tailing off until late November");
+  assert.equal(say(soft, on(2026, 11, 5)), "Tailing off, two or three weeks left", "the tail itself");
+  assert.equal(say(soft, on(2026, 11, 28)), "Tailing off, a few days left");
+  assert.equal(say([[23, 43, "in"]], on(2026, 10, 25)), "A few days left", "a hard stop is the JUST line");
 });
 
 test("coming in: the phrase coarsens with distance and never names a day", () => {
   const forced = [[44, 52, "in"]];
-  assert.equal(say(forced, on(2026, 10, 24)), "Any day now");
-  assert.equal(say(forced, on(2026, 10, 18)), "In a week or two");
-  assert.equal(say(forced, on(2026, 10, 4)), "In two or three weeks");
+  assert.equal(say(forced, on(2026, 10, 24)), "A few days away");
+  assert.equal(say(forced, on(2026, 10, 18)), "A week or two away");
+  assert.equal(say(forced, on(2026, 10, 4)), "Two or three weeks away");
   assert.equal(say(forced, on(2026, 9, 10)), "From early November", "mid-week is 1 November");
   assert.equal(say([[47, 52, "in"]], on(2026, 10, 1)), "From late November", "week 47 starts 19 November, its middle is the 22nd");
   assert.equal(say(forced, on(2026, 6, 1)), "Back in November");
   assert.equal(say([[40, 41, "in"]], on(2026, 10, 18)), "Back next October", "the same month next year");
-  assert.equal(say([[18, 22, "avail"], [23, 39, "in"]], on(2026, 10, 18)), "First ones in May, properly in June");
-  assert.equal(say([[40, 43, "avail"], [44, 52, "in"]], on(2026, 9, 29)), "First ones any day now, properly from early November");
+  assert.equal(say([[18, 22, "avail"], [23, 39, "in"]], on(2026, 10, 18)), "First ones in May, in earnest in June");
+  assert.equal(say([[40, 43, "avail"], [44, 52, "in"]], on(2026, 9, 29)), "First ones in a few days, in earnest from early November");
 });
 
-test("going out: a few more days, a week or two, two or three weeks, then the month", () => {
+test("going out: a few days, a week or two, two or three weeks, then the month", () => {
   const toOct = [[1, 43, "in"]];
-  assert.equal(say(toOct, on(2026, 10, 25)), "For a few more days");
-  assert.equal(say(toOct, on(2026, 10, 18)), "For another week or two");
-  assert.equal(say(toOct, on(2026, 10, 4)), "For another two or three weeks");
+  assert.equal(say(toOct, on(2026, 10, 25)), "A few days left");
+  assert.equal(say(toOct, on(2026, 10, 18)), "A week or two left");
+  assert.equal(say(toOct, on(2026, 10, 4)), "Two or three weeks left");
   assert.equal(say([[1, 48, "in"]], on(2026, 10, 18)), "Until late November");
   assert.equal(say([[1, 52, "in"]], on(2026, 10, 18)), "All year");
   assert.equal(say([[36, 52, "in"]], on(2026, 10, 18)), "Until late December", "week 52 reads from its middle, 27 December");
@@ -404,7 +404,7 @@ test("a variety that is only ever just about", () => {
   assert.equal(before.verdict, "NEARLY");
   assert.deepEqual(before.from, { week: 10, years: 0 });
   assert.equal(before.inFrom, null);
-  assert.equal(V.dateLine(before, 2026, V.midOfToday(8, 2026)), "In a week or two.");
+  assert.equal(V.dateLine(before, 2026, V.midOfToday(8, 2026)), "A week or two away.");
   const after = V.varietyVerdict(v, 20);
   assert.equal(after.verdict, "NO");
   assert.deepEqual(after.from, { week: 10, years: 1 });
@@ -477,7 +477,7 @@ test("the weekly digest for week 42: its lists, by kind, by time left", () => {
   V.flatten(now.last).concat(V.flatten(now.onway), V.flatten(now.still)).forEach((i) => {
     assert.ok(!/\d/.test(i.line), i.name + ": " + i.line);
   });
-  assert.equal(V.flatten(now.last).find((i) => i.slug === "celery").line, "For another week or two");
+  assert.equal(V.flatten(now.last).find((i) => i.slug === "celery").line, "A week or two left");
   // Nothing appears twice.
   const all = slugs(now.arrived).concat(slugs(now.last), slugs(now.onway), slugs(now.still), slugs(now.store), slugs(now.glass));
   assert.equal(new Set(all).size, all.length);
@@ -496,7 +496,7 @@ test("last chance and on the way group by one timing, soonest first, A to Z with
     assert.equal(grouped.reduce((n, g) => n + g.items.length, 0), V.flatten(now[name]).length, name + ": every food once");
     grouped.forEach((g) => {
       g.items.forEach((i) => assert.equal(i.when, g.phrase));
-      assert.ok(!/first ones|properly|about now/i.test(g.phrase), name + ": " + g.phrase + " is one timing");
+      assert.ok(!/first ones|in earnest|about now|then /i.test(g.phrase), name + ": " + g.phrase + " is one timing");
       const names = g.items.map((i) => i.name + " " + i.variety);
       assert.deepEqual(names, names.slice().sort(), name + " " + g.phrase + " is A to Z");
     });
@@ -504,10 +504,30 @@ test("last chance and on the way group by one timing, soonest first, A to Z with
     soonest.forEach((d, i) => assert.ok(i === 0 || soonest[i - 1] <= d, name + " groups run soonest first"));
   });
   const last = V.byPhrase(now.last);
-  assert.ok(last.find((g) => g.phrase === "For another week or two").items.some((i) => i.slug === "celery"));
+  assert.ok(last.find((g) => g.phrase === "A week or two left").items.some((i) => i.slug === "celery"));
   const onway = V.byPhrase(now.onway);
-  assert.ok(onway.find((g) => g.phrase === "In a week or two").items.some((i) => i.slug === "jerusalem-artichokes"));
+  assert.ok(onway.find((g) => g.phrase === "A week or two away").items.some((i) => i.slug === "jerusalem-artichokes"));
   assert.deepEqual(V.byPhrase([]), []);
+});
+
+test("on the way out groups by distance alone: the tail and the sequel are asides, not groups", () => {
+  // Basil tails off and celery stops hard, both after week 43; tomatoes
+  // go on under glass. On Now all three are one group, "A week or two
+  // left", and only tomatoes carries an aside.
+  const now = V.nowLists(foods, groups, WEEK, YEAR, TODAY);
+  const last = V.byPhrase(now.last);
+  const group = last.find((g) => g.items.some((i) => i.slug === "celery"));
+  assert.equal(group.phrase, "A week or two left");
+  const slugs = group.items.map((i) => i.slug);
+  assert.ok(slugs.includes("basil"), "a tail is not a group of its own");
+  assert.ok(slugs.includes("tomatoes"), "a sequel is not a group of its own");
+  const item = (slug) => group.items.find((i) => i.slug === slug);
+  assert.equal(item("basil").aside, "");
+  assert.equal(item("celery").aside, "");
+  assert.equal(item("tomatoes").aside, "then under glass until late November");
+  assert.equal(item("tomatoes").line, "Tailing off, a week or two left, then under glass until late November");
+  last.forEach((g) => assert.match(g.phrase, /^(A few days left|A week or two left|Two or three weeks left|Until )/, g.phrase));
+  V.byPhrase(now.onway).forEach((g) => assert.match(g.phrase, /^(A few days away|A week or two away|Two or three weeks away|From |In |Next )/, g.phrase));
 });
 
 test("quotations are stable for a food for a week and prefer pinned lines", () => {

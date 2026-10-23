@@ -5,9 +5,9 @@ permalink: /now/
 ---
 {%- comment -%}
 The weekly digest, in the order a cook reads it: just arrived, A to Z;
-still great but on the way out and on the way, under their phrases,
-soonest first; great this week, a group per kind of food; then the
-YES-ISH foods, available from storage and glasshouse-grown. The
+on the way out and on the way in, under their timings, soonest first;
+great this week, a group per kind of food; then the YES-ISH foods,
+available from storage and under glass. The
 build-day week is baked here from _data/baked.json; site.js redraws the
 lists from foods.json whenever the page was not baked today, and for
 another week, building the same markup as band.html. Without JavaScript
@@ -31,9 +31,9 @@ the baked week shows, dated.
 
 <div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
   {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived shape="plain" az=baked.az.arrived -%}
-  {%- include band.html cls="last" heading="Still great but on the way out" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
-  {%- include band.html cls="onway" heading="On the way" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
+  {%- include band.html cls="last" heading="On the way out" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
+  {%- include band.html cls="onway" heading="On the way in" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
   {%- include band.html cls="still" heading="Great this week" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}
   {%- include band.html cls="store" heading="Available from storage" list=now.store shape="kind" -%}
-  {%- include band.html cls="glass" heading="Glasshouse-grown" list=now.glass shape="kind" -%}
+  {%- include band.html cls="glass" heading="Under glass" list=now.glass shape="kind" -%}
 </div>

@@ -5,6 +5,25 @@ reason, so that nobody relitigates it by accident. What the site does
 now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 `model_instructions/manual.md`. Add to the top.
 
+## 2026-10-23
+
+- **The date phrases are deadpan, one distance scale, and Now groups by
+  distance alone.** On the way out had 29 foods, every one ending within
+  the week, in six groups, because the group label was each food's whole
+  sentence: "Just about" split 12 from 14, and "then available from
+  storage until late April" made groups of one or two. The label is now
+  the distance to the one boundary ("A few days left") and the rest of
+  the sentence is an aside under the food's name, as "first ones in a
+  week or two" already was. The words lost their presenter's voice: "A
+  few days left", "A week or two away", "Tailing off until late
+  November", "First ones in April, in earnest in May", "A few about now,
+  in earnest in a week or two", "Under glass for now. Outdoor from early
+  July."; never "At its best", "Just about", "properly", "any day now"
+  or "Still great but". The bands are Just arrived, On the way out, On
+  the way in, Great this week, Available from storage and Under glass.
+  "Available from storage" stays in full. Helen: "we need to rationalise
+  the language, and we need to sound less like Jamie Oliver."
+
 ## 2026-10-22, after the full review
 
 - **The Good Fish Guide lines are sentences, dated.** "Good Fish Guide,
