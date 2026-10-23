@@ -7,6 +7,19 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **One search ranking**, `assets/search.js`, for home, the header and
+  the not-found page. The not-found page had its own older scoring
+  (prefix and inside-word points), home and the header each a copy of
+  the tiers with the lead rule pasted twice. The not-found page now
+  ranks as home does and falls back to the three-letter "did you mean".
+  `tests/site/search.test.js` pins the examples ("ape" nothing, "cox"
+  Apples (Cox), "crab" the two crabs then crab apples) and that the two
+  index shapes rank every query alike.
+- **The calendar feeds are folded after the build** (`tools/fold-ics.js`):
+  CRLF ends and 75-octet lines as RFC 5545 asks, which Jekyll cannot do
+  in Liquid. `tests/build/` checks the built endpoints and feeds, and
+  that the charts draw in Chromium at three widths with no console
+  error; the deploy runs both after the cards.
 - **The ring list names no source**, not per row and not as "Dates
   from" under the list. A visitor who wants the sources opens "Show me
   the sources". This replaces "Shared sources once" below.
