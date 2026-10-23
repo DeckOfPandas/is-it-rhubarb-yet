@@ -53,93 +53,10 @@
   }
 
   // --- Matching what people type --------------------------------------------
-  // Case, accents and punctuation are ignored and "&" reads as "and".
-  // Every word is matched under its forms: itself and, when it ends in s
-  // or ies, its singular, on both sides, so "leek" begins "leeks",
-  // "cherry" begins "cherries" (as "cherry") and "chilli" begins
-  // "chillies" as typed. Every typed word must begin a candidate word, or
-  // at least occur inside one or its singular; a word that begins the whole candidate
-  // scores highest, then one that begins a word, then one found inside a
-  // word.
-  function fold(s) {
-    return String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "")
-      .toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ").trim();
-  }
-  function forms(w) {
-    var out = [w];
-    if (/ies$/.test(w)) out.push(w.replace(/ies$/, "y"));
-    if (/s$/.test(w)) out.push(w.replace(/s$/, ""));
-    return out;
-  }
-  function begins(q, t) {
-    for (var i = 0; i < q.length; i++) {
-      for (var k = 0; k < t.length; k++) if (t[k].indexOf(q[i]) === 0) return true;
-    }
-    return false;
-  }
-  // Whether a typed word is found inside any form of a word, so "berry"
-  // is inside "strawberries" by way of "strawberry".
-  function inside(q, t) {
-    for (var k = 0; k < t.length; k++) if (t[k].indexOf(q) >= 0) return true;
-    return false;
-  }
-  function words(s) { return s.split(" ").filter(Boolean); }
-
-  // Score of a candidate (an array of folded terms) for a typed query; 0
-  // means no match.
-  function score(terms, query) {
-    var qw = words(query).map(forms);
-    if (!qw.length) return 0;
-    var total = 0;
-    for (var i = 0; i < qw.length; i++) {
-      var best = 0;
-      for (var t = 0; t < terms.length && best < 3; t++) {
-        var tw = words(terms[t]).map(forms);
-        if (tw.length && begins(qw[i], tw[0])) { best = Math.max(best, t === 0 ? 3 : 2.5); continue; }
-        for (var k = 0; k < tw.length; k++) {
-          if (begins(qw[i], tw[k])) best = Math.max(best, 2);
-          else if (qw[i][0].length >= 3 && inside(qw[i][0], tw[k])) best = Math.max(best, 1);
-        }
-      }
-      if (!best) return 0;
-      total += best;
-    }
-    return total;
-  }
-
-  // Rank an index of {name, terms (folded)} by a query.
-  function rank(index, query) {
-    var q = fold(query);
-    if (!q) return [];
-    return index.map(function (it) { return { item: it, score: score(it.terms, q) }; })
-      .filter(function (r) { return r.score > 0; })
-      .sort(function (a, b) { return (b.score - a.score) || (a.item.name < b.item.name ? -1 : 1); })
-      .map(function (r) { return r.item; });
-  }
-
-  // --- Home search: tiers ----------------------------------------------------
-  // The hero ranks a candidate (a food's name, alias or shared word, a
-  // variety's name or how it is said, each as folded words) by how the
-  // typed words meet it: 1, exactly; 2, at its start; 3, at the start of
-  // a later word. Text found only inside a word is no match: "ape" finds
-  // nothing. Singular and plural are equal, and the last typed word,
-  // still being typed, may also begin its word.
-  function singular(w) { return w.replace(/ies$/, "y").replace(/oes$/, "o").replace(/([^s])s$/, "$1"); }
-  function wordsAt(c, q, i) {
-    if (i + q.length > c.length) return false;
-    for (var j = 0; j < q.length; j++) {
-      if (singular(c[i + j]) === singular(q[j])) continue;
-      if (j === q.length - 1 && c[i + j].indexOf(q[j]) === 0) continue;
-      return false;
-    }
-    return true;
-  }
-  function tierOf(c, q) {
-    if (c.length === q.length && c.every(function (w, i) { return singular(w) === singular(q[i]); })) return 1;
-    if (wordsAt(c, q, 0)) return 2;
-    for (var i = 1; i < c.length; i++) if (wordsAt(c, q, i)) return 3;
-    return 0;
-  }
+  // The ranking is assets/search.js, shared by home, the header, the
+  // not-found page and the tests; these are its helpers by name.
+  var S = window.Search;
+  var fold = S.fold, words = S.words;
 
   // --- A food in a list, the same markup as _includes/food-row.html ------
   // opts.tag and opts.leader are each on unless false.
@@ -883,8 +800,8 @@
       indexIn = loadSearch().then(function (items) {
         index = items.map(function (it) {
           return {
-            slug: it.slug,
-            strings: it.terms.map(function (s) { return words(fold(s)); }),
+            slug: it.slug, name: it.name, label: "",
+            strings: S.strings(it.terms),
             names: [it.name].concat(it.names || []),
             colour: function () { return it.never ? getComputedStyle(document.documentElement).getPropertyValue("--never").trim() : it.colour; },
           };
@@ -896,15 +813,6 @@
     input.addEventListener("focus", ensureIndex);
     input.addEventListener("input", ensureIndex);
     if (input.value) ensureIndex();
-    function search(text) {
-      var q = words(fold(text));
-      if (!q.length) return [];
-      return index.map(function (it) {
-        var t = 0;
-        it.strings.forEach(function (c) { var x = tierOf(c, q); if (x && (!t || x < t)) t = x; });
-        return { it: it, tier: t };
-      }).filter(function (h) { return h.tier; }).sort(function (a, b) { return a.tier - b.tier; });
-    }
     var field = hookField(input, { stacked: function () { return false; }, onChange: change });
     function go() {
       var q = input.value.trim();
@@ -916,9 +824,8 @@
     // changes on Enter (a phone's Go) alone, never on a timer, so a slow
     // typist is not carried off mid-word.
     function change() {
-      var q = input.value.trim();
-      hits = search(q);
-      lead = hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier) ? hits[0].it : null;
+      hits = S.search(index, input.value.trim());
+      lead = S.leadOf(hits);
       field.update(lead);
     }
     input.form.addEventListener("submit", function (e) { e.preventDefault(); go(); });
@@ -969,12 +876,11 @@
     // whole, with its whole dial (ring -1); a variety answers for itself,
     // its dial cut to its ring.
     var lineOf = {};
-    function terms(list) { return list.map(function (s) { return words(fold(s)); }); }
     var index = rows.map(function (li) {
       var name = li.querySelector(".food-title").textContent;
       return {
         name: name, label: "", slug: li.dataset.slug, ask: li.dataset.said || name.toLowerCase(), never: li.classList.contains("never"),
-        strings: terms(li.dataset.terms.split("|").filter(Boolean)),
+        strings: S.strings(li.dataset.terms.split("|").filter(Boolean)),
         names: (li.dataset.names || "").split("|").filter(Boolean),
         colour: function () { return getComputedStyle(li).getPropertyValue("--food").trim(); },
         ink: function () { var s = getComputedStyle(li); return [s.getPropertyValue("--food-shed").trim(), s.getPropertyValue("--food-custard").trim()]; },
@@ -998,7 +904,7 @@
           var said = V.varietySaid(f, r.v), label = V.varietyLabel(r.v);
           index.push({
             name: f.name, label: label, slug: f.slug, ask: V.varietySaid(f, r.v, true),
-            strings: terms([r.v.name, said]), names: [r.v.name, said],
+            strings: S.strings([r.v.name, said]), names: [r.v.name, said],
             colour: function () { return r.colour; },
             ink: function () { return r.v.colour ? [r.v.text_on_shed, r.v.text_on_custard] : [f.text_on_shed, f.text_on_custard]; },
             verdict: function () { return r.verdict; },
@@ -1014,30 +920,7 @@
     }
     input.addEventListener("focus", ensureFoods);
     input.addEventListener("input", ensureFoods);
-    // One hit per food, at its best tier, by tier and then A to Z by food
-    // and variety. A food found by a variety alone shows as that variety,
-    // the best one; a food found as well or better itself shows as the
-    // food. So a food stays one row while letters are typed, and the rows
-    // only ever narrow.
-    function search(text) {
-      var q = words(fold(text));
-      if (!q.length) return [];
-      var best = {};
-      index.forEach(function (it) {
-        var t = 0;
-        it.strings.forEach(function (c) { var x = tierOf(c, q); if (x && (!t || x < t)) t = x; });
-        if (!t) return;
-        var b = best[it.slug];
-        if (!b || t < b.tier || (t === b.tier && !it.label)) best[it.slug] = { it: it, tier: t };
-      });
-      return Object.keys(best).map(function (k) { return best[k]; })
-        .sort(function (a, b) {
-          var x = a.it.name + " " + a.it.label, y = b.it.name + " " + b.it.label;
-          return (a.tier - b.tier) || (x < y ? -1 : x > y ? 1 : 0);
-        });
-    }
-    // The single best match, when it is found exactly or at its start
-    // and nothing else is found as well: it alone colours the hero and
+    // The single best match (S.leadOf): it alone colours the hero and
     // completes the typed word.
     var lead = null;
     // What the hero spells for an answer: the typed text and, when the
@@ -1048,10 +931,6 @@
       if (lead !== it || it.names.some(function (s) { return fold(s) === f; })) return q;
       for (var i = 0; i < it.names.length; i++) if (fold(it.names[i]).indexOf(f) === 0) return it.names[i];
       return q;
-    }
-    // Two names the same once folded, singular and plural alike.
-    function sameWords(a, b) {
-      return words(fold(a)).map(singular).join(" ") === words(fold(b)).map(singular).join(" ");
     }
     // The links Up and Down move the highlight through, in rank order,
     // and which is lit.
@@ -1095,14 +974,14 @@
       lead = null;
       answered = null;
       if (!q) { status.textContent = ""; return; }
-      var hits = search(q);
+      var hits = S.search(index, q);
       var exact = hits.filter(function (h) { return h.tier === 1; });
       var near = hits.filter(function (h) { return h.tier === 2 || h.tier === 3; });
       var answer = null, also = [], list = [];
       if (exact.length === 1) { answer = exact[0]; also = near; }
       else list = hits;
       if (list.length === 1) { answer = list[0]; list = []; }
-      if (hits.length && hits[0].tier <= 2 && !(hits[1] && hits[1].tier === hits[0].tier)) lead = hits[0].it;
+      lead = S.leadOf(hits);
       if (answer) {
         var it = answer.it, verdict = it.verdict();
         // The label names the results region, so a hidden label must not
@@ -1113,7 +992,7 @@
         one.classList.toggle("is-plain", !!it.never);
         one.style.setProperty("--food", it.colour());
         one.querySelector(".ask-name").textContent = it.ask;
-        one.classList.toggle("asks", !sameWords(heroWord(it, q), it.ask));
+        one.classList.toggle("asks", !S.sameWords(heroWord(it, q), it.ask));
         one.querySelector(".one-word").textContent = verdict + ".";
         one.querySelector(".one-line").textContent = it.line();
         // A never-food's card links to its page too ("Tell me why"), which
@@ -1154,10 +1033,7 @@
         noneAsk.textContent = q.toLowerCase();
         none.hidden = false;
         status.textContent = "No matches.";
-        var bit = fold(q).slice(0, 3);
-        var close = bit.length < 3 ? [] : index.filter(function (it) {
-          return !it.label && it.strings.some(function (c) { return c.join(" ").indexOf(bit) >= 0; });
-        }).slice(0, 5);
+        var close = S.nearest(index, q, 5);
         close.forEach(function (it) {
           var row = it.row();
           suggestList.appendChild(row);
@@ -1436,15 +1312,10 @@
     document.getElementById("asked").textContent = last;
     document.title = "Is it " + last + " yet? Literally no idea.";
     loadSearch().then(function (items) {
-      var index = items.map(function (it) { it.terms = it.terms.map(fold); return it; });
-      var found = rank(index, last).slice(0, 5);
-      if (!found.length) {
-        // Nothing begins with it: offer anything sharing three letters.
-        var q = fold(last).slice(0, 3);
-        found = q.length === 3 ? index.filter(function (it) {
-          return it.terms.some(function (t) { return t.indexOf(q) >= 0; });
-        }).slice(0, 5) : [];
-      }
+      var index = items.map(function (it) { it.label = ""; it.strings = S.strings(it.terms); return it; });
+      var found = S.search(index, last).slice(0, 5).map(function (h) { return h.it; });
+      // Nothing begins with it: offer anything sharing three letters.
+      if (!found.length) found = S.nearest(index, last, 5);
       if (!found.length) return;
       var ul = document.getElementById("suggest-list");
       found.forEach(function (it) { ul.appendChild(foodRow(it)); });

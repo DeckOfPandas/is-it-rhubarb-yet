@@ -337,19 +337,22 @@ asks.
   the faded part. Tab with no completion moves focus as usual. Escape
   dismisses a completion, and a second Escape clears the input. The input
   has `aria-autocomplete="both"`; the completion is not announced.
-- **Search ranking** (`tierOf` in `site.js`; the not-found page keeps the
-  older scoring, `rank`). Candidates are each food's and never-food's
-  name, aliases and shared `also` words, and each named variety by its
-  own name and how it is said ("cox", "forced rhubarb"), which joins
-  once `foods.json` is in. Both sides are folded (case, accents,
-  punctuation; "&" is "and") and singular equals plural. A candidate's
-  best tier: 1, exact; 2, the string starts with the query; 3, a later
-  word starts with it. Text found only inside a word is no match
-  anywhere: "ape" and "lla" get LITERALLY NO IDEA. The last typed word
-  may be unfinished. A food is one hit at its best tier: found by a
-  variety alone it shows as that variety ("cox" gives "Apples (Cox)"),
-  and found as well or better itself it shows as the food. Each letter
-  typed only ever takes hits away.
+- **Search ranking** (`assets/search.js`: `search`, `leadOf`,
+  `nearest`; the same module answers the header and the not-found
+  page). Candidates are each food's and never-food's name, aliases and
+  shared `also` words, and each named variety by its own name and how
+  it is said ("cox", "forced rhubarb"), which joins once `foods.json` is
+  in. Both sides are folded (case, accents, punctuation; "&" is "and")
+  and singular equals plural. A candidate's best tier: 1, exact; 2, the
+  string starts with the query; 3, a later word starts with it. Text
+  found only inside a word is no match anywhere: "ape" and "lla" get
+  LITERALLY NO IDEA. The last typed word may be unfinished, so "corn"
+  finds the Cornish sole after sweetcorn. A food is one hit at its best
+  tier: found by a variety alone it shows as that variety ("cox" gives
+  "Apples (Cox)"), and found as well or better itself it shows as the
+  food. Each letter typed only ever takes hits away. The lead, which
+  colours the hero and completes the word, is the first hit when it is
+  tier 1 or 2 and nothing else shares its tier.
   - **One tier-1 match** is answered with the food's card in the label's
     place, with "Also: Crab apples" under it, the tier 2–3 matches as
     links in their colours. The card leaves out its question, which the
@@ -492,8 +495,9 @@ icons and the fonts, small and muted.
 
 `404.html`, served by GitHub Pages for any address it cannot find: "Is
 it [what was asked] yet?", LITERALLY NO IDEA., "If that's an actual
-thing, please tell us.", then up to five nearest foods from
-`search.json` under DID YOU MEAN, and two ways on. It names no
+thing, please tell us.", then up to five foods from `search.json` under
+DID YOU MEAN, ranked as home ranks them, or sharing the first three
+letters when nothing is, and two ways on. It names no
 canonical. Home's one heading, "Is it in season yet?", is visually
 hidden, since the hero is a form.
 
@@ -790,7 +794,14 @@ Now's bands from `site.js` through `window.Site`, and every date through
 - **Tests.** After a build, `node --test tests/cards/cards.test.js`
   checks that every page's share image is the size the page states, that
   `twitter:image` is `og:image`, and that every linked icon is the size
-  its `sizes` states.
+  its `sizes` states. `tests/build/endpoints.test.js` checks that
+  `search.json` and `foods.json` parse and carry what the scripts read,
+  and that every calendar feed is well formed (CRLF, 75-octet lines,
+  complete events, unique UIDs). `tests/build/charts.test.js` loads
+  home, a food page, the calendar and the wheel in Chromium at 390, 820
+  and 1280 wide, served from `_site`, and fails on any console error;
+  without Playwright it is skipped. `tests/site/search.test.js` needs no
+  build: it runs the search ranking over the data.
 
 ## Wording
 
