@@ -16,6 +16,18 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
   explanation, go with it. Seven other foods carry the same unlabelled
   pair of Defra lines (lettuce, pears, currants, runner & French beans,
   broad beans, cabbage, spring greens), for an issue.
+- **No "National" ring on a fish.** Thirteen fish carried a fourth ring
+  read off one sentence of Seafish's 2009 Seafood Guide, a catering
+  guide whose cod entry begins "All year round" before giving a trade
+  season of June to February. The ring showed cod off from March to
+  May while all three coasts had it in and Cornwall had it at its best.
+  Removing the ring from every fish changes no verdict in any week (it
+  was `lead: false`, so it had no calendar row, wheel dot or feed
+  event). Seafish stays in the register and in each fish's sources, and
+  the four ring notes a visitor can use moved to the food's notes: cod's
+  best quality July to October, monkfish's October to May, squid's
+  October to March, and mussels not at their best when spawning in
+  spring.
 - **Every ring of a food with two or more rings is named in the data.**
   Seven dials had an unnamed ring beside a method ring, so the ring list
   read BLACKBERRIES beside WILD. The unnamed ring is now a method ring

@@ -2288,14 +2288,6 @@
       weeks:
         - [1, 22, in]
         - [40, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "All year round, at its best in summer."
-      weeks:
-        - [1, 52, in]
 
 - name: "Sea bass"
   slug: sea-bass
@@ -2323,15 +2315,6 @@
       weeks:
         - [1, 22, in]
         - [40, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Wild season August-March (high price)."
-      weeks:
-        - [1, 13, in]
-        - [31, 52, in]
 
 - name: "Sardines"
   slug: sardines
@@ -2420,6 +2403,7 @@
   note: "Cornish cod is at its best from March to May and again in September and October."
   notes:
     - "The coasts' own calendars are used over BBC Good Food's February to April spawning peak."
+    - "Seafish puts the best quality from July to October."
   buy: "Good Fish Guide, October 2026: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2). Trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
   varieties:
     - name: "North East"
@@ -2440,16 +2424,6 @@
       weeks:
         - [1, 8, avail]
         - [9, 43, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Season June-February, best quality July-October, can be difficult in November-December."
-      weeks:
-        - [1, 8, avail]
-        - [23, 26, avail]
-        - [27, 52, in]
 
 - name: "Haddock"
   slug: haddock
@@ -2543,15 +2517,6 @@
         - [9, 35, in]
         - [36, 43, avail]
         - [44, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Season May-February; avoid February-April when it is in roe."
-      weeks:
-        - [1, 4, in]
-        - [18, 52, in]
 
 - name: "Dover sole"
   slug: dover-sole
@@ -2584,15 +2549,6 @@
         - [14, 26, in]
         - [36, 48, in]
         - [49, 52, avail]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Seafish gives the season as May to March, avoiding Christmas; its table does not separate Dover from lemon sole clearly, so this row is a reading of it."
-      weeks:
-        - [1, 13, in]
-        - [18, 52, in]
 
 - name: "Pollock"
   slug: pollock
@@ -2649,6 +2605,8 @@
   text_on_shed: "#9a7386"
   sources: [northumberland, bnfs, ffs, seafish]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, Rockall and the west of Scotland, or the Kattegat and Skagerrak, caught by otter trawl."
+  notes:
+    - "Seafish puts the best quality from October to May."
   varieties:
     - name: "North East"
       ring: region
@@ -2668,14 +2626,6 @@
       sources: [ffs]
       weeks:
         - [5, 48, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "All year round, best quality October-May."
-      weeks:
-        - [1, 52, in]
 
 - name: "Lemon sole"
   slug: lemon-sole
@@ -2837,6 +2787,8 @@
   text_on_custard: "#8f5c91"
   sources: [northumberland, bnfs, ffs, seafish]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Celtic Seas, caught by jig."
+  notes:
+    - "Seafish puts the best availability and quality from October to March."
   varieties:
     - name: "North East"
       ring: region
@@ -2855,15 +2807,6 @@
       sources: [ffs]
       weeks:
         - [1, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Season May-October, but best availability and quality October-March."
-      weeks:
-        - [1, 13, in]
-        - [18, 52, in]
 
 - name: "Brown crab"
   slug: brown-crab
@@ -2894,14 +2837,6 @@
       sources: [ffs]
       weeks:
         - [5, 39, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "All year round; season and best availability April-September."
-      weeks:
-        - [1, 52, in]
 
 - name: "Lobster"
   slug: lobster
@@ -2932,15 +2867,6 @@
       sources: [ffs]
       weeks:
         - [1, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "All year round; season April-November."
-      weeks:
-        - [1, 48, in]
-        - [49, 52, avail]
 
 - name: "Langoustines"
   slug: langoustines
@@ -2967,6 +2893,8 @@
   sources: [bnfs, ffs, seafish]
   note: "Rope-grown mussels are good all year and at their best from October to March."
   buy: "Good Fish Guide, October 2026: a best choice (rated 1) when rope-grown in the UK or Ireland. Other methods rate from 1 to 3, so ask how they were grown."
+  notes:
+    - "Not at their best when spawning in spring."
   varieties:
     - name: "South East"
       ring: region
@@ -2979,15 +2907,6 @@
       sources: [ffs]
       weeks:
         - [1, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Rope-grown October-July (dredged August-May). Not at their best when spawning in spring."
-      weeks:
-        - [1, 30, in]
-        - [40, 52, in]
 
 - name: "Oysters"
   slug: oysters
@@ -3078,16 +2997,6 @@
       sources: [ffs]
       weeks:
         - [1, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Seafish gives the season as September to March and the best months as March to November; the data follows its season."
-      weeks:
-        - [1, 8, avail]
-        - [9, 48, in]
-        - [49, 52, avail]
 
 - name: "Cockles"
   slug: cockles
@@ -3146,15 +3055,6 @@
       sources: [ffs]
       weeks:
         - [1, 52, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "Wild season April-February."
-      weeks:
-        - [1, 8, in]
-        - [14, 52, in]
 
 - name: "Red mullet"
   slug: red-mullet
@@ -3178,15 +3078,6 @@
       sources: [ffs]
       weeks:
         - [1, 39, in]
-    - name: "National"
-      ring: region
-      lead: false
-      sources: [seafish]
-      notes:
-        - "UK season May-November, best in summer."
-      weeks:
-        - [18, 22, avail]
-        - [23, 48, in]
 
 - name: "Skates and rays"
   slug: skates-rays
