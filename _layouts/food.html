@@ -46,12 +46,12 @@ to this food). The whole page keys off --food, the food's colour.
      whole food's fresh weeks, a glasshouse ring left out as held), which
      answers the title's question in words; and, for a food of two rings
      or more, the dial's legend, "From the outside in". One row per ring
-     in the dial's order, outer ring first: a swatch, the ring's name and
-     its own phrase. A growing method's ring is named with the food, "Wild
-     blackberries", "Glasshouse tomatoes", so that it never stands as a
-     bare "Wild" beside an unnamed ring that says "Blackberries". No source is named here: the sources are behind the
-     disclosure below. A row and its ring light each other, the rest
-     fading to a quarter (site.js); a tap pins the light. {%- endcomment -%}
+     in the dial's order, outer ring first: a swatch, the ring's name as
+     the data gives it (every ring of a food with two or more is named
+     there) and its own phrase. No source is named here: the sources are
+     behind the disclosure below. A row and its ring light each other,
+     the rest fading to a quarter (site.js); a tap pins the light.
+     {%- endcomment -%}
   <div class="breakdown" id="breakdown">
   {%- include season-wheel.html food=food -%}
   {%- if b.season and b.season != "" and food.unsold == nil -%}
@@ -62,9 +62,7 @@ to this food). The whole page keys off --food, the food's colour.
   <ol class="ring-list" id="ring-list">
   {%- for vi in b.rings -%}
     {%- assign v = food.varieties[vi] -%}
-    {%- assign ring_name = v.name | default: food.name -%}
-    {%- if v.ring == "method" -%}{%- assign food_said = food.name | downcase -%}{%- assign ring_name = v.name | append: " " | append: food_said -%}{%- if food.said -%}{%- assign ring_name = v.name | append: " " | append: food.said -%}{%- endif -%}{%- endif -%}
-    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ ring_name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span></span></button></li>
+    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span></span></button></li>
   {%- endfor -%}
   </ol>
   {%- endif -%}
@@ -73,34 +71,24 @@ to this food). The whole page keys off --food, the food's colour.
   {%- if food.buy -%}<p class="buy"><small>{{ food.buy }}</small></p>{%- endif -%}
   </div>
 
-  {%- comment -%} "Also this week": three other foods that are not NO, at
-     random from the baked verdicts, from the same family first and, when
-     the family has fewer than three, from any family to make up three.
-     The family's come first, then the rest, each A to Z, every row with
-     its verdict tag, since the verdicts differ. Then how many more foods
-     are not NO, which links to Now. All of them are in data-all, the
-     family's marked, and site.js picks a fresh three on every visit.
-     {%- endcomment -%}
-  {%- assign also_family = "" | split: "" -%}
-  {%- assign also_rest = "" | split: "" -%}
+  {%- comment -%} "Also this week": three foods of the same family that
+     are YES or JUST, at random from the baked verdicts, A to Z, each
+     with its verdict tag since the two differ, then how many more of
+     the family there are, which links to Now. A family with nothing
+     else in shows no section. All of them are in data-all, and site.js
+     picks a fresh three on every visit. {%- endcomment -%}
+  {%- assign also_all = "" | split: "" -%}
   {%- for other in site.data.foods -%}
-    {%- if other.slug != food.slug -%}
+    {%- if other.group == food.group and other.slug != food.slug -%}
       {%- assign ob = baked.foods[other.slug] -%}
-      {%- if ob.verdict and ob.verdict != "NO" -%}
-        {%- if other.group == food.group -%}{%- assign also_family = also_family | push: other -%}{%- else -%}{%- assign also_rest = also_rest | push: other -%}{%- endif -%}
-      {%- endif -%}
+      {%- if ob.verdict == "YES" or ob.verdict == "JUST" -%}{%- assign also_all = also_all | push: other -%}{%- endif -%}
     {%- endif -%}
   {%- endfor -%}
-  {%- assign also = also_family | sample: 3 | sort: "name" -%}
-  {%- assign also_need = 3 | minus: also.size -%}
-  {%- if also_need > 0 and also_rest.size > 0 -%}
-    {%- assign also_extra = also_rest | sample: also_need | sort: "name" -%}
-    {%- assign also = also | concat: also_extra -%}
-  {%- endif -%}
+  {%- assign also = also_all | sample: 3 | sort: "name" -%}
   {%- if also.size > 0 -%}
-  {%- assign also_more = also_family.size | plus: also_rest.size | minus: also.size -%}
-  {%- capture also_json -%}[{% for o in also_family %}{%- assign os = o.slug -%}{"slug":{{ o.slug | jsonify }},"name":{{ o.name | jsonify }},"colour":{{ o.colour | jsonify }},"verdict":{{ baked.foods[os].verdict | jsonify }},"family":true},{% endfor %}{% for o in also_rest %}{%- assign os = o.slug -%}{"slug":{{ o.slug | jsonify }},"name":{{ o.name | jsonify }},"colour":{{ o.colour | jsonify }},"verdict":{{ baked.foods[os].verdict | jsonify }}},{% endfor %}]{%- endcapture %}
-  <section class="also" data-all='{{ also_json | replace: ",]", "]" | escape }}'>
+  {%- assign also_more = also_all.size | minus: also.size -%}
+  {%- capture also_json -%}[{% for o in also_all %}{%- assign os = o.slug -%}{"slug":{{ o.slug | jsonify }},"name":{{ o.name | jsonify }},"colour":{{ o.colour | jsonify }},"verdict":{{ baked.foods[os].verdict | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{%- endcapture %}
+  <section class="also" data-all='{{ also_json | escape }}'>
     <h2>Also this week</h2>
     <ul class="food-list">
       {%- for other in also -%}{%- assign os = other.slug -%}{%- assign ov = baked.foods[os].verdict -%}{%- include food-row.html item=other verdict=ov -%}{%- endfor -%}

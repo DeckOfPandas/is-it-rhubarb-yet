@@ -12,13 +12,24 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
   the sources". This replaces "Shared sources once" below.
 - **Defra is not a source for rhubarb.** Its wholesale months (January
   to May, March to October) do not match the dial, which is the
-  Market's. No note replaces it.
-- **A growing method's ring is named with the food** in the ring list,
-  "Wild blackberries" beside "Blackberries", never a bare "Wild".
+  Market's. Its two notes, the same words with different dates and no
+  explanation, go with it. Seven other foods carry the same unlabelled
+  pair of Defra lines (lettuce, pears, currants, runner & French beans,
+  broad beans, cabbage, spring greens), for an issue.
+- **Every ring of a food with two or more rings is named in the data.**
+  Seven dials had an unnamed ring beside a method ring, so the ring list
+  read BLACKBERRIES beside WILD. The unnamed ring is now a method ring
+  of its own: Outdoor beside Glasshouse (cucumber, peppers, tomatoes),
+  Cultivated beside Wild (blackberries, gooseberries, hazelnuts), Market
+  beside Wild (morels), as pak choi, watercress and girolles already
+  were. No template builds a name, so the list, the calendar and the
+  wheel agree.
 - **"Also this week"** replaces "Great this week" on a food page: three
-  foods that are not NO, the same family first, then any family, to a
-  total of three, each with its verdict tag. Blackberries had none,
-  since no other soft fruit was YES.
+  foods of the same family that are YES or JUST, each with its verdict
+  tag, and "and N more" counts the rest of the family. Blackberries had
+  no section, since no other soft fruit was YES while two were JUST. A
+  family with nothing else in still shows none: a herb page does not
+  offer mussels.
 
 - **The date phrases are deadpan, one distance scale, and Now groups by
   distance alone.** On the way out had 29 foods, every one ending within
