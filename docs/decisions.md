@@ -10,6 +10,11 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 - **The ring list names no source**, not per row and not as "Dates
   from" under the list. A visitor who wants the sources opens "Show me
   the sources". This replaces "Shared sources once" below.
+- **Defra is not a source for rhubarb.** Its wholesale months (January
+  to May, March to October) do not match the dial, which is the
+  Market's. No note replaces it.
+- **A growing method's ring is named with the food** in the ring list,
+  "Wild blackberries" beside "Blackberries", never a bare "Wild".
 
 - **The date phrases are deadpan, one distance scale, and Now groups by
   distance alone.** On the way out had 29 foods, every one ending within

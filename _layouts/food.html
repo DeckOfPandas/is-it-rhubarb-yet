@@ -47,7 +47,9 @@ to this food). The whole page keys off --food, the food's colour.
      answers the title's question in words; and, for a food of two rings
      or more, the dial's legend, "From the outside in". One row per ring
      in the dial's order, outer ring first: a swatch, the ring's name and
-     its own phrase. No source is named here: the sources are behind the
+     its own phrase. A growing method's ring is named with the food, "Wild
+     blackberries", "Glasshouse tomatoes", so that it never stands as a
+     bare "Wild" beside an unnamed ring that says "Blackberries". No source is named here: the sources are behind the
      disclosure below. A row and its ring light each other, the rest
      fading to a quarter (site.js); a tap pins the light. {%- endcomment -%}
   <div class="breakdown" id="breakdown">
@@ -60,7 +62,9 @@ to this food). The whole page keys off --food, the food's colour.
   <ol class="ring-list" id="ring-list">
   {%- for vi in b.rings -%}
     {%- assign v = food.varieties[vi] -%}
-    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span></span></button></li>
+    {%- assign ring_name = v.name | default: food.name -%}
+    {%- if v.ring == "method" -%}{%- assign food_said = food.name | downcase -%}{%- assign ring_name = v.name | append: " " | append: food_said -%}{%- if food.said -%}{%- assign ring_name = v.name | append: " " | append: food.said -%}{%- endif -%}{%- endif -%}
+    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ ring_name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span></span></button></li>
   {%- endfor -%}
   </ol>
   {%- endif -%}
