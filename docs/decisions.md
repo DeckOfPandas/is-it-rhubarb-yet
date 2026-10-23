@@ -7,6 +7,11 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **A quotation keeps its semicolons.** It is verbatim, so the rule
+  against semicolons in anything a visitor reads does not touch
+  `_data/quotes.yml`. Its new authors include three who died in 1956
+  (Walter de la Mare, A. A. Milne, H. L. Mencken), whose work is in UK
+  copyright until 1 January 2027. Helen is content to quote them now.
 - **No more cards: search answers with rows, the wheel opens a chip,
   the calendar goes to the page.** The card (`.one-result`, home's
   single answer and the charts' popover) was a second design language
