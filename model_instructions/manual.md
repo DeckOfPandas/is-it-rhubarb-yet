@@ -108,7 +108,11 @@ footer is the last line of defence.
 - No calendar date for a season, ever; the as-of date is the only date.
 - Every font size and every gap is a token in `site.css`. Three fonts,
   one job each. One brand colour, which never carries body-size text.
-- A food is a row, a card or a page, never a fourth thing.
+- A food is a row, a chip (the wheel's) or a page, never a fourth thing.
+  Search answers with rows and the calendar's rows go straight to the
+  page. The standalone dials, `/wheel/<slug>.svg`, stay as an endpoint
+  though nothing on the site fetches them now: the checker still wants a
+  stub per food.
 - No trigonometry in the templates; arcs are dashed circles.
 - Month starts are the fixed list `1,5,9,14,18,23,27,31,36,40,44,49`
   wherever they appear; they must agree.

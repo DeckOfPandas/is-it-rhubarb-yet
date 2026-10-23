@@ -1,0 +1,11 @@
+{%- comment -%}
+On the row Enter would open, how to take it: the Enter key, drawn as a
+keycap holding the return mark, small and muted at the row's right end
+after the tag. The font subsets have no arrows, so the mark is an SVG,
+drawn as the arrow mark is. Hidden from screen readers, which say the
+link itself, and from touch screens, whose keyboards have their own Go
+key. site.js moves home's one keycap from row to row as the highlight
+moves; the kitchen sink shows it at rest.
+{%- endcomment -%}
+<span class="key-hint" aria-hidden="true"><kbd>{% include icons/enter.svg %}</kbd></span>
+{%- comment -%} No newline after the markup. {%- endcomment -%}

@@ -1,5 +1,7 @@
 // The calendar and the wheel, made to be played with: a food highlights
-// on hover or focus and opens its card on a click, tap or Enter; a pink
+// on hover or focus; on the wheel a click, tap or Enter opens its chip,
+// the door to its page, and on the calendar it goes straight to the
+// page; a pink
 // line travels through the year, early, mid or late in each month, and
 // the foods for its time are listed under the chart, under a heading
 // with a stepper of its own; TODAY brings it back. While the chart is on
@@ -11,8 +13,8 @@
 // fitted to its longest name. The wheel never turns; In season names and
 // lights only what is in season, Whole year everything. Everything here
 // is added to charts that work without it. Loaded after verdict.js,
-// site.js, whose window.Site lends the card's dial, the hand and Now's
-// lists, and magnifier.js.
+// site.js, whose window.Site lends the hand and Now's lists, and
+// magnifier.js.
 (function () {
   "use strict";
   var S = window.Site, V = window.Verdict;
@@ -592,7 +594,7 @@
     fitWeeks();
     cals.forEach(layoutCal);
     dials.forEach(layoutDial);
-    if (pop) fillPop();
+    if (chip) fillChip();
     list();
     showJump();
   }
@@ -601,7 +603,7 @@
   // --- The floating button -------------------------------------------------------------------
   // A pink pill fixed at the foot of the screen, "81 in season in late
   // November ↓", while the chart is on screen and the list's heading is
-  // not, and not while a docked popover holds the foot of the screen.
+  // not, and not while a docked chip holds the foot of the screen.
   // Pressed, it scrolls to the list's heading (at once with reduced
   // motion) and gives it focus. It waits for foods.json, for its count.
   // Both pills' arrows are the site's arrow mark, turned down or up; on
@@ -629,7 +631,7 @@
     if (title) { title.setAttribute("tabindex", "-1"); title.focus({ preventScroll: true }); }
   });
   function showJump() {
-    var docked = !!(pop && pop.classList.contains("is-docked"));
+    var docked = !!(chip && chip.classList.contains("is-docked"));
     jump.hidden = !foods || !chartSeen || headSeen || docked;
     var chart = root.querySelector(".ordered, .chart-stage");
     up.hidden = !jump.hidden || docked || chart.getBoundingClientRect().bottom > S.headerHeight();
@@ -704,14 +706,17 @@
     });
   }
 
-  // --- Highlight and popover ----------------------------------------------------------------
+  // --- Highlight and the chip ----------------------------------------------------------------
   // A food is its parts: on the calendar a row's name and weeks (its
   // data-row), on the wheel a label and its arc (its data-slug, within
-  // one wheel). Hovering or focusing it lights it and fades the rest; a
-  // click, tap or Enter pins it, outlined in ink, and opens its card
-  // beside it, or docked under the chart on a narrow screen. The card is
-  // the home answer's, with a close button of its own; Escape, a click
-  // outside or the button closes it and gives focus back.
+  // one wheel). Hovering or focusing it lights it and fades the rest. On
+  // the calendar a click, tap or Enter is the row's own link, to the
+  // food's page. On the wheel it pins the food, outlined in ink, and
+  // opens its chip beside it, or docked under the chart on a narrow
+  // screen: the page's question, IS IT CHERRIES YET?, as the one link to
+  // the page, asked for the whole food in the present tense whatever
+  // time the wheel has travelled to. Escape or a click outside closes
+  // it and gives focus back; Enter on the chip follows it.
   function partsOf(part) {
     if (WHEEL) {
       var svg = part.ownerSVGElement;
@@ -750,6 +755,7 @@
   });
   root.addEventListener("focusin", function (e) { if (!pinned) light(targetOf(e.target)); });
   root.addEventListener("click", function (e) {
+    if (!WHEEL) return;
     var part = targetOf(e.target);
     if (!part || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
@@ -758,23 +764,31 @@
   });
   root.addEventListener("pointerdown", function (e) { if (timer && !e.target.closest(".tt-play")) stopPlay(); });
 
-  var pop = null, foods = null, bySlug = {};
-  var popTemplate = document.getElementById("tt-pop");
+  var chip = null, foods = null, bySlug = {};
+  var chipTemplate = document.getElementById("tt-chip");
   function open(part) {
     close(false);
     light(part);
     pinned = part;
     partsOf(part).parts.forEach(function (p) { p.classList.add("is-pinned"); });
-    pop = popTemplate.content.firstElementChild.cloneNode(true);
-    pop.querySelector(".tt-close").addEventListener("click", function () { close(true); });
-    document.body.appendChild(pop);
-    fillPop();
-    pop.querySelector(".one-more").focus({ preventScroll: true });
+    chip = chipTemplate.content.firstElementChild.cloneNode(true);
+    // Following the chip, its food's name is named for the view
+    // transition, so it flies into the page's question.
+    chip.querySelector(".tt-chip-link").addEventListener("click", function () {
+      chip.querySelector(".ask-name").style.viewTransitionName = "food-name";
+    });
+    document.body.appendChild(chip);
+    fillChip();
+    // Focus moves to the chip once the opening event is over: inside the
+    // click a keyboard Enter synthesises on a wheel label, Chromium
+    // keeps focus on the label and the move is lost.
+    var opened = chip;
+    setTimeout(function () { if (chip === opened) chip.querySelector(".tt-chip-link").focus({ preventScroll: true }); }, 0);
   }
   function close(giveBack) {
-    if (!pop) return;
-    pop.remove();
-    pop = null;
+    if (!chip) return;
+    chip.remove();
+    chip = null;
     var part = pinned;
     if (part) partsOf(part).parts.forEach(function (p) { p.classList.remove("is-pinned"); });
     pinned = null;
@@ -782,79 +796,49 @@
     showJump();
     if (giveBack && part) part.focus({ preventScroll: true });
   }
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && pop) { e.preventDefault(); close(true); } });
-  // A click elsewhere closes the card; focus goes back to the food only if
-  // it was in the card, so the click keeps whatever it went to.
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && chip) { e.preventDefault(); close(true); } });
+  // A click elsewhere closes the chip; focus goes back to the food only if
+  // it was in the chip, so the click keeps whatever it went to.
   document.addEventListener("pointerdown", function (e) {
-    if (pop && !pop.contains(e.target) && !targetOf(e.target)) close(pop.contains(document.activeElement));
+    if (chip && !chip.contains(e.target) && !targetOf(e.target)) close(chip.contains(document.activeElement));
   });
-  // The card for the pinned food at the line's time: its verdict, date
-  // line and dial (on the wheel the whole food's, on the calendar the
-  // row's own variety, its dial cut to that ring), and the time it is for
-  // when that is not today.
-  function fillPop() {
-    if (!pop || !pinned || !foods) return;
+  // The chip for the pinned food: its question in the food's colours, as
+  // the page asks it, and the link to its page.
+  function fillChip() {
+    if (!chip || !pinned || !foods) return;
     var f = bySlug[pinned.dataset.slug];
     if (!f) return;
-    var when = dateOf(state.at), fv = V.foodVerdict(f, V.weekOf(when));
-    var vi = WHEEL || f.varieties.length < 2 ? -1 : +pinned.dataset.variety;
-    var r = vi >= 0 ? fv.varieties[vi] : fv.whole;
-    var label = vi >= 0 && r.v.name ? V.varietyLabel(r.v) : "";
-    var name = f.name + (label ? " (" + label + ")" : "");
-    pop.setAttribute("aria-label", name);
-    pop.style.setProperty("--food", vi >= 0 ? r.colour : f.colour);
-    pop.querySelector(".tt-pop-when").textContent = state.at === null ? "" : "In " + STEPS[state.at].phrase;
-    pop.querySelector(".ask-name").textContent = label ? V.varietySaid(f, r.v, true) : f.name.toLowerCase();
-    pop.querySelector(".one-word").textContent = r.verdict + ".";
-    pop.querySelector(".one-line").textContent = V.dateLine(r, when.getFullYear(), when);
-    var go = pop.querySelector(".one-more");
-    go.href = S.foodUrl(f.slug);
-    S.setArrowText(go, S.tellMeAbout(f.name));
-    var box = pop.querySelector(".one-dial"), key = f.slug + "/" + vi + "/" + (state.at === null ? "now" : state.at);
-    if (box.dataset.key !== key) {
-      box.dataset.key = key;
-      S.miniDial(f.slug, vi, vi >= 0 ? r.colour : null).then(function (fig) {
-        if (!fig || box.dataset.key !== key) return;
-        box.textContent = "";
-        box.appendChild(fig);
-        S.markWheel(fig, when);
-      });
-    }
-    placePop();
+    chip.setAttribute("aria-label", f.name);
+    chip.style.setProperty("--food", f.colour);
+    if (f.text_on_shed) chip.style.setProperty("--food-shed", f.text_on_shed);
+    if (f.text_on_custard) chip.style.setProperty("--food-custard", f.text_on_custard);
+    chip.querySelector(".ask-name").textContent = V.foodSaid(f);
+    chip.querySelector(".tt-chip-link").href = S.foodUrl(f.slug);
+    placeChip();
   }
-  // Beside the food: on the calendar under its row (over it when the row
-  // is low on the screen), from where its weeks begin; on the wheel to the
-  // right of its dot, or to the left when there is no room. On a narrow
-  // screen it docks at the foot of the screen, and the page scrolls the
-  // food clear of it.
-  function placePop() {
+  // Beside the dot: to its right, or to the left when there is no room.
+  // On a narrow screen it docks at the foot of the screen, and the page
+  // scrolls the food clear of it.
+  function placeChip() {
     var docked = narrow.matches;
-    pop.classList.toggle("is-docked", docked);
+    chip.classList.toggle("is-docked", docked);
     showJump();
-    var rect = (WHEEL ? pinned.querySelector(".dot") : pinned).getBoundingClientRect();
+    var rect = pinned.querySelector(".dot").getBoundingClientRect();
     if (docked) {
-      pop.style.left = pop.style.top = "";
-      var top = pop.getBoundingClientRect().top;
+      chip.style.left = chip.style.top = "";
+      var top = chip.getBoundingClientRect().top;
       if (rect.bottom > top - 8) window.scrollBy({ top: rect.bottom - top + 16, behavior: reduceMotion.matches ? "auto" : "smooth" });
       return;
     }
-    var w = pop.offsetWidth, h = pop.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
-    var x, y;
-    if (WHEEL) {
-      x = rect.right + 16;
-      if (x + w > vw - 16) x = rect.left - 16 - w;
-      y = rect.top + rect.height / 2 - h / 2;
-    } else {
-      x = rect.right + 8;
-      y = rect.bottom + 8;
-      if (y + h > vh - 16) y = rect.top - 8 - h;
-    }
+    var w = chip.offsetWidth, h = chip.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var x = rect.right + 16, y = rect.top + rect.height / 2 - h / 2;
+    if (x + w > vw - 16) x = rect.left - 16 - w;
     x = Math.max(16, Math.min(x, vw - 16 - w));
     y = Math.max(S.headerHeight() + 16, Math.min(y, vh - 16 - h));
-    pop.style.left = (x + window.scrollX) + "px";
-    pop.style.top = (y + window.scrollY) + "px";
+    chip.style.left = (x + window.scrollX) + "px";
+    chip.style.top = (y + window.scrollY) + "px";
   }
-  window.addEventListener("resize", function () { if (pop) placePop(); });
+  window.addEventListener("resize", function () { if (chip) placeChip(); });
 
   // A food's name for a screen reader: "Celery, July to October", from
   // its in-season weeks (any variety's, on the wheel; the row's own on

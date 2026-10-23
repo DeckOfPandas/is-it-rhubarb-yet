@@ -7,6 +7,26 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **No more cards: search answers with rows, the wheel opens a chip,
+  the calendar goes to the page.** The card (`.one-result`, home's
+  single answer and the charts' popover) was a second design language
+  beside the page and said less than it; a list, even of one, already
+  answers and Enter already opens it; and above all, people who stopped
+  at a card never saw the page, the quotation, the dial and the sources,
+  which are the point of the site. A food is now a row, a chip or a
+  page. Home's every answer is rows under TELL ME EVERYTHING ABOUT or N
+  MATCHES, the Enter keycap on the row Enter would open (not under DID
+  YOU MEAN until one is lit, so a typo and Enter open nothing), that
+  row's page prerendered; no match is bare text, LITERALLY NO IDEA. in
+  ink, no panel. The date line leaves home: the page says when, and
+  Helen expects more pages to be opened for it. A calendar row's click
+  is its own link. The wheel's chip is the page's question lifted onto a
+  small panel as the one link, the food's name in its colour (the page's
+  question stays muted), no verdict, date line, time or dial, no ×. A
+  never row's tag stays the muted ink. The standalone dials,
+  `/wheel/<slug>.svg`, stay as an endpoint with no reader on the site.
+  Agreed with Helen in another chat on 23 October; the spec is the
+  record of the reasons.
 - **No ring name with a comma or a bracket in it.** In caps on the ring
   list, "NATIVE, NATIONAL" read as two things. The oysters' national
   native ring restated the R months from the same Seafish sentence the
