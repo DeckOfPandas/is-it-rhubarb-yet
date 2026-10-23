@@ -102,13 +102,16 @@ JPEG; every other page shows the home card.
      question is the logo, so the header has no wordmark; elsewhere the
      wordmark is on the left, and its RHUBARB is the search, as the hero
      is: the input's placeholder. IS IT and YET? are links home (one tab
-     stop, named Home). Without JavaScript it is a form that asks home. The
-     header sticks to the top of every page. The magnifier goes to the
-     wordmark's input (on home, to the hero's). {%- endcomment -%}
+     stop, named Home). Without JavaScript it is a form that lands on
+     home's Everything list, which cannot filter, so the typed word is
+     carried in ?q= for a visitor who turns JavaScript on and the list
+     is what the no-JS visitor gets. The header sticks to the top of
+     every page. The magnifier goes to the wordmark's input (on home, to
+     the hero's). {%- endcomment -%}
   <header class="site-header{% if page.url == '/' %} is-home{% endif %}">
     <div class="site-header-inner">
       {%- if page.url != '/' -%}
-      <form class="brand head-search" role="search" method="get" action="{{ '/' | relative_url }}">
+      <form class="brand head-search" role="search" method="get" action="{{ '/' | relative_url }}#all-foods">
         <label class="brand-line" for="head-input">
           <a class="hook-word" href="{{ '/' | relative_url }}" aria-label="Home">Is it</a>
           <span class="hook-slot"><input class="hook-input" id="head-input" name="q" type="search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"

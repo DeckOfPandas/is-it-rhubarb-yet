@@ -19,9 +19,14 @@ is `docs/design.md`; the decision log is `docs/decisions.md`.
   `yesish`, `just`, `nearly`, `no`, `never`. A quotation with `foods` is
   preferred for those foods. Its header is the vetting rule.
 - `_data/sources.yml` names every source a food or ring may cite: `key`,
-  `name` (as the Source data page lists it), `short` (what a food page's
-  ring list says) and `url`. `general` is common knowledge, not yet
-  checked, with no address.
+  `name` (as the Source data page lists it), `short`, `url`, `kind`
+  (the Source data page's heading it lists under: veg, herbs, foraging,
+  fish, fish_sustainability, meat, meat_sustainability) and `rank` (its
+  place in that list), with an optional `note` the page adds in
+  brackets and `pending: true` on a source nothing cites yet, which
+  the checker would otherwise warn about. The page's lists are
+  generated from it. `general` is common knowledge, not yet checked,
+  with no address and no kind.
 - Stubs, one per food, which the checker requires: `_foods/<slug>.md`
   (the page at `/<slug>/`), `_remind/<slug>.ics` (the food's calendar at
   `/remind/<slug>.ics`), `_wheels/<slug>.svg` (a standalone SVG of the
@@ -44,7 +49,6 @@ A real entry, cut down, with the optional fields marked:
   sources: [ncgm, defra, bap]   # keys in sources.yml
   notes:
     - "British Apples & Pears lists Bramleys as available all year, harvested in August and September and the rest from storage."
-  # note: "Helen's own note."               optional
   # buy: "What to ask for at the counter."  optional
   # aliases: [zucchini]                     optional, this food's own
   # also: [mushrooms]                       optional, shared broader words
@@ -146,13 +150,15 @@ A ring of the food itself, as a fish's coasts or a glasshouse crop has:
   are shared (every fungus answers to "mushrooms"). The checker keeps an
   alias unique across foods and never-foods, and no `also` word may be
   someone's alias.
-- **`sources`** on a food is every source its rings use; on a ring, its
-  own. A food not in the 21 October 2026 bundle keeps its one older
-  `source` key. `notes` are sentences shown with the data on the food
-  page, the food's then each ring's; `note` is Helen's own; `buy` is the
-  counter note (for fish, from the Good Fish Guide). Every one of them
-  is printed for visitors, so a note is a sentence a visitor can use,
-  never a working note.
+- **`sources`** on a food is every source it cites: its rings' and its
+  notes' (lobster's size rule cites `defra_lobster`, every counter line
+  `mcs`). On a ring, its own, each of which the food's list must carry;
+  a ring with none inherits the food's. There is no singular `source`
+  or `note` any more. `notes` are sentences shown with the data on the
+  food page, the food's then each ring's; `buy` is the counter note (for
+  fish, from the Good Fish Guide). Every one of them is printed for
+  visitors, so a note is a sentence a visitor can use, never a working
+  note; the checker warns on one that opens with a working word.
 - **Reserved slugs** that no food may take are listed in
   `tools/check-foods.py` (`RESERVED_SLUGS`): the pages, the endpoints and
   every old address that forwards (`grey-squirrel`, `button-mushrooms`,
@@ -257,10 +263,17 @@ words holding throughout.
 `python3 -I tools/check-foods.py` validates all five data files and the
 stubs: the shape of every entry, the week ranges, the colour rules, the
 text colours, the `said`, `cultivar`, `ring`, `lead`, `short`, `aliases`
-and `also` fields, the source keys, the reserved slugs, every stub, and
-that every verdict has a general quotation. Problems fail; warnings
-print. Run it after every data edit. Python here has no YAML library, so
-Ruby parses each file. It does not check that source links resolve:
+and `also` fields, the source keys (a ring's within its food's, no
+empty list, no name twice once folded, no food whose every ring is
+`lead: false`), the reserved slugs, every stub, and that every verdict
+has a general quotation. Problems fail; warnings print: a source nothing
+cites (unless `pending`), a just-about run touching no season or nine
+weeks or longer, a note opening with a working word, two foods' colours
+within 2 OKLab units (and a count of the pairs within 4), and a
+whole-food verdict lasting one week, which `tools/sweep-verdicts.js`
+computes from `verdict.js` under Node. Run it after every data edit.
+Python here has no YAML library, so Ruby parses each file. It does not
+check that source links resolve:
 `sh scripts/check-link.sh <https-url>` does, one URL at a time, printing
 the status and the final address.
 

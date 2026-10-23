@@ -7,6 +7,40 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **`sources` and `notes` everywhere; no singular `source` or `note`.**
+  Forty-two foods carried the older `source: key` and fifty-five a
+  `note` beside their `notes`; the page printed both the same way. The
+  singular keys are folded in (the note first among the notes) and the
+  checker refuses them. A ring's `sources: []` (beef, pork, chicken,
+  duck) is gone: a ring with none inherits the food's. A ring's keys
+  must all be in the food's list.
+- **A note cites its authority in the food's `sources`.** Lobster's size
+  rule cites Defra's lobster page, hare's note the Hares Preservation
+  Act, wild salmon Country Life and the Welsh and Scottish rules,
+  scallops the IFCA closure, wild duck and wood pigeon Defra's quarry
+  consultation, and every counter line the Good Fish Guide. Thirteen
+  register keys were cited by nothing; now six are, and the six
+  sustainability sources Helen lists as still to come are marked
+  `pending`, as are the two the page links from prose alone.
+- **The Source data page's lists are generated from the register.**
+  Every entry has a `kind` and a `rank`; the page loops over the kinds
+  under Helen's prose, which is untouched. The lists came out identical
+  to the hand-written ones, plus Country Life, which the register had
+  and the page had lost.
+- **The checker warns on more** (C19): a source nothing cites, a
+  just-about run touching no season or nine weeks or longer, a note
+  opening with a working word, two foods' colours within 2 OKLab units
+  (and counts the pairs within 4: 434), and a whole-food verdict
+  lasting one week, from `tools/sweep-verdicts.js` under Node. It
+  refuses a name used twice once folded and a food whose every ring is
+  `lead: false`. Three colours moved by a unit or so to clear the
+  2-unit line (wild sea kale, spruce tips, hedgehog fungus). The
+  olive-yellow cluster (lettuce, round lettuce, courgette flowers,
+  dandelion, Williams pears, chervil, quince, dill, lemon sole) cannot
+  be separated without visible repainting, so those seven warnings
+  stand for Helen.
+- **The no-JS search form lands on the Everything list** (`#all-foods`)
+  rather than on a home that ignores the typed word (D28).
 - **One search ranking**, `assets/search.js`, for home, the header and
   the not-found page. The not-found page had its own older scoring
   (prefix and inside-word points), home and the header each a copy of

@@ -234,8 +234,9 @@
   also: ["veg", "vegetables"]
   colour: "#6e6067"
   text_on_shed: "#897a81"
-  source: bbc
-  note: "BBC Good Food's calendar runs to September; October to December follows the crop, which is lifted through the winter."
+  sources: [bbc]
+  notes:
+    - "BBC Good Food's calendar runs to September; October to December follows the crop, which is lifted through the winter."
   varieties:
     - name: ""
       weeks:
@@ -288,8 +289,8 @@
   colour: "#007638"
   text_on_shed: "#2d8f50"
   sources: [ncgm, defra, rhs, garden_organic, rocket_gardens]
-  note: "Covent Garden shows purple sprouting almost all year; it is sold from late winter to spring, which the data follows."
   notes:
+    - "Covent Garden shows purple sprouting almost all year; it is sold from late winter to spring, which the data follows."
     - "The RHS Crop Planner PDF draws the calabrese harvest as January to May and September to December; the RHS website gives July to October and Garden Organic August to November. The PDF row was dropped as an error."
     - "Defra's wholesale prices list UK calabrese from June to November most years."
     - "A late-winter and spring crop: Rocket Gardens says the harvest starts between very early and late spring depending on planting, and BBC Good Food's calendar also shows January to April."
@@ -387,8 +388,8 @@
   colour: "#649700"
   text_on_custard: "#507900"
   sources: [ncgm, defra]
-  note: "NCGM has these most of the year, and BBC Good Food gives March to June. Defra lists them in May too, the month they are named for."
   notes:
+    - "NCGM has these most of the year, and BBC Good Food gives March to June. Defra lists them in May too, the month they are named for."
     - "Defra's wholesale prices list UK cabbage in every month most years."
     - "Defra's wholesale prices list UK spring greens in every month most years."
   varieties:
@@ -423,7 +424,8 @@
   colour: "#556b72"
   text_on_shed: "#6b8289"
   sources: [bbc, gbc_cavolo]
-  note: "BBC Good Food's calendar runs to September, but the crop stands through winter and is cut until March."
+  notes:
+    - "BBC Good Food's calendar runs to September, but the crop stands through winter and is cut until March."
   varieties:
     - name: ""
       sources: [bbc, gbc_cavolo]
@@ -677,8 +679,8 @@
   colour: "#829100"
   text_on_custard: "#687400"
   sources: [ncgm, defra, fpj_iceberg]
-  note: "NCGM lists five types; this row is their union."
   notes:
+    - "NCGM lists five types; this row is their union."
     - "Defra's wholesale prices list UK lettuce in every month most years."
     - "Defra's wholesale prices list UK lettuce from May to November most years."
   varieties:
@@ -915,7 +917,7 @@
   also: ["veg", "vegetables"]
   colour: "#6f8700"
   text_on_custard: "#617600"
-  source: bbc
+  sources: [bbc]
   varieties:
     - name: ""
       weeks:
@@ -966,7 +968,8 @@
   text_on_shed: "#2687b4"
   text_on_custard: "#0575a2"
   sources: [westlands, galloway, wikipedia_sea_kale]
-  note: "Forced sea kale is grown in the dark like forced rhubarb. Wild sea kale was so over-harvested by Victorian forcers that the practice was banned in the early 20th century. Take one or two shoots from a big colony, never from a lone plant, and never dig up the root."
+  notes:
+    - "Forced sea kale is grown in the dark like forced rhubarb. Wild sea kale was so over-harvested by Victorian forcers that the practice was banned in the early 20th century. Take one or two shoots from a big colony, never from a lone plant, and never dig up the root."
   varieties:
     - name: "Forced"
       short: "Forced sea kale"
@@ -976,9 +979,9 @@
         - [49, 52, in]
     - name: "Wild"
       short: "Wild sea kale"
-      colour: "#2e8b57"
-      text_on_shed: "#2f8f59"
-      text_on_custard: "#297c4d"
+      colour: "#3c8957"
+      text_on_shed: "#418e5b"
+      text_on_custard: "#2d7b4a"
       sources: [galloway, wikipedia_sea_kale]
       weeks:
         - [9, 22, in]
@@ -1038,7 +1041,7 @@
   also: ["veg", "vegetables"]
   colour: "#9f8000"
   text_on_custard: "#856b00"
-  source: bbc
+  sources: [bbc]
   varieties:
     - name: ""
       weeks:
@@ -1234,8 +1237,8 @@
   colour: "#c50a53"
   text_on_shed: "#e63a6c"
   sources: [ncgm, defra]
-  note: "BBC Good Food has cherries June to July; NCGM runs later."
   notes:
+    - "BBC Good Food has cherries June to July; NCGM runs later."
     - "Defra's wholesale prices list UK cherries from June to August most years."
   varieties:
     - name: ""
@@ -1351,7 +1354,8 @@
   colour: "#884f92"
   text_on_shed: "#a369ad"
   sources: [ashridge, rhs_figs, fif_figs]
-  note: "Outdoor figs ripen one crop a year, at the end of summer. A second crop only ripens under glass or in a freak summer."
+  notes:
+    - "Outdoor figs ripen one crop a year, at the end of summer. A second crop only ripens under glass or in a freak summer."
   varieties:
     - name: ""
       sources: [ashridge, rhs_figs, fif_figs]
@@ -1394,8 +1398,8 @@
   text_on_shed: "#ba50d1"
   sources: [ncgm, defra]
   short: "Currants"
-  note: "BBC Good Food has blackcurrants from late May to July; NCGM has July to August."
   notes:
+    - "BBC Good Food has blackcurrants from late May to July; NCGM has July to August."
     - "Defra's wholesale prices list UK currants from July to August most years."
     - "Defra's wholesale prices list UK currants in August most years."
   varieties:
@@ -1451,7 +1455,7 @@
   also: ["fruit", "berries"]
   colour: "#b70d99"
   text_on_shed: "#d63bb6"
-  source: bbc
+  sources: [bbc]
   varieties:
     - name: ""
       weeks:
@@ -1481,8 +1485,8 @@
   colour: "#ff2d78"
   text_on_custard: "#d8005f"
   sources: [ncgm]
-  note: "BBC Good Food has rhubarb January to June with no forced/outdoor split."
   notes:
+    - "BBC Good Food has rhubarb January to June with no forced/outdoor split."
     - "Yorkshire Forced Rhubarb has PDO status (2010), but the registration contains no season dates; growers' practice is roughly January to March."
   varieties:
     - name: "Forced"
@@ -1528,7 +1532,8 @@
   colour: "#9c7836"
   text_on_custard: "#8b6824"
   sources: [rhs_grapes, freshplaza_grapes]
-  note: "Dessert grapes ripen from August to October, depending on the variety. British table grapes are rare in shops."
+  notes:
+    - "Dessert grapes ripen from August to October, depending on the variety. British table grapes are rare in shops."
   varieties:
     - name: ""
       sources: [rhs_grapes, freshplaza_grapes]
@@ -1568,7 +1573,8 @@
   colour: "#815d49"
   text_on_shed: "#9b7661"
   sources: [ncgm, forestheart]
-  note: "Fresh (wet) walnuts."
+  notes:
+    - "Fresh (wet) walnuts."
   varieties:
     - name: "Fresh"
       ring: method
@@ -1593,7 +1599,7 @@
   colour: "#008b0a"
   text_on_shed: "#159218"
   text_on_custard: "#008008"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1605,8 +1611,9 @@
   group: foraged
   colour: "#4e7600"
   text_on_shed: "#608a23"
-  source: general
-  note: "Young tops only; tough and gritty once they flower."
+  sources: [general]
+  notes:
+    - "Young tops only; tough and gritty once they flower."
   varieties:
     - name: ""
       weeks:
@@ -1618,8 +1625,9 @@
   group: foraged
   colour: "#9f8800"
   text_on_custard: "#806d00"
-  source: general
-  note: "Leaves before the flowers open."
+  sources: [general]
+  notes:
+    - "Leaves before the flowers open."
   varieties:
     - name: ""
       weeks:
@@ -1631,7 +1639,7 @@
   group: foraged
   colour: "#007a5b"
   text_on_shed: "#278e6d"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1645,8 +1653,8 @@
   colour: "#00928a"
   text_on_custard: "#007b75"
   sources: [ncgm]
-  note: "Marsh samphire."
   notes:
+    - "Marsh samphire."
     - "Marsh samphire; pick by snipping above the base, never pulling up."
   varieties:
     - name: ""
@@ -1660,7 +1668,7 @@
   group: foraged
   colour: "#868b75"
   text_on_custard: "#6c705b"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1672,7 +1680,7 @@
   group: foraged
   colour: "#a9735e"
   text_on_custard: "#96614d"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1685,7 +1693,7 @@
   colour: "#db472e"
   text_on_shed: "#df4a31"
   text_on_custard: "#cb371f"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1698,7 +1706,7 @@
   also: ["berries"]
   colour: "#5654d9"
   text_on_shed: "#6b6ef5"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1710,7 +1718,7 @@
   also: ["berries"]
   colour: "#8c3fba"
   text_on_shed: "#a85cd8"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1722,8 +1730,9 @@
   group: foraged
   colour: "#bd3000"
   text_on_shed: "#dc4e2a"
-  source: general
-  note: "Best after the first frost."
+  sources: [general]
+  notes:
+    - "Best after the first frost."
   varieties:
     - name: ""
       weeks:
@@ -1736,7 +1745,7 @@
   colour: "#837000"
   text_on_shed: "#917e1c"
   text_on_custard: "#806d00"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1747,7 +1756,7 @@
   group: foraged
   colour: "#d06a00"
   text_on_custard: "#ac5600"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1758,7 +1767,7 @@
   group: foraged
   colour: "#1466c3"
   text_on_shed: "#317edd"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1770,7 +1779,7 @@
   group: foraged
   colour: "#9b4e33"
   text_on_shed: "#b8694d"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -1812,8 +1821,8 @@
 - name: "Spruce tips"
   slug: spruce-tips
   group: foraged
-  colour: "#59982e"
-  text_on_custard: "#3f7c03"
+  colour: "#55983a"
+  text_on_custard: "#3a7c1b"
   sources: [forestheart]
   notes:
     - "Be certain it is not yew: every part of yew is poisonous."
@@ -1828,10 +1837,11 @@
   group: fungi
   colour: "#8a5a00"
   text_on_shed: "#a6752b"
-  source: general
+  sources: [general]
   aliases: ["porcini", "penny buns"]
   also: ["mushrooms"]
-  note: "Penny buns."
+  notes:
+    - "Penny buns."
   varieties:
     - name: ""
       weeks:
@@ -1843,7 +1853,7 @@
   colour: "#896d83"
   text_on_shed: "#92768c"
   text_on_custard: "#81657b"
-  source: general
+  sources: [general]
   also: ["mushrooms"]
   varieties:
     - name: ""
@@ -1876,7 +1886,8 @@
   sources: [first_nature, ncgm]
   aliases: ["chanterelles"]
   also: ["mushrooms"]
-  note: "Chanterelles."
+  notes:
+    - "Chanterelles."
   varieties:
     - name: "Wild"
       ring: method
@@ -1898,9 +1909,9 @@
 - name: "Hedgehog fungus"
   slug: hedgehog-fungus
   group: fungi
-  colour: "#ab6700"
-  text_on_shed: "#b36e12"
-  text_on_custard: "#9f5f00"
+  colour: "#ae6c00"
+  text_on_shed: "#b3710c"
+  text_on_custard: "#9e5d00"
   sources: [first_nature]
   aliases: ["hedgehog mushrooms", "pied de mouton"]
   also: ["mushrooms"]
@@ -2034,7 +2045,7 @@
   colour: "#008426"
   text_on_shed: "#1e9134"
   text_on_custard: "#008024"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2049,8 +2060,9 @@
   also: ["herbs"]
   colour: "#556a4e"
   text_on_shed: "#6e8466"
-  source: general
-  note: "Evergreen, picked all year."
+  sources: [general]
+  notes:
+    - "Evergreen, picked all year."
   varieties:
     - name: ""
       weeks:
@@ -2062,7 +2074,7 @@
   also: ["herbs"]
   colour: "#769400"
   text_on_custard: "#5e7600"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2077,7 +2089,7 @@
   colour: "#008b65"
   text_on_shed: "#0f9069"
   text_on_custard: "#007d5b"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2092,7 +2104,7 @@
   also: ["herbs"]
   colour: "#009e42"
   text_on_custard: "#007f34"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2106,7 +2118,7 @@
   also: ["herbs"]
   colour: "#997b00"
   text_on_custard: "#856b00"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2119,7 +2131,7 @@
   also: ["herbs"]
   colour: "#516d00"
   text_on_shed: "#6a882a"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2133,7 +2145,7 @@
   also: ["herbs"]
   colour: "#7e6700"
   text_on_shed: "#947c25"
-  source: general
+  sources: [general]
   short: "Oregano"
   varieties:
     - name: ""
@@ -2148,7 +2160,7 @@
   also: ["herbs"]
   colour: "#008b94"
   text_on_custard: "#007a83"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2162,7 +2174,7 @@
   also: ["herbs"]
   colour: "#00734d"
   text_on_shed: "#2f8e66"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2176,8 +2188,9 @@
   also: ["herbs"]
   colour: "#537482"
   text_on_shed: "#618391"
-  source: general
-  note: "Evergreen, picked all year."
+  sources: [general]
+  notes:
+    - "Evergreen, picked all year."
   varieties:
     - name: ""
       weeks:
@@ -2189,7 +2202,7 @@
   also: ["herbs"]
   colour: "#77867d"
   text_on_custard: "#637169"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2204,7 +2217,7 @@
   colour: "#6a7f00"
   text_on_shed: "#718712"
   text_on_custard: "#627600"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2218,7 +2231,7 @@
   also: ["herbs"]
   colour: "#5c9663"
   text_on_custard: "#417a49"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2232,7 +2245,7 @@
   also: ["herbs"]
   colour: "#806c56"
   text_on_shed: "#8f7b64"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
       weeks:
@@ -2247,7 +2260,8 @@
   colour: "#bf775a"
   text_on_custard: "#a15b3f"
   sources: [tregothnan]
-  note: "Tregothnan in Cornwall plucks from April to October, taking two leaves and a bud from each bush about monthly."
+  notes:
+    - "Tregothnan in Cornwall plucks from April to October, taking two leaves and a bud from each bush about monthly."
   varieties:
     - name: ""
       sources: [tregothnan]
@@ -2261,9 +2275,9 @@
   colour: "#007e8d"
   text_on_shed: "#1e8a9a"
   text_on_custard: "#007988"
-  sources: [northumberland, bnfs, ffs, seafish]
-  note: "Flying Fish Seafoods have Cornish handline mackerel poor from June to September and only fair the rest of the year; the summer mackerel of common knowledge is a different fishery."
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   notes:
+    - "Flying Fish Seafoods have Cornish handline mackerel poor from June to September and only fair the rest of the year; the summer mackerel of common knowledge is a different fishery."
     - "The coasts disagree: Northumberland peaks June-August and has none November-April, while Flying Fish marks Cornish mackerel poor June-September and varying the rest of the year."
   buy: "Good Fish Guide, October 2026: every mackerel is rated Avoid, wherever and however it is caught."
   varieties:
@@ -2296,9 +2310,9 @@
   colour: "#5a76af"
   text_on_shed: "#617eb7"
   text_on_custard: "#526da6"
-  sources: [bnfs, ffs, seafish]
-  note: "Wild, line-caught; poor through the summer."
+  sources: [bnfs, ffs, seafish, mcs]
   notes:
+    - "Wild, line-caught; poor through the summer."
     - "Brighton & Newhaven marks February and March out of season, which matches the commercial bass closure of recent years."
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) when it is caught by handline in the North Sea, the Irish Sea, the Channel, the Bristol Channel or the Celtic Sea. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
@@ -2323,9 +2337,9 @@
   also: ["fish"]
   colour: "#008ab9"
   text_on_custard: "#00769f"
-  sources: [bnfs, ffs, msc_sardine]
-  note: "Cornish sardines, best in the cold months."
+  sources: [bnfs, ffs, msc_sardine, mcs]
   notes:
+    - "Cornish sardines, best in the cold months."
     - "Flying Fish shows Cornish sardines good most of the year (varying April-June), best quality in the cold months; Brighton & Newhaven has none March-July."
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the southern Celtic Seas and the Channel, caught by purse seine or ring net."
   varieties:
@@ -2359,9 +2373,10 @@
   colour: "#2476d5"
   text_on_shed: "#2e7ede"
   text_on_custard: "#196dcc"
-  sources: [northumberland, ffs]
-  note: "Poor from January to March."
+  sources: [northumberland, ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) for North Sea autumn spawners (the North Sea and the eastern Channel) caught by drift net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
+  notes:
+    - "Poor from January to March."
   varieties:
     - name: "North East"
       ring: region
@@ -2383,9 +2398,10 @@
   colour: "#6c70d8"
   text_on_shed: "#6f73dc"
   text_on_custard: "#6062c9"
-  sources: [mjseafood, mcs_sprat]
-  note: "A winter fish. The Thames Estuary is the traditional fishery."
+  sources: [mjseafood, mcs_sprat, mcs]
   buy: "Good Fish Guide, October 2026: Channel sprats are the better choice, rated 3 (1 is the best, 5 is the worst). North Sea and West of Scotland sprats rate 4."
+  notes:
+    - "A winter fish. The Thames Estuary is the traditional fishery."
   varieties:
     - name: ""
       sources: [mjseafood]
@@ -2399,9 +2415,9 @@
   also: ["fish"]
   colour: "#229271"
   text_on_custard: "#007d5f"
-  sources: [northumberland, bnfs, ffs, seafish]
-  note: "Cornish cod is at its best from March to May and again in September and October."
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   notes:
+    - "Cornish cod is at its best from March to May and again in September and October."
     - "The coasts' own calendars are used over BBC Good Food's February to April spawning peak."
     - "Seafish puts the best quality from July to October."
   buy: "Good Fish Guide, October 2026: every cod from UK waters is rated Avoid. The guide's best choice is MSC-certified line- or net-caught Icelandic cod (rated 2). Trawled Barents Sea and Norwegian cod, what UK distant-water trawlers catch, is rated Avoid."
@@ -2431,9 +2447,10 @@
   also: ["fish"]
   colour: "#8e8396"
   text_on_custard: "#756a7c"
-  sources: [northumberland, bnfs, ffs]
-  note: "Two peaks: late winter and late summer."
+  sources: [northumberland, bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 1) from the North Sea, the west of Scotland or the Skagerrak, caught by seine net. Other stocks and methods rate from 1 to 5, so ask where and how it was caught."
+  notes:
+    - "Two peaks: late winter and late summer."
   varieties:
     - name: "North East"
       ring: region
@@ -2460,9 +2477,10 @@
   also: ["fish"]
   colour: "#5e8fac"
   text_on_custard: "#43738f"
-  sources: [northumberland, bnfs, ffs]
-  note: "Consistent all year."
+  sources: [northumberland, bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern stock (the North Sea, the Celtic Seas and northern Biscay), caught by gill or fixed net."
+  notes:
+    - "Consistent all year."
   varieties:
     - name: "North East"
       ring: region
@@ -2492,9 +2510,9 @@
   colour: "#9f6d00"
   text_on_shed: "#a77513"
   text_on_custard: "#936500"
-  sources: [northumberland, bnfs, ffs, seafish]
-  note: "Poor in January and February after spawning."
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   notes:
+    - "Poor in January and February after spawning."
     - "Flying Fish marks January-February poor, in line with Seafish's advice to avoid plaice in roe (February-April)."
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the Skagerrak, caught by otter trawl. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
@@ -2525,9 +2543,10 @@
   also: ["fish"]
   colour: "#a14e4f"
   text_on_shed: "#bb6565"
-  sources: [northumberland, bnfs, ffs, seafish]
-  note: "Poor in January and February after spawning; best in spring and again from July."
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the western Channel, caught by gill or fixed net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
+  notes:
+    - "Poor in January and February after spawning; best in spring and again from July."
   varieties:
     - name: "North East"
       ring: region
@@ -2557,9 +2576,9 @@
   also: ["fish"]
   colour: "#4d658a"
   text_on_shed: "#6680a6"
-  sources: [northumberland, ffs]
-  note: "Poor in January and February; good from March."
+  sources: [northumberland, ffs, mcs]
   notes:
+    - "Poor in January and February; good from March."
     - "Northumberland's row covers pollack and saithe (coley) together."
   buy: "Good Fish Guide, October 2026: rated 3 at best (1 is the best, 5 is the worst), caught by handline in the Channel or the Celtic Seas. Other stocks and methods rate up to 5, so ask where and how it was caught."
   varieties:
@@ -2581,9 +2600,10 @@
   also: ["fish"]
   colour: "#8283c5"
   text_on_custard: "#6767a7"
-  sources: [northumberland, ffs]
-  note: "Consistent all year."
+  sources: [northumberland, ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the eastern Channel, caught by otter trawl. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
+  notes:
+    - "Consistent all year."
   varieties:
     - name: "North East"
       ring: region
@@ -2603,7 +2623,7 @@
   also: ["fish"]
   colour: "#7e596c"
   text_on_shed: "#9a7386"
-  sources: [northumberland, bnfs, ffs, seafish]
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, Rockall and the west of Scotland, or the Kattegat and Skagerrak, caught by otter trawl."
   notes:
     - "Seafish puts the best quality from October to May."
@@ -2633,9 +2653,10 @@
   also: ["fish"]
   colour: "#978a00"
   text_on_custard: "#7a6f00"
-  sources: [northumberland, bnfs, ffs]
-  note: "Poor from January to March and from October."
+  sources: [northumberland, bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the North Sea, the Skagerrak and Kattegat or the eastern Channel, caught by otter trawl."
+  notes:
+    - "Poor from January to March and from October."
   varieties:
     - name: "North East"
       ring: region
@@ -2663,7 +2684,7 @@
   also: ["fish"]
   colour: "#cc2e00"
   text_on_shed: "#e34623"
-  sources: [northumberland, bnfs, ffs]
+  sources: [northumberland, bnfs, ffs, mcs]
   notes:
     - "The coasts disagree sharply: North East peak June-August, South East out of season June-September."
   buy: "Good Fish Guide, October 2026: rated 3 at best (1 is the best, 5 is the worst), from the north-east Atlantic, caught by otter trawl. Other methods rate up to 5, so ask how it was caught."
@@ -2696,9 +2717,10 @@
   also: ["fish"]
   colour: "#586b28"
   text_on_shed: "#718643"
-  sources: [northumberland, bnfs, ffs]
-  note: "Poor in January and February."
+  sources: [northumberland, bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, the Skagerrak and Kattegat or the Channel, caught by gill or fixed net. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
+  notes:
+    - "Poor in January and February."
   varieties:
     - name: "North East"
       ring: region
@@ -2724,9 +2746,10 @@
   also: ["fish", "seafood"]
   colour: "#ab7f70"
   text_on_custard: "#8e6456"
-  sources: [bnfs, ffs]
-  note: "Poor from May to July."
+  sources: [bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Channel or the Celtic Seas, caught by pot, trap or creel."
+  notes:
+    - "Poor from May to July."
   varieties:
     - name: "South East"
       ring: region
@@ -2747,10 +2770,10 @@
   also: ["fish"]
   colour: "#b8684f"
   text_on_custard: "#a75840"
-  sources: [northumberland]
+  sources: [northumberland, countrylife_salmon, nrw_salmon, scot_salmon_sale, mcs]
   unsold: "It cannot be sold in England, Wales or Scotland"
-  note: "Rod-caught Scottish; most salmon sold is farmed all year."
   notes:
+    - "Rod-caught Scottish; most salmon sold is farmed all year."
     - "Selling rod-caught salmon or sea trout has been illegal since 2009, and coastal net fisheries are largely closed, so wild salmon is rarely legitimately on sale."
   buy: "Good Fish Guide, October 2026: rated Avoid. Not that you can buy it."
   varieties:
@@ -2767,7 +2790,7 @@
   colour: "#cc5356"
   text_on_shed: "#d05659"
   text_on_custard: "#bd454a"
-  sources: [northumberland, nrw_salmon]
+  sources: [northumberland, nrw_salmon, mcs]
   notes:
     - "Rod-caught sea trout cannot be sold, as for wild salmon. What is sold comes from licensed net fisheries and carries an Environment Agency or Natural Resources Wales tag."
   buy: "Good Fish Guide, October 2026: not rated."
@@ -2785,7 +2808,7 @@
   also: ["fish", "seafood"]
   colour: "#ac77ad"
   text_on_custard: "#8f5c91"
-  sources: [northumberland, bnfs, ffs, seafish]
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Celtic Seas, caught by jig."
   notes:
     - "Seafish puts the best availability and quality from October to March."
@@ -2814,9 +2837,9 @@
   also: ["fish", "shellfish", "seafood", "crab"]
   colour: "#9d4f00"
   text_on_shed: "#ba6a2a"
-  sources: [northumberland, bnfs, ffs, seafish]
-  note: "Poor in January."
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   notes:
+    - "Poor in January."
     - "The coasts disagree: Northumberland peaks in winter (November-February); Flying Fish and Seafish say April-September, with Flying Fish marking October-January poor; Brighton & Newhaven has it all year."
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from Shetland, caught by pot, trap or creel. Other stocks rate from 2 to 5, so ask where it was caught."
   varieties:
@@ -2844,9 +2867,9 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#0066b1"
   text_on_shed: "#2d82cf"
-  sources: [northumberland, bnfs, ffs, seafish]
-  note: "Native Cornish lobster is of consistent quality all year; the summer peak is one of supply and price."
+  sources: [northumberland, bnfs, ffs, seafish, defra_lobster, mcs]
   notes:
+    - "Native Cornish lobster is of consistent quality all year; the summer peak is one of supply and price."
     - "Minimum landing size rising to 90 mm, phased in 2026-28 (Defra)."
   buy: "Good Fish Guide, October 2026: rated 3 at best (1 is the best, 5 is the worst), from north-west England, caught by pot, trap or creel. Other stocks rate up to 5, so ask where it was caught."
   varieties:
@@ -2875,7 +2898,7 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#c76e85"
   text_on_custard: "#a8536a"
-  sources: [northumberland]
+  sources: [northumberland, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the South Minch, caught by pot, trap or creel. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
@@ -2890,10 +2913,10 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#5457c7"
   text_on_shed: "#6b72e5"
-  sources: [bnfs, ffs, seafish]
-  note: "Rope-grown mussels are good all year and at their best from October to March."
+  sources: [bnfs, ffs, seafish, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 1) when rope-grown in the UK or Ireland. Other methods rate from 1 to 3, so ask how they were grown."
   notes:
+    - "Rope-grown mussels are good all year and at their best from October to March."
     - "Not at their best when spawning in spring."
   varieties:
     - name: "South East"
@@ -2914,9 +2937,9 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#3f6d63"
   text_on_shed: "#58877c"
-  sources: [shellfish_act, seafish, ffs]
-  note: "Natives in the months with an R; rock oysters all year."
+  sources: [shellfish_act, seafish, ffs, mcs]
   notes:
+    - "Natives in the months with an R; rock oysters all year."
     - "The traditional \"R months\" rule has a legal basis for native oysters; Pacific oysters are exempt."
   buy: "Farmed rock oysters are a best choice; wild natives are the rarer treat."
   varieties:
@@ -2965,9 +2988,9 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#be7a28"
   text_on_custard: "#9f5f00"
-  sources: [northumberland, bnfs, ffs, seafish]
-  note: "Cornish scallops are poor in midwinter and best in September and October; Orkney hand-dived scallops are consistent all year."
+  sources: [northumberland, bnfs, ffs, seafish, ifca_scallop, mcs]
   notes:
+    - "Cornish scallops are poor in midwinter and best in September and October; Orkney hand-dived scallops are consistent all year."
     - "Devon & Severn IFCA closes scallop dredging 1 July-30 September in its district."
   buy: "Good Fish Guide, October 2026: a best choice (rated 1) when farmed in Scotland, on the seabed or on ropes. Wild stocks and methods rate from 1 to 5, so ask where and how they were caught."
   varieties:
@@ -3004,7 +3027,7 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#6a914a"
   text_on_custard: "#537832"
-  source: general
+  sources: [general, mcs]
   buy: "Hand-raked from a managed bed is the good choice."
   varieties:
     - name: ""
@@ -3019,7 +3042,7 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#7f5f00"
   text_on_shed: "#9a7a2b"
-  source: general
+  sources: [general, mcs]
   buy: "Ask for shrimp from a certified fishery; Morecambe Bay and the Wash are the UK ones."
   varieties:
     - name: ""
@@ -3035,7 +3058,7 @@
   colour: "#6c7b5a"
   text_on_shed: "#748361"
   text_on_custard: "#647252"
-  sources: [northumberland, bnfs, ffs, seafish]
+  sources: [northumberland, bnfs, ffs, seafish, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, caught by otter trawl. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
     - name: "North East"
@@ -3062,7 +3085,7 @@
   also: ["fish"]
   colour: "#bf2d52"
   text_on_shed: "#db4968"
-  sources: [northumberland, ffs, seafish]
+  sources: [northumberland, ffs, seafish, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern area (the North Sea, the eastern Channel and the Skagerrak and Kattegat), caught by seine net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
     - name: "North East"
@@ -3087,7 +3110,7 @@
   colour: "#7e659a"
   text_on_shed: "#8d73a9"
   text_on_custard: "#7c6398"
-  sources: [northumberland, bnfs, ffs]
+  sources: [northumberland, bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the Irish Sea, the Bristol Channel or the northern Celtic Sea, caught by otter trawl. Other species, stocks and methods rate from 2 to 5, so ask which it is and where and how it was caught."
   varieties:
     - name: "North East"
@@ -3115,7 +3138,7 @@
   colour: "#6a7681"
   text_on_shed: "#73808b"
   text_on_custard: "#646f7a"
-  sources: [bnfs, ffs]
+  sources: [bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from Cornwall, caught by beach seine."
   varieties:
     - name: "South East"
@@ -3138,7 +3161,7 @@
   colour: "#787800"
   text_on_shed: "#828218"
   text_on_custard: "#727100"
-  sources: [ffs]
+  sources: [ffs, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the north-east Atlantic, caught by gill or fixed net."
   varieties:
     - name: "South West"
@@ -3153,7 +3176,7 @@
   also: ["fish", "seafood"]
   colour: "#9d4d82"
   text_on_shed: "#b56298"
-  sources: [ffs]
+  sources: [ffs, mcs]
   buy: "Good Fish Guide, October 2026: not rated."
   varieties:
     - name: "South West"
@@ -3168,7 +3191,7 @@
   also: ["fish"]
   colour: "#948253"
   text_on_custard: "#7e6c3e"
-  sources: [northumberland, ffs]
+  sources: [northumberland, ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the Skagerrak and Kattegat, caught by otter trawl. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
     - name: "North East"
@@ -3190,7 +3213,7 @@
   colour: "#9e6a7c"
   text_on_shed: "#a46f81"
   text_on_custard: "#925f71"
-  sources: [northumberland]
+  sources: [northumberland, mcs]
   aliases: ["witch", "torbay sole"]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern North Sea or the west of Scotland, caught by otter trawl."
   varieties:
@@ -3206,7 +3229,7 @@
   colour: "#9561cd"
   text_on_shed: "#9966d2"
   text_on_custard: "#8954bf"
-  sources: [northumberland]
+  sources: [northumberland, mcs]
   aliases: ["megrim sole", "cornish sole"]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern North Sea or the west of Scotland, caught by otter trawl."
   varieties:
@@ -3222,7 +3245,7 @@
   colour: "#377e49"
   text_on_shed: "#468d57"
   text_on_custard: "#347b47"
-  sources: [northumberland]
+  sources: [northumberland, mcs]
   buy: "Good Fish Guide, October 2026: rated Avoid, however and wherever it is caught."
   varieties:
     - name: "North East"
@@ -3237,7 +3260,7 @@
   also: ["fish"]
   colour: "#70624e"
   text_on_shed: "#8a7c67"
-  sources: [northumberland, ffs]
+  sources: [northumberland, ffs, mcs]
   notes:
     - "Wild Atlantic halibut is rated Avoid; no UK-farmed halibut rating exists."
   buy: "Good Fish Guide, October 2026: wild Atlantic halibut is rated Avoid, however it is caught. Farmed halibut is not rated."
@@ -3260,7 +3283,7 @@
   also: ["fish"]
   colour: "#e15f24"
   text_on_custard: "#bf4600"
-  sources: [ffs]
+  sources: [ffs, mcs]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) when it is organic-certified and farmed in open sea pens in Scotland or Ireland."
   varieties:
     - name: "Glenarm, Northern Ireland"
@@ -3285,7 +3308,7 @@
   colour: "#bc5700"
   text_on_shed: "#c86117"
   text_on_custard: "#b25200"
-  sources: [bnfs]
+  sources: [bnfs, mcs]
   buy: "Good Fish Guide, October 2026: rated 3 (1 is the best, 5 is the worst) from Cornwall, caught by pot, trap or creel."
   varieties:
     - name: "South East"
@@ -3300,7 +3323,7 @@
   also: ["fish", "shellfish", "seafood"]
   colour: "#728f7f"
   text_on_custard: "#587465"
-  sources: [bnfs, ffs]
+  sources: [bnfs, ffs, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from Scotland, gathered by hand by divers or from the shore."
   varieties:
     - name: "South East"
@@ -3326,7 +3349,7 @@
   colour: "#906850"
   text_on_shed: "#9e755d"
   text_on_custard: "#8d654e"
-  sources: [bnfs]
+  sources: [bnfs, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Sussex coast, caught by pot, trap or creel."
   varieties:
     - name: "South East"
@@ -3412,11 +3435,11 @@
   also: ["meat"]
   colour: "#c90039"
   text_on_shed: "#ea3752"
-  source: general
-  note: "All year."
+  sources: [general]
+  notes:
+    - "All year."
   varieties:
     - name: ""
-      sources: []
       notes:
         - "No source gives this a season."
       weeks:
@@ -3428,11 +3451,11 @@
   also: ["meat"]
   colour: "#a77c99"
   text_on_custard: "#8b617e"
-  source: general
-  note: "All year."
+  sources: [general]
+  notes:
+    - "All year."
   varieties:
     - name: ""
-      sources: []
       notes:
         - "No source gives this a season."
       weeks:
@@ -3445,7 +3468,8 @@
   colour: "#5c7442"
   text_on_shed: "#6d8653"
   sources: [goose]
-  note: "Michaelmas to Christmas."
+  notes:
+    - "Michaelmas to Christmas."
   varieties:
     - name: ""
       sources: [goose]
@@ -3478,8 +3502,8 @@
   colour: "#94514a"
   text_on_shed: "#b16b64"
   sources: [basc, naturescot_game]
-  note: "12 August to 10 December."
   notes:
+    - "12 August to 10 December."
     - "Same dates in Scotland, where grouse moors now need a NatureScot licence; Northern Ireland closes on 30 November."
   varieties:
     - name: ""
@@ -3496,8 +3520,8 @@
   text_on_shed: "#ba6a16"
   text_on_custard: "#a75a00"
   sources: [basc]
-  note: "1 October to 1 February."
   notes:
+    - "1 October to 1 February."
     - "Northern Ireland closes on 31 January."
   varieties:
     - name: ""
@@ -3513,7 +3537,8 @@
   colour: "#8b6700"
   text_on_shed: "#9d7921"
   sources: [basc]
-  note: "1 September to 1 February, grey and red-legged alike."
+  notes:
+    - "1 September to 1 February, grey and red-legged alike."
   varieties:
     - name: ""
       sources: [basc]
@@ -3529,9 +3554,9 @@
   colour: "#008269"
   text_on_shed: "#1d8e74"
   text_on_custard: "#007c64"
-  sources: [basc]
-  note: "Mallard, teal and wigeon: 1 September to 31 January inland, to 20 February on the foreshore."
+  sources: [basc, defra_quarry]
   notes:
+    - "Mallard, teal and wigeon: 1 September to 31 January inland, to 20 February on the foreshore."
     - "Defra's 2026 consultation proposed removing pochard (and in England pintail, goldeneye and white-fronted goose) from the quarry list."
   varieties:
     - name: ""
@@ -3548,8 +3573,8 @@
   colour: "#726971"
   text_on_shed: "#857b83"
   sources: [basc]
-  note: "1 October to 31 January."
   notes:
+    - "1 October to 31 January."
     - "Scotland opens on 1 September."
     - "Defra consulted in spring 2026 on extending the close season to 30 November in England and Wales; no decision has been announced."
   varieties:
@@ -3567,8 +3592,8 @@
   colour: "#af3f00"
   text_on_shed: "#ce5b2b"
   sources: [basc]
-  note: "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season."
   notes:
+    - "Red and fallow: stags and bucks 1 August to 30 April, hinds and does 1 November to 31 March. Roe bucks 1 April to 31 October and does 1 November to 31 March, so some roe is always in season; muntjac has no closed season."
     - "Scotland: no close season for male deer of any species since 21 October 2023; hinds and does 21 October to 15 February (roe does to 31 March)."
     - "Dates are legal open seasons, not quality peaks; some venison is sold frozen."
   varieties:
@@ -3621,10 +3646,10 @@
   colour: "#7e70a0"
   text_on_shed: "#8577a7"
   text_on_custard: "#746696"
-  sources: [basc]
+  sources: [basc, defra_quarry]
   aliases: ["pigeon"]
-  note: "No closed season; at its best from spring to autumn."
   notes:
+    - "No closed season; at its best from spring to autumn."
     - "Defra's 2026 consultation proposed adding wood pigeon to the quarry list with a 1 September-31 January season (crop-protection shooting would continue all year). No decision announced as of 21 October 2026."
   varieties:
     - name: ""
@@ -3641,7 +3666,8 @@
   colour: "#7b8aa0"
   text_on_custard: "#606f84"
   sources: [basc, naturescot_game]
-  note: "No closed season; young rabbits from late summer are the ones to buy."
+  notes:
+    - "No closed season; young rabbits from late summer are the ones to buy."
   varieties:
     - name: ""
       sources: [basc, naturescot_game]
@@ -3656,9 +3682,9 @@
   also: ["meat", "game"]
   colour: "#c97333"
   text_on_custard: "#ab570d"
-  sources: [basc]
-  note: "No closed season in England and Wales, but hare may only be sold from 1 August to 28 February."
+  sources: [basc, hares_act]
   notes:
+    - "No closed season in England and Wales, but hare may only be sold from 1 August to 28 February."
     - "Scotland: close season 1 February-30 September. Northern Ireland: open 12 August-31 January. Mountain hare is fully protected in Scotland."
   varieties:
     - name: ""
@@ -3676,9 +3702,10 @@
   colour: "#467f90"
   text_on_shed: "#4c8697"
   text_on_custard: "#3c7586"
-  source: general
+  sources: [general]
   aliases: ["grey squirrel", "grey-squirrel"]
-  note: "Grey squirrel only: red squirrels are protected. No closed season; sold by a few game dealers."
+  notes:
+    - "Grey squirrel only: red squirrels are protected. No closed season; sold by a few game dealers."
   varieties:
     - name: ""
       weeks:
@@ -3690,10 +3717,9 @@
   also: ["meat"]
   colour: "#a78438"
   text_on_custard: "#8a6916"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
-      sources: []
       notes:
         - "No source gives this a season."
       weeks:
@@ -3706,10 +3732,9 @@
   colour: "#9d6957"
   text_on_shed: "#a6725f"
   text_on_custard: "#956150"
-  source: general
+  sources: [general]
   varieties:
     - name: ""
-      sources: []
       notes:
         - "No source gives this a season."
       weeks:
