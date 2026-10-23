@@ -211,7 +211,7 @@
         var v = food.varieties[i], s = stateAt(v, w);
         if (!s) continue;
         // A glasshouse ring is held while it is in; its just-about weeks
-        // count for nothing, so the whole food's "then glasshouse-grown
+        // count for nothing, so the whole food's "then under glass
         // until" ends where the ring's own line says it does.
         if (isGlasshouse(v)) { if (s !== "in") continue; s = "glass"; }
         if (STATE_RANK[s] > STATE_RANK[b] || (s === "glass" && b === "store")) b = s;
@@ -392,15 +392,16 @@
   // (its start plus three days), so week 18, which starts on 30 April,
   // reads as May. Phrases get coarser with distance and never finer than
   // the data: no "next week", because data weeks are not Monday to Sunday.
+  // The same four steps coming and going, so the words of one band of Now
+  // answer those of the other.
   //   Coming in, by days to the first day of the first week:
-  //     1 to 6 "any day now"; 7 to 13 "in a week or two"; 14 to 27 "in two
-  //     or three weeks"; 28 to 62 "from early November"; beyond that the
-  //     month alone, "in April", or "next October" when it is this month
-  //     again.
+  //     1 to 6 "a few days away"; 7 to 13 "a week or two away"; 14 to 27
+  //     "two or three weeks away"; 28 to 62 "from early November"; beyond
+  //     that the month alone, "in April", or "next October" when it is
+  //     this month again.
   //   Going out, by days to the last day of the last week:
-  //     0 to 6 "for a few more days"; 7 to 13 "for another week or two";
-  //     14 to 27 "for another two or three weeks"; 28 on "until late
-  //     December".
+  //     0 to 6 "a few days left"; 7 to 13 "a week or two left"; 14 to 27
+  //     "two or three weeks left"; 28 on "until late December".
   // Early is the 1st to the 10th, mid the 11th to the 20th, late the rest;
   // mid is always hyphenated ("mid-January"), early and late never are.
   // The one calendar date on the site is the "as of" date, which is when
@@ -418,83 +419,95 @@
   // today: the digest for another week.
   function midOfToday(week, year) { return midOfWeek({ week: week, years: 0 }, year); }
 
-  // How a start is said: `soon` follows "First ones" or "properly" or
-  // stands alone, `back` follows a NO. All lower-case.
+  // How a start is said, all lower-case. `soon` stands alone ("a week or
+  // two away", "from early November", "in April"), `after` follows "First
+  // ones" or "in earnest" ("in a week or two"), and `back` follows a NO
+  // ("back in April").
   function arriving(at, year, today) {
     var days = daysBetween(today, startDate(at, year));
     var mid = midOfWeek(at, year), month = MONTHS[mid.getMonth()];
-    if (days <= 6) return { soon: "any day now", back: "any day now" };
-    if (days <= 13) return { soon: "in a week or two", back: "in a week or two" };
-    if (days <= 27) return { soon: "in two or three weeks", back: "in two or three weeks" };
+    if (days <= 6) return { soon: "a few days away", after: "in a few days", back: "a few days away" };
+    if (days <= 13) return { soon: "a week or two away", after: "in a week or two", back: "a week or two away" };
+    if (days <= 27) return { soon: "two or three weeks away", after: "in two or three weeks", back: "two or three weeks away" };
     if (days <= 62) {
       var part = "from " + monthPart(mid);
-      return { soon: part, back: part };
+      return { soon: part, after: part, back: part };
     }
     var far = mid.getMonth() === today.getMonth() ? "next " + month : "in " + month;
-    return { soon: far, back: "back " + far, farOff: true };
+    return { soon: far, after: far, back: "back " + far, farOff: true };
   }
-  // How an end is said, lower-case: "for a few more days", "until late
-  // December".
+  // How an end is said, all lower-case. `left` stands alone or follows a
+  // state ("a few days left", "until late December"), `after` follows a
+  // "then" ("for a few more days", "until late December").
   function leaving(at, year, today) {
     var days = daysBetween(today, endDate(at, year));
-    if (days <= 6) return "for a few more days";
-    if (days <= 13) return "for another week or two";
-    if (days <= 27) return "for another two or three weeks";
-    return "until " + monthPart(midOfWeek(at, year));
+    if (days <= 6) return { left: "a few days left", after: "for a few more days" };
+    if (days <= 13) return { left: "a week or two left", after: "for another week or two" };
+    if (days <= 27) return { left: "two or three weeks left", after: "for another two or three weeks" };
+    var month = "until " + monthPart(midOfWeek(at, year));
+    return { left: month, after: month };
   }
-  // "First ones in April, properly in May." When both halves would say
+  // A state and its end: "Under glass until late November", "Tailing off,
+  // a few days left".
+  function stateUntil(state, at, year, today) {
+    var end = leaving(at, year, today).left;
+    return state + (end.indexOf("until ") === 0 ? " " : ", ") + end;
+  }
+  // "First ones in April, in earnest in May." When both halves would say
   // the same thing the month is split into parts, and if they still agree
-  // only the first-ones phrase is kept.
+  // the one start is said alone.
   function firstOnes(r, year, today) {
     var a = arriving(r.from, year, today), b = arriving(r.inFrom, year, today);
-    var sa = a.soon, sb = b.soon;
-    if (sa === sb && a.farOff) {
+    if (a.soon === b.soon && !a.farOff) return cap(a.soon);
+    var sa = a.after, sb = b.after;
+    if (sa === sb) {
       sa = "in " + monthPart(midOfWeek(r.from, year));
       sb = "in " + monthPart(midOfWeek(r.inFrom, year));
     }
     if (sa === sb) return cap(sa);
-    return "First ones " + sa + ", properly " + sb;
+    return "First ones " + sa + ", in earnest " + sb;
   }
 
   // The phrase for one variety's verdict, without its full stop: the date
   // line on a food page, the line under a food in a list. `year` is the
   // year of the week asked about and `today` the day the question is
   // asked on; a digest for another week passes the middle of that week.
-  // A start said for a clause after a semicolon or a full stop: near, as
-  // `arriving` says it; further off, "from early July".
+  // A start said after "Outdoor": near, as `arriving` says it ("in a week
+  // or two"); further off, "from early July", since the glasshouse line
+  // is read all winter and a bare month is too loose for it.
   function fromSaid(at, year, today) {
-    if (daysBetween(today, startDate(at, year)) <= 27) return arriving(at, year, today).soon;
+    if (daysBetween(today, startDate(at, year)) <= 27) return arriving(at, year, today).after;
     return "from " + monthPart(midOfWeek(at, year));
   }
   // What follows a fresh season, after its end: ", then available from
-  // storage until late July".
+  // storage until late July", ", then under glass".
   function thenSaid(r, year, today) {
     if (!r.then) return "";
-    var words = r.then.kind === "glass" ? ", then glasshouse-grown" : ", then available from storage";
-    return r.then.on ? words : words + " " + leaving(r.then.until, year, today);
+    var words = r.then.kind === "glass" ? ", then under glass" : ", then available from storage";
+    return r.then.on ? words : words + " " + leaving(r.then.until, year, today).after;
   }
   // A week of storage or glasshouse alone. Storage says when fresh food is
   // back once that is within NEARLY_WEEKS; a glasshouse that lasts until
   // the outdoor season says when that comes.
   function heldSaid(r, year, today) {
     if (r.glass) {
-      if ((r.allYear || r.heldOn) && r.fresh) return "Glasshouse-grown for now, and outdoor " + fromSaid(r.fresh.at, year, today);
-      if (r.allYear) return "Glasshouse-grown all year";
-      return "Glasshouse-grown " + leaving(r.until, year, today);
+      if ((r.allYear || r.heldOn) && r.fresh) return "Under glass for now. Outdoor " + fromSaid(r.fresh.at, year, today);
+      if (r.allYear) return "Under glass all year";
+      return stateUntil("Under glass", r.until, year, today);
     }
-    var s = r.allYear ? "Available from storage all year" : "Available from storage " + leaving(r.until, year, today);
+    var s = r.allYear ? "Available from storage all year" : stateUntil("Available from storage", r.until, year, today);
     if (r.fresh && r.fresh.weeks <= C.NEARLY_WEEKS) s += ". Fresh " + arriving(r.fresh.at, year, today).soon;
     return s;
   }
 
   // A YES whose fresh run ends softly, into a just-about tail, says so
-  // once the end is near enough to be said in weeks ("At its best for a
-  // few more days, then just about until late November"), since "for a
-  // few more days" alone is the JUST line and a reader would expect the
-  // food to be gone, not JUST next week; further off it is "Until late
-  // October" as before. A JUST that is the tail itself, or an isolated
-  // just-about run, says "Just about, until late November": JUST is for
-  // a hard stop within two weeks, and a tail can last a quarter.
+  // once the end is near enough to be said in weeks ("A few days left,
+  // then tailing off until late November"), since "A few days left" alone
+  // is the JUST line and a reader would expect the food to be gone, not
+  // JUST next week; further off it is "Until late October" as before. A
+  // JUST that is the tail itself, or an isolated just-about run, says
+  // "Tailing off until late November": JUST is for a hard stop within two
+  // weeks, and a tail can last a quarter.
   function softEnd(r, year, today) {
     return r.hardStop === false && daysBetween(today, endDate(r.until, year)) <= 27;
   }
@@ -504,16 +517,16 @@
       case "YES":
         if (r.allYear) return "All year";
         if (softEnd(r, year, today)) {
-          return "At its best " + leaving(r.until, year, today) + ", then just about " + leaving(r.spanUntil, year, today) + thenSaid(r, year, today);
+          return cap(leaving(r.until, year, today).left) + ", then tailing off " + leaving(r.spanUntil, year, today).after + thenSaid(r, year, today);
         }
-        return cap(leaving(r.until, year, today)) + thenSaid(r, year, today);
+        return cap(leaving(r.until, year, today).left) + thenSaid(r, year, today);
       case "JUST":
-        if (r.tail || r.isolated) return "Just about, " + leaving(r.until, year, today) + thenSaid(r, year, today);
-        return cap(leaving(r.until, year, today)) + thenSaid(r, year, today);
+        if (r.tail || r.isolated) return stateUntil("Tailing off", r.until, year, today) + thenSaid(r, year, today);
+        return cap(leaving(r.until, year, today).left) + thenSaid(r, year, today);
       case "YES-ISH":
         return heldSaid(r, year, today);
       case "NEARLY":
-        if (r.state === "avail") return "A few about now, properly " + arriving(r.from, year, today).soon;
+        if (r.state === "avail") return "A few about now, in earnest " + arriving(r.from, year, today).after;
         if (r.inFrom && r.inFrom.week !== r.from.week) return firstOnes(r, year, today);
         return cap(arriving(r.from, year, today).soon);
       case "NO":
@@ -539,20 +552,25 @@
   }
 
   // One timing per food for a list grouped by timing: `when` is the
-  // boundary that groups it (when a NEARLY food is properly in, when
-  // anything else ends or starts, as `phrase` says it), `days` the days to
-  // that boundary, and `early` the earlier part of a two-part phrase, "a
-  // few about now" or "first ones in a week or two", which a list shows
-  // beside the food rather than as a group of its own. The words are
-  // `phrase`'s own.
+  // boundary that groups it (when a JUST food ends, when a NEARLY food is
+  // in in earnest, what `phrase` says for the rest), `days` the days to
+  // that boundary, and `aside` the rest of the food's phrase, which a list
+  // shows beside the food rather than as a group of its own: "a few about
+  // now" or "first ones in a week or two" before a start, "then available
+  // from storage until late April" after an end. A tail JUST has no aside
+  // on Now, since its band says it is on the way out and its group says
+  // how long for. The words are `phrase`'s own.
   function timing(r, year, today) {
-    var whole = { when: phrase(r, year, today), early: "", days: daysTo(r, year, today) };
+    var whole = { when: phrase(r, year, today), aside: "", days: daysTo(r, year, today) };
+    if (r.verdict === "JUST") {
+      return { when: cap(leaving(r.until, year, today).left), aside: thenSaid(r, year, today).replace(/^, /, ""), days: whole.days };
+    }
     if (r.verdict !== "NEARLY") return whole;
-    if (r.state === "avail") return { when: cap(arriving(r.from, year, today).soon), early: "a few about now", days: whole.days };
+    if (r.state === "avail") return { when: cap(arriving(r.from, year, today).soon), aside: "a few about now", days: whole.days };
     if (!r.inFrom || r.inFrom.week === r.from.week) return whole;
-    var first = arriving(r.from, year, today).soon, then = arriving(r.inFrom, year, today).soon;
-    if (first === then) return whole;
-    return { when: cap(then), early: "first ones " + first, days: daysBetween(today, startDate(r.inFrom, year)) };
+    var first = arriving(r.from, year, today), then = arriving(r.inFrom, year, today);
+    if (first.soon === then.soon) return whole;
+    return { when: cap(then.soon), aside: "first ones " + first.after, days: daysBetween(today, startDate(r.inFrom, year)) };
   }
 
   // --- Naming a variety ----------------------------------------------------
@@ -658,7 +676,7 @@
         group: f.group, kind: kind,
         variety: "", verdict: fv.verdict,
         line: phrase(v, year, today), since: v.since === undefined ? null : v.since,
-        days: daysTo(v, year, today), when: t.when, early: t.early, whenDays: t.days
+        days: daysTo(v, year, today), when: t.when, aside: t.aside, whenDays: t.days
       };
       var list = bandOf(v);
       if (list !== "later") (buckets[list][kind] = buckets[list][kind] || []).push(item);
