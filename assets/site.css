@@ -604,6 +604,9 @@ article.never { --food: var(--never); }
 .food-sources { font-size: var(--fs-small); }
 /* "Add apples to your calendar:" and its links, one dotted line. */
 .calendar-line { margin: var(--sp-4) 0 0; color: var(--muted); max-width: 40rem; }
+/* Below 700px the instruction is a line of its own and the links one
+   line under it, so the links never break across lines. */
+@media (max-width: 43.74rem) { .calendar-line .instruct { display: block; } }
 .calendar-line .sep { color: var(--muted); }
 /* The food page's one rule, between "Also this week" and the sources. */
 .page-rule { border: 0; border-top: 1px solid var(--rule); margin: var(--sp-3) 0; }

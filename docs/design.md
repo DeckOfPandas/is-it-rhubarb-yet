@@ -102,8 +102,9 @@ component at rest, hovered and focused.
   every left and right edge lines up at every width.
 - **Breakpoints**, as the stylesheet uses them: 37.49rem (600px, the
   hero stacks, the licences stack), 42rem (Anton's large tracking on
-  titles), 43.74rem (700px, the header wraps, the calendar runs to the
-  edges, the chip docks, the controls stop sticking), 51.25rem
+  titles), 43.74rem (700px, the header wraps, the calendar line's links
+  drop under it, the calendar runs to the edges, the chip docks, the
+  controls stop sticking), 51.25rem
   (820px, the wheel is the content's width and its pills sit at the
   right).
 
@@ -429,7 +430,8 @@ One shape for every food, one column at every width, in this order:
 8. the calendar line, "Add rhubarb to your calendar: Apple · Google ·
    .ics" (Apple is the `webcal://` link; Google is Google Calendar's own
    subscribe link; then the file), each dot glued to its link by a
-   no-break space; not for a food that cannot be sold;
+   no-break space; below 700px the links are a line of their own under
+   the instruction; not for a food that cannot be sold;
 9. "Ask about something else →".
 
 Every block is 40px from the next. Food pages have no as-of line; the
