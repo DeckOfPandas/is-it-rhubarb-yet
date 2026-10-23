@@ -15,6 +15,10 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
   Market's. No note replaces it.
 - **A growing method's ring is named with the food** in the ring list,
   "Wild blackberries" beside "Blackberries", never a bare "Wild".
+- **"Also this week"** replaces "Great this week" on a food page: three
+  foods that are not NO, the same family first, then any family, to a
+  total of three, each with its verdict tag. Blackberries had none,
+  since no other soft fruit was YES.
 
 - **The date phrases are deadpan, one distance scale, and Now groups by
   distance alone.** On the way out had 29 foods, every one ending within

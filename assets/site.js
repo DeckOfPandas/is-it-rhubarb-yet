@@ -671,41 +671,45 @@
     showQuote(document.getElementById("quote"), V.pickQuote(quotes, fv.verdict, food.slug, WEEK));
     var no = article.querySelector("[data-fine-no]"), yes = article.querySelector("[data-fine-yes]");
     if (no && yes) { no.hidden = fv.verdict !== "NO"; yes.hidden = fv.verdict === "NO"; }
-    // "Great this week": ALSO_PICK foods of the same family that are YES,
-    // a fresh pick on every visit, A to Z, then how many more there are.
-    // In the baked week they come from the section's data-all; for another
-    // week, or a page baked with none, from foods.json. It is "Also great
-    // this week" only when this food is YES too.
-    function alsoHeading(h) {
-      h.textContent = fv.verdict === "YES" ? "Also great this week" : "Great this week";
-    }
-    var section = article.querySelector(".also");
-    if (section) alsoHeading(section.querySelector("h2"));
-    if (SAME_WEEK) { if (section) fillAlso(JSON.parse(section.dataset.all || "[]")); }
+    // "Also this week": ALSO_PICK other foods that are not NO, from the
+    // same family first and from any family to make up the number, a
+    // fresh pick on every visit, the family's then the rest A to Z, each
+    // with its verdict tag, then how many more there are. In the baked
+    // week they come from the section's data-all; for another week, or a
+    // page baked with none, from foods.json.
+    if (SAME_WEEK) { if (article.querySelector(".also")) fillAlso(JSON.parse(article.querySelector(".also").dataset.all || "[]")); }
     else loadFoods().then(function (foods) {
-      fillAlso(foods.filter(function (f) {
-        return f.group === food.group && f.slug !== food.slug && V.foodVerdict(f, WEEK).verdict === "YES";
-      }));
+      var all = [];
+      foods.forEach(function (f) {
+        if (f.slug === food.slug) return;
+        var verdict = V.foodVerdict(f, WEEK).verdict;
+        if (verdict === "NO" || verdict === "NEVER") return;
+        all.push({ slug: f.slug, name: f.name, colour: f.colour, verdict: verdict, family: f.group === food.group });
+      });
+      fillAlso(all);
     });
+    function byName(a, b) { return a.name < b.name ? -1 : 1; }
     function fillAlso(all) {
-      var picks = pickSome(all, ALSO_PICK).sort(function (a, b) { return a.name < b.name ? -1 : 1; });
-      section = article.querySelector(".also");
+      var family = all.filter(function (f) { return f.family; });
+      var rest = all.filter(function (f) { return !f.family; });
+      var picks = pickSome(family, ALSO_PICK).sort(byName);
+      picks = picks.concat(pickSome(rest, ALSO_PICK - picks.length).sort(byName));
+      var section = article.querySelector(".also");
       if (!picks.length) { if (section) section.hidden = true; return; }
       if (!section) {
         section = el("section", "also");
-        section.appendChild(el("h2"));
+        section.appendChild(el("h2", null, "Also this week"));
         section.appendChild(el("ul", "food-list"));
         var p = el("p", "also-more");
-        var m = arrowLink(BASE + "now/#still", "");
+        var m = arrowLink(BASE + "now/", "");
         m.classList.add("more-link");
         p.appendChild(m);
         section.appendChild(p);
         article.insertBefore(section, article.querySelector(".page-rule"));
       }
-      alsoHeading(section.querySelector("h2"));
       var ul = section.querySelector("ul");
       ul.textContent = "";
-      picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: "YES" }, { tag: false })); });
+      picks.forEach(function (f) { ul.appendChild(foodRow({ slug: f.slug, name: f.name, colour: f.colour, verdict: f.verdict })); });
       var more = all.length - picks.length;
       section.querySelector(".also-more").hidden = !more;
       setArrowText(section.querySelector(".more-link"), "and " + more + " more");

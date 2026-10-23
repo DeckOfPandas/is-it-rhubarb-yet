@@ -403,9 +403,10 @@ One shape for every food, one column at every width, in this order:
    fresh weeks in months, baked as `season`; not for a food that cannot
    be sold) and, for a food of two rings or more, its ring list;
 4. the counter note;
-5. Also great this week ("Great this week" unless this food is YES too):
-   three foods of the same family that are YES, a fresh pick on every
-   visit, A to Z, and "and N more →" to Now;
+5. Also this week: three other foods that are not NO, from the same
+   family first and from any family to make up three, a fresh pick on
+   every visit, the family's then the rest A to Z, each with its verdict
+   tag, and "and N more →" to Now;
 6. one hairline, the only rule on the page;
 7. the sources disclosure, "Great! Show me the sources." ("Fine, show me
    the sources." for NO), in the instructive style, holding the numbered
