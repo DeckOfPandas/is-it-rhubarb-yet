@@ -188,7 +188,10 @@ the wheel's scale. The week arrows are 44px boxes; a ring-list row is
   motion), and on a wide screen home keeps the focus in the hero with the
   caret at the end (`sessionStorage` carries that); a phone is left
   without focus, so the keyboard does not cover the answer. Without
-  JavaScript it is a form that asks home.
+  JavaScript it is a form that lands on home's Everything list
+  (`/?q=…#all-foods`), which cannot filter: the no-JS visitor gets the
+  full list to read, and the word is kept in the address for a visitor
+  who turns JavaScript on.
 
 ### Switches
 
