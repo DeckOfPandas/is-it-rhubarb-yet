@@ -46,10 +46,9 @@ to this food). The whole page keys off --food, the food's colour.
      whole food's fresh weeks, a glasshouse ring left out as held), which
      answers the title's question in words; and, for a food of two rings
      or more, the dial's legend, "From the outside in". One row per ring
-     in the dial's order, outer ring first: a swatch, the ring's name,
-     its own phrase and, only where its sources are not the ones every
-     ring shares, its own, small and muted; the shared sources are said
-     once under the list. A row and its ring light each other, the rest
+     in the dial's order, outer ring first: a swatch, the ring's name and
+     its own phrase. No source is named here: the sources are behind the
+     disclosure below. A row and its ring light each other, the rest
      fading to a quarter (site.js); a tap pins the light. {%- endcomment -%}
   <div class="breakdown" id="breakdown">
   {%- include season-wheel.html food=food -%}
@@ -57,31 +56,13 @@ to this food). The whole page keys off --food, the food's colour.
   <p class="season-line">In season {{ b.season }}.</p>
   {%- endif -%}
   {%- if food.varieties.size > 1 -%}
-  {%- assign food_keys = food.sources | default: "" -%}
-  {%- if food_keys == "" -%}{%- assign food_keys = "" | split: "" | push: food.source -%}{%- endif -%}
-  {%- assign shared = "" | split: "" -%}
-  {%- for k in food_keys -%}
-    {%- assign everywhere = true -%}
-    {%- for vi in b.rings -%}
-      {%- assign rv = food.varieties[vi] -%}
-      {%- assign rk = rv.sources | default: food_keys -%}
-      {%- unless rk contains k -%}{%- assign everywhere = false -%}{%- endunless -%}
-    {%- endfor -%}
-    {%- if everywhere -%}{%- assign shared = shared | push: k -%}{%- endif -%}
-  {%- endfor -%}
   <p class="ring-lead">From the outside in:</p>
   <ol class="ring-list" id="ring-list">
   {%- for vi in b.rings -%}
     {%- assign v = food.varieties[vi] -%}
-    {%- assign rk = v.sources | default: food_keys -%}
-    {%- assign own = "" | split: "" -%}
-    {%- for k in rk -%}{%- unless shared contains k -%}{%- assign own = own | push: k -%}{%- endunless -%}{%- endfor -%}
-    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span>{% if own.size > 0 %} <span class="sep" aria-hidden="true">·</span> <small class="ring-source">{% include source-names.html keys=own %}</small>{% endif %}</span></button></li>
+    <li data-ring="{{ vi }}" style="{% include variety-style.html food=food v=v %}"><button type="button" class="ring-row" aria-pressed="false"><span class="swatch" aria-hidden="true"></span><span class="ring-text"><span class="line-name">{{ v.name | default: food.name }}</span> <span class="sep" aria-hidden="true">·</span> <span class="ring-words">{{ b.ringLines[vi] }}</span></span></button></li>
   {%- endfor -%}
   </ol>
-  {%- if shared.size > 0 -%}
-  <p class="ring-shared">Dates from {% include source-names.html keys=shared %}.</p>
-  {%- endif -%}
   {%- endif -%}
   </div>
 

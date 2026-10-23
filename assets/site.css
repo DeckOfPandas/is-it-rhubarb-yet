@@ -369,8 +369,7 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 /* A food's ring list, the dial's legend: a row per ring, outer ring
    first, each a button (a tap pins its ring's light). A swatch in the
    ring's colour, then on one wrapping line its name in the caps style in
-   the ring's text colour, its phrase, and its source, small and muted,
-   joined by dots. */
+   the ring's text colour, and its phrase, joined by a dot. */
 .ring-list { list-style: none; padding: 0; margin: var(--sp-2) 0 0; }
 .ring-list li + li { margin-top: var(--sp-1); }
 .ring-row {
@@ -386,11 +385,10 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ring-row .line-name { --food-ink: var(--food-shed, var(--food)); } }
 :root[data-theme="dark"] .ring-row .line-name { --food-ink: var(--food-shed, var(--food)); }
-.ring-source { color: var(--muted); font-size: var(--fs-small); }
 /* Under the dial: the season in months, then the ring list's lead ("From
-   the outside in:") and, after the list, the sources every ring shares. */
+   the outside in:"). */
 .season-line { margin: var(--sp-2) 0 0; }
-.ring-lead, .ring-shared { color: var(--muted); font-size: var(--fs-small); margin: var(--sp-1) 0 0; }
+.ring-lead { color: var(--muted); font-size: var(--fs-small); margin: var(--sp-1) 0 0; }
 .ring-lead { margin-top: var(--sp-2); }
 .ring-lead + .ring-list { margin-top: var(--sp-1); }
 /* A lit ring and its row: the rest fade to a quarter, as on the charts. */

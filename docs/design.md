@@ -435,14 +435,10 @@ with `text-wrap: pretty`.
   no legend of its own.
 - **The ring list** (`.ring-list`) is the dial's legend, led by "From
   the outside in:" (small, muted), outer ring first: a swatch in the
-  ring's colour, its name in the caps style in its text colour, its own
-  phrase without a full stop (baked as `ringLines`) and, only where its
-  sources are not the ones every ring shares, its own sources' short
-  names, small and muted, joined by dots: NORTH EAST · Until late
-  January · Northumberland Seafood. The sources every ring shares are
-  said once under the list, "Dates from New Covent Garden Market and
-  Defra." Sources in a sentence are joined with commas and "and"
-  (`_includes/source-names.html`). Each row is a button. Hovering or
+  ring's colour, its name in the caps style in its text colour and its
+  own phrase without a full stop (baked as `ringLines`), joined by a
+  dot: NORTH EAST · Until late January. It names no source: the sources
+  are behind "Show me the sources". Each row is a button. Hovering or
   focusing a row, or hovering a ring, lights the ring and its row and
   fades the rest to a quarter (`lightRings`); a tap pins the light
   (`aria-pressed`) until it is tapped again.

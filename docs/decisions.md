@@ -5,6 +5,12 @@ reason, so that nobody relitigates it by accident. What the site does
 now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 `model_instructions/manual.md`. Add to the top.
 
+## 2026-10-23, citing sources
+
+- **The ring list names no source**, not per row and not as "Dates
+  from" under the list. A visitor who wants the sources opens "Show me
+  the sources". This replaces "Shared sources once" below.
+
 ## 2026-10-22, after the full review
 
 - **The Good Fish Guide lines are sentences, dated.** "Good Fish Guide,
