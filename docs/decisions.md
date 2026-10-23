@@ -7,6 +7,11 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **A quotation keeps its semicolons.** It is verbatim, so the rule
+  against semicolons in anything a visitor reads does not touch
+  `_data/quotes.yml`. Its new authors include three who died in 1956
+  (Walter de la Mare, A. A. Milne, H. L. Mencken), whose work is in UK
+  copyright until 1 January 2027. Helen is content to quote them now.
 - **The ring list names no source**, not per row and not as "Dates
   from" under the list. A visitor who wants the sources opens "Show me
   the sources". This replaces "Shared sources once" below.
