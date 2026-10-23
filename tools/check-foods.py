@@ -200,19 +200,28 @@ def fold_name(s):
 
 
 def check_avail_runs(weeks, label, warnings):
-    """A just-about run touching no in-season run (the wrap counted) reads
-    JUST on its own; one of LONG_AVAIL weeks or more is a season in all
-    but name."""
+    """A just-about run touching no in-season run reads JUST on its own;
+    one of LONG_AVAIL weeks or more is a season in all but name. A run
+    that meets another just-about run across the year's end is one run
+    with it, so what it touches is what the other run touches."""
     cover = {}
     for r in weeks:
         if isinstance(r, list) and len(r) == 3 and all(isinstance(n, int) for n in r[:2]):
             for w in range(r[0], r[1] + 1):
                 cover[w] = r[2]
+
+    def beyond(week, step):
+        for _ in range(52):
+            week = (week - 1 + step) % 52 + 1
+            if cover.get(week) != "avail":
+                return cover.get(week)
+        return None
+
     for r in weeks:
         if not (isinstance(r, list) and len(r) == 3 and r[2] == "avail"):
             continue
-        before = cover.get(52 if r[0] == 1 else r[0] - 1)
-        after = cover.get(1 if r[1] == 52 else r[1] + 1)
+        before = beyond(r[0], -1)
+        after = beyond(r[1], 1)
         if before != "in" and after != "in":
             warnings.append(f"{label}: just-about run {r} touches no in-season run, so it reads JUST on its own")
         if r[1] - r[0] + 1 >= LONG_AVAIL:
