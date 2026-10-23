@@ -55,17 +55,21 @@ jobs:
       - run: npm install --no-save --no-audit --no-fund --prefix tmp/playwright playwright@1.63.0
       - run: node tmp/playwright/node_modules/playwright/cli.js install --with-deps chromium
       - run: python3 -I tools/check-foods.py
-      - run: node --test tests/verdict/verdict.test.js
+      - run: node --test tests/verdict/verdict.test.js tests/site/search.test.js tests/site/magnifier.test.js
       - run: node tools/bake.js
         env:
           TZ: Europe/London
       - run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      - run: node tools/fold-ics.js _site
+      - run: node tools/food-json.js _site
       - run: node tools/cards.js --out _site/cards
         env:
           NODE_PATH: ${{ github.workspace }}/tmp/playwright/node_modules
-      - run: node --test tests/cards/cards.test.js
+      - run: node --test tests/cards/cards.test.js tests/build/endpoints.test.js tests/build/charts.test.js tests/build/shots.test.js
+        env:
+          NODE_PATH: ${{ github.workspace }}/tmp/playwright/node_modules
       - uses: actions/upload-pages-artifact@v3
 
   deploy:

@@ -19,9 +19,14 @@ is `docs/design.md`; the decision log is `docs/decisions.md`.
   `yesish`, `just`, `nearly`, `no`, `never`. A quotation with `foods` is
   preferred for those foods. Its header is the vetting rule.
 - `_data/sources.yml` names every source a food or ring may cite: `key`,
-  `name` (as the Source data page lists it), `short` (what a food page's
-  ring list says) and `url`. `general` is common knowledge, not yet
-  checked, with no address.
+  `name` (as the Source data page lists it), `short`, `url`, `kind`
+  (the Source data page's heading it lists under: veg, herbs, foraging,
+  fish, fish_sustainability, meat, meat_sustainability) and `rank` (its
+  place in that list), with an optional `note` the page adds in
+  brackets and `pending: true` on a source nothing cites yet, which
+  the checker would otherwise warn about. The page's lists are
+  generated from it. `general` is common knowledge, not yet checked,
+  with no address and no kind.
 - Stubs, one per food, which the checker requires: `_foods/<slug>.md`
   (the page at `/<slug>/`), `_remind/<slug>.ics` (the food's calendar at
   `/remind/<slug>.ics`), `_wheels/<slug>.svg` (a standalone SVG of the
@@ -44,7 +49,6 @@ A real entry, cut down, with the optional fields marked:
   sources: [ncgm, defra, bap]   # keys in sources.yml
   notes:
     - "British Apples & Pears lists Bramleys as available all year, harvested in August and September and the rest from storage."
-  # note: "Helen's own note."               optional
   # buy: "What to ask for at the counter."  optional
   # aliases: [zucchini]                     optional, this food's own
   # also: [mushrooms]                       optional, shared broader words
@@ -111,7 +115,7 @@ A ring of the food itself, as a fish's coasts or a glasshouse crop has:
   this way: every coast but a fish's South West (where it has one),
   glasshouse rings, a wild ring beside a market or cultivated one, and
   provenance rings (Welsh, salt marsh, Orkney, the Cornish sardine
-  fishery, the national native and Porthilly rock oysters). Search is
+  fishery, Porthilly rock oysters). Search is
   governed by `ring`, not `lead`: a named variety with no `ring` is
   searchable by its name and how it is said; a ring (a coast, a
   glasshouse) is not.
@@ -146,13 +150,15 @@ A ring of the food itself, as a fish's coasts or a glasshouse crop has:
   are shared (every fungus answers to "mushrooms"). The checker keeps an
   alias unique across foods and never-foods, and no `also` word may be
   someone's alias.
-- **`sources`** on a food is every source its rings use; on a ring, its
-  own. A food not in the 21 October 2026 bundle keeps its one older
-  `source` key. `notes` are sentences shown with the data on the food
-  page, the food's then each ring's; `note` is Helen's own; `buy` is the
-  counter note (for fish, from the Good Fish Guide). Every one of them
-  is printed for visitors, so a note is a sentence a visitor can use,
-  never a working note.
+- **`sources`** on a food is every source it cites: its rings' and its
+  notes' (lobster's size rule cites `defra_lobster`, every counter line
+  `mcs`). On a ring, its own, each of which the food's list must carry;
+  a ring with none inherits the food's. There is no singular `source`
+  or `note` any more. `notes` are sentences shown with the data on the
+  food page, the food's then each ring's; `buy` is the counter note (for
+  fish, from the Good Fish Guide). Every one of them is printed for
+  visitors, so a note is a sentence a visitor can use, never a working
+  note; the checker warns on one that opens with a working word.
 - **Reserved slugs** that no food may take are listed in
   `tools/check-foods.py` (`RESERVED_SLUGS`): the pages, the endpoints and
   every old address that forwards (`grey-squirrel`, `button-mushrooms`,
@@ -185,6 +191,15 @@ statement):
   on that timeline, so apples are not JUST while Cox ends and Braeburn
   carries on, and cod answers for all its coasts. Each ring is answered
   on its own too, for the ring list and for a variety found by search.
+  A food in all year from some coasts and not others says which: "All
+  year, from the North East and South East", only when every all-year
+  ring is a `ring: region`; rock oysters make oysters' "All year" its
+  own.
+- **Today is the UK's day.** `ukToday` reads the date in Europe/London
+  from the clock, so a visitor east or west of it is answered for the
+  day it is here, and a build at 03:30 UTC in summer for the day it
+  already is; without Intl's time zones it is the clock's own day. The
+  site, the bake and the cards all take today from it.
 - **Verdicts**, in rank order: YES > JUST > YES-ISH > NEARLY > NO. YES-ISH
   is a week of storage or glasshouse alone; fresh beats it and it beats
   NEARLY. The thresholds are constants at the top of the file: NEARLY
@@ -233,6 +248,12 @@ words holding throughout.
 
 - `foods.json`: the whole data file. Linked from every page as the
   alternate and from the footer.
+- `/foods/<slug>.json`: one file per food and never-food, written into
+  `_site` after Jekyll by `tools/food-json.js`: the food's data as
+  `foods.yml` has it, plus `asOf` (the build day and its week, the
+  baked verdict and date line, the season in months, a line per ring),
+  read from `_data/baked.json` and never recomputed. A never-food reads
+  NEVER with its line. The Source data page says what the fields mean.
 - `search.json`: what the header search and the not-found page match
   against: every food and never-food with its name, its varieties as
   said (not its rings), aliases, shared words and the baked verdict.
@@ -248,17 +269,26 @@ words holding throughout.
   seasons it is (`rhubarb-forced-1@is-it-rhubarb-yet`), never its date,
   so a calendar updates a moved event rather than adding one. A renamed
   food's old feed has no forward (a feed cannot redirect on Pages), so
-  its subscribers must subscribe again.
+  its subscribers must subscribe again. After Jekyll, `tools/fold-ics.js`
+  folds every feed to RFC 5545's 75-octet lines with CRLF ends;
+  `tests/build/endpoints.test.js` checks the built feeds and endpoints.
 
 ## Checking the data
 
 `python3 -I tools/check-foods.py` validates all five data files and the
 stubs: the shape of every entry, the week ranges, the colour rules, the
 text colours, the `said`, `cultivar`, `ring`, `lead`, `short`, `aliases`
-and `also` fields, the source keys, the reserved slugs, every stub, and
-that every verdict has a general quotation. Problems fail; warnings
-print. Run it after every data edit. Python here has no YAML library, so
-Ruby parses each file. It does not check that source links resolve:
+and `also` fields, the source keys (a ring's within its food's, no
+empty list, no name twice once folded, no food whose every ring is
+`lead: false`), the reserved slugs, every stub, and that every verdict
+has a general quotation. Problems fail; warnings print: a source nothing
+cites (unless `pending`), a just-about run touching no season or nine
+weeks or longer, a note opening with a working word, two foods' colours
+within 2 OKLab units (and a count of the pairs within 4), and a
+whole-food verdict lasting one week, which `tools/sweep-verdicts.js`
+computes from `verdict.js` under Node. Run it after every data edit.
+Python here has no YAML library, so Ruby parses each file. It does not
+check that source links resolve:
 `sh scripts/check-link.sh <https-url>` does, one URL at a time, printing
 the status and the final address.
 

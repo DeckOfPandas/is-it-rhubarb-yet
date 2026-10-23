@@ -16,8 +16,17 @@ within 10 OKLab units (x100) of the brand pink; two varieties
 of one food within 12 of each other get a warning. Rings of one food
 (ring: region, method, zone or part) share its colour, or their variety's.
 
-Sources: a food has `source` (one key) or `sources` (a list), and a ring
-may have its own `sources`; every key is one in _data/sources.yml.
+Sources: a food has `sources` (a list of keys in _data/sources.yml), and a
+ring may have its own, each of which the food's list must also carry; a
+ring without any inherits the food's. The singular `source` and `note`
+keys are gone: `sources` and `notes` everywhere.
+
+Warnings (printed, never failing): a source key nothing cites and no
+entry marks `pending`; a just-about run touching no in-season run, or
+nine weeks or longer; a note beginning with a working word; two foods'
+colours within CROSS_DISTANCE OKLab units, with one count of the pairs
+within CROSS_NEAR; and a whole-food verdict that lasts a single week,
+which node tools/sweep-verdicts.js computes from assets/verdict.js.
 """
 
 import json
@@ -62,6 +71,18 @@ CONTRAST_FAIL = 3.15
 TEXT_CONTRAST = 4.5
 PINK_DISTANCE = 10.0
 VARIETY_DISTANCE = 12.0
+# Two foods' colours (a food's, or a named variety's) this close are
+# told apart by nothing but their label where colour is the key: the
+# wheel's dots, the "Also:" links. Under CROSS_DISTANCE each pair is
+# named; under CROSS_NEAR the pairs are counted.
+CROSS_DISTANCE = 2.0
+CROSS_NEAR = 4.0
+# A just-about run this long is a season in all but name.
+LONG_AVAIL = 9
+# A note that begins with one of these is a working note, not a sentence
+# for a visitor.
+WORKING_WORDS = re.compile(r"^(fudge|todo|tbc|tbd|xxx|verify|check|fix|fixme|note to self)\b", re.I)
+SWEEP = ROOT / "tools" / "sweep-verdicts.js"
 
 
 def load(path):
@@ -142,8 +163,14 @@ def check_text_colours(item, label, problems):
 
 
 def check_sources(item, label, problems, warnings, known):
-    """`source` or `sources` name keys in sources.yml; general warns."""
-    keys = ([item["source"]] if "source" in item else []) + list(item.get("sources") or [])
+    """`sources` is a list of keys in sources.yml; general warns; the
+    singular `source` is a problem."""
+    if "source" in item:
+        problems.append(f"{label}: source is written sources: [{item['source']}] now")
+    keys = list(item.get("sources") or [])
+    if "sources" in item and not isinstance(item["sources"], list):
+        problems.append(f"{label}: sources must be a list")
+        keys = []
     for k in keys:
         if k not in known:
             problems.append(f"{label}: unknown source {k!r}")
@@ -152,10 +179,81 @@ def check_sources(item, label, problems, warnings, known):
     return keys
 
 
-def check_notes(item, label, problems):
-    """`notes`, when present, is a list of sentences."""
+def check_notes(item, label, problems, warnings):
+    """`notes`, when present, is a list of sentences for a visitor; the
+    singular `note` is a problem, and a note that opens with a working
+    word warns."""
+    if "note" in item:
+        problems.append(f"{label}: note is the first line of notes now")
     if "notes" in item and not (isinstance(item["notes"], list) and all(isinstance(n, str) and n.strip() for n in item["notes"])):
         problems.append(f"{label}: notes must be a list of sentences")
+        return
+    for n in item.get("notes") or []:
+        if WORKING_WORDS.match(n.strip()):
+            warnings.append(f"{label}: a working note, not a sentence for a visitor: {n[:40]!r}")
+
+
+def fold_name(s):
+    """A name as the search folds it, so Chilli and chillies collide."""
+    s = re.sub(r"[^a-z0-9]+", " ", s.lower().replace("&", " and ")).strip()
+    return " ".join(re.sub(r"ies$", "y", w) if w.endswith("ies") else re.sub(r"([^s])s$", r"\1", w) for w in s.split())
+
+
+def check_avail_runs(weeks, label, warnings):
+    """A just-about run touching no in-season run reads JUST on its own;
+    one of LONG_AVAIL weeks or more is a season in all but name. A run
+    that meets another just-about run across the year's end is one run
+    with it, so what it touches is what the other run touches."""
+    cover = {}
+    for r in weeks:
+        if isinstance(r, list) and len(r) == 3 and all(isinstance(n, int) for n in r[:2]):
+            for w in range(r[0], r[1] + 1):
+                cover[w] = r[2]
+
+    def beyond(week, step):
+        for _ in range(52):
+            week = (week - 1 + step) % 52 + 1
+            if cover.get(week) != "avail":
+                return cover.get(week)
+        return None
+
+    for r in weeks:
+        if not (isinstance(r, list) and len(r) == 3 and r[2] == "avail"):
+            continue
+        before = beyond(r[0], -1)
+        after = beyond(r[1], 1)
+        if before != "in" and after != "in":
+            warnings.append(f"{label}: just-about run {r} touches no in-season run, so it reads JUST on its own")
+        if r[1] - r[0] + 1 >= LONG_AVAIL:
+            warnings.append(f"{label}: just-about run {r} is {r[1] - r[0] + 1} weeks, a season in all but name")
+
+
+def sweep_verdicts():
+    """Each food's 52 whole-food verdicts, from the verdict rules in
+    assets/verdict.js under Node; {} if Node is not about."""
+    try:
+        return json.loads(subprocess.check_output(["node", str(SWEEP)], text=True))
+    except (OSError, subprocess.CalledProcessError):
+        return {}
+
+
+def check_one_week_verdicts(sweep, names, warnings):
+    """A whole-food verdict that lasts a single week, the year's end
+    joined to its start."""
+    for slug, row in sweep.items():
+        runs = []
+        for w, v in enumerate(row, start=1):
+            if runs and runs[-1][0] == v:
+                runs[-1][1] += 1
+            else:
+                runs.append([v, 1, w])
+        if len(runs) > 1 and runs[0][0] == runs[-1][0]:
+            runs[0][1] += runs[-1][1]
+            runs[0][2] = runs[-1][2]
+            runs.pop()
+        for v, n, at in runs:
+            if n == 1 and len(runs) > 1:
+                warnings.append(f"{names.get(slug, slug)}: {v} lasts one week (week {at})")
 
 
 def check_shades(item, label, problems, warnings, slug):
@@ -215,12 +313,16 @@ def main() -> int:
     foods = load(DATA)
     groups = {g["key"] for g in load(GROUPS_FILE)}
     never = load(NEVER_FILE) if NEVER_FILE.exists() else []
-    known = {s["key"] for s in load(SOURCES_FILE)}
+    sources = load(SOURCES_FILE)
+    known = {s["key"] for s in sources}
     problems = []
     warnings = []
     slugs = set()
     colours = {}
     aliases = {}
+    used_keys = set()
+    names_seen = {}
+    cross = []
     stubs = {p.stem for p in STUBS.glob("*.md")}
     reminders = {p.stem for p in REMIND.glob("*.ics")}
     wheels = {p.stem for p in WHEELS.glob("*.svg")}
@@ -232,8 +334,12 @@ def main() -> int:
         for key in ("name", "slug", "group", "colour", "varieties"):
             if key not in f:
                 problems.append(f"{where}: missing {key}")
-        if "source" not in f and not f.get("sources"):
-            problems.append(f"{where}: missing source or sources")
+        if not f.get("sources"):
+            problems.append(f"{where}: missing sources")
+        folded = fold_name(f.get("name", ""))
+        if folded in names_seen:
+            problems.append(f"{where}: the same name as {names_seen[folded]} once folded")
+        names_seen[folded] = where
         if not SLUG.match(slug or ""):
             problems.append(f"{where}: bad slug {slug!r}")
         if slug in RESERVED_SLUGS:
@@ -243,8 +349,11 @@ def main() -> int:
         slugs.add(slug)
         if f.get("group") not in groups:
             problems.append(f"{where}: unknown group {f.get('group')!r}")
-        check_sources(f, where, problems, warnings, known)
-        check_notes(f, where, problems)
+        food_keys = check_sources(f, where, problems, warnings, known)
+        used_keys.update(food_keys)
+        check_notes(f, where, problems, warnings)
+        if COLOUR.match(str(f.get("colour", ""))):
+            cross.append((f["colour"], where))
         if "unsold" in f and not (isinstance(f["unsold"], str) and f["unsold"].strip()):
             problems.append(f"{where}: unsold must be a sentence")
         if "said" in f and not (isinstance(f["said"], str) and f["said"].strip()):
@@ -262,6 +371,8 @@ def main() -> int:
             problems.append(f"{where}: no _wheels/{slug}.svg stub")
         if not f.get("varieties"):
             problems.append(f"{where}: no varieties")
+        elif all(v.get("lead") is False for v in f["varieties"]):
+            problems.append(f"{where}: every ring is lead: false, so nothing reaches the calendar, the wheel or the feed")
         variety_colours = []
         for v in f.get("varieties", []):
             label = f"{where} / {v.get('name') or '-'}"
@@ -281,8 +392,14 @@ def main() -> int:
             if "lead" in v and v["lead"] is not False:
                 problems.append(f"{label}: lead is false or left out")
             if "sources" in v:
-                check_sources({"sources": v["sources"]}, label, problems, [], known)
-            check_notes(v, label, problems)
+                ring_keys = check_sources({"sources": v["sources"]}, label, problems, [], known)
+                if not ring_keys:
+                    problems.append(f"{label}: sources: [] says nothing; leave it out to inherit the food's")
+                for k in ring_keys:
+                    if k not in food_keys:
+                        problems.append(f"{label}: cites {k}, which the food's sources do not carry")
+                used_keys.update(ring_keys)
+            check_notes(v, label, problems, warnings)
             if "said" in v and not (isinstance(v["said"], str) and v["said"].strip()):
                 problems.append(f"{label}: said must be a phrase")
             if "said" in v and not v.get("name"):
@@ -302,6 +419,8 @@ def main() -> int:
                 problems.append(f"{label}: same colour as {colours[row_colour]}")
             colours[row_colour] = label
             if COLOUR.match(str(row_colour)):
+                if v.get("name") and "colour" in v:
+                    cross.append((row_colour, label))
                 for other_label, other in variety_colours:
                     if row_colour == other:
                         problems.append(f"{label}: same colour as {other_label}")
@@ -325,6 +444,29 @@ def main() -> int:
                 covered |= span
             if not any(r[2] == "in" for r in v["weeks"] if isinstance(r, list) and len(r) == 3):
                 problems.append(f"{label}: never fully in season")
+            check_avail_runs(v["weeks"], label, warnings)
+
+    # Two foods told apart by colour alone.
+    near = 0
+    for i in range(len(cross)):
+        for j in range(i + 1, len(cross)):
+            (a, la), (b, lb) = cross[i], cross[j]
+            if la.split(" / ")[0] == lb.split(" / ")[0]:
+                continue
+            d = distance(a, b)
+            if d < CROSS_NEAR:
+                near += 1
+            if d < CROSS_DISTANCE:
+                warnings.append(f"{la}: {a} is {d:.1f} from {lb} {b}")
+    if near:
+        warnings.append(f"{near} pairs of foods' colours within {CROSS_NEAR} OKLab units of each other")
+
+    # A source nothing cites, unless it is marked pending.
+    for s in sources:
+        if s["key"] not in used_keys and s["key"] != "general" and not s.get("pending"):
+            warnings.append(f"sources.yml: {s['key']} is cited by nothing")
+
+    check_one_week_verdicts(sweep_verdicts(), {f.get("slug"): f.get("name", "?") for f in foods}, warnings)
 
     for extra in sorted(stubs - slugs):
         problems.append(f"_foods/{extra}.md: no such food in the data file")
@@ -346,6 +488,10 @@ def main() -> int:
         if slug in slugs or slug in never_slugs or slug in RESERVED_SLUGS:
             problems.append(f"never/{where}: slug {slug!r} is taken")
         never_slugs.add(slug)
+        folded = fold_name(n.get("name", ""))
+        if folded in names_seen:
+            problems.append(f"never/{where}: the same name as {names_seen[folded]} once folded")
+        names_seen[folded] = "never/" + where
         check_aliases(n, f"never/{where}", problems, aliases, slug)
         if slug not in never_stubs:
             problems.append(f"never/{where}: no _never/{slug}.md stub")

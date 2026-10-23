@@ -1,18 +1,20 @@
 // The calendar and the wheel, made to be played with: a food highlights
-// on hover or focus and opens its card on a click, tap or Enter; a pink
+// on hover or focus; on the wheel a click, tap or Enter opens its chip,
+// the door to its page, and on the calendar it goes straight to the
+// page; a pink
 // line travels through the year, early, mid or late in each month, and
 // the foods for its time are listed under the chart, under a heading
 // with a stepper of its own; TODAY brings it back. While the chart is on
 // screen a pink button at the foot of the screen counts what is in
 // season and jumps to the list; down in the list, another takes you back
-// to the top. On the calendar a magnifier spreads the
-// weeks round the line and squeezes the rest, and the four season
+// to the top. On the calendar a magnifier (assets/magnifier.js) spreads
+// the weeks round the line and squeezes the rest, and the four season
 // buttons jump to mid-season and zoom in; on a phone its names column is
 // fitted to its longest name. The wheel never turns; In season names and
 // lights only what is in season, Whole year everything. Everything here
-// is added to charts that work without it. Loaded after verdict.js and
-// site.js, whose window.Site lends the card's dial, the hand and Now's
-// lists.
+// is added to charts that work without it. Loaded after verdict.js,
+// site.js, whose window.Site lends the hand and Now's lists, and
+// magnifier.js.
 (function () {
   "use strict";
   var S = window.Site, V = window.Verdict;
@@ -24,7 +26,7 @@
   var SVG = "http://www.w3.org/2000/svg";
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
-  var still = matchMedia("(prefers-reduced-motion: reduce)");
+  var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
   var narrow = matchMedia("(max-width: 43.74rem)");
   function svgEl(tag, cls, attrs) {
     var n = document.createElementNS(SVG, tag);
@@ -77,35 +79,14 @@
   }
 
   // --- The magnifier (the calendar's) -------------------------------------------
-  // A focus and context distortion of the year: each slice of it is drawn
-  // as wide as 1 + MAG * exp(-(d / SPREAD)^2), d its distance in weeks from
-  // the line, and the whole scaled back to 52. F maps a place on the year
-  // to where it is drawn, Finv back again; both are the identity with the
-  // magnifier off, as they always are on the wheel. A table of N slices is
-  // rebuilt whenever the line moves.
-  var MAG = 5, SPREAD = 2.6, N = 520, table = null;
-  function buildF() {
-    if (!state.zoom) { table = null; return; }
-    var c = tOf(state.at), sum = 0, acc = [0];
-    for (var k = 0; k < N; k++) {
-      var d = (k + 0.5) * 52 / N - c;
-      sum += 1 + MAG * Math.exp(-(d * d) / (SPREAD * SPREAD));
-      acc.push(sum);
-    }
-    table = acc.map(function (v) { return v / sum * 52; });
-  }
-  function F(t) {
-    if (!table) return t;
-    var lap = Math.floor(t / 52), u = (t - lap * 52) / 52 * N;
-    var k = Math.min(N - 1, Math.floor(u));
-    return table[k] + (table[k + 1] - table[k]) * (u - k) + lap * 52;
-  }
-  function Finv(y) {
-    if (!table) return y;
-    var lap = Math.floor(y / 52), v = y - lap * 52, lo = 0, hi = N;
-    while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (table[mid] <= v) lo = mid; else hi = mid; }
-    return (lo + (v - table[lo]) / ((table[lo + 1] - table[lo]) || 1)) * 52 / N + lap * 52;
-  }
+  // The maths is assets/magnifier.js (window.Magnifier): F maps a place
+  // on the year to where it is drawn, Finv back again, both the identity
+  // with the magnifier off, as they always are on the wheel. It is
+  // centred on the line whenever the line moves.
+  var magnifier = window.Magnifier.create({ mag: 5, spread: 2.6, slices: 520 });
+  function buildF() { magnifier.set(state.zoom ? tOf(state.at) : null); }
+  function F(t) { return magnifier.F(t); }
+  function Finv(y) { return magnifier.Finv(y); }
 
   // --- The calendar --------------------------------------------------------------
   // Every bar, month line and label keeps the place on the year it was
@@ -132,10 +113,10 @@
         svg.querySelectorAll(".month-line").forEach(function (l) { items.push({ el: l, kind: "line", a: (+l.getAttribute("x1") - x0) / cw }); });
       });
       var starts = [];
-      months.querySelectorAll(".month-label").forEach(function (t) {
-        var a = (+t.getAttribute("x") - 4 - x0) / cw;
+      months.querySelectorAll(".month-label").forEach(function (label) {
+        var a = (+label.getAttribute("x") - 4 - x0) / cw;
         starts.push(a);
-        items.push({ el: t, kind: "month", a: a });
+        items.push({ el: label, kind: "month", a: a });
       });
       items.forEach(function (it) { if (it.kind === "month") { var i = starts.indexOf(it.a); it.b = i < 11 ? starts[i + 1] : 52; } });
       cal.querySelectorAll(".today").forEach(function (l) { l.style.display = "none"; });
@@ -148,29 +129,29 @@
         return g;
       }
       var steps = STEPS.map(function (s) {
-        var t = svgEl("line", "tt-step-tick", { y1: header - 5, y2: header, "aria-hidden": "true" });
-        months.appendChild(t);
-        return { el: t, t: s.t };
+        var stepTick = svgEl("line", "tt-step-tick", { y1: header - 5, y2: header, "aria-hidden": "true" });
+        months.appendChild(stepTick);
+        return { el: stepTick, t: s.t };
       });
       var lines = [lineIn(months, 0, header), lineIn(cells, header, bottom)];
       var tick = svgEl("line", "tt-today", { y1: header - 8, y2: header, "aria-hidden": "true" });
       months.appendChild(tick);
-      months.querySelectorAll(".month-label").forEach(function (t) { months.appendChild(t); });
+      months.querySelectorAll(".month-label").forEach(function (label) { months.appendChild(label); });
       var head = cal.querySelector(".chart-head");
       var rail = el("div", "tt-rail");
       var handle = makeHandle(el("div", "tt-handle"));
       rail.appendChild(handle);
       head.insertBefore(rail, head.firstChild);
-      var c = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail, header: header,
+      var chart = { cal: cal, months: months, cells: cells, labels: cal.querySelector(".cal-labels"), head: head, rail: rail, header: header,
         x0: x0, cw: cw, cw0: cw, items: items, steps: steps, lines: lines, tick: tick, handle: handle, x: x0,
         hits: cells.querySelectorAll(".row-hit"), monthLabels: months.querySelectorAll(".month-label") };
       rail.addEventListener("click", function (e) {
         if (e.target !== rail) return;
         stopPlay();
-        setAt(nearest(Finv((e.clientX - months.getBoundingClientRect().left) / c.cw)));
+        setAt(nearest(Finv((e.clientX - months.getBoundingClientRect().left) / chart.cw)));
       });
-      cal.querySelector(".chart-body").addEventListener("scroll", function () { placeHandle(c); }, { passive: true });
-      cals.push(c);
+      cal.querySelector(".chart-body").addEventListener("scroll", function () { placeHandle(chart); }, { passive: true });
+      cals.push(chart);
     });
     window.addEventListener("resize", function () { if (fitWeeks()) cals.forEach(layoutCal); else cals.forEach(placeHandle); });
   }
@@ -182,41 +163,41 @@
   // out again.
   function fitWeeks() {
     var room = 0;
-    cals.forEach(function (c) { var w = c.cal.parentElement.getBoundingClientRect().width; if (w) room = w; });
+    cals.forEach(function (chart) { var w = chart.cal.parentElement.getBoundingClientRect().width; if (w) room = w; });
     if (!room) return false;
     var changed = false;
-    cals.forEach(function (c) {
-      var col = +c.labels.getAttribute("width");
+    cals.forEach(function (chart) {
+      var col = +chart.labels.getAttribute("width");
       // Scrolling, the weeks keep the drawn 8px after December; filling,
       // only the 1px the last month line needs, so they end on the edge.
       var scroll = narrow.matches && !state.zoom, tail = scroll ? 8 : 1;
-      var cw = scroll ? c.cw0 : Math.max(1, (room - col - tail) / 52);
-      if (Math.abs(cw - c.cw) < 0.01 && c.fitted) return;
-      c.cw = cw; c.fitted = true; changed = true;
+      var cw = scroll ? chart.cw0 : Math.max(1, (room - col - tail) / 52);
+      if (Math.abs(cw - chart.cw) < 0.01 && chart.fitted) return;
+      chart.cw = cw; chart.fitted = true; changed = true;
       var w = (52 * cw + tail).toFixed(2);
-      [c.months, c.cells].forEach(function (svg) {
+      [chart.months, chart.cells].forEach(function (svg) {
         var vb = svg.getAttribute("viewBox").split(" ");
         vb[2] = w;
         svg.setAttribute("viewBox", vb.join(" "));
         svg.setAttribute("width", w);
       });
-      c.hits.forEach(function (r) { r.setAttribute("width", w); });
-      c.cal.style.setProperty("--cal-w", (col + +w) + "px");
+      chart.hits.forEach(function (r) { r.setAttribute("width", w); });
+      chart.cal.style.setProperty("--cal-w", (col + +w) + "px");
     });
     return changed;
   }
   // A month name the scrolled weeks have pushed part way under the names
   // column, or past the chart's right edge, is hidden rather than cut.
-  function cutMonths(c) {
-    var head = c.head.getBoundingClientRect(), from = head.left + c.labels.getBoundingClientRect().width;
-    c.monthLabels.forEach(function (t) {
-      var r = t.getBoundingClientRect();
-      t.classList.toggle("is-cut", !!r.width && (r.left < from - 0.5 || r.right > head.right + 0.5));
+  function cutMonths(chart) {
+    var head = chart.head.getBoundingClientRect(), from = head.left + chart.labels.getBoundingClientRect().width;
+    chart.monthLabels.forEach(function (label) {
+      var r = label.getBoundingClientRect();
+      label.classList.toggle("is-cut", !!r.width && (r.left < from - 0.5 || r.right > head.right + 0.5));
     });
   }
-  function layoutCal(c) {
-    function X(t) { return c.x0 + F(t) * c.cw; }
-    c.items.forEach(function (it) {
+  function layoutCal(chart) {
+    function X(t) { return chart.x0 + F(t) * chart.cw; }
+    chart.items.forEach(function (it) {
       var xa = X(it.a);
       if (it.kind === "bar") {
         it.el.setAttribute("x", xa.toFixed(2));
@@ -235,46 +216,46 @@
     });
     // A step's tick shows only where the magnifier has spread its third
     // of the month to twice its width or more.
-    var third = 52 / 36, plain = third * c.cw;
-    c.steps.forEach(function (s) {
+    var third = 52 / 36, plain = third * chart.cw;
+    chart.steps.forEach(function (s) {
       var xs = X(s.t);
       s.el.setAttribute("x1", xs.toFixed(2)); s.el.setAttribute("x2", xs.toFixed(2));
       s.el.style.display = state.zoom && X(s.t + third / 2) - X(s.t - third / 2) >= 2 * plain ? "" : "none";
     });
     var x = X(tOf(state.at));
-    c.x = x;
-    c.lines.forEach(function (g) { g.style.transform = "translateX(" + x.toFixed(2) + "px)"; });
+    chart.x = x;
+    chart.lines.forEach(function (g) { g.style.transform = "translateX(" + x.toFixed(2) + "px)"; });
     var now = X(NOW_T).toFixed(2);
-    c.tick.setAttribute("x1", now); c.tick.setAttribute("x2", now);
+    chart.tick.setAttribute("x1", now); chart.tick.setAttribute("x2", now);
     // On today itself the line is the mark; the tick waits under it.
-    c.tick.style.display = state.at === null ? "none" : "";
+    chart.tick.style.display = state.at === null ? "none" : "";
     // The chart on show scrolls, if it must, to keep the line in view.
     // A place in the weeks' SVG is x0 less than its place in the scrolled
     // row, after the names column.
-    var body = c.cal.querySelector(".chart-body");
+    var body = chart.cal.querySelector(".chart-body");
     if (body.clientWidth && body.scrollWidth > body.clientWidth) {
-      var labels = c.labels.getBoundingClientRect().width, at = x - c.x0 + labels;
+      var labels = chart.labels.getBoundingClientRect().width, at = x - chart.x0 + labels;
       var from = body.scrollLeft + labels + 24, to = body.scrollLeft + body.clientWidth - 24;
-      if (at < from || at > to) body.scrollTo({ left: Math.max(0, at - labels - (body.clientWidth - labels) / 2), behavior: still.matches || !c.ready ? "auto" : "smooth" });
+      if (at < from || at > to) body.scrollTo({ left: Math.max(0, at - labels - (body.clientWidth - labels) / 2), behavior: reduceMotion.matches || !chart.ready ? "auto" : "smooth" });
     }
-    placeHandle(c);
-    c.ready = true;
+    placeHandle(chart);
+    chart.ready = true;
   }
   // The handle is centred on the line, but slides along to stay on the
   // screen and inside the chart, 8px in from the screen's edge.
-  function placeHandle(c) {
-    var hw = c.handle.offsetWidth;
+  function placeHandle(chart) {
+    var hw = chart.handle.offsetWidth;
     if (!hw) return;
-    var rail = c.rail.getBoundingClientRect(), head = c.head.getBoundingClientRect();
+    var rail = chart.rail.getBoundingClientRect(), head = chart.head.getBoundingClientRect();
     var vw = document.documentElement.clientWidth;
     var lo = Math.max(8, head.left), hi = Math.min(vw - 8, head.right) - hw;
-    var screen = rail.left + c.x - c.x0 + c.labels.getBoundingClientRect().width - hw / 2;
+    var screen = rail.left + chart.x - chart.x0 + chart.labels.getBoundingClientRect().width - hw / 2;
     screen = Math.max(lo, Math.min(screen, hi));
-    c.handle.style.transform = "translateX(" + (screen - rail.left).toFixed(2) + "px)";
-    cutMonths(c);
+    chart.handle.style.transform = "translateX(" + (screen - rail.left).toFixed(2) + "px)";
+    cutMonths(chart);
   }
-  function calTime(c, clientX) {
-    return Finv((clientX - c.months.getBoundingClientRect().left) / c.cw);
+  function calTime(chart, clientX) {
+    return Finv((clientX - chart.months.getBoundingClientRect().left) / chart.cw);
   }
   // On a phone the names are the small size, a row's short name where it
   // has one, and their column is exactly as wide as the longest name, 16px
@@ -287,16 +268,16 @@
   // show is measured, and cut, for all three. The weeks are then fitted
   // to what is left.
   var nameW = 0, EDGE = 16, NAME_SHARE = 0.4;
-  function cutName(t, maxW) {
-    var ink = t.querySelector(".row-ink"), variety = t.querySelector(".row-variety");
+  function cutName(label, maxW) {
+    var ink = label.querySelector(".row-ink"), variety = label.querySelector(".row-variety");
     if (!ink) return;
     if (ink.dataset.full === undefined) ink.dataset.full = ink.textContent;
     ink.textContent = ink.dataset.full;
     if (variety) variety.style.display = "";
-    if (t.getBBox().width <= maxW) return;
+    if (label.getBBox().width <= maxW) return;
     if (variety) variety.style.display = "none";
     var name = ink.dataset.full;
-    while (name.length > 3 && t.getBBox().width > maxW) {
+    while (name.length > 3 && label.getBBox().width > maxW) {
       name = name.slice(0, -1);
       ink.textContent = name.replace(/\s+$/, "") + "…";
     }
@@ -305,35 +286,35 @@
     if (!cals.length) return;
     if (narrow.matches) {
       var widest = 0, shown = [];
-      cals.forEach(function (c) {
-        c.labels.querySelectorAll(".row-label").forEach(function (t) {
-          if (!t.getClientRects().length) return;
-          shown.push(t);
-          cutName(t, Infinity);
-          widest = Math.max(widest, t.getBBox().width);
+      cals.forEach(function (chart) {
+        chart.labels.querySelectorAll(".row-label").forEach(function (label) {
+          if (!label.getClientRects().length) return;
+          shown.push(label);
+          cutName(label, Infinity);
+          widest = Math.max(widest, label.getBBox().width);
         });
       });
       var room = cals[0].cal.parentElement.getBoundingClientRect().width;
       var cap = room ? Math.floor(room * NAME_SHARE) - EDGE - 8 : Infinity;
       if (widest > cap) {
-        shown.forEach(function (t) { cutName(t, cap); });
+        shown.forEach(function (label) { cutName(label, cap); });
         widest = cap;
       }
       if (widest) nameW = EDGE + Math.ceil(widest) + 8;
     }
     var w = narrow.matches && nameW ? nameW : 0;
-    cals.forEach(function (c) {
-      var vb = c.labels.getAttribute("viewBox").split(" ");
-      var col = w || c.x0;
-      vb[0] = c.x0 - col; vb[2] = col;
-      c.labels.setAttribute("viewBox", vb.join(" "));
-      c.labels.setAttribute("width", col);
-      c.cal.style.setProperty("--cal-x0", col + "px");
-      c.cal.style.setProperty("--cal-w", (col + +c.cells.getAttribute("width")) + "px");
-      c.labels.querySelectorAll(".group-label").forEach(function (g) { g.setAttribute("x", c.x0 - col + (w ? EDGE : 0)); });
+    cals.forEach(function (chart) {
+      var vb = chart.labels.getAttribute("viewBox").split(" ");
+      var col = w || chart.x0;
+      vb[0] = chart.x0 - col; vb[2] = col;
+      chart.labels.setAttribute("viewBox", vb.join(" "));
+      chart.labels.setAttribute("width", col);
+      chart.cal.style.setProperty("--cal-x0", col + "px");
+      chart.cal.style.setProperty("--cal-w", (col + +chart.cells.getAttribute("width")) + "px");
+      chart.labels.querySelectorAll(".group-label").forEach(function (g) { g.setAttribute("x", chart.x0 - col + (w ? EDGE : 0)); });
     });
     fitWeeks();
-    cals.forEach(function (c) { if (c.ready) layoutCal(c); else placeHandle(c); });
+    cals.forEach(function (chart) { if (chart.ready) layoutCal(chart); else placeHandle(chart); });
   }
 
   // --- One chart, three orders -----------------------------------------------------
@@ -356,15 +337,15 @@
   function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
   function orderRows(order) {
     if (!foods || !cals.length) return;
-    var c = cals[0];
-    var rows = Array.prototype.map.call(c.labels.querySelectorAll("a.row"), function (a) {
+    var chart = cals[0];
+    var rows = Array.prototype.map.call(chart.labels.querySelectorAll("a.row"), function (a) {
       var f = bySlug[a.dataset.slug], vi = +a.dataset.variety, v = f.varieties[vi];
       var foodFirst = 99;
       f.varieties.forEach(function (x) { foodFirst = Math.min(foodFirst, firstIn(x.weeks)); });
       var gi = 0;
       groups.forEach(function (g, i) { if (g.key === f.group) gi = i; });
       return {
-        a: a, cells: c.cells.querySelector('a.row[data-row="' + a.dataset.row + '"]'),
+        a: a, cells: chart.cells.querySelector('a.row[data-row="' + a.dataset.row + '"]'),
         y0: +a.querySelector(".row-hit").getAttribute("y"),
         first: firstIn(v.weeks), foodFirst: foodFirst, gi: gi, group: f.group,
         name: f.name, label: V.varietyLabel(v), vi: vi
@@ -375,15 +356,15 @@
       if (order === "alpha") return cmp(p.name.toLowerCase(), q.name.toLowerCase()) || cmp(p.label.toLowerCase(), q.label.toLowerCase()) || cmp(p.vi, q.vi);
       return cmp(p.first, q.first) || cmp(p.name, q.name) || cmp(p.vi, q.vi);
     });
-    c.labels.querySelectorAll(".group-label").forEach(function (t) { t.remove(); });
-    var y = c.header, lastGroup = null;
+    chart.labels.querySelectorAll(".group-label").forEach(function (label) { label.remove(); });
+    var y = chart.header, lastGroup = null;
     rows.forEach(function (r) {
       if (order === "group" && r.group !== lastGroup) {
         lastGroup = r.group;
         y += GROUP_GAP;
-        var t = svgEl("text", "group-label", { x: 0, y: y - 9, "aria-hidden": "true" });
-        t.textContent = groups[r.gi].name;
-        c.labels.appendChild(t);
+        var label = svgEl("text", "group-label", { x: 0, y: y - 9, "aria-hidden": "true" });
+        label.textContent = groups[r.gi].name;
+        chart.labels.appendChild(label);
       }
       var dy = y - r.y0, move = dy ? "translate(0 " + dy + ")" : "";
       r.a.setAttribute("transform", move);
@@ -391,8 +372,8 @@
       y += ROW_H;
     });
     // The two scrolling SVGs are as tall as the rows now laid out.
-    var body = y + 10 - c.header;
-    [c.labels, c.cells].forEach(function (svg) {
+    var body = y + 10 - chart.header;
+    [chart.labels, chart.cells].forEach(function (svg) {
       var vb = svg.getAttribute("viewBox").split(" ");
       vb[3] = body;
       svg.setAttribute("viewBox", vb.join(" "));
@@ -456,14 +437,14 @@
   }
   // The knob's tap disc: 22 screen pixels in wheel units, for the wheel
   // on show (a hidden wheel has no width and keeps its last radius).
-  function sizeKnobHit(d) {
-    var width = d.svg.getBoundingClientRect().width, units = d.svg.viewBox.baseVal.width;
-    if (width && units) d.hit.setAttribute("r", (22 * units / width).toFixed(1));
+  function sizeKnobHit(dial) {
+    var width = dial.svg.getBoundingClientRect().width, units = dial.svg.viewBox.baseVal.width;
+    if (width && units) dial.hit.setAttribute("r", (22 * units / width).toFixed(1));
   }
   function norm(a) { return ((a % 360) + 360) % 360; }
-  function layoutDial(d) {
-    var C = d.C, year = litYear && litYear.checked, shown = "";
-    d.labels.forEach(function (l) {
+  function layoutDial(dial) {
+    var C = dial.C, year = litYear && litYear.checked, shown = "";
+    dial.labels.forEach(function (l) {
       var on = year || !inSeason || !!inSeason[l.slug];
       l.text.style.display = on ? "" : "none";
       shown += on ? "1" : "0";
@@ -472,28 +453,28 @@
     // The labels on show keep clear of each other; placed again only when
     // the set on show changes, not on every move of the line, and only
     // once the fonts are in, since their widths decide it.
-    if (shown !== d.shown && d.svg.getClientRects().length) {
-      d.shown = shown;
-      (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { S.spreadLabels(d.svg); });
+    if (shown !== dial.shown && dial.svg.getClientRects().length) {
+      dial.shown = shown;
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { S.spreadLabels(dial.svg); });
     }
-    d.tick.setAttribute("transform", "rotate(" + (NOW_T * 360 / 52).toFixed(2) + " " + C + " " + C + ")");
+    dial.tick.setAttribute("transform", "rotate(" + (NOW_T * 360 / 52).toFixed(2) + " " + C + " " + C + ")");
     var L = tOf(state.at) * 360 / 52;
-    if (d.last !== null) L += 360 * Math.round((d.last - L) / 360);
-    d.last = L;
-    d.line.style.transform = "rotate(" + L.toFixed(2) + "deg)";
+    if (dial.last !== null) L += 360 * Math.round((dial.last - L) / 360);
+    dial.last = L;
+    dial.line.style.transform = "rotate(" + L.toFixed(2) + "deg)";
     var rad = L * Math.PI / 180, sin = Math.sin(rad), cos = Math.cos(rad);
-    d.knob.setAttribute("transform", "translate(" + (C + d.RIM * sin).toFixed(2) + " " + (C - d.RIM * cos).toFixed(2) + ")");
-    d.word.setAttribute("x", (sin >= 0 ? 22 : -22));
-    d.word.setAttribute("y", (-cos * 10).toFixed(2));
-    d.word.setAttribute("text-anchor", sin >= 0 ? "start" : "end");
-    d.word.textContent = whenLabel().toUpperCase();
-    sizeKnobHit(d);
+    dial.knob.setAttribute("transform", "translate(" + (C + dial.RIM * sin).toFixed(2) + " " + (C - dial.RIM * cos).toFixed(2) + ")");
+    dial.word.setAttribute("x", (sin >= 0 ? 22 : -22));
+    dial.word.setAttribute("y", (-cos * 10).toFixed(2));
+    dial.word.setAttribute("text-anchor", sin >= 0 ? "start" : "end");
+    dial.word.textContent = whenLabel().toUpperCase();
+    sizeKnobHit(dial);
   }
-  function wheelTime(d, clientX, clientY) {
-    var p = d.svg.createSVGPoint();
-    p.x = d.C; p.y = d.C;
-    var c = p.matrixTransform(d.svg.getScreenCTM());
-    var a = Math.atan2(clientX - c.x, -(clientY - c.y)) * 180 / Math.PI;
+  function wheelTime(dial, clientX, clientY) {
+    var p = dial.svg.createSVGPoint();
+    p.x = dial.C; p.y = dial.C;
+    var centre = p.matrixTransform(dial.svg.getScreenCTM());
+    var a = Math.atan2(clientX - centre.x, -(clientY - centre.y)) * 180 / Math.PI;
     return norm(a) * 52 / 360;
   }
 
@@ -504,13 +485,13 @@
   // the nearest step. Only the handle takes touch-action: none, so the
   // chart itself still scrolls and pinches as a page does.
   function whenLabel() { return state.at === null ? "Today" : STEPS[state.at].phrase; }
-  function makeHandle(h) {
-    h.setAttribute("tabindex", "0");
-    h.setAttribute("role", "slider");
-    h.setAttribute("aria-label", "Time of year");
-    h.setAttribute("aria-valuemin", "0");
-    h.setAttribute("aria-valuemax", "35");
-    h.addEventListener("keydown", function (e) {
+  function makeHandle(handle) {
+    handle.setAttribute("tabindex", "0");
+    handle.setAttribute("role", "slider");
+    handle.setAttribute("aria-label", "Time of year");
+    handle.setAttribute("aria-valuemin", "0");
+    handle.setAttribute("aria-valuemax", "35");
+    handle.addEventListener("keydown", function (e) {
       var k = e.key, dir = 0;
       if (k === "ArrowRight" || k === "ArrowUp") dir = 1;
       else if (k === "ArrowLeft" || k === "ArrowDown") dir = -1;
@@ -522,30 +503,30 @@
       stopPlay();
       move(dir);
     });
-    h.addEventListener("pointerdown", function (e) {
+    handle.addEventListener("pointerdown", function (e) {
       if (e.button) return;
       e.preventDefault();
       stopPlay();
-      h.setPointerCapture(e.pointerId);
-      h.focus({ preventScroll: true });
+      handle.setPointerCapture(e.pointerId);
+      handle.focus({ preventScroll: true });
       root.classList.add("is-dragging");
       function at(ev) {
-        var t = WHEEL ? wheelTime(dials.filter(function (d) { return d.knob === h; })[0], ev.clientX, ev.clientY)
-          : calTime(cals.filter(function (c) { return c.handle === h; })[0], ev.clientX);
+        var t = WHEEL ? wheelTime(dials.filter(function (dial) { return dial.knob === handle; })[0], ev.clientX, ev.clientY)
+          : calTime(cals.filter(function (chart) { return chart.handle === handle; })[0], ev.clientX);
         var i = nearest(((t % 52) + 52) % 52);
         if (i !== state.at) setAt(i);
       }
       function up() {
-        h.removeEventListener("pointermove", at);
-        h.removeEventListener("pointerup", up);
-        h.removeEventListener("pointercancel", up);
+        handle.removeEventListener("pointermove", at);
+        handle.removeEventListener("pointerup", up);
+        handle.removeEventListener("pointercancel", up);
         root.classList.remove("is-dragging");
       }
-      h.addEventListener("pointermove", at);
-      h.addEventListener("pointerup", up);
-      h.addEventListener("pointercancel", up);
+      handle.addEventListener("pointermove", at);
+      handle.addEventListener("pointerup", up);
+      handle.addEventListener("pointercancel", up);
     });
-    return h;
+    return handle;
   }
   function move(dir) {
     var at = state.at === null ? stepFrom(NOW_T, dir) : state.at;
@@ -613,7 +594,7 @@
     fitWeeks();
     cals.forEach(layoutCal);
     dials.forEach(layoutDial);
-    if (pop) fillPop();
+    if (chip) fillChip();
     list();
     showJump();
   }
@@ -622,7 +603,7 @@
   // --- The floating button -------------------------------------------------------------------
   // A pink pill fixed at the foot of the screen, "81 in season in late
   // November ↓", while the chart is on screen and the list's heading is
-  // not, and not while a docked popover holds the foot of the screen.
+  // not, and not while a docked chip holds the foot of the screen.
   // Pressed, it scrolls to the list's heading (at once with reduced
   // motion) and gives it focus. It waits for foods.json, for its count.
   // Both pills' arrows are the site's arrow mark, turned down or up; on
@@ -646,11 +627,11 @@
   up.appendChild(S.arrowMark()).classList.add("is-up");
   up.addEventListener("click", function () {
     var title = document.querySelector("main h1");
-    window.scrollTo({ top: 0, behavior: still.matches ? "auto" : "smooth" });
+    window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
     if (title) { title.setAttribute("tabindex", "-1"); title.focus({ preventScroll: true }); }
   });
   function showJump() {
-    var docked = !!(pop && pop.classList.contains("is-docked"));
+    var docked = !!(chip && chip.classList.contains("is-docked"));
     jump.hidden = !foods || !chartSeen || headSeen || docked;
     var chart = root.querySelector(".ordered, .chart-stage");
     up.hidden = !jump.hidden || docked || chart.getBoundingClientRect().bottom > S.headerHeight();
@@ -658,7 +639,7 @@
   function toList() {
     var head = listBox.querySelector(".tt-list-title");
     if (!head) return;
-    head.scrollIntoView({ behavior: still.matches ? "auto" : "smooth", block: "start" });
+    head.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
     head.focus({ preventScroll: true });
   }
 
@@ -725,157 +706,139 @@
     });
   }
 
-  // --- Highlight and popover ----------------------------------------------------------------
+  // --- Highlight and the chip ----------------------------------------------------------------
   // A food is its parts: on the calendar a row's name and weeks (its
   // data-row), on the wheel a label and its arc (its data-slug, within
-  // one wheel). Hovering or focusing it lights it and fades the rest; a
-  // click, tap or Enter pins it, outlined in ink, and opens its card
-  // beside it, or docked under the chart on a narrow screen. The card is
-  // the home answer's, with a close button of its own; Escape, a click
-  // outside or the button closes it and gives focus back.
-  function partsOf(t) {
+  // one wheel). Hovering or focusing it lights it and fades the rest. On
+  // the calendar a click, tap or Enter is the row's own link, to the
+  // food's page. On the wheel it pins the food, outlined in ink, and
+  // opens its chip beside it, or docked under the chart on a narrow
+  // screen: the page's question, IS IT CHERRIES YET?, as the one link to
+  // the page, asked for the whole food in the present tense whatever
+  // time the wheel has travelled to. Escape or a click outside closes
+  // it and gives focus back; Enter on the chip follows it.
+  function partsOf(part) {
     if (WHEEL) {
-      var svg = t.ownerSVGElement;
-      return { box: svg, parts: svg.querySelectorAll('[data-slug="' + t.dataset.slug + '"]') };
+      var svg = part.ownerSVGElement;
+      return { box: svg, parts: svg.querySelectorAll('[data-slug="' + part.dataset.slug + '"]') };
     }
-    var cal = t.closest(".cal");
-    return { box: cal, parts: cal.querySelectorAll('[data-row="' + t.dataset.row + '"]') };
+    var cal = part.closest(".cal");
+    return { box: cal, parts: cal.querySelectorAll('[data-row="' + part.dataset.row + '"]') };
   }
   // The part that stands for a food, whichever part was met: on the
   // wheel its label, on the calendar its name (the one that takes focus).
-  function targetOf(n) {
-    var t = n && n.closest && n.closest(WHEEL ? "a.label, .season" : "a.row");
-    if (!t || !root.contains(t)) return null;
-    if (WHEEL && !t.matches("a.label")) t = t.ownerSVGElement.querySelector('a.label[data-slug="' + t.dataset.slug + '"]');
-    if (!WHEEL && !t.closest(".cal-labels")) t = t.closest(".cal").querySelector('.cal-labels a.row[data-row="' + t.dataset.row + '"]');
-    return t;
+  function targetOf(node) {
+    var part = node && node.closest && node.closest(WHEEL ? "a.label, .season" : "a.row");
+    if (!part || !root.contains(part)) return null;
+    if (WHEEL && !part.matches("a.label")) part = part.ownerSVGElement.querySelector('a.label[data-slug="' + part.dataset.slug + '"]');
+    if (!WHEEL && !part.closest(".cal-labels")) part = part.closest(".cal").querySelector('.cal-labels a.row[data-row="' + part.dataset.row + '"]');
+    return part;
   }
   // A lit wheel label is brought in front of its neighbours, under the
   // line, unless it has focus, which moving it would take away.
   var hot = null, pinned = null;
-  function light(t) {
-    if (t === hot) return;
+  function light(part) {
+    if (part === hot) return;
     if (hot) { var was = partsOf(hot); was.box.classList.remove("is-lit"); was.parts.forEach(function (p) { p.classList.remove("is-hot"); }); }
-    hot = t;
-    if (!t) return;
-    var now = partsOf(t);
+    hot = part;
+    if (!part) return;
+    var now = partsOf(part);
     now.box.classList.add("is-lit");
     now.parts.forEach(function (p) { p.classList.add("is-hot"); });
-    if (WHEEL && !t.contains(document.activeElement)) t.parentNode.insertBefore(t, t.parentNode.querySelector(".tt-line"));
+    if (WHEEL && !part.contains(document.activeElement)) part.parentNode.insertBefore(part, part.parentNode.querySelector(".tt-line"));
   }
-  root.addEventListener("pointerover", function (e) { if (!pinned) { var t = targetOf(e.target); if (t) light(t); } });
+  root.addEventListener("pointerover", function (e) { if (!pinned) { var part = targetOf(e.target); if (part) light(part); } });
   root.addEventListener("pointerout", function (e) {
     if (pinned || !hot) return;
     var to = targetOf(e.relatedTarget);
     if (!to) light(null);
   });
-  root.addEventListener("focusin", function (e) { if (!pinned) { var t = targetOf(e.target); light(t); } });
+  root.addEventListener("focusin", function (e) { if (!pinned) light(targetOf(e.target)); });
   root.addEventListener("click", function (e) {
-    var t = targetOf(e.target);
-    if (!t || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    if (!WHEEL) return;
+    var part = targetOf(e.target);
+    if (!part || e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
     stopPlay();
-    open(t);
+    open(part);
   });
   root.addEventListener("pointerdown", function (e) { if (timer && !e.target.closest(".tt-play")) stopPlay(); });
 
-  var pop = null, foods = null, bySlug = {};
-  var popTemplate = document.getElementById("tt-pop");
-  function open(t) {
+  var chip = null, foods = null, bySlug = {};
+  var chipTemplate = document.getElementById("tt-chip");
+  function open(part) {
     close(false);
-    light(t);
-    pinned = t;
-    partsOf(t).parts.forEach(function (p) { p.classList.add("is-pinned"); });
-    pop = popTemplate.content.firstElementChild.cloneNode(true);
-    pop.querySelector(".tt-close").addEventListener("click", function () { close(true); });
-    document.body.appendChild(pop);
-    fillPop();
-    pop.querySelector(".one-more").focus({ preventScroll: true });
+    light(part);
+    pinned = part;
+    partsOf(part).parts.forEach(function (p) { p.classList.add("is-pinned"); });
+    chip = chipTemplate.content.firstElementChild.cloneNode(true);
+    // Following the chip, its food's name is named for the view
+    // transition, so it flies into the page's question.
+    chip.querySelector(".tt-chip-link").addEventListener("click", function () {
+      chip.querySelector(".ask-name").style.viewTransitionName = "food-name";
+    });
+    document.body.appendChild(chip);
+    fillChip();
+    // Focus moves to the chip once the opening event is over: inside the
+    // click a keyboard Enter synthesises on a wheel label, Chromium
+    // keeps focus on the label and the move is lost.
+    var opened = chip;
+    setTimeout(function () { if (chip === opened) chip.querySelector(".tt-chip-link").focus({ preventScroll: true }); }, 0);
   }
   function close(giveBack) {
-    if (!pop) return;
-    pop.remove();
-    pop = null;
-    var t = pinned;
-    if (t) partsOf(t).parts.forEach(function (p) { p.classList.remove("is-pinned"); });
+    if (!chip) return;
+    chip.remove();
+    chip = null;
+    var part = pinned;
+    if (part) partsOf(part).parts.forEach(function (p) { p.classList.remove("is-pinned"); });
     pinned = null;
     light(null);
     showJump();
-    if (giveBack && t) t.focus({ preventScroll: true });
+    if (giveBack && part) part.focus({ preventScroll: true });
   }
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && pop) { e.preventDefault(); close(true); } });
-  // A click elsewhere closes the card; focus goes back to the food only if
-  // it was in the card, so the click keeps whatever it went to.
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && chip) { e.preventDefault(); close(true); } });
+  // A click elsewhere closes the chip; focus goes back to the food only if
+  // it was in the chip, so the click keeps whatever it went to.
   document.addEventListener("pointerdown", function (e) {
-    if (pop && !pop.contains(e.target) && !targetOf(e.target)) close(pop.contains(document.activeElement));
+    if (chip && !chip.contains(e.target) && !targetOf(e.target)) close(chip.contains(document.activeElement));
   });
-  // The card for the pinned food at the line's time: its verdict, date
-  // line and dial (on the wheel the whole food's, on the calendar the
-  // row's own variety, its dial cut to that ring), and the time it is for
-  // when that is not today.
-  function fillPop() {
-    if (!pop || !pinned || !foods) return;
+  // The chip for the pinned food: its question in the food's colours, as
+  // the page asks it, and the link to its page.
+  function fillChip() {
+    if (!chip || !pinned || !foods) return;
     var f = bySlug[pinned.dataset.slug];
     if (!f) return;
-    var when = dateOf(state.at), fv = V.foodVerdict(f, V.weekOf(when));
-    var vi = WHEEL || f.varieties.length < 2 ? -1 : +pinned.dataset.variety;
-    var r = vi >= 0 ? fv.varieties[vi] : fv.whole;
-    var label = vi >= 0 && r.v.name ? V.varietyLabel(r.v) : "";
-    var name = f.name + (label ? " (" + label + ")" : "");
-    pop.setAttribute("aria-label", name);
-    pop.style.setProperty("--food", vi >= 0 ? r.colour : f.colour);
-    pop.querySelector(".tt-pop-when").textContent = state.at === null ? "" : "In " + STEPS[state.at].phrase;
-    pop.querySelector(".ask-name").textContent = label ? V.varietySaid(f, r.v, true) : f.name.toLowerCase();
-    pop.querySelector(".one-word").textContent = r.verdict + ".";
-    pop.querySelector(".one-line").textContent = V.dateLine(r, when.getFullYear(), when);
-    var go = pop.querySelector(".one-more");
-    go.href = S.foodUrl(f.slug);
-    S.setArrowText(go, S.tellMeAbout(f.name));
-    var box = pop.querySelector(".one-dial"), key = f.slug + "/" + vi + "/" + (state.at === null ? "now" : state.at);
-    if (box.dataset.key !== key) {
-      box.dataset.key = key;
-      S.miniDial(f.slug, vi, vi >= 0 ? r.colour : null).then(function (fig) {
-        if (!fig || box.dataset.key !== key) return;
-        box.textContent = "";
-        box.appendChild(fig);
-        S.markWheel(fig, when);
-      });
-    }
-    placePop();
+    chip.setAttribute("aria-label", f.name);
+    chip.style.setProperty("--food", f.colour);
+    if (f.text_on_shed) chip.style.setProperty("--food-shed", f.text_on_shed);
+    if (f.text_on_custard) chip.style.setProperty("--food-custard", f.text_on_custard);
+    chip.querySelector(".ask-name").textContent = V.foodSaid(f);
+    chip.querySelector(".tt-chip-link").href = S.foodUrl(f.slug);
+    placeChip();
   }
-  // Beside the food: on the calendar under its row (over it when the row
-  // is low on the screen), from where its weeks begin; on the wheel to the
-  // right of its dot, or to the left when there is no room. On a narrow
-  // screen it docks at the foot of the screen, and the page scrolls the
-  // food clear of it.
-  function placePop() {
+  // Beside the dot: to its right, or to the left when there is no room.
+  // On a narrow screen it docks at the foot of the screen, and the page
+  // scrolls the food clear of it.
+  function placeChip() {
     var docked = narrow.matches;
-    pop.classList.toggle("is-docked", docked);
+    chip.classList.toggle("is-docked", docked);
     showJump();
-    var rect = (WHEEL ? pinned.querySelector(".dot") : pinned).getBoundingClientRect();
+    var rect = pinned.querySelector(".dot").getBoundingClientRect();
     if (docked) {
-      pop.style.left = pop.style.top = "";
-      var top = pop.getBoundingClientRect().top;
-      if (rect.bottom > top - 8) window.scrollBy({ top: rect.bottom - top + 16, behavior: still.matches ? "auto" : "smooth" });
+      chip.style.left = chip.style.top = "";
+      var top = chip.getBoundingClientRect().top;
+      if (rect.bottom > top - 8) window.scrollBy({ top: rect.bottom - top + 16, behavior: reduceMotion.matches ? "auto" : "smooth" });
       return;
     }
-    var w = pop.offsetWidth, h = pop.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
-    var x, y;
-    if (WHEEL) {
-      x = rect.right + 16;
-      if (x + w > vw - 16) x = rect.left - 16 - w;
-      y = rect.top + rect.height / 2 - h / 2;
-    } else {
-      x = rect.right + 8;
-      y = rect.bottom + 8;
-      if (y + h > vh - 16) y = rect.top - 8 - h;
-    }
+    var w = chip.offsetWidth, h = chip.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var x = rect.right + 16, y = rect.top + rect.height / 2 - h / 2;
+    if (x + w > vw - 16) x = rect.left - 16 - w;
     x = Math.max(16, Math.min(x, vw - 16 - w));
     y = Math.max(S.headerHeight() + 16, Math.min(y, vh - 16 - h));
-    pop.style.left = (x + window.scrollX) + "px";
-    pop.style.top = (y + window.scrollY) + "px";
+    chip.style.left = (x + window.scrollX) + "px";
+    chip.style.top = (y + window.scrollY) + "px";
   }
-  window.addEventListener("resize", function () { if (pop) placePop(); });
+  window.addEventListener("resize", function () { if (chip) placeChip(); });
 
   // A food's name for a screen reader: "Celery, July to October", from
   // its in-season weeks (any variety's, on the wheel; the row's own on

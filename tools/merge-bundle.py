@@ -67,8 +67,8 @@ SPLIT = {
     "beans": {"Broad": ("broad-beans", ""), "French and runner": ("runner-french-beans", "")},
     "cabbage": {"Red": ("cabbage", "Red"), "Savoy": ("cabbage", "Savoy"), "Spring greens": ("spring-greens", ""),
                 "Winter white": ("cabbage", "Winter white")},
-    "native-oyster": {"Legal sale season": ("oysters", "Native"), "National (Seafish)": ("oysters", "Native, national")},
-    "rock-oyster": {"National (Seafish)": ("oysters", "Rock"), "Porthilly, Cornwall (Flying Fish)": ("oysters", "Rock, Porthilly")},
+    "native-oyster": {"Legal sale season": ("oysters", "Native")},
+    "rock-oyster": {"National (Seafish)": ("oysters", "Rock"), "Porthilly, Cornwall (Flying Fish)": ("oysters", "Porthilly rock")},
     "witch-megrim": {"North East (Northumberland)": ("witch-sole", "")},
     "hazel": {"Hazelnuts": ("cobnuts", "Wild")},
 }
@@ -90,7 +90,7 @@ NAMES = {
     "pears": {"Comice and Concorde": "Comice & Concorde", "Williams'": "Williams"},
     "radishes": {"Radish": "", "Daikon (mooli)": "Mooli"},
     "lamb": {"New-season lamb (grass-fed)": "New-season", "Milk-fed spring lamb": "Milk-fed spring",
-             "Welsh Lamb (PGI)": "Welsh (PGI)", "Salt marsh lamb (Gower PDO)": "Salt marsh (Gower PDO)"},
+             "Welsh Lamb (PGI)": "Welsh", "Salt marsh lamb (Gower PDO)": "Salt marsh"},
     "salmon-farmed": {"Glenarm organic, Northern Ireland (Flying Fish)": "Glenarm, Northern Ireland",
                       "Loch Duart, Scotland (Flying Fish)": "Loch Duart, Scotland"},
     "scallops": {"Orkney hand-dived (Flying Fish)": "Orkney, hand-dived"},
@@ -105,17 +105,17 @@ ZONES = {
     "wild-duck": {"Inland": "", "Foreshore (below high water)": ""},
 }
 RING_KIND = {
-    "lamb": {"Welsh (PGI)": "region", "Salt marsh (Gower PDO)": "region"},
+    "lamb": {"Welsh": "region", "Salt marsh": "region"},
     "salmon-farmed": {"Glenarm, Northern Ireland": "region", "Loch Duart, Scotland": "region"},
     "scallops": {"Orkney, hand-dived": "region"},
     "sardines": {"Cornish fishery (MSC)": "region"},
-    "oysters": {"Native, national": "region", "Rock, Porthilly": "region"},
+    "oysters": {"Porthilly rock": "region"},
     "hop": {"Shoots": "part", "Flowers": "part"},
     "cobnuts": {"Wild": "method"},
     "girolles": {"Market": "method"},
 }
-NOT_LEAD = {("lamb", "Welsh (PGI)"), ("lamb", "Salt marsh (Gower PDO)"), ("scallops", "Orkney, hand-dived"),
-            ("sardines", "Cornish fishery (MSC)"), ("oysters", "Native, national"), ("oysters", "Rock, Porthilly")}
+NOT_LEAD = {("lamb", "Welsh"), ("lamb", "Salt marsh"), ("scallops", "Orkney, hand-dived"),
+            ("sardines", "Cornish fishery (MSC)"), ("oysters", "Porthilly rock")}
 REGIONS = ("North East", "South East", "South West", "National")
 MAIN = {"Market (New Covent Garden)", "Season", "All year", "England & Wales open season", "England & Wales",
         "Tips", "Leaves", "Fruit", "Nuts", "Hips", "Sloes", "Berries", "Flowers"}

@@ -47,6 +47,24 @@
     return Math.round((midnight(d) - new Date(d.getFullYear(), 0, 1)) / MS_PER_DAY) + 1;
   }
   function weekOf(d) { return Math.min(52, Math.floor((dayOfYear(d) - 1) / 7) + 1); }
+  // Today on the UK's calendar, whatever the clock it runs on says: the
+  // seasons are British, so a visitor at breakfast in Sydney on a Monday
+  // is answered for the Sunday it still is in London, and a build at
+  // 03:30 UTC in summer for the day it already is there. Noon on that
+  // date in the clock's own zone, so the week and day-of-year arithmetic,
+  // which read local fields, agree with it. Without Intl's time zones it
+  // is the clock's own day.
+  function ukToday(now) {
+    now = now || new Date();
+    try {
+      var at = {};
+      new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", year: "numeric", month: "numeric", day: "numeric" })
+        .formatToParts(now).forEach(function (p) { at[p.type] = p.value; });
+      return new Date(+at.year, +at.month - 1, +at.day, 12);
+    } catch (e) {
+      return now;
+    }
+  }
   function startOfWeek(week, year) { return new Date(year, 0, 1 + (week - 1) * 7); }
   function endOfWeek(week, year) {
     return week === 52 ? new Date(year, 11, 31) : new Date(year, 0, (week - 1) * 7 + 7);
@@ -331,7 +349,26 @@
       return r;
     });
     var whole = food.unsold ? { verdict: "NO", state: "", unsold: food.unsold } : wholeVerdict(timelineOf(food), week);
+    // A food in season all year from some coasts and not others says
+    // which: "All year, from the North East and South East". Only when
+    // every all-year ring is a coast or a place (`ring: region`); a
+    // variety that is in all year (rock oysters, cultivated mushrooms)
+    // makes the food's "All year" its own.
+    if (whole.allYear && whole.verdict === "YES") {
+      var allYear = results.filter(function (r) { return r.allYear && r.verdict === "YES"; });
+      if (allYear.length < results.length && allYear.every(function (r) { return r.v.ring === "region" && r.v.name; })) {
+        whole.fromRings = allYear.map(function (r) { return r.v.name; });
+      }
+    }
     return { verdict: whole.verdict, whole: whole, varieties: results };
+  }
+  // Coasts and places in a sentence: "the North East and South East",
+  // "Glenarm, Northern Ireland and Loch Duart, Scotland". Compass
+  // coasts share one "the".
+  function placesSaid(names) {
+    var compass = names.every(function (n) { return /^(North|South|East|West)\b/.test(n); });
+    var list = names.length < 2 ? names[0] : names.slice(0, -1).join(", ") + " and " + names[names.length - 1];
+    return (compass ? "the " : "") + list;
   }
 
   // A food's rings from the longest season to the shortest, as the dial
@@ -515,7 +552,7 @@
     if (r.unsold) return r.unsold;
     switch (r.verdict) {
       case "YES":
-        if (r.allYear) return "All year";
+        if (r.allYear) return r.fromRings ? "All year, from " + placesSaid(r.fromRings) : "All year";
         if (softEnd(r, year, today)) {
           return cap(leaving(r.until, year, today).left) + ", then tailing off " + leaving(r.spanUntil, year, today).after + thenSaid(r, year, today);
         }
@@ -736,7 +773,7 @@
 
   return {
     C: C, RANK: RANK,
-    weekOf: weekOf, startOfWeek: startOfWeek, endOfWeek: endOfWeek,
+    weekOf: weekOf, ukToday: ukToday, startOfWeek: startOfWeek, endOfWeek: endOfWeek,
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,
     timelineOf: timelineOf, ringOrder: ringOrder, isGlasshouse: isGlasshouse,

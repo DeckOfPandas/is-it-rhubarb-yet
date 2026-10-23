@@ -24,18 +24,18 @@ component at rest, hovered and focused.
   `--band` (4%), `--panel` (one step lighter than the page, towards white
   on custard and towards ink on the shed) and `--panel-hover`.
 - **Food colours.** Each food's colour arrives as `--food` on its row,
-  card or page (`--c` on a chart row), and every colour in the data
+  chip or page (`--c` on a chart row), and every colour in the data
   passes 3.15:1 on both backgrounds, so a verdict word is simply set in
   it. A food's name set in its colour at text size (`.food-link`: the
-  teasers, "Also:", the wheel's "ALL YEAR:") takes `--food-custard` in
-  light and `--food-shed` in dark, the same hue at 4.5:1, or the colour
-  itself where there is none. Rows keep their names in ink. The rules
-  and the checker are in `docs/data.md`.
-- **Never-foods** share `--never`, ghost grey `#857f78`: their swatches
-  and tags, their pages and cards, the NEVER in a lone search result, the
-  hero's completion, word and underline on a lone never-food match. They
-  never fall back to the pink. The colour is a token in `site.css` and a
-  constant in `tools/cards.js`.
+  teasers, the wheel's "ALL YEAR:"; the chip's question) takes
+  `--food-custard` in light and `--food-shed` in dark, the same hue at
+  4.5:1, or the colour itself where there is none. Rows keep their names
+  in ink. The rules and the checker are in `docs/data.md`.
+- **Never-foods** share `--never`, ghost grey `#857f78`: their swatches,
+  their pages and share cards, and the hero's completion, word and
+  underline on a lone never-food match; their row's NEVER tag is the
+  muted ink, as every never row's is. They never fall back to the pink.
+  The colour is a token in `site.css` and a constant in `tools/cards.js`.
 - **"Today" is drawn in ink**: the food page dial's hand, and on the
   calendar and the wheel a short ink tick that never moves (hidden on
   the calendar while the pink time line is on today itself).
@@ -67,15 +67,15 @@ component at rest, hovered and focused.
     `--track-caps`: the nav, the footer, group labels, chart month names,
     a dial's months and TODAY, every switch, a ring's name); `small` 14px
     (the calendar's names on a phone, notes, a quotation's attribution, a
-    ring's source, the counter note, the card's keycap hint); `body` 17px
-    (text; the date line, bold, on a card); `lead` 23px (the date line,
-    bold, on a food page; the quotation, in Newsreader).
+    ring's source, the counter note, the Enter keycap on a search row);
+    `body` 17px (text; the no-match line on home); `lead` 23px (the date
+    line, bold, on a food page; the quotation, in Newsreader).
   - Anton: `label` 20px (every section label, in full ink: ON THE WAY,
-    GREAT THIS WEEK, EVERYTHING, N MATCHES; a card's question, muted);
-    `title`, one clamp (page titles, each in a `.page-head` with 40px
-    under it; a food page's question; a card's verdict; the heading of
-    the list under a chart); `display` (the hero, and the verdict until
-    `site.js` fits it).
+    GREAT THIS WEEK, EVERYTHING, N MATCHES, TELL ME EVERYTHING ABOUT; the
+    chip's question, muted); `title`, one clamp (page titles, each in a
+    `.page-head` with 40px under it; a food page's question; LITERALLY
+    NO IDEA. on home; the heading of the list under a chart); `display`
+    (the hero, and the verdict until `site.js` fits it).
   - The sizes that do not fit the scale, kept on purpose: the wordmark,
     sized as a logo; the stacked hero below 600px, larger than display to
     fill the phone; a row's verdict tag, Anton at the small size; the
@@ -101,11 +101,11 @@ component at rest, hovered and focused.
   (its rule too) share `--page`, 64rem less the two 16px gutters, so
   every left and right edge lines up at every width.
 - **Breakpoints**, as the stylesheet uses them: 28rem (448px, the header
-  wraps; the card's dial moves to the corner at 28.25rem), 37.49rem
-  (600px, the hero stacks, the licences stack), 42rem (Anton's large
-  tracking on titles), 43.74rem (700px, the calendar runs to the edges,
-  the popover docks, the controls stop sticking), 51.25rem (820px, the
-  wheel is the content's width and its pills sit at the right).
+  wraps), 37.49rem (600px, the hero stacks, the licences stack), 42rem
+  (Anton's large tracking on titles), 43.74rem (700px, the calendar runs
+  to the edges, the chip docks, the controls stop sticking), 51.25rem
+  (820px, the wheel is the content's width and its pills sit at the
+  right).
 
 ## Links
 
@@ -155,23 +155,24 @@ the wheel's scale. The week arrows are 44px boxes; a ring-list row is
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined in
   pink, the line exactly the word's width, in the header, the hero and
   the cards. It does not change on hover.
-- **Header.** NOW, CALENDAR, WHEEL, ?? (About, `aria-label="About"`) and
-  a magnifier at the top right of every page, home included, in caps,
-  muted, no underline; the current page in ink and underlined in pink, as
-  the others are on hover or focus. Each item is drawn only as big as
-  what it shows, 24px from the next, the magnifier's right edge on the
-  page's; its tap area reaches 44px, the magnifier's into the gutter so
-  it never meets ??'s. The wordmark is on the left of the same row, or on
-  a phone on a row of its own under the nav, so the nav never moves. Home
-  has no wordmark. The header sticks to the top of every page on a solid
-  page-colour background over a 1px rule; `site.js` measures its height
-  into `--header-h` (CSS guesses 45px, 90px on a phone with the wordmark,
-  until then); the row may wrap, so a large default font stacks the nav
-  under the wordmark instead of overprinting it. What sticks below it
-  sits at `--header-h`, and every
-  element with an id has `scroll-margin-top: var(--header-h)`, so a jump
-  stops below the header. The magnifier links to `/#search`; with
-  JavaScript it focuses the wordmark's search, and on home the hero.
+- **Header.** NOW, CALENDAR, WHEEL and ?? (About, `aria-label="About"`)
+  at the top right of every page, in caps, muted, no underline; the
+  current page in ink and underlined in pink, as the others are on hover
+  or focus; on home alone a magnifier after them, since home has no
+  wordmark to type into and the hero may be far up the page. Each item
+  is drawn only as big as what it shows, 24px from the next, the last
+  one's right edge on the page's; its tap area reaches 44px, the
+  magnifier's into the gutter so it never meets ??'s. The wordmark is on
+  the left of the same row, or on a phone on a row of its own under the
+  nav, so the nav never moves. Home has no wordmark. The header sticks
+  to the top of every page on a solid page-colour background over a 1px
+  rule; `site.js` measures its height into `--header-h` (CSS guesses
+  45px, 90px on a phone with the wordmark, until then); the row may
+  wrap, so a large default font stacks the nav under the wordmark
+  instead of overprinting it. What sticks below it sits at
+  `--header-h`, and every element with an id has `scroll-margin-top:
+  var(--header-h)`, so a jump stops below the header. The magnifier
+  links to `/#search`; with JavaScript it focuses the hero.
 - **Header search.** On every page but home the wordmark is the search:
   `#head-input`, named "Search foods", has RHUBARB as its placeholder,
   and a click on RHUBARB puts the caret there. IS IT and YET? are links
@@ -188,7 +189,10 @@ the wheel's scale. The week arrows are 44px boxes; a ring-list row is
   motion), and on a wide screen home keeps the focus in the hero with the
   caret at the end (`sessionStorage` carries that); a phone is left
   without focus, so the keyboard does not cover the answer. Without
-  JavaScript it is a form that asks home.
+  JavaScript it is a form that lands on home's Everything list
+  (`/?q=…#all-foods`), which cannot filter: the no-JS visitor gets the
+  full list to read, and the word is kept in the address for a visitor
+  who turns JavaScript on.
 
 ### Switches
 
@@ -204,9 +208,9 @@ order and kind switches open on their default every visit (home by
 family, calendar by start, wheel on All). The theme switch needs
 JavaScript, so it only appears with it.
 
-### Rows, groups and cards: a food at three levels
+### Rows, groups and the chip: a food at three levels
 
-A food is shown as a row, a card or a page, and each is a smaller version
+A food is shown as a row, a chip or a page, and each is a smaller version
 of the next, never a different design. No fourth way: any new view that
 needs a food uses one of these as it is.
 
@@ -228,31 +232,24 @@ needs a food uses one of these as it is.
   one of three shapes: `plain` (one A to Z list), `phrase` (a group per
   timing, soonest first) or `kind` (a group per kind with its count). An
   empty band shows its empty line, or with none is left out.
-- **Card** (`.one-result`: home's single answer, and the calendar's and
-  the wheel's popover, which is the same card): the food page in small.
-  A panel `--panel`, 12px radius, its left edge `--food-bar-width` (6px)
-  in the food's colour. On the left, in order: the question (at `label`,
-  muted; "IS IT BASIL YET?", or for a variety "Is it Cox apples yet?"),
-  the verdict (at `title`), the date line (`body` bold, with its full
-  stop), then the action "Tell me everything about apples →", the food's
-  name in its sentence form, the one link to its page. Under it, small
-  and muted, the Enter key as a keycap holding the return mark
-  (`_includes/card-hint.html`, `icons/enter.svg`), hidden from screen
-  readers. On the right, alone and centred, a 110px miniature of the
-  dial with today's hand: the food's standalone dial, `/wheel/<slug>.svg`
-  (the same include as the page's, 10 KB where the page is 50), fetched
-  once per food (`miniDial` in `site.js`), its own stylesheet and script
-  dropped. A food's card has the whole dial; a named variety's (from search, or a
-  calendar row of a food of several) is cut to that ring, widened to fill
-  the band and drawn all in its colour. The card and a list of matches
-  share one width, `--answer-w` (40rem). Below about 420px of card width
-  the dial is 72px at the top right beside the question and verdict, and
-  the date line and action run the full width under them. A never-food's
-  card (`.is-plain`) is question, verdict and line in ghost grey, no dial
-  and no keycap, and one action, "Tell me why →", to its page, which
-  carries the quotation and the ways on. The no-match card
-  (`.is-unknown`) is the same in ink with no action at all.
+- **Chip** (`.tt-chip`, the wheel's): the food page's own question
+  lifted onto a small panel, the one link to the page, and nothing a row
+  does not say. A panel `--panel`, 12px radius, its left edge
+  `--food-bar-width` (6px) in the food's colour and a shadow; inside, IS
+  IT CHERRIES YET? in Anton at `label`, muted, the food's name in the
+  food's text colour for the theme (as a row's tag is), underlined in the
+  food's colour on hover or focus. The question is asked for the whole
+  food in the present tense whatever time the wheel has travelled to:
+  the wheel shows the time, the chip is the door. No close button: Escape
+  or a click outside closes it. It is a `dialog` named for its food.
+  Home's search has no chip: a list of rows, even of one, already
+  answers, and Enter opens it.
 - **Page** (`/<slug>/`): everything, below.
+
+The Enter keycap, the return mark in a small muted keycap
+(`_includes/key-hint.html`, `icons/enter.svg`), sits on the search row
+Enter would open, after its tag, hidden from screen readers and from
+touch screens. The kitchen sink shows it at rest.
 
 ### The verdict word
 
@@ -337,36 +334,49 @@ asks.
   the faded part. Tab with no completion moves focus as usual. Escape
   dismisses a completion, and a second Escape clears the input. The input
   has `aria-autocomplete="both"`; the completion is not announced.
-- **Search ranking** (`tierOf` in `site.js`; the not-found page keeps the
-  older scoring, `rank`). Candidates are each food's and never-food's
-  name, aliases and shared `also` words, and each named variety by its
-  own name and how it is said ("cox", "forced rhubarb"), which joins
-  once `foods.json` is in. Both sides are folded (case, accents,
-  punctuation; "&" is "and") and singular equals plural. A candidate's
-  best tier: 1, exact; 2, the string starts with the query; 3, a later
-  word starts with it. Text found only inside a word is no match
-  anywhere: "ape" and "lla" get LITERALLY NO IDEA. The last typed word
-  may be unfinished. A food is one hit at its best tier: found by a
-  variety alone it shows as that variety ("cox" gives "Apples (Cox)"),
-  and found as well or better itself it shows as the food. Each letter
-  typed only ever takes hits away.
-  - **One tier-1 match** is answered with the food's card in the label's
-    place, with "Also: Crab apples" under it, the tier 2–3 matches as
-    links in their colours. The card leaves out its question, which the
-    hero asks, only when the hero's text and its completion spell the
-    card's own name (singular and plural alike); otherwise it asks in the
-    food's name (`.asks`): ZUCCHINI is answered "Is it courgettes yet?".
-  - **Otherwise** every match of every tier is a row under "N MATCHES",
-    a teaser label in the first teaser's spot, in one column, by tier
-    then A to Z, with leaders and tags. A list of one is answered as a
-    card, without "Also".
-  - **No match:** a plain card in ink: "Is it zzz yet?", LITERALLY NO
-    IDEA., "If that's an actual thing, please tell us." (a link to the
-    issues). Under it up to five foods sharing its first three letters
-    under DID YOU MEAN.
-  - Up and Down move a highlight in rank order through the answer, its
-    "Also" links or the rows; Enter opens it, or the first. A polite live
-    region says the count. Clearing the input brings everything back.
+- **Search ranking** (`assets/search.js`: `search`, `leadOf`,
+  `nearest`; the same module answers the header and the not-found
+  page). Candidates are each food's and never-food's name, aliases and
+  shared `also` words, and each named variety by its own name and how
+  it is said ("cox", "forced rhubarb"), which joins once `foods.json` is
+  in. Both sides are folded (case, accents, punctuation; "&" is "and")
+  and singular equals plural. A candidate's best tier: 1, exact; 2, the
+  string starts with the query; 3, a later word starts with it. Text
+  found only inside a word is no match anywhere: "ape" and "lla" get
+  LITERALLY NO IDEA. The last typed word may be unfinished, so "corn"
+  finds the Cornish sole after sweetcorn. A food is one hit at its best
+  tier: found by a variety alone it shows as that variety ("cox" gives
+  "Apples (Cox)"), and found as well or better itself it shows as the
+  food. Each letter typed only ever takes hits away. The lead, which
+  colours the hero and completes the word, is the first hit when it is
+  tier 1 or 2 and nothing else shares its tier.
+  - **Every answer is a list of rows**, the ordinary row (swatch, name, a
+    named variety, leader, verdict tag; no arrow, no date line: the page
+    says when), in one column in rank order, by tier then A to Z, with
+    the heading in the first teaser's spot: TELL ME EVERYTHING ABOUT for
+    one match, N MATCHES for more. The tier 2–3 matches are rows in the
+    same list. A never-food is a row with the NEVER tag in the muted
+    ink, and opens its page, which carries its line and quotation. ZUCCHINI
+    is answered with the Courgettes row: the row says the name, so the
+    hero need not.
+  - **No match:** bare text under the hero, which asks the question:
+    LITERALLY NO IDEA. in Anton at `title`, in ink, then "If that's an
+    actual thing, please tell us." (a link to the issues) at `body`, then
+    up to five foods sharing its first three letters as rows under DID
+    YOU MEAN. No panel.
+  - **The Enter keycap** sits on the row Enter would open: the lit row,
+    or the first before any arrow key, so a list of one shows it at
+    once; under DID YOU MEAN only once a suggestion is lit, so a typo and
+    Enter open nothing. That row's page is prerendered by one
+    `speculationrules` script, replaced only when the row changes; a
+    browser without speculation rules ignores it.
+  - Up and Down move a highlight in rank order through the rows; Enter
+    opens the lit one, or the first; a click or tap opens a row. The hero
+    is a combobox over the results (`aria-controls`, `aria-expanded`),
+    the rows' links are its options, each with an id, and the lit one is
+    named in `aria-activedescendant`. A polite live region says the
+    count (and for one match which food), then the lit row's words as
+    the highlight moves. Clearing the input brings everything back.
     Under any answer, "Ask about something else →" empties the hero and
     puts the caret in it.
   - While the input has text, the teasers and the whole Everything
@@ -376,11 +386,13 @@ asks.
 - **Into the food page.** Pages cross-fade with cross-document view
   transitions (`@view-transition { navigation: auto; }`, only without
   reduced motion; a browser without them simply navigates). Following a
-  home card, `site.js` names the hero's typed word `food-name`, the card's
-  verdict `food-verdict` and its dial `food-dial`, and the food page names
-  its question's food name, verdict and dial the same, so each moves into
-  place. The names are set only as the answer is followed and cleared
-  once home is shown again.
+  search row, `site.js` names the row's food name `food-name` and its tag
+  `food-verdict`, and the food page names its question's food name and
+  its verdict the same, so the name flies into the question and the tag
+  grows into the giant verdict; rows have no dial, so nothing is named
+  `food-dial` from home. The wheel's chip names its food name
+  `food-name` as it is followed. The names are set only as the row or
+  chip is followed and cleared once home is shown again.
 - **Teasers.** JUST ARRIVED (or ON THE WAY when nothing has), GREAT THIS
   WEEK and STILL GREAT BUT ON THE WAY OUT, each an Anton label over three
   foods in their colours, picked afresh at random on every visit by
@@ -477,12 +489,13 @@ Titled "??" in Anton `title` (a screen reader hears "About"); Helen's
 copy. It opens "Is it rhubarb yet? Well, is it???", the second sentence a
 prose link to rhubarb's page; the food count links to the calendar; the
 dinner food in "Coolio, I'm off to cook …" is picked at random on every
-visit from what is YES on the visitor's day, the build baking one for no
+visit from what is YES on the UK's day, the build baking one for no
 JavaScript. It ends on the dinner line; the credits are on Source data.
 
 ### Source data
 
-Helen's copy: where each kind of food's dates come from; the JSON; the
+Helen's copy: where each kind of food's dates come from; the JSON, the
+whole file and the per-food files with their `asOf` block; the
 calendar feeds, offered three ways; the full list of sources by kind;
 the foraging footnote ("common knowledge*" is a prose link to it, and it
 ends "Back to where I was" with the arrow turned up); then CREDITS, the
@@ -492,8 +505,9 @@ icons and the fonts, small and muted.
 
 `404.html`, served by GitHub Pages for any address it cannot find: "Is
 it [what was asked] yet?", LITERALLY NO IDEA., "If that's an actual
-thing, please tell us.", then up to five nearest foods from
-`search.json` under DID YOU MEAN, and two ways on. It names no
+thing, please tell us.", then up to five foods from `search.json` under
+DID YOU MEAN, ranked as home ranks them, or sharing the first three
+letters when nothing is, and two ways on. It names no
 canonical. Home's one heading, "Is it in season yet?", is visually
 hidden, since the hero is a form.
 
@@ -509,7 +523,9 @@ hidden, since the hero is a form.
   frames, by `?q=`. A new shared component goes on this page too.
 - `/grey-squirrel/`, `/button-mushrooms/` and `/cobnuts/`: a renamed food's old
   address, a page that forwards at once (meta refresh), `noindex`, with
-  the canonical pointing at the new page.
+  the canonical pointing at the new page. It carries the viewport meta
+  and the stylesheet, so the moment it shows is in the site's type at
+  the phone's width.
 
 ### Print
 
@@ -565,8 +581,8 @@ stands on a printed or script-less calendar.
   A food page links here with `#<slug>`, which marks the food's rows and
   scrolls to the first.
 - On a phone (below 700px) it runs to the screen's edges, the names are
-  `small` (14px), a row with a `short:` name shows it instead (popovers,
-  lists and screen readers keep the full name), and `charts.js` fits the
+  `small` (14px), a row with a `short:` name shows it instead (lists and
+  screen readers keep the full name), and `charts.js` fits the
   names column to the longest name shown, 16px from the screen's edge
   and 8px from the weeks, but never wider than two fifths of the screen:
   a name that will not fit loses its variety and then its last letters to
@@ -628,9 +644,8 @@ stands on a printed or script-less calendar.
 ### The calendar and the wheel, played with
 
 `assets/charts.js`, loaded only on pages with `charts: true`, on top of
-charts that work without it; it borrows the card's dial, the hand and
-Now's bands from `site.js` through `window.Site`, and every date through
-`verdict.js`.
+charts that work without it; it borrows the hand and Now's bands from
+`site.js` through `window.Site`, and every date through `verdict.js`.
 
 - **Highlight.** Hovering or focusing a food (a calendar row, by its
   name or its weeks; a wheel dot, label or arc) lights it and fades the
@@ -639,17 +654,19 @@ Now's bands from `site.js` through `window.Site`, and every date through
   has focus, which moving it would take). Each is focusable with a name
   and its season, "Celery, July to October" ("Bay, all year"; two runs
   joined with "and").
-- **Popover.** A click, tap or Enter pins the food (outlined in ink) and
-  opens its card: exactly the home answer's card, plus the time it is
-  for in caps over the question when that is not today ("IN EARLY
-  APRIL"), and a × button of its own in the top right. On the wheel it
-  answers for the whole food, with the whole dial; on the calendar for
-  the row's own variety, its dial cut to that ring (a food of one ring
-  answers as a whole). Escape, a click outside or × closes it; focus goes
-  back to the food (after a click outside, only if focus was in the
-  card). Wide: beside the food, under its row or right of its dot,
-  flipped to stay on the screen. Below 700px: docked at the foot of the
-  screen, and the page scrolls the food clear of it.
+- **Through to the page.** On the calendar a click, tap or Enter on a
+  row is the row's own link to the food's page, which is what it does
+  without JavaScript; `charts.js` does not intercept it. On the wheel a
+  click, tap or Enter on a dot, label or arc pins the food (outlined in
+  ink) and opens its chip (above, "Rows, groups and the chip"): the
+  page's question as the one link to the page, asked for the whole food
+  in the present tense whatever time the wheel is at. Escape or a click
+  outside closes it; focus goes back to the food (after a click outside,
+  only if focus was in the chip). Enter on a focused food opens the chip
+  and moves focus to it, so Enter again follows it. Wide: right of the
+  dot, or left when there is no room, flipped to stay on the screen.
+  Below 700px: docked at the foot of the screen, and the page scrolls the
+  food clear of it.
 - **Time travel.** Today is a short ink tick on the calendar's month axis
   and across the wheel's month ring, and never moves; it stands in for
   the dashed today line and the hand, which `charts.js` hides. On the
@@ -703,7 +720,7 @@ Now's bands from `site.js` through `window.Site`, and every date through
   from 820px the pills sit at the bottom right on the content's edge;
   phones and the calendar keep them centred. Pressed, it scrolls to the
   list's heading (at once with reduced motion), gives it focus, and
-  hides. Hidden under a docked popover. A wheel short enough that its
+  hides. Hidden under a docked chip. A wheel short enough that its
   list's heading is always on screen with it never shows it. Once the
   chart is wholly above the screen, the same pill says "BACK TO TOP ↑":
   it goes to the top and focuses the page's title.
@@ -725,7 +742,10 @@ Now's bands from `site.js` through `window.Site`, and every date through
 - **Magnifier** (the calendar only). A focus and context distortion
   centred on the line: each slice of the year is drawn as wide as
   1 + 5 × exp(−(d / 2.6)²), d its distance in weeks from the line, and the
-  whole scaled back to 52 weeks. On a phone, magnifying fits all 52 weeks
+  whole scaled back to 52 weeks. The maths is `assets/magnifier.js`, a
+  module with no DOM that `tests/site/magnifier.test.js` checks under
+  Node (the year keeps its length, places keep their order, Finv undoes
+  F); `charts.js` centres it on the line. On a phone, magnifying fits all 52 weeks
   to the screen's width round the line. It follows the line as it is
   dragged or played. Month names with no room are hidden. In the
   magnified stretch only (where a third of a month is drawn at twice its
@@ -790,7 +810,22 @@ Now's bands from `site.js` through `window.Site`, and every date through
 - **Tests.** After a build, `node --test tests/cards/cards.test.js`
   checks that every page's share image is the size the page states, that
   `twitter:image` is `og:image`, and that every linked icon is the size
-  its `sizes` states.
+  its `sizes` states. `tests/build/endpoints.test.js` checks that
+  `search.json` and `foods.json` parse and carry what the scripts read,
+  and that every calendar feed is well formed (CRLF, 75-octet lines,
+  complete events, unique UIDs). `tests/build/charts.test.js` loads
+  home, a food page, the calendar and the wheel in Chromium at 390, 820
+  and 1280 wide, served from `_site`, and fails on any console error;
+  without Playwright it is skipped. `tests/build/shots.test.js` shoots
+  eight pages at 390 and 1280 (home, About, Source data, the not-found
+  page, the calendar and the wheel at mid-December, rhubarb and Now),
+  the clock frozen on 25 October 2026, motion reduced and `Math.random`
+  seeded, and compares each shot's dHash (nine by eight greys, 64 bits)
+  with `tests/build/shot-hashes.json`; more than 6 bits apart fails. A
+  change meant to move things rewrites the baseline with `node
+  tools/dev/shot-hash.js --write`. `tests/site/search.test.js` and
+  `tests/site/magnifier.test.js` need no build: they run the search
+  ranking over the data and the magnifier's maths.
 
 ## Wording
 
@@ -811,7 +846,7 @@ Now's bands from `site.js` through `window.Site`, and every date through
   nav item stays WHEEL. The sources disclosures are "Great! Show me the
   sources." and "Fine, show me the sources.", with full stops.
 - Phrases used as labels in lists have no full stop; a date line that
-  answers a question (the home answer, a food page, a card) does.
+  answers a question (a food page) does.
 - No semicolons in anything a visitor reads: two sentences, or a comma
   and "and". A rating from a scale says the scale where nothing else
   orients the reader: "rated 3 at best (1 is the best, 5 is the worst)".
@@ -825,7 +860,7 @@ Now's bands from `site.js` through `window.Site`, and every date through
 - Reduced motion: no view transitions, no caret blink, no hand sweep, no
   gliding line, jumps instead of smooth scrolls.
 - Every chart row, dot and label is a link with a spoken name and
-  season; the handle is a slider with a spoken value; the popover is a
-  dialog named for its food; the search results have a polite live
+  season; the handle is a slider with a spoken value; the wheel's chip is
+  a dialog named for its food; the search results have a polite live
   region; the switches are radio groups with legends; the theme switch's
   inputs carry their spoken names.

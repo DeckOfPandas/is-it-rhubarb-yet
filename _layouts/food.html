@@ -99,11 +99,10 @@ to this food). The whole page keys off --food, the food's colour.
 
   <hr class="page-rule">
   {%- comment -%} The sources, numbered, as _data/sources.yml names them
-     (a food's `sources`, from its rings, or its one older `source`), and
-     the notes on the data: the food's, then each ring's under its name.
+     (the food's `sources`: its rings' and its notes'), and the notes on
+     the data: the food's, then each ring's under its name.
      {%- endcomment -%}
-  {%- assign keys = food.sources | default: "" -%}
-  {%- if keys == "" -%}{%- assign keys = "" | split: "" | push: food.source -%}{%- endif -%}
+  {%- assign keys = food.sources -%}
   <details class="fine">
     <summary><span data-fine-no{% if b.verdict != "NO" %} hidden{% endif %}>Fine, show me the sources.</span><span data-fine-yes{% if b.verdict == "NO" %} hidden{% endif %}>Great! Show me the sources.</span></summary>
     <ol class="source-list food-sources">
@@ -112,7 +111,6 @@ to this food). The whole page keys off --food, the food's colour.
       <li>{% if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name | default: k }}{% endif %}</li>
     {%- endfor -%}
     </ol>
-    {%- if food.note -%}<p class="note">{{ food.note }}</p>{%- endif -%}
     {%- for n in food.notes -%}<p class="note">{{ n }}</p>{%- endfor -%}
     {%- for v in food.varieties -%}{%- if v.notes -%}<p class="note">{% if v.name != "" %}<strong>{{ v.name }}:</strong> {% endif %}{{ v.notes | join: " " }}</p>{%- endif -%}{%- endfor -%}
   </details>

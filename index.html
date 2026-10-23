@@ -28,7 +28,7 @@ site.js adds the varieties from foods.json), the names it completes to
     <label class="hook-line" for="hook-input">
       <span class="hook-word">Is it</span>
       <span class="hook-slot"><input class="hook-input" id="hook-input" name="q" type="search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"
-        placeholder="rhubarb" aria-label="Is it … yet? Type a food" aria-autocomplete="both" size="7"></span>
+        placeholder="rhubarb" aria-label="Is it … yet? Type a food" aria-autocomplete="both" role="combobox" aria-expanded="false" aria-controls="results" size="7"></span>
       <span class="hook-word">yet?</span>
     </label>
     <button type="submit" class="visually-hidden" tabindex="-1">Ask</button>
@@ -64,23 +64,19 @@ site.js adds the varieties from foods.json), the names it completes to
     <p class="this-week-more"><a class="arrow-link" href="{{ '/now/' | relative_url }}">{% include arrow-words.html text="Everything in season this week" %}</a></p>
   </div>
   {%- comment -%} What is typed, answered in the this-week blocks' place,
-     filled by site.js: a count in a teaser label over the matches in
-     rank order, with tags; a lone or exact match as a card, the food
-     page in small (question, verdict, line, "Tell me everything about
-     … →", a link to its page, and a miniature of its dial; a
-     never-food's card is its question, verdict and line, and no link),
-     then "Also:" and the near matches; or, with no match, a plain card
-     like a never-food's, LITERALLY NO IDEA. in ink, and the nearest
-     foods. Under any of them, "Ask about something else →" empties the
-     hero.
+     filled by site.js: the matches as rows in rank order, with tags,
+     under TELL ME EVERYTHING ABOUT (one) or N MATCHES (more), the Enter
+     keycap on the row Enter would open; or, with no match, LITERALLY NO
+     IDEA. in ink under the hero's question, and the nearest foods under
+     DID YOU MEAN. Under either, "Ask about something else →" empties
+     the hero. The keycap is a template site.js clones.
      {%- endcomment -%}
   <section class="results" id="results" aria-labelledby="results-label" hidden>
     <h2 class="teaser-label" id="results-label"></h2>
     <ul class="food-list" id="found"></ul>
-    <div class="one-result" id="one-result" hidden><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span> <a class="arrow-link one-more">{% include arrow-words.html text="" %}</a>{% include card-hint.html %}<span class="one-dial" aria-hidden="true"></span></div>
-    <p class="also-line" id="also-line" hidden></p>
     <div class="results-none" id="hook-none" hidden>
-      <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>
+      <p class="none-word">Literally no idea.</p>
+      <p class="none-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</p>
       <div class="food-group" id="suggest" hidden>
         <h3 class="group-label">Did you mean</h3>
         <ul class="food-list" id="suggest-list"></ul>
@@ -88,6 +84,7 @@ site.js adds the varieties from foods.json), the names it completes to
     </div>
     <p class="onwards"><a class="arrow-link" id="ask-again" href="{{ '/' | relative_url }}#search">{% include arrow-words.html text="Ask about something else" %}</a></p>
   </section>
+  <template id="key-hint">{% include key-hint.html %}</template>
   <p class="visually-hidden" id="results-status" aria-live="polite"></p>
 </section>
 

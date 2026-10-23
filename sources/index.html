@@ -31,7 +31,7 @@ Google's own subscribe link, since Google does not open webcal://.
 <p>Dates are said in words rather than days because the data is weekly or monthly, whereas the weather does its own thing.</p>
 
 <h2>Cool, give me allll the numbers</h2>
-<p><a href="{{ '/foods.json' | relative_url }}">Here is all my food data as JSON</a>. It uses a 52-week year where week 1 starts on 1 January, and the last day or two of December become honorary week 52. My compilation of source dates is <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: use it however you like, just say where it came from. The sources have their own terms: Defra's prices and the legislation are public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>, and the quotations on the food pages remain their authors' and are not mine to license.</p>
+<p><a href="{{ '/foods.json' | relative_url }}">Here is all my food data as JSON</a>. It uses a 52-week year where week 1 starts on 1 January, and the last day or two of December become honorary week 52. Each food has a file of its own too, at <code>/foods/&lt;slug&gt;.json</code> (<a href="{{ '/foods/rhubarb.json' | relative_url }}">rhubarb's</a>, say): the same data, plus an <code>asOf</code> block with the day the site was last built, its week, the food's verdict and date line that day, its season in months, and a line per ring. A food that never has a season reads NEVER with its own line. My compilation of source dates is <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: use it however you like, just say where it came from. The sources have their own terms: Defra's prices and the legislation are public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>, and the quotations on the food pages remain their authors' and are not mine to license.</p>
 
 <h2 id="calendar-feed">Calendar feeds</h2>
 <p>You can subscribe to food season starts (rounded to the week) in your calendar app! How very exciting! <a href="{{ every }}">Apple</a>, <a href="https://calendar.google.com/calendar/r?cid={{ every | url_encode }}">Google</a>, <a href="{{ '/season-starts.ics' | relative_url }}">.ics file</a>.</p>
@@ -41,93 +41,21 @@ Google's own subscribe link, since Google does not open webcal://.
 <p>Spotted something wrong? I'd be grateful if you could <a href="{{ issues }}">open a GitHub issue</a>.</p>
 
 <h2>Sources</h2>
-
-<h3>Fruit and veg</h3>
+{%- comment -%} Every source in _data/sources.yml with a kind, under
+   its kind's heading in the order its rank gives, so the page cannot
+   drift from the register the food pages cite. A note in brackets is
+   the entry's own. {%- endcomment -%}
+{%- assign kinds = "veg|Fruit and veg,herbs|Herbs and tea,foraging|Mushrooms and foraging,fish|Fish and shellfish,fish_sustainability|Fish sustainability,meat|Meat and game,meat_sustainability|Meat sustainability" | split: "," -%}
+{%- for entry in kinds -%}
+{%- assign parts = entry | split: "|" -%}
+{%- assign in_kind = site.data.sources | where: "kind", parts[0] | sort: "rank" -%}
+<h3>{{ parts[1] }}</h3>
 <ul class="source-list">
-  <li><a href="https://newcoventgardenmarket.com/wp-content/uploads/2022/02/British-seasonal-fruit-veg-calendar-new-covent-garden-market-2.pdf">New Covent Garden Market: British seasonal fruit and veg calendar</a></li>
-  <li><a href="https://www.gov.uk/government/statistical-data-sets/wholesale-fruit-and-vegetable-prices-weekly-average">Defra: Wholesale fruit and vegetable prices</a></li>
-  <li><a href="https://rhs.org.uk/vegetables/calabrese/grow-your-own">RHS: Calabrese, grow your own</a></li>
-  <li><a href="https://www.rhs.org.uk/advice/pdfs/crop-planner.pdf">RHS: Crop planner</a></li>
-  <li><a href="https://www.gardenorganic.org.uk/expert-advice/how-to-grow/growing-guides/vegetables-herbs-guides/how-to-grow-calabrese">Garden Organic: How to grow calabrese</a></li>
-  <li><a href="https://www.britishapplesandpears.co.uk/apple-varieties/">British Apples &amp; Pears: Apple varieties</a></li>
-  <li><a href="https://courses.charlesdowding.co.uk/product/growing-guide-12-chicory-radicchio/">Charles Dowding: Chicory and radicchio</a></li>
-  <li><a href="https://www.rocketgardens.co.uk/harvesting-purple-sprouting-broccoli/">Rocket Gardens: Harvesting purple sprouting broccoli</a></li>
-  <li><a href="https://farming.co.uk/news/early-start-leads-to-early-close-for-uk-asparagus-crop">Farming UK: The British asparagus season</a></li>
-  <li><a href="https://www.bbcgoodfood.com/howto/guide/seasonal-calendar">BBC Good Food: Seasonal calendar</a> (salsify, cavolo nero, mangetout, courgette flowers, loganberries and tayberries)</li>
-  <li><a href="https://www.greatbritishchefs.com/how-to-cook/how-to-cook-cavolo-nero">Great British Chefs: How to cook cavolo nero</a></li>
-  <li><a href="https://www.rhs.org.uk/plants/139298/brassica-oleracea-capitata-group-tundra/details">RHS: Savoy cabbage 'Tundra'</a></li>
-  <li><a href="https://www.rhs.org.uk/vegetables/garlic/grow-your-own">RHS: Garlic, grow your own</a></li>
-  <li><a href="https://www.fruitnet.com/fresh-produce-journal/uk-iceberg-supplies-tighten/152139.article">Fresh Produce Journal: UK iceberg supplies tighten</a></li>
-  <li><a href="https://www.ashridgetrees.co.uk/blogs/fruit/how-grow-brown-turkey-fig-trees/">Ashridge Nurseries: Growing figs</a></li>
-  <li><a href="https://www.rhs.org.uk/fruit/figs/grow-your-own">RHS: Figs, grow your own</a></li>
-  <li><a href="https://www.foodingredientsfirst.com/news/sainsburys-keeps-it-british-with-essex-grown-figs.html">Food Ingredients First: Sainsbury's Essex-grown figs (2013)</a></li>
-  <li><a href="https://www.rhs.org.uk/fruit/grapes/grow-your-own">RHS: Grapes, grow your own</a></li>
-  <li><a href="https://www.freshplaza.com/north-america/article/2150006/british-grapes-on-shelves-after-3-years/">FreshPlaza: British grapes on shelves (2015)</a></li>
-  <li><a href="https://www.thestaffcanteen.com/Editorials-and-Advertorials/the-british-sea-kale-season-is-now-upon-us-advertorial-by-westlands">The Staff Canteen: The British sea kale season (Westlands, 2017)</a></li>
+{%- for s in in_kind %}
+  <li><a href="{{ s.url }}">{{ s.name | escape }}</a>{% if s.note %} ({{ s.note }}){% endif %}</li>
+{%- endfor %}
 </ul>
-
-<h3>Herbs and tea</h3>
-<ul class="source-list">
-  <li><a href="https://tregothnan.co.uk/pages/frequently-asked-questions">Tregothnan: Frequently asked questions</a></li>
-</ul>
-
-<h3>Mushrooms and foraging</h3>
-<ul class="source-list">
-  <li><a href="https://www.first-nature.com/fungi/">First Nature: Fungi</a></li>
-  <li><a href="https://substack.com/@forestheart">Forestheart</a></li>
-  <li><a href="https://gallowaywildfoods.com/sea-kale-identification-edibility-and-distribution/">Galloway Wild Foods: Sea kale</a></li>
-  <li><a href="https://en.wikipedia.org/wiki/Crambe_maritima">Wikipedia: Crambe maritima</a></li>
-  <li><a href="https://www.legislation.gov.uk/ukpga/1981/69/section/13">Wildlife and Countryside Act 1981, section 13</a></li>
-</ul>
-
-<h3>Fish and shellfish</h3>
-<ul class="source-list">
-  <li><a href="https://flyingfishseafoods.co.uk/seasonality/">Flying Fish Seafoods: Seasonality</a></li>
-  <li><a href="https://www.brighton-fish-sales.co.uk/">Brighton &amp; Newhaven Fish Sales</a></li>
-  <li><a href="https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/">Northumberland Seafood: Seasonality</a></li>
-  <li><a href="https://www.seafish.org/document/?id=33802">Seafish: Seafood guide</a></li>
-  <li><a href="https://www.mjseafood.com/the-fish-book/39/anchovies-and-sprats">M&amp;J Seafood: Anchovies and sprats</a></li>
-  <li><a href="https://msc.org/uk/what-we-are-doing/uk-irish-fisheries/cornish-sardine">MSC: Cornish sardine fishery</a></li>
-  <li><a href="https://legislation.gov.uk/ukpga/1967/83/section/16/data.html">Sea Fisheries (Shellfish) Act 1967, section 16</a></li>
-  <li><a href="https://naturalresourceswales.gov.uk/guidance-and-advice/business-sectors/fisheries/buying-and-selling-salmon-and-sea-trout-in-wales-staying-within-the-law/?lang=en">Natural Resources Wales: Buying and selling salmon and sea trout</a></li>
-  <li><a href="https://www.legislation.gov.uk/ssi/2002/418/made">Conservation of Salmon (Prohibition of Sale) (Scotland) Regulations 2002</a></li>
-  <li><a href="https://www.devonandsevernifca.gov.uk/wp-content/uploads/2025/01/DS-IFCA-Response-to-Consultation-on-King-Scallop-Closure-2025.pdf">Devon &amp; Severn IFCA: King scallop closure</a></li>
-  <li><a href="https://defrafmp.blog.gov.uk/2025/12/11/lobster-size-rules-are-changing-heres-what-you-need-to-know">Defra: Lobster size rules are changing</a></li>
-</ul>
-
-<h3>Fish sustainability</h3>
-<ul class="source-list">
-  <li><a href="https://www.mcsuk.org/goodfishguide/">Marine Conservation Society: Good Fish Guide</a></li>
-  <li><a href="https://www.mcsuk.org/what-we-do/sustainable-seafood/the-good-fish-guide/how-our-good-fish-guide-ratings-work/">Marine Conservation Society: How our ratings work</a></li>
-  <li><a href="https://www.mcsuk.org/goodfishguide/species/sprat/wild/202/">Marine Conservation Society: Good Fish Guide, sprat (English Channel)</a></li>
-</ul>
-
-<h3>Meat and game</h3>
-<ul class="source-list">
-  <li><a href="https://basc.org.uk/shooting-seasons/">BASC: Shooting seasons</a></li>
-  <li><a href="https://www.nature.scot/professional-advice/social-and-economic-benefits-nature/food-and-drink/game">NatureScot: Game</a></li>
-  <li><a href="https://www.gov.uk/government/news/stronger-protections-to-help-protect-threatened-wild-birds">GOV.UK: Stronger protections for threatened wild birds</a></li>
-  <li><a href="https://web.archive.org/web/20250323181601/https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change">AHDB: Patterns in sheep slaughter</a> (an archived copy, since AHDB has taken the page down)</li>
-  <li><a href="https://ahdb.org.uk/news/high-prices-encourage-early-store-lamb-sales-lamb-market-update">AHDB: Lamb market update, August 2026</a></li>
-  <li><a href="https://www.agriland.co.uk/farming-news/nsa-encourages-shoppers-to-enjoy-british-lamb-this-easter/">National Sheep Association, via Agriland</a></li>
-  <li><a href="https://businesswales.gov.wales/foodanddrink/news-and-events/news/pgi-welsh-lamb-bonanza-londons-borough-market-mark-start-lamb-day">Hybu Cig Cymru, via Business Wales</a></li>
-  <li><a href="https://www.lishmansbutchers.co.uk/david-lishmans-guide-to-lamb/">Lishman's: Guide to lamb</a></li>
-  <li><a href="https://www.farmcontractormagazine.com/livestock/sheep/salt-marsh-lamb-the-welsh-delicacy-coming-into-season-this-mayjune.html">Farm Contractor: Salt marsh lamb</a></li>
-  <li><a href="https://www.fwi.co.uk/livestock/poultry/michaelmas-geese-on-the-move">Farmers Weekly: Michaelmas geese</a></li>
-  <li><a href="https://www.kiwa.com/en/services/certification/traditional-farmfresh-turkey-association/">Traditional Farmfresh Turkey Association</a></li>
-  <li><a href="https://www.legislation.gov.uk/ukpga/Vict/55-56/8">Hares Preservation Act 1892</a></li>
-</ul>
-
-<h3>Meat sustainability</h3>
-<ul class="source-list">
-  <li><a href="https://ourworldindata.org/grapher/ghg-per-kg-poore">Poore &amp; Nemecek (2018), via Our World in Data</a></li>
-  <li><a href="https://www.eating-better.org/site/assets/files/1799/sourcing_better_framework_final.pdf">Eating Better: Sourcing Better framework</a></li>
-  <li><a href="https://pastureforlife.org/resources/standards-51">Pasture for Life: Certification standards</a></li>
-  <li><a href="https://www.rspcaassured.org.uk/">RSPCA Assured</a></li>
-  <li><a href="https://www.gov.uk/government/news/national-quality-assurance-scheme-for-wild-venison-launches">GOV.UK: Wild venison quality assurance scheme</a></li>
-  <li><a href="https://web.archive.org/web/20240530220237/https://www.food.gov.uk/safety-hygiene/lead-shot-game">Food Standards Agency: Game shot with lead</a> (an archived copy, since the FSA's page has moved)</li>
-</ul>
-
+{% endfor %}
 {%- comment -%} The footnote to "common knowledge", at the foot of the
    page, with the way back to where the reader was. {%- endcomment -%}
 <section class="footnote" id="common-knowledge">

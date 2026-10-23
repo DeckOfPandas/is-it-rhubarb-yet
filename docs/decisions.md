@@ -12,6 +12,128 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
   `_data/quotes.yml`. Its new authors include three who died in 1956
   (Walter de la Mare, A. A. Milne, H. L. Mencken), whose work is in UK
   copyright until 1 January 2027. Helen is content to quote them now.
+- **No more cards: search answers with rows, the wheel opens a chip,
+  the calendar goes to the page.** The card (`.one-result`, home's
+  single answer and the charts' popover) was a second design language
+  beside the page and said less than it; a list, even of one, already
+  answers and Enter already opens it; and above all, people who stopped
+  at a card never saw the page, the quotation, the dial and the sources,
+  which are the point of the site. A food is now a row, a chip or a
+  page. Home's every answer is rows under TELL ME EVERYTHING ABOUT or N
+  MATCHES, the Enter keycap on the row Enter would open (not under DID
+  YOU MEAN until one is lit, so a typo and Enter open nothing), that
+  row's page prerendered; no match is bare text, LITERALLY NO IDEA. in
+  ink, no panel. The date line leaves home: the page says when, and
+  Helen expects more pages to be opened for it. A calendar row's click
+  is its own link. The wheel's chip is the page's question lifted onto a
+  small panel as the one link, the food's name in its colour (the page's
+  question stays muted), no verdict, date line, time or dial, no ×. A
+  never row's tag stays the muted ink. The standalone dials,
+  `/wheel/<slug>.svg`, stay as an endpoint with no reader on the site.
+  Agreed with Helen in another chat on 23 October; the spec is the
+  record of the reasons.
+- **No ring name with a comma or a bracket in it.** In caps on the ring
+  list, "NATIVE, NATIONAL" read as two things. The oysters' national
+  native ring restated the R months from the same Seafish sentence the
+  fish's National rings came from, and is gone like them; "Rock,
+  Porthilly" is "Porthilly rock". Lamb's provenance rings are "Welsh"
+  and "Salt marsh", and their notes say PGI and PDO.
+- **Notes that argued with their weeks.** Walnuts' wild ring: green
+  walnuts for pickling from June, the mature nuts from early October.
+  The "poor in January and February" lines on Dover sole, lemon sole
+  and brill, against two coasts' all-year rings, are gone. Rosehips'
+  "best after the first frost" stands: frost improves them, it does not
+  start them.
+- **No whole-food verdict lasts one week.** Broccoli's purple sprouting
+  ring is just about from December, when the early varieties crop, so
+  the food goes from on the way out to on the way in instead of a NO
+  for week 49 alone; cavolo nero is cut into mid-April, then just about
+  until the new crop in June. The checker follows a just-about run
+  across the year's end when deciding whether it touches a season.
+- **The olive-yellow cluster is separated.** Nine foods sat within 2
+  OKLab units of another food's colour. Each moved by one to four
+  units, in lightness or a touch of hue and never out of its family;
+  Iceberg, Little gem and Williams moved too, so that lettuce's and
+  pears' rings stay 12 apart. No two foods are within 2 units now. The
+  count of pairs within 4 (447) is the crowding of a palette of two
+  hundred colours and stays a count.
+- **"All year, from the North East and South East."** A food in season
+  all year from some coasts and not others names them on its top line,
+  so cod no longer reads "All year." while its Cornish ring and its
+  counter line say otherwise. Only coasts and places (`ring: region`)
+  are named: rock oysters make oysters' "All year" the food's own.
+  Helen: "that's fine, isn't it".
+- **Today is the UK's day.** The seasons are British, so `ukToday`
+  reads the date in Europe/London for the site, the bake and the cards;
+  a visitor in Sydney at breakfast on Monday is answered for London's
+  Sunday. Without Intl's time zones it is the clock's own day.
+- **The hero is a combobox and its highlight is heard.** Up and Down
+  moved a highlight no screen reader heard. The links it reaches are
+  options with ids, the lit one is named in `aria-activedescendant`, and
+  the status line says its words as the highlight moves.
+- **The magnifier is home's alone.** On every other page the wordmark's
+  RHUBARB is the search and focuses the same input 40px away. The
+  forwarding pages carry the viewport meta and the stylesheet.
+- **The magnifier's maths is a module** (`assets/magnifier.js`) with
+  tests under Node, and `charts.js` names its calendar, dial, label,
+  handle and part rather than c, d, t and h; `reduceMotion` is the one
+  name for the reduced-motion query in both scripts. Home's hero is
+  three functions: what can be found, the results, the hero's rules.
+- **One JSON file per food** (#43): `/foods/<slug>.json`, the data plus
+  an `asOf` block with the bake's verdict, line, season and ring lines,
+  written after Jekyll by `tools/food-json.js`, never recomputed.
+- **Screenshot regression by perceptual hash.** `tests/build/shots.test.js`
+  compares eight pages at two widths with `tests/build/shot-hashes.json`
+  (dHash, 6 bits of 64 allowed), the clock frozen and the random picks
+  seeded, on every deploy; no raster file is committed. A deliberate
+  change rewrites the baseline with `tools/dev/shot-hash.js --write`.
+- **`sources` and `notes` everywhere; no singular `source` or `note`.**
+  Forty-two foods carried the older `source: key` and fifty-five a
+  `note` beside their `notes`; the page printed both the same way. The
+  singular keys are folded in (the note first among the notes) and the
+  checker refuses them. A ring's `sources: []` (beef, pork, chicken,
+  duck) is gone: a ring with none inherits the food's. A ring's keys
+  must all be in the food's list.
+- **A note cites its authority in the food's `sources`.** Lobster's size
+  rule cites Defra's lobster page, hare's note the Hares Preservation
+  Act, wild salmon Country Life and the Welsh and Scottish rules,
+  scallops the IFCA closure, wild duck and wood pigeon Defra's quarry
+  consultation, and every counter line the Good Fish Guide. Thirteen
+  register keys were cited by nothing; now six are, and the six
+  sustainability sources Helen lists as still to come are marked
+  `pending`, as are the two the page links from prose alone.
+- **The Source data page's lists are generated from the register.**
+  Every entry has a `kind` and a `rank`; the page loops over the kinds
+  under Helen's prose, which is untouched. The lists came out identical
+  to the hand-written ones, plus Country Life, which the register had
+  and the page had lost.
+- **The checker warns on more** (C19): a source nothing cites, a
+  just-about run touching no season or nine weeks or longer, a note
+  opening with a working word, two foods' colours within 2 OKLab units
+  (and counts the pairs within 4: 434), and a whole-food verdict
+  lasting one week, from `tools/sweep-verdicts.js` under Node. It
+  refuses a name used twice once folded and a food whose every ring is
+  `lead: false`. Three colours moved by a unit or so to clear the
+  2-unit line (wild sea kale, spruce tips, hedgehog fungus). The
+  olive-yellow cluster (lettuce, round lettuce, courgette flowers,
+  dandelion, Williams pears, chervil, quince, dill, lemon sole) cannot
+  be separated without visible repainting, so those seven warnings
+  stand for Helen.
+- **The no-JS search form lands on the Everything list** (`#all-foods`)
+  rather than on a home that ignores the typed word (D28).
+- **One search ranking**, `assets/search.js`, for home, the header and
+  the not-found page. The not-found page had its own older scoring
+  (prefix and inside-word points), home and the header each a copy of
+  the tiers with the lead rule pasted twice. The not-found page now
+  ranks as home does and falls back to the three-letter "did you mean".
+  `tests/site/search.test.js` pins the examples ("ape" nothing, "cox"
+  Apples (Cox), "crab" the two crabs then crab apples) and that the two
+  index shapes rank every query alike.
+- **The calendar feeds are folded after the build** (`tools/fold-ics.js`):
+  CRLF ends and 75-octet lines as RFC 5545 asks, which Jekyll cannot do
+  in Liquid. `tests/build/` checks the built endpoints and feeds, and
+  that the charts draw in Chromium at three widths with no console
+  error; the deploy runs both after the cards.
 - **The ring list names no source**, not per row and not as "Dates
   from" under the list. A visitor who wants the sources opens "Show me
   the sources". This replaces "Shared sources once" below.

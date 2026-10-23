@@ -130,9 +130,9 @@
   .wheel .store { stroke: var(--c); stroke-opacity: 0.3; }
   .wheel .blend { stroke: var(--b); }
   .chart .cal a.row.is-hot .row-hit { fill: var(--band); }
-  .results .food-row a.is-active, .also-line .food-link.is-active { background: var(--band); }
-  .one-hint kbd { border-color: var(--muted); }
-  .tt-jump, .tt-pop { box-shadow: 0 4px 16px rgba(22, 17, 14, 0.3); }
+  .results .food-row a.is-active { background: var(--band); }
+  .key-hint kbd { border-color: var(--muted); }
+  .tt-jump, .tt-chip { box-shadow: 0 4px 16px rgba(22, 17, 14, 0.3); }
 }
 
 /* --- Base ----------------------------------------------------------------- */
@@ -363,10 +363,8 @@ main:has(#kind-meat:checked) .ordered > .by-meat { display: block; }
 .group-label .count { font-weight: 700; margin-left: 0.25em; }
 .empty { color: var(--muted); font-style: italic; }
 
-/* The date line, bold and tabular, the second thing on a verdict page
-   (lead) and on a card, the search's or a chart's popover (body). */
+/* The date line, bold and tabular, the second thing on a verdict page. */
 .date-line { font: 700 var(--fs-lead)/1.3 var(--text); margin: 0; }
-.one-line { font: 700 var(--fs-body)/1.4 var(--text); margin: 0; }
 /* A food's ring list, the dial's legend: a row per ring, outer ring
    first, each a button (a tap pins its ring's light). A swatch in the
    ring's colour, then on one wrapping line its name in the caps style in
@@ -466,7 +464,7 @@ html:not(.js) .hook-input:focus-visible { border-bottom-color: var(--ink); }
    ways on), nothing sticks, and the calendar, drawn at its own size, is
    scaled to fit a portrait sheet. */
 @media print {
-  .site-header, .switch, .tt-controls, .tt-rail, .tt-handle, .tt-jump, .footer-github, .hearts, .card-hint, .onwards, .this-week-more, .also-more { display: none !important; }
+  .site-header, .switch, .tt-controls, .tt-rail, .tt-handle, .tt-jump, .footer-github, .hearts, .key-hint, .onwards, .this-week-more, .also-more { display: none !important; }
   .chart-head, .cal-corner, .cal-labels { position: static; }
   .chart-body { overflow: visible; }
   .cal { zoom: 0.72; }
@@ -514,83 +512,27 @@ html:not(.js) .hook-input:focus-visible { border-bottom-color: var(--ink); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .food-link { --food-ink: var(--food-shed, var(--food)); } }
 :root[data-theme="dark"] .food-link { --food-ink: var(--food-shed, var(--food)); }
 .food-link:is(:hover, :focus-visible) { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
-/* What is typed, answered where the this-week blocks were. Two or more
-   matches: the count in their label's style and place, then the rows in
-   one column, in rank order; the one Up and Down reach sits on a wash
-   of its food's colour. One match: the food's card, in the label's
-   place. Then a quiet "Also:" line of near matches, each in its own
-   colour. The card and the list share --answer-w. */
+/* What is typed, answered where the this-week blocks were: the heading
+   in the teaser label's style and place (TELL ME EVERYTHING ABOUT for
+   one match, N MATCHES for more), then the rows in one column, in rank
+   order; the one Up and Down reach sits on a wash of its food's colour.
+   The list keeps --answer-w. With no match, LITERALLY NO IDEA. in Anton
+   at title size in ink (the hero above asks the question), the line
+   under it at body, and the nearest foods under DID YOU MEAN. */
 .results { margin: var(--sp-4) 0 0; }
 .results .food-list { columns: auto; max-width: var(--answer-w); }
-.also-line { margin: var(--sp-2) 0 0; color: var(--muted); max-width: var(--answer-w); }
-.also-line .food-link.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); border-radius: 3px; }
 .results .food-row a { margin: 0 -0.4rem; padding: 0.1rem 0.4rem; border-radius: 4px; }
 .results .food-row a.is-active { background: color-mix(in oklab, var(--food) 16%, var(--bg)); }
-/* A food's card: the food page in small, the same on home (a single
-   match) and in the calendar's and the wheel's popover. A panel one step
-   lighter than the page, its left edge in the food's colour
-   (--food-bar-width): the page's own question, verdict and date line, at
-   card size (the question at label size, the verdict at title size, the
-   date line at body, bold), then an action, "Tell me everything about apples
-   →", to the food's page; the dial alone on the right, 110px. A plain
-   card (.is-plain: a never-food's, or nothing found) is its question,
-   verdict and line only, and no link, padded as any card; nothing found
-   is in ink. On home the hero asks the question, so the card does not.
-   Below about 420px of card width the dial is 72px at the top right,
-   beside the question and verdict, and the line and action run the
-   full width under them. */
-.one-result {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text dial" "more dial" "hint dial";
-  align-items: center; gap: var(--sp-2) var(--sp-3); max-width: var(--answer-w);
-  padding: var(--sp-3); background: var(--panel); border-radius: 12px; border-left: var(--food-bar-width) solid var(--food);
-  color: var(--ink);
-}
-.one-result.is-unknown { --food: var(--ink); }
-.one-text { grid-area: text; display: block; min-width: 0; }
-.one-result .one-ask { display: block; margin: 0; font-size: var(--fs-label); letter-spacing: var(--track-small); }
-.one-result .one-word { display: block; margin-top: var(--sp-1); font-size: var(--fs-title); line-height: 1; padding-top: 0; white-space: normal; }
-.one-result .one-line { display: block; margin: var(--sp-1) 0 0; }
-.one-more { grid-area: more; align-self: start; }
-/* Under the action, how to take it: the Enter key as a keycap holding the
-   return mark (_includes/card-hint.html), small and muted. */
-.one-hint { grid-area: hint; align-self: start; margin-top: calc(-1 * var(--sp-1)); color: var(--muted); font: 400 var(--fs-small)/1.3 var(--text); }
-.one-hint kbd { display: inline-block; padding: 0.1em 0.4em; border: 1px solid color-mix(in oklab, var(--muted) 60%, var(--bg)); border-bottom-width: 2px; border-radius: 4px; line-height: 1; }
-.one-hint .enter-mark { display: block; width: 1.05em; height: 0.74em; overflow: visible; }
-.one-more.is-active .arrow-text { text-decoration-thickness: 2px; }
-.one-dial { grid-area: dial; width: 110px; height: 110px; }
-.one-dial .wheel { display: block; width: 100%; margin: 0; }
-.one-dial .month, .one-dial .today-label { display: none; }
-.wheel svg.mono .blend { stroke: var(--c); }
-/* A plain card keeps its action ("Tell me why →" on a never-food's) but
-   not the keycap or the dial; nothing found has no action at all. */
-.one-result.is-plain { grid-template-columns: minmax(0, 1fr); grid-template-areas: "text" "more"; }
-.one-result.is-plain .one-hint, .one-result.is-plain .one-dial, .one-result.is-unknown .one-more { display: none; }
-.one-result.is-unknown { grid-template-areas: "text"; }
-/* On home the hero asks the question, so the answer leaves it out, unless
-   the hero's word is not the food's name (an alias, a later word, a
-   variety): then the card asks it in the food's own name (.asks). */
-.results .one-ask { display: none; }
-.results .one-result.asks .one-ask { display: block; }
-.results .one-result:not(.asks) .one-word { margin-top: 0; }
-@media (max-width: 37.49rem) {
-  .one-result { padding: var(--sp-2); gap: var(--sp-2); }
-}
-@media (max-width: 28.25rem) {
-  .one-result:not(.is-plain) {
-    grid-template-columns: minmax(0, 1fr) 72px; grid-template-areas: "when when" "ask dial" "word dial" "line line" "more more" "hint hint";
-    align-items: start; row-gap: 0;
-  }
-  .one-result:not(.is-plain) .one-text { display: contents; }
-  .one-result:not(.is-plain) .tt-pop-when { grid-area: when; }
-  .one-result:not(.is-plain) .one-ask { grid-area: ask; }
-  .one-result:not(.is-plain) .one-word { grid-area: word; }
-  .one-result:not(.is-plain) .one-line { grid-area: line; margin-top: var(--sp-2); }
-  .one-result:not(.is-plain) .one-more { margin-top: var(--sp-2); }
-  .one-result:not(.is-plain) .one-hint { margin-top: var(--sp-1); }
-  .one-result:not(.is-plain) .one-dial { width: 72px; height: 72px; }
-  .tt-pop .one-dial { margin-top: var(--sp-4); }
-  .results .one-result:not(.is-plain):not(.asks) { grid-template-areas: "when when" "word dial" "line line" "more more" "hint hint"; }
-}
+.none-word { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); color: var(--ink); margin: 0; text-wrap: balance; }
+@media (min-width: 42rem) { .none-word { letter-spacing: var(--track-large); } }
+.none-line { margin: var(--sp-1) 0 0; max-width: var(--answer-w); }
+/* On the row Enter would open, how to take it: the Enter key as a keycap
+   holding the return mark (_includes/key-hint.html), small and muted,
+   after the tag. Not on a touch screen, whose keyboard has its own Go. */
+.key-hint { flex: none; margin-left: var(--sp-1); color: var(--muted); font: 400 var(--fs-small)/1.3 var(--text); align-self: center; }
+.key-hint kbd { display: inline-block; padding: 0.1em 0.4em; border: 1px solid color-mix(in oklab, var(--muted) 60%, var(--bg)); border-bottom-width: 2px; border-radius: 4px; line-height: 1; }
+.key-hint .enter-mark { display: block; width: 1.05em; height: 0.74em; overflow: visible; }
+@media (hover: none) and (pointer: coarse) { .key-hint { display: none; } }
 @media (max-width: 37.49rem) { .results { min-height: 60vh; } }
 .results-none .food-group { margin-top: var(--sp-4); }
 .list-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--sp-1) var(--sp-2); margin-top: var(--sp-4); border-top: 1px solid var(--rule); padding-top: var(--sp-2); }
@@ -603,13 +545,12 @@ article.food { padding-top: var(--sp-1); }
 /* The question is set like a page title, at title size, in the muted
    ink, the full width, its lines balanced; the verdict under it is the
    real h1, fitted to the line by site.js and kept short enough that the
-   date line is on the first screen. The question, the verdict and the
-   date line are shared with a food's card on home, which sets them
-   smaller. */
-.ask, .one-ask { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); color: var(--muted); margin: var(--sp-3) 0 0; max-width: none; text-wrap: balance; }
+   date line is on the first screen. The wheel's chip lifts the question
+   onto a small panel (.tt-chip). */
+.ask { font: 400 var(--fs-title)/1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); color: var(--muted); margin: var(--sp-3) 0 0; max-width: none; text-wrap: balance; }
 @media (min-width: 42rem) { .ask { letter-spacing: var(--track-large); } }
 .verdict { margin: 0.1em 0 0 -0.03em; line-height: 1; text-wrap: nowrap; }
-.verdict-word, .one-word {
+.verdict-word {
   display: inline-block; font: 400 var(--fs-display)/0.86 var(--display);
   letter-spacing: var(--track-large); text-transform: uppercase; color: var(--food); white-space: nowrap;
   padding-top: 0.08em;
@@ -629,7 +570,7 @@ h1.verdict { container-type: inline-size; }
 article.never { --food: var(--never); }
 .verdict + .date-line { margin-top: var(--sp-3); }
 .verdict + .date-line + .quote { margin-top: var(--sp-4); }
-.not-found .verdict-word, .is-unknown .one-word { color: var(--ink); }
+.not-found .verdict-word { color: var(--ink); }
 /* Under the verdict, one column at every width, every block 40px from
    the next: the date line, the quotation, the breakdown (the dial on the
    same left edge as the words, its ring list under it), the counter
@@ -638,7 +579,7 @@ article.never { --food: var(--never); }
 .food-body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-4); margin-top: var(--sp-3); }
 .food-body > * { margin: 0; max-width: 65ch; }
 .breakdown .wheel { width: min(22rem, 100%); margin: 0; }
-.date-line, .one-line { text-wrap: pretty; }
+.date-line { text-wrap: pretty; }
 /* A quotation and every note stand behind a bar in the food's colour. */
 .quote { margin: 0; max-width: 34rem; padding-left: var(--sp-2); border-left: 3px solid var(--food); font: italic 400 var(--fs-lead)/1.3 var(--quote); }
 .quote p { margin: 0; max-width: none; }
@@ -939,23 +880,26 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .dial svg.is-lit a.label:not(.is-hot), .dial svg.is-lit .season:not(.is-hot) { opacity: 0.25; }
 .dial a.label.is-hot text { font-weight: 700; }
 .dial a.label.is-pinned .dot { stroke: var(--ink); stroke-width: 2; }
-/* The food popover is exactly the card, the same width, type and
-   layout, with two things more: when it is not for today, the time it
-   is for in caps over the question, and a close button in its top
-   right. Beside the food on a wide screen; docked at the foot of the
-   screen on a narrow one. */
-.tt-pop {
-  position: absolute; z-index: 20; width: min(var(--answer-w), calc(100vw - 2 * var(--sp-2)));
+/* The wheel's chip: the food page's question lifted onto a small panel,
+   the one link to the page. A panel --panel, 12px radius, the food's
+   colour down its left edge (--food-bar-width) and a shadow; inside, IS
+   IT CHERRIES YET? in Anton at label size, muted, the food's name in
+   the food's text colour for the theme (as a row's tag is), underlined
+   in the food's colour on hover or focus. No close button: Escape or a
+   click outside closes it. Beside the dot on a wide screen; docked at
+   the foot of the screen on a narrow one. */
+.tt-chip {
+  position: absolute; z-index: 20; max-width: min(var(--answer-w), calc(100vw - 2 * var(--sp-2)));
+  background: var(--panel); border-radius: 12px; border-left: var(--food-bar-width) solid var(--food);
   box-shadow: 0 8px 24px color-mix(in oklab, var(--shed) 30%, transparent);
 }
-.tt-pop.is-docked { position: fixed; left: var(--sp-2); right: var(--sp-2); bottom: var(--sp-2); width: auto; }
-.tt-pop-when { display: block; margin: 0 0 var(--sp-1); font: 700 var(--fs-caps)/1.3 var(--text); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--muted); }
-.tt-pop-when:empty { display: none; }
-.tt-close {
-  position: absolute; top: 0; right: 0; width: 44px; height: 44px; padding: 0; border: 0; background: none;
-  color: var(--muted); font: 400 1.5rem/1 var(--text); cursor: pointer; border-radius: 0 12px 0 8px;
-}
-.tt-close:is(:hover, :focus-visible) { color: var(--ink); }
+.tt-chip.is-docked { position: fixed; left: var(--sp-2); right: var(--sp-2); bottom: var(--sp-2); max-width: none; }
+.tt-chip-link { display: block; padding: var(--sp-2) var(--sp-3); text-decoration: none; color: var(--muted); border-radius: 0 12px 12px 0; }
+.chip-ask { display: block; font: 400 var(--fs-label)/1.1 var(--display); text-transform: uppercase; letter-spacing: var(--track-small); text-wrap: balance; }
+.chip-ask .ask-name { --food-ink: var(--food-custard, var(--food)); color: var(--food-ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip-ask .ask-name { --food-ink: var(--food-shed, var(--food)); } }
+:root[data-theme="dark"] .chip-ask .ask-name { --food-ink: var(--food-shed, var(--food)); }
+.tt-chip-link:is(:hover, :focus-visible) .ask-name { text-decoration: underline; text-decoration-color: var(--food); text-decoration-thickness: 2px; text-underline-offset: 0.1em; }
 /* The list under the chart opens with Now's own header: a title, "In
    season in mid-January", over the stepper and that third of the
    month's days. */
@@ -975,11 +919,9 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 .ks-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: var(--sp-3) var(--sp-4); }
 .ks-state-name { margin: 0 0 var(--sp-1); font: 400 var(--fs-small)/1.3 var(--text); color: var(--muted); font-style: italic; }
 .ks-state .food-list { columns: auto; }
-.ks-state .one-result { padding: var(--sp-2); grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text go" "sub go"; }
-.ks-state .one-dial { display: none; }
-/* A card at its real width, its dial drawn as a plain ring, which the
-   kitchen sink cannot fetch. */
-.ks-card .one-dial { width: 110px; height: 110px; border-radius: 50%; border: 14px solid color-mix(in oklab, var(--food) 35%, var(--panel)); }
+/* The chip at rest in the flow, where on the wheel it floats. */
+.ks-chip { position: static; display: inline-block; }
+.ks-none { margin-top: var(--sp-3); }
 .ks-nav { margin: 0 0 var(--sp-2); justify-content: flex-start; }
 .ks-footer { padding: var(--sp-2) 0 0; margin: var(--sp-2) 0 0; }
 .ks-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-2) var(--sp-3); margin: var(--sp-2) 0; }
