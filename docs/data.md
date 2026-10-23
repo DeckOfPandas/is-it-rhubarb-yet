@@ -191,6 +191,15 @@ statement):
   on that timeline, so apples are not JUST while Cox ends and Braeburn
   carries on, and cod answers for all its coasts. Each ring is answered
   on its own too, for the ring list and for a variety found by search.
+  A food in all year from some coasts and not others says which: "All
+  year, from the North East and South East", only when every all-year
+  ring is a `ring: region`; rock oysters make oysters' "All year" its
+  own.
+- **Today is the UK's day.** `ukToday` reads the date in Europe/London
+  from the clock, so a visitor east or west of it is answered for the
+  day it is here, and a build at 03:30 UTC in summer for the day it
+  already is; without Intl's time zones it is the clock's own day. The
+  site, the bake and the cards all take today from it.
 - **Verdicts**, in rank order: YES > JUST > YES-ISH > NEARLY > NO. YES-ISH
   is a week of storage or glasshouse alone; fresh beats it and it beats
   NEARLY. The thresholds are constants at the top of the file: NEARLY

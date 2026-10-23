@@ -17,10 +17,11 @@ const { loadYaml } = require("./yaml.js");
 const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "_data");
 
+// The build day is the UK's day, whatever zone the build runs in.
 function today() {
   const at = process.argv.indexOf("--date");
   const given = at >= 0 ? process.argv[at + 1] : null;
-  if (!given) return new Date();
+  if (!given) return V.ukToday();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(given)) throw new Error("--date must be YYYY-MM-DD, not " + given);
   const [y, m, d] = given.split("-").map(Number);
   return new Date(y, m - 1, d, 12);
