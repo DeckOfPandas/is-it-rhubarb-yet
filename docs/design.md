@@ -155,23 +155,24 @@ the wheel's scale. The week arrows are 44px boxes; a ring-list row is
 - **Logo.** IS IT RHUBARB YET? in Anton, RHUBARB pink and underlined in
   pink, the line exactly the word's width, in the header, the hero and
   the cards. It does not change on hover.
-- **Header.** NOW, CALENDAR, WHEEL, ?? (About, `aria-label="About"`) and
-  a magnifier at the top right of every page, home included, in caps,
-  muted, no underline; the current page in ink and underlined in pink, as
-  the others are on hover or focus. Each item is drawn only as big as
-  what it shows, 24px from the next, the magnifier's right edge on the
-  page's; its tap area reaches 44px, the magnifier's into the gutter so
-  it never meets ??'s. The wordmark is on the left of the same row, or on
-  a phone on a row of its own under the nav, so the nav never moves. Home
-  has no wordmark. The header sticks to the top of every page on a solid
-  page-colour background over a 1px rule; `site.js` measures its height
-  into `--header-h` (CSS guesses 45px, 90px on a phone with the wordmark,
-  until then); the row may wrap, so a large default font stacks the nav
-  under the wordmark instead of overprinting it. What sticks below it
-  sits at `--header-h`, and every
-  element with an id has `scroll-margin-top: var(--header-h)`, so a jump
-  stops below the header. The magnifier links to `/#search`; with
-  JavaScript it focuses the wordmark's search, and on home the hero.
+- **Header.** NOW, CALENDAR, WHEEL and ?? (About, `aria-label="About"`)
+  at the top right of every page, in caps, muted, no underline; the
+  current page in ink and underlined in pink, as the others are on hover
+  or focus; on home alone a magnifier after them, since home has no
+  wordmark to type into and the hero may be far up the page. Each item
+  is drawn only as big as what it shows, 24px from the next, the last
+  one's right edge on the page's; its tap area reaches 44px, the
+  magnifier's into the gutter so it never meets ??'s. The wordmark is on
+  the left of the same row, or on a phone on a row of its own under the
+  nav, so the nav never moves. Home has no wordmark. The header sticks
+  to the top of every page on a solid page-colour background over a 1px
+  rule; `site.js` measures its height into `--header-h` (CSS guesses
+  45px, 90px on a phone with the wordmark, until then); the row may
+  wrap, so a large default font stacks the nav under the wordmark
+  instead of overprinting it. What sticks below it sits at
+  `--header-h`, and every element with an id has `scroll-margin-top:
+  var(--header-h)`, so a jump stops below the header. The magnifier
+  links to `/#search`; with JavaScript it focuses the hero.
 - **Header search.** On every page but home the wordmark is the search:
   `#head-input`, named "Search foods", has RHUBARB as its placeholder,
   and a click on RHUBARB puts the caret there. IS IT and YET? are links
@@ -371,8 +372,12 @@ asks.
     issues). Under it up to five foods sharing its first three letters
     under DID YOU MEAN.
   - Up and Down move a highlight in rank order through the answer, its
-    "Also" links or the rows; Enter opens it, or the first. A polite live
-    region says the count. Clearing the input brings everything back.
+    "Also" links or the rows; Enter opens it, or the first. The hero is
+    a combobox over the results (`aria-controls`, `aria-expanded`), the
+    links it moves through are its options, each with an id, and the
+    lit one is named in `aria-activedescendant`. A polite live region
+    says the count, then the lit link's words as the highlight moves.
+    Clearing the input brings everything back.
     Under any answer, "Ask about something else →" empties the hero and
     puts the caret in it.
   - While the input has text, the teasers and the whole Everything
@@ -483,7 +488,7 @@ Titled "??" in Anton `title` (a screen reader hears "About"); Helen's
 copy. It opens "Is it rhubarb yet? Well, is it???", the second sentence a
 prose link to rhubarb's page; the food count links to the calendar; the
 dinner food in "Coolio, I'm off to cook …" is picked at random on every
-visit from what is YES on the visitor's day, the build baking one for no
+visit from what is YES on the UK's day, the build baking one for no
 JavaScript. It ends on the dinner line; the credits are on Source data.
 
 ### Source data
@@ -516,7 +521,9 @@ hidden, since the hero is a form.
   frames, by `?q=`. A new shared component goes on this page too.
 - `/grey-squirrel/`, `/button-mushrooms/` and `/cobnuts/`: a renamed food's old
   address, a page that forwards at once (meta refresh), `noindex`, with
-  the canonical pointing at the new page.
+  the canonical pointing at the new page. It carries the viewport meta
+  and the stylesheet, so the moment it shows is in the site's type at
+  the phone's width.
 
 ### Print
 

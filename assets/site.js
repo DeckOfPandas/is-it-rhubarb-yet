@@ -1,12 +1,12 @@
 // Everything on the site that needs today's date or a typed word happens
 // here, in the visitor's browser, on top of HTML that was baked for the
 // build day. The rules themselves live in assets/verdict.js, loaded first.
-// No dependencies.
+// Today is the UK's day, not the visitor's clock's. No dependencies.
 (function () {
   "use strict";
   var V = window.Verdict;
   var html = document.documentElement;
-  var TODAY = new Date();
+  var TODAY = V.ukToday();
   var WEEK = V.weekOf(TODAY), YEAR = TODAY.getFullYear();
   var BAKED_WEEK = parseInt(html.dataset.bakedWeek, 10);
   var BAKED_YEAR = parseInt(html.dataset.bakedYear, 10);
@@ -944,6 +944,7 @@
     function apply() {
       var q = input.value.trim();
       filter(q);
+      markPicks();
       field.update(lead);
       var url = new URL(location.href);
       if (q) url.searchParams.set("q", input.value); else url.searchParams.delete("q");
@@ -1074,11 +1075,29 @@
     window.addEventListener("pagereveal", function (e) {
       (e.viewTransition ? e.viewTransition.finished : Promise.resolve()).then(function () { nameFor(false); });
     });
+    // The links Up and Down reach are the hero's options: each has an id
+    // and the option role, and the hero (a combobox) names the lit one
+    // in aria-activedescendant and says its words through the status
+    // line, so a screen reader hears the highlight move.
+    function markPicks() {
+      picks.forEach(function (p, i) {
+        p.id = "pick-" + i;
+        p.setAttribute("role", "option");
+        p.setAttribute("aria-selected", "false");
+      });
+      input.setAttribute("aria-expanded", String(!results.hidden));
+    }
     function light(i) {
-      if (active >= 0) picks[active].classList.remove("is-active");
+      if (active >= 0) {
+        picks[active].classList.remove("is-active");
+        picks[active].setAttribute("aria-selected", "false");
+      }
       active = i;
-      if (i < 0) return;
+      if (i < 0) { input.removeAttribute("aria-activedescendant"); return; }
       picks[i].classList.add("is-active");
+      picks[i].setAttribute("aria-selected", "true");
+      input.setAttribute("aria-activedescendant", picks[i].id);
+      status.textContent = picks[i].textContent.replace(/\s+/g, " ").trim();
       picks[i].scrollIntoView({ block: "nearest" });
     }
 
