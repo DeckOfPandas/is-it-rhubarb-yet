@@ -7,6 +7,18 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **Now's words live in the data, once.** Liquid labelled a kind "veg"
+  and `site.js` "Veg" (the CSS uppercased both, so only a screen reader
+  heard it); the six headings and three empty lines were written in
+  `now/index.html`, `site.js` twice, `index.html` and `tools/cards.js`;
+  the month grid was written in four includes and `charts.js`. Now
+  `groups.yml` carries each kind's `kind_name`, `_data/digest.yml` the
+  bands, and `_data/grid.json` the month grid, and every reader takes
+  them from there. A row drawn by `site.js` now carries the food's text
+  colours as the baked row does; `tests/build/parity.test.js` compares
+  every baked row on Now with `site.js`'s own. The year-end wrap is
+  still derived in five includes (D13's larger half) and left for
+  another day.
 - **"All year, from the North East and South East."** A food in season
   all year from some coasts and not others names them on its top line,
   so cod no longer reads "All year." while its Cornish ring and its

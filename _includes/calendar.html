@@ -37,8 +37,8 @@ be unique on a page that carries several charts.
 {%- assign rh = 22 -%}
 {%- assign header = 28 -%}
 {%- assign group_gap = 28 -%}
-{%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
-{%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
+{%- assign month_starts = site.data.grid.month_starts -%}
+{%- assign month_names = site.data.grid.short -%}
 {%- assign today_x = site.data.baked.week | minus: 1 | times: cw | plus: x0 | plus: 7 -%}
 
 {%- comment -%}

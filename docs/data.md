@@ -11,7 +11,18 @@ is `docs/design.md`; the decision log is `docs/decisions.md`.
   in step with `tools/check-foods.py`.
 - `_data/groups.yml` names the culinary families, in display order, each
   with its `kind` (veg, fruit, wild, herbs, fish or meat), which the
-  wheel page and Now's groups are drawn by.
+  wheel page and Now's groups are drawn by, and the kind's `kind_name`
+  ("Veg"), which labels a group on Now in Liquid and in `site.js` alike.
+- `_data/digest.yml` is Now's bands in page order: key, heading, shape
+  (plain, phrase or kind) and, for a band shown when empty, its empty
+  line. `now/index.html` bakes them and hands them to `site.js` in
+  `data-bands`; home's teasers and the share cards take the headings
+  from it.
+- `_data/grid.json` is the 52-week year as the templates draw it: the
+  first week of each month on the 4-4-5 split, the month names and
+  their three-letter labels. The calendar, wheel, arrivals dial and
+  feed includes read it; `verdict.js` carries the same month names and
+  `tests/verdict` checks the two agree.
 - `_data/never.yml` lists the foods that are never in season here, each
   with a `line` for its page and `aliases`. Its header lists the foods
   deliberately left off because they are grown here.

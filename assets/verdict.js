@@ -772,7 +772,7 @@
   }
 
   return {
-    C: C, RANK: RANK,
+    C: C, RANK: RANK, MONTHS: MONTHS,
     weekOf: weekOf, ukToday: ukToday, startOfWeek: startOfWeek, endOfWeek: endOfWeek,
     dayOfYear: dayOfYear, nextWeek: nextWeek, prevWeek: prevWeek,
     stateAt: stateAt, varietyVerdict: varietyVerdict, foodVerdict: foodVerdict,

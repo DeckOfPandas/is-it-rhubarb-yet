@@ -65,7 +65,12 @@
     var li = el("li", "food-row" + (item.never ? " never" : ""));
     li.dataset.slug = item.slug;
     li.dataset.verdict = item.verdict;
-    if (item.colour) li.style.setProperty("--food", item.colour);
+    if (item.colour && !item.never) {
+      li.style.setProperty("--food", item.colour);
+      var shed = item.textShed || item.text_on_shed, custard = item.textCustard || item.text_on_custard;
+      if (shed) li.style.setProperty("--food-shed", shed);
+      if (custard) li.style.setProperty("--food-custard", custard);
+    }
     var a = el("a");
     a.href = foodUrl(item.slug);
     var sw = el("span", "swatch"); sw.setAttribute("aria-hidden", "true");
@@ -1219,21 +1224,25 @@
     } else {
       loadFoods().then(function (foods) {
         var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
+        var bands = JSON.parse(strip.dataset.bands || "[]");
+        function heading(key) {
+          var b = bands.filter(function (x) { return x.key === key; })[0];
+          return b ? b.heading : key;
+        }
         strip.textContent = "";
-        function block(key, label, list) {
-          var items = V.flatten(list);
+        function block(key) {
+          var items = V.flatten(now[key]);
           if (!items.length) return;
           var s = el("section", "teaser");
-          s.appendChild(el("h2", "teaser-label", label));
+          s.appendChild(el("h2", "teaser-label", heading(key)));
           var p = el("p", "teaser-foods");
           fillTeaser(p, items, key);
           s.appendChild(p);
           strip.appendChild(s);
         }
-        if (V.flatten(now.arrived).length) block("arrived", "Just arrived", now.arrived);
-        else block("onway", "On the way in", now.onway);
-        block("still", "Great this week", now.still);
-        block("last", "On the way out", now.last);
+        block(V.flatten(now.arrived).length ? "arrived" : "onway");
+        block("still");
+        block("last");
         var p = el("p", "this-week-more");
         p.appendChild(arrowLink(BASE + "now/", "Everything in season this week"));
         strip.appendChild(p);
@@ -1242,13 +1251,12 @@
   }
 
   // --- Now: the digest for any week ----------------------------------------
-  var KIND = { veg: "Veg", fruit: "Fruit", wild: "Wild", herbs: "Herbs", fish: "Fish", meat: "Meat" };
   // One band, the same markup as _includes/band.html: a heading with the
   // count (none when it is nothing), then the foods as one A to Z list
   // (plain), a group per timing (phrase) or a group per kind with its
-  // count (kind). No row has a tag. An empty band shows its emptyText,
-  // or with none is left out.
-  function band(cls, heading, kinds, shape, emptyText) {
+  // count (kind), labelled by kindName(kind). No row has a tag. An empty
+  // band shows its emptyText, or with none is left out.
+  function band(cls, heading, kinds, shape, emptyText, kindName) {
     var total = V.flatten(kinds).length;
     if (!total && !emptyText) return document.createTextNode("");
     var s = el("section", "band " + cls);
@@ -1260,29 +1268,32 @@
     if (shape === "phrase") {
       V.byPhrase(kinds).forEach(function (g) { s.appendChild(foodGroup(g.items, g.phrase)); });
     } else if (shape === "kind") {
-      kinds.forEach(function (k) { s.appendChild(foodGroup(k.items, KIND[k.kind] || k.kind, true)); });
+      kinds.forEach(function (k) { s.appendChild(foodGroup(k.items, kindName(k.kind), true)); });
     } else {
       s.appendChild(foodGroup(V.azList(kinds)));
     }
     return s;
   }
-  // Now's bands, from nowLists, into `box`, under Now's own labels for
-  // any week. The YES-ISH foods come last, from storage and then from a
-  // glasshouse, each band left out when it is empty.
-  function fillDigest(box, now) {
+  // Now's bands, from nowLists, into `box`, for any week: `bands` is
+  // _data/digest.yml (key, heading, shape, empty line), as the page
+  // carries it in data-bands, and `groups` is groups.yml, whose
+  // kind_name labels a kind. A band with no empty line is left out when
+  // it is empty.
+  function fillDigest(box, now, groups, bands) {
+    var names = {};
+    (groups || []).forEach(function (g) { if (g.kind_name) names[g.kind] = g.kind_name; });
+    function kindName(k) { return names[k] || k; }
     box.textContent = "";
-    box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
-    box.appendChild(band("last", "On the way out", now.last, "phrase", "Nothing on its way out."));
-    box.appendChild(band("onway", "On the way in", now.onway, "phrase", "Nothing due in the next few weeks."));
-    box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
-    box.appendChild(band("store", "Available from storage", now.store, "kind"));
-    box.appendChild(band("glass", "Under glass", now.glass, "kind"));
+    (bands || []).forEach(function (b) {
+      box.appendChild(band(b.key, b.heading, now[b.key] || [], b.shape, b.empty, kindName));
+    });
   }
 
   function initNow() {
     var digest = document.getElementById("digest");
     if (!digest) return;
     var groups = JSON.parse(digest.dataset.groups || "[]");
+    var bands = JSON.parse(digest.dataset.bands || "[]");
     var title = document.getElementById("week-title");
     var dates = document.getElementById("week-dates");
     var prev = document.getElementById("prev-week"), next = document.getElementById("next-week");
@@ -1334,7 +1345,7 @@
       redrawn = true;
       loadFoods().then(function (foods) {
         if (weekAt(offset).week !== w || weekAt(offset).year !== y) return;
-        fillDigest(digest, V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y)));
+        fillDigest(digest, V.nowLists(foods, groups, w, y, offset === 0 ? TODAY : V.midOfToday(w, y)), groups, bands);
       });
     }
 
@@ -1392,7 +1403,7 @@
   // their cards and lists exactly as the rest of the site does.
   window.Site = {
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
-    el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
+    el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout, foodRow: foodRow,
     miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest, spreadLabels: spreadLabels,
     headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText, setDate: setDate
   };

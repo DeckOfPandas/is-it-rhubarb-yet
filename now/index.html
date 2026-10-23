@@ -29,11 +29,14 @@ the baked week shows, dated.
   </p>
 </header>
 
-<div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
-  {%- include band.html cls="arrived" heading="Just arrived" list=now.arrived shape="plain" az=baked.az.arrived -%}
-  {%- include band.html cls="last" heading="On the way out" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
-  {%- include band.html cls="onway" heading="On the way in" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
-  {%- include band.html cls="still" heading="Great this week" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}
-  {%- include band.html cls="store" heading="Available from storage" list=now.store shape="kind" -%}
-  {%- include band.html cls="glass" heading="Under glass" list=now.glass shape="kind" -%}
+{%- comment -%} The bands, their headings, shapes and empty lines, are
+   _data/digest.yml, which the page hands to site.js in data-bands.
+   {%- endcomment -%}
+<div class="digest" id="digest" data-groups='{{ site.data.groups | jsonify | escape }}' data-bands='{{ site.data.digest | jsonify | escape }}' data-foods="{{ '/foods.json' | relative_url }}">
+  {%- for b in site.data.digest -%}
+  {%- assign b_list = now[b.key] -%}
+  {%- assign b_phrases = baked.phrases[b.key] -%}
+  {%- assign b_az = baked.az[b.key] -%}
+  {%- include band.html cls=b.key heading=b.heading list=b_list shape=b.shape phrases=b_phrases az=b_az empty=b.empty -%}
+  {%- endfor -%}
 </div>

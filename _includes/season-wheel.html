@@ -36,8 +36,8 @@ parsed as XML: every name is escaped and no attribute is bare.
 {%- assign n = food.varieties.size -%}
 {%- assign band = R | minus: R0 | times: 1.0 | divided_by: n -%}
 {%- assign thick = band | minus: 3 | round: 2 -%}
-{%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
-{%- assign month_names = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," -%}
+{%- assign month_starts = site.data.grid.month_starts -%}
+{%- assign month_names = site.data.grid.months -%}
 {%- unless include.standalone -%}<figure class="wheel">{%- endunless -%}
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-label="Season of {{ food.name | escape }} around the year">
   {%- if include.standalone -%}

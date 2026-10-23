@@ -1,45 +1,61 @@
 # Culinary families, in display order. Every food's `group` must be a key
 # here; tools/check-foods.py enforces it. `kind` is the broad class the
-# arrivals dial is drawn for: veg, fruit, wild, herbs, fish or meat.
+# arrivals dial is drawn for: veg, fruit, wild, herbs, fish or meat, and
+# `kind_name` how Now's groups and the digest label it ("Veg"), the same in
+# Liquid and in site.js.
 - key: roots
   name: Roots & tubers
   kind: veg
+  kind_name: Veg
 - key: brassicas
   name: Brassicas
   kind: veg
+  kind_name: Veg
 - key: alliums
   name: Alliums
   kind: veg
+  kind_name: Veg
 - key: leaves
   name: Leaves & salad
   kind: veg
+  kind_name: Veg
 - key: shoots
   name: Shoots, pods & stems
   kind: veg
+  kind_name: Veg
 - key: fruiting
   name: Squash & fruiting veg
   kind: veg
+  kind_name: Veg
 - key: orchard
   name: Orchard fruit
   kind: fruit
+  kind_name: Fruit
 - key: soft
   name: Soft fruit & rhubarb
   kind: fruit
+  kind_name: Fruit
 - key: nuts
   name: Nuts
   kind: fruit
+  kind_name: Fruit
 - key: foraged
   name: Foraged & wild
   kind: wild
+  kind_name: Wild
 - key: fungi
   name: Mushrooms & fungi
   kind: wild
+  kind_name: Wild
 - key: herbs
   name: Herbs
   kind: herbs
+  kind_name: Herbs
 - key: fish
   name: Fish & shellfish
   kind: fish
+  kind_name: Fish
 - key: meat
   name: Meat & game
   kind: meat
+  kind_name: Meat

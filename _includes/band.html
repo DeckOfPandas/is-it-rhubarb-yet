@@ -9,13 +9,14 @@ row carries a tag.
           of a food's phrase ("first ones in a week or two", "then
           available from storage until late April") shows beside it
   kind    a group per kind of food with its count, A to Z (great now,
-          storage, glasshouse)
+          storage, glasshouse), labelled by the kind's `kind_name` in
+          groups.yml
 A group is food-group.html. Expects: cls (arrived, last, onway, still,
 store, glass),
 heading, list (the baked [{kind, items}] from nowLists), shape, phrases
 (the baked [{phrase, items}] for the phrase shape), az (the baked A to Z
 list for the plain shape), and empty (the line for an empty band; with
-none, an empty band is left out).
+none, an empty band is left out). _data/digest.yml carries them.
 site.js builds the same markup when it redraws the digest for another
 week.
 {%- endcomment -%}
@@ -29,7 +30,10 @@ week.
   {%- elsif include.shape == "phrase" -%}
     {%- for g in include.phrases -%}{%- include food-group.html label=g.phrase items=g.items -%}{%- endfor -%}
   {%- elsif include.shape == "kind" -%}
-    {%- for k in include.list -%}{%- include food-group.html label=k.kind items=k.items count=true -%}{%- endfor -%}
+    {%- for k in include.list -%}
+      {%- assign kg = site.data.groups | where: "kind", k.kind | first -%}
+      {%- include food-group.html label=kg.kind_name items=k.items count=true -%}
+    {%- endfor -%}
   {%- else -%}
     {%- include food-group.html items=include.az -%}
   {%- endif -%}

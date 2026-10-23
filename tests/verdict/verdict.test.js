@@ -62,6 +62,23 @@ test("every food and every variety has a verdict and a date phrase in every week
   assert.deepEqual(missing, []);
 });
 
+test("_data/grid.json, which the templates draw by, agrees with verdict.js", () => {
+  const grid = JSON.parse(require("fs").readFileSync(path.join(DATA, "grid.json"), "utf8"));
+  assert.deepEqual(grid.months, V.MONTHS);
+  assert.deepEqual(grid.short, V.MONTHS.map((m) => m.slice(0, 3)));
+  assert.equal(grid.month_starts.length, 12);
+  assert.equal(grid.month_starts[0], 1);
+  grid.month_starts.forEach((w, m) => {
+    // The month's first week is the first whose middle (its start plus
+    // three days, as the phrases read a week) falls in it, so the week
+    // before has its middle in the month before.
+    if (m === 0) return;
+    const mid = V.midOfWeek({ week: w, years: 0 }, 2026), before = V.midOfWeek({ week: w - 1, years: 0 }, 2026);
+    assert.equal(mid.getMonth(), m, `week ${w}'s middle is in month ${mid.getMonth()}, not ${m}`);
+    assert.equal(before.getMonth(), m - 1, `week ${w - 1}'s middle is already in month ${m}`);
+  });
+});
+
 test("leap years: the grid is by day of year, week 52 takes nine days", () => {
   assert.equal(V.weekOf(new Date(2028, 11, 31)), 52);
   assert.equal(V.weekOf(new Date(2028, 11, 23)), 52);

@@ -15,8 +15,8 @@ so that each property keeps its own line.
 {% unless include.food.unsold -%}
 {% assign food = include.food -%}
 {% assign vlabels = site.data.baked.labels[food.slug] -%}
-{% assign ics_month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
-{% assign ics_months = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," -%}
+{% assign ics_month_starts = site.data.grid.month_starts -%}
+{% assign ics_months = site.data.grid.months -%}
 {% for v in food.varieties -%}
 {% if v.lead == false -%}{% continue -%}{% endif -%}
 {% assign vlabel = vlabels[forloop.index0] -%}

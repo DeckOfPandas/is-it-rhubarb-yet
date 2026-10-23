@@ -1,0 +1,6 @@
+{
+  "comment": "The 52-week year as the templates draw it: the first week of each month on the 4-4-5 split (week 1 starts on 1 January), with the months' names and their three-letter labels. The includes read this; assets/verdict.js carries the same month names, and tests/verdict checks the two agree.",
+  "month_starts": [1, 5, 9, 14, 18, 23, 27, 31, 36, 40, 44, 49],
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "short": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+}

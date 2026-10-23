@@ -1,0 +1,28 @@
+# Now's bands, in page order: the key (its id on the page and its list
+# from nowLists), the heading, the shape of its list (plain: one A to Z
+# list; phrase: a group per timing; kind: a group per kind of food) and,
+# for a band shown even when it is empty, its empty line. now/index.html
+# bakes them, site.js redraws them for another week and for the charts'
+# lists, and home's teasers and the share cards take the headings from
+# here, so the words live in one place.
+- key: arrived
+  heading: Just arrived
+  shape: plain
+- key: last
+  heading: On the way out
+  shape: phrase
+  empty: Nothing on its way out.
+- key: onway
+  heading: On the way in
+  shape: phrase
+  empty: Nothing due in the next few weeks.
+- key: still
+  heading: Great this week
+  shape: kind
+  empty: Nothing at all, which cannot be right.
+- key: store
+  heading: Available from storage
+  shape: kind
+- key: glass
+  heading: Under glass
+  shape: kind

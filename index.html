@@ -40,12 +40,17 @@ site.js adds the varieties from foods.json), the names it completes to
      is left out. Each carries all its foods in data-all, and site.js
      picks a fresh three on every visit; tools/cards.js draws the same
      blocks. {%- endcomment -%}
-  <div class="this-week" id="this-week">
-    {%- assign first = "arrived|Just arrived" -%}
+  <div class="this-week" id="this-week" data-bands='{{ site.data.digest | jsonify | escape }}'>
+    {%- assign dg = site.data.digest -%}
+    {%- assign b_arrived = dg | where: "key", "arrived" | first -%}
+    {%- assign b_onway = dg | where: "key", "onway" | first -%}
+    {%- assign b_still = dg | where: "key", "still" | first -%}
+    {%- assign b_last = dg | where: "key", "last" | first -%}
+    {%- assign first = "arrived|" | append: b_arrived.heading -%}
     {%- assign arrived_count = 0 -%}
     {%- for k in baked.now.arrived -%}{%- assign arrived_count = arrived_count | plus: k.items.size -%}{%- endfor -%}
-    {%- if arrived_count == 0 -%}{%- assign first = "onway|On the way in" -%}{%- endif -%}
-    {%- assign blocks = first | append: ",still|Great this week,last|On the way out" | split: "," -%}
+    {%- if arrived_count == 0 -%}{%- assign first = "onway|" | append: b_onway.heading -%}{%- endif -%}
+    {%- assign blocks = first | append: ",still|" | append: b_still.heading | append: ",last|" | append: b_last.heading | split: "," -%}
     {%- for entry in blocks -%}
       {%- assign parts = entry | split: "|" -%}
       {%- assign key = parts[0] -%}

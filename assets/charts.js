@@ -20,10 +20,10 @@
   if (!root || !S || !V) return;
   var WHEEL = root.dataset.tt === "wheel";
   var groups = JSON.parse(root.dataset.groups || "[]");
+  var bands = JSON.parse(root.dataset.bands || "[]");
   var TODAY = S.TODAY, YEAR = S.YEAR, el = S.el;
   var SVG = "http://www.w3.org/2000/svg";
-  var MONTHS = ["January", "February", "March", "April", "May", "June", "July",
-    "August", "September", "October", "November", "December"];
+  var MONTHS = V.MONTHS;
   var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
   var narrow = matchMedia("(max-width: 43.74rem)");
   function svgEl(tag, cls, attrs) {
@@ -909,7 +909,7 @@
     var when = dateOf(state.at), week = V.weekOf(when);
     listTitle.textContent = "In season " + (state.at === null ? "this week" : "in " + STEPS[state.at].phrase);
     S.setDate(listDates, V.fmtRange(week, when.getFullYear()));
-    S.fillDigest(listBands, V.nowLists(shownFoods(), groups, week, when.getFullYear(), when));
+    S.fillDigest(listBands, V.nowLists(shownFoods(), groups, week, when.getFullYear(), when), groups, bands);
     listAll.textContent = "";
     listAll.hidden = kindShown() === "all";
     if (!listAll.hidden) {

@@ -19,7 +19,7 @@ remembered.
   <h1>Calendar</h1>
 </header>
 
-<div class="tt" data-tt="calendar" data-groups='{{ site.data.groups | jsonify | escape }}'>
+<div class="tt" data-tt="calendar" data-groups='{{ site.data.groups | jsonify | escape }}' data-bands='{{ site.data.digest | jsonify | escape }}'>
 {%- comment -%} The stage holds the controls and the chart, 40px apart,
    so that on a wide screen the controls stick to the top only while the
    chart is there. {%- endcomment -%}

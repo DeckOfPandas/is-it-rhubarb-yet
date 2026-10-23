@@ -16,7 +16,7 @@ wheel. Every visit opens on All.
   <h1>The shape of the year</h1>
 </header>
 
-<div class="tt" data-tt="wheel" data-groups='{{ site.data.groups | jsonify | escape }}'>
+<div class="tt" data-tt="wheel" data-groups='{{ site.data.groups | jsonify | escape }}' data-bands='{{ site.data.digest | jsonify | escape }}'>
 {%- comment -%} The controls and the wheel, 40px apart, as on the
    calendar. {%- endcomment -%}
 <div class="tt-stage">

@@ -48,8 +48,8 @@ opacity), dot (dot radius), arcs (false draws dots only).
 {%- comment -%} Assigned variables outlive an include, so a linear dial must clear the table a previous dial on the page chose. {%- endcomment -%}
 {%- assign table = false -%}
 {%- if scale == "log" -%}{%- assign table = logtable -%}{%- elsif scale == "exp" -%}{%- assign table = exptable -%}{%- endif -%}
-{%- assign month_starts = "1,5,9,14,18,23,27,31,36,40,44,49" | split: "," -%}
-{%- assign month_names = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" | split: "," -%}
+{%- assign month_starts = site.data.grid.month_starts -%}
+{%- assign month_names = site.data.grid.short -%}
 {%- assign guides = "4,13,26,39" | split: "," -%}
 {%- assign guide_names = "1 month,3 months,6 months,9 months" | split: "," -%}
 {%- if include.kind == "all" -%}{%- assign kind_groups = site.data.groups -%}

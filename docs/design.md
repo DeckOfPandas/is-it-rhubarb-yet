@@ -473,7 +473,11 @@ the address carries `week=` and, in another year, `year=`. The bands,
 each the full width, 40px apart, each left out when empty unless it has
 an empty line: Just arrived (A to Z), On the way out and On the way in
 (grouped by one timing, soonest first), Great this week (by kind with
-counts), Available from storage and Under glass (by kind). A count
+counts), Available from storage and Under glass (by kind). The bands,
+their headings, shapes and empty lines are `_data/digest.yml`, and a
+kind's label is its `kind_name` in `groups.yml`, so Liquid and
+`site.js` draw the same words; `tests/build/parity.test.js` checks the
+baked rows against `site.js`'s. A count
 beside a section's label is caps, muted, as beside a group's. On the way
 out and On the way in group by the distance to the one boundary alone
 ("A few days left", "A week or two away"); the rest of a food's phrase
