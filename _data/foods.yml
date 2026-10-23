@@ -636,7 +636,9 @@
   notes:
     - "Defra's wholesale prices list UK cucumbers from February to November most years."
   varieties:
-    - name: ""
+    - name: "Outdoor"
+      ring: method
+      method: outdoor
       sources: [ncgm]
       weeks:
         - [9, 13, avail]
@@ -1068,7 +1070,9 @@
   notes:
     - "Defra's wholesale prices list UK capsicum from June to November most years."
   varieties:
-    - name: ""
+    - name: "Outdoor"
+      ring: method
+      method: outdoor
       sources: [ncgm]
       weeks:
         - [18, 43, in]
@@ -1128,7 +1132,9 @@
   notes:
     - "Defra's wholesale prices list UK tomatoes from April to November most years."
   varieties:
-    - name: ""
+    - name: "Outdoor"
+      ring: method
+      method: outdoor
       shades: ["#5d8f00", "#e44500", "#b4344e"]
       sources: [ncgm, defra]
       notes:
@@ -1364,7 +1370,9 @@
     - "Market blackberries run later than wild ones (cultivated and polytunnel crops)."
     - "Defra's wholesale prices list UK blackberries from June to October most years."
   varieties:
-    - name: ""
+    - name: "Cultivated"
+      ring: method
+      method: cultivated
       sources: [ncgm, defra]
       weeks:
         - [31, 35, avail]
@@ -1422,7 +1430,9 @@
   notes:
     - "Defra's wholesale prices list UK gooseberries from June to July most years."
   varieties:
-    - name: ""
+    - name: "Cultivated"
+      ring: method
+      method: cultivated
       sources: [ncgm, defra]
       weeks:
         - [23, 26, avail]
@@ -1536,7 +1546,9 @@
   text_on_custard: "#9a6127"
   sources: [ncgm, forestheart]
   varieties:
-    - name: ""
+    - name: "Cultivated"
+      ring: method
+      method: cultivated
       sources: [ncgm]
       weeks:
         - [31, 35, avail]
@@ -1920,7 +1932,9 @@
       weeks:
         - [9, 22, in]
         - [23, 26, avail]
-    - name: ""
+    - name: "Market"
+      ring: method
+      method: market
       sources: [ncgm]
       weeks:
         - [9, 13, avail]
