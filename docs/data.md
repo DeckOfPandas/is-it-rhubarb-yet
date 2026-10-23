@@ -115,7 +115,7 @@ A ring of the food itself, as a fish's coasts or a glasshouse crop has:
   this way: every coast but a fish's South West (where it has one),
   glasshouse rings, a wild ring beside a market or cultivated one, and
   provenance rings (Welsh, salt marsh, Orkney, the Cornish sardine
-  fishery, the national native and Porthilly rock oysters). Search is
+  fishery, Porthilly rock oysters). Search is
   governed by `ring`, not `lead`: a named variety with no `ring` is
   searchable by its name and how it is said; a ring (a coast, a
   glasshouse) is not.

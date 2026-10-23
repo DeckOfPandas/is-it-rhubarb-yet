@@ -7,6 +7,31 @@ now is in `docs/design.md` and `docs/data.md`; how to work on it is in
 
 ## 2026-10-23
 
+- **No ring name with a comma or a bracket in it.** In caps on the ring
+  list, "NATIVE, NATIONAL" read as two things. The oysters' national
+  native ring restated the R months from the same Seafish sentence the
+  fish's National rings came from, and is gone like them; "Rock,
+  Porthilly" is "Porthilly rock". Lamb's provenance rings are "Welsh"
+  and "Salt marsh", and their notes say PGI and PDO.
+- **Notes that argued with their weeks.** Walnuts' wild ring: green
+  walnuts for pickling from June, the mature nuts from early October.
+  The "poor in January and February" lines on Dover sole, lemon sole
+  and brill, against two coasts' all-year rings, are gone. Rosehips'
+  "best after the first frost" stands: frost improves them, it does not
+  start them.
+- **No whole-food verdict lasts one week.** Broccoli's purple sprouting
+  ring is just about from December, when the early varieties crop, so
+  the food goes from on the way out to on the way in instead of a NO
+  for week 49 alone; cavolo nero is cut into mid-April, then just about
+  until the new crop in June. The checker follows a just-about run
+  across the year's end when deciding whether it touches a season.
+- **The olive-yellow cluster is separated.** Nine foods sat within 2
+  OKLab units of another food's colour. Each moved by one to four
+  units, in lightness or a touch of hue and never out of its family;
+  Iceberg, Little gem and Williams moved too, so that lettuce's and
+  pears' rings stay 12 apart. No two foods are within 2 units now. The
+  count of pairs within 4 (447) is the crowding of a palette of two
+  hundred colours and stays a count.
 - **"All year, from the North East and South East."** A food in season
   all year from some coasts and not others names them on its top line,
   so cod no longer reads "All year." while its Cornish ring and its
