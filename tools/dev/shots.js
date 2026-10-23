@@ -126,8 +126,8 @@ async function pickFoods(base, day) {
       await shot('kitchen-sink', 'kitchen-sink/', { both: true, wide: true });
       await shot('home-empty', '', { both: true });
       await shot('home-search-ghost', '', { act: type('avoc') });
-      await shot('home-search-card', '', { both: true, act: type('basil') });
-      await shot('home-search-also', '', { act: type('apples') });
+      await shot('home-search-one', '', { both: true, act: type('basil') });
+      await shot('home-search-two', '', { act: type('apples') });
       await shot('home-search-several', '', { act: type('app') });
       await shot('home-search-never', '', { both: true, act: type('banana') });
       await shot('home-search-unknown', '', { act: type('zzz') });

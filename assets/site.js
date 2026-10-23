@@ -449,54 +449,6 @@
     });
   }
 
-  // --- A food's card dial ------------------------------------------------------
-  // A copy of the food page's own dial. For a variety it is cut to that
-  // ring (`ring`, the variety's place in the food's varieties, which the
-  // ring's data-ring gives, since the dial orders its rings by length) and
-  // that ring widened to fill the band all the rings share, as a food of
-  // one variety draws it: _includes/season-wheel.html's R 140 and R0 78,
-  // less its 3 units of gap; it keeps its shape but is drawn in one
-  // colour (`colour`), shades and all. For a whole food (ring -1) it is
-  // the dial as it is. It is cut from the food's standalone dial,
-  // /wheel/<slug>.svg (the same include as the page's), fetched once per
-  // food and kept; the standalone's own stylesheet and script, there for
-  // when the file is opened by itself, are dropped so the page's styles
-  // colour it. Resolves to a span.wheel for markWheel, or null.
-  var dials = {};
-  var RING_THICK = 140 - 78 - 3, RING_MID = 140 - RING_THICK / 2;
-  function miniDial(slug, ring, colour) {
-    if (!dials[slug]) dials[slug] = fetch(BASE + "wheel/" + slug + ".svg").then(function (r) {
-      if (!r.ok) throw new Error(r.status);
-      return r.text();
-    }).then(function (text) {
-      var svg = new DOMParser().parseFromString(text, "image/svg+xml").documentElement;
-      if (!svg || svg.localName !== "svg") return null;
-      svg.querySelectorAll("style, script").forEach(function (n) { n.remove(); });
-      return svg;
-    }).catch(function () { return null; });
-    return dials[slug].then(function (svg) {
-      if (!svg) return null;
-      var copy = document.importNode(svg, true);
-      copy.setAttribute("viewBox", "30 30 300 300");
-      copy.removeAttribute("role"); copy.removeAttribute("aria-label");
-      var rings = copy.querySelectorAll(".ring");
-      if (rings.length > 1 && ring >= 0 && ring < rings.length) {
-        rings.forEach(function (g) {
-          if (+g.dataset.ring !== ring) { g.remove(); return; }
-          g.setAttribute("stroke-width", RING_THICK);
-          g.querySelectorAll("circle").forEach(function (c) { c.setAttribute("r", RING_MID); });
-        });
-      }
-      if (colour) {
-        copy.classList.add("mono");
-        copy.querySelectorAll(".ring, .ring g").forEach(function (g) { g.style.setProperty("--c", colour); });
-      }
-      var fig = el("span", "wheel");
-      fig.appendChild(copy);
-      return fig;
-    });
-  }
-
   // --- Switches: remember a radio group's choice under its data-remember
   // key. Only the theme switch has one: the order and kind switches open
   // on their default every visit. The theme switch also sets data-theme
@@ -1359,7 +1311,7 @@
   window.Site = {
     BASE: BASE, TODAY: TODAY, YEAR: YEAR,
     el: el, foodUrl: foodUrl, loadFoods: loadFoods, tellMeAbout: tellMeAbout,
-    miniDial: miniDial, markWheel: markWheel, fillDigest: fillDigest, spreadLabels: spreadLabels,
+    markWheel: markWheel, fillDigest: fillDigest, spreadLabels: spreadLabels,
     headerHeight: headerHeight, arrowMark: arrowMark, arrowLink: arrowLink, setArrowText: setArrowText, setDate: setDate
   };
 })();

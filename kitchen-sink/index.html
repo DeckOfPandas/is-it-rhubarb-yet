@@ -67,18 +67,12 @@ photographs it.
 </section>
 
 <section class="ks-section">
-  <h2 class="ks-title">Verdict word: page, card and tag</h2>
+  <h2 class="ks-title">Verdict word: page and tag</h2>
   <div class="ks-verdicts">
     {%- for v in verdicts -%}{%- assign f = examples[forloop.index0] -%}
     <span class="verdict-word" style="--food: {{ f.colour }}">{{ v }}.</span>
     {%- endfor %}
     <span class="verdict-word" style="--food: var(--never)">NEVER.</span>
-  </div>
-  <div class="ks-row">
-    {%- for v in verdicts -%}{%- assign f = examples[forloop.index0] -%}
-    <span class="one-result ks-bare" style="--food: {{ f.colour }}"><span class="one-word">{{ v }}.</span></span>
-    {%- endfor %}
-    <span class="one-result ks-bare" style="--food: var(--never)"><span class="one-word">NEVER.</span></span>
   </div>
   <div class="ks-row">
     {%- for v in verdicts -%}{%- assign f = examples[forloop.index0] -%}
@@ -89,25 +83,36 @@ photographs it.
 </section>
 
 <section class="ks-section">
-  <h2 class="ks-title">Card</h2>
+  <h2 class="ks-title">Search answer: the row Enter would open, and no match</h2>
   <div class="ks-states">
   {%- for s in states -%}
     <div class="ks-state is-{{ s }}">
       <p class="ks-state-name">{{ s }}</p>
-      <div class="one-result" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <a class="arrow-link one-more" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}">{% capture tell_text %}Tell me everything about {{ yes0.name | downcase }}{% endcapture %}{% include arrow-words.html text=tell_text %}</a><span class="one-dial" aria-hidden="true"></span></div>
+      <ul class="food-list results-sample">
+        <li class="food-row{% if s == 'focus' %} is-lit{% endif %}" data-slug="{{ yes0.slug }}" style="--food: {{ yes0.colour }}{% if yes0.text_on_shed %}; --food-shed: {{ yes0.text_on_shed }}{% endif %}{% if yes0.text_on_custard %}; --food-custard: {{ yes0.text_on_custard }}{% endif %}">
+          <a href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}"{% if s == 'focus' %} class="is-active"{% endif %}><span class="swatch" aria-hidden="true"></span><span class="food-name"><span class="food-title">{{ yes0.name }}</span></span> <span class="leader" aria-hidden="true"></span><span class="verdict-tag">YES</span>{% include key-hint.html %}</a>
+        </li>
+      </ul>
     </div>
   {%- endfor -%}
   </div>
-  <div class="ks-row">
-    <div class="one-result is-plain is-never" style="--food: var(--never)"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ never0.name | downcase }}</span> yet?</span> <span class="one-word">NEVER.</span> <span class="one-line">{{ never0.line }}</span></span></div>
-    <div class="one-result is-plain is-unknown"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">zzz</span> yet?</span> <span class="one-word">Literally no idea.</span> <span class="one-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</span></span></div>
+  <div class="results-none ks-none">
+    <p class="none-word">Literally no idea.</p>
+    <p class="none-line">If that's an actual thing, please <a href="https://github.com/DeckOfPandas/is-it-rhubarb-yet/issues">tell us</a>.</p>
   </div>
 </section>
 
 <section class="ks-section">
-  <h2 class="ks-title">Card at full width, with its hint</h2>
-  <div class="ks-card">
-    <div class="one-result" style="--food: {{ yes0.colour }}"><span class="one-text"><span class="one-ask">Is it <span class="ask-name">{{ yes0.name | downcase }}</span> yet?</span> <span class="one-word">YES.</span> <span class="one-line">{{ yb.line }}</span></span> <a class="arrow-link one-more" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}">{% capture tell_text %}Tell me everything about {{ yes0.name | downcase }}{% endcapture %}{% include arrow-words.html text=tell_text %}</a>{% include key-hint.html %}<span class="one-dial" aria-hidden="true"></span></div>
+  <h2 class="ks-title">The wheel's chip</h2>
+  <div class="ks-states">
+  {%- for s in states -%}
+    <div class="ks-state is-{{ s }}">
+      <p class="ks-state-name">{{ s }}</p>
+      <div class="tt-chip ks-chip" role="dialog" aria-label="{{ yes0.name }}" style="--food: {{ yes0.colour }}{% if yes0.text_on_shed %}; --food-shed: {{ yes0.text_on_shed }}{% endif %}{% if yes0.text_on_custard %}; --food-custard: {{ yes0.text_on_custard }}{% endif %}">
+        <a class="tt-chip-link" href="{{ '/' | append: yes0.slug | append: '/' | relative_url }}"><span class="chip-ask">Is it <span class="ask-name">{% include said.html food=yes0 %}</span> yet?</span></a>
+      </div>
+    </div>
+  {%- endfor -%}
   </div>
 </section>
 

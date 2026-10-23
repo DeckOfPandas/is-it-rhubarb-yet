@@ -779,7 +779,11 @@
     });
     document.body.appendChild(chip);
     fillChip();
-    chip.querySelector(".tt-chip-link").focus({ preventScroll: true });
+    // Focus moves to the chip once the opening event is over: inside the
+    // click a keyboard Enter synthesises on a wheel label, Chromium
+    // keeps focus on the label and the move is lost.
+    var opened = chip;
+    setTimeout(function () { if (chip === opened) chip.querySelector(".tt-chip-link").focus({ preventScroll: true }); }, 0);
   }
   function close(giveBack) {
     if (!chip) return;
