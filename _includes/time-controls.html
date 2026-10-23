@@ -64,10 +64,11 @@ copied from. Expects: wheel (true on the wheel).
     </div>
   </div>
 </div>
-<template id="tt-pop">
-  <div class="one-result tt-pop" role="dialog">
-    <span class="one-text"><span class="tt-pop-when"></span><span class="one-ask">Is it <span class="ask-name"></span> yet?</span> <span class="one-word"></span> <span class="one-line"></span></span>
-    <a class="arrow-link one-more">{% include arrow-words.html text="" %}</a><span class="one-dial" aria-hidden="true"></span>
-    <button type="button" class="tt-close" aria-label="Close">×</button>
+{%- comment -%} The wheel's chip: the food page's question lifted onto a
+   small panel, the one link to the page. charts.js clones it, names it
+   for its food and places it beside the dot. {%- endcomment -%}
+<template id="tt-chip">
+  <div class="tt-chip" role="dialog">
+    <a class="tt-chip-link"><span class="chip-ask">Is it <span class="ask-name"></span> yet?</span></a>
   </div>
 </template>
