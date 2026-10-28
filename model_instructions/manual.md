@@ -66,8 +66,9 @@ To bake for another day, `node tools/bake.js --date 2026-10-29`, then
 Jekyll and `node tools/cards.js --out _site/cards`. The ports Helen can
 reach are in `.devcontainer/kit.env`.
 
-Visual checks: `node tools/dev/shoot.js <base-url> <label> [--scheme
-dark] [--click <text>] [--type <text>] <page>...` writes `tmp/shots/`;
+Visual checks: `node tools/dev/shoot.js <base-url> <label> [--engine
+webkit] [--scheme dark] [--click <text>] [--type <text>] <page>...`
+writes `tmp/shots/`, in WebKit (nearest Safari) when asked;
 `node tools/dev/shots.js --base <url> [--full yes]` takes the whole
 design-review set at 390, 820 and 1280 into `screenshots/` (gitignored);
 `node tools/dev/slice-png.js tmp/shots/<file>.png` cuts a tall one.

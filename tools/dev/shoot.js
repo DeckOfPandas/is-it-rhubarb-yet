@@ -1,9 +1,10 @@
 // Screenshot pages of a running site, full page, at phone and desktop widths.
 //
 // USAGE:
-//   node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... [--type <text>] <page>...
+//   node tools/dev/shoot.js <base-url> <label> [--engine chromium|webkit] [--scheme light|dark] [--click <text>]... [--type <text>] <page>...
 //
 //   node tools/dev/shoot.js http://127.0.0.1:9000/mysite before --scheme dark . wheel/
+//   node tools/dev/shoot.js http://127.0.0.1:9000 safari --engine webkit --type cele .
 //   node tools/dev/shoot.js http://127.0.0.1:9000 menu --click "By colour" .
 //   node tools/dev/shoot.js http://127.0.0.1:9000 typed --type leek .
 //
@@ -11,7 +12,8 @@
 // may not start with `/`: the permission checker reads such an argument as
 // an absolute file path and stops the command to ask.
 //
-// Shots land in tmp/shots/<label>-<width>-<scheme>-<page>.png. Each --click
+// Shots land in tmp/shots/<label>-<width>-<scheme>-<page>.png, with
+// -webkit after the width for WebKit, the engine nearest Safari. Each --click
 // clicks the first visible element with that exact text, in order, before the
 // shot; --type then types its text into the first visible text or search
 // input. Tall pages come out tall: tools/dev/slice-png.js cuts them into
@@ -29,9 +31,12 @@ const OUT_DIR = 'tmp/shots';
 function parse(argv) {
   const [base, label, ...rest] = argv;
   if (!base || !label) usage('give a base URL and a label');
-  const opts = { base: base.replace(/\/$/, ''), label, scheme: 'light', clicks: [], type: null, paths: [] };
+  const opts = { base: base.replace(/\/$/, ''), label, scheme: 'light', engine: 'chromium', clicks: [], type: null, paths: [] };
   for (let i = 0; i < rest.length; i++) {
-    if (rest[i] === '--scheme') {
+    if (rest[i] === '--engine') {
+      opts.engine = rest[++i];
+      if (!['chromium', 'webkit'].includes(opts.engine)) usage(`--engine is chromium or webkit, not '${opts.engine}'`);
+    } else if (rest[i] === '--scheme') {
       opts.scheme = rest[++i];
       if (!['light', 'dark'].includes(opts.scheme)) usage(`--scheme is light or dark, not '${opts.scheme}'`);
     } else if (rest[i] === '--click') {
@@ -52,16 +57,17 @@ function parse(argv) {
 }
 
 function usage(message) {
-  console.error(`shoot.js: ${message}\nusage: node tools/dev/shoot.js <base-url> <label> [--scheme light|dark] [--click <text>]... [--type <text>] <page>...`);
+  console.error(`shoot.js: ${message}\nusage: node tools/dev/shoot.js <base-url> <label> [--engine chromium|webkit] [--scheme light|dark] [--click <text>]... [--type <text>] <page>...`);
   process.exit(2);
 }
 
 (async () => {
   const opts = parse(process.argv.slice(2));
   // Required after the arguments are checked, so a usage error needs no browser.
-  const { chromium } = require('playwright');
+  const engine = require('playwright')[opts.engine];
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  const browser = await chromium.launch();
+  const browser = await engine.launch();
+  const tag = opts.engine === 'chromium' ? '' : `-${opts.engine}`;
   let failed = false;
   for (const [name, width] of Object.entries(WIDTHS)) {
     const context = await browser.newContext({
@@ -71,7 +77,7 @@ function usage(message) {
     const page = await context.newPage();
     for (const p of opts.paths) {
       const slug = p.replace(/\/$/, '').replace(/[^A-Za-z0-9._-]+/g, '_') || 'root';
-      const file = path.join(OUT_DIR, `${opts.label}-${name}-${opts.scheme}-${slug}.png`);
+      const file = path.join(OUT_DIR, `${opts.label}-${name}${tag}-${opts.scheme}-${slug}.png`);
       try {
         await page.goto(opts.base + '/' + p, { waitUntil: 'networkidle' });
         for (const text of opts.clicks) {
