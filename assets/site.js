@@ -640,6 +640,21 @@
     layer.appendChild(layerTyped); layer.appendChild(layerRest);
     layer.hidden = true;
     [ruler, underline, caret, layer].forEach(function (n) { n.setAttribute("aria-hidden", "true"); slot.appendChild(n); });
+    // Where the input sets its text's baseline, in px from the slot's top.
+    // Engines place a field's line differently in its box, but each aligns
+    // the field on that line, so an empty item baseline-aligned beside it
+    // in the slot ends on it.
+    var probe = el("span", "hook-probe");
+    probe.setAttribute("aria-hidden", "true");
+    function baseline() {
+      var top = input.getBoundingClientRect().top - slot.getBoundingClientRect().top;
+      slot.style.alignItems = "baseline";
+      slot.appendChild(probe);
+      var drop = probe.getBoundingClientRect().bottom - input.getBoundingClientRect().top;
+      slot.removeChild(probe);
+      slot.style.alignItems = "";
+      return top + drop;
+    }
     var line = input.closest(".hook-line, .brand-line");
     var CARET_ROOM = 0.05;
     var lead = null, ghost = "", ghostFull = "", composing = false, dismissed = false;
@@ -668,9 +683,16 @@
       if (!stacked) input.style.width = (Math.min(w, room) / (em * scale)).toFixed(3) + "em";
       underline.style.width = (text * scale / em).toFixed(3) + "em";
       caret.style.left = document.activeElement === input ? "0" : (text * scale / em).toFixed(3) + "em";
+      var base = baseline();
+      slot.style.setProperty("--hook-baseline", (base / em).toFixed(3) + "em");
       layer.style.fontSize = input.style.fontSize;
-      layer.style.top = (input.offsetTop + input.clientTop) + "px";
-      layer.style.height = input.clientHeight + "px";
+      if (!layer.hidden) {
+        layer.style.top = "0px";
+        layerTyped.appendChild(probe);
+        var ghostBase = probe.getBoundingClientRect().bottom - layer.getBoundingClientRect().top;
+        layerTyped.removeChild(probe);
+        layer.style.top = (base - ghostBase) + "px";
+      }
     }
     function complete() {
       ghost = ghostFull = "";
