@@ -66,7 +66,7 @@ RUN if [ "$WITH_PLAYWRIGHT" = 1 ]; then \
       mkdir -p /opt/playwright && cd /opt/playwright \
       && npm init -y > /dev/null \
       && npm install --no-audit --no-fund "playwright@${PLAYWRIGHT_VERSION}" \
-      && PLAYWRIGHT_BROWSERS_PATH=/opt/playwright/ms-playwright npx playwright install --with-deps chromium \
+      && PLAYWRIGHT_BROWSERS_PATH=/opt/playwright/ms-playwright npx playwright install --with-deps chromium webkit \
       && pip install --break-system-packages --no-cache-dir "playwright==${PLAYWRIGHT_VERSION}" \
       && rm -rf /var/lib/apt/lists/* /root/.npm; \
     fi
