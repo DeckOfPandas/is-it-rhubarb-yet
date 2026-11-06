@@ -9,10 +9,10 @@
 // in, on a non-leap year. Each week reads:
 //   in -> great_now; store or glass -> from_store; none -> out;
 //   avail -> coming_in when, past the "avail" weeks around it, an
-//   in-season run lies ahead and none behind; going_out otherwise: a run
-//   behind, a run on both sides (a gap between two rings' seasons), or
-//   none at all (a few about with no season proper, which the verdict
-//   calls JUST).
+//   in-season run lies ahead, a lull between two runs included, as the
+//   verdict reads it (NEARLY, "a few about now, in earnest in May");
+//   going_out otherwise: a run behind only, or none at all (a few about
+//   with no season proper, which the verdict calls JUST).
 // A month takes the state most of its weeks have; a tie goes to the
 // first of MONTH_ORDER. A never-food reads never; an unsold food, out.
 //
@@ -49,9 +49,7 @@ function weekState(timeline, w) {
   if (s === "in") return "great_now";
   if (s === "store" || s === "glass") return "from_store";
   if (s !== "avail") return "out";
-  const ahead = beyondAvail(timeline, w, 1) === "in";
-  const behind = beyondAvail(timeline, w, -1) === "in";
-  return ahead && !behind ? "coming_in" : "going_out";
+  return beyondAvail(timeline, w, 1) === "in" ? "coming_in" : "going_out";
 }
 
 function monthsOf(food) {

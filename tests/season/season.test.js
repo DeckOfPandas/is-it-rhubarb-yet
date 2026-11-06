@@ -47,6 +47,14 @@ test("storage reads from store, and so does a glasshouse ring that is in", () =>
   assert.equal(seasonFile([f], []).foods[0].glasshouse, true);
 });
 
+test("a lull between two in-season runs reads coming in, as the verdict reads it", () => {
+  const mar = weeksOf(2), apr = weeksOf(3), may = weeksOf(4);
+  const f = food([[mar[0], mar[mar.length - 1], "in"], [apr[0], apr[apr.length - 1], "avail"], [may[0], may[may.length - 1], "in"]]);
+  assert.equal(monthsOf(f)[3], "coming_in");
+  const Verdict = require("../../assets/verdict.js");
+  assert.equal(Verdict.foodVerdict(f, apr[1]).verdict, "NEARLY");
+});
+
 test("a few about with no season proper reads going out", () => {
   const mar = weeksOf(2);
   assert.equal(monthsOf(food([[mar[0], mar[mar.length - 1], "avail"]]))[2], "going_out");
@@ -79,6 +87,29 @@ test("the real data makes a valid season file, one entry per food and never-food
   const ids = file.foods.map((f) => f.id);
   assert.equal(new Set(ids).size, ids.length, "every id once");
   assert.deepEqual(ids, [...ids].sort(), "sorted by id, so a rebuild with unchanged data is byte-identical");
+});
+
+test("every real 'few about' week agrees with the site's verdict", () => {
+  // coming_in where the verdict looks ahead (NEARLY, or YES-ISH while store
+  // or glass still sells it); going_out where it looks back (JUST).
+  const Verdict = require("../../assets/verdict.js");
+  const { weekState } = require("../../tools/season-json.js");
+  const { loadYaml } = require("../../tools/yaml.js");
+  const expected = { coming_in: ["NEARLY", "YES-ISH"], going_out: ["JUST"] };
+  const wrong = [];
+  let checked = 0;
+  for (const f of loadYaml(path.join(ROOT, "_data", "foods.yml"))) {
+    if (f.unsold) continue;
+    const t = Verdict.timelineOf(f).timeline;
+    for (let w = 1; w <= 52; w++) {
+      if (t[w] !== "avail") continue;
+      checked++;
+      const state = weekState(t, w), verdict = Verdict.foodVerdict(f, w).verdict;
+      if (!expected[state].includes(verdict)) wrong.push(`${f.slug} week ${w}: ${state} but ${verdict}`);
+    }
+  }
+  assert.ok(checked > 0, "no 'avail' weeks in the data: this test checked nothing");
+  assert.deepEqual(wrong, []);
 });
 
 test("the schema check catches a wrong file", () => {
