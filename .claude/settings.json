@@ -135,7 +135,9 @@
       "Bash(sh scripts/gh-agent.sh pr view *)",
       "Bash(sh scripts/gh-agent.sh pr diff *)",
       "Bash(sh scripts/gh-agent.sh pr create *)",
-      "Bash(sh scripts/gh-agent.sh pr comment *)"
+      "Bash(sh scripts/gh-agent.sh pr comment *)",
+      "Read(//dev/null)",
+      "Edit(//dev/null)"
     ],
     "blockReadsOutsideWorkingDirectories": true,
     "deny": [
