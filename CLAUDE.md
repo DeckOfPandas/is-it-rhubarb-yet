@@ -20,7 +20,7 @@ is the only enforcement.
   Card and icon tests, after a build: `node --test tests/cards/cards.test.js`.
 - **Serving for me to look at:** read `PORTS` in `.devcontainer/kit.env`
   (`host:container` pairs), listen on `0.0.0.0:<container port>`
-  (`bundle exec jekyll serve --host 0.0.0.0 --port 9000`), and give me
+  (`bundle exec jekyll serve --host 0.0.0.0 --port 6000`), and give me
   `http://localhost:<host port>/`, plus the `baseurl` from `_config.yml`.
   No pair in `PORTS` means I can't reach it: ask me to add one.
 - Visual checks: `node tools/dev/shoot.js <base-url> <label> [--engine webkit]

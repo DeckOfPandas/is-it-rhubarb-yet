@@ -9,7 +9,7 @@
 //   node tools/dev/shots.js [--base <url>] [--date YYYY-MM-DD] [--out <dir>] [--full yes]
 //
 //   --base  the running site, baseurl included (default
-//           http://localhost:9000/is-it-rhubarb-yet/)
+//           http://localhost:6000/is-it-rhubarb-yet/)
 //   --date  the day the browser believes it is (default 2026-10-25), at
 //           noon; the pages recompute their verdicts for it
 //   --out   where the PNGs go (default screenshots/, which is gitignored)
@@ -39,7 +39,7 @@ const THEMES = ['light', 'dark'];
 const YESISH_DAY = '2026-05-20';
 
 function parse(argv) {
-  const opts = { base: 'http://localhost:9000/is-it-rhubarb-yet/', date: '2026-10-25', out: 'screenshots', full: 'no' };
+  const opts = { base: 'http://localhost:6000/is-it-rhubarb-yet/', date: '2026-10-25', out: 'screenshots', full: 'no' };
   for (let i = 0; i < argv.length; i++) {
     const key = argv[i].replace(/^--/, '');
     if (!(key in opts) || argv[i + 1] === undefined) usage(`unknown or empty option '${argv[i]}'`);
