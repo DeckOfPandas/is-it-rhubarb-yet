@@ -48,7 +48,7 @@ https://deckofpandas.github.io/is-it-rhubarb-yet/.
 
 ```
 sh tools/build.sh                                   # bake, Jekyll, fold the feeds, per-food JSON, cards
-bundle exec jekyll serve --host 0.0.0.0 --port 9000 # serve _site (keep_files keeps the cards)
+bundle exec jekyll serve --host 0.0.0.0 --port 6000 # serve _site (keep_files keeps the cards)
 python3 -I tools/check-foods.py                     # the data checker, after any data edit
 node --test tests/verdict/verdict.test.js           # the verdict rules
 node --test tests/site/search.test.js               # the search ranking, over the data
