@@ -59,7 +59,8 @@ RUN if [ "$WITH_RUBY" = 1 ]; then \
 ENV BUNDLE_PATH=/state/bundle
 
 # The npm and pip bindings are pinned to ONE version so they resolve to one
-# Chromium revision; two versions would put two browsers in the image.
+# revision of each browser; two versions would put two of each in the image.
+# WebKit is the engine nearest Safari.
 ARG WITH_PLAYWRIGHT=0
 ARG PLAYWRIGHT_VERSION=1.63.0
 RUN if [ "$WITH_PLAYWRIGHT" = 1 ]; then \
@@ -116,6 +117,12 @@ RUN chmod 0755 /usr/local/bin/init-firewall.sh \
       if [ "$WITH_PY_REQS" = 1 ]; then printf '%s\n' pypi.org files.pythonhosted.org; fi; \
       for domain in $EXTRA_ALLOWED_DOMAINS; do printf '%s\n' "$domain"; done; \
     } > /etc/claude-kit/allowed-domains
+
+# Managed settings apply to every Claude session in the container, wherever it
+# starts, and root owns them, so nothing inside can switch the hook off. It
+# warns a session started in a nested clone, where the project's hooks don't run.
+COPY managed-settings.json /etc/claude-code/managed-settings.json
+COPY session-place.py /usr/local/share/claude-kit/session-place.py
 
 # container.bashrc guards against host dotfiles that reload ~/.bashrc.
 COPY container.bashrc /usr/local/share/claude-kit/container.bashrc
