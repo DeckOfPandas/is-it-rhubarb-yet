@@ -26,6 +26,15 @@ says so: "this project overrides the kit's <rule>: …".
   red step stops the deploy, the daily rebake included.
 - **The design-review screenshot set** is `node tools/dev/shots.js`; run it
   with `--base` set to the URL you are serving.
+- **The seasons review page** is `node tools/dev/before-after.js` after a
+  build: each food's old dial beside its new one, at
+  `<base>/dev/before-after/`. A rebuild wipes it; nothing deploys it.
+- **The site draws from `_data/shown.json`**, not `foods.yml`: bake.js
+  writes it from `tools/shown.js`, which hides `proposed` and `no_supply`
+  rings and the research's keys. Seasons are corrected in
+  `research/data/`, then `python3 research/build/merge.py`, `compare.py`,
+  `report_compare.py` and `propose.py`, then copy
+  `research/out/proposed/` over `_data/`.
 - The site is Jekyll with no plugins, vanilla JS and inline SVG only. No
   raster images, no npm, no new gems without asking.
 - **`_data/foods.yml` is the source of truth for seasons.**
