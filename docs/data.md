@@ -8,7 +8,23 @@ is `docs/design.md`; the decision log is `docs/decisions.md`.
 
 - `_data/foods.yml` is the truth for seasons: one entry per food. Edit it
   by hand. The comment at the top of the file is the schema and is kept
-  in step with `tools/check-foods.py`.
+  in step with `tools/check-foods.py`. Its seasons and sources now come
+  from the research in `research/` (the pipeline's `out/proposed/`),
+  which also adds keys the site does not show yet: `confidence`,
+  `research`, `mcs`, ring-level `buy`, `sustainability`,
+  `never_candidate`, and the flags `proposed` and `no_supply`. How hand
+  edits and the pipeline share the file is not settled; until it is,
+  correct a season in `research/data/` and re-run the pipeline.
+- **The site reads `_data/shown.json`, not `foods.yml`.** `tools/bake.js`
+  writes it before every build from `tools/shown.js`: every food with its
+  `proposed` and `no_supply` rings left out, the research's keys and a
+  meat food's `buy` dropped, and the food's `sources` cut to what its
+  shown rings cite. Every template reads it as `site.data.shown`, and the
+  Node tools call `shownFoods()`; nothing that draws or answers sees a
+  hidden ring. It is gitignored, like `baked.json`.
+- `research/` holds the research behind the seasons: `rules.md`, the data
+  and source registers by group, the pipeline (`build/`) and its output
+  (`out/`). Jekyll excludes it.
 - `_data/groups.yml` names the culinary families, in display order, each
   with its `kind` (veg, fruit, wild, herbs, fish or meat), which the
   wheel page and Now's groups are drawn by.
@@ -26,7 +42,10 @@ is `docs/design.md`; the decision log is `docs/decisions.md`.
   brackets and `pending: true` on a source nothing cites yet, which
   the checker would otherwise warn about. The page's lists are
   generated from it. `general` is common knowledge, not yet checked,
-  with no address and no kind.
+  with no address and no kind. A source from the research also has
+  `type` (primary, trade, secondary), `published` (a year, or
+  `undated`), an optional `published_note` and `accessed`; its `note`
+  is the research's and the page does not show it.
 - Stubs, one per food, which the checker requires: `_foods/<slug>.md`
   (the page at `/<slug>/`), `_remind/<slug>.ics` (the food's calendar at
   `/remind/<slug>.ics`), `_wheels/<slug>.svg` (a standalone SVG of the
@@ -242,15 +261,18 @@ statement):
 Tests: `node --test tests/verdict/verdict.test.js` checks the grid, the
 cases in the scope document, and that every food and ring has a verdict
 and a date phrase in every week, with the verdict order and the storage
-words holding throughout.
+words holding throughout. The cases pinned to a real food on a real day
+read `tests/verdict/fixture-foods.yml`, the data frozen as it was on 10
+November 2026; the every-food checks run on that and on the shown data.
 
 ## Endpoints built from the data
 
-- `foods.json`: the whole data file. Linked from every page as the
-  alternate and from the footer.
+- `foods.json`: the data as the site shows it (`_data/shown.json`), not
+  every key of `foods.yml`. Linked from every page as the alternate and
+  from the footer.
 - `/foods/<slug>.json`: one file per food and never-food, written into
-  `_site` after Jekyll by `tools/food-json.js`: the food's data as
-  `foods.yml` has it, plus `asOf` (the build day and its week, the
+  `_site` after Jekyll by `tools/food-json.js`: the food's data as the
+  site shows it, plus `asOf` (the build day and its week, the
   baked verdict and date line, the season in months, a line per ring),
   read from `_data/baked.json` and never recomputed. A never-food reads
   NEVER with its line. The Source data page says what the fields mean.
@@ -281,13 +303,19 @@ text colours, the `said`, `cultivar`, `ring`, `lead`, `short`, `aliases`
 and `also` fields, the source keys (a ring's within its food's, no
 empty list, no name twice once folded, no food whose every ring is
 `lead: false`), the reserved slugs, every stub, and that every verdict
-has a general quotation. Problems fail; warnings print: a source nothing
-cites (unless `pending`), a just-about run touching no season or nine
-weeks or longer, a note opening with a working word, two foods' colours
-within 2 OKLab units (and a count of the pairs within 4), and a
-whole-food verdict lasting one week, which `tools/sweep-verdicts.js`
-computes from `verdict.js` under Node. Run it after every data edit.
-Python here has no YAML library, so Ruby parses each file. It does not
+has a general quotation. It checks the research's keys for shape too
+(confidence, research notes by kind, Good Fish Guide ratings that agree
+with their labels, sustainability's source keys, a source's type and
+dates), and lets a hidden, `no_supply` or `unsold` ring have no weeks; a
+hidden ring is left out of the colour and season checks. Problems fail;
+warnings print: a source nothing cites (unless `pending`), a just-about
+run touching no season or nine weeks or longer, a shown ring never in
+season, a food whose lead ring is hidden, a note opening with a working
+word, two foods' colours within 2 OKLab units (and a count of the pairs
+within 4), and a whole-food verdict lasting one week, which
+`tools/sweep-verdicts.js` computes from `verdict.js` under Node. Run it
+after every data edit. Python here has no YAML library, so Ruby parses
+each file, allowing its bare dates and anchors. It does not
 check that source links resolve:
 `sh scripts/check-link.sh <https-url>` does, one URL at a time, printing
 the status and the final address.

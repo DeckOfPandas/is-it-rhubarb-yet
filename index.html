@@ -20,7 +20,7 @@ site.js adds the varieties from foods.json), the names it completes to
 (its name and aliases) and its line, which the matches are copied from.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
-{%- assign foods = site.data.foods | sort: "name" -%}
+{%- assign foods = site.data.shown | sort: "name" -%}
 <section class="hook">
   {%- comment -%} The hero is a form, not a heading, so the page's one
      heading is spoken but not seen. {%- endcomment -%}

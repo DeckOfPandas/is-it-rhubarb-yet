@@ -45,7 +45,8 @@ Google's own subscribe link, since Google does not open webcal://.
 {%- comment -%} Every source in _data/sources.yml with a kind, under
    its kind's heading in the order its rank gives, so the page cannot
    drift from the register the food pages cite. A note in brackets is
-   the entry's own. {%- endcomment -%}
+   the entry's own; an entry from the research (one with a `type`) keeps
+   its note in the data until its display is designed. {%- endcomment -%}
 {%- assign kinds = "veg|Fruit and veg,herbs|Herbs and tea,foraging|Mushrooms and foraging,fish|Fish and shellfish,fish_sustainability|Fish sustainability,meat|Meat and game,meat_sustainability|Meat sustainability" | split: "," -%}
 {%- for entry in kinds -%}
 {%- assign parts = entry | split: "|" -%}
@@ -53,7 +54,7 @@ Google's own subscribe link, since Google does not open webcal://.
 <h3>{{ parts[1] }}</h3>
 <ul class="source-list">
 {%- for s in in_kind %}
-  <li><a href="{{ s.url }}">{{ s.name | escape }}</a>{% if s.note %} ({{ s.note }}){% endif %}</li>
+  <li><a href="{{ s.url }}">{{ s.name | escape }}</a>{% if s.note and s.type == nil %} ({{ s.note }}){% endif %}</li>
 {%- endfor %}
 </ul>
 {% endfor %}

@@ -21,6 +21,14 @@ ring may have its own, each of which the food's list must also carry; a
 ring without any inherits the food's. The singular `source` and `note`
 keys are gone: `sources` and `notes` everywhere.
 
+The research's keys (research/rules.md) are checked for shape: on a ring
+`confidence`, `research`, `mcs`, `buy`, and the flags `proposed`,
+`no_supply` and `unsold`; on a food `confidence`, `mcs` or `mcs_note`,
+`sustainability` and `never_candidate`; on a source `type`, `published`,
+`published_note` and `accessed`. A ring that is `proposed` or `no_supply`
+is hidden (tools/shown.js): its weeks may be empty and it is left out of
+the colour and season checks, which are about what the site draws.
+
 Warnings (printed, never failing): a source key nothing cites and no
 entry marks `pending`; a just-about run touching no in-season run, or
 nine weeks or longer; a note beginning with a working word; two foods'
@@ -29,6 +37,7 @@ within CROSS_NEAR; and a whole-food verdict that lasts a single week,
 which node tools/sweep-verdicts.js computes from assets/verdict.js.
 """
 
+import datetime
 import json
 import re
 import subprocess
@@ -54,6 +63,19 @@ RINGS = {"region", "method", "zone", "part"}
 METHODS = {"glasshouse", "outdoor", "cultivated", "wild", "fresh", "market", "farmed"}
 COLOUR = re.compile(r"^#[0-9a-f]{6}$")
 SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
+ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+CONFIDENCE = {"high", "medium", "low"}
+# A ring's `research` notes, by kind (research/rules.md), and the
+# pipeline's own: kept (Helen's weeks kept), combined (a whole-food ring
+# made of several lines), never (a NEVER candidate).
+RESEARCH_KEYS = {"season", "discrepancy", "drift", "year_round", "sustainability",
+                 "unsold", "no_supply", "kept", "combined", "never"}
+SUSTAINABILITY_KEYS = {"confidence", "impact", "frameworks", "notes", "buy"}
+SOURCE_TYPES = {"primary", "trade", "secondary"}
+# The Good Fish Guide's scale: 1-2 Best Choice, 3-4 OK, 5 Avoid.
+MCS_BANDS = {1: "Best Choice", 2: "Best Choice", 3: "OK", 4: "OK", 5: "Avoid"}
+MCS_BAND = re.compile(r"^[1-5](-[1-5])?$")
+FIRST_YEAR = 1900
 
 # Paths that are not foods. A food with one of these slugs would take the
 # page's URL, because food pages live at /<slug>/. grey-squirrel and
@@ -86,8 +108,11 @@ SWEEP = ROOT / "tools" / "sweep-verdicts.js"
 
 
 def load(path):
-    ruby = ["ruby", "-ryaml", "-rjson", "-e",
-            "puts JSON.dump(YAML.load_file(ARGV[0]))", str(path)]
+    """Bare dates and anchors are allowed by name, as tools/yaml.js does;
+    a date comes out as its ISO string."""
+    ruby = ["ruby", "-ryaml", "-rjson", "-rdate", "-e",
+            "puts JSON.dump(YAML.load_file(ARGV[0], permitted_classes: [Date], aliases: true))",
+            str(path)]
     return json.loads(subprocess.check_output(ruby, text=True))
 
 
@@ -309,6 +334,147 @@ def check_short(item, label, problems, warnings):
         warnings.append(f"{label}: short {short!r} is {len(short)} characters, over {SHORT_MAX}")
 
 
+def is_hidden(v):
+    """A ring the site does not show: tools/shown.js drops it."""
+    return v.get("proposed") is True or v.get("no_supply") is True
+
+
+def check_flag(item, key, label, problems):
+    if key in item and item[key] is not True:
+        problems.append(f"{label}: {key} is true or left out")
+
+
+def check_phrase(item, key, label, problems):
+    if key in item and not (isinstance(item[key], str) and item[key].strip()):
+        problems.append(f"{label}: {key} must be a sentence")
+
+
+def check_confidence(item, label, problems):
+    if "confidence" in item and item["confidence"] not in CONFIDENCE:
+        problems.append(f"{label}: confidence is one of {sorted(CONFIDENCE)}, not {item['confidence']!r}")
+
+
+def check_research(v, label, problems):
+    """`research` maps a kind of note to its sentence."""
+    if "research" not in v:
+        return
+    r = v["research"]
+    if not isinstance(r, dict) or not r:
+        problems.append(f"{label}: research must map a kind of note to a sentence")
+        return
+    for k, text in r.items():
+        if k not in RESEARCH_KEYS:
+            problems.append(f"{label}: research.{k} is not one of {sorted(RESEARCH_KEYS)}")
+        if not (isinstance(text, str) and text.strip()):
+            problems.append(f"{label}: research.{k} must be a sentence")
+
+
+def check_rating(r, label, problems):
+    """One Good Fish Guide rating: stock and method as the MCS names them,
+    a score of 1 to 5 whose label agrees with it, or no score with a label
+    (and a band, where the MCS shows one)."""
+    if not isinstance(r, dict):
+        problems.append(f"{label}: a rating must be a mapping")
+        return
+    for k in ("stock", "method", "label"):
+        if not (isinstance(r.get(k), str) and r[k].strip()):
+            problems.append(f"{label}: a rating needs {k}")
+    score = r.get("rating")
+    if score is None:
+        band = r.get("band")
+        if band is not None and not MCS_BAND.match(str(band)):
+            problems.append(f"{label}: band {band!r} must be like 1-2")
+    elif not (isinstance(score, int) and score in MCS_BANDS):
+        problems.append(f"{label}: rating {score!r} must be 1 to 5, or null")
+    elif isinstance(r.get("label"), str) and not r["label"].startswith(MCS_BANDS[score]):
+        problems.append(f"{label}: rating {score} is {MCS_BANDS[score]}, not {r['label']!r}")
+
+
+def check_mcs(m, label, problems, summary=False):
+    """A ring's `mcs`: when it was read, and its ratings. A food's also
+    carries its best and worst."""
+    if not isinstance(m, dict):
+        problems.append(f"{label}: mcs must be a mapping")
+        return
+    if not ISO_DATE.match(str(m.get("read", ""))):
+        problems.append(f"{label}: mcs.read must be a date, YYYY-MM-DD")
+    ratings = m.get("ratings")
+    if not (isinstance(ratings, list) and ratings):
+        problems.append(f"{label}: mcs.ratings must be a list of ratings")
+        ratings = []
+    for r in ratings:
+        check_rating(r, f"{label} mcs", problems)
+    if summary:
+        for k in ("best", "worst"):
+            if k not in m:
+                problems.append(f"{label}: mcs needs {k}")
+            else:
+                check_rating(m[k], f"{label} mcs.{k}", problems)
+
+
+def check_sustainability(s, label, problems, known, used):
+    """A meat food's `sustainability`: its keys, and every `...source` in it
+    a key of sources.yml, which counts as cited."""
+    if not isinstance(s, dict):
+        problems.append(f"{label}: sustainability must be a mapping")
+        return
+    for k in s:
+        if k not in SUSTAINABILITY_KEYS:
+            problems.append(f"{label}: sustainability.{k} is not one of {sorted(SUSTAINABILITY_KEYS)}")
+    check_confidence(s, f"{label} sustainability", problems)
+
+    def walk(x):
+        if isinstance(x, dict):
+            for k, v in x.items():
+                if k.endswith("source") and isinstance(v, str):
+                    if v not in known:
+                        problems.append(f"{label}: sustainability cites unknown source {v!r}")
+                    used.add(v)
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(s)
+
+
+def check_source_entry(s, problems):
+    """The research's fields on a source: its type, the year it was
+    published (or `undated`), and the day it was read."""
+    label = f"sources.yml: {s.get('key', '?')}"
+    if "type" in s and s["type"] not in SOURCE_TYPES:
+        problems.append(f"{label}: type is one of {sorted(SOURCE_TYPES)}")
+    if "published" in s:
+        p = s["published"]
+        if not (p == "undated" or (isinstance(p, int) and FIRST_YEAR <= p <= datetime.date.today().year)):
+            problems.append(f"{label}: published is a year or undated, not {p!r}")
+    check_phrase(s, "published_note", label, problems)
+    if "accessed" in s and not ISO_DATE.match(str(s["accessed"])):
+        problems.append(f"{label}: accessed must be a date, YYYY-MM-DD")
+    if "type" in s:
+        for k in ("published", "accessed"):
+            if k not in s:
+                problems.append(f"{label}: a researched source needs {k}")
+
+
+def check_weeks(weeks, label, problems):
+    """Runs are [from, to, state], inside the year, in no overlap."""
+    covered = set()
+    for r in weeks:
+        if (not isinstance(r, list) or len(r) != 3
+                or not all(isinstance(n, int) for n in r[:2])):
+            problems.append(f"{label}: range must be [from, to, state]: {r}")
+            continue
+        a, b, state = r
+        if not (1 <= a <= b <= 52):
+            problems.append(f"{label}: weeks out of order or range: {r}")
+        if state not in STATES:
+            problems.append(f"{label}: unknown state {state!r}")
+        span = set(range(a, b + 1))
+        if covered & span:
+            problems.append(f"{label}: overlapping runs at weeks {sorted(covered & span)[:3]}")
+        covered |= span
+
+
 def main() -> int:
     foods = load(DATA)
     groups = {g["key"] for g in load(GROUPS_FILE)}
@@ -317,6 +483,8 @@ def main() -> int:
     known = {s["key"] for s in sources}
     problems = []
     warnings = []
+    for s in sources:
+        check_source_entry(s, problems)
     slugs = set()
     colours = {}
     aliases = {}
@@ -358,6 +526,19 @@ def main() -> int:
             problems.append(f"{where}: unsold must be a sentence")
         if "said" in f and not (isinstance(f["said"], str) and f["said"].strip()):
             problems.append(f"{where}: said must be a phrase")
+        check_phrase(f, "buy", where, problems)
+        check_confidence(f, where, problems)
+        check_flag(f, "never_candidate", where, problems)
+        if "mcs" in f:
+            if f["mcs"] is None:
+                if not (isinstance(f.get("mcs_note"), str) and f["mcs_note"].strip()):
+                    problems.append(f"{where}: mcs: null needs an mcs_note saying why")
+            else:
+                check_mcs(f["mcs"], where, problems, summary=True)
+        elif "mcs_note" in f:
+            problems.append(f"{where}: mcs_note belongs beside mcs: null")
+        if "sustainability" in f:
+            check_sustainability(f["sustainability"], where, problems, known, used_keys)
         check_colour(f.get("colour", ""), where, problems, warnings, slug)
         check_text_colours(f, where, problems)
         check_shades(f, where, problems, warnings, slug)
@@ -373,12 +554,37 @@ def main() -> int:
             problems.append(f"{where}: no varieties")
         elif all(v.get("lead") is False for v in f["varieties"]):
             problems.append(f"{where}: every ring is lead: false, so nothing reaches the calendar, the wheel or the feed")
+        else:
+            shown = [v for v in f["varieties"] if not is_hidden(v)]
+            if not shown:
+                problems.append(f"{where}: every ring is hidden (proposed or no_supply), so the food shows nothing")
+            elif all(v.get("lead") is False for v in shown):
+                warnings.append(f"{where}: its lead ring is hidden (proposed or no_supply), so it has no calendar row, wheel dot or feed")
         variety_colours = []
         for v in f.get("varieties", []):
             label = f"{where} / {v.get('name') or '-'}"
-            if "name" not in v or not v.get("weeks"):
+            hidden = is_hidden(v)
+            # A ring's weeks are empty only where it has none to give: no
+            # supply, not sellable, or a proposed ring nobody has dated.
+            empty_ok = hidden or v.get("unsold") is True
+            if "name" not in v or not isinstance(v.get("weeks"), list) or not (v["weeks"] or empty_ok):
                 problems.append(f"{label}: variety needs name and weeks")
                 continue
+            for flag in ("proposed", "no_supply", "unsold"):
+                check_flag(v, flag, label, problems)
+            for flag in ("no_supply", "unsold"):
+                if v.get(flag) is True and v["weeks"]:
+                    problems.append(f"{label}: a {flag} ring has no weeks")
+            if v.get("proposed") is True and v.get("lead") is not False:
+                problems.append(f"{label}: a proposed ring is lead: false until it is promoted")
+            if v.get("unsold") is True and not f.get("unsold"):
+                problems.append(f"{label}: an unsold ring needs the food's unsold sentence")
+            check_confidence(v, label, problems)
+            check_research(v, label, problems)
+            check_phrase(v, "buy", label, problems)
+            if "mcs" in v:
+                check_mcs(v["mcs"], label, problems)
+            check_weeks(v["weeks"], label, problems)
             if "colour" in v:
                 check_colour(v["colour"], label, problems, warnings, slug)
                 check_text_colours(v, label, problems)
@@ -411,6 +617,11 @@ def main() -> int:
             check_shades(v, label, problems, warnings, slug)
             check_aliases(v, label, problems, aliases, slug)
             check_short(v, label, problems, warnings)
+            if hidden:
+                continue
+            if v["weeks"] and not any(r[2] == "in" for r in v["weeks"] if isinstance(r, list) and len(r) == 3):
+                warnings.append(f"{label}: never in season, only just about or from storage, so it never reads YES")
+            check_avail_runs(v["weeks"], label, warnings)
             row_colour = v.get("colour", f.get("colour"))
             # A ring shares its food's colour, or its variety's.
             if v.get("ring"):
@@ -427,24 +638,6 @@ def main() -> int:
                     elif distance(row_colour, other) < VARIETY_DISTANCE:
                         warnings.append(f"{label}: {row_colour} is {distance(row_colour, other):.1f} from {other_label}")
                 variety_colours.append((label, row_colour))
-            covered = set()
-            for r in v["weeks"]:
-                if (not isinstance(r, list) or len(r) != 3
-                        or not all(isinstance(n, int) for n in r[:2])):
-                    problems.append(f"{label}: range must be [from, to, state]: {r}")
-                    continue
-                a, b, state = r
-                if not (1 <= a <= b <= 52):
-                    problems.append(f"{label}: weeks out of order or range: {r}")
-                if state not in STATES:
-                    problems.append(f"{label}: unknown state {state!r}")
-                span = set(range(a, b + 1))
-                if covered & span:
-                    problems.append(f"{label}: overlapping runs at weeks {sorted(covered & span)[:3]}")
-                covered |= span
-            if not any(r[2] == "in" for r in v["weeks"] if isinstance(r, list) and len(r) == 3):
-                problems.append(f"{label}: never fully in season")
-            check_avail_runs(v["weeks"], label, warnings)
 
     # Two foods told apart by colour alone.
     near = 0

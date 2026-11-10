@@ -3,7 +3,8 @@
 // name, aliases and shared words, and every named variety (not a ring)
 // by its name and how it is said. The header and the not-found page
 // build theirs from search.json, which carries the same strings, so
-// what passes here holds for all three.
+// what passes here holds for all three. The foods are the ones the site
+// shows (tools/shown.js): a hidden variety is never a search hit.
 // Run: node --test tests/site/search.test.js
 "use strict";
 const test = require("node:test");
@@ -12,9 +13,10 @@ const path = require("path");
 const S = require("../../assets/search.js");
 const V = require("../../assets/verdict.js");
 const { loadYaml } = require("../../tools/yaml.js");
+const { shownFoods } = require("../../tools/shown.js");
 
 const DATA = path.join(__dirname, "..", "..", "_data");
-const foods = loadYaml(path.join(DATA, "foods.yml"));
+const foods = shownFoods(loadYaml(path.join(DATA, "foods.yml")));
 const never = loadYaml(path.join(DATA, "never.yml"));
 
 // Home's index: a whole food is one item; a named variety is another,

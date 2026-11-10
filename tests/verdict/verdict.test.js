@@ -1,5 +1,9 @@
-// The verdict rules, checked against the real data for the cases in the
-// scope document and against made-up varieties for the edges.
+// The verdict rules, checked against real foods for the cases in the
+// scope document and against made-up varieties for the edges. A case
+// pinned to a real food on a real day reads fixture-foods.yml, the data
+// frozen as it was when the case was written, so new data cannot move
+// it; the checks that hold for every food run on that and on the data the
+// site shows today (tools/shown.js).
 // Run: node --test tests/verdict/verdict.test.js
 "use strict";
 const test = require("node:test");
@@ -7,11 +11,14 @@ const assert = require("node:assert/strict");
 const path = require("path");
 const V = require("../../assets/verdict.js");
 const { loadYaml } = require("../../tools/yaml.js");
+const { shownFoods } = require("../../tools/shown.js");
 
 const DATA = path.join(__dirname, "..", "..", "_data");
-const foods = loadYaml(path.join(DATA, "foods.yml"));
+const foods = loadYaml(path.join(__dirname, "fixture-foods.yml"));
+const live = shownFoods(loadYaml(path.join(DATA, "foods.yml")));
 const groups = loadYaml(path.join(DATA, "groups.yml"));
 const bySlug = Object.fromEntries(foods.map((f) => [f.slug, f]));
+const DATASETS = [["fixture", foods], ["live", live]];
 
 // Sunday 18 October 2026 is in week 42.
 const TODAY = new Date(2026, 9, 18, 12);
@@ -47,7 +54,7 @@ test("the week grid", () => {
 test("every food and every variety has a verdict and a date phrase in every week", () => {
   const OK = new Set(["YES", "JUST", "YES-ISH", "NEARLY", "NO"]);
   const missing = [];
-  for (const f of foods) {
+  for (const f of foods.concat(live)) {
     for (let w = 1; w <= 52; w++) {
       const today = V.midOfToday(w, YEAR);
       const fv = V.foodVerdict(f, w);
@@ -264,23 +271,51 @@ test("verdict order: YES > JUST > YES-ISH > NEARLY > NO", () => {
 
 test("every food, every week: the order holds and the storage words are right", () => {
   const wrong = [];
-  for (const f of foods) {
+  for (const [set, f] of DATASETS.flatMap(([set, fs]) => fs.map((f) => [set, f]))) {
     if (f.unsold) continue;
     const t = V.timelineOf(f);
     for (let w = 1; w <= 52; w++) {
       const today = V.midOfToday(w, YEAR);
       const fv = V.foodVerdict(f, w), line = V.dateLine(fv.whole, YEAR, today);
-      const s = t.timeline[w], at = `${f.slug} week ${w}`;
+      const s = t.timeline[w], at = `${set} ${f.slug} week ${w}`;
       if (s === "in" && !["YES", "JUST"].includes(fv.verdict)) wrong.push(`${at}: in season but ${fv.verdict}`);
       if ((s === "store" || s === "glass") && fv.verdict !== "YES-ISH") wrong.push(`${at}: held alone but ${fv.verdict}`);
       if (s === "" && !["NEARLY", "NO"].includes(fv.verdict)) wrong.push(`${at}: nothing but ${fv.verdict}`);
       if (fv.verdict === "YES-ISH" && !/^(Available from storage|Under glass)/.test(line)) wrong.push(`${at}: ${line}`);
       if (/from store\b/.test(line)) wrong.push(`${at}: says "from store": ${line}`);
-      if (/, then /.test(line) && !/, then (available from storage|under glass|tailing off)/.test(line)) wrong.push(`${at}: ${line}`);
+      if (/, then /.test(line) && !/, then (available from storage|under glass|tailing off|a few about the rest of the year)/.test(line)) wrong.push(`${at}: ${line}`);
       if (/\d/.test(line)) wrong.push(`${at}: a number in ${line}`);
+      // A tail names the end of its run, never one a year off.
+      const r = fv.whole;
+      if (/tailing off until/.test(line) && r.spanUntil && r.spanUntil.years === 1 && r.spanUntil.week === V.prevWeek(w)) wrong.push(`${at}: a tail round the year: ${line}`);
+      for (const ring of fv.varieties) {
+        const p = V.phrase(ring, YEAR, today);
+        if (/tailing off until/.test(p) && ring.spanUntil && ring.spanUntil.years === 1 && ring.spanUntil.week === V.prevWeek(w)) wrong.push(`${at} / ${ring.name}: a tail round the year: ${p}`);
+      }
     }
   }
   assert.deepEqual(wrong, []);
+});
+
+test("a fresh span round the whole year: the tail and the just-about line name no end", () => {
+  // In season weeks 1-8, just about the rest of the year (a fish landed all
+  // year, best in winter), and just about all year with no season at all.
+  const tail = [[1, 8, "in"], [9, 52, "avail"]];
+  assert.equal(say(tail, V.midOfToday(6, YEAR)), "Two or three weeks left, then a few about the rest of the year");
+  assert.equal(say(tail, V.midOfToday(20, YEAR)), "A few about now, in earnest in January");
+  const always = [[1, 52, "avail"]];
+  const r = V.varietyVerdict({ name: "", weeks: always }, 20);
+  assert.equal(r.verdict, V.C.ISOLATED_AVAIL);
+  assert.equal(r.allYear, true);
+  assert.equal(say(always, V.midOfToday(20, YEAR)), "A few about all year");
+  assert.equal(V.daysTo(r, YEAR, V.midOfToday(20, YEAR)), null, "no boundary to sort by");
+  assert.equal(V.timing(r, YEAR, V.midOfToday(20, YEAR)).when, "A few about all year");
+});
+
+test("a ring that goes into storage says so, as the whole food does", () => {
+  const bramley = { name: "", weeks: [[1, 30, "store"], [31, 39, "in"], [40, 52, "store"]] };
+  assert.equal(say(bramley.weeks, V.midOfToday(37, YEAR)), "Two or three weeks left, then available from storage until late July");
+  assert.equal(say(bramley.weeks, V.midOfToday(32, YEAR)), "Until late September", "a far end is said alone, as before");
 });
 
 test("JUST runs across overlapping rings: one ring ending is not the food ending", () => {
@@ -321,7 +356,7 @@ test("rings run from the longest season to the shortest, ties in data order", ()
     { name: "C", weeks: [[5, 14, "avail"]] }, { name: "D", weeks: [[1, 52, "in"]] }] };
   assert.deepEqual(V.ringOrder(food), [3, 1, 0, 2]);
   assert.deepEqual(ringLines("lettuce").slice(0, 2).map((l) => l[0]), ["Glasshouse", "Little gem"]);
-  for (const f of foods) {
+  for (const f of foods.concat(live)) {
     const order = V.ringOrder(f);
     assert.deepEqual(order.slice().sort((a, b) => a - b), f.varieties.map((_, i) => i), f.slug + ": every ring once");
   }

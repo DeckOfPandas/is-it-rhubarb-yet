@@ -14,7 +14,7 @@ the quotations in data-quotes (the general pools plus the lines pinned
 to this food). The whole page keys off --food, the food's colour.
 {%- endcomment -%}
 {%- assign baked = site.data.baked -%}
-{%- assign food = site.data.foods | where: "slug", page.slug | first -%}
+{%- assign food = site.data.shown | where: "slug", page.slug | first -%}
 {%- assign b = baked.foods[page.slug] -%}
 {%- capture quotes_json -%}{ {%- for pool in site.data.quotes -%}
   {%- assign general = pool[1] | where_exp: "q", "q.foods == nil" -%}
@@ -78,7 +78,7 @@ to this food). The whole page keys off --food, the food's colour.
      else in shows no section. All of them are in data-all, and site.js
      picks a fresh three on every visit. {%- endcomment -%}
   {%- assign also_all = "" | split: "" -%}
-  {%- for other in site.data.foods -%}
+  {%- for other in site.data.shown -%}
     {%- if other.group == food.group and other.slug != food.slug -%}
       {%- assign ob = baked.foods[other.slug] -%}
       {%- if ob.verdict == "YES" or ob.verdict == "JUST" -%}{%- assign also_all = also_all | push: other -%}{%- endif -%}

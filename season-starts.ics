@@ -16,7 +16,7 @@ VERSION:2.0
 PRODID:-//Is It Rhubarb Yet//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:UK seasons
-{% for food in site.data.foods -%}
+{% for food in site.data.shown -%}
 {% include ics-events.html food=food jan1=jan1 -%}
 {% endfor -%}
 END:VCALENDAR

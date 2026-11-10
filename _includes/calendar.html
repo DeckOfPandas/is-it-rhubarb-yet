@@ -47,7 +47,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
 {%- endcomment -%}
 {%- assign keyed = "" | split: "" -%}
 {%- assign groups_present = 0 -%}
-{%- for food in site.data.foods -%}
+{%- for food in site.data.shown -%}
   {%- assign food_first = 99 -%}
   {%- for v in food.varieties -%}{%- for r in v.weeks -%}
     {%- if r[2] == "in" and r[0] < food_first -%}{%- assign food_first = r[0] -%}{%- endif -%}
@@ -77,7 +77,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
 {%- assign keyed = keyed | sort -%}
 {%- if include.order == "group" -%}
   {%- for g in site.data.groups -%}
-    {%- assign in_group = site.data.foods | where: "group", g.key -%}
+    {%- assign in_group = site.data.shown | where: "group", g.key -%}
     {%- if in_group.size > 0 -%}{%- assign groups_present = groups_present | plus: 1 -%}{%- endif -%}
   {%- endfor -%}
 {%- endif -%}
@@ -94,7 +94,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
 {%- assign current_group = "" -%}
 {%- for key in keyed -%}
   {%- assign parts = key | split: "|" -%}
-  {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+  {%- assign food = site.data.shown | where: "slug", parts[1] | first -%}
   {%- if include.order == "group" and food.group != current_group -%}
     {%- assign current_group = food.group -%}
     {%- assign g = site.data.groups | where: "key", current_group | first -%}
@@ -136,7 +136,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
       {%- continue -%}
     {%- endif -%}
     {%- assign y = parts[0] | plus: 0 -%}
-    {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+    {%- assign food = site.data.shown | where: "slug", parts[1] | first -%}
     {%- assign vi = parts[2] | plus: 0 -%}
     {%- assign v = food.varieties[vi] -%}
     {%- assign vlabels = site.data.baked.labels[food.slug] -%}
@@ -164,7 +164,7 @@ number in a key is padded to a fixed width by adding 100 or 10.
     {%- assign parts = row | split: "|" -%}
     {%- if parts[0] == "g" -%}{%- continue -%}{%- endif -%}
     {%- assign y = parts[0] | plus: 0 -%}
-    {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+    {%- assign food = site.data.shown | where: "slug", parts[1] | first -%}
     {%- assign vi = parts[2] | plus: 0 -%}
     {%- assign v = food.varieties[vi] -%}
     {%- assign gid = include.id | append: "-" | append: food.slug | append: "-" | append: vi -%}

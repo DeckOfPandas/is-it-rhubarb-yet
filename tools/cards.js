@@ -34,6 +34,7 @@ const http = require("http");
 const path = require("path");
 const V = require("../assets/verdict.js");
 const { loadYaml } = require("./yaml.js");
+const { shownFoods } = require("./shown.js");
 const { drawIcons, SITE_ICONS } = require("./icons.js");
 
 // How many foods each line names, as index.html samples and site.js draws.
@@ -301,7 +302,7 @@ async function main() {
   const bakedPath = path.join(DATA, "baked.json");
   if (!fs.existsSync(bakedPath)) throw new Error("no _data/baked.json: run node tools/bake.js first");
   const baked = JSON.parse(fs.readFileSync(bakedPath, "utf8"));
-  const foods = loadYaml(path.join(DATA, "foods.yml"));
+  const foods = shownFoods(loadYaml(path.join(DATA, "foods.yml")));
   const never = fs.existsSync(path.join(DATA, "never.yml")) ? loadYaml(path.join(DATA, "never.yml")) : [];
 
   const cards = [];
