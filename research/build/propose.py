@@ -130,6 +130,10 @@ def main():
                 used.add(target)
                 if not line.get("weeks") and not (line.get("no_supply") or line.get("unsold")):
                     nr = dict(r)
+                    # A ring with no sources inherits its food's; say so, since the
+                    # food's list is rebuilt from its rings' below.
+                    if not nr.get("sources"):
+                        nr["sources"] = list(f.get("sources") or [])
                     nr["research"] = {"kept": "No clean-room data for this line; Helen's original weeks kept.",
                                       **(research(line) or {})}
                     nr["confidence"] = "low"

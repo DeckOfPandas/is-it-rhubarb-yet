@@ -1857,11 +1857,12 @@
   also: [veg, vegetables]
   colour: "#a67c1e"
   text_on_custard: "#8f6600"
-  sources: []
+  sources: [bbc]
   varieties:
   - name: ""
     weeks:
     - [23, 35, in]
+    sources: [bbc]
     research:
       kept: "No clean-room data for this line; Helen's original weeks kept."
       season: "Still no dated UK-grown window. Third pass: a London organic box scheme sold courgette flowers hand-picked by a named grower at Wild Fields in early July 2013, calling them something never seen in supermarkets (farmdirect-courgette-flowers-2013); one dated sale, no window. A UK foodservice supplier lists Israeli flowers and says it imports from the Netherlands outside the UK season, which it calls late spring and summer without months (osolocal-courgette-flowers). Searched The Caterer, FPJ, The Grocer, FreshPlaza and Hortidaily (Dutch growers only), and chef-facing growers in Cornwall, Kent, Sussex, Norfolk and Worcestershire (Westlands and Nurtured in Norfolk do not list them). Small UK supply evidently exists, so not a never case, but no source names months."
