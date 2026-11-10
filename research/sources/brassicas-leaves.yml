@@ -1,0 +1,401 @@
+# Source registry: brassicas-leaves group (researched 2026-11-10)
+- key: defra-wholesale-prices
+  title: "Wholesale fruit and vegetable prices, weekly average: weekly price time series (CSV preview, fruitvegprices-261026; fortnightly dates 2025-11-24 to 2026-10-26)"
+  publisher: "Defra"
+  url: "https://www.gov.uk/csv-preview/6adb512cd798ae11e9bc5c36/fruitvegprices-261026.csv"
+  type: primary
+  published: 2026
+  accessed: 2026-11-10
+- key: ahdb-harvested-britain
+  title: "Harvested in Britain: a year in the life of Britain's horticultural harvest (c. 2015)"
+  publisher: "AHDB Horticulture"
+  url: "https://projectbluearchive.blob.core.windows.net/media/Default/Imported%20Publication%20Docs/AHDB%20Horticulture%20/Harvested_in_Britain_web%20(2).pdf"
+  type: primary
+  published: 2015
+  accessed: 2026-11-10
+- key: rhs-kohlrabi
+  title: "How to grow kohl rabi"
+  publisher: "Royal Horticultural Society"
+  url: "https://www.rhs.org.uk/vegetables/kohl-rabi"
+  type: primary
+  published: 2026
+  published_note: Living RHS guide; no date shown, footer reads © RHS 2026.
+  accessed: 2026-11-10
+- key: freshplaza-sprouts-clappison
+  title: "UK: East Yorkshire farm benefits from sprouts bonanza (2 Jan 2012; quotes W Clappison farm)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2091055/uk-east-yorkshire-farm-benefits-from-sprouts-bonanza"
+  type: trade
+  published: 2012
+  accessed: 2026-11-10
+- key: freshplaza-broccoli-riviera
+  title: "UK broccoli harvest expected three weeks early (23 May 2025; quotes Riviera Produce)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/europe/article/9734784/uk-broccoli-harvest-expected-three-weeks-early/"
+  type: trade
+  published: 2025
+  accessed: 2026-11-10
+- key: freshplaza-broccoli-peloton
+  title: "Good end to broccoli season but it will not make up for losses at the start of the UK brassica campaign (17 Oct 2025; quotes Peloton Produce)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/9775848/good-end-to-broccoli-season-but-it-will-not-make-up-for-losses-at-the-start-of-the-uk-brassica-campaign/"
+  type: trade
+  published: 2025
+  accessed: 2026-11-10
+- key: caterer-psb
+  title: "Home-grown harvest: purple sprouting broccoli (2 Mar 2018; market report from Total Produce)"
+  publisher: "The Caterer"
+  url: "https://thecaterer.com/all-content/home-grown-harvest-purple-sprouting-broccoli"
+  type: trade
+  published: 2018
+  accessed: 2026-11-10
+- key: grocer-psb-frost
+  title: "Severe frosts wreck purple broccoli crops (c. early 2011; quotes Staples Vegetables)"
+  publisher: "The Grocer"
+  url: "https://www.thegrocer.co.uk/news/severe-frosts-wreck-purple-broccoli-crops/215885.article"
+  type: trade
+  published: 2011
+  published_note: No date line; the text cites Kantar data to 23 January 2011 and the frosts of November 2010.
+  accessed: 2026-11-10
+- key: freshplaza-cauli-sef-2024
+  title: "Big demand for Cornwall's cauliflower (2 Feb 2024; quotes Southern England Farms)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/9597793/big-demand-for-cornwall-s-cauliflower/"
+  type: trade
+  published: 2024
+  accessed: 2026-11-10
+- key: freshplaza-cauli-sef-2017
+  title: "Cornish cauliflower in good supply (14 Dec 2017; quotes Southern England Farms)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2186430/cornish-cauliflower-in-good-supply/"
+  type: trade
+  published: 2017
+  accessed: 2026-11-10
+- key: freshplaza-cauli-sef-2021
+  title: "Cauliflower availability is now very strong and will continue to be so into April (25 Mar 2021; quotes Southern England Farms)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/article/9306067/cauliflower-availability-is-now-very-strong-and-will-continue-to-be-so-into-april"
+  type: trade
+  published: 2021
+  accessed: 2026-11-10
+- key: riverford-cornish-cauli
+  title: "Growing caulis is in my Cornish heritage (27 Feb 2020; by grower Paul Badcock)"
+  publisher: "Wicked Leeks (Riverford)"
+  url: "https://wickedleeks.riverford.co.uk/opinion/growing-caulis-is-in-my-cornish-heritage/"
+  type: trade
+  published: 2020
+  accessed: 2026-11-10
+- key: freshplaza-cavolo-mudwalls
+  title: "UK cavolo nero is back in season (23 Aug 2016; quotes Mudwalls Farm)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2162318/uk-cavolo-nero-is-back-in-season/"
+  type: trade
+  published: 2016
+  accessed: 2026-11-10
+- key: freshplaza-cavolo-ahworth
+  title: "We have been bold with our cavolo nero growing plan to ensure we can meet demand (2 Jul 2025; quotes A.H. Worth)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/europe/article/9746298/we-have-been-bold-with-our-cavolo-nero-growing-plan-to-ensure-we-can-meet-demand/"
+  type: trade
+  published: 2025
+  accessed: 2026-11-10
+- key: freshplaza-cabbage-esg
+  title: "Vogue has called 2026 the year of the cabbage (29 Oct 2026; ESG Drysdale)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/oceania/article/9886628/vogue-has-called-2026-the-year-of-the-cabbage/"
+  type: trade
+  published: 2026
+  accessed: 2026-11-10
+- key: caterer-spring-greens
+  title: "Home-grown harvest: spring greens (3 Mar 2019; market report from Total Produce)"
+  publisher: "The Caterer"
+  url: "https://thecaterer.com/all-content/home-grown-harvest-spring-greens"
+  type: trade
+  published: 2019
+  accessed: 2026-11-10
+- key: farmingmonthly-watercress
+  title: "Another successful Watercress Festival heralds the start of a bumper season for watercress growers (17 May 2011; quotes the Watercress Alliance)"
+  publisher: "Farming Monthly"
+  url: "https://www.farmingmonthly.co.uk/news/1170-another-successful-watercress-festival-heralds-the-start-of-a-bumper-season-for-watercress-growers/"
+  type: trade
+  published: 2011
+  accessed: 2026-11-10
+- key: hortidaily-watercress
+  title: "UK watercress farmers help get bride to the church on time (20 May 2014; quotes the Watercress Alliance)"
+  publisher: "HortiDaily"
+  url: "https://www.hortidaily.com/article/6008768/uk-watercress-farmers-help-get-bride-to-the-church-on-time/"
+  type: trade
+  published: 2014
+  accessed: 2026-11-10
+- key: freshplaza-lettuce-2017
+  title: "UK iceberg lettuce harvest comes early, ending Spanish veg shortage (1 May 2017)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2174743/uk-iceberg-lettuce-harvest-comes-early-ending-spanish-veg-shortage/"
+  type: trade
+  published: 2017
+  accessed: 2026-11-10
+- key: esm-kohlrabi
+  title: "Waitrose introduces British-grown kohlrabi (16 Aug 2013)"
+  publisher: "ESM Magazine"
+  url: "https://www.esmmagazine.com/retail/waitrose-introduces-british-grown-kohlrabi-1987"
+  type: trade
+  published: 2013
+  accessed: 2026-11-10
+- key: sleafordstandard-sprouts
+  title: "Ready to harvest 150m-plus sprouts (c. 2016; quotes T. H. Clements)"
+  publisher: "Sleaford Standard"
+  url: "https://www.sleafordstandard.co.uk/news/ready-to-harvest-150m-plus-sprouts-754274"
+  type: secondary
+  published: undated
+  published_note: No date line; the text looks ahead to Christmas 2017, so about 2016-17.
+  accessed: 2026-11-10
+- key: courier-watercress
+  title: "Season's eatings: watercress (undated; quotes The Watercress Company and Vitacress)"
+  publisher: "The Courier"
+  url: "https://www.thecourier.co.uk/fp/lifestyle/food-drink/1475165/seasons-eatings-watercress/"
+  type: secondary
+  published: undated
+  published_note: No date line or year on the page.
+  accessed: 2026-11-10
+- key: tozer-psb
+  title: "Broccoli purple sprouting: UK variety range"
+  publisher: "Tozer Seeds"
+  url: "https://www.tozerseeds.com/product-category/brassicas/broccoli-purple-sprouting/?country=UK"
+  type: secondary
+  published: 2026
+  published_note: Current UK variety catalogue; no date shown, so the current year is used.
+  accessed: 2026-11-10
+- key: vegsoc-seasonal
+  title: "Seasonal UK grown produce (also republished by the British Dietetic Association)"
+  publisher: "The Vegetarian Society"
+  url: "https://vegsoc.org/blog/seasonal-uk-grown-produce/"
+  type: secondary
+  published: 2026
+  published_note: First published 1 January 2022; last modified 24 September 2026.
+  accessed: 2026-11-10
+- key: oddbox-seasonal
+  title: "What's in season when? A guide to UK seasonal eating (29 Jul 2021)"
+  publisher: "Oddbox"
+  url: "https://www.oddbox.co.uk/blog/whats-in-season-when-a-guide-to-uk-seasonal-eating"
+  type: secondary
+  published: 2021
+  accessed: 2026-11-10
+- key: hubbub-seasonal
+  title: "How to eat seasonally in the UK: a month-by-month guide"
+  publisher: "Hubbub"
+  url: "https://hubbub.org.uk/how-to-eat-seasonally-in-the-uk-a-month-by-month-guide"
+  type: secondary
+  published: undated
+  published_note: No date, update stamp or copyright year on the page.
+  accessed: 2026-11-10
+- key: freshview-seasonality
+  title: "Seasonality calendar"
+  publisher: "Freshview Foods"
+  url: "https://freshviewfoods.co.uk/seasonality-calendar/"
+  type: secondary
+  published: 2025
+  published_note: Last modified 27 February 2025.
+  accessed: 2026-11-10
+- key: kentishstour-seasonal
+  title: "Seasonal calendar"
+  publisher: "Kentish Stour Countryside Partnership"
+  url: "https://kentishstour.org.uk/about-the-stour-valley/action-to-help-the-stour-valley/countryside-products/seasonal-calendar/"
+  type: secondary
+  published: 2021
+  published_note: Last modified 14 January 2021.
+  accessed: 2026-11-10
+# ---- added in gap-fill pass (2026-11-10) ----
+- key: freshplaza-cabbage-naylor
+  title: "UK cabbage prices picking up (8 Mar 2016; quotes Simon Naylor, Naylor Farms)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2154406/uk-cabbage-prices-picking-up/"
+  type: trade
+  published: 2016
+  accessed: 2026-11-10
+- key: caterer-red-cabbage
+  title: "Home-grown harvest: red cabbage (27 Oct 2018; market report by Ashley Clemence, Total Produce Local)"
+  publisher: "The Caterer"
+  url: "https://thecaterer.com/indepth/home-grown-harvest-red-cabbage"
+  type: trade
+  published: 2018
+  accessed: 2026-11-10
+- key: freshplaza-redcabbage-produceworld
+  title: "UK: Red cabbage in big demand (26 Feb 2015; quotes Andrew Burgess, Produce World)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2135889/uk-red-cabbage-in-big-demand/"
+  type: trade
+  published: 2015
+  accessed: 2026-11-10
+- key: freshplaza-kale-reynolds
+  title: "Terrible season UK for kale growers (28 Jan 2016; quotes Matt Jones, Reynolds)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2152621/terrible-season-uk-for-kale-growers/"
+  type: trade
+  published: 2016
+  accessed: 2026-11-10
+- key: freshplaza-kale-mkc
+  title: "MKC only UK grower to produce year-round kale (11 Dec 2020; quotes Chris Molyneux, Molyneux Kale Company)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/9276423/mkc-only-uk-grower-to-produce-year-round-kale/"
+  type: trade
+  published: 2020
+  accessed: 2026-11-10
+- key: grocer-kale-hardy
+  title: "Winter-hardy kale is new star of brassicas (c. Feb 2013; quotes Andy Weir, Reynolds)"
+  publisher: "The Grocer"
+  url: "https://www.thegrocer.co.uk/fresh/winter-hardy-kale-is-new-star-of-brassicas/237738.article"
+  type: trade
+  published: 2013
+  published_note: No date line; the text cites Kantar data to 17 February 2013.
+  accessed: 2026-11-10
+- key: ncgm-december-2021
+  title: "Fruit and veg in season this December (1 Dec 2021)"
+  publisher: "New Covent Garden Market (Covent Garden Market Authority)"
+  url: "https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-this-december/"
+  type: trade
+  published: 2021
+  accessed: 2026-11-10
+- key: ncgm-october-2021
+  title: "Fruit and veg in season this October (4 Oct 2021)"
+  publisher: "New Covent Garden Market (Covent Garden Market Authority)"
+  url: "https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-this-october/"
+  type: trade
+  published: 2021
+  accessed: 2026-11-10
+- key: ncgm-august-2021
+  title: "Market blog post on UK grower produce (Aug 2021)"
+  publisher: "New Covent Garden Market (Covent Garden Market Authority)"
+  url: "https://newcoventgardenmarket.com/?p=1063"
+  type: trade
+  published: 2021
+  accessed: 2026-11-10
+- key: freshplaza-ncgm-sept-2026
+  title: "UK apples begin as summer produce season winds down (2 Sep 2026; New Covent Garden Market report)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/article/9868785/uk-apples-begin-as-summer-produce-season-winds-down/"
+  type: trade
+  published: 2026
+  accessed: 2026-11-10
+- key: fpj-littlegem-snaith
+  title: "A little gem for Yorkshire Asda stores (undated; grower Mark Hardwick via English Village Salads)"
+  publisher: "Fresh Produce Journal"
+  url: "https://fruitnet.com/fresh-produce-journal/a-little-gem-for-yorkshire-asda-stores/145012.article"
+  type: trade
+  published: undated
+  published_note: No date line; mentions variety development from 2006, so 2006 or later. FPJ numbering suggests about 2008.
+  accessed: 2026-11-10
+- key: deliciouslyorkshire-cress
+  title: "Local salad grower on a mission to bring back cress (6 Aug 2018; W.S. Bentley)"
+  publisher: "Deliciouslyorkshire"
+  url: "https://deliciouslyorkshire.co.uk/local-salad-grower-on-a-mission-to-bring-back-cress/"
+  type: trade
+  published: 2018
+  accessed: 2026-11-10
+- key: pocklington-cress
+  title: "Farm of the week: enterprise on the cress of a wave (undated; Bentley's, Gomersal)"
+  publisher: "Pocklington Post"
+  url: "https://www.pocklingtonpost.co.uk/news/environment/farm-of-the-week-enterprise-on-the-cress-of-a-wave-1892233"
+  type: secondary
+  published: undated
+  published_note: No date line; refers to a sprouted-seed E. coli outbreak a year earlier (probably 2011), so about 2012.
+  accessed: 2026-11-10
+- key: grocer-cress-humbervhb
+  title: "Campaign to impress with cress (undated; quotes James Seymour, Humber VHB)"
+  publisher: "The Grocer"
+  url: "https://www.thegrocer.co.uk/news/campaign-to-impress-with-cress/108952.article"
+  type: trade
+  published: undated
+  published_note: No date or year on the page; The Grocer's article numbering suggests the 2000s.
+  accessed: 2026-11-10
+- key: westlands-watercress
+  title: "About Westlands UK watercress (17 Oct 2025; grower's own page)"
+  publisher: "Westlands UK"
+  url: "https://westlandsuk.co.uk/2025/10/17/about-westlands-uk-watercress/"
+  type: trade
+  published: 2025
+  accessed: 2026-11-10
+- key: wildfooduk-watercress
+  title: "Watercress (edible wild plants)"
+  publisher: "Wild Food UK"
+  url: "https://www.wildfooduk.com/edible-wild-plants/watercress/"
+  type: secondary
+  published: 2024
+  published_note: Published 18 January 2018, updated 30 April 2024.
+  accessed: 2026-11-10
+- key: countrylife-forage
+  title: "Live off the land: 12 foods you can forage throughout the year (21 Mar 2020; by John Wright)"
+  publisher: "Country Life"
+  url: "https://www.countrylife.co.uk/gardens/live-off-the-land-12-foods-you-can-forage-throughout-the-year-212973"
+  type: secondary
+  published: 2020
+  accessed: 2026-11-10
+- key: producedinkent-vegbox-2024
+  title: "August update from Kent Veg Box (30 Jul 2024)"
+  publisher: "Produced in Kent"
+  url: "https://www.producedinkent.co.uk/news/august-update-from-kent-veg-box"
+  type: secondary
+  published: 2024
+  accessed: 2026-11-10
+- key: rhs-cucumbers
+  title: "How to grow cucumbers"
+  publisher: "Royal Horticultural Society"
+  url: "https://www.rhs.org.uk/vegetables/cucumbers/grow-your-own?type=v"
+  type: primary
+  published: 2026
+  published_note: Living RHS guide; no date shown, footer reads © RHS 2026.
+  accessed: 2026-11-10
+- key: farmdirect-cucumbers-2021
+  title: "First cucumbers, watercress and baby leeks (9 Feb 2021; names Thanet Earth)"
+  publisher: "Farm-Direct"
+  url: "https://farm-direct.com/news/7108-first-cucumbers-watercress-baby-leeks.aspx"
+  type: secondary
+  published: 2021
+  accessed: 2026-11-10
+- key: lvga-home
+  title: "Lea Valley Growers Association home page"
+  publisher: "Lea Valley Growers Association"
+  url: "https://www.lvga.co.uk/"
+  type: primary
+  published: 2026
+  published_note: Industry body's live home page; no date or year shown, so the current year is used.
+  accessed: 2026-11-10
+- key: hortnews-cucumbers-2018
+  title: "UK-grown cucumbers show promise as planting area continues to grow"
+  publisher: "Hortnews (The Commercial Greenhouse Grower)"
+  url: "https://hortnews.com/uk-grown-cucumbers-show-promise-planting-area-continues-grow/"
+  type: trade
+  published: 2018
+  published_note: Published 22 February 2018.
+  accessed: 2026-11-10
+- key: fpj-red-butterhead-bedfordshire
+  title: "New sweet lettuce variety unveiled at Sainsbury's"
+  publisher: "Fresh Produce Journal"
+  url: "https://www.fruitnet.com/fresh-produce-journal/new-sweet-lettuce-variety-unveiled-at-sainsburys/165717.article"
+  type: trade
+  published: 2015
+  published_note: No date line; reports the same Sainsbury's launch that FreshPlaza covered on 30 June 2015.
+  accessed: 2026-11-10
+- key: freshplaza-red-butterhead-2015
+  title: "UK: 100% British lettuce turns heads (30 June 2015)"
+  publisher: "FreshPlaza"
+  url: "https://www.freshplaza.com/north-america/article/2142305/100-british-lettuce-turns-heads/"
+  type: trade
+  published: 2015
+  accessed: 2026-11-10
+# ---- added in source-dating pass (2026-11-10) ----
+- key: farminguk-watercress-2020
+  title: "UK watercress harvest underway as planned despite Covid-19 (28 May 2020; The Watercress Company)"
+  publisher: "FarmingUK"
+  url: "https://www.farminguk.com/news/uk-watercress-harvest-underway-as-planned-despite-covid-19_55746.html"
+  type: trade
+  published: 2020
+  published_note: Published 28 May 2020.
+  accessed: 2026-11-10
+- key: dorsetview-watercress-2023
+  title: "Watercress news item (23 February 2023; quotes Tom Amery, The Watercress Company)"
+  publisher: "Dorset View"
+  url: "https://www.dorsetview.co.uk/?p=68525"
+  type: secondary
+  published: 2023
+  published_note: Published 23 February 2023.
+  accessed: 2026-11-10

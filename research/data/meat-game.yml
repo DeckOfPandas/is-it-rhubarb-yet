@@ -1,0 +1,391 @@
+- name: "Lamb"
+  slug: lamb
+  group: meat-game
+  lines:
+    - name: "New-season"
+      kind: variety
+      confidence: moderate
+      sources: [nsa-buyers-guide-lamb, ahdb-sheep-slaughter-patterns, qms-lamb-q2-2026, farminguk-hcc-lamb-season]
+      weeks:
+        - [14, 30, avail]
+        - [31, 48, in]
+        - [49, 52, avail]
+      notes:
+        season: "UK-wide. British lamb is on sale all year, most plentiful in autumn; lambs are mostly born in spring and reach market about six months later, though some are born early for Easter (nsa-buyers-guide-lamb). AHDB puts the lamb kill highest in late summer and early autumn, with UK sheep meat production peaking in autumn and more lambs now coming forward before June (ahdb-sheep-slaughter-patterns). In 2026, new-season supply built at Scottish marts from May, rising through July and August towards an autumn high (qms-lamb-q2-2026). So: avail from April (Easter lambs), in August to November, avail in December; from January the previous year's crop is sold as hogget (see Hogget)."
+        discrepancy: "AHDB says late summer and early autumn (August to October); NSA says autumn (September to November); HCC puts the Welsh peak in August to early September (farminguk-hcc-lamb-season). The in window spans August to November to cover both primary sources."
+        drift: "AHDB says that over 40 years more lambs have come forward before June in their year of birth, and the autumn peak has flattened and lengthened (ahdb-sheep-slaughter-patterns, 2021)."
+    - name: "Milk-fed spring"
+      kind: variety
+      confidence: low
+      sources: [fcdo-rhug-milk-lamb-2014, thecaterer-milk-fed-lamb, nsa-buyers-guide-lamb]
+      weeks:
+        - [14, 17, avail]
+      notes:
+        season: "Third pass: one UK producer found. Rhug Estate (organic, North Wales) sells milk lambs, still suckling their mothers while also eating grass, as the first lambs off the farm each year; the first are available in April (fcdo-rhug-milk-lamb-2014, a 2014 government blog describing the estate). April only, marked avail because no season or end date is named; Rhug's current lamb pages do not list milk lamb, so whether it is still sold is unconfirmed. Low: one secondary source, one producer. Source age: the April date rests only on the 2014 blog (the Caterer piece is 2007; nsa-buyers-guide-lamb is current but gives no milk-lamb dates). Dating pass, 2026-11-10: no newer source found; Rhug's 2024 lambing news (updated 2025) does not mention milk lamb. The only other milk-fed lamb in UK trade press was imported Pyrenean lamb (thecaterer-milk-fed-lamb, 2007), out of scope. NSA mentions early-born lambs for Easter but not milk-fed lamb (nsa-buyers-guide-lamb)."
+    - name: "Hogget"
+      kind: variety
+      confidence: moderate
+      sources: [nsa-buyers-guide-lamb, qms-lamb-q2-2026, qms-hoggs-may-2013, ahdb-spring-lamb-2023, fwi-hogget-mutton-upland]
+      weeks:
+        - [1, 13, in]
+        - [14, 23, avail]
+      notes:
+        season: "Hogget is old-season lamb, born the previous spring and nearly a year old, offered as an Easter option (nsa-buyers-guide-lamb). In 2026, hoggs reached market in the first quarter and tightened sharply after Easter (qms-lamb-q2-2026). In early May 2013 hoggs were still about 80% of Scottish prime sheep marketings (qms-hoggs-may-2013); in early June 2023 AHDB said hogget supply was coming to an end (ahdb-spring-lamb-2023). One upland farm markets meat aged 9 to 18 months as hogget, selling from February (fwi-hogget-mutton-upland). In = January to March; avail April to early June as supply tails off."
+        discrepancy: "The tail-off varies by year: QMS 2026 shows a sharp drop after Easter (early April); QMS 2013 and AHDB 2023 show hoggs still on the market in May and early June."
+    - name: "Welsh"
+      kind: region
+      confidence: moderate
+      sources: [hcc-lamb-day, hcc-lamb-summer-tips, agriland-hcc-lamb-peak, farminguk-hcc-lamb-season, hcc-welsh-lamb-pgi, specialityfood-welsh-lamb]
+      weeks:
+        - [1, 30, avail]
+        - [31, 48, in]
+        - [49, 52, avail]
+      notes:
+        season: "HCC dates the new season from Lamb Day, 1 August (hcc-lamb-day), puts the peak in August to early September (agriland-hcc-lamb-peak, hcc-lamb-summer-tips), and says supply is highest through summer and autumn (farminguk-hcc-lamb-season). The PGI has no season but covers lambs slaughtered under a year old (hcc-welsh-lamb-pgi), so lambs carry on into the following spring; coastal lambs come earlier than hill lambs (specialityfood-welsh-lamb). The avail ranges are my extrapolation from these."
+        discrepancy: "farminguk-hcc-lamb-season says the second half of the year (from July); hcc-lamb-day starts the season on 1 August. Followed the named start date."
+        sustainability: "Welsh Lamb holds PGI status (hcc-welsh-lamb-pgi, read 2026-11-10)."
+    - name: "Salt marsh"
+      kind: method
+      confidence: moderate
+      sources: [gower-saltmarsh-lamb-pdo, gower-saltmarsh-lamb-pdo-amendment, fwi-holker-saltmarsh-lamb, lishmans-saltmarsh-lamb, booths-saltmarsh-lamb, hcc-welsh-lamb-pgi]
+      weeks:
+        - [23, 52, in]
+      notes:
+        season: "Dates are from the Gower Salt Marsh Lamb PDO (UK GI scheme), the only salt marsh source that names a season: a seasonal product available from June to the end of December, lambs aged 4 to 10 months at slaughter, having grazed the salt marsh for at least half their life and at least 2 months (gower-saltmarsh-lamb-pdo; unchanged by the 2024 amendment, which only moved slaughter to named abattoirs, gower-saltmarsh-lamb-pdo-amendment). Morecambe Bay (Holker Estate, Cartmel peninsula) is consistent but gives no end date: March-born lambs come off the marsh in mid-summer (fwi-holker-saltmarsh-lamb, 2002, quoting a Holker tenant); a Southern Lakes butcher had it back on the counter from 9 September 2024 (lishmans-saltmarsh-lamb); Booths calls it a seasonal Cumbrian product from Holker tenants (booths-saltmarsh-lamb). Moderate because the PDO covers Gower only. The Welsh Lamb PGI does not mention salt marsh grazing (hcc-welsh-lamb-pgi)."
+    - name: "Mutton"
+      kind: variety
+      confidence: moderate
+      sources: [nsa-buyers-guide-lamb, muttonrenaissance-what-is-mutton, fwi-mutton-spec]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Mutton is meat from older sheep, typically ewes past breeding, and the National Sheep Association's current buyers' guide says it is available all year round, naming no best season (nsa-buyers-guide-lamb, page copyright 2026). Rule 3 applies, so it is in all year. Helen confirmed this source, 2026-11-10."
+        discrepancy: "Older sources name a peak: the Mutton Renaissance campaign (undated page, campaign launched 2004) says the best meat is produced October to March, and a 2005 specification launch dated the mutton season from 1 October, after summer grazing (muttonrenaissance-what-is-mutton, fwi-mutton-spec). Under the source-age rule these pre-2016 sources don't override the current NSA guide; no newer source naming a mutton season was found (searched NSA, AHDB, Farmers Guardian 2022, producer blogs 2021 to 2026)."
+
+- name: "Beef"
+  slug: beef
+  group: meat-game
+  lines:
+    - name: "Beef"
+      kind: whole
+      confidence: moderate
+      sources: [qms-beef-q3-2026, ahdb-beef-production-oct-2021, hcc-welsh-beef-pgi]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Rule 3 (in all year). Prime cattle are killed every week of the year: the kill is seasonally low from mid-June, often dips further in August, peaks in October and has a secondary peak in December, reflecting spring calving and a slaughter age of about 21 months (qms-beef-q3-2026). AHDB reports UK beef production monthly (ahdb-beef-production-oct-2021). The Welsh Beef PGI sets an age range (12 to 48 months) but no season (hcc-welsh-beef-pgi). The kill peak is a supply pattern, not a best-to-eat window, so it is not marked."
+
+- name: "Pork"
+  slug: pork
+  group: meat-game
+  lines:
+    - name: "Pork"
+      kind: whole
+      confidence: low
+      sources: [npa-porkwatch-jan-2023, grocer-ahdb-pork-supplies]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Rule 3 (in all year). No source states outright that British pork is year-round; this is inferred. AHDB's Porkwatch retail survey found British fresh pork at 87% of retail lines in September, 85% in November and 84% in January (npa-porkwatch-jan-2023, NPA, February 2023), and AHDB reports weekly clean pig slaughterings (grocer-ahdb-pork-supplies, October 2017). No source names a peak. The search budget ran out before AHDB, Red Tractor or NPA pages stating year-round supply could be found."
+
+- name: "Goose"
+  slug: goose
+  group: meat-game
+  lines:
+    - name: "Goose"
+      kind: whole
+      confidence: moderate
+      sources: [bgp-goose-leaflet-2016, poultrysite-goose-farm-walk-2021, fwi-michaelmas-geese, farminguk-michaelmas-goose, defra-poultry-statsnotice-jan2021, naturescot-wildfowl]
+      weeks:
+        - [37, 52, in]
+      notes:
+        season: "Dating pass, 2026-11-10: the first-pass dates rested only on trade press from 2004 and 2009, so the line was lowered to low, then refreshed. British Goose Producers (part of the British Poultry Council) say fresh free-range geese are available from mid-September until Christmas, the first traditionally eaten at Michaelmas (bgp-goose-leaflet-2016); start moved from week 36 to 37 to follow this primary source. In 2021 the BPC goose farm walk still framed goose as a Christmas bird, about 250,000 eaten each Christmas (poultrysite-goose-farm-walk-2021). Older trade press agrees: September to the end of the year, with most eaten at Christmas (fwi-michaelmas-geese, 2004, quoting the British Goose Producers' Association chairman). Michaelmas (29 September) marks when geese start to become available (farminguk-michaelmas-goose, 2009, quoting the British Goose Producers chairman). Defra's poultry statistics exclude geese, so there is no official monthly series (defra-poultry-statsnotice-jan2021). Wild geese are not covered: NatureScot licenses sale of wild goose meat only in a trial in Orkney, the Uists and Lewis and Harris (naturescot-wildfowl)."
+
+- name: "Turkey"
+  slug: turkey
+  group: meat-game
+  lines:
+    - name: "Turkey"
+      kind: whole
+      confidence: moderate
+      sources: [defra-poultry-statsnotice-jan2021, defra-poultry-statsnotice-mar2017, defra-poultry-statsnotice-sep2024]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Turkeys are slaughtered in every month in Defra's monthly notices (for example 0.6 to 0.8 million a month in July to October, 1.2 to 1.6 million in January and February), with a clear Christmas peak: 2.9 million in December 2020 (defra-poultry-statsnotice-jan2021, defra-poultry-statsnotice-mar2017, defra-poultry-statsnotice-sep2024). Coordinator: the December peak is about demand, not eating quality, so rule 3 applies and the line is in all year, as with beef. The Christmas-only product is the Traditional farm-fresh line."
+    - name: "Traditional farm-fresh"
+      kind: method
+      confidence: moderate
+      sources: [tfta-golden-turkey, fwi-tfta-standards, fwi-norfolk-black-turkey]
+      weeks:
+        - [49, 52, in]
+      notes:
+        season: "Split added: traditional free-range, dry-plucked and hung birds are a Christmas product, unlike year-round commodity turkey. TFTA Golden Turkeys are sold as Christmas turkeys, grown to maturity and dry-aged at least 7 days (tfta-golden-turkey); the TFTA minimum rearing age is 20 weeks, most members rear to about 24 (fwi-tfta-standards, 2007). Norfolk Black: a Norfolk breeder starts slaughtering for Christmas in the first days of December and hangs birds for one to three weeks; leftover birds are frozen for Easter (fwi-norfolk-black-turkey, 2013). No Norfolk Black PGI was found; the search budget ran out before this could be confirmed either way. Source age: the December start comes from fwi-norfolk-black-turkey (2013); the current TFTA page (tfta-golden-turkey, 2026) confirms these are Christmas birds hung at least 7 days but gives no dates. Dating pass, 2026-11-10: no newer source with dates was found; a TFTA member farm in a recent (undated, about 2023) Press and Journal piece hangs birds at least 10 days before Christmas, consistent with a December slaughter."
+
+- name: "Grouse"
+  slug: grouse
+  group: meat-game
+  lines:
+    - name: "Great Britain"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons]
+      weeks:
+        - [32, 50, in]
+      notes:
+        season: "Red grouse open season 12 August to 10 December in England, Wales and Scotland (basc-seasons). Black grouse (20 Aug to 10 Dec; from 1 Sep in Somerset, Devon and the New Forest) and ptarmigan (Scotland, 12 Aug to 10 Dec) have their own seasons and are not split out. Game may not be killed on Sundays or Christmas Day in England and Wales (naturenet-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Northern Ireland"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons]
+      weeks:
+        - [32, 48, in]
+      notes:
+        season: "Red grouse open season 12 August to 30 November (basc-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Pheasant"
+  slug: pheasant
+  group: meat-game
+  lines:
+    - name: "Great Britain"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons]
+      weeks:
+        - [1, 5, in]
+        - [40, 52, in]
+      notes:
+        season: "Open season 1 October to 1 February in England, Wales and Scotland (basc-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Northern Ireland"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons]
+      weeks:
+        - [1, 5, in]
+        - [40, 52, in]
+      notes:
+        season: "Open season 1 October to 31 January (basc-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Partridge"
+  slug: partridge
+  group: meat-game
+  lines:
+    - name: "Great Britain"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons]
+      weeks:
+        - [1, 5, in]
+        - [35, 52, in]
+      notes:
+        season: "Grey and red-legged partridge share the season, 1 September to 1 February, in England, Wales and Scotland (basc-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Northern Ireland"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons]
+      weeks:
+        - [1, 5, in]
+        - [35, 52, in]
+      notes:
+        season: "Grey and red-legged partridge, 1 September to 31 January (basc-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Wild duck"
+  slug: wild-duck
+  group: meat-game
+  lines:
+    - name: "Inland"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons]
+      weeks:
+        - [1, 5, in]
+        - [35, 52, in]
+      notes:
+        season: "Duck above the high-water mark of ordinary spring tides: 1 September to 31 January across the UK. Northern Ireland's foreshore follows the same dates (basc-seasons). Split added because the GB foreshore season runs three weeks longer. Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "GB foreshore"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons]
+      weeks:
+        - [1, 8, in]
+        - [35, 52, in]
+      notes:
+        season: "Duck below the high-water mark of ordinary spring tides in England, Wales and Scotland: 1 September to 20 February (basc-seasons). Wildfowl may not be shot on Sundays or Christmas Day in Scotland (naturenet-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Woodcock"
+  slug: woodcock
+  group: meat-game
+  lines:
+    - name: "England, Wales & NI"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons, basc-woodcock-restraint]
+      weeks:
+        - [1, 5, in]
+        - [40, 52, in]
+      notes:
+        season: "Open season 1 October to 31 January (basc-seasons). Over 90% of hunters say they do not shoot woodcock before 1 December, if at all, so supply is concentrated in December and January (basc-woodcock-restraint). Shooting UK notes some shoots ask guns not to shoot woodcock at all (shootinguk-game-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Scotland"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, basc-woodcock-restraint]
+      weeks:
+        - [1, 5, in]
+        - [35, 52, in]
+      notes:
+        season: "Open season 1 September to 31 January (basc-seasons). The voluntary restraint before 1 December applies here too (basc-woodcock-restraint). Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Venison"
+  slug: venison
+  group: meat-game
+  lines:
+    - name: "Red & fallow"
+      kind: variety
+      confidence: high
+      sources: [leg-deer-act-1991-sch1, basc-seasons, bds-open-seasons, deer-initiative-legislation, naturenet-seasons]
+      weeks:
+        - [1, 18, in]
+        - [31, 52, in]
+      notes:
+        season: "England, Wales and Northern Ireland. Stags and bucks 1 August to 30 April; hinds and does 1 November to 31 March, so both sexes are open November to March and males only in August to October and April (leg-deer-act-1991-sch1, bds-open-seasons). Sika and red/sika hybrids follow the same dates. Marked in for either sex open, per the brief. Weeks include any week with at least one open day (legal-dates rule)."
+        discrepancy: "naturenet-seasons gives Northern Ireland red hinds to the end of February; basc-seasons gives November to March. The weeks are unaffected because stags are open then."
+    - name: "Red & fallow, Scotland"
+      kind: region
+      confidence: high
+      sources: [naturescot-deer, basc-seasons, bds-open-seasons, naturenet-seasons]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Split added: Scotland removed the close season for all male deer from 21 October 2023 (naturescot-deer). Hinds and does are open 21 October to 15 February only (naturescot-deer, bds-open-seasons). Sika follows the same dates. Weeks include any week with at least one open day (legal-dates rule)."
+        discrepancy: "naturenet-seasons still gives the pre-2023 Scottish stag season (1 July to 20 October); it is out of date."
+    - name: "Roe"
+      kind: variety
+      confidence: high
+      sources: [leg-deer-act-1991-sch1, naturescot-deer, basc-seasons, bds-open-seasons]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "One sex is always open. England and Wales: bucks 1 April to 31 October, does 1 November to 31 March (leg-deer-act-1991-sch1). Scotland: bucks all year since October 2023, does 21 October to 31 March (naturescot-deer). Roe are not present in Northern Ireland (bds-open-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Chinese water deer"
+      kind: variety
+      confidence: high
+      sources: [leg-deer-act-1991-sch1, basc-seasons, bds-open-seasons, deer-initiative-legislation]
+      weeks:
+        - [1, 13, in]
+        - [44, 52, in]
+      notes:
+        season: "England and Wales only: both sexes 1 November to 31 March, because the sexes are hard to tell apart in the field (deer-initiative-legislation). Not recognised as present in Scotland and no applicable legislation there (bds-open-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Muntjac"
+      kind: variety
+      confidence: high
+      sources: [basc-seasons, deer-initiative-legislation, bds-open-seasons]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "No statutory close season, because muntjac breed all year (deer-initiative-legislation, basc-seasons). Not recognised as present in Scotland (bds-open-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Farmed"
+      kind: method
+      confidence: moderate
+      sources: [deer-initiative-legislation, grocer-waitrose-venison, fwi-venison-farming, caterer-venison]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Deer farmers may kill marked, enclosed deer during the close season (deer-initiative-legislation). Waitrose moved to British venison 365 days a year (grocer-waitrose-venison); Dovecote Park brought its kill season forward to supply chilled venison through the summer (fwi-venison-farming, quoting a BDFPA council member). Prime farmed venison comes from deer under 27 months (caterer-venison)."
+        discrepancy: "fwi-venison-farming describes one producer selling finished stock mainly July to September, with a premium on early sales, so farmed supply may still be uneven; no source names a peak."
+
+- name: "Wood pigeon"
+  slug: wood-pigeon
+  group: meat-game
+  lines:
+    - name: "Wood pigeon"
+      kind: whole
+      confidence: high
+      sources: [leg-wca-1981-sch3, basc-general-licences, shootinguk-game-seasons]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Woodpigeon is listed in Part II of Schedule 3, saleable dead at all times, with no seasonal restriction (leg-wca-1981-sch3, re-read 2026-11-10). It is shot under general licences, renewed each year in England, Scotland, Wales and Northern Ireland, which allow year-round control of pest birds including woodpigeon (basc-general-licences); Shooting UK says pigeon can be shot all year (shootinguk-game-seasons). The current Natural England and NatureScot licence texts could not be fetched (search budget exhausted, direct URLs blocked), so licence numbers and validity dates are not recorded. Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Rabbit"
+  slug: rabbit
+  group: meat-game
+  lines:
+    - name: "Rabbit"
+      kind: whole
+      confidence: high
+      sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "No close season in any UK nation; it is classed as a pest in Northern Ireland (basc-seasons). Restrictions apply to how and when occupiers take rabbits on moorland and unenclosed land, for example firearms only 11 December to 31 March in England and Wales and 1 July to 31 March in Scotland (basc-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Hare"
+  slug: hare
+  group: meat-game
+  lines:
+    - name: "England & Wales"
+      kind: region
+      confidence: high
+      sources: [leg-hares-preservation-1892, gwct-hares-code, basc-seasons, shootinguk-hare-close-season, parliament-hares-bill, westminsterbrief-hares-debate, govwales-hare-consultation]
+      weeks:
+        - [1, 9, in]
+        - [31, 52, in]
+      notes:
+        season: "No close season for killing (basc-seasons), but hares may not be sold in Great Britain from March to July (leg-hares-preservation-1892, no outstanding changes as of 2026-11-10); weeks show the saleable months. Organised hare shoots are normally held in February (gwct-hares-code). Pending change: a Lords bill proposes a close season from early February to the end of September and repeal of the sale ban (parliament-hares-bill, introduced July 2026); Defra supports a close season but has no legislative slot (westminsterbrief-hares-debate); Wales consulted on a statutory close season, 21 Sep to 19 Oct 2026 (govwales-hare-consultation). Re-checked 2026-11-10: the bill has had only its first reading (21 July 2026), with second reading unscheduled; the Welsh consultation has closed and its outcome is not yet published. Nothing has changed in force. Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Scotland"
+      kind: region
+      confidence: high
+      sources: [leg-wane-scotland-2011-s6, basc-seasons, leg-hares-preservation-1892]
+      weeks:
+        - [1, 5, in]
+        - [40, 52, in]
+      notes:
+        season: "Split added: brown hare close season 1 February to 30 September (leg-wane-scotland-2011-s6), so open 1 October to 31 January (basc-seasons). The GB sale ban (March to July) also applies (leg-hares-preservation-1892). Mountain hare is protected (basc-seasons). Weeks include any week with at least one open day (legal-dates rule)."
+    - name: "Northern Ireland"
+      kind: region
+      confidence: high
+      sources: [basc-seasons, naturenet-seasons, leg-hares-preservation-1892]
+      weeks:
+        - [1, 5, in]
+        - [32, 52, in]
+      notes:
+        season: "Split added: open season 12 August to 31 January (basc-seasons). The 1892 sale ban covers Great Britain only (leg-hares-preservation-1892). Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Squirrel"
+  slug: squirrel
+  group: meat-game
+  lines:
+    - name: "Grey squirrel"
+      kind: whole
+      confidence: low
+      sources: [naturenet-seasons]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Grey squirrel has no close season and can be controlled by approved methods all year (naturenet-seasons). Still only a secondary source, and an undated one: BASC's seasons pages do not cover grey squirrel, and the search budget ran out before Natural England, NatureScot or legislation.gov.uk pages could be fetched. Weeks include any week with at least one open day (legal-dates rule)."
+
+- name: "Chicken"
+  slug: chicken
+  group: meat-game
+  lines:
+    - name: "Chicken"
+      kind: whole
+      confidence: moderate
+      sources: [defra-poultry-statsnotice-jan2021, defra-poultry-statsnotice-mar2017, defra-poultry-statsnotice-sep2024]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Rule 3 (in all year). Defra's monthly notices show 74 to 111 million broilers slaughtered in every month reported (January, February, July to December across the three notices), with only a dip around Christmas (defra-poultry-statsnotice-jan2021, defra-poultry-statsnotice-mar2017, defra-poultry-statsnotice-sep2024). No peak is named. British Poultry Council or Red Tractor pages stating year-round supply were not found before the search budget ran out."
+
+- name: "Duck"
+  slug: duck
+  group: meat-game
+  lines:
+    - name: "Duck"
+      kind: whole
+      confidence: low
+      sources: [defra-poultry-statsnotice-jan2021, defra-poultry-statsnotice-mar2017, defra-poultry-statsnotice-sep2024]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Rule 3 (in all year), inferred. Defra reports 1.5 to 2.9 thousand tonnes of duck meat a month in every month shown (January, February, July to December) with no seasonal comment (defra-poultry-statsnotice-jan2021, defra-poultry-statsnotice-mar2017, defra-poultry-statsnotice-sep2024); the 2024 figures are flagged as suppressed for low survey response. March to June were not seen, and no producer source was found before the search budget ran out. Wild duck is a separate food."

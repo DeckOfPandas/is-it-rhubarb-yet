@@ -1,0 +1,712 @@
+- key: cgsg-crab
+  title: Crab, Brown, Edible
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/crab-brown-edible.php
+  type: primary
+  published: 2026
+  published_note: Page says Updated Jan 2026.
+  accessed: 2026-11-10
+- key: cgsg-lobster
+  title: Lobster
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/lobster.php
+  type: primary
+  published: 2026
+  published_note: Page says Updated Jan 2026.
+  accessed: 2026-11-10
+- key: cgsg-spider-crab
+  title: Cornish King Crab (spider crab)
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/cornish-king-crab.php
+  type: primary
+  published: 2026
+  published_note: Page says Updated Jan 2026.
+  accessed: 2026-11-10
+- key: cgsg-scallop
+  title: Scallop
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/scallop.php
+  type: primary
+  published: 2026
+  published_note: Page says Updated Jan 2026.
+  accessed: 2026-11-10
+- key: cgsg-mussels
+  title: Mussels
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/mussels.php
+  type: primary
+  published: 2017
+  published_note: Page says Updated October 2017.
+  accessed: 2026-11-10
+- key: cgsg-native-oyster
+  title: Native Oyster
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/native-oyster.php
+  type: primary
+  published: 2026
+  published_note: Page says Updated January 2026.
+  accessed: 2026-11-10
+- key: cgsg-pacific-oyster
+  title: Pacific oyster
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/pacific-oyster.php
+  type: primary
+  published: undated
+  published_note: No update line on the page; it is part of the current CGSG guide, and its newest cited reference
+    is from 2012.
+  accessed: 2026-11-10
+- key: cgsg-razor-clam
+  title: Razor Clams
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/razor-clams.php
+  type: primary
+  published: 2023
+  published_note: Page says Updated March 2023.
+  accessed: 2026-11-10
+- key: cgsg-porthilly
+  title: Porthilly Shellfish (directory entry)
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/directory/porthilly-shellfish.php
+  type: primary
+  published: undated
+  published_note: Directory entry with no date or copyright year.
+  accessed: 2026-11-10
+- key: mcs-brown-crab
+  title: 'Brown crab: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/brown-crab/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; no per-rating dates on the overview; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-brown-crab-shetland
+  title: Brown crab, Shetland, pot (MSC) rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/brown-crab/wild/206/
+  type: primary
+  published: 2023
+  published_note: Rating last updated June 2023 (page also cites a May 2025 rule change).
+  accessed: 2026-11-10
+- key: mcs-brown-crab-northumberland
+  title: Brown crab, Central North Sea, Northumberland IFCA, pot rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/brown-crab/wild/522/
+  type: primary
+  published: 2024
+  published_note: Rating last updated June 2024.
+  accessed: 2026-11-10
+- key: mcs-lobster
+  title: 'European lobster: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/european-lobster/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-lobster-scotland-east
+  title: European lobster, Scotland (East), pot rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/european-lobster/wild/464/
+  type: primary
+  published: 2023
+  published_note: Rating last updated June 2023 (page cites sources accessed November 2025).
+  accessed: 2026-11-10
+- key: mcs-scampi
+  title: 'Scampi or langoustine: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/scampi/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-scampi-farn-deeps
+  title: Scampi or langoustine, Farn Deeps (FU 6), bottom trawl rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/scampi/wild/582/
+  type: primary
+  published: 2025
+  published_note: Rating last updated December 2025.
+  accessed: 2026-11-10
+- key: mcs-king-scallop
+  title: 'King scallop: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/king-scallop/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-cockle
+  title: 'Cockle: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/cockle/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-whelk
+  title: 'Common whelk: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/common-whelk/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-brown-shrimp
+  title: 'Brown shrimp: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/brown-shrimp/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-native-oyster
+  title: 'Native oyster: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/native-oyster/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-pacific-oyster
+  title: 'Pacific oyster: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/pacific-oyster/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: cefas-crab-assessments-2019
+  title: Crab assessments 2019 (March 2021 update)
+  publisher: Cefas (via GOV.UK)
+  url: https://assets.publishing.service.gov.uk/media/60631425e90e072d929ec8d9/Crab_assessments_2019__March_21_update.pdf
+  type: primary
+  published: 2021
+  published_note: March 2021 update of the 2019 assessments.
+  accessed: 2026-11-10
+- key: maff-norfolk-crab
+  title: 'Laboratory Leaflet No. 12: The Norfolk Crab Fishery (c. 1966)'
+  publisher: Ministry of Agriculture, Fisheries and Food, Fisheries Laboratory Burnham-on-Crouch (hosted by Cefas)
+  url: https://www.cefas.co.uk/Publications/lableaflets/lableaflet12.pdf
+  type: primary
+  published: 1966
+  published_note: Circa 1966; the leaflet is undated and the year is approximate.
+  accessed: 2026-11-10
+- key: nifca-crab-2023
+  title: Crab 2023 Status Report
+  publisher: Northumberland Inshore Fisheries and Conservation Authority
+  url: https://nifca.gov.uk/wp-content/uploads/2023/08/NIFCA-report-Crab-2023-Status-Report.pdf
+  type: primary
+  published: 2023
+  accessed: 2026-11-10
+- key: scotgov-nephrops-fmp
+  title: 'North Sea Nephrops: proposed Fisheries Management Plan (Background)'
+  publisher: Scottish Government
+  url: https://www.gov.scot/publications/proposed-fisheries-management-plan-north-sea-nephrops/pages/9/
+  type: primary
+  published: 2026
+  published_note: Published 25 March 2026.
+  accessed: 2026-11-10
+- key: scotgov-nephrops-stocks-2015
+  title: 'Fish and Shellfish Stocks: 2015 Edition (Nephrops)'
+  publisher: Scottish Government
+  url: https://www.gov.scot/publications/fish-shellfish-stocks-2015-edition/pages/19/
+  type: primary
+  published: 2015
+  accessed: 2026-11-10
+- key: mmo-farn-deeps-nephrops
+  title: Farne Deeps Nephrops sustainable fishing plan (May 2012)
+  publisher: Marine Management Organisation (hosted by Northumberland IFCA)
+  url: https://nifca.gov.uk/wp-content/uploads/2022/02/MMO_nephrops-Farne-Deeps-sustainable-fishing-plan_May-2012.pdf
+  type: primary
+  published: 2012
+  published_note: May 2012.
+  accessed: 2026-11-10
+- key: chipperfield-mussel-spawning
+  title: Observations on the breeding and settlement of Mytilus edulis (L.) in British waters (Chipperfield, 1953)
+  publisher: Journal of the Marine Biological Association of the UK
+  url: https://cambridge.org/core/journals/journal-of-the-marine-biological-association-of-the-united-kingdom/article/abs/observations-on-the-breeding-and-settlement-of-mytilus-edulis-l-in-british-waters/8F8272BF21703C018868D53A2509B2E4
+  type: primary
+  published: 1953
+  accessed: 2026-11-10
+- key: eifca-wash-mussel-dredge-2025
+  title: Wash harvestable mussel fishery (dredge) 2025 exemption conditions
+  publisher: Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.eastern-ifca.gov.uk/wp-content/uploads/2025/01/2025_01_22_Wash_Harvestable_Dredge_Fishery.pdf
+  type: primary
+  published: 2025
+  published_note: Notice dated 22 January 2025.
+  accessed: 2026-11-10
+- key: eifca-wash-cockle-2024
+  title: Wash Cockle Fishery 2024
+  publisher: Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.eastern-ifca.gov.uk/?p=8850
+  type: primary
+  published: 2024
+  accessed: 2026-11-10
+- key: eifca-wash-schedule-2025
+  title: Wash Cockle and Mussel Byelaw 2021 permit conditions, Schedule 2 (updated 28 Oct 2025)
+  publisher: Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.eastern-ifca.gov.uk/wp-content/uploads/2025/10/2025_10_28_Schedule_2_updated.pdf
+  type: primary
+  published: 2025
+  published_note: Updated 28 October 2025.
+  accessed: 2026-11-10
+- key: legislation-fal-order-2016
+  title: The Fal Fishery Order 2016 (SI 2016/716)
+  publisher: legislation.gov.uk
+  url: https://www.legislation.gov.uk/uksi/2016/716
+  type: primary
+  published: 2016
+  published_note: Statutory instrument in force, so it counts as current.
+  accessed: 2026-11-10
+- key: colchester-colne-opening-2026
+  title: Colne Oyster Fisheries to open for the season (2026)
+  publisher: Colchester City Council
+  url: https://new.colchester.gov.uk/news/2026/colne-oyster-fisheries-open-season
+  type: primary
+  published: 2026
+  accessed: 2026-11-10
+- key: seafoodsource-natives
+  title: Bring on the natives
+  publisher: SeafoodSource
+  url: https://www.seafoodsource.com/features/bring-on-the-natives
+  type: trade
+  published: undated
+  published_note: No date or author shown; the article opens in a September.
+  accessed: 2026-11-10
+- key: grocer-mussels
+  title: 'In Season: Mussels'
+  publisher: The Grocer
+  url: https://thegrocer.co.uk/in-season-mussels/197526.article
+  type: trade
+  published: undated
+  published_note: No date shown on the article page.
+  accessed: 2026-11-10
+- key: lfm-blackwater-oysters
+  title: 'Producer: Black Water Oysters'
+  publisher: London Farmers' Markets
+  url: https://www.lfm.org.uk/producers/black-water-oysters/
+  type: secondary
+  published: undated
+  published_note: Producer page with no date or copyright year.
+  accessed: 2026-11-10
+- key: dalegate-brancaster-mussels
+  title: Brancaster Mussels in Season
+  publisher: Dalegate Market, Burnham Deepdale
+  url: https://dalegatemarket.co.uk/events/1853183372/
+  type: secondary
+  published: 2021
+  published_note: The mussel season listing is for 1 October 2021 to 28 February 2022; site footer is copyright
+    2026 but the listing was not updated.
+  accessed: 2026-11-10
+- key: saveur-norfolk-mussels
+  title: Where to Feast on Mussels Along England's Norfolk Coast (2016)
+  publisher: Saveur
+  url: https://www.saveur.com/norfolk-england-mussels/
+  type: secondary
+  published: 2016
+  accessed: 2026-11-10
+- key: nnn-norfolk-spider-crab
+  title: Spider crabs multiply off Norfolk coast
+  publisher: North Norfolk News
+  url: https://www.northnorfolknews.co.uk/news/north-norfolk-fishermen-catching-spiny-spider-crabs-9168568
+  type: secondary
+  published: undated
+  published_note: No publication date shown; the article refers only to this year.
+  accessed: 2026-11-10
+- key: sussex-ifca-regulations
+  title: Regulations (byelaws list, including Scallop Closed Season 2005, Fishing Instruments, Shellfish Permit
+    Byelaw 2015, Hand Gathering Byelaw 2021)
+  publisher: Sussex Inshore Fisheries and Conservation Authority
+  url: https://www.sussex-ifca.gov.uk/regulations
+  type: primary
+  published: 2026
+  published_note: Living byelaw list; site copyright 2026.
+  accessed: 2026-11-10
+- key: mmo-king-scallop-closure-2026
+  title: King scallop closure decision 2026 (ICES 7d and 7e)
+  publisher: Marine Management Organisation (GOV.UK)
+  url: https://assets.publishing.service.gov.uk/media/69c1422c7e02b81c0d1c7663/King_scallop_closure__decision_2026.pdf
+  type: primary
+  published: 2026
+  accessed: 2026-11-10
+- key: mmo-king-scallop-closure-2025
+  title: King scallop closure decision 2025 (one-page poster)
+  publisher: Marine Management Organisation (GOV.UK)
+  url: https://assets.publishing.service.gov.uk/media/67c87107ae2aa47d2f5ae321/1_Page_Poster_King_Scallop_Closure_decision_2025.pdf
+  type: primary
+  published: 2025
+  accessed: 2026-11-10
+- key: defra-king-scallop-fmp-annexes-2023
+  title: 'King Scallop FMP consultation: Annexes (July 2023)'
+  publisher: Defra
+  url: https://consult.defra.gov.uk/fisheries-management-plans-1/kingscallop-fmp-consultation/supporting_documents/King%20Scallop%20FMP%20Annexes%20%20July%202023.pdf
+  type: primary
+  published: 2023
+  published_note: July 2023.
+  accessed: 2026-11-10
+- key: dsifca-scallop-closure-response-2025
+  title: D&S IFCA response to consultation on king scallop closure (December 2025)
+  publisher: Devon and Severn Inshore Fisheries and Conservation Authority
+  url: https://www.devonandsevernifca.gov.uk/wp-content/uploads/2025/12/DS-IFCA-Response-to-Consultation-on-King-Scallop-Closure-Dec-2025.pdf
+  type: primary
+  published: 2025
+  published_note: December 2025.
+  accessed: 2026-11-10
+- key: neifca-scallop-dredge-2026
+  title: 2026/2027 NEIFCA Permitted Scallop Dredge Fishery (notice, 29 October 2026)
+  publisher: North Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.ne-ifca.gov.uk/Press-Releases/20262027-neifca-permitted-scallop-dredge-fishery
+  type: primary
+  published: 2026
+  published_note: Notice of 29 October 2026.
+  accessed: 2026-11-10
+- key: neifca-scallop-permits-2026
+  title: Scallop Dredging Permits (2026/2027 season, notice of 22 June 2026)
+  publisher: North Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.ne-ifca.gov.uk/Press-Releases/scallop-dredging-permits-20231
+  type: primary
+  published: 2026
+  published_note: Notice of 22 June 2026.
+  accessed: 2026-11-10
+- key: scotgov-scallop-stocks-2025
+  title: 'Scottish Scallop Stocks: Results of 2025 Stock Assessments (fishery background)'
+  publisher: Scottish Government
+  url: https://www.gov.scot/publications/scottish-scallop-stocks-results-2025-stock-assessments/pages/3/
+  type: primary
+  published: 2025
+  accessed: 2026-11-10
+- key: orkneynews-dived-scallops-2025
+  title: '''They have trashed the summer grounds and are into our winter grounds now'': the destruction of Orkney''s
+    dived scallops sector (22 October 2025)'
+  publisher: The Orkney News
+  url: https://theorkneynews.scot/2025/10/22/they-have-trashed-the-summer-grounds-and-are-into-our-winter-grounds-now-the-destruction-of-orkneys-dived-scallops-sector/comment-page-1/amp/
+  type: secondary
+  published: 2025
+  published_note: 22 October 2025.
+  accessed: 2026-11-10
+- key: mcs-brown-shrimp-wash
+  title: Brown shrimp, The Wash, beam trawl (MSC) rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/brown-shrimp/wild/727/
+  type: primary
+  published: 2025
+  published_note: Rating last updated September 2025.
+  accessed: 2026-11-10
+- key: mcs-brown-shrimp-north-sea
+  title: Brown shrimp, North Sea, beam trawl (MSC) rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/brown-shrimp/wild/511/
+  type: primary
+  published: 2025
+  published_note: Rating last updated September 2025.
+  accessed: 2026-11-10
+- key: mcs-whelk-kent-essex
+  title: Common whelk, Kent and Essex IFCA, pot rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/common-whelk/wild/1039/
+  type: primary
+  published: 2023
+  published_note: Rating last updated May 2023.
+  accessed: 2026-11-10
+- key: mcs-whelk-sussex
+  title: Common whelk, Sussex IFCA, pot rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/common-whelk/wild/1033/
+  type: primary
+  published: 2023
+  published_note: Rating last updated May 2023.
+  accessed: 2026-11-10
+- key: eifca-shrimp-workshop-2016
+  title: Eastern IFCA Shrimp Industry Workshop Report, 26 September 2016
+  publisher: Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.eastern-ifca.gov.uk/wp-content/uploads/2016/09/Shrimp-Workshop-Report.pdf
+  type: primary
+  published: 2016
+  published_note: Workshop of 26 September 2016.
+  accessed: 2026-11-10
+- key: eifca-shrimp-effort-management
+  title: Shrimp Effort Management
+  publisher: Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.eastern-ifca.gov.uk/shrimp-effort-management/
+  type: primary
+  published: 2024
+  published_note: Page metadata dated 9 May 2024.
+  accessed: 2026-11-10
+- key: fishingnews-wash-shrimp
+  title: Feature on the Wash brown shrimp fishery and proposed site closures (John Worrall, c. late 2019)
+  publisher: Fishing News
+  url: https://fishingnews.co.uk/?p=65725
+  type: trade
+  published: 2019
+  published_note: 'Approximate: the feature is undated on the page and is placed in late 2019 from its content.'
+  accessed: 2026-11-10
+- key: fishfacts-north-sea-shrimp-2009
+  title: 'Fishfacts: North Sea brown shrimp (version September 2009), hosted by Eastern IFCA'
+  publisher: Responsible Fishing Committee (hosted by Eastern IFCA)
+  url: https://www.eastern-ifca.gov.uk/wp-content/uploads/2016/03/Fishfacts_North_Sea_shrimp.pdf
+  type: secondary
+  published: 2009
+  published_note: Version September 2009.
+  accessed: 2026-11-10
+- key: msc-wash-brown-shrimp
+  title: Wash brown shrimp
+  publisher: Marine Stewardship Council UK
+  url: https://www.msc.org/uk/what-we-are-doing/uk-irish-fisheries/wash-brown-shrimp
+  type: primary
+  published: undated
+  published_note: No page date; content refers to certification in 2020 and reassessment due 2025.
+  accessed: 2026-11-10
+- key: nwifca-shrimps
+  title: Shrimps Northwest (modified 13 February 2025)
+  publisher: North Western Inshore Fisheries and Conservation Authority
+  url: https://www.nw-ifca.gov.uk/shrimps_northwest
+  type: primary
+  published: 2025
+  published_note: Modified 13 February 2025.
+  accessed: 2026-11-10
+- key: kefca-whelk-report-2025-01
+  title: 'Agenda item B3: Whelk Permit Byelaw update, 28 January 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b3-whelk-report-1737461902.pdf
+  type: primary
+  published: 2025
+  published_note: Meeting of 28 January 2025.
+  accessed: 2026-11-10
+- key: kefca-whelk-report-2026-01
+  title: 'Agenda item B5: Whelk Permit Byelaw update 2025-2026, 27 January 2026'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b5-whelk-report-2025-2026-1768901273.pdf
+  type: primary
+  published: 2026
+  published_note: Meeting of 27 January 2026.
+  accessed: 2026-11-10
+- key: kefca-whelk-byelaw-2022
+  title: Whelk Fishery Flexible Permit Byelaw (signed)
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/keifca-whelk-fishery-flexible-permit-byelaw-signed-1646653098.pdf
+  type: primary
+  published: 2022
+  published_note: Upload timestamp in the URL is March 2022.
+  accessed: 2026-11-10
+- key: eifca-whelk-sitrep-2024
+  title: 'Whelk Permit Byelaw 2016: flexible permit conditions review, situation report (October 2024)'
+  publisher: Eastern Inshore Fisheries and Conservation Authority
+  url: https://www.eastern-ifca.gov.uk/wp-content/uploads/2024/10/2024_10_09_Whelk_Sit_Rep.pdf
+  type: primary
+  published: 2024
+  published_note: 9 October 2024.
+  accessed: 2026-11-10
+- key: kefca-kent-2025-feb-jun
+  title: 'Agenda item C1: Kent shore report, February to June 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c1-kent-shore-1749671582.pdf
+  type: primary
+  published: 2025
+  published_note: June 2025 meeting.
+  accessed: 2026-11-10
+- key: kefca-essex-2025-jan-jun
+  title: 'Agenda item C2: Essex shore report, January to June 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1749671592.pdf
+  type: primary
+  published: 2025
+  published_note: June 2025 meeting.
+  accessed: 2026-11-10
+- key: kefca-essex-2025-nov-jan
+  title: 'Agenda item C2: Essex shore report, November 2025 to January 2026'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1768901355.pdf
+  type: primary
+  published: 2026
+  published_note: January 2026 meeting.
+  accessed: 2026-11-10
+- key: mcs-spider-crab
+  title: Spider crab, pot, UK (all areas except Devon and Severn, Southern and Cornwall IFCA districts) rating
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/spider-crab/wild/509/
+  type: primary
+  published: 2025
+  published_note: Rating last updated December 2025.
+  accessed: 2026-11-10
+- key: kefca-manila-clam-trial
+  title: Manila clam trial
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://kentandessex-ifca.gov.uk/im-interested-in/research/manila-clam-trial
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2026; its newest content is the June 2025 approval of the two-year trial.
+  accessed: 2026-11-10
+- key: kefca-manila-clam-update-2025-11
+  title: 'Agenda item B3: Small scale Manila clam trial update, 25 November 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b3-manila-clam-update-1764588358.pdf
+  type: primary
+  published: 2025
+  published_note: Meeting of 25 November 2025.
+  accessed: 2026-11-10
+- key: kefca-manila-clam-trial-report-2026-05
+  title: 'Agenda item B6: Manila clam trial update, 19 May 2026'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b6-mc-trial-report-1778576658.pdf
+  type: primary
+  published: 2026
+  published_note: Meeting of 19 May 2026.
+  accessed: 2026-11-10
+- key: flyingfish-seasonality
+  title: Seasonality (seafood calendar; Q marks time of best quality)
+  publisher: Flying Fish Seafoods (Cornwall)
+  url: https://flyingfishseafoods.co.uk/seasonality/
+  type: secondary
+  published: 2026
+  published_note: Page modified 8 June 2026; copyright 2026. The availability shading (poor, varying, good) is colour
+    only and could not be read by the research tools; only the Q (best quality) marks were read.
+  accessed: 2026-11-10
+- key: northumberland-seafood-seasonality
+  title: Seasonality (chart of when local fishermen catch each species)
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/
+  type: secondary
+  published: 2015
+  published_note: Page modified 29 September 2015; the chart is an image uploaded July 2015 that the research tools
+    could not read.
+  accessed: 2026-11-10
+- key: northumberland-seafood-brown-crab
+  title: Brown Crab
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/brown-crab/
+  type: secondary
+  published: 2016
+  published_note: Page modified 29 January 2016.
+  accessed: 2026-11-10
+- key: northumberland-seafood-lobster
+  title: Lobster
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/lobster/
+  type: secondary
+  published: 2016
+  published_note: Page modified 14 January 2016.
+  accessed: 2026-11-10
+- key: bnfs-seasonality
+  title: Seasonality on the South Coast
+  publisher: Brighton & Newhaven Fish Sales
+  url: https://www.brighton-fish-sales.co.uk/brighton-and-newhaven-fish-sales-seasonality/
+  type: secondary
+  published: 2024
+  published_note: Page modified 28 May 2024; the chart (BNFS-Sustainability-2024) is an image the research tools
+    could not read.
+  accessed: 2026-11-10
+- key: sussex-ifca-species
+  title: Species (fishery profiles)
+  publisher: Sussex Inshore Fisheries and Conservation Authority
+  url: https://www.sussex-ifca.gov.uk/species
+  type: primary
+  published: 2026
+  published_note: Living page, copyright 2026; it cites Sussex IFCA (2020) and links 2025 species fishery reports.
+  accessed: 2026-11-10
+- key: fitd-crab
+  title: Crab
+  publisher: Fish is the Dish (Seafish)
+  url: https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/crab
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2025.
+  accessed: 2026-11-10
+- key: fitd-lobster
+  title: Lobster
+  publisher: Fish is the Dish (Seafish)
+  url: https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/lobster
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2025.
+  accessed: 2026-11-10
+- key: fitd-langoustines
+  title: Langoustines
+  publisher: Fish is the Dish (Seafish)
+  url: https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/langoustines
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2025.
+  accessed: 2026-11-10
+- key: fitd-mussels
+  title: Mussels
+  publisher: Fish is the Dish (Seafish)
+  url: https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/mussels
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2025.
+  accessed: 2026-11-10
+- key: fitd-oysters
+  title: Oysters
+  publisher: Fish is the Dish (Seafish)
+  url: https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/oysters
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2025.
+  accessed: 2026-11-10
+- key: fitd-scallops
+  title: Scallops
+  publisher: Fish is the Dish (Seafish)
+  url: https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/scallops
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2025.
+  accessed: 2026-11-10
+- key: fitd-clams
+  title: Clams
+  publisher: Fish is the Dish (Seafish)
+  url: https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/clams
+  type: primary
+  published: 2025
+  published_note: Living page, copyright 2025.
+  accessed: 2026-11-10
+- key: mcs-blue-mussel
+  title: 'Blue mussel: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/blue-mussel/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-razor-clam
+  title: 'Razor clam: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/razor-clam/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; copyright 2026.
+  accessed: 2026-11-10
+- key: mcs-spider-crab-all
+  title: 'Spider crab: all ratings'
+  publisher: Marine Conservation Society Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/spider-crab/
+  type: primary
+  published: 2026
+  published_note: Living ratings page; individual ratings last updated December 2025.
+  accessed: 2026-11-10
+- key: kefca-annual-plan-2026-27
+  title: Annual Plan 2026-2027
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/annual-plan-2026-27-1768909917.pdf
+  type: primary
+  published: 2026
+  published_note: Covers work from April 2026; upload timestamp in the URL is January 2026.
+  accessed: 2026-11-10
+- key: helen-ffs-chart
+  title: 'Flying Fish Seafoods: Seasonality chart (weeks as transcribed by Helen)'
+  publisher: Flying Fish Seafoods
+  url: https://flyingfishseafoods.co.uk/seasonality/
+  type: primary
+  published: undated
+  published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'ffs'); the chart itself
+    is an image and was not re-read.
+  accessed: '2026-11-10'
+- key: helen-bnfs-chart
+  title: 'Brighton & Newhaven Fish Sales: seasonality (weeks as transcribed by Helen)'
+  publisher: Brighton & Newhaven Fish Sales
+  url: https://www.brighton-fish-sales.co.uk/
+  type: primary
+  published: undated
+  published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'bnfs'); the chart itself
+    is an image and was not re-read.
+  accessed: '2026-11-10'

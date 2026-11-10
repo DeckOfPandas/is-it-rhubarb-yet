@@ -1,0 +1,753 @@
+- key: cgsg-mackerel
+  title: Mackerel
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/mackerel.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-bass
+  title: Bass, Seabass
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/bass-seabass.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Oct 2026.
+- key: cgsg-sardine
+  title: Cornish Sardine
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/cornish-sardine.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; overview updated Jan 2026.
+- key: cgsg-herring
+  title: Herring
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/herring.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Oct 2026.
+- key: cgsg-cod
+  title: Cod
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/cod.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jul 2026.
+- key: cgsg-haddock
+  title: Haddock
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/haddock.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-hake
+  title: Hake
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/hake.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-pollack
+  title: Pollack
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/pollack.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-whiting
+  title: Whiting
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/whiting.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-monkfish-white
+  title: Monkfish, white
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/monkfish-white.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Oct 2026.
+- key: cgsg-red-gurnard
+  title: Red Gurnard
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/red-gurnard.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-red-mullet
+  title: Red mullet
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/red-mullet.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-grey-mullet
+  title: Grey Mullet
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/grey-mullet.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-john-dory
+  title: John Dory
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/john-dory.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: cgsg-ling
+  title: Ling
+  publisher: Cornwall Good Seafood Guide (Cornwall Wildlife Trust)
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/ling.php
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living CGSG species page; updated Jan 2026.
+- key: mcs-mackerel
+  title: Mackerel (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/mackerel/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-mackerel-sw-handline
+  title: Mackerel, Northeast Atlantic, South West UK, handline (rating 193)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/mackerel/wild/193/
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+  published_note: Rating last updated Nov 2025.
+- key: mcs-seabass
+  title: Seabass (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/seabass/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-sardine
+  title: Sardine (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/sardine/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-sprat
+  title: Sprat (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/sprat/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-cod
+  title: Atlantic cod (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/atlantic-cod/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-cod-southern-substock
+  title: Atlantic cod, Northern Shelf Southern substock (rating 1321)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/atlantic-cod/wild/1321/
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+  published_note: Rating last updated Dec 2025.
+- key: mcs-cod-celtic
+  title: Atlantic cod, Celtic Seas (southern) and English Channel (west) (rating 34)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/atlantic-cod/wild/34/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Rating last updated Jun 2026.
+- key: mcs-haddock
+  title: Haddock (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/haddock/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-hake
+  title: European hake (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/european-hake/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-whiting
+  title: Whiting (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/whiting/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-monkfish-white
+  title: White monkfish (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/white-monkfish
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-monkfish-black
+  title: Black-bellied monkfish (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/black-bellied-monkfish
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; not re-read in the fish pass (page not reachable via search), year assumed
+    from the live guide.
+- key: mcs-red-mullet
+  title: Red mullet (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/red-mullet/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: seafish-seafood-guide
+  title: The Seafood Guide (March 2009)
+  publisher: Seafish
+  url: https://seafoodacademy.org/pdfs/seafood-guide.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2009
+- key: gov-sea4-fish-baseline
+  title: 'Offshore Energy SEA 4, Appendix 1a.4: Fish and Shellfish (environmental baseline)'
+  publisher: UK Government (Offshore Energy Strategic Environmental Assessment)
+  url: https://assets.publishing.service.gov.uk/media/623253a78fa8f56c20996990/Appendix_1a_4_-_Fish___Shellfish.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2022
+  published_note: Year of the OESEA4 report; not re-checked on the PDF in the fish pass.
+- key: gov-bass-guidance-2026
+  title: Bass fishing guidance (updated 27 February 2026)
+  publisher: GOV.UK (Defra / Marine Management Organisation)
+  url: https://www.gov.uk/government/publications/bass-industry-guidance-2026/bass-fishing-guidance-2025
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+- key: msc-cornwall-sardine
+  title: Cornwall Sardine (fishery record MSC-F-31296)
+  publisher: Marine Stewardship Council
+  url: https://fisheries.msc.org/en/fisheries/cornwall-sardine-uk/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MSC fishery record, current certificate to Aug 2027 (read 2026-11-10).
+- key: msc-uk-sardines
+  title: 'Sardines: sustainable fish to eat in the UK'
+  publisher: Marine Stewardship Council
+  url: https://www.msc.org/uk/what-you-can-do/sustainable-fish-to-eat-in-the-uk/sardines
+  type: primary
+  accessed: 2026-11-10
+  published: undated
+  published_note: Living MSC consumer page; no date found in the text read.
+- key: msc-uk-herring
+  title: 'Herring: sustainable fish to eat in the UK'
+  publisher: Marine Stewardship Council
+  url: https://www.msc.org/uk/what-you-can-do/sustainable-fish-to-eat-in-the-uk/herring
+  type: primary
+  accessed: 2026-11-10
+  published: undated
+  published_note: Living MSC consumer page; no date found in the text read.
+- key: csma-fishery
+  title: Fisheries
+  publisher: Cornish Sardine Management Association (Cornish Sardines)
+  url: https://www.cornishsardines.org.uk/?p=1173
+  type: primary
+  accessed: 2026-11-10
+  published: undated
+  published_note: No date found on the page text read.
+- key: govscot-salmon-conservation
+  title: Conservation of wild salmon (updated 5 August 2026)
+  publisher: Scottish Government
+  url: https://www.gov.scot/policies/salmon-and-recreational-fisheries/conservation/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Updated 5 August 2026.
+- key: govscot-salmon-stats-2025
+  title: 'Salmon & sea trout fishery statistics 2025: salmon net fishery (published 29 April 2026)'
+  publisher: Scottish Government
+  url: https://www.gov.scot/publications/salmon-sea-trout-fishery-statistics-2025/pages/6/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Published 29 April 2026.
+- key: marinescot-sma-salmon
+  title: Salmon and sea trout fishing (Scotland's Marine Assessment 2020)
+  publisher: Marine Directorate, Scottish Government
+  url: https://marine.gov.scot/sma/node/17412
+  type: primary
+  accessed: 2026-11-10
+  published: 2020
+  published_note: Scotland's Marine Assessment 2020.
+- key: leg-tweed-order-2007
+  title: The Tweed Regulation Order 2007 (SSI 2007/19)
+  publisher: legislation.gov.uk
+  url: https://www.legislation.gov.uk/ssi/2007/19/data.xht
+  type: primary
+  accessed: 2026-11-10
+  published: 2007
+  published_note: Order in force, so it counts as current.
+- key: nasco-uk-mixed-stock-2025
+  title: NEA(25)05 Mixed Stock Fisheries, tabled by the United Kingdom
+  publisher: North Atlantic Salmon Conservation Organization (UK submission)
+  url: https://nasco.int/wp-content/uploads/2025/05/NEA2505_Mixed-Stock-Fisheries-Tabled-by-the-United-Kingdom.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+- key: ea-sea-trout-net-2020
+  title: 'Consultation report: options for extending the sea trout beach net fishery in Yorkshire and North East
+    England (January 2020)'
+  publisher: Environment Agency
+  url: https://consult.environment-agency.gov.uk/north-east/yorkshire-and-north-east-coastal-sea-trout-fishery/supporting_documents/Sea%20trout%20net%20fishery%20consultation%20report.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2020
+- key: ea-cross-border-byelaws-2020
+  title: New cross border byelaws to protect salmon and sea trout (26 June 2020)
+  publisher: Environment Agency (GOV.UK)
+  url: https://www.gov.uk/government/news/new-cross-border-byelaws-to-protect-salmon-and-sea-trout
+  type: primary
+  accessed: 2026-11-10
+  published: 2020
+- key: undercurrent-mcs-cod-2026
+  title: Latest MCS Good Fish Guide has no recommended choices for UK-caught cod (9 April 2026)
+  publisher: Undercurrent News
+  url: https://www.undercurrentnews.com/2026/04/09/latest-mcs-good-fish-guide-has-no-recommended-choices-for-uk-caught-cod/
+  type: trade
+  accessed: 2026-11-10
+  published: 2026
+- key: itv-mcs-oct-2026
+  title: Some hake and coley stocks suffering from population decline, consumers warned (13 October 2026)
+  publisher: ITV News
+  url: https://www.itv.com/news/2026-10-13/some-hake-and-coley-stocks-suffering-from-population-decline-consumers-warned
+  type: secondary
+  accessed: 2026-11-10
+  published: 2026
+- key: ttg-cgsg-winter-2026
+  title: Cornwall Good Seafood Guide winter 2026
+  publisher: Through the Gaps (blog)
+  url: https://blog.through-the-gaps.co.uk/2026/02/cornwall-good-seafood-guide-winter-2026.html
+  type: secondary
+  accessed: 2026-11-10
+  published: 2026
+- key: fishfocus-mackerel-2025
+  title: High quality Scottish mackerel in strong demand from markets (22 January 2025)
+  publisher: Fish Focus
+  url: https://fishfocus.co.uk/high-quality-scottish-mackerel-in-strong-demand-from-markets/
+  type: trade
+  accessed: 2026-11-10
+  published: 2025
+- key: fishfocus-mackerel-2024
+  title: Good start of the year mackerel fishery for Scottish fleet (26 February 2024)
+  publisher: Fish Focus
+  url: https://fishfocus.co.uk/good-start-of-the-year-mackerel-fishery-for-scottish-fleet/
+  type: trade
+  accessed: 2026-11-10
+  published: 2024
+- key: fishingdaily-mackerel-autumn
+  title: End of the year mackerel fishery successfully completed for Scottish fleet (undated)
+  publisher: The Fishing Daily
+  url: https://thefishingdaily.com/featured-news/end-of-the-year-mackerel-fishery-successfully-completed-for-scottish-fleet/
+  type: trade
+  accessed: 2026-11-10
+  published: undated
+  published_note: No date on the page or in the URL; its image paths are from 2020, which suggests late 2020 but
+    does not fix it.
+- key: worldfishing-mackerel-2023
+  title: Scottish mackerel enjoys bumper year-end (4 December 2023)
+  publisher: World Fishing & Aquaculture
+  url: https://www.worldfishing.net/fisheries/scottish-mackerel-enjoys-bumper-year-end/1489492.article
+  type: trade
+  accessed: 2026-11-10
+  published: 2023
+- key: govscot-inshore-mackerel-review
+  title: 'Trial mackerel inshore fishery 2014-2017: review (1 November 2017)'
+  publisher: Scottish Government
+  url: https://www.gov.scot/publications/review-trial-mackerel-inshore-fishery-2014-2017/pages/3/
+  type: primary
+  accessed: 2026-11-10
+  published: 2017
+- key: sussexifca-species
+  title: Species
+  publisher: Sussex Inshore Fisheries and Conservation Authority
+  url: https://www.sussex-ifca.gov.uk/species
+  type: primary
+  accessed: 2026-11-10
+  published: undated
+  published_note: Living IFCA species page; no date found in the text read.
+- key: kefca-essex-2025-jul-nov
+  title: 'Agenda item C2: Essex shore report, July to November 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1763458637.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+  published_note: Date from the URL upload stamp (18 Nov 2025).
+- key: kefca-essex-2025-nov-jan
+  title: 'Agenda item C2: Essex shore report, November 2025 to January 2026'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1768901355.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Date from the URL upload stamp (20 Jan 2026).
+- key: kefca-kent-2025-nov-jan
+  title: 'Agenda item C1: Kent shore report, November 2025 to January 2026'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c1-kent-shore-report-1768901346.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Date from the URL upload stamp (20 Jan 2026).
+- key: kefca-kent-2026-jan-may
+  title: 'Agenda item C1: Kent shore report, January to May 2026'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c1-kent-shore-report-1778576740.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Date from the URL upload stamp (12 May 2026).
+- key: govscot-hake-fmp-2025
+  title: Proposed Northern Shelf hake fisheries management plan (20 November 2025)
+  publisher: Scottish Government
+  url: https://www.gov.scot/publications/proposed-northern-shelf-hake-fisheries-management-plan/pages/9/
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+- key: mcs-pollack
+  title: Pollack (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/pollack/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-red-gurnard
+  title: Red gurnard (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/red-gurnard/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-ling
+  title: Ling (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/ling/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-grey-mullet
+  title: Grey mullet (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/grey-mullet/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-grey-mullet-ns-channel
+  title: Grey mullet, North Sea and English Channel, gill or fixed net (rating 152)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/grey-mullet/wild/152/
+  type: primary
+  accessed: 2026-11-10
+  published: 2023
+  published_note: Rating last updated Aug 2023.
+- key: mcs-john-dory
+  title: John Dory (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/john-dory/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: ea-ne-coast-net-amendments-2018
+  title: North east coast net fishery amendments (national salmon and sea trout protection byelaws, September 2018)
+  publisher: Environment Agency
+  url: https://consult.environment-agency.gov.uk/fisheries/proposed-national-salmon-byelaws/results/northeastcoastfisheryamendments_sept2018.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2018
+- key: gov-sea-trout-net-decision-2020
+  title: Decision on sea trout netting season extension announced (31 March 2020)
+  publisher: Environment Agency (GOV.UK)
+  url: https://gov.uk/government/news/decision-on-sea-trout-netting-season-extension-announced
+  type: primary
+  accessed: 2026-11-10
+  published: 2020
+- key: lochduart-label-rouge-2021
+  title: Label Rouge salmon fillet packs announcement (29 March 2021)
+  publisher: Loch Duart
+  url: https://lochduart.com/?p=5412
+  type: secondary
+  accessed: 2026-11-10
+  published: 2021
+- key: northern-times-loch-duart-2021
+  title: Loch Duart flags Label Rouge accreditation as salmon producer with Dingwall plant eyes markets across Europe
+    (3 April 2021)
+  publisher: Northern Times
+  url: https://www.northern-times.co.uk/news/salmon-firms-french-connection-is-a-source-of-pride-233885/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2021
+- key: undercurrent-loch-duart-rspca-2024
+  title: Loch Duart exits 'unfit' RSPCA certification scheme (29 August 2024)
+  publisher: Undercurrent News
+  url: https://www.undercurrentnews.com/2024/08/29/loch-duart-exits-unfit-rspca-certification-scheme/
+  type: trade
+  accessed: 2026-11-10
+  published: 2024
+- key: intrafish-loch-duart-standard-2025
+  title: Scottish salmon producer launches bespoke farming standard (8 May 2025)
+  publisher: IntraFish
+  url: https://www.intrafish.com/salmon/scottish-salmon-producer-launches-bespoke-farming-standard/2-1-1816653
+  type: trade
+  accessed: 2026-11-10
+  published: 2025
+- key: abelandcole-glenarm
+  title: Glenarm Organic Salmon (producer page)
+  publisher: Abel & Cole
+  url: https://www.abelandcole.co.uk/producer/130/
+  type: secondary
+  accessed: 2026-11-10
+  published: undated
+  published_note: Retailer producer page; no date found in the text read.
+- key: irishnews-glenarm-2015
+  title: Glenarm firm takes further leap into export markets (5 May 2015)
+  publisher: The Irish News
+  url: https://www.irishnews.com/business/2015/05/05/news/glenarm-firm-takes-further-leap-into-export-markets-129371/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2015
+- key: kefca-kent-2025-feb-jun
+  title: 'Agenda item C1: Kent shore report, February to June 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c1-kent-shore-1749671582.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+  published_note: Date from the URL upload stamp (11 Jun 2025).
+- key: kefca-essex-2025-jan-jun
+  title: 'Agenda item C2: Essex shore report, January to June 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1749671592.pdf
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+  published_note: Date from the URL upload stamp (11 Jun 2025).
+- key: govscot-ling-fmp-2025
+  title: 'Proposed Northern Shelf Ling Fisheries Management Plan: background (20 November 2025)'
+  publisher: Scottish Government
+  url: https://www.gov.scot/publications/proposed-northern-shelf-ling-fisheries-management-plan/pages/9/
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+- key: seafish-species-guide-gurnard-2010
+  title: 'Seafish species guide: the gurnard (R&D species guide, December 2010), copy on Issuu'
+  publisher: Seafish
+  url: https://issuu.com/capnh/docs/seafishspeciesguide_gurnard_201012
+  type: primary
+  accessed: 2026-11-10
+  published: 2010
+- key: ffs-seasonality
+  title: Seasonality
+  publisher: Flying Fish Seafoods
+  url: https://flyingfishseafoods.co.uk/seasonality/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Page last modified 8 Jun 2026; footer copyright 2026. Q marks best quality; the poor/varying/good
+    availability shading is not legible in page text.
+- key: northumberland-seasonality
+  title: Seasonality
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2015
+  published_note: Page modified Sep 2015; chart image uploaded Jul 2015 and not legible as text.
+- key: northumberland-mackerel
+  title: Mackerel
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/mackerel/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2016
+  published_note: Page modified 14 Jan 2016.
+- key: northumberland-herring
+  title: Herring
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/herring/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2016
+  published_note: Page modified 14 Jan 2016.
+- key: northumberland-whiting
+  title: Whiting
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/whiting/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2016
+  published_note: Page modified 14 Jan 2016.
+- key: northumberland-ling
+  title: Ling
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/ling/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2016
+  published_note: Page modified 14 Jan 2016.
+- key: northumberland-gurnard
+  title: Gurnard
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/gurnard/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2016
+  published_note: Page modified 14 Jan 2016.
+- key: bnfs-seasonality
+  title: Seasonality on the South Coast
+  publisher: Brighton & Newhaven Fish Sales
+  url: https://www.brighton-fish-sales.co.uk/brighton-and-newhaven-fish-sales-seasonality/
+  type: secondary
+  accessed: 2026-11-10
+  published: 2024
+  published_note: Page modified 28 May 2024; chart image named 2024; chart not legible as text.
+- key: fishfocus-mackerel-autumn-2025
+  title: Good abundance of mackerel for Scottish fishery this autumn (12 November 2025)
+  publisher: Fish Focus
+  url: https://fishfocus.co.uk/good-abundance-of-mackerel-for-scottish-fishery-this-autumn/
+  type: trade
+  accessed: 2026-11-10
+  published: 2025
+- key: mcs-herring
+  title: Herring (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/herring/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-monkfish
+  title: Monkfish (overview and sustainable swaps)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/monkfish/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10). Swaps
+    list gives white monkfish 6 sources rated 2-3, which fixes the scores of its Best Choice (2) and OK (3) entries.
+- key: mcs-atlantic-salmon
+  title: Atlantic salmon (species ratings)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/atlantic-salmon/
+  type: primary
+  accessed: 2026-11-10
+  published: 2026
+  published_note: Living MCS species page; no update date shown, footer copyright 2026 (read 2026-11-10).
+- key: mcs-sprat-ec
+  title: Sprat, English Channel, pelagic trawl (rating 202)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/sprat/wild/202/
+  type: primary
+  accessed: 2026-11-10
+  published: 2024
+  published_note: Rating last updated May 2024.
+- key: mcs-sardine-uncertified
+  title: Sardine, Southern Celtic Seas and English Channel, uncertified (rating 475)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/sardine/wild/475/
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+  published_note: Rating last updated Dec 2025.
+- key: mcs-sardine-msc
+  title: Sardine, Southern Celtic Seas and English Channel, MSC Cornwall (rating 954)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/sardine/wild/954/
+  type: primary
+  accessed: 2026-11-10
+  published: undated
+  published_note: No update date shown; cites a 2025 stock assessment.
+- key: mcs-pollack-handline
+  title: Pollack, Celtic Seas and English Channel, handline (rating 783)
+  publisher: Marine Conservation Society, Good Fish Guide
+  url: https://www.mcsuk.org/goodfishguide/species/pollack/wild/783/
+  type: primary
+  accessed: 2026-11-10
+  published: 2025
+  published_note: Rating last updated Aug 2025.
+- key: rockfish-glenarm-2025
+  title: The return of salmon at Rockfish
+  publisher: Rockfish (Skipper's Log blog)
+  url: https://therockfish.co.uk/blogs/skippers-log/the-return-of-salmon-at-rockfish
+  type: secondary
+  accessed: 2026-11-10
+  published: undated
+  published_note: No date on the page; an image version stamp suggests late September 2025.
+- key: salmonbusiness-loch-duart-standard-2025
+  title: Loch Duart introduces bespoke welfare standard for small-scale salmon farming (9 May 2025)
+  publisher: Salmon Business
+  url: https://www.salmonbusiness.com/loch-duart-introduces-bespoke-welfare-standard-for-small-scale-salmon-farming/
+  type: trade
+  accessed: 2026-11-10
+  published: 2025
+- key: helen-northumberland-chart
+  title: 'Northumberland Seafood: Seasonality chart (weeks as transcribed by Helen)'
+  publisher: Northumberland Seafood
+  url: https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/
+  type: primary
+  published: undated
+  published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'northumberland'); the
+    chart itself is an image and was not re-read.
+  accessed: '2026-11-10'
+- key: helen-ffs-chart
+  title: 'Flying Fish Seafoods: Seasonality chart (weeks as transcribed by Helen)'
+  publisher: Flying Fish Seafoods
+  url: https://flyingfishseafoods.co.uk/seasonality/
+  type: primary
+  published: undated
+  published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'ffs'); the chart itself
+    is an image and was not re-read.
+  accessed: '2026-11-10'
+- key: helen-bnfs-chart
+  title: 'Brighton & Newhaven Fish Sales: seasonality (weeks as transcribed by Helen)'
+  publisher: Brighton & Newhaven Fish Sales
+  url: https://www.brighton-fish-sales.co.uk/
+  type: primary
+  published: undated
+  published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'bnfs'); the chart itself
+    is an image and was not re-read.
+  accessed: '2026-11-10'

@@ -1,0 +1,4827 @@
+rows:
+- food: Enoki
+  ring: (whole)
+  ours: Enoki
+  band: never-mismatch
+  in_mis: 52
+  fresh_mis: 52
+  any_mis: 52
+  helen: in January–December
+  mine: none
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: ····················································
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Food Standards Agency (primary), Scottish Daily Mail (via PressReader) (secondary), SAC Consulting / Scotland's Rural College (primary)
+  note: ''
+  cat: never-mismatch
+- food: Halibut
+  ring: South West
+  ours: SW
+  band: never-mismatch
+  in_mis: 52
+  fresh_mis: 52
+  any_mis: 52
+  helen: in January–December
+  mine: none
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: ····················································
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: low
+  our_sources: Seafish (primary), Cornwall Good Seafood Guide (primary), Marine Conservation Society (primary)
+  note: cgsg-halibut ticks no month as best to eat and says the fish is rare locally, so the national season may overstate Cornish supply.
+  cat: never-mismatch
+- food: Cucumber
+  ring: Outdoor
+  ours: Outdoor
+  band: never-mismatch
+  in_mis: 26
+  fresh_mis: 35
+  any_mis: 35
+  helen: in April–September; avail March and October
+  mine: none
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ····················································
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Produced in Kent (secondary), Royal Horticultural Society (secondary), Hortnews (The Commercial Greenhouse Grower) (trade)
+  note: ''
+  cat: never-mismatch
+- food: Shallots
+  ring: (whole)
+  ours: Shallots
+  band: large
+  in_mis: 44
+  fresh_mis: 44
+  any_mis: 44
+  helen: in September–June
+  mine: in August–September; store October–March
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIII·········IIIIIIIIIIIIIIIII
+  ostrip: sssssssssssss·················IIIIIIIIIsssssssssssss
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), Royal Horticultural Society (secondary)
+  note: End of the season is undocumented; Aug-Sep harvest is a reading of 'mid to late summer', and the store window to end of March is my extrapolation from RHS home-storage guidance. No commercial storage
+    source found.
+  cat: shifted
+- food: Horseradish
+  ring: (whole)
+  ours: Cultivated
+  band: large
+  in_mis: 43
+  fresh_mis: 35
+  any_mis: 43
+  helen: in May and October; avail April and September; store November–March
+  mine: in January–December
+  hstrip: sssssssssssssaaaaIIIII·············aaaaIIIIsssssssss
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Tracklements (secondary), Royal Horticultural Society (secondary), Defra (primary), Freshview Foods (secondary)
+  note: ''
+  cat: ours-longer
+- food: Cuttlefish
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 48
+  fresh_mis: 27
+  any_mis: 48
+  helen: in January–April; avail September–October
+  mine: in May–January; avail February–April
+  hstrip: IIIIIIIIIIIIIIIII··················aaaaaaaa·········
+  ostrip: IIIIaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary), UK Government (GOV.UK assets) (primary)
+  note: Flying Fish Seafoods marks November-February as best quality (flyingfish-seasonality), leaving out May-October, which cgsg-cuttlefish ticks; the primary regional guide is used.
+  cat: ours-longer
+- food: Sea bass
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 43
+  fresh_mis: 17
+  any_mis: 43
+  helen: in October–May
+  mine: in June–November; avail December–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIII·················IIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), GOV.UK (Defra / Marine Management Organisation) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society,
+    Good Fish Guide (primary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year) (line-caught wild bass), against cgsg-bass's Jun-Nov; CGSG kept. seafish-seafood-guide (2009, background
+    only) gives a wild season of Aug-Mar, which predates the closure. cgsg-bass quotes a 2-fish recreational bag limit; current guidance is 3 per day (gov-bass-guidance-2026). The best-to-eat source marks
+    17 w
+  cat: ours-longer
+- food: Lemon sole
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 34
+  fresh_mis: 26
+  any_mis: 39
+  helen: in May–August; avail April and September
+  mine: in July–February; avail March–June
+  hstrip: ·············aaaaIIIIIIIIIIIIIIIIIIaaaa·············
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Direct Seafoods (secondary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary)
+  note: Flying Fish Seafoods marks June-September as best quality (flyingfish-seasonality), against July-February in cgsg-lemon-sole. The 2009 national guide's May-March season no longer counts.
+  cat: ours-longer
+- food: Brown crab
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 43
+  fresh_mis: 17
+  any_mis: 43
+  helen: in February–September
+  mine: in October–March; avail April–September
+  hstrip: ····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII·············
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: low
+  our_sources: Cornwall Good Seafood Guide (primary), Fish is the Dish (Seafish) (primary), Flying Fish Seafoods (secondary), Cefas (via GOV.UK) (primary)
+  note: 'Best-to-eat sources disagree by more than 4 weeks, so confidence is low. cgsg-crab ticks all 12 months but its text says winter is best (rule 1 applied: October-March used). Seafish gives March-June
+    as best quality UK-wide (fitd-crab). Flying Fish, a Cornish wholesaler, marks best quality for live cock crab and picked meat in March-June and September-December, not January-February or July-August
+    ('
+  cat: ours-longer
+- food: Nettles
+  ring: (whole)
+  ours: Nettles
+  band: large
+  in_mis: 20
+  fresh_mis: 38
+  any_mis: 43
+  helen: in March–April; avail May
+  mine: in February–June and September–November; avail December–February and June–August
+  hstrip: ········IIIIIIIIIaaaaa······························
+  ostrip: aaaaaaaIIIIIIIIIIIIIIIIaaaaaaaaaaaaIIIIIIIIIIIIIaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), NatureScot (primary)
+  note: natgeo-calendar puts the peak in April only (weeks 14-17).
+  cat: ours-longer
+- food: Swede
+  ring: (whole)
+  ours: Swede
+  band: large
+  in_mis: 31
+  fresh_mis: 24
+  any_mis: 33
+  helen: in September–November; avail July–August; store December–June
+  mine: in June–April; avail June; store May–June
+  hstrip: ssssssssssssssssssssssssssaaaaaaaaaIIIIIIIIIIIIIssss
+  ostrip: IIIIIIIIIIIIIIIIIssssssaaIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Caterer (trade), Fresh Produce Journal (Fruitnet) (trade), FreshPlaza (trade), Defra (primary)
+  note: 'Whether Jan-Apr supply is field-lifted or stored is unclear: the Devon grower harvests to April, but Produce World''s storage ran before May too. New-season start varies: mid-June (caterer-swede-2017)
+    vs June or July (fpj-roots-differing-seasons) vs July (freshview-seasonality).'
+  cat: ours-longer
+- food: Chervil
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 27
+  fresh_mis: 27
+  any_mis: 32
+  helen: in April–July; avail March and August
+  mine: in June–November
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIaaaaa·················
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 9 weeks earlier and ends about 9 weeks earlier than the chervil-specific dates.
+  cat: shifted
+- food: Lamb
+  ring: Mutton
+  ours: Mutton
+  band: large
+  in_mis: 31
+  fresh_mis: 22
+  any_mis: 31
+  helen: in October–February; avail March and September
+  mine: in January–December
+  hstrip: IIIIIIIIaaaaa······················aaaaIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: National Sheep Association, AHDB, AHDB, Lishman's, Hybu Cig Cymru, Farm Contractor
+  helen_general: false
+  our_conf: moderate
+  our_sources: National Sheep Association (primary), Mutton Renaissance (primary), Farmers Weekly, quoting Mutton Renaissance and the National Sheep Association (trade)
+  note: 'Older sources name a peak: the Mutton Renaissance campaign (undated page, campaign launched 2004) says the best meat is produced October to March, and a 2005 specification launch dated the mutton
+    season from 1 October, after summer grazing (muttonrenaissance-what-is-mutton, fwi-mutton-spec). Under the source-age rule these pre-2016 sources don''t override the current NSA guide; no newer source
+    nami'
+  cat: ours-longer
+- food: Cod
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News (trade), Seafish (primary)
+  note: ''
+  cat: peak
+- food: Cod
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News
+    (trade)
+  note: ''
+  cat: peak
+- food: Haddock
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary)
+  note: ''
+  cat: peak
+- food: Haddock
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Brighton & Newhaven Fish Sales (primary)
+  note: ''
+  cat: peak
+- food: Pollock
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development
+    Trust) (secondary)
+  note: ''
+  cat: peak
+- food: Monkfish
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ''
+  cat: peak
+- food: Gurnard
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary)
+  note: ''
+  cat: peak
+- food: Skates and rays
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Conservation Society (primary)
+  note: ''
+  cat: peak
+- food: Skates and rays
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex IFCA (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: The same profile says thornback are traditionally present from early spring to late autumn (kefca-thornback-smp-2014), and they lay eggs inshore March-September (ices-fishmap-thornback, kentessex-ifca-thornback);
+    its explicit all-year season is used (rule 1).
+  cat: peak
+- food: Dab
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society (primary), Northumberland Seafood (primary)
+  note: ''
+  cat: peak
+- food: Halibut
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Cornwall Good Seafood Guide (primary), Marine Conservation Society (primary)
+  note: ''
+  cat: peak
+- food: Whelks
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 52
+  fresh_mis: 0
+  any_mis: 52
+  helen: in January–December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: high
+  our_sources: Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: 'Pass 3 change: April-June was in; it is a landings peak, not a best-to-eat window, so it is now avail. Landings peaks differ by area: Sussex January-April (sussex-ifca-species); Kent and Essex
+    April-June, or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01); Eastern IFCA, Norfolk and the Wash, January-June (as quoted in
+    kefca-whe'
+  cat: peak
+- food: Lamb
+  ring: Welsh
+  ours: Welsh
+  band: large
+  in_mis: 9
+  fresh_mis: 43
+  any_mis: 43
+  helen: in August–September
+  mine: in August–November; avail December–July
+  hstrip: ······························IIIIIIIII·············
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIaaaa
+  helen_sources: Hybu Cig Cymru
+  helen_general: false
+  our_conf: moderate
+  our_sources: Business Wales (Welsh Government), quoting Hybu Cig Cymru (primary), Hybu Cig Cymru (Meat Promotion Wales) (primary), Agriland, quoting Hybu Cig Cymru (trade), FarmingUK, quoting Hybu Cig
+    Cymru (trade)
+  note: farminguk-hcc-lamb-season says the second half of the year (from July); hcc-lamb-day starts the season on 1 August. Followed the named start date.
+  cat: ours-longer
+- food: Chicory & Radicchio
+  ring: (whole)
+  ours: Chicory & Radicchio
+  band: large
+  in_mis: 30
+  fresh_mis: 21
+  any_mis: 39
+  helen: in June–October; avail May and November
+  mine: in September–February; avail March–August
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Charles Dowding
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Oddbox (secondary), Hubbub (secondary)
+  note: vegsoc-seasonal marks all twelve months; oddbox-seasonal March-July and September-February; hubbub-seasonal September-November and January-February.
+  cat: ours-longer
+- food: Clams
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 43
+  fresh_mis: 7
+  any_mis: 50
+  helen: in May–February
+  mine: avail January–December
+  hstrip: IIIIIIII·········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaa··aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: 'Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its window has moved each year, so these weeks may change.'
+  cat: ours-longer
+- food: Oyster mushrooms
+  ring: Wild
+  ours: Wild
+  band: large
+  in_mis: 26
+  fresh_mis: 22
+  any_mis: 26
+  helen: in June–November; avail December
+  mine: in January–December
+  hstrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: First Nature
+  helen_general: false
+  our_conf: high
+  our_sources: Woodland Trust (primary), The Wildlife Trusts (primary)
+  note: ''
+  cat: ours-longer
+- food: Monkfish
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 48
+  fresh_mis: 0
+  any_mis: 48
+  helen: in January–November; avail December
+  mine: avail January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ''
+  cat: peak
+- food: Sprats
+  ring: (whole)
+  ours: Sprats
+  band: large
+  in_mis: 30
+  fresh_mis: 17
+  any_mis: 30
+  helen: in September–March
+  mine: avail November–January
+  hstrip: IIIIIIIIIIIII······················IIIIIIIIIIIIIIIII
+  ostrip: aaaa·······································aaaaaaaaa
+  helen_sources: M&J Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: ''
+  cat: ours-shorter
+- food: Garlic
+  ring: (whole)
+  ours: all lines combined
+  band: large
+  in_mis: 26
+  fresh_mis: 18
+  any_mis: 26
+  helen: in August–December; avail June–July; store January–May
+  mine: in May–September; store October–April
+  hstrip: ssssssssssssssssssssssaaaaaaaaIIIIIIIIIIIIIIIIIIIIII
+  ostrip: sssssssssssssssssIIIIIIIIIIIIIIIIIIIIIIsssssssssssss
+  helen_sources: New Covent Garden Market, RHS
+  helen_general: false
+  our_conf: low
+  our_sources: The Garlic Farm (Isle of Wight) (secondary), Fresh Produce Journal (Fruitnet) (trade), Royal Horticultural Society (secondary), The Vegetarian Society (secondary)
+  note: 'Store end is my extrapolation from RHS home-storage guidance: softneck keeps to mid-spring, hardneck four to six months (rhs-garlic). No commercial storage source found.'
+  cat: shifted
+- food: Walnuts
+  ring: Wild
+  ours: Wild
+  band: large
+  in_mis: 22
+  fresh_mis: 22
+  any_mis: 22
+  helen: in June–November
+  mine: in October
+  hstrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ·······································IIII·········
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: low
+  our_sources: Woodland Trust (primary)
+  note: ''
+  cat: ours-shorter
+- food: Hake
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 44
+  fresh_mis: 0
+  any_mis: 44
+  helen: in March–December; avail January–February
+  mine: avail January–December
+  hstrip: aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Scottish Government (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development Trust) (secondary)
+  note: ''
+  cat: peak
+- food: Gurnard
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 27
+  fresh_mis: 17
+  any_mis: 35
+  helen: in March–May and August–September; avail June–July and October
+  mine: in March and September–December; avail January–February and April–August
+  hstrip: ········IIIIIIIIIIIIIIaaaaaaaaIIIIIIIIIaaaa·········
+  ostrip: aaaaaaaaIIIIIaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: 'cgsg-red-gurnard ticks Mar-May and Aug-Dec, but its text says to avoid Apr-Aug (spawning). Rule 1 applied (text): Apr, May and Aug set to avail. ffs-seasonality (gurnard, species not named) marks
+    best quality May-Sep, which is mostly CGSG''s spawning period; CGSG (primary) kept.'
+  cat: ours-longer
+- food: Lettuce
+  ring: Little gem
+  ours: Little gem
+  band: large
+  in_mis: 26
+  fresh_mis: 17
+  any_mis: 26
+  helen: in April–September; avail March and October
+  mine: in January–December
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Defra (primary), Fresh Produce Journal (trade)
+  note: ''
+  cat: ours-longer
+- food: Dandelion
+  ring: (whole)
+  ours: Dandelion
+  band: large
+  in_mis: 5
+  fresh_mis: 38
+  any_mis: 43
+  helen: in March–April; avail May
+  mine: in March–May; avail June–February
+  hstrip: ········IIIIIIIIIaaaaa······························
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Woodland Trust (primary), Love Cairngorms (secondary)
+  note: natgeo-calendar gives a June peak (weeks 23-26), probably for flowers.
+  cat: ours-longer
+- food: Cockles
+  ring: (whole)
+  ours: Cockles
+  band: large
+  in_mis: 20
+  fresh_mis: 22
+  any_mis: 30
+  helen: in June–November; avail May
+  mine: in August–February; avail March and June–July
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: IIIIIIIIaaaaa·········aaaaaaaaIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge, Good Fish Guide
+  helen_general: true
+  our_conf: moderate
+  our_sources: Marine Conservation Society Good Fish Guide (primary), Eastern Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: ''
+  cat: shifted
+- food: Brown shrimp
+  ring: (whole)
+  ours: Brown shrimp
+  band: large
+  in_mis: 21
+  fresh_mis: 21
+  any_mis: 42
+  helen: in June–October; avail May and November
+  mine: avail January–December
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Common knowledge, Good Fish Guide
+  helen_general: true
+  our_conf: moderate
+  our_sources: Eastern Inshore Fisheries and Conservation Authority (primary), Fishing News (trade), Responsible Fishing Committee (hosted by Eastern IFCA) (secondary)
+  note: 'Pass 3 change: September-December was in; it is a landings peak, not a best-to-eat window, so it is now avail. A 2009 North Sea fact sheet also names early spring as a landings peak alongside autumn
+    (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
+  cat: ours-longer
+- food: Whiting
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 40
+  fresh_mis: 0
+  any_mis: 40
+  helen: in January–December
+  mine: in December–February; avail March–November
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), UK Government (Offshore Energy Strategic Environmental Assessment) (primary)
+  note: ''
+  cat: peak
+- food: Squid
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 40
+  fresh_mis: 0
+  any_mis: 40
+  helen: in January–December
+  mine: in December–February; avail March–November
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), The Fishing Daily (trade), UK Government (GOV.UK assets), Offshore Energy SEA (primary), Seafish (primary)
+  note: The best-to-eat source (December-February) and the landings source (mostly May-October) disagree about when squid is landed; in is kept (rule 5). The 2009 national guide, now background only, gave
+    best October-March (seafish-seafood-guide).
+  cat: peak
+- food: Squid
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 40
+  fresh_mis: 0
+  any_mis: 40
+  helen: in January–December
+  mine: in December–February; avail March–November
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), UK Government (GOV.UK assets) (primary), Seafish (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: gov-sea4-cephalopods puts squid in the southern North Sea mainly in late spring and summer, outside the winter in-season window. The 2009 national guide, now background only, said squid was available
+    all year, best October-March (seafish-seafood-guide).
+  cat: peak
+- food: Sea beet
+  ring: (whole)
+  ours: Sea beet
+  band: large
+  in_mis: 18
+  fresh_mis: 21
+  any_mis: 39
+  helen: in April–August; avail March and September
+  mine: in March–May; avail June–February
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIIIIIIaaaa·············
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: NatureScot (primary), The Wildlife Trusts (primary), Kent Wildlife Trust (primary), Galloway Wild Foods (secondary)
+  note: galloway-sea-beet gives flowering as May-August, Wildlife Trusts July-September.
+  cat: ours-longer
+- food: Mackerel
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 25
+  fresh_mis: 14
+  any_mis: 31
+  helen: in June–August; avail May and September–October
+  mine: in January–February and October–November; avail April–September and November
+  hstrip: ·················aaaaaIIIIIIIIIIIIIaaaaaaaa·········
+  ostrip: IIIII········aaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIaa····
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish Focus (trade), The Fishing Daily (trade)
+  note: northumberland-mackerel (2016, secondary) puts the peak in July, in the inshore summer fishery; the SPFA-quoted trade sources (higher rank) name Jan-early Feb and Oct-Nov for the pelagic fleet,
+    so July is avail here. seafish-seafood-guide (2009) is background only under the fish brief (all year, best Jun-Aug); its all-year avail was dropped, leaving Feb-Mar and December empty.
+  cat: ours-longer
+- food: Mackerel
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 22
+  fresh_mis: 17
+  any_mis: 26
+  helen: in October–May
+  mine: in July–March; avail April–June
+  hstrip: IIIIIIIIIIIIIIIIIIIIII·················IIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-mackerel's Apr-Jun gap; CGSG (primary) kept. seafish-seafood-guide (2009) is background only
+    under the fish brief (all year, best in summer).
+  cat: ours-longer
+- food: Lemon sole
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 39
+  fresh_mis: 0
+  any_mis: 39
+  helen: in January–December
+  mine: in June–August; avail September–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), Northumberland Seafood (Amble Development Trust) (secondary)
+  note: The winter 2025 report says lemon sole spawns in summer (directseafoods-winter-2025), against spring in Seafish's 2014 species guide (seafish-lemon-sole). The 2009 national guide, now background
+    only, gave a season of May-March (seafish-seafood-guide), much wider than the summer window here.
+  cat: peak
+- food: Lemon sole
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 39
+  fresh_mis: 0
+  any_mis: 39
+  helen: in January–December
+  mine: in June–August; avail September–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), Brighton & Newhaven Fish Sales (secondary)
+  note: The winter 2025 report says lemon sole spawns in summer (directseafoods-winter-2025), against spring in Seafish's 2014 species guide (seafish-lemon-sole). The 2009 national guide, now background
+    only, gave a season of May-March (seafish-seafood-guide), much wider than the summer window here.
+  cat: peak
+- food: Wood sorrel
+  ring: (whole)
+  ours: Wood sorrel
+  band: large
+  in_mis: 38
+  fresh_mis: 0
+  any_mis: 38
+  helen: in January–December
+  mine: in March–May; avail June–February
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: low
+  our_sources: Galloway Wild Foods (secondary), BBC Countryfile (secondary), Wild Food UK (secondary), The Foraging Course Company (secondary)
+  note: ''
+  cat: peak
+- food: Dover sole
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 21
+  fresh_mis: 17
+  any_mis: 25
+  helen: in April–June and September–November; avail March and December
+  mine: in May–January; avail February–April
+  hstrip: ········aaaaaIIIIIIIIIIIII·········IIIIIIIIIIIIIaaaa
+  ostrip: IIIIaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary)
+  note: 'Flying Fish Seafoods marks March-April and July-November as best quality (flyingfish-seasonality): it includes two of cgsg-dover-sole''s spawning months and leaves out December-January and May-June.
+    The primary regional guide is used.'
+  cat: ours-longer
+- food: Lettuce
+  ring: Round
+  ours: Round
+  band: large
+  in_mis: 18
+  fresh_mis: 18
+  any_mis: 18
+  helen: in April–September
+  mine: in June–November
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIII·············
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Fresh Produce Journal (trade), FreshPlaza (trade)
+  note: ''
+  cat: shifted
+- food: Aubergine
+  ring: (whole)
+  ours: Glasshouse
+  band: large
+  in_mis: 18
+  fresh_mis: 18
+  any_mis: 23
+  helen: in June–September; avail May
+  mine: in March–October; avail November
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIII·············
+  ostrip: ········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Caterer (trade), Fresh Produce Journal (Fruitnet) (trade), Lea Valley Growers Association (primary), Horticultural Development Company, a division of AHDB (primary)
+  note: A Yorkshire grower said supply would run until November (fpj-aubergines-evs), about four weeks past caterer-aubergines-2017; November kept as avail.
+  cat: ours-longer
+- food: Squash
+  ring: (whole)
+  ours: Winter
+  band: large
+  in_mis: 13
+  fresh_mis: 22
+  any_mis: 31
+  helen: in September–October; avail August; store November–March
+  mine: in October–December; avail January–February and September
+  hstrip: sssssssssssss·················aaaaaIIIIIIIIsssssssss
+  ostrip: aaaaaaaa···························aaaaIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), The Vegetarian Society (secondary), Foodomarket (wholesaler) (secondary), Plantura (secondary)
+  note: vegsoc-seasonal gives butternut from September, about four weeks before the Barfoots harvest; plantura-calendar lists butternut in November only.
+  cat: shifted
+- food: Mackerel
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 35
+  fresh_mis: 0
+  any_mis: 35
+  helen: in April–November; avail January–February
+  mine: avail January–February and April–November
+  hstrip: aaaaaaaa·····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: aaaaaaaa·····aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: cgsg-mackerel (western Channel) marks Jan-Mar and Jul-Dec as best to eat. seafish-seafood-guide (2009) is background only under the fish brief (all year, best in summer); its in weeks (Jun-Aug)
+    were dropped.
+  cat: peak
+- food: Cod
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 26
+  fresh_mis: 9
+  any_mis: 26
+  helen: in March–October; avail January–February
+  mine: in May–February; avail March–April
+  hstrip: aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: IIIIIIIIaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary)
+  note: ffs-seasonality marks best quality Jul-Oct only, against cgsg-cod's all months but Mar-Apr; CGSG (primary) kept. seafish-seafood-guide (2009, background only) also gives best Jul-Oct.
+  cat: ours-longer
+- food: Haddock
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 26
+  fresh_mis: 9
+  any_mis: 26
+  helen: in February–October; avail January
+  mine: in May–January; avail February–April
+  hstrip: aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: IIIIaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary)
+  note: ffs-seasonality marks best quality Feb-Apr and Jul-Sep, which includes the breeding season cgsg-haddock says to avoid; CGSG (primary) kept. seafish-seafood-guide (2009, background only) gives best
+    Feb-Sep.
+  cat: ours-longer
+- food: Hake
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 35
+  fresh_mis: 0
+  any_mis: 35
+  helen: in March–October; avail February and November
+  mine: avail February–November
+  hstrip: ····aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ····aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: ''
+  cat: peak
+- food: Gurnard
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 35
+  fresh_mis: 0
+  any_mis: 35
+  helen: in October–May
+  mine: avail October–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIII·················IIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaa·················aaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary),
+    Seafish (primary)
+  note: ''
+  cat: peak
+- food: Red mullet
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 26
+  fresh_mis: 9
+  any_mis: 26
+  helen: in January–September
+  mine: in May–November; avail January–April
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII·············
+  ostrip: aaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-red-mullet's May-Nov; CGSG kept. The best-to-eat source marks 9 weeks as in that Flying Fish
+    Seafoods's chart (as transcribed) doesn't show as landed; kept in under rule 5.
+  cat: ours-longer
+- food: Grey mullet
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 35
+  fresh_mis: 0
+  any_mis: 35
+  helen: in April–November
+  mine: avail April–November
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ·············aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ''
+  cat: peak
+- food: Rosemary
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 34
+  fresh_mis: 0
+  any_mis: 34
+  helen: in January–December
+  mine: in May–August; avail September–April
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+  cat: peak
+- food: Herring
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 17
+  fresh_mis: 17
+  any_mis: 17
+  helen: in April–November
+  mine: in January–December
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ''
+  cat: ours-longer
+- food: Brown crab
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 34
+  fresh_mis: 0
+  any_mis: 34
+  helen: in January–December
+  mine: in March–June; avail July–February
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish is the Dish (Seafish) (primary), Northumberland Seafood (Amble Development Trust) (secondary), Northumberland Inshore Fisheries and Conservation Authority (primary)
+  note: The landings sources put the busiest fishing in May-December (mcs-brown-crab-northumberland) and the biggest landings in Q4 (nifca-crab-2023), while the best-quality window is March-June (fitd-crab).
+    The same Seafish page also says fresh crab is best enjoyed April-October; its labelled best-quality months are used.
+  cat: peak
+- food: Brown crab
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 34
+  fresh_mis: 0
+  any_mis: 34
+  helen: in January–December
+  mine: in March–June; avail July–February
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish is the Dish (Seafish) (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Cefas (via GOV.UK) (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: 'Pass 3 change: the earlier in window of August-November was a landings peak, not a best-to-eat window (cefas-crab-assessments-2019), so it is now avail. That peak falls outside the March-June best-quality
+    months (fitd-crab). The same Seafish page also says fresh crab is best enjoyed April-October.'
+  cat: peak
+- food: Scallops
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 21
+  fresh_mis: 12
+  any_mis: 21
+  helen: in April–May and July–November; avail March and June
+  mine: in January–December
+  hstrip: ········aaaaaIIIIIIIIIaaaaIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: low
+  our_sources: Cornwall Good Seafood Guide (primary), Fish is the Dish (Seafish) (primary), Flying Fish Seafoods (secondary), Defra (primary)
+  note: Best-to-eat sources clash, so confidence is low. Seafish gives August-September as best quality UK-wide (fitd-scallops); Flying Fish marks September-October as best quality for Looe Bay half-shell
+    scallops (flyingfish-seasonality); Defra says summer scallops are roe-less with poor meat yield (defra-king-scallop-fmp-annexes-2023). With no agreed peak, the regional guide's all-year window is kept.
+    C
+  cat: ours-longer
+- food: Leeks
+  ring: (whole)
+  ours: Leeks
+  band: large
+  in_mis: 18
+  fresh_mis: 13
+  any_mis: 23
+  helen: in September–February; avail March and August
+  mine: in July–April; avail May
+  hstrip: IIIIIIIIaaaaa·················aaaaaIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIaaaaa····IIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), AHDB Horticulture (primary), Freshview Foods (secondary), Defra (UK GI scheme) (primary)
+  note: 'Dates moved in the source-age pass: previously in Jan-May (wks 1-22) and July-Dec, after AHDB''s 11 months on sale (ahdb-harvested-in-britain, 2015); now in to the end of April (wk 17) per freshplaza-esg-leeks-2026,
+    with May avail. Welsh Leeks PGI starts harvest in August (wk 31), about four weeks after the July start (defra-pgi-welsh-leeks).'
+  cat: ours-longer
+- food: Langoustines
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 31
+  fresh_mis: 0
+  any_mis: 31
+  helen: in January–December
+  mine: in October–February; avail March–September
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish is the Dish (Seafish) (primary), Scottish Government (primary), Marine Conservation Society Good Fish Guide (primary)
+  note: 'Pass 3 change: the earlier in window, June-August, was the landings peak (scotgov-nephrops-fmp). It now falls in avail, because the best-quality months are winter (fitd-langoustines).'
+  cat: peak
+- food: Celeriac
+  ring: (whole)
+  ours: Celeriac
+  band: large
+  in_mis: 13
+  fresh_mis: 17
+  any_mis: 17
+  helen: in September–January; avail February; store March–August
+  mine: in August–November; store December–July
+  hstrip: IIIIaaaasssssssssssssssssssssssssssIIIIIIIIIIIIIIIII
+  ostrip: ssssssssssssssssssssssssssssssIIIIIIIIIIIIIIIIIIssss
+  helen_sources: New Covent Garden Market, RHS, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), Jack Buck Farms / Farmers Guardian (trade)
+  note: Both sources trace back to the same grower, so this is effectively one grower's season. 'Until July' read as through July (wk 30), leaving no gap before the August harvest.
+  cat: shifted
+- food: Rhubarb
+  ring: Outdoor
+  ours: Outdoor
+  band: large
+  in_mis: 13
+  fresh_mis: 16
+  any_mis: 20
+  helen: in May–July; avail April
+  mine: in April–September; avail March and October
+  hstrip: ·············aaaaIIIIIIIIIIIII······················
+  ostrip: ··········aaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa·········
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), Fresh Produce Journal (Fruitnet) (trade), The Caterer (trade), The Vegetarian Society (secondary)
+  note: 'Previous dates: avail week 13, in 14 to 39, from Oldroyd Hulme (about 2009) and The Caterer (2018). Defra''s 2026 quotes start about two weeks earlier and run at least four weeks later. The Caterer''s
+    unattributed outlook says the main season runs only until June or July (caterer-outdoor-rhubarb).'
+  cat: ours-longer
+- food: Chard
+  ring: (whole)
+  ours: Chard
+  band: large
+  in_mis: 14
+  fresh_mis: 14
+  any_mis: 14
+  helen: in May–October
+  mine: in June–December
+  hstrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Oddbox (secondary), Hubbub (secondary), Freshview Foods (secondary)
+  note: hubbub-seasonal gives June-August; freshview-seasonality April and July-August from an Evesham grower.
+  cat: shifted
+- food: Rhubarb
+  ring: Forced
+  ours: Forced
+  band: large
+  in_mis: 11
+  fresh_mis: 17
+  any_mis: 19
+  helen: in November–March
+  mine: in January–March; avail January and April–May
+  hstrip: IIIIIIIIIIIII······························IIIIIIIII
+  ostrip: aaIIIIIIIIIIIaaaaaaaa·······························
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), The Caterer (trade), Fresh Produce Journal (Fruitnet) (trade), Defra (GOV.UK) (primary)
+  note: Growers and a wholesaler gave mid-January to March, finishing before outdoor rhubarb reaches market in April (caterer-forced-rhubarb, undated but 2010 or later; fpj-oldroyd-rhubarb, about 2009),
+    against Defra's quotes to 25 May 2026, about eight weeks later.
+  cat: shifted
+- food: Potatoes
+  ring: Maincrop
+  ours: Maincrop
+  band: large
+  in_mis: 13
+  fresh_mis: 14
+  any_mis: 18
+  helen: in October–December; avail September; store January–May
+  mine: in September–October; avail August; store November–May
+  hstrip: ssssssssssssssssssssss·············aaaaIIIIIIIIIIIII
+  ostrip: ssssssssssssssssssssss········aaaaaIIIIIIIIsssssssss
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: AHDB Horticulture (primary), AHDB (primary), Defra (UK GI scheme) (primary), Fresh Produce Journal (Fruitnet) (trade)
+  note: Cranfield researchers say storage of up to eight months may be halved to about four since the CIPC sprout suppressant was withdrawn (potatopro-cranfield-storage-2025), so the late-spring store tail
+    may be thinner than AHDB's 2015 Sept-May figure suggests.
+  cat: shifted
+- food: Cabbage
+  ring: Red
+  ours: Red
+  band: large
+  in_mis: 9
+  fresh_mis: 18
+  any_mis: 27
+  helen: in August–November; avail July; store December–May
+  mine: in September–December; avail January–March and July–August; store April–July
+  hstrip: ssssssssssssssssssssss····aaaaIIIIIIIIIIIIIIIIIIssss
+  ostrip: aaaaaaaaaaaaassssssssssssssaaaaaaaaIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Caterer (trade), FreshPlaza (trade), Defra (primary)
+  note: 'Naylor puts all stock in store from November (freshplaza-cabbage-naylor), but Produce World cuts fresh until March (freshplaza-redcabbage-produceworld). Secondary calendars: September-February
+    (vegsoc-seasonal, oddbox-seasonal); March-August and October-January (freshview-seasonality).'
+  cat: shifted
+- food: Marrow
+  ring: (whole)
+  ours: Marrow
+  band: large
+  in_mis: 13
+  fresh_mis: 14
+  any_mis: 18
+  helen: in August–October; avail July and November
+  mine: in May–October
+  hstrip: ··························aaaaIIIIIIIIIIIIIaaaaa····
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Kentish Stour Countryside Partnership (secondary), The Vegetarian Society (secondary)
+  note: ''
+  cat: shifted
+- food: Sea buckthorn
+  ring: (whole)
+  ours: Sea buckthorn
+  band: large
+  in_mis: 5
+  fresh_mis: 22
+  any_mis: 22
+  helen: in September–October
+  mine: in September–November; avail December–February and August
+  hstrip: ···································IIIIIIII·········
+  ostrip: aaaaaaaa······················aaaaaIIIIIIIIIIIIIaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: The Wildlife Trusts (primary), Wicked Leeks (Riverford) (secondary), Country Life (secondary)
+  note: ''
+  cat: ours-longer
+- food: Edible flowers
+  ring: (whole)
+  ours: Edible flowers
+  band: large
+  in_mis: 13
+  fresh_mis: 13
+  any_mis: 13
+  helen: in April–September
+  mine: in May–July
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIII·············
+  ostrip: ·················IIIIIIIIIIIII······················
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Oddbox (secondary), Hubbub (secondary), The Vegetarian Society (secondary)
+  note: ''
+  cat: ours-shorter
+- food: Peppers
+  ring: Outdoor
+  ours: Outdoor
+  band: large
+  in_mis: 13
+  fresh_mis: 13
+  any_mis: 13
+  helen: in May–October
+  mine: in August–October
+  hstrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: ······························IIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Plantura (secondary), Horticultural Development Company, a division of AHDB (primary)
+  note: ''
+  cat: ours-shorter
+- food: Blackberries
+  ring: Cultivated
+  ours: Cultivated
+  band: large
+  in_mis: 9
+  fresh_mis: 17
+  any_mis: 26
+  helen: in September–October; avail August and November
+  mine: in August–September; avail April–July and October–November
+  hstrip: ······························aaaaaIIIIIIIIaaaaa····
+  ostrip: ·············aaaaaaaaaaaaaaaaaIIIIIIIIIaaaaaaaaa····
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Farming UK News (farming.co.uk) (trade), Borough Market (secondary), The Vegetarian Society (secondary)
+  note: A secondary list gives July to October for blackberries generally (vegsoc-seasonal).
+  cat: ours-longer
+- food: Sorrel
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 13
+  fresh_mis: 13
+  any_mis: 18
+  helen: in April–July; avail March and August
+  mine: in April–October
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIaaaaa·················
+  ostrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) ends about 4 weeks earlier.
+  cat: shifted
+- food: Sardines
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 26
+  fresh_mis: 0
+  any_mis: 26
+  helen: in January–December
+  mine: in August–January; avail February–July
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Marine Stewardship Council (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: 'As for Cornish fishery MSC: ffs-seasonality marks best quality Jan-Apr and Oct-Dec against cgsg-sardine''s Aug-Jan.'
+  cat: peak
+- food: Mussels
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 26
+  fresh_mis: 0
+  any_mis: 26
+  helen: in January–December
+  mine: in October–March; avail April–September
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish is the Dish (Seafish) (primary), The Grocer (trade), Dalegate Market, Burnham Deepdale (secondary), Saveur (secondary)
+  note: The Brancaster retailer's September-April runs about 4 weeks wider at each end than the Seafish best-quality months (dalegate-brancaster-mussels, fitd-mussels). The Wash dredge notice gives an opening
+    date only (eifca-wash-mussel-dredge-2025). No Eastern IFCA page giving SE months was found.
+  cat: peak
+- food: Mussels
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 26
+  fresh_mis: 0
+  any_mis: 26
+  helen: in January–December
+  mine: in October–March; avail April–September
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish is the Dish (Seafish) (primary), Flying Fish Seafoods (secondary), Cornwall Good Seafood Guide (primary), The Grocer (trade)
+  note: 'CGSG (updated October 2017) ticks all 12 months as best to eat for farmed mussels and names no peak (cgsg-mussels). Pass 3 change: the line was in all year.'
+  cat: peak
+- food: Oysters
+  ring: Native
+  ours: Native – Fal
+  band: large
+  in_mis: 8
+  fresh_mis: 18
+  any_mis: 18
+  helen: in September–April; avail May and August
+  mine: in October–March
+  hstrip: IIIIIIIIIIIIIIIIIaaaaa········aaaaaIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIII··························IIIIIIIIIIIII
+  helen_sources: Shellfish Act 1967
+  helen_general: false
+  our_conf: high
+  our_sources: legislation.gov.uk (primary), Cornwall Good Seafood Guide (primary), Fish is the Dish (Seafish) (primary), Marine Conservation Society Good Fish Guide (primary)
+  note: ''
+  cat: ours-shorter
+- food: Red mullet
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 26
+  fresh_mis: 0
+  any_mis: 26
+  helen: in June–August and October–December; avail September
+  mine: avail June–December
+  hstrip: ······················IIIIIIIIIIIIIaaaaIIIIIIIIIIIII
+  ostrip: ······················aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary)
+  note: ''
+  cat: peak
+- food: Chives
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 12
+  fresh_mis: 13
+  any_mis: 17
+  helen: in April–August; avail March and September
+  mine: in May–October
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIIIIIIaaaa·············
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: A Surrey grower expected UK chives from June even in its earliest-ever season (fpj-herbfresh-early-start), about 5 weeks after the start here; this is a single undated year, so the herb-specific
+    season is kept. Category-wide window Apr-Sep (fpj-herbs-uk-kitchens).
+  cat: shifted
+- food: Sage
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 13
+  fresh_mis: 12
+  any_mis: 25
+  helen: in April–October; avail March and November
+  mine: in March–August; avail September–February
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+  cat: ours-longer
+- food: Thyme
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 8
+  fresh_mis: 17
+  any_mis: 25
+  helen: in May–October; avail April and November
+  mine: in May–August; avail September–April
+  hstrip: ·············aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: aaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+  cat: ours-longer
+- food: Plaice
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 17
+  fresh_mis: 8
+  any_mis: 21
+  helen: in March–August and November–December; avail September–October
+  mine: in April–January; avail February–March
+  hstrip: ········IIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaaaaaIIIIIIIII
+  ostrip: IIIIaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Direct Seafoods (secondary), Marine Conservation Society (primary)
+  note: Flying Fish Seafoods marks only June-August as best quality (flyingfish-seasonality), much narrower than cgsg-plaice; the primary regional guide is used (rule 2).
+  cat: ours-longer
+- food: Scallops
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 25
+  fresh_mis: 0
+  any_mis: 25
+  helen: in January–December
+  mine: in November–May; avail May–October
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: North Eastern Inshore Fisheries and Conservation Authority (primary), Scottish Government (primary), Defra (primary)
+  note: Seafish's consumer guide gives August-September as best quality and April-September as the most readily available months, UK-wide (fitd-scallops). That clashes with Defra, which says summer scallops
+    are roe-less with poor meat yield (defra-king-scallop-fmp-annexes-2023), and with the legal season. The legal season is kept (rule 4).
+  cat: peak
+- food: Grey mullet
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 8
+  fresh_mis: 17
+  any_mis: 21
+  helen: in April–November
+  mine: in May–December; avail January–April
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: aaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-grey-mullet's May-Dec; CGSG kept.
+  cat: ours-longer
+- food: Salsify
+  ring: (whole)
+  ours: Salsify
+  band: large
+  in_mis: 7
+  fresh_mis: 17
+  any_mis: 17
+  helen: in September–January; avail August
+  mine: in September–February; avail March
+  hstrip: IIII··························aaaaaIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaa·························IIIIIIIIIIIIII
+  helen_sources: BBC Good Food
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Caterer (trade), The Scottish Farmer (trade), The Grocer (trade), Freshview Foods (secondary)
+  note: 'Whether Jan-Mar supply is stored roots or late liftings is not stated: AB''s harvest ends in December but supply continues to spring. The Caterer''s 2019 market report said salsify then on sale
+    was mainly Belgian (caterer-salsify-2019).'
+  cat: shifted
+- food: Pumpkin
+  ring: (whole)
+  ours: Pumpkin
+  band: large
+  in_mis: 5
+  fresh_mis: 19
+  any_mis: 19
+  helen: in September–December; store January–March
+  mine: in August–December; avail January–March and July
+  hstrip: sssssssssssss······················IIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaa················aIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Kentish Stour Countryside Partnership (secondary), Foodomarket (wholesaler) (secondary), Grocery Gazette (trade)
+  note: foodomarket-season gives September to February; kentishstour-calendar runs to March.
+  cat: ours-longer
+- food: Carrots
+  ring: (whole)
+  ours: Carrots
+  band: large
+  in_mis: 14
+  fresh_mis: 9
+  any_mis: 14
+  helen: in June–February; avail May; store March–April
+  mine: in January–December
+  hstrip: IIIIIIIIsssssssssaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: high
+  our_sources: AHDB Horticulture (primary), British Growers Association (primary), Farmers Guide (trade), AHDB (archive) (primary)
+  note: Supply can be thin in late May to early June (wks 21-23) when the old English crop is finished; in 2026 imports filled the gap (freshplaza-bcga-carrots-2026-05). Not treated as a gap because primary
+    sources describe year-round supply.
+  cat: ours-longer
+- food: Lettuce
+  ring: Cos
+  ours: Cos
+  band: large
+  in_mis: 9
+  fresh_mis: 14
+  any_mis: 18
+  helen: in July–October; avail June
+  mine: in May–October; avail April and November
+  hstrip: ······················aaaaIIIIIIIIIIIIIIIII·········
+  ostrip: ·············aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), AHDB Horticulture (primary), FreshPlaza (trade), The Vegetarian Society (secondary)
+  note: Defra also quotes cos on two December 2025 dates; no source explains winter supply.
+  cat: ours-longer
+- food: Parsnips
+  ring: (whole)
+  ours: Parsnips
+  band: large
+  in_mis: 13
+  fresh_mis: 9
+  any_mis: 22
+  helen: in August–February; avail March–April and July
+  mine: in July–April; avail May–June
+  hstrip: IIIIIIIIaaaaaaaaa·········aaaaIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: AHDB Horticulture (primary), Fresh Produce Journal (Fruitnet) (trade)
+  note: 'New-crop start: June per Produce World (fpj-parsnip-underdog) vs July per Huntapac (fpj-british-veg-roots), up to four weeks apart; both articles are undated and from different years. In starts
+    at July, with June as avail. Source-age pass: the season-naming sources are old or undated (fpj-roots-differing-seasons 2004; FPJ pieces about 2012-15), with year-round supply from the 2016 Defra notices.
+    T'
+  cat: ours-longer
+- food: Kohlrabi
+  ring: (whole)
+  ours: Kohlrabi
+  band: large
+  in_mis: 13
+  fresh_mis: 9
+  any_mis: 13
+  helen: in July–November; avail June
+  mine: in May–December
+  hstrip: ······················aaaaIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), New Covent Garden Market (Covent Garden Market Authority) (trade), The Vegetarian Society (secondary)
+  note: vegsoc-seasonal gives July-September; oddbox-seasonal June-February. More than 4 weeks apart.
+  cat: ours-longer
+- food: Tomatoes
+  ring: Glasshouse
+  ours: Glasshouse
+  band: large
+  in_mis: 5
+  fresh_mis: 17
+  any_mis: 17
+  helen: in April–November
+  mine: in March–November; avail December–February
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  helen_sources: Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Tomato Growers' Association (primary), HortiDaily (trade)
+  note: btga-about gives March to October; ahdb-grown-in-britain starts in February; both about four weeks off btga-fortnight-2025. Defra's wholesale series quoted home-grown round tomatoes from 27 Apr
+    to 26 Oct 2026, with vine and cherry also quoted in December 2025 but not January to mid-April (defra-wholesale-prices). In one year the association announced the season start on 17 April (fpj-buy-british-t
+  cat: ours-longer
+- food: Wild garlic
+  ring: (whole)
+  ours: UK-wide
+  band: large
+  in_mis: 14
+  fresh_mis: 8
+  any_mis: 22
+  helen: in April–May; avail March
+  mine: in March; avail February and April–June
+  hstrip: ········aaaaaIIIIIIIII······························
+  ostrip: ····aaaaIIIIIaaaaaaaaaaaaa··························
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary)
+  note: wt-wild-garlic-pesto says visit woods late March to July (weeks 12-30). natgeo-calendar puts the peak in April (14-17). caterer-wild-garlic says growth starts in Cornwall in late December and runs
+    about 12 weeks, about two weeks later per degree north.
+  cat: ours-longer
+- food: Field mushrooms
+  ring: (whole)
+  ours: Field mushrooms
+  band: large
+  in_mis: 4
+  fresh_mis: 18
+  any_mis: 18
+  helen: in August–October
+  mine: in July–October; avail May–June and November
+  hstrip: ······························IIIIIIIIIIIII·········
+  ostrip: ·················aaaaaaaaaIIIIIIIIIIIIIIIIIaaaaa····
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: First Nature (secondary), Wild Food UK (secondary), Mushroom Diary (secondary), NERC Open Research Archive (UKCEH) (primary)
+  note: 'firstnature-field-mushroom: Jun-Oct; wildfooduk-field-mushroom: May-Nov; mushroomdiary-calendar: Jul-Oct.'
+  cat: ours-longer
+- food: Tea
+  ring: (whole)
+  ours: Cornwall
+  band: large
+  in_mis: 0
+  fresh_mis: 22
+  any_mis: 22
+  helen: in April–October
+  mine: in April–October; avail November–March
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: aaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaaaaaa
+  helen_sources: Tregothnan
+  helen_general: false
+  our_conf: moderate
+  our_sources: Tregothnan (primary)
+  note: ''
+  cat: ours-longer
+- food: Sardines
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 22
+  fresh_mis: 0
+  any_mis: 22
+  helen: in August–December; avail January–February
+  mine: avail August–February
+  hstrip: aaaaaaaa······················IIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaa······················aaaaaaaaaaaaaaaaaaaaaa
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: ''
+  cat: peak
+- food: Dab
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 22
+  fresh_mis: 0
+  any_mis: 22
+  helen: in January–December
+  mine: in June–December; avail January–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary)
+  note: cgsg-dab also ticks January, inside its own stated spawning period; rule 1 applied, so January is avail. Flying Fish Seafoods marks no best-quality months for dabs, which on its key means consistent
+    quality all year (flyingfish-seasonality), against the regional guide's window; the primary source is used.
+  cat: peak
+- food: Potatoes
+  ring: New
+  ours: New
+  band: large
+  in_mis: 14
+  fresh_mis: 7
+  any_mis: 15
+  helen: in June–September; avail May
+  mine: in May–July; avail April and August
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIII·············
+  ostrip: ················aIIIIIIIIIIIIIaaa···················
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: high
+  our_sources: Defra (UK GI scheme) (primary), Scottish Government (primary), AHDB Horticulture (primary)
+  note: ''
+  cat: shifted
+- food: Brussels sprouts
+  ring: (whole)
+  ours: Brussels sprouts
+  band: large
+  in_mis: 9
+  fresh_mis: 12
+  any_mis: 16
+  helen: in October–February; avail September
+  mine: in September–March; avail April and August
+  hstrip: IIIIIIII···························aaaaIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaa···············aaaaaIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), AHDB Horticulture (primary), Defra (primary), Sleaford Standard (secondary)
+  note: vegsoc-seasonal gives September-February; freshview-seasonality October-January.
+  cat: ours-longer
+- food: Girolles
+  ring: Wild
+  ours: Wild
+  band: large
+  in_mis: 13
+  fresh_mis: 8
+  any_mis: 13
+  helen: in June–October; avail November
+  mine: in July–December
+  hstrip: ······················IIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ··························IIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: First Nature
+  helen_general: false
+  our_conf: low
+  our_sources: Woodland Trust (primary), Wild Food UK (secondary), Mushroom Diary (secondary), The Staff Canteen (trade)
+  note: 'wildfooduk-chanterelle: May-Nov; mushroomdiary-calendar: Jun-Nov. Start differs by about 8 weeks from the primary source, so confidence low.'
+  cat: shifted
+- food: Pollock
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 13
+  fresh_mis: 8
+  any_mis: 17
+  helen: in March–December
+  mine: in May–January; avail February–April
+  hstrip: ········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-pollack's Feb-Apr spawning gap; CGSG kept.
+  cat: ours-longer
+- food: Brill
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 9
+  fresh_mis: 12
+  any_mis: 17
+  helen: in March–November
+  mine: in April–December; avail January–March
+  hstrip: ········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: aaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Direct Seafoods (secondary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary)
+  note: cgsg-brill says brill spawn in spring and summer, yet ticks April-December, so its ticks are not spawning-based; the ticks are used. Flying Fish Seafoods marks no best-quality months for brill,
+    which on its key means consistent quality all year (flyingfish-seasonality), against the regional guide's window; the primary source is used.
+  cat: ours-longer
+- food: Scallops
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 21
+  fresh_mis: 0
+  any_mis: 21
+  helen: in January–December
+  mine: in November–May; avail June–October
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: high
+  our_sources: Sussex Inshore Fisheries and Conservation Authority (primary), Marine Management Organisation (GOV.UK) (primary)
+  note: The MMO offshore 7d closure (1 July-30 September; open weeks 1-26 and 40-52 by the legal-week rule) is shorter than the Sussex inshore closure (1 June-31 October) by about 4 weeks at each end (mmo-king-scallop-closure-2026,
+    sussex-ifca-regulations). Defra describes the IFCA 3-6nm zone as closed for about six months over summer, roughly May-September (defra-king-scallop-fmp-annexes-2023). Seafish's
+  cat: peak
+- food: Radishes
+  ring: (whole)
+  ours: Salad radish
+  band: large
+  in_mis: 10
+  fresh_mis: 10
+  any_mis: 10
+  helen: in April–November
+  mine: in March–October
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary)
+  note: ''
+  cat: shifted
+- food: Mangetout
+  ring: (whole)
+  ours: Mangetout
+  band: large
+  in_mis: 12
+  fresh_mis: 8
+  any_mis: 12
+  helen: in June–August
+  mine: in August–September; avail July
+  hstrip: ······················IIIIIIIIIIIII·················
+  ostrip: ··························aaaaIIIIIIIII·············
+  helen_sources: BBC Good Food
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Kentish Stour Countryside Partnership (secondary)
+  note: ''
+  cat: shifted
+- food: Blueberries
+  ring: (whole)
+  ours: Blueberries
+  band: large
+  in_mis: 8
+  fresh_mis: 12
+  any_mis: 12
+  helen: in July–August
+  mine: in June–September; avail October
+  hstrip: ··························IIIIIIIII·················
+  ostrip: ······················IIIIIIIIIIIIIIIIIaaaa·········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), Farming UK News (farming.co.uk) (trade), Fresh Produce Journal (Fruitnet) (trade), Borough Market (secondary)
+  note: Hall Hunter's 2023 end (30 September, week 39) is about four weeks before Defra's last 2026 quote. Secondary sources give August to September for the English crop (borough-currants) and June to
+    November in Scotland (courier-scotland-july).
+  cat: ours-longer
+- food: Cabbage
+  ring: Savoy
+  ours: Savoy
+  band: large
+  in_mis: 14
+  fresh_mis: 5
+  any_mis: 19
+  helen: in July–March; avail April and June
+  mine: in September–February; avail March–August
+  hstrip: IIIIIIIIIIIIIaaaa·····aaaaIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra, RHS
+  helen_general: false
+  our_conf: moderate
+  our_sources: AHDB Horticulture (primary), The Vegetarian Society (secondary), Oddbox (secondary), Defra (primary)
+  note: vegsoc-seasonal and oddbox-seasonal start in October (about 4 weeks later than AHDB) and end in February.
+  cat: ours-longer
+- food: Cabbage
+  ring: Winter white
+  ours: Winter white
+  band: large
+  in_mis: 12
+  fresh_mis: 7
+  any_mis: 13
+  helen: in September–December; avail August; store January–June
+  mine: in July–November; store December–July
+  hstrip: ssssssssssssssssssssssssss····aaaaaIIIIIIIIIIIIIIIII
+  ostrip: sssssssssssssssssssssssssssIIIIIIIIIIIIIIIIIIIIIssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), Defra (primary), The Vegetarian Society (secondary)
+  note: 'Secondary calendars count winter months as in season with no store distinction: August-November and January-February (vegsoc-seasonal); July-February (oddbox-seasonal).'
+  cat: shifted
+- food: Turnips
+  ring: (whole)
+  ours: Turnips
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 9
+  helen: in July–April
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIII·········IIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: low
+  our_sources: Defra (primary), The Vegetarian Society (secondary), Freshview Foods (secondary)
+  note: vegsoc-seasonal lists only Jan, Jun-Jul and Sep-Dec; a supplier calendar has British turnips in December, ending in April (freshview-seasonality). Both are secondary and conflict with the year-round
+    Defra quotes. Low because the dates rest on reading one year of price tables, not on a named season.
+  cat: ours-longer
+- food: Watercress
+  ring: Wild
+  ours: Wild
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 9
+  helen: in March–June and September–November
+  mine: in March–November
+  hstrip: ········IIIIIIIIIIIIIIIIII·········IIIIIIIIIIIII····
+  ostrip: ········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: low
+  our_sources: Wild Food UK (secondary), Country Life (secondary), The Courier (secondary)
+  note: ''
+  cat: ours-longer
+- food: Globe artichokes
+  ring: (whole)
+  ours: Globe artichokes
+  band: large
+  in_mis: 4
+  fresh_mis: 14
+  any_mis: 14
+  helen: in June–October; avail May and November
+  mine: in June–September
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ······················IIIIIIIIIIIIIIIII·············
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Caterer (trade), Abel & Cole (secondary), Food and Travel (secondary), The Vegetarian Society (secondary)
+  note: vegsoc-seasonal lists an unspecified 'artichoke' in March to May, which can't be confirmed as globe; not used.
+  cat: ours-shorter
+- food: Peas
+  ring: (whole)
+  ours: Peas
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 18
+  helen: in June–September; avail May and October
+  mine: in June–August; avail June and August–September
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ······················aaaIIIIIIIIaaaaaa·············
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Yes Peas! (PEAS / BGA Ltd) (primary), Fresh Produce Journal (Fruitnet) (trade), lovefood.com (secondary)
+  note: ''
+  cat: ours-shorter
+- food: Pears
+  ring: Comice & Concorde
+  ours: Comice & Concorde
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 9
+  helen: in October–December; store January–February
+  mine: in October; store November–February
+  hstrip: ssssssss·······························IIIIIIIIIIIII
+  ostrip: ssssssss·······························IIIIsssssssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Apples & Pears Ltd (primary), Defra (primary)
+  note: Defra's wholesale series quoted home-grown Doyenne du Comice until 13 Apr 2026, about seven weeks past BAPL's February end, and from 12 Oct 2026 (defra-wholesale-prices). Defra has no Concorde series,
+    so the dates of this combined line are not changed (rule 8); a Comice-only line would run store to week 15.
+  cat: ours-shorter
+- food: Pears
+  ring: Conference
+  ours: Conference
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 9
+  helen: in September–December; store January–May
+  mine: in September–October; store November–May
+  hstrip: ssssssssssssssssssssss·············IIIIIIIIIIIIIIIII
+  ostrip: ssssssssssssssssssssss·············IIIIIIIIsssssssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Apples & Pears Ltd (primary), Fresh Produce Journal (Fruitnet) (trade), FoodIngredientsFirst (trade)
+  note: ''
+  cat: ours-shorter
+- food: Morels
+  ring: Market
+  ours: Market
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 14
+  helen: in April–May; avail March
+  mine: avail May
+  hstrip: ········aaaaaIIIIIIIII······························
+  ostrip: ·················aaaaa······························
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Freshview Foods (secondary), The Staff Canteen (trade), JancisRobinson.com (secondary), Woodland Trust (primary)
+  note: ''
+  cat: ours-shorter
+- food: Lovage
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 13
+  helen: in May–August; avail April and September
+  mine: in March–August
+  hstrip: ·············aaaaIIIIIIIIIIIIIIIIIIaaaa·············
+  ostrip: ········IIIIIIIIIIIIIIIIIIIIIIIIIII·················
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
+  cat: shifted
+- food: Parsley
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 4
+  fresh_mis: 14
+  any_mis: 14
+  helen: in April–October; avail March and November
+  mine: in May–October
+  hstrip: ········aaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade), Horticultural Development Company (AHDB) (primary)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
+  cat: ours-shorter
+- food: Squid
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 18
+  fresh_mis: 0
+  any_mis: 18
+  helen: in January–December
+  mine: in July–February; avail March–June
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: low
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Direct Seafoods (secondary)
+  note: 'cgsg-squid-european ticks July-January, leaving February unticked. Flying Fish Seafoods marks October-March as best quality (flyingfish-seasonality), and a national market report says native squid
+    is in season in winter (directseafoods-winter-2025): both start about thirteen weeks later than cgsg-squid-veined, so confidence is low.'
+  cat: peak
+- food: Lamb
+  ring: Milk-fed spring
+  ours: Milk-fed spring
+  band: large
+  in_mis: 9
+  fresh_mis: 9
+  any_mis: 13
+  helen: in April–May; avail June
+  mine: avail April
+  hstrip: ·············IIIIIIIIIaaaa··························
+  ostrip: ·············aaaa···································
+  helen_sources: Lishman's
+  helen_general: false
+  our_conf: low
+  our_sources: Foreign, Commonwealth & Development Office blogs (Martin Oxley) (secondary), The Caterer (trade), National Sheep Association (primary)
+  note: ''
+  cat: ours-shorter
+- food: Spring greens
+  ring: (whole)
+  ours: Spring greens
+  band: large
+  in_mis: 17
+  fresh_mis: 0
+  any_mis: 17
+  helen: in August–May; avail June–July
+  mine: in January–October; avail November–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIaaaaaaaaIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaaaaaa
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Vegetarian Society (secondary), Oddbox (secondary), Defra (primary), The Caterer (trade)
+  note: freshview-seasonality runs January-November; kentishstour-seasonal marks all year.
+  cat: peak
+- food: Kale
+  ring: (whole)
+  ours: Kale
+  band: large
+  in_mis: 4
+  fresh_mis: 13
+  any_mis: 17
+  helen: in September–April; avail August
+  mine: in September–March; avail April–August
+  hstrip: IIIIIIIIIIIIIIIII·············aaaaaIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), The Grocer (trade), New Covent Garden Market (Covent Garden Market Authority) (trade)
+  note: 'grocer-kale-hardy gives June to early March, over 4 weeks earlier at the start than Reynolds. Secondary: September-April (oddbox-seasonal); September-February plus April (vegsoc-seasonal); August-March
+    (hubbub-seasonal); curly kale also July-September (freshview-seasonality).'
+  cat: ours-longer
+- food: Pak choi
+  ring: Outdoor
+  ours: Outdoor
+  band: large
+  in_mis: 8
+  fresh_mis: 9
+  any_mis: 13
+  helen: in July–September
+  mine: in June–August; avail May and September
+  hstrip: ··························IIIIIIIIIIIII·············
+  ostrip: ·················aaaaaIIIIIIIIIIIIIaaaa·············
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Freshview Foods (secondary), Hubbub (secondary), Oddbox (secondary)
+  note: ''
+  cat: ours-longer
+- food: Spring onions
+  ring: (whole)
+  ours: Spring onions
+  band: large
+  in_mis: 9
+  fresh_mis: 8
+  any_mis: 14
+  helen: in June–October; avail April–May and November
+  mine: in April–October; avail April
+  hstrip: ·············aaaaaaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ·············aaaIIIIIIIIIIIIIIIIIIIIIIII············
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), G's Fresh (secondary), The Vegetarian Society (secondary)
+  note: vegsoc-seasonal lists spring onions January to October, about 16 weeks earlier at the start; it is secondary and gives no basis, so it is not used for dates. gs-sandfields-spring-onions starts in
+    April, about three weeks before the trade source.
+  cat: ours-shorter
+- food: Cucumber
+  ring: Glasshouse
+  ours: Glasshouse
+  band: large
+  in_mis: 13
+  fresh_mis: 4
+  any_mis: 13
+  helen: in March–October; avail February and November
+  mine: in January–November
+  hstrip: ····aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: Defra
+  helen_general: false
+  our_conf: low
+  our_sources: AHDB Horticulture (primary), Defra (primary), Kentish Stour Countryside Partnership (secondary), Farm-Direct (secondary)
+  note: Defra quotes home-grown cucumbers only from mid-March to mid-October (weeks 11-41), over 4 weeks shorter at each end than AHDB; kentishstour-seasonal gives protected April-September.
+  cat: peak
+- food: Strawberries
+  ring: (whole)
+  ours: Field & tunnel
+  band: large
+  in_mis: 13
+  fresh_mis: 4
+  any_mis: 13
+  helen: in June–August; avail May and September
+  mine: in May–October
+  hstrip: ·················aaaaaIIIIIIIIIIIIIaaaa·············
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), FreshPlaza (trade)
+  note: ''
+  cat: peak
+- food: Rosehips
+  ring: (whole)
+  ours: Rosehips
+  band: large
+  in_mis: 5
+  fresh_mis: 12
+  any_mis: 17
+  helen: in September–October; avail November
+  mine: in September–November; avail December–February
+  hstrip: ···································IIIIIIIIaaaaa····
+  ostrip: aaaaaaaa···························IIIIIIIIIIIIIaaaa
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), NatureScot (primary), National Geographic (secondary)
+  note: ''
+  cat: ours-longer
+- food: Tarragon
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 13
+  fresh_mis: 4
+  any_mis: 13
+  helen: in June–September; avail May and October
+  mine: in April–October
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) ends about 4 weeks earlier.
+  cat: peak
+- food: Sardines
+  ring: Cornish fishery (MSC)
+  ours: Cornish fishery MSC
+  band: large
+  in_mis: 4
+  fresh_mis: 13
+  any_mis: 17
+  helen: in July–January
+  mine: in August–January; avail February–April and July
+  hstrip: IIII······················IIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIaaaaaaaaaaaaa·········aaaaIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: MSC
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Marine Stewardship Council (primary), Cornish Sardine Management Association (Cornish Sardines) (primary)
+  note: cgsg-sardine ticks Jul-Feb as best to eat; its text says the main season is Aug-Jan. Rule 1 applied (text). ffs-seasonality marks best quality Jan-Apr and Oct-Dec, so it adds Feb-Apr and drops Aug-Sep
+    against cgsg-sardine; CGSG (primary) kept.
+  cat: ours-longer
+- food: Cuttlefish
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 13
+  fresh_mis: 4
+  any_mis: 17
+  helen: in April–June
+  mine: avail April–July
+  hstrip: ·············IIIIIIIIIIIII··························
+  ostrip: ·············aaaaaaaaaaaaaaaaa······················
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Management Organisation (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: Seafish says the south-coast trap fishery usually runs in summer and autumn, when cuttlefish come inshore to spawn (seafish-gear-cuttlefish-pots), against April-July from the MMO, a gap of more
+    than four weeks. A University of Brighton project, run 2018-19, describes the Hastings fishery as seasonal and targeting the overwintering population, without months (brighton-sepia-hastings).
+  cat: peak
+- food: Witch sole
+  ring: (whole)
+  ours: Witch sole
+  band: large
+  in_mis: 17
+  fresh_mis: 0
+  any_mis: 17
+  helen: in January–December
+  mine: in August–March; avail April–July
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Direct Seafoods (secondary)
+  note: For the North Sea, the 2026 report says witch spawns from March and should be avoided then (directseafoods-spring-2026), and Northumberland Seafood gives spawning as May-September (northumberland-witch,
+    2016). The summer 2025 report calls witch in season in summer (directseafoods-summer-2025), inside cgsg-witch's spawning period.
+  cat: peak
+- food: Megrim
+  ring: (whole)
+  ours: Megrim
+  band: large
+  in_mis: 17
+  fresh_mis: 0
+  any_mis: 17
+  helen: in January–December
+  mine: in May–December; avail January–April
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Direct Seafoods (secondary)
+  note: The 2026 report has megrim improving in April (directseafoods-spring-2026), four weeks before cgsg-megrim and the 2025 report.
+  cat: peak
+- food: Cavolo nero
+  ring: (whole)
+  ours: Cavolo nero
+  band: large
+  in_mis: 7
+  fresh_mis: 9
+  any_mis: 14
+  helen: in June–April; avail April–May
+  mine: in June–February; avail March
+  hstrip: IIIIIIIIIIIIIIIaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaa·········IIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: BBC Good Food, Great British Chefs
+  helen_general: false
+  our_conf: low
+  our_sources: FreshPlaza (trade), Freshview Foods (secondary)
+  note: Mudwalls Farm starts in late August and runs through winter to February/March (freshplaza-cavolo-mudwalls), over 4 weeks later than A.H. Worth's June start; A.H. Worth ends in December.
+  cat: ours-shorter
+- food: Celery
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 10
+  fresh_mis: 6
+  any_mis: 10
+  helen: in July–October; avail June
+  mine: in May–November
+  hstrip: ······················aaaaIIIIIIIIIIIIIIIII·········
+  ostrip: ·····················IIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Horticultural Development Company, a division of AHDB (primary), Defra (primary), The Vegetarian Society (secondary), Kentish Stour Countryside Partnership (secondary)
+  note: 'Secondary calendars differ widely: vegsoc-seasonal lists January and September to December; kentishstour-calendar lists April to early July. AHDB dates used (rule 2).'
+  cat: ours-longer
+- food: Blackberries
+  ring: Wild
+  ours: Wild
+  band: large
+  in_mis: 4
+  fresh_mis: 12
+  any_mis: 12
+  helen: in July–September
+  mine: in July–October; avail October–November
+  hstrip: ··························IIIIIIIIIIIII·············
+  ostrip: ·····························IIIIIIIIIIIaaaaaaaa····
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), Borough Market (secondary), The Vegetarian Society (secondary)
+  note: Other secondary lists give July to October (vegsoc-seasonal) and, for Scotland, July to about October (courier-scotland-july), not split by wild or cultivated. Borough Market's start (August) is
+    about two weeks after the Woodland Trust's late July.
+  cat: shifted
+- food: Sloes
+  ring: (whole)
+  ours: Sloes
+  band: large
+  in_mis: 5
+  fresh_mis: 10
+  any_mis: 10
+  helen: in October–November
+  mine: in September–December; avail August–September
+  hstrip: ·······································IIIIIIIII····
+  ostrip: ·································aaaaaIIIIIIIIIIIIII
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), Country Life (secondary)
+  note: countrylife-wild-fruit (John Wright) has the fruit ripening late August to early November (weeks 34-45); its earlier start is shown as avail.
+  cat: ours-longer
+- food: Chillies
+  ring: (whole)
+  ours: Glasshouse
+  band: large
+  in_mis: 5
+  fresh_mis: 9
+  any_mis: 9
+  helen: in May–November; avail December
+  mine: in May–October
+  hstrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Horticultural Development Company, a division of AHDB (primary), The Vegetarian Society (secondary)
+  note: ''
+  cat: ours-shorter
+- food: Wild strawberries
+  ring: (whole)
+  ours: Wild strawberries
+  band: large
+  in_mis: 5
+  fresh_mis: 9
+  any_mis: 9
+  helen: in June–July
+  mine: in June–August; avail September
+  hstrip: ······················IIIIIIII······················
+  ostrip: ······················IIIIIIIIIIIIIaaaa·············
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), BBC Countryfile (secondary), National Geographic (secondary)
+  note: wt-foraging-sep says fruit appears from July onwards (week 27), against June (week 23) in wt-foraging-jul; the July post's text is used.
+  cat: ours-longer
+- food: Marjoram & Oregano
+  ring: (whole)
+  ours: Outdoor
+  band: large
+  in_mis: 5
+  fresh_mis: 9
+  any_mis: 14
+  helen: in June–September; avail May and October
+  mine: in May–September; avail March–April and October
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ········aaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIaaaa·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 4 weeks before the in window.
+  cat: ours-longer
+- food: Turbot
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 14
+  fresh_mis: 0
+  any_mis: 14
+  helen: in January–December
+  mine: in June–February; avail March–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), Northumberland Seafood (Amble Development Trust) (secondary)
+  note: northumberland-turbot's April-August breeding overlaps June-August, which the market reports treat as in season.
+  cat: peak
+- food: Turbot
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 14
+  fresh_mis: 0
+  any_mis: 14
+  helen: in January–December
+  mine: in June–February; avail March–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), Brighton & Newhaven Fish Sales (secondary)
+  note: ''
+  cat: peak
+- food: Turbot
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 14
+  fresh_mis: 0
+  any_mis: 14
+  helen: in January–December
+  mine: in June–February; avail March–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Direct Seafoods (secondary), Flying Fish Seafoods (secondary)
+  note: cgsg-turbot says turbot spawn April-August in most of their range, which overlaps its June-August ticks; the ticks are used. Flying Fish Seafoods marks no best-quality months for turbot, which on
+    its key means consistent quality all year (flyingfish-seasonality), against the regional guide's window; the primary source is used.
+  cat: peak
+- food: Skates and rays
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 14
+  fresh_mis: 0
+  any_mis: 14
+  helen: in January–December
+  mine: in June–February; avail March–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary)
+  note: Cuckoo and small-eyed ray are ticked from July, not June (cgsg-cuckoo-ray, cgsg-small-eyed-ray); spotted ray is ticked all year (cgsg-spotted-ray). Thornback lay eggs March-September (ices-fishmap-thornback)
+    and blonde ray February-August (cgsg-blonde-ray), overlapping the June-August ticks. Flying Fish Seafoods marks no best-quality months for skate wings, which on its key means consistent qualit
+  cat: peak
+- food: Ling
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 14
+  fresh_mis: 0
+  any_mis: 14
+  helen: in January–December
+  mine: in June–February; avail March–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Scottish Government (primary), Marine Conservation Society, Good Fish Guide (primary)
+  note: govscot-ling-fmp-2025 gives Northern Shelf spawning as April-June at 100-300 m, about a month later than northumberland-ling's spring, and does not link it to eating or catch timing.
+  cat: peak
+- food: Watercress
+  ring: Cultivated
+  ours: Cultivated
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in July–September; avail May–June and October–November
+  mine: in May–October; avail November
+  hstrip: ·················aaaaaaaaaIIIIIIIIIIIIIaaaaaaaaa····
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: FarmingUK (trade), Dorset View (secondary), Farming Monthly (trade), HortiDaily (trade)
+  note: In 2023 The Watercress Company's managing director said the UK season usually runs May to November (dorsetview-watercress-2023), about four weeks longer than its late-October end in 2020 (farminguk-watercress-2020);
+    the 2023 source is local news, so the trade source's end date is kept and November stays avail. vegsoc-seasonal gives March-December; kentishstour-seasonal March-November.
+  cat: peak
+- food: Fennel
+  ring: (whole)
+  ours: Fennel
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in July–November
+  mine: in July–August; avail September–November
+  hstrip: ··························IIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ··························IIIIIIIIIaaaaaaaaaaaaa····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Kentish Stour Countryside Partnership (secondary)
+  note: 'vegsoc-seasonal: July to August; kentishstour-calendar: July to November. The shared months are in, the rest avail.'
+  cat: peak
+- food: Sweetcorn
+  ring: (whole)
+  ours: Sweetcorn
+  band: large
+  in_mis: 4
+  fresh_mis: 9
+  any_mis: 11
+  helen: in August–October; avail July and November
+  mine: in July–October
+  hstrip: ··························aaaaIIIIIIIIIIIIIaaaaa····
+  ostrip: ····························IIIIIIIIIIIII···········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), The Vegetarian Society (secondary), Plantura (secondary)
+  note: ''
+  cat: ours-shorter
+- food: Sea kale
+  ring: Forced
+  ours: Forced
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in December–May
+  mine: in January–March; avail April–May and December
+  hstrip: IIIIIIIIIIIIIIIIIIIIII··························IIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaa··························aaaa
+  helen_sources: Westlands
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), The Grocer (trade), The List (secondary), The Staff Canteen (trade)
+  note: A Westlands advertorial (Jan 2017) gives a December to May season (staffcanteen-westlands-sea-kale-2017); December and April to May kept as avail.
+  cat: peak
+- food: Ceps
+  ring: (whole)
+  ours: Ceps
+  band: large
+  in_mis: 4
+  fresh_mis: 9
+  any_mis: 9
+  helen: in August–October
+  mine: in July–October; avail November
+  hstrip: ······························IIIIIIIIIIIII·········
+  ostrip: ··························IIIIIIIIIIIIIIIIIaaaaa····
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Woodland Trust (primary), Wild Food UK (secondary), Mushroom Diary (secondary), Freshview Foods (secondary)
+  note: wildfooduk-cep gives Aug-Oct, starting about 4 weeks after the primary source's summer start.
+  cat: ours-longer
+- food: Hedgehog fungus
+  ring: (whole)
+  ours: Hedgehog fungus
+  band: large
+  in_mis: 9
+  fresh_mis: 4
+  any_mis: 9
+  helen: in August–December
+  mine: in August–October; avail November
+  hstrip: ······························IIIIIIIIIIIIIIIIIIIIII
+  ostrip: ······························IIIIIIIIIIIIIaaaaa····
+  helen_sources: First Nature
+  helen_general: false
+  our_conf: low
+  our_sources: Wild Food UK (secondary), Mushroom Diary (secondary), The Staff Canteen (trade)
+  note: ''
+  cat: peak
+- food: Plaice
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in January–December
+  mine: in April–December; avail January–March
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary)
+  note: 'The 2009 national guide, now background only, gave best May-January (seafish-seafood-guide): about four weeks later at the start, and January in, against the 2025-26 reports.'
+  cat: peak
+- food: Plaice
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 0
+  fresh_mis: 13
+  any_mis: 13
+  helen: in April–December
+  mine: in April–December; avail January–March
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary)
+  note: ''
+  cat: ours-longer
+- food: Dover sole
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in January–December
+  mine: in July–March; avail April–June
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), Northumberland Seafood (Amble Development Trust) (secondary)
+  note: Northumberland Seafood says sole is at its best April-June (northumberland-dover-sole, 2016), the opposite of the 2026 report; the newer source is used. The spring 2025 report put best quality from
+    May (directseafoods-spring-2025), against July here.
+  cat: peak
+- food: Dover sole
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in January–December
+  mine: in July–March; avail April–June
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary), Sussex IFCA (primary)
+  note: 'Sussex IFCA''s main sole seasons are spring and autumn (sussex-ifca-commercial), and Essex sole peaked around June 2025 (kefca-essex-2025-jan-jun): both partly inside the April-June spawning window
+    that the 2026 report advises avoiding. The spring 2025 report put best quality from May (directseafoods-spring-2025).'
+  cat: peak
+- food: Brill
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in January–December
+  mine: in April–December; avail January–March
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary)
+  note: ''
+  cat: peak
+- food: Brill
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in January–December
+  mine: in April–December; avail January–March
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Direct Seafoods (secondary)
+  note: ''
+  cat: peak
+- food: Lamb
+  ring: Salt marsh
+  ours: Salt marsh
+  band: large
+  in_mis: 13
+  fresh_mis: 0
+  any_mis: 13
+  helen: in July–October; avail June and November–December
+  mine: in June–December
+  hstrip: ······················aaaaIIIIIIIIIIIIIIIIIaaaaaaaaa
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Farm Contractor
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (GOV.UK) (primary), Farmers Weekly, quoting a Holker Estate tenant (trade), Lishman's of Ilkley (butcher) (secondary)
+  note: ''
+  cat: peak
+- food: Broccoli
+  ring: Purple sprouting
+  ours: Purple sprouting
+  band: large
+  in_mis: 0
+  fresh_mis: 12
+  any_mis: 12
+  helen: in February–April; avail December–January and May
+  mine: in February–April; avail October–January and May
+  hstrip: aaaaIIIIIIIIIIIIIaaaaa··························aaaa
+  ostrip: aaaaIIIIIIIIIIIIIaa····················aaaaaaaaaaaaa
+  helen_sources: New Covent Garden Market, Rocket Gardens
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Caterer (trade), The Grocer (trade), AHDB Horticulture (primary), Tozer Seeds (secondary)
+  note: vegsoc-seasonal gives February-March only; oddbox-seasonal February-April; freshview-seasonality August-March.
+  cat: shifted
+- food: Herring
+  ring: North East
+  ours: NE
+  band: large
+  in_mis: 12
+  fresh_mis: 0
+  any_mis: 12
+  helen: in January–December
+  mine: in March–November; avail December–February
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Fish Focus (trade), Marine Stewardship Council (primary)
+  note: The second pass had in = mid-Jul-Aug from the fishery report alone (fishfocus-mackerel-2024); under the fish brief that is a landings window, and the Northumberland best-to-eat window is wider.
+    gov-sea4-fish-baseline gives Aug-Sep Buchan/Shetland spawning, inside the in window; no source links it to eating quality.
+  cat: peak
+- food: Broccoli
+  ring: Calabrese
+  ours: Calabrese
+  band: large
+  in_mis: 10
+  fresh_mis: 0
+  any_mis: 10
+  helen: in June–October; avail May and November
+  mine: in May–November
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: New Covent Garden Market, Defra, RHS, Garden Organic
+  helen_general: false
+  our_conf: moderate
+  our_sources: AHDB Horticulture (primary), Defra (primary), FreshPlaza (trade)
+  note: Defra quotes home-grown calabrese from early June to late October (weeks 23-43; November not in the data read); vegsoc-seasonal gives June-October. Riviera's comment implies a normal start in late
+    June (about week 25).
+  cat: peak
+- food: Lettuce
+  ring: Iceberg
+  ours: Iceberg
+  band: large
+  in_mis: 0
+  fresh_mis: 9
+  any_mis: 9
+  helen: in May–October
+  mine: in May–October; avail April and November
+  hstrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: ·············aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  helen_sources: New Covent Garden Market, Fresh Produce Journal
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), AHDB Horticulture (primary), FreshPlaza (trade), The Vegetarian Society (secondary)
+  note: ''
+  cat: ours-longer
+- food: Hake
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 9
+  fresh_mis: 0
+  any_mis: 9
+  helen: in January–December
+  mine: in April–January; avail February–March
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary), ITV News (secondary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-hake's Feb-Mar spawning gap; CGSG kept.
+  cat: peak
+- food: Whiting
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 9
+  fresh_mis: 0
+  any_mis: 9
+  helen: in January–December
+  mine: in May–February; avail March–April
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-whiting's Mar-Apr gap; CGSG kept.
+  cat: peak
+- food: John Dory
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 9
+  fresh_mis: 0
+  any_mis: 9
+  helen: in January–December
+  mine: in April–January; avail February–March
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary)
+  note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-john-dory's Feb-Mar gap; CGSG kept. seafish-seafood-guide (2009, background only) lists it
+    as available all year.
+  cat: peak
+- food: Octopus
+  ring: South West
+  ours: SW
+  band: large
+  in_mis: 9
+  fresh_mis: 0
+  any_mis: 9
+  helen: in January–December
+  mine: in May–February; avail March–April
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIaaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary)
+  note: Flying Fish Seafoods marks no best-quality months for octopus, which on its key means consistent quality all year (flyingfish-seasonality), against the regional guide's window; the primary source
+    is used.
+  cat: peak
+- food: Spider crab
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 9
+  fresh_mis: 0
+  any_mis: 9
+  helen: in May–June
+  mine: avail May–June
+  hstrip: ·················IIIIIIIII··························
+  ostrip: ·················aaaaaaaaa··························
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: North Norfolk News (secondary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: ''
+  cat: peak
+- food: Tomatoes
+  ring: Outdoor
+  ours: Outdoor
+  band: small
+  in_mis: 8
+  fresh_mis: 8
+  any_mis: 12
+  helen: in July–September; avail June and October
+  mine: in August–October
+  hstrip: ······················aaaaIIIIIIIIIIIIIaaaa·········
+  ostrip: ······························IIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: low
+  our_sources: Plantura (secondary), Horticultural Development Company, a division of AHDB (primary)
+  note: ''
+  cat: ours-shorter
+- food: Gooseberries
+  ring: Wild
+  ours: Wild
+  band: small
+  in_mis: 8
+  fresh_mis: 8
+  any_mis: 8
+  helen: in July–September
+  mine: in June–August
+  hstrip: ··························IIIIIIIIIIIII·············
+  ostrip: ······················IIIIIIIIIIIII·················
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: low
+  our_sources: Wild Food UK (secondary), The Foraging Course Company (secondary)
+  note: The Foraging Course Company gives fruit from summer to early autumn (foragingcourse-gooseberry), running about four weeks past Wild Food UK's August end.
+  cat: shifted
+- food: Hazelnuts
+  ring: Wild
+  ours: Wild
+  band: small
+  in_mis: 8
+  fresh_mis: 8
+  any_mis: 8
+  helen: in August–November
+  mine: in August–October
+  hstrip: ······························IIIIIIIIIIIIIIIIII····
+  ostrip: ·································IIIIIIIIII·········
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: moderate
+  our_sources: Woodland Trust (primary)
+  note: ''
+  cat: ours-shorter
+- food: Basil
+  ring: (whole)
+  ours: Outdoor
+  band: small
+  in_mis: 8
+  fresh_mis: 8
+  any_mis: 12
+  helen: in July–September; avail June and October
+  mine: in June–August
+  hstrip: ······················aaaaIIIIIIIIIIIIIaaaa·········
+  ostrip: ······················IIIIIIIIIIIII·················
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep, with Mar and Oct as shoulders (fpj-herbs-uk-kitchens), runs about 9 weeks earlier and 4 weeks later than the basil-specific dates.
+  cat: ours-shorter
+- food: Monkfish
+  ring: South West
+  ours: SW
+  band: small
+  in_mis: 8
+  fresh_mis: 8
+  any_mis: 8
+  helen: in February–November
+  mine: in January–December
+  hstrip: ····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ffs-seasonality marks best quality Jan-Apr and Oct-Dec only, against cgsg-monkfish-white's all year; CGSG (primary) kept. seafish-seafood-guide (2009, background only) gives best Oct-May.
+  cat: ours-longer
+- food: Apples
+  ring: Braeburn
+  ours: Braeburn
+  band: small
+  in_mis: 5
+  fresh_mis: 8
+  any_mis: 24
+  helen: in November; avail October; store December–April
+  mine: avail October; store November–August
+  hstrip: sssssssssssssssss······················aaaaIIIIIssss
+  ostrip: sssssssssssssssssssssssssssssssss·········asssssssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: low
+  our_sources: Defra (primary), British Apples & Pears Ltd (primary), Fresh Produce Journal (Fruitnet), quoting English Apples & Pears (trade)
+  note: 'BAPL contradicts itself: its varieties page gives November to May (bapl-apple-varieties), about seven weeks earlier than its season page. Two other sources are earlier still: Sainsbury''s and Worldwide
+    Fruit offered all-English Braeburn in October in one year (fpj-sainsburys-braeburn), and New Covent Garden expected first Braeburns later in October 2025, in a season running two weeks early (ncgm-oc'
+  cat: ours-shorter
+- food: Samphire
+  ring: (whole)
+  ours: Marsh samphire (wild)
+  band: small
+  in_mis: 8
+  fresh_mis: 5
+  any_mis: 13
+  helen: in July–August; avail June
+  mine: in June–August; avail May and August
+  hstrip: ······················aaaaIIIIIIIII·················
+  ostrip: ·················aaaaaIIIIIIIIIaaaa·················
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Galloway Wild Foods (secondary), CPRE Norfolk (secondary), KL Magazine (secondary), Riverford (secondary)
+  note: wildwalks-marsh-samphire gives the peak as June-August (weeks 23-35); klmag-samphire late June or early July to end of August (26-35); vice-samphire has a restaurant serving it June-September (23-39),
+    though sellers called it woody by the end of August. countryfile-monthly lists marsh samphire under December, which no other source supports.
+  cat: ours-longer
+- food: Meadowsweet
+  ring: (whole)
+  ours: Meadowsweet
+  band: small
+  in_mis: 5
+  fresh_mis: 8
+  any_mis: 13
+  helen: in June–August
+  mine: in June–July; avail August–October
+  hstrip: ······················IIIIIIIIIIIII·················
+  ostrip: ······················IIIIIIIIaaaaaaaaaaaaa·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), NatureScot (primary)
+  note: WT gives flowering to October (weeks to 43); NatureScot June-July only.
+  cat: ours-longer
+- food: Elderberries
+  ring: (whole)
+  ours: Elderberries
+  band: small
+  in_mis: 5
+  fresh_mis: 8
+  any_mis: 13
+  helen: in September; avail August
+  mine: in August–September; avail July and October
+  hstrip: ······························aaaaaIIII·············
+  ostrip: ··························aaaaIIIIIIIIIaaaa·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), Wicked Leeks (Riverford) (secondary), National Geographic (secondary)
+  note: riverford-autumn-foraging gives September-October (weeks 36-43).
+  cat: ours-longer
+- food: Beetroot
+  ring: (whole)
+  ours: Beetroot
+  band: small
+  in_mis: 4
+  fresh_mis: 8
+  any_mis: 9
+  helen: in June–October; avail May; store November–April
+  mine: in July–October; avail June; store November–June
+  hstrip: sssssssssssssssssaaaaaIIIIIIIIIIIIIIIIIIIIIsssssssss
+  ostrip: sssssssssssssssssssssssssaIIIIIIIIIIIIIIIIIsssssssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Countryside (NFU Countryside Online) (trade), Fresh Produce Journal (Fruitnet) (trade), Defra (primary)
+  note: Clamp storage is straw-covered field storage, not controlled storage; it is marked store because the roots are lifted and held, not left growing. The store end (wk 25) is inferred from the Defra
+    quotes, not stated by a grower; no source says how long clamped or cold-stored UK beetroot lasts.
+  cat: ours-shorter
+- food: Medlars
+  ring: (whole)
+  ours: Medlars
+  band: small
+  in_mis: 5
+  fresh_mis: 7
+  any_mis: 8
+  helen: in November–December; avail October
+  mine: in October–November
+  hstrip: ·······································aaaaIIIIIIIII
+  ostrip: ··········································IIIIII····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (Fruitnet) (trade)
+  note: ''
+  cat: ours-shorter
+- food: Raspberries
+  ring: (whole)
+  ours: Field & tunnel
+  band: small
+  in_mis: 5
+  fresh_mis: 7
+  any_mis: 7
+  helen: in May–October
+  mine: in June–October; avail November
+  hstrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIIIaa·······
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), FarmingUK (trade), The Grocer (trade)
+  note: ''
+  cat: shifted
+- food: Girolles
+  ring: Market
+  ours: Market
+  band: small
+  in_mis: 6
+  fresh_mis: 6
+  any_mis: 6
+  helen: in July–November
+  mine: in July–October
+  hstrip: ··························IIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ···························IIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Staff Canteen (trade), The Staff Canteen (secondary)
+  note: ''
+  cat: ours-shorter
+- food: Peppers
+  ring: Glasshouse
+  ours: Glasshouse
+  band: small
+  in_mis: 8
+  fresh_mis: 3
+  any_mis: 11
+  helen: in July–September; avail April–June and October–November
+  mine: in June–August; avail March–May and September–November
+  hstrip: ·············aaaaaaaaaaaaaIIIIIIIIIIIIIaaaaaaaaa····
+  ostrip: ············aaaaaaaaaaIIIIIIIIIIIIIaaaaaaaaaaa······
+  helen_sources: Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Horticultural Development Company, a division of AHDB (primary), HortiDaily (trade), Lea Valley Growers Association (primary), Defra (primary)
+  note: The Lea Valley growers' secretary said the 2017 crop started in January and would run to November (hortidaily-peppers-lvga-2017), about ten weeks earlier than AHDB's start; Defra also has a home-grown
+    elongated pepper quote in December 2025. Defra's last quote (12 Oct 2026) is about five weeks before AHDB's mid-November end. AHDB dates used.
+  cat: peak
+- food: Blackcurrants & Redcurrants
+  ring: (whole)
+  ours: all lines combined
+  band: small
+  in_mis: 7
+  fresh_mis: 4
+  any_mis: 10
+  helen: in August; avail July
+  mine: in June–August; avail June and August
+  hstrip: ··························aaaaIIIII·················
+  ostrip: ······················aaaIIIIIIIIaa·················
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: low/moderate
+  our_sources: Fresh Produce Journal (Fruitnet), quoting the Blackcurrant Foundation (trade), Fruit & Vine, quoting the Blackcurrant Foundation (trade), Fruit & Vine (trade), Countryside (NFU) (trade),
+    Defra (primary), Borough Market (secondary), Rectory Farm (Stanton St John, Oxford) (secondary), The Vegetarian Society (secondary)
+  note: Other secondary lists give June to August (vegsoc-seasonal) and, for Scotland, end of May to end of July (courier-scotland-july). The Norfolk grower profile also says the season usually ends in
+    early August (countryside-blackcurrant-grower), about two weeks before its own mid-August end. Defra's 2026 quotes start about five weeks after the secondary sources' late-June start and run about four
+    week
+  cat: peak
+- food: Walnuts
+  ring: Fresh
+  ours: Fresh
+  band: small
+  in_mis: 5
+  fresh_mis: 5
+  any_mis: 5
+  helen: in October
+  mine: in October–November
+  hstrip: ·······································IIII·········
+  ostrip: ·······································IIIIIIIII····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Sharpham Park (secondary), Hodmedod's (secondary), Roughway Farm (secondary)
+  note: ''
+  cat: ours-longer
+- food: Crab apples
+  ring: (whole)
+  ours: Crab apples
+  band: small
+  in_mis: 5
+  fresh_mis: 5
+  any_mis: 5
+  helen: in September–October
+  mine: in August–October
+  hstrip: ···································IIIIIIII·········
+  ostrip: ······························IIIIIIIIIIIII·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), National Geographic (secondary)
+  note: ''
+  cat: ours-longer
+- food: Hops
+  ring: Flowers
+  ours: Flowers
+  band: small
+  in_mis: 5
+  fresh_mis: 5
+  any_mis: 7
+  helen: in August–September
+  mine: in September; avail August and October
+  hstrip: ······························IIIIIIIII·············
+  ostrip: ·································aaIIIIaa···········
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Hop Association (primary), Society of Independent Brewers (SIBA) (trade), Hukins Hops (secondary), Adnams (secondary)
+  note: ''
+  cat: shifted
+- food: Pears
+  ring: Williams
+  ours: Williams
+  band: small
+  in_mis: 7
+  fresh_mis: 2
+  any_mis: 9
+  helen: in September; avail August and October
+  mine: in August–October
+  hstrip: ······························aaaaaIIIIaaaa·········
+  ostrip: ································IIIIIIIIIII·········
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Apples & Pears Ltd (primary)
+  note: ''
+  cat: peak
+- food: Morels
+  ring: Wild
+  ours: Wild
+  band: small
+  in_mis: 5
+  fresh_mis: 4
+  any_mis: 9
+  helen: in March–May; avail June
+  mine: in April–May; avail March
+  hstrip: ········IIIIIIIIIIIIIIaaaa··························
+  ostrip: ········aaaaaIIIIIIIII······························
+  helen_sources: First Nature
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Wildlife Trusts (primary), Woodland Trust (primary), Royal Botanic Gardens, Kew (Grow Wild) (primary)
+  note: 'woodlandtrust-morel: Mar-May; wildlifetrusts-morel: Apr-May.'
+  cat: peak
+- food: Hen of the woods
+  ring: (whole)
+  ours: Hen of the woods
+  band: small
+  in_mis: 4
+  fresh_mis: 5
+  any_mis: 9
+  helen: in July–October
+  mine: in August–October; avail July and November
+  hstrip: ··························IIIIIIIIIIIIIIIII·········
+  ostrip: ··························aaaaIIIIIIIIIIIIIaaaaa····
+  helen_sources: First Nature
+  helen_general: false
+  our_conf: low
+  our_sources: Wild Food UK (secondary), Mushroom Diary (secondary), NERC Open Research Archive (UKCEH) (primary), Nature (secondary)
+  note: 'wildfooduk-hen-of-the-woods: Aug-Nov; mushroomdiary-calendar: Jul-Oct.'
+  cat: ours-longer
+- food: Lamb
+  ring: Hogget
+  ours: Hogget
+  band: small
+  in_mis: 8
+  fresh_mis: 1
+  any_mis: 9
+  helen: in February–April; avail January and May
+  mine: in January–March; avail April–June
+  hstrip: aaaaIIIIIIIIIIIIIaaaaa······························
+  ostrip: IIIIIIIIIIIIIaaaaaaaaaa·····························
+  helen_sources: Lishman's
+  helen_general: false
+  our_conf: moderate
+  our_sources: National Sheep Association (primary), Quality Meat Scotland (primary), AHDB (primary)
+  note: 'The tail-off varies by year: QMS 2026 shows a sharp drop after Easter (early April); QMS 2013 and AHDB 2023 show hoggs still on the market in May and early June.'
+  cat: peak
+- food: Onions
+  ring: (whole)
+  ours: all lines combined
+  band: small
+  in_mis: 2
+  fresh_mis: 6
+  any_mis: 6
+  helen: in July–September; avail June and October; store November–May
+  mine: in July–September; avail October; store November–July
+  hstrip: ssssssssssssssssssssssaaaaIIIIIIIIIIIIIaaaasssssssss
+  ostrip: ssssssssssssssssssssssssssssIIIIIIIIIIIaaaasssssssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: AHDB Horticulture (primary), Fresh Produce Journal (Fruitnet) (trade), FreshPlaza (trade)
+  note: One grower finished packing UK stored crop in mid-July (wk 28), with two to three weeks of imports in July (fpj-onions-year-round); AHDB has CA stock covering all of July (to wk 30). In 2019 UK
+    stocks ran very low by late May (freshplaza-bopa-2019).
+  cat: ours-shorter
+- food: Broad beans
+  ring: (whole)
+  ours: Broad beans
+  band: small
+  in_mis: 8
+  fresh_mis: 0
+  any_mis: 8
+  helen: in July–August; avail June and September
+  mine: in June–August; avail August–September
+  hstrip: ······················aaaaIIIIIIIIIaaaa·············
+  ostrip: ······················IIIIIIIIIaaaaaaaa·············
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), lovefood.com (secondary), Food and Travel (secondary), The Vegetarian Society (secondary)
+  note: lovefood-peas-broad-beans names July and August as the best months, ending about four weeks after the last Defra quote; vegsoc-seasonal gives June to August.
+  cat: peak
+- food: Sweet chestnuts
+  ring: (whole)
+  ours: Sweet chestnuts
+  band: small
+  in_mis: 5
+  fresh_mis: 3
+  any_mis: 8
+  helen: in October–November; avail December
+  mine: in October; avail November–December
+  hstrip: ·······································IIIIIIIIIaaaa
+  ostrip: ·······································IIIIaaaaaa···
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), National Geographic (secondary)
+  note: ''
+  cat: peak
+- food: Lamb
+  ring: New-season
+  ours: New-season
+  band: small
+  in_mis: 8
+  fresh_mis: 0
+  any_mis: 8
+  helen: in June–November; avail April–May and December
+  mine: in August–November; avail April–July and December
+  hstrip: ·············aaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  ostrip: ·············aaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIaaaa
+  helen_sources: National Sheep Association, AHDB, AHDB
+  helen_general: false
+  our_conf: moderate
+  our_sources: National Sheep Association (primary), AHDB (primary), Quality Meat Scotland (primary), FarmingUK, quoting Hybu Cig Cymru (trade)
+  note: AHDB says late summer and early autumn (August to October); NSA says autumn (September to November); HCC puts the Welsh peak in August to early September (farminguk-hcc-lamb-season). The in window
+    spans August to November to cover both primary sources.
+  cat: peak
+- food: Courgettes
+  ring: (whole)
+  ours: Courgettes
+  band: small
+  in_mis: 2
+  fresh_mis: 5
+  any_mis: 7
+  helen: in June–September; avail May and October
+  mine: in June–September; avail June and October
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ······················aaIIIIIIIIIIIIIIIaaaa·········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), The Vegetarian Society (secondary), Kentish Stour Countryside Partnership (secondary), Ocado (secondary)
+  note: Two calendars give June to October (vegsoc-seasonal, kentishstour-calendar), about four weeks past the last Defra quote; gbc-courgettes gives June to September; foodomarket-season gives June to
+    August.
+  cat: ours-shorter
+- food: Hops
+  ring: Shoots
+  ours: Shoots
+  band: small
+  in_mis: 5
+  fresh_mis: 1
+  any_mis: 5
+  helen: in March–May
+  mine: in April; avail March
+  hstrip: ·········IIIIIIIII··································
+  ostrip: ·········aaaaIIII···································
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: low
+  our_sources: Slow Food in the UK (secondary), Totally Wild UK (secondary), Hogs Back Brewery (secondary), British Guild of Beer Writers (trade)
+  note: slowfood-hopshoots starts in March (week 10); totallywild-hops starts in early April (week 14).
+  cat: peak
+- food: Jerusalem artichokes
+  ring: (whole)
+  ours: Jerusalem artichokes
+  band: small
+  in_mis: 0
+  fresh_mis: 5
+  any_mis: 5
+  helen: in November–February; avail October
+  mine: in November–February; avail March and October
+  hstrip: IIIIIIII·······························aaaaIIIIIIIII
+  ostrip: IIIIIIIIaaaaa··························aaaaIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Freshview Foods (secondary)
+  note: freshview-seasonality runs about four weeks longer at each end (Oct-Mar) than vegsoc-seasonal (Nov-Feb).
+  cat: ours-longer
+- food: Damsons
+  ring: (whole)
+  ours: Damsons
+  band: small
+  in_mis: 5
+  fresh_mis: 0
+  any_mis: 5
+  helen: in September; avail August
+  mine: in August–September
+  hstrip: ······························aaaaaIIII·············
+  ostrip: ······························IIIIIIIII·············
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Royal Horticultural Society (secondary)
+  note: ''
+  cat: peak
+- food: Turkey
+  ring: (whole)
+  ours: Traditional farm-fresh
+  band: small
+  in_mis: 0
+  fresh_mis: 5
+  any_mis: 5
+  helen: in December; avail November
+  mine: in December
+  hstrip: ···········································aaaaaIIII
+  ostrip: ················································IIII
+  helen_sources: Traditional Farmfresh Turkey Association
+  helen_general: false
+  our_conf: moderate
+  our_sources: Love British Food (TFTA trade stand) (trade), Farmers Weekly, quoting the TFTA (trade), Farmers Weekly, quoting Peeles Rare Breed Turkeys (trade)
+  note: ''
+  cat: ours-shorter
+- food: Radishes
+  ring: Mooli
+  ours: Mooli
+  band: no-data-ours
+  in_mis: 26
+  fresh_mis: 35
+  any_mis: 35
+  helen: in June–November; avail May and December
+  mine: none
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  ostrip: ····················································
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: ''
+  note: ''
+  cat: no-data-ours
+- food: Lettuce
+  ring: Curly
+  ours: Curly
+  band: no-data-ours
+  in_mis: 17
+  fresh_mis: 31
+  any_mis: 31
+  helen: in July–October; avail May–June and November
+  mine: none
+  hstrip: ·················aaaaaaaaaIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ····················································
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: ''
+  note: ''
+  cat: no-data-ours
+- food: Courgette flowers
+  ring: (whole)
+  ours: Courgette flowers
+  band: no-data-ours
+  in_mis: 13
+  fresh_mis: 13
+  any_mis: 13
+  helen: in June–August
+  mine: none
+  hstrip: ······················IIIIIIIIIIIII·················
+  ostrip: ····················································
+  helen_sources: BBC Good Food
+  helen_general: false
+  our_conf: low
+  our_sources: Farm Direct (secondary), Oso Local (secondary)
+  note: ''
+  cat: no-data-ours
+- food: Grapes
+  ring: (whole)
+  ours: Grapes
+  band: no-data-ours
+  in_mis: 8
+  fresh_mis: 13
+  any_mis: 13
+  helen: in September–October; avail August
+  mine: none
+  hstrip: ······························aaaaaIIIIIIII·········
+  ostrip: ····················································
+  helen_sources: RHS, FreshPlaza
+  helen_general: false
+  our_conf: low
+  our_sources: FreshPlaza (trade), Fresh Produce Journal (trade)
+  note: ''
+  cat: no-data-ours
+- food: Romanesco
+  ring: (whole)
+  ours: Romanesco
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 4
+  helen: in June–December
+  mine: in June–November
+  hstrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Freshview Foods (secondary), New Covent Garden Market (Covent Garden Market Authority) (trade)
+  note: ''
+  cat: agree
+- food: Runner & French beans
+  ring: (whole)
+  ours: all lines combined
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 8
+  helen: in July–September; avail June and October
+  mine: in July–October
+  hstrip: ······················aaaaIIIIIIIIIIIIIaaaa·········
+  ostrip: ··························IIIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), The Morning Advertiser (trade), Fresh Produce Journal (Fruitnet) (trade), The Vegetarian Society (secondary), Food and Travel (secondary)
+  note: A foodservice supplier gave early July to end of September (ma-runner-beans-2007), four weeks shorter than Defra. vegsoc-seasonal lists June to October. Secondary sources put the bulk of the crop
+    in July and August (foodandtravel-french-beans, vegsoc-seasonal); Defra quotes run about six weeks later, to mid-October.
+  cat: agree
+- food: Quince
+  ring: (whole)
+  ours: Quince
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 4
+  helen: in October–November
+  mine: in October–December
+  hstrip: ·······································IIIIIIIII····
+  ostrip: ·······································IIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary)
+  note: ''
+  cat: agree
+- food: Bilberries
+  ring: (whole)
+  ours: UK-wide
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 4
+  helen: in July–August
+  mine: in July–September
+  hstrip: ··························IIIIIIIII·················
+  ostrip: ··························IIIIIIIIIIIII·············
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), The Wildlife Trusts (primary), UKHillwalking (secondary), BBC Countryfile (secondary)
+  note: ''
+  cat: agree
+- food: Spruce tips
+  ring: (whole)
+  ours: Spruce tips
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 4
+  helen: in April–May
+  mine: in April–June
+  hstrip: ·············IIIIIIIII······························
+  ostrip: ·············IIIIIIIIIIIII··························
+  helen_sources: Forestheart
+  helen_general: false
+  our_conf: low
+  our_sources: Galloway Wild Foods (secondary), Reading Amateur Brewers (secondary), Woodland Ways (secondary)
+  note: rab-spruce-beer gives early May to mid-June (weeks 19-24), narrower than Galloway's April-June.
+  cat: agree
+- food: Coriander
+  ring: (whole)
+  ours: Outdoor
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 8
+  helen: in June–September; avail May and October
+  mine: in July–September; avail May–June
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ·················aaaaaaaaaIIIIIIIIIIIII·············
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade), Horticultural Development Company (AHDB) (primary)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 13 weeks before the coriander-specific in window.
+  cat: agree
+- food: Mint
+  ring: (whole)
+  ours: Outdoor
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 8
+  helen: in May–September; avail April and October
+  mine: in May–October
+  hstrip: ·············aaaaIIIIIIIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Horticultural Development Company (AHDB) (primary), Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
+  cat: agree
+- food: Plums
+  ring: (whole)
+  ours: all lines combined
+  band: agree
+  in_mis: 3
+  fresh_mis: 3
+  any_mis: 3
+  helen: in August–September
+  mine: in July–September
+  hstrip: ······························IIIIIIIII·············
+  ostrip: ···························IIIIIIIIIIII·············
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: low/moderate
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), FreshPlaza (trade), New Covent Garden Market (secondary), Defra (primary)
+  note: In the late 2015 season Total Worldfresh said Opal had started only about 10 August (freshplaza-plums-2015), about three weeks after the mid-July start. The previous dates (avail week 32, in 33
+    to 36, avail 37 to 38) came from the 2009 to 2015 trade reports; they started about 10 August and gave a bulk of two to three weeks, against Defra's nine weeks of quotes in 2026. In 2015 Victoria was
+    only s
+  cat: agree
+- food: Elderflower
+  ring: (whole)
+  ours: Elderflower
+  band: agree
+  in_mis: 2
+  fresh_mis: 4
+  any_mis: 6
+  helen: in June; avail May
+  mine: in May–June; avail May and July
+  hstrip: ·················aaaaaIIII··························
+  ostrip: ·················aaaIIIIIIaaaa······················
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Woodland Trust (primary), NatureScot (primary), National Geographic (secondary)
+  note: naturescot-foraging-plants says flowers can be gathered May to July (weeks 18-30), against WT's late May to June (21-26).
+  cat: agree
+- food: Wild duck
+  ring: (whole)
+  ours: Inland
+  band: agree
+  in_mis: 2
+  fresh_mis: 4
+  any_mis: 5
+  helen: in September–January; avail February
+  mine: in August–February
+  hstrip: IIIIaaaa···························IIIIIIIIIIIIIIIII
+  ostrip: IIIII·····························IIIIIIIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: BASC (primary), Shooting UK (Shooting Times / Sporting Gun) (trade), Naturenet (secondary)
+  note: ''
+  cat: agree
+- food: Gooseberries
+  ring: Cultivated
+  ours: Cultivated
+  band: agree
+  in_mis: 4
+  fresh_mis: 1
+  any_mis: 5
+  helen: in July–August; avail June
+  mine: in June–August; avail May
+  hstrip: ······················aaaaIIIIIIIII·················
+  ostrip: ·····················aIIIIIIIIIIIII·················
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), HortiDaily (trade), The Caterer (trade), Borough Market (secondary)
+  note: The Caterer's main text gives May to August with a peak in June and July, while its Total Produce market report gives June to late August (caterer-gooseberries); neither names a grower, so the Winterwood
+    dates are used. A secondary list gives June to July (vegsoc-seasonal), about four weeks shorter.
+  cat: agree
+- food: Hazelnuts
+  ring: Cultivated
+  ours: Cultivated
+  band: agree
+  in_mis: 3
+  fresh_mis: 2
+  any_mis: 14
+  helen: in September–October; avail August
+  mine: in August–October; store November–December
+  hstrip: ······························aaaaaIIIIIIII·········
+  ostrip: ································IIIIIIIIIIIsssssssss
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Kentish Cobnuts Association (primary), Fresh Produce Journal (Fruitnet), quoting the Kentish Cobnuts Association (trade), Fresh Produce Journal (Fruitnet), quoting the Association of
+    Kentish Cobnuts Growers (trade)
+  note: 'Trade sources start later: the KCA chairman said picking usually begins in the first week of September (fpj-cobnuts-early), and the growers'' association president said the first week of September
+    is about right to start eating green cobnuts (fpj-cobnuts-too-early), about three weeks after the KCA''s mid-August. The KCA contradicts itself on storage: one page says stored nuts may be sold all
+    year (k'
+  cat: agree
+- food: Spinach
+  ring: (whole)
+  ours: Spinach
+  band: agree
+  in_mis: 0
+  fresh_mis: 4
+  any_mis: 4
+  helen: in May–October
+  mine: in May–October; avail April
+  hstrip: ·················IIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: ·············aaaaIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), Freshview Foods (secondary), Kentish Stour Countryside Partnership (secondary), The Vegetarian Society (secondary)
+  note: vegsoc-seasonal lists only April-May and September-October; oddbox-seasonal March-July and September-October.
+  cat: agree
+- food: Sea kale
+  ring: Wild
+  ours: Wild
+  band: agree
+  in_mis: 0
+  fresh_mis: 4
+  any_mis: 4
+  helen: in March–May; avail June
+  mine: in March–May
+  hstrip: ········IIIIIIIIIIIIIIaaaa··························
+  ostrip: ········IIIIIIIIIIIIII······························
+  helen_sources: Galloway Wild Foods, Wikipedia
+  helen_general: false
+  our_conf: low
+  our_sources: Galloway Wild Foods (secondary)
+  note: ''
+  cat: agree
+- food: Apples
+  ring: Golden Delicious
+  ours: Golden Delicious
+  band: agree
+  in_mis: 0
+  fresh_mis: 4
+  any_mis: 16
+  helen: in November; avail October; store December–February
+  mine: in November
+  hstrip: ssssssss·······························aaaaIIIIIssss
+  ostrip: ···········································IIIII····
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Apples & Pears Ltd (primary)
+  note: ''
+  cat: agree
+- food: Apples
+  ring: Royal Gala
+  ours: Royal Gala
+  band: agree
+  in_mis: 1
+  fresh_mis: 3
+  any_mis: 17
+  helen: in October; avail September; store November–May
+  mine: in September–October; store November–August
+  hstrip: ssssssssssssssssssssss·············aaaaIIIIsssssssss
+  ostrip: sssssssssssssssssssssssssssssssssss···IIIIIsssssssss
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Apples & Pears Ltd (primary), Fresh Produce Journal (Fruitnet) (trade)
+  note: Defra's wholesale series quoted home-grown Gala without a break from 19 Jan to 17 Aug 2026 (defra-wholesale-prices), filling the May to early June gap between BAPL's early May end and the Goatham
+    summer range, so the two store ranges were joined. Defra's new-season quotes began 14 Sep 2026, two weeks before the in range.
+  cat: agree
+- food: Apples
+  ring: Russet
+  ours: Russet
+  band: agree
+  in_mis: 1
+  fresh_mis: 3
+  any_mis: 15
+  helen: in October; avail September; store November–January
+  mine: in September–October; store November–April
+  hstrip: ssss·······························aaaaIIIIsssssssss
+  ostrip: sssssssssssssss·······················IIIIIsssssssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Apples & Pears Ltd (primary), Defra (primary)
+  note: Defra's wholesale series quoted home-grown Egremont Russet until 13 Apr 2026 (defra-wholesale-prices), about five weeks past BAPL's early March end (bapl-british-season); the store range was extended
+    to week 15 on the newer primary source. Defra's new-season quotes began 28 Sep 2026.
+  cat: agree
+- food: Dill
+  ring: (whole)
+  ours: Outdoor
+  band: agree
+  in_mis: 4
+  fresh_mis: 0
+  any_mis: 4
+  helen: in June–September; avail October
+  mine: in June–October
+  hstrip: ······················IIIIIIIIIIIIIIIIIaaaa·········
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade), Horticultural Development Company (AHDB) (primary)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 9 weeks earlier and ends about 4 weeks earlier.
+  cat: agree
+- food: Sea bass
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 2
+  fresh_mis: 2
+  any_mis: 2
+  helen: in April–January
+  mine: in January–December
+  hstrip: IIII·········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIII·······IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: high
+  our_sources: GOV.UK (Defra / Marine Management Organisation) (primary), Marine Conservation Society, Good Fish Guide (primary), Brighton & Newhaven Fish Sales (secondary), Seafish (primary)
+  note: seafish-seafood-guide (2009, background only) gives a wild season of Aug-Mar, which predates the Feb-Mar closure.
+  cat: agree
+- food: Clams
+  ring: South West
+  ours: SW
+  band: agree
+  in_mis: 4
+  fresh_mis: 0
+  any_mis: 4
+  helen: in September–April; avail May and August
+  mine: in October–April; avail May and August–September
+  hstrip: IIIIIIIIIIIIIIIIIaaaaa········aaaaaIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIaaaaa········aaaaaaaaaIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society Good Fish Guide (primary), Flying Fish Seafoods (primary)
+  note: ''
+  cat: agree
+- food: Goose
+  ring: (whole)
+  ours: Goose
+  band: agree
+  in_mis: 3
+  fresh_mis: 1
+  any_mis: 4
+  helen: in October–December; avail September
+  mine: in September–December
+  hstrip: ···································aaaaIIIIIIIIIIIII
+  ostrip: ····································IIIIIIIIIIIIIIII
+  helen_sources: Farmers Weekly
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Goose Producers (British Poultry Council) (primary), The Poultry Site, reporting the British Poultry Council goose farm walk (trade), Farmers Weekly, quoting the British Goose Producers'
+    Association (trade), FarmingUK, quoting British Goose Producers (trade)
+  note: ''
+  cat: agree
+- food: Grouse
+  ring: (whole)
+  ours: Great Britain
+  band: agree
+  in_mis: 2
+  fresh_mis: 2
+  any_mis: 4
+  helen: in August–November; avail December
+  mine: in August–December
+  hstrip: ·······························IIIIIIIIIIIIIIIIIaaaa
+  ostrip: ·······························IIIIIIIIIIIIIIIIIII··
+  helen_sources: BASC, NatureScot
+  helen_general: false
+  our_conf: high
+  our_sources: BASC (primary), Shooting UK (Shooting Times / Sporting Gun) (trade), Naturenet (secondary)
+  note: ''
+  cat: agree
+- food: Partridge
+  ring: (whole)
+  ours: Great Britain
+  band: agree
+  in_mis: 2
+  fresh_mis: 2
+  any_mis: 2
+  helen: in September–January
+  mine: in August–February
+  hstrip: IIII·······························IIIIIIIIIIIIIIIII
+  ostrip: IIIII·····························IIIIIIIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: BASC (primary), Shooting UK (Shooting Times / Sporting Gun) (trade), Naturenet (secondary)
+  note: ''
+  cat: agree
+- food: Asparagus
+  ring: (whole)
+  ours: Outdoor
+  band: agree
+  in_mis: 2
+  fresh_mis: 0
+  any_mis: 2
+  helen: in May–June; avail April
+  mine: in April–June; avail April and June
+  hstrip: ·············aaaaIIIIIIIII··························
+  ostrip: ·············aaaIIIIIIIIIa··························
+  helen_sources: New Covent Garden Market, Defra, Farming UK
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fresh Produce Journal (Fruitnet) (trade), Horticultural Development Company, a division of AHDB (primary), FreshPlaza (trade)
+  note: 'ahdb-grown-in-britain: early/mid April to late June; growers'' association (via fpj-asparagus-2026): 23 Apr to 21 Jun. Edges kept as avail.'
+  cat: agree
+- food: Apples
+  ring: Cox
+  ours: Cox
+  band: agree
+  in_mis: 1
+  fresh_mis: 1
+  any_mis: 3
+  helen: in September–October; store November–April
+  mine: in September–October; store November–May
+  hstrip: sssssssssssssssss··················IIIIIIIIsssssssss
+  ostrip: sssssssssssssssssss·················IIIIIIIsssssssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: British Apples & Pears Ltd (primary), NIAB (primary), Fresh Produce Journal (Fruitnet) (trade)
+  note: Defra's wholesale series quoted home-grown Cox until 11 May 2026 (defra-wholesale-prices), five weeks past BAPL's early April end (bapl-british-season); the store range was extended to week 19 on
+    the newer primary source. Defra's new-season quotes began 14 Sep 2026, matching the in range.
+  cat: agree
+- food: Figs
+  ring: (whole)
+  ours: Glasshouse
+  band: agree
+  in_mis: 1
+  fresh_mis: 1
+  any_mis: 1
+  helen: in August–September
+  mine: in August–October
+  hstrip: ······························IIIIIIIII·············
+  ostrip: ······························IIIIIIIIII············
+  helen_sources: Ashridge Nurseries, RHS, Food Ingredients First
+  helen_general: false
+  our_conf: low
+  our_sources: FreshPlaza (trade), Fresh Produce Journal (Fruitnet) (trade), Royal Horticultural Society (secondary)
+  note: ''
+  cat: agree
+- food: Sea trout
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 1
+  fresh_mis: 1
+  any_mis: 1
+  helen: in April–August
+  mine: in March–August
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIII·················
+  ostrip: ············IIIIIIIIIIIIIIIIIIIIIII·················
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: Environment Agency (primary), Environment Agency (GOV.UK) (primary), North Atlantic Salmon Conservation Organization (UK submission) (primary)
+  note: seafish-seafood-guide (2009) gives 1 Mar-31 Aug, starting about 3.5 weeks earlier. The outcome of the promised post-2022 review, and the exact season changes NASCO mentions, could not be confirmed
+    (search budget ran out), so confidence stays moderate rather than high despite the byelaw basis.
+  cat: agree
+- food: Pheasant
+  ring: (whole)
+  ours: Great Britain
+  band: agree
+  in_mis: 1
+  fresh_mis: 1
+  any_mis: 1
+  helen: in October–January
+  mine: in October–February
+  hstrip: IIII···································IIIIIIIIIIIII
+  ostrip: IIIII··································IIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: BASC (primary), Shooting UK (Shooting Times / Sporting Gun) (trade), Naturenet (secondary)
+  note: ''
+  cat: agree
+- food: Woodcock
+  ring: (whole)
+  ours: England, Wales & NI
+  band: agree
+  in_mis: 1
+  fresh_mis: 1
+  any_mis: 1
+  helen: in October–January
+  mine: in October–February
+  hstrip: IIII···································IIIIIIIIIIIII
+  ostrip: IIIII··································IIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: BASC (primary), Shooting UK (Shooting Times / Sporting Gun) (trade), Naturenet (secondary)
+  note: ''
+  cat: agree
+- food: Venison
+  ring: Red & fallow
+  ours: Red & fallow
+  band: agree
+  in_mis: 1
+  fresh_mis: 1
+  any_mis: 1
+  helen: in August–April
+  mine: in August–May
+  hstrip: IIIIIIIIIIIIIIIII·············IIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIII············IIIIIIIIIIIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: legislation.gov.uk (primary), BASC (primary), British Deer Society (primary), The Deer Initiative (primary)
+  note: naturenet-seasons gives Northern Ireland red hinds to the end of February; basc-seasons gives November to March. The weeks are unaffected because stags are open then.
+  cat: agree
+- food: Hare
+  ring: (whole)
+  ours: England & Wales
+  band: agree
+  in_mis: 1
+  fresh_mis: 1
+  any_mis: 1
+  helen: in August–February
+  mine: in August–March
+  hstrip: IIIIIIII······················IIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIII·····················IIIIIIIIIIIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: legislation.gov.uk (primary), GWCT (in association with BASC) (primary), BASC (primary), Shooting UK (Shooting Times) (trade)
+  note: ''
+  cat: agree
+- food: Cauliflower
+  ring: (whole)
+  ours: all lines combined
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), Kentish Stour Countryside Partnership (secondary), AHDB Horticulture (primary), Defra (primary), Wicked Leeks (Riverford) (trade)
+  note: vegsoc-seasonal gives June-November only. kentishstour-seasonal gives Kent and Cornwall January-June.
+  cat: agree
+- food: Pak choi
+  ring: Glasshouse
+  ours: Glasshouse
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Defra
+  helen_general: false
+  our_conf: low
+  our_sources: Defra (primary), New Covent Garden Market (Covent Garden Market Authority) (trade)
+  note: ''
+  cat: agree
+- food: Lettuce
+  ring: Glasshouse
+  ours: Glasshouse
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Defra
+  helen_general: false
+  our_conf: high
+  our_sources: AHDB Horticulture (primary), Defra (primary)
+  note: ''
+  cat: agree
+- food: Rocket
+  ring: (whole)
+  ours: Rocket
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in April–October
+  mine: in April–October
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  ostrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIII·········
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: Defra (primary), The Vegetarian Society (secondary), Oddbox (secondary), Hubbub (secondary)
+  note: hubbub-seasonal ends in September.
+  cat: agree
+- food: Cress
+  ring: (whole)
+  ours: Cress
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: Deliciouslyorkshire (trade), Pocklington Post (secondary), The Grocer (trade)
+  note: ''
+  cat: agree
+- food: Apples
+  ring: Bramley
+  ours: Bramley
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in August–September; store October–July
+  mine: in August–September; store October–July
+  hstrip: ssssssssssssssssssssssssssssssIIIIIIIIIsssssssssssss
+  ostrip: ssssssssssssssssssssssssssssssIIIIIIIIIsssssssssssss
+  helen_sources: New Covent Garden Market, Defra, British Apples & Pears
+  helen_general: false
+  our_conf: moderate
+  our_sources: Bramley Apples (bramleyapples.co.uk) (primary), British Apples & Pears Ltd (primary), NIAB (primary)
+  note: Armagh (NI) picks Bramley September to October (visitarmagh-bramley), about four weeks later than the August to September window in bramleyapples-faq; the primary source is used.
+  cat: agree
+- food: Cherries
+  ring: (whole)
+  ours: Cherries
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in July–August; avail June and September
+  mine: in July–August; avail June and September
+  hstrip: ······················aaaaIIIIIIIIIaaaa·············
+  ostrip: ······················aaaaIIIIIIIIIaaaa·············
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), Fresh Produce Journal (Fruitnet) (trade)
+  note: ''
+  cat: agree
+- food: Loganberries & Tayberries
+  ring: (whole)
+  ours: all lines combined
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in July–August
+  mine: in July–August
+  hstrip: ··························IIIIIIIII·················
+  ostrip: ··························IIIIIIIII·················
+  helen_sources: BBC Good Food
+  helen_general: false
+  our_conf: low
+  our_sources: The Vegetarian Society (secondary), Royal Horticultural Society (secondary), The Courier (secondary)
+  note: 'Secondary sources disagree: June only (vegsoc-seasonal), about four weeks earlier than the RHS; and, in Scotland, usually until the end of August (courier-scotland-july), about four weeks later.
+    The first pass used these dates.'
+  cat: agree
+- food: Giant puffball
+  ring: (whole)
+  ours: Giant puffball
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in July–November
+  mine: in July–November
+  hstrip: ··························IIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ··························IIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: First Nature
+  helen_general: false
+  our_conf: low
+  our_sources: The Wildlife Trusts (primary), Mushroom Diary (secondary), NERC Open Research Archive (UKCEH) (primary), Nature (secondary)
+  note: mushroomdiary-calendar gives Jul-Sep, ending about 8 weeks earlier; so confidence low.
+  cat: agree
+- food: Oyster mushrooms
+  ring: Cultivated
+  ours: Cultivated
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), Booths (secondary), Woodland Trust (primary), SAC Consulting / Scotland's Rural College (primary)
+  note: sruc-mushroom-factsheet (April 2020) says no commercial speciality mushroom production is reported in Ireland or the UK, citing the spawn firm Mycelia. Trade press the same quarter names a UK farm
+    and its weekly tonnage (freshplaza-smithy-exotic), so the data follows the named-grower report.
+  cat: agree
+- food: Cultivated mushrooms
+  ring: (whole)
+  ours: Cultivated mushrooms
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: The Grocer (trade), Fresh Produce Journal (trade), SAC Consulting / Scotland's Rural College (primary)
+  note: ''
+  cat: agree
+- food: Shiitake
+  ring: (whole)
+  ours: Shiitake
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: FreshPlaza (trade), Booths (secondary), Scottish Daily Mail (via PressReader) (secondary), SAC Consulting / Scotland's Rural College (primary)
+  note: sruc-mushroom-factsheet (April 2020) says no commercial speciality mushroom production is reported in Ireland or the UK, citing the spawn firm Mycelia. Trade press the same quarter names a UK farm
+    and its weekly tonnage (freshplaza-smithy-exotic), so the data follows the named-grower report; the SRUC line probably reflects a gap in reported statistics, not an absence of growers.
+  cat: agree
+- food: Bay
+  ring: (whole)
+  ours: Outdoor
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
+  note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+  cat: agree
+- food: Lobster
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish is the Dish (Seafish) (primary), Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society Good Fish Guide (primary)
+  note: 'Pass 3 change: the earlier window (in May-December, avail January-April) came from the MCS key fishing season, which is a landings statement (mcs-lobster-scotland-east), not a best-to-eat one.'
+  cat: agree
+- food: Lobster
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: moderate
+  our_sources: Fish is the Dish (Seafish) (primary), Marine Conservation Society Good Fish Guide (primary)
+  note: 'Pass 3 change: the earlier window (in May-December, avail January-April) came from the MCS key fishing season, a landings statement (mcs-lobster-scotland-east).'
+  cat: agree
+- food: Lobster
+  ring: South West
+  ours: SW
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: high
+  our_sources: Cornwall Good Seafood Guide (primary), Fish is the Dish (Seafish) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society Good Fish Guide (primary)
+  note: MCS names May-December as the UK key fishing season (mcs-lobster-scotland-east), a landings statement; the best-to-eat sources name no peak.
+  cat: agree
+- food: Oysters
+  ring: Rock
+  ours: Rock
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Seafish
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Fish is the Dish (Seafish) (primary), London Farmers' Markets (secondary), Marine Conservation Society Good Fish Guide (primary)
+  note: Seafish also says that, although oysters are on sale all year, the best time to buy them is September-April (fitd-oysters). That sentence covers oysters in general; the Pacific-specific sources
+    name no peak, so they are followed.
+  cat: agree
+- food: Oysters
+  ring: Porthilly rock
+  ours: Porthilly rock
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: moderate
+  our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society Good Fish Guide (primary)
+  note: ''
+  cat: agree
+- food: Scallops
+  ring: Orkney, hand-dived
+  ours: Orkney hand-dived
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: low
+  our_sources: Scottish Government (primary), The Orkney News (secondary), Flying Fish Seafoods (secondary), Marine Conservation Society Good Fish Guide (primary)
+  note: ''
+  cat: agree
+- food: Farmed salmon
+  ring: Glenarm, Northern Ireland
+  ours: Glenarm, Northern Ireland
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: low
+  our_sources: Flying Fish Seafoods (secondary), Rockfish (Skipper's Log blog) (secondary), Abel & Cole (secondary), The Irish News (secondary)
+  note: rockfish-glenarm-2025 describes its 2025 supply as a limited allocation, sold while stocks last, which may mean supply is not continuous.
+  cat: agree
+- food: Farmed salmon
+  ring: Loch Duart, Scotland
+  ours: Loch Duart, Scotland
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Flying Fish Seafoods
+  helen_general: false
+  our_conf: low
+  our_sources: Flying Fish Seafoods (secondary), Loch Duart (secondary), Northern Times (secondary), Undercurrent News (trade)
+  note: ''
+  cat: agree
+- food: Beef
+  ring: (whole)
+  ours: Beef
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Quality Meat Scotland (primary), AHDB (primary), Defra / Hybu Cig Cymru (GOV.UK) (primary)
+  note: ''
+  cat: agree
+- food: Pork
+  ring: (whole)
+  ours: Pork
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: National Pig Association (primary), The Grocer, quoting AHDB (trade)
+  note: ''
+  cat: agree
+- food: Venison
+  ring: Roe
+  ours: Roe
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: legislation.gov.uk (primary), NatureScot (primary), BASC (primary), British Deer Society (primary)
+  note: ''
+  cat: agree
+- food: Venison
+  ring: Chinese water deer
+  ours: Chinese water deer
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in November–March
+  mine: in November–March
+  hstrip: IIIIIIIIIIIII······························IIIIIIIII
+  ostrip: IIIIIIIIIIIII······························IIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: legislation.gov.uk (primary), BASC (primary), British Deer Society (primary), The Deer Initiative (primary)
+  note: ''
+  cat: agree
+- food: Venison
+  ring: Muntjac
+  ours: Muntjac
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: BASC (primary), The Deer Initiative (primary), British Deer Society (primary)
+  note: ''
+  cat: agree
+- food: Wood pigeon
+  ring: (whole)
+  ours: Wood pigeon
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: BASC
+  helen_general: false
+  our_conf: high
+  our_sources: legislation.gov.uk (primary), BASC (primary), Shooting UK (Shooting Times / Sporting Gun) (trade)
+  note: ''
+  cat: agree
+- food: Rabbit
+  ring: (whole)
+  ours: Rabbit
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: BASC, NatureScot
+  helen_general: false
+  our_conf: high
+  our_sources: BASC (primary), Shooting UK (Shooting Times / Sporting Gun) (trade), Naturenet (secondary)
+  note: ''
+  cat: agree
+- food: Squirrel
+  ring: (whole)
+  ours: Grey squirrel
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Naturenet (secondary)
+  note: ''
+  cat: agree
+- food: Chicken
+  ring: (whole)
+  ours: Chicken
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: moderate
+  our_sources: Defra (primary), Defra (GOV.UK) (primary)
+  note: ''
+  cat: agree
+- food: Duck
+  ring: (whole)
+  ours: Duck
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge
+  helen_general: true
+  our_conf: low
+  our_sources: Defra (primary), Defra (GOV.UK) (primary)
+  note: ''
+  cat: agree
+- food: Wild salmon
+  ring: North East
+  ours: NE
+  band: never
+  in_mis: 13
+  fresh_mis: 13
+  any_mis: 13
+  helen: in June–August
+  mine: none
+  hstrip: ······················IIIIIIIIIIIII·················
+  ostrip: ····················································
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Scottish Government (primary), Marine Directorate, Scottish Government (primary), legislation.gov.uk (primary)
+  note: seafish-seafood-guide (2009) gives a wild season of Apr-Sep, before the 2016 Scottish coastal netting ban.
+  cat: never
+extra:
+- - horseradish
+  - Wild
+  - method
+  - low
+- - potatoes
+  - Pembrokeshire
+  - region
+  - high
+- - potatoes
+  - Cornish
+  - region
+  - low
+- - leeks
+  - Welsh (PGI)
+  - region
+  - high
+- - broccoli
+  - Purple sprouting, summer
+  - variety
+  - moderate
+- - cabbage
+  - Pointed
+  - variety
+  - moderate
+- - watercress
+  - Glasshouse
+  - method
+  - moderate
+- - asparagus
+  - Protected
+  - method
+  - moderate
+- - celery
+  - Fenland
+  - region
+  - high
+- - squash
+  - Summer
+  - variety
+  - low
+- - damsons
+  - Westmorland
+  - region
+  - moderate
+- - raspberries
+  - Glasshouse
+  - method
+  - low
+- - strawberries
+  - Glasshouse
+  - method
+  - moderate
+- - wild-garlic
+  - Scotland
+  - region
+  - low
+- - samphire
+  - Rock samphire
+  - variety
+  - low
+- - samphire
+  - Glasshouse (hydroponic)
+  - method
+  - moderate
+- - bilberries
+  - Scotland
+  - region
+  - moderate
+- - basil
+  - Glasshouse
+  - method
+  - moderate
+- - chives
+  - Glasshouse
+  - method
+  - low
+- - coriander
+  - Glasshouse
+  - method
+  - moderate
+- - dill
+  - Glasshouse
+  - method
+  - low
+- - marjoram-oregano
+  - Glasshouse
+  - method
+  - low
+- - mint
+  - Glasshouse
+  - method
+  - moderate
+- - parsley
+  - Glasshouse
+  - method
+  - moderate
+- - rosemary
+  - Glasshouse
+  - method
+  - moderate
+- - sage
+  - Glasshouse
+  - method
+  - low
+- - sorrel
+  - Glasshouse
+  - method
+  - low
+- - tarragon
+  - Glasshouse
+  - method
+  - low
+- - thyme
+  - Glasshouse
+  - method
+  - moderate
+- - tea
+  - Scotland
+  - region
+  - low
+- - herring
+  - SE
+  - region
+  - moderate
+- - ling
+  - SW
+  - region
+  - moderate
+- - halibut
+  - Farmed
+  - method
+  - low
+- - skates-and-rays
+  - Undulate ray (Channel)
+  - variety
+  - high
+- - brown-crab
+  - Norfolk (Cromer)
+  - region
+  - moderate
+- - langoustines
+  - Farn Deeps
+  - region
+  - low
+- - oysters
+  - Native – Colchester
+  - region
+  - high
+- - spider-crab
+  - SW
+  - region
+  - moderate
+- - turkey
+  - Turkey
+  - whole
+  - moderate
+- - grouse
+  - Northern Ireland
+  - region
+  - high
+- - pheasant
+  - Northern Ireland
+  - region
+  - high
+- - partridge
+  - Northern Ireland
+  - region
+  - high
+- - wild-duck
+  - GB foreshore
+  - region
+  - high
+- - woodcock
+  - Scotland
+  - region
+  - high
+- - venison
+  - Red & fallow, Scotland
+  - region
+  - high
+- - venison
+  - Farmed
+  - method
+  - moderate
+- - hare
+  - Scotland
+  - region
+  - high
+- - hare
+  - Northern Ireland
+  - region
+  - high

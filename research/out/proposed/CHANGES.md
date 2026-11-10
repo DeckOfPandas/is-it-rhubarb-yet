@@ -1,0 +1,73 @@
+# Proposed changes to foods.yml
+
+- Rings whose weeks and sources now come from the clean-room data: 255 (226 with different weeks)
+- Rings kept as they were, because there's no clean-room data: 5
+- Whole-food rings now combining several clean-room lines: 7
+- New rings added as proposed (lead: false): 63
+- NEVER candidates: 1
+- Sources added: 726
+- Food-level confidence: 12 high, 92 medium, 74 low (the weakest of each food's lead rings)
+- Fish with a food-level MCS summary: 42 (sea trout isn't rated by the MCS)
+- Meat and game with a sustainability block and a buy line: 17
+
+Every change in weeks is set out in `comparison.md`, with week strips and both sets of sources.
+
+## Structural changes by food
+
+- **Horseradish:** new ring 'Wild' (method, low)
+- **Potatoes:** new ring 'Pembrokeshire' (region, high); new ring 'Cornish' (region, low)
+- **Radishes:** Mooli: kept yours (no clean-room data)
+- **Broccoli:** new ring 'Purple sprouting, summer' (variety, moderate)
+- **Cabbage:** new ring 'Pointed' (variety, moderate)
+- **Cauliflower:** (whole): weeks now combine 2 clean-room lines; new ring 'Lincolnshire, Scotland and other' (region, moderate); new ring 'Cornwall winter' (region, moderate)
+- **Garlic:** (whole): weeks now combine 2 clean-room lines; new ring 'Wet (green)' (method, low); new ring 'Dried' (method, low)
+- **Leeks:** new ring 'Welsh (PGI)' (region, high)
+- **Onions:** (whole): weeks now combine 2 clean-room lines; new ring 'Maincrop (seed-grown)' (variety, moderate); new ring 'Sets and overwintered' (variety, moderate)
+- **Lettuce:** Curly: kept yours (no clean-room data)
+- **Watercress:** new ring 'Glasshouse' (method, moderate)
+- **Asparagus:** new ring 'Protected' (method, moderate)
+- **Runner & French beans:** (whole): weeks now combine 2 clean-room lines; new ring 'Runner' (variety, moderate); new ring 'French' (variety, moderate)
+- **Celery:** new ring 'Fenland' (region, high)
+- **Courgette flowers:** (whole): kept yours (no clean-room data)
+- **Squash:** new ring 'Summer' (variety, low)
+- **Damsons:** new ring 'Westmorland' (region, moderate)
+- **Plums:** (whole): weeks now combine 3 clean-room lines; new ring 'Opal' (variety, low); new ring 'Victoria' (variety, moderate); new ring 'Marjorie's Seedling' (variety, low)
+- **Blackcurrants & Redcurrants:** (whole): weeks now combine 2 clean-room lines; new ring 'Blackcurrants' (variety, moderate); new ring 'Redcurrants' (variety, low)
+- **Loganberries & Tayberries:** (whole): weeks now combine 2 clean-room lines; new ring 'Loganberries' (variety, low); new ring 'Tayberries' (variety, low)
+- **Raspberries:** new ring 'Glasshouse' (method, low)
+- **Strawberries:** new ring 'Glasshouse' (method, moderate)
+- **Grapes:** (whole): kept yours (no clean-room data)
+- **Wild garlic:** new ring 'Scotland' (region, low)
+- **Samphire:** new ring 'Rock samphire' (variety, low); new ring 'Glasshouse (hydroponic)' (method, moderate)
+- **Bilberries:** new ring 'Scotland' (region, moderate)
+- **Enoki:** (whole): kept yours (no clean-room data); NEVER candidate: not grown here; move to never.yml
+- **Basil:** new ring 'Glasshouse' (method, moderate)
+- **Chives:** new ring 'Glasshouse' (method, low)
+- **Coriander:** new ring 'Glasshouse' (method, moderate)
+- **Dill:** new ring 'Glasshouse' (method, low)
+- **Marjoram & Oregano:** new ring 'Glasshouse' (method, low)
+- **Mint:** new ring 'Glasshouse' (method, moderate)
+- **Parsley:** new ring 'Glasshouse' (method, moderate)
+- **Rosemary:** new ring 'Glasshouse' (method, moderate)
+- **Sage:** new ring 'Glasshouse' (method, low)
+- **Sorrel:** new ring 'Glasshouse' (method, low)
+- **Tarragon:** new ring 'Glasshouse' (method, low)
+- **Thyme:** new ring 'Glasshouse' (method, moderate)
+- **Tea:** new ring 'Scotland' (region, low)
+- **Herring:** new ring 'South East' (region, moderate)
+- **Sea trout:** no MCS rating
+- **Brown crab:** new ring 'Norfolk (Cromer)' (region, moderate)
+- **Langoustines:** new ring 'Farn Deeps' (region, low)
+- **Oysters:** new ring 'Native – Colchester' (region, high)
+- **Skates and rays:** new ring 'Undulate ray (Channel)' (variety, high)
+- **Ling:** new ring 'South West' (region, moderate)
+- **Halibut:** new ring 'Farmed' (method, low)
+- **Spider crab:** new ring 'South West' (region, moderate)
+- **Turkey:** new ring 'Turkey' (whole, moderate)
+- **Grouse:** new ring 'Northern Ireland' (region, high)
+- **Pheasant:** new ring 'Northern Ireland' (region, high)
+- **Partridge:** new ring 'Northern Ireland' (region, high)
+- **Wild duck:** new ring 'GB foreshore' (region, high)
+- **Woodcock:** new ring 'Scotland' (region, high)
+- **Venison:** new ring 'Red & fallow, Scotland' (region, high); new ring 'Farmed' (method, moderate)
+- **Hare:** new ring 'Scotland' (region, high); new ring 'Northern Ireland' (region, high)

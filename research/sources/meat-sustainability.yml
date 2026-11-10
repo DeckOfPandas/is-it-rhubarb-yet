@@ -1,0 +1,383 @@
+# Source registry: meat sustainability and environmental impact (researched 2026-11-10)
+# Third-party sources only. Where a canonical page renders its numbers client-side, the
+# published_note says where the values were actually read.
+
+# --- Environmental impact: Poore & Nemecek (2018) via Our World in Data ---
+- key: owid-ghg-per-kg
+  title: "Greenhouse gas emissions per kilogram of food product (Poore & Nemecek 2018, processed by OWID)"
+  publisher: "Our World in Data"
+  url: "https://ourworldindata.org/grapher/ghg-per-kg-poore"
+  type: primary
+  published: 2019
+  published_note: "Chart metadata: last updated 2019-10-08; values are global means. The canonical page renders values client-side, so the numbers were read from OWID's own preview deployment of the same chart (nightingale-owid.netlify.app/grapher/ghg-per-kg-poore)."
+  accessed: 2026-11-10
+- key: owid-ghg-per-protein
+  title: "Greenhouse gas emissions per 100 grams of protein (Poore & Nemecek 2018, processed by OWID)"
+  publisher: "Our World in Data"
+  url: "https://ourworldindata.org/grapher/ghg-per-protein-poore"
+  type: primary
+  published: 2019
+  published_note: "Chart metadata: last updated 2019-10-08; values are global means. Values were read from a CC BY export of this chart (idoc-projets.ias.u-psud.fr, GES_proteines_OWData.pdf) and agree with the mean column of Poore & Nemecek's Fig. 1 (poore-nemecek-2018)."
+  accessed: 2026-11-10
+- key: owid-land-use-per-protein
+  title: "Land use per 100 grams of protein (Poore & Nemecek 2018, processed by OWID)"
+  publisher: "Our World in Data"
+  url: "https://ourworldindata.org/grapher/land-use-protein-poore"
+  type: primary
+  published: 2019
+  published_note: "Chart metadata: last updated 2019-10-08; values are global means. Values read from OWID's preview deployment of the same chart (nightingale-owid.netlify.app/grapher/land-use-protein-poore)."
+  accessed: 2026-11-10
+- key: statista-land-use-per-kg
+  title: "Land used to produce one kilogram of food product as of 2018, by type (republishes Poore & Nemecek / OWID means)"
+  publisher: "Statista"
+  url: "https://statista.com/statistics/1179708/land-use-per-kilogram-of-food-product"
+  type: secondary
+  published: 2020
+  published_note: "Page states last updated 16 October 2020. Used only because OWID's own land-use-per-kg chart (ourworldindata.org/grapher/land-use-per-kg-poore, means, updated 2019-10-08) did not expose its values; the page as read gave only beef (beef herd) and poultry meat."
+  accessed: 2026-11-10
+- key: owid-less-meat
+  title: "Less meat is nearly always better than sustainable meat, to reduce your carbon footprint (Hannah Ritchie)"
+  publisher: "Our World in Data"
+  url: "https://ourworldindata.org/less-meat-or-sustainable-meat"
+  type: primary
+  published: 2020
+  published_note: "Published 4 February 2020. The chart description says it shows the median per product; its alt text loosely calls the same values averages."
+  accessed: 2026-11-10
+- key: owid-faq-impacts
+  title: "FAQs on the environmental impacts of food (Hannah Ritchie)"
+  publisher: "Our World in Data"
+  url: "https://ourworldindata.org/faqs-environmental-impacts-food"
+  type: primary
+  published: 2022
+  published_note: "Published 7 February 2022; notes a data update on 15 June 2022."
+  accessed: 2026-11-10
+- key: owid-environmental-impacts
+  title: "Environmental impacts of food production"
+  publisher: "Our World in Data"
+  url: "https://ourworldindata.org/environmental-impacts-of-food"
+  type: primary
+  published: 2021
+  published_note: "Page says first published January 2020, last major revision June 2021. Read via OWID's preview deployment (nightingale-owid.netlify.app/environmental-impacts-of-food) as the canonical URL was not fetchable here."
+  accessed: 2026-11-10
+- key: poore-nemecek-2018
+  title: "Reducing food's environmental impacts through producers and consumers (Science 360:987-992), accepted manuscript"
+  publisher: "J. Poore and T. Nemecek (University of Oxford / Agroscope)"
+  url: "https://josephpoore.com/Science%20360%206392%20987%20-%20Accepted%20Manuscript.pdf"
+  type: primary
+  published: 2018
+  published_note: "Fig. 1 data block as extracted gives n (inventories) and, by match with OWID's means and with OWID's stated 10th percentiles, 10th-percentile and mean values per 100 g protein; the extracted text has no column headers, so this mapping is by agreement with OWID, not by label."
+  accessed: 2026-11-10
+
+# --- Environmental impact: UK figures and claims ---
+- key: frontiers-welsh-lamb-2024
+  title: "The nutritional value of meat should be considered when comparing the carbon footprint of lambs produced on different finishing diets (McNicol et al., Frontiers in Sustainable Food Systems 8)"
+  publisher: "Frontiers (Bangor University, Queen's University Belfast, Hybu Cig Cymru, AFBI)"
+  url: "https://www.frontiersin.org/articles/10.3389/fsufs.2024.1321288/full"
+  type: primary
+  published: 2024
+  published_note: "Published 20 February 2024; peer reviewed; funded through the Red Meat Development Programme (Hybu Cig Cymru, Welsh Government)."
+  accessed: 2026-11-10
+- key: fwi-prism-2024
+  title: "Carbon footprint study shows scope for beef and sheep efficiency gains (Prism programme: ABP, Andersons Centre, Harper Adams University)"
+  publisher: "Farmers Weekly"
+  url: "https://fwi.co.uk/livestock/assessing-performance/carbon-footprint-study-show-scope-for-beef-and-sheep-efficiency-gains"
+  type: trade
+  published: 2024
+  published_note: "Byline 17 July 2024 (page also shows 18 July 2024)."
+  accessed: 2026-11-10
+- key: asa-ahdb-2026
+  title: "ASA Ruling on Agriculture and Horticulture Development Board (A25-1278659), complaint by Chris Packham"
+  publisher: "Advertising Standards Authority"
+  url: "https://www.asa.org.uk/rulings/agriculture-and-horticulture-development-board--a25-1278659--agriculture-and-horticulture-development-board.html"
+  type: primary
+  published: 2026
+  published_note: "Ruling dated 13 May 2026; upheld in part."
+  accessed: 2026-11-10
+- key: ahdb-ccc-less-meat
+  title: "The CCC's call for less meat: striking the right balance for health and environment"
+  publisher: "AHDB"
+  url: "https://ahdb.org.uk/the-ccc-s-call-for-less-meat-striking-the-right-balance-for-health-and-environment"
+  type: primary
+  published: undated
+  published_note: "No date shown on the page as read. It responds to the Climate Change Committee's Seventh Carbon Budget, so it is no older than that report."
+  accessed: 2026-11-10
+- key: pigworld-pig-carbon-2021
+  title: "New research reveals significant reduction in carbon footprint of British pig farms (QUB study in Agricultural Systems, using AHDB data 2000-2020)"
+  publisher: "Pig World"
+  url: "https://www.pig-world.co.uk/news/environment/new-research-reveals-significant-reduction-in-carbon-footprint-of-british-pig-farms.html"
+  type: trade
+  published: 2021
+  published_note: "Published 23 February 2021; quotes Prof. Ilias Kyriazakis, Queen's University Belfast."
+  accessed: 2026-11-10
+- key: soilassoc-peak-poultry
+  title: "Peak poultry: briefing for policy makers"
+  publisher: "Soil Association"
+  url: "https://www.soilassociation.org/media/22930/peak-poultry-briefing-for-policy-makers.pdf"
+  type: primary
+  published: undated
+  published_note: "No date on the document. It refers to the run-up to COP26 and its latest cited sources are from 2020."
+  accessed: 2026-11-10
+- key: admg-sac-venison-ghg
+  title: "Deer and greenhouse gases: SAC Consulting carbon footprint of wild venison for the Scottish Venison Association (AGM 2024 presentation, Robin Pakeman)"
+  publisher: "Association of Deer Management Groups"
+  url: "https://www.deer-management.co.uk/wp-content/uploads/2024/03/AGM2024_DeerAndGHG.pdf"
+  type: primary
+  published: 2024
+  published_note: "No date in the document; upload date in URL (March 2024). Reports an SAC Consulting study; the underlying SAC report itself was not read."
+  accessed: 2026-11-10
+- key: naturescot-venison-lca-2015
+  title: "NatureScot Archive Report 024: Life cycle assessment of Scottish wild venison"
+  publisher: "NatureScot (commissioned by the Deer Commission for Scotland)"
+  url: "https://www.nature.scot/doc/naturescot-archive-report-024-life-cycle-assessment-scottish-wild-venison"
+  type: primary
+  published: 2015
+  published_note: "Listed as published 2015. Before 2016, so background only beside admg-sac-venison-ghg."
+  accessed: 2026-11-10
+
+# --- Frameworks, certifications and labels ---
+- key: eatingbetter-sourcing-better-2021
+  title: "Sourcing Better: a pathway to less and better meat and dairy"
+  publisher: "Eating Better"
+  url: "https://www.eating-better.org/site/assets/files/1799/sourcing_better_framework_final.pdf"
+  type: primary
+  published: 2021
+  published_note: "Dated January 2021. Superseded in detail by Sourcing Better 2.0 (eatingbetter-sourcing-better-2026), whose PDF could not be retrieved."
+  accessed: 2026-11-10
+- key: eatingbetter-sourcing-better-2026
+  title: "Introducing Sourcing Better 2.0: a clearer pathway for food businesses to improve meat and dairy sourcing"
+  publisher: "Eating Better"
+  url: "https://eating-better.org/news-and-reports/reports/introducing-sourcing-better-2.0-a-clearer-pathway-for-food-businesses-to-improve-meat-and-dairy-sourcing/"
+  type: primary
+  published: 2026
+  published_note: "Published 19 January 2026. The announcement keeps the Basic / Better / Best tiers but gives no species criteria; the linked PDF (eating-better.org/site/assets/files/13924/sourcing_better_26_final-1.pdf) failed to load."
+  accessed: 2026-11-10
+- key: pfl-standards-5-1
+  title: "Certification Standards for Ruminant Livestock and Products from Ruminant Livestock, Version 5.1"
+  publisher: "Pasture for Life"
+  url: "https://pastureforlife.org/resources/standards-51"
+  type: primary
+  published: 2025
+  published_note: "No date on the page; footer copyright 2025. The page links the full standard but does not summarise it."
+  accessed: 2026-11-10
+- key: pfl-standards-page
+  title: "The Pasture for Life Standards"
+  publisher: "Pasture for Life"
+  url: "https://www.pastureforlife.org/certification/the-pasture-for-life-standards/"
+  type: primary
+  published: undated
+  published_note: "Living page with no date shown."
+  accessed: 2026-11-10
+- key: rspca-assured-standards
+  title: "Welfare standards (RSPCA welfare standards by species)"
+  publisher: "RSPCA Assured"
+  url: "https://www.rspcaassured.org.uk/industry/standards"
+  type: primary
+  published: 2026
+  published_note: "Living page; latest editions listed include beef cattle (August 2026) and turkeys (17 August 2026). Footer still reads 2025."
+  accessed: 2026-11-10
+- key: rspca-higher-welfare
+  title: "Choosing higher welfare meat, fish, eggs and dairy"
+  publisher: "RSPCA"
+  url: "https://www.rspca.org.uk/whatwedo/food-and-farming/high-welfare"
+  type: primary
+  published: 2026
+  published_note: "Living page; no date line, footer copyright 2026."
+  accessed: 2026-11-10
+- key: rspca-assured-labels
+  title: "Animal welfare and food labels explained (Beth Winspear)"
+  publisher: "RSPCA Assured"
+  url: "https://www.rspcaassured.org.uk/blog/food-labels-explained"
+  type: primary
+  published: undated
+  published_note: "No publication date on the article; a 10 February 2026 date appears only beside related content."
+  accessed: 2026-11-10
+- key: which-chicken-labels-2019
+  title: "The labels and lingo supermarkets use to get you to buy their chicken"
+  publisher: "Which?"
+  url: "https://www.which.co.uk/news/article/the-labels-and-lingo-supermarkets-use-to-get-you-to-buy-their-chicken-aljFO6e6WUi7"
+  type: primary
+  published: 2019
+  published_note: "Published 20 April 2019."
+  accessed: 2026-11-10
+- key: ciwf-shopping-guide
+  title: "The Compassion in World Farming Guide to Food Shopping"
+  publisher: "Compassion in World Farming"
+  url: "https://www.ciwf.org.uk/media/5161418/shoppingguide.pdf"
+  type: primary
+  published: undated
+  published_note: "No date on the document. It recommends RSPCA Freedom Food (the former name of RSPCA Assured) and lists Somerfield as a retailer, so it is an old guide; treated as background only. CIWF's current label pages did not render their content."
+  accessed: 2026-11-10
+
+# --- Game: lead ammunition ---
+- key: fsa-lead-shot-game
+  title: "Advice to frequent eaters of game shot with lead"
+  publisher: "Food Standards Agency"
+  url: "https://www.food.gov.uk/science/advice-to-frequent-eaters-of-game-shot-with-lead"
+  type: primary
+  published: 2024
+  published_note: "Last updated 2 October 2024. The brief's archived URL (web.archive.org, food.gov.uk/safety-hygiene/lead-shot-game) could not be fetched; this is the live FSA page."
+  accessed: 2026-11-10
+- key: cam-lead-pledge-2025
+  title: "Pledge to phase out toxic lead ammunition in UK hunting by 2025 has failed"
+  publisher: "University of Cambridge"
+  url: "https://www.cam.ac.uk/research/news/pledge-to-phase-out-toxic-lead-ammunition-in-uk-hunting-by-2025-has-failed"
+  type: primary
+  published: 2025
+  published_note: "Published 6 March 2025; reports Green, Taggart et al. in Conservation Evidence."
+  accessed: 2026-11-10
+- key: shootinguk-lead-study-2025
+  title: "Study claims voluntary move away from lead shot has failed"
+  publisher: "Shooting UK (Shooting Times / Sporting Gun)"
+  url: "https://www.shootinguk.co.uk/news/uk-shooting-industry-fails-phase-out-lead-shot-despite-2020-voluntary-pledge/"
+  type: trade
+  published: 2025
+  published_note: "Published 26 March 2025; quotes BASC's response."
+  accessed: 2026-11-10
+- key: shootinguk-lead-ban-2026
+  title: "Lead ammunition ban: 2029 deadlines confirmed"
+  publisher: "Shooting UK (Shooting Times / Sporting Gun)"
+  url: "https://www.shootinguk.co.uk/news/lead-ammunition-ban-timetable/"
+  type: trade
+  published: 2026
+  published_note: "Published 2 August 2026; reports Defra's 31 July 2026 response to the Animal Sentience Committee."
+  accessed: 2026-11-10
+- key: basc-lead-restrictions-2026
+  title: "Lead ammunition restrictions - your questions answered"
+  publisher: "BASC"
+  url: "https://basc.org.uk/lead-ammunition-restrictions-your-questions-answered/"
+  type: primary
+  published: 2026
+  published_note: "Published 9 March 2026, modified 8 July 2026."
+  accessed: 2026-11-10
+- key: code-good-shooting-practice
+  title: "The Code of Good Shooting Practice"
+  publisher: "Code of Good Shooting Practice steering committee (BASC, CLA, Countryside Alliance, GFA, GWCT, Moorland Association, NGDA, NGO, SGA, Scottish Land and Estates); PDF hosted by GWCT"
+  url: "https://www.gwct.org.uk/media/768987/CodeGoodSHootingPractice.pdf"
+  type: primary
+  published: undated
+  published_note: "No edition or date in the extracted text."
+  accessed: 2026-11-10
+
+# --- Game: deer ---
+- key: gov-bqwv-2023
+  title: "National quality assurance scheme for wild venison launches"
+  publisher: "Forestry Commission / GOV.UK"
+  url: "https://www.gov.uk/government/news/national-quality-assurance-scheme-for-wild-venison-launches"
+  type: primary
+  published: 2023
+  published_note: "Press release, 30 April 2023."
+  accessed: 2026-11-10
+- key: defra-deer-policy-2026
+  title: "Deer impacts policy statement: managing the impacts of wild deer in England"
+  publisher: "Defra (with the Forestry Commission)"
+  url: "https://www.gov.uk/government/publications/deer-impacts-policy-statement-for-england/deer-impacts-policy-statement-managing-the-impacts-of-wild-deer-in-england"
+  type: primary
+  published: 2026
+  published_note: "Published 20 February 2026."
+  accessed: 2026-11-10
+- key: naturescot-deer-cull-2024
+  title: "Deer cull incentive schemes launch to help tackle nature and climate crises"
+  publisher: "NatureScot"
+  url: "https://presscentre.nature.scot/news/deer-cull-incentive-schemes-launch-to-help-tackle-nature-and-climate-crises"
+  type: primary
+  published: 2024
+  published_note: "Press release, 15 August 2024."
+  accessed: 2026-11-10
+
+# --- Game: gamebird releasing and grouse moors ---
+- key: ne-gamebird-rea-2020
+  title: "Ecological consequences of gamebird releasing and management on lowland shoots in England (NEER016, Madden and Sage)"
+  publisher: "Natural England (jointly funded with BASC)"
+  url: "https://publications.naturalengland.org.uk/file/4572137908338688"
+  type: primary
+  published: 2020
+  published_note: "First edition July 2020."
+  accessed: 2026-11-10
+- key: rspb-gamebird-register-2024
+  title: "What changes to the poultry register mean for gamebird releases"
+  publisher: "RSPB"
+  url: "https://web-cdn.rspb.org.uk/helping-nature/what-we-do/influence-government-and-business/policies-and-briefings/what-changes-to-the-poultry-register-mean-for-gamebird-releases"
+  type: primary
+  published: 2024
+  published_note: "Published 14 October 2024."
+  accessed: 2026-11-10
+- key: gwct-mallard-releases-2024
+  title: "Numbers, densities and distribution of Mallards released for shooting in the UK over the last 20 years (Aebischer, Eur. J. Wildl. Res. 70:76)"
+  publisher: "Game & Wildlife Conservation Trust"
+  url: "https://gwct.org.uk/research/scientific-publications/2024/aebischer2024/"
+  type: primary
+  published: 2024
+  accessed: 2026-11-10
+- key: gwct-releasing-review-2021
+  title: "Gamebird releasing and management in the UK: a review of ecological considerations, best practice management and delivering net biodiversity gain (Sage, Brewin, Stevens, Draycott)"
+  publisher: "Game & Wildlife Conservation Trust"
+  url: "https://gwct.org.uk/releasingreport"
+  type: primary
+  published: 2021
+  accessed: 2026-11-10
+- key: rspb-grouse-debate-2025
+  title: "Westminster driven grouse shooting debate"
+  publisher: "RSPB"
+  url: "https://www.rspb.org.uk/whats-happening/news/westminster-driven-grouse-shooting-debate"
+  type: primary
+  published: 2025
+  published_note: "Published 4 July 2025."
+  accessed: 2026-11-10
+- key: moorland-assoc-briefing-2025
+  title: "Summary: the Moorland Association's driven grouse shooting briefing note"
+  publisher: "Moorland Association"
+  url: "https://www.moorlandassociation.org/post/summary-the-moorland-association-s-driven-grouse-shooting-briefing-note"
+  type: primary
+  published: 2025
+  published_note: "Published 18 June 2025, updated 24 June 2025. Advocacy briefing."
+  accessed: 2026-11-10
+- key: gwct-grouse-debate-2025
+  title: "Driven grouse shooting debate: recognising the science"
+  publisher: "Game & Wildlife Conservation Trust"
+  url: "https://gwct.org.uk/blogs/news/2025/july/driven-grouse-shooting-debate-recognising-the-science/"
+  type: primary
+  published: 2025
+  published_note: "Blog post, 1 July 2025."
+  accessed: 2026-11-10
+
+# --- Game: other species ---
+- key: gwct-woodcock-faq
+  title: "Shooting of woodcock (FAQ)"
+  publisher: "Game & Wildlife Conservation Trust"
+  url: "https://www.gwct.org.uk/advisory/faqs/shooting-of-woodcock"
+  type: primary
+  published: 2026
+  published_note: "Living advisory page; no date line, footer copyright 2026. Its population figures date from the 2013 survey."
+  accessed: 2026-11-10
+- key: gwct-brown-hares-2022
+  title: "A future for brown hares"
+  publisher: "Game & Wildlife Conservation Trust"
+  url: "https://www.gwct.org.uk/media/1287729/A-future-for-brown-hares.pdf"
+  type: primary
+  published: 2022
+  published_note: "Published January 2022; data to 2019-2020."
+  accessed: 2026-11-10
+- key: gwct-ngc-rabbit
+  title: "Interpretation of NGC trends: rabbit"
+  publisher: "Game & Wildlife Conservation Trust"
+  url: "https://gwct.org.uk/research/long-term-monitoring/national-gamebag-census/mammal-bags-comprehensive-overviews/interpretation-of-ngc-trends-rabbit/"
+  type: primary
+  published: undated
+  published_note: "No date line; footer copyright 2026, but the text reads as written in the late 2000s (it mentions a 2009 approval). Treated as undated, not current."
+  accessed: 2026-11-10
+- key: ne-gl42-2026
+  title: "GL42: general licence to kill or take certain species of wild birds to prevent serious damage"
+  publisher: "Natural England / GOV.UK"
+  url: "https://www.gov.uk/government/publications/wild-birds-licence-to-kill-or-take-to-prevent-serious-damage-gl42/gl42-general-licence-to-kill-or-take-certain-species-of-wild-birds-to-prevent-serious-damage"
+  type: primary
+  published: 2026
+  published_note: "Licence valid 1 January to 31 December 2026."
+  accessed: 2026-11-10
+- key: defra-grey-squirrel-2026
+  title: "Grey squirrel policy statement: managing the impact of grey squirrels"
+  publisher: "Defra (with the Forestry Commission)"
+  url: "https://www.gov.uk/government/publications/grey-squirrel-policy-statement/grey-squirrel-policy-statement-managing-the-impact-of-grey-squirrels"
+  type: primary
+  published: 2026
+  published_note: "First published 29 January 2026, last updated 6 February 2026."
+  accessed: 2026-11-10

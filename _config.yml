@@ -73,6 +73,7 @@ exclude:
   - tests/
   - tools/
   - tmp/
+  - research/
   - screenshots/
   - scripts/
   - model_instructions/

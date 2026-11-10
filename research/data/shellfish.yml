@@ -1,0 +1,1284 @@
+- name: Brown crab
+  slug: brown-crab
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-crab
+    - northumberland-seafood-brown-crab
+    - northumberland-seafood-seasonality
+    - nifca-crab-2023
+    - mcs-brown-crab-northumberland
+    - mcs-brown-crab-shetland
+    - mcs-brown-crab
+    weeks:
+    - - 1
+      - 8
+      - avail
+    - - 9
+      - 26
+      - in
+    - - 27
+      - 52
+      - avail
+    notes:
+      season: 'In = best to eat: Seafish''s consumer guide gives March-June as best quality for brown crab, UK-wide
+        (fitd-crab); Amble''s Northumberland Seafood says local crab is at its best in spring (northumberland-seafood-brown-crab).
+        Avail = landings: Northumberland Seafood says crab is generally in season April-November (northumberland-seafood-brown-crab);
+        MCS gives May-December as the key UK fishing season (mcs-brown-crab-northumberland); Northumberland IFCA
+        quarterly landings for ICES IVb show crab landed in every quarter, with Q4 the largest and Q2-Q3 the smallest
+        in 2020-22 (nifca-crab-2023). The Northumberland Seafood seasonality chart is an image the research tools
+        could not read (northumberland-seafood-seasonality). Shetland is ICES IVa.'
+      discrepancy: The landings sources put the busiest fishing in May-December (mcs-brown-crab-northumberland)
+        and the biggest landings in Q4 (nifca-crab-2023), while the best-quality window is March-June (fitd-crab).
+        The same Seafish page also says fresh crab is best enjoyed April-October; its labelled best-quality months
+        are used.
+      year_round: Landed all year in the North East (nifca-crab-2023); best quality March-June, before the summer
+        and autumn moult (fitd-crab). Avail here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Scotland (Shetland): All areas'
+        method: Pot, trap or creel
+        rating: 2
+        label: Best Choice
+      - stock: 'England (Central North Sea): Northumberland IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Central North Sea): North Eastern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Southern North Sea): North Eastern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Central North Sea): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'Scotland (East): All areas'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'Scotland (Orkney): All areas'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+    buy: MSC-certified pot-caught Shetland crab is the Best Choice. Pot-caught crab from Northumberland, Yorkshire
+      and east Scotland is OK but needs improvement, with concern over the Central North Sea stock. Landing berried
+      or soft crab is banned in England and Wales, and berried crab in Scotland since May 2025.
+  - name: SE
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-crab
+    - sussex-ifca-species
+    - cefas-crab-assessments-2019
+    - bnfs-seasonality
+    - mcs-brown-crab
+    weeks:
+    - - 1
+      - 8
+      - avail
+    - - 9
+      - 26
+      - in
+    - - 27
+      - 52
+      - avail
+    notes:
+      season: 'In = best to eat: Seafish''s consumer guide gives March-June as best quality, UK-wide (fitd-crab).
+        Avail = landings: Sussex IFCA says the main brown crab fisheries, based at Shoreham and Eastbourne, operate
+        all year (sussex-ifca-species). Cefas describes a large late-summer-to-autumn fishery in the Eastern Channel,
+        ICES VIId, targeting mature females migrating west to spawn (cefas-crab-assessments-2019). The Brighton
+        & Newhaven Fish Sales seasonality chart is an image the research tools could not read (bnfs-seasonality).
+        Norfolk, ICES IVc, has a different spring fishery and is its own line.'
+      discrepancy: 'Pass 3 change: the earlier in window of August-November was a landings peak, not a best-to-eat
+        window (cefas-crab-assessments-2019), so it is now avail. That peak falls outside the March-June best-quality
+        months (fitd-crab). The same Seafish page also says fresh crab is best enjoyed April-October.'
+      year_round: Landed all year from Shoreham and Eastbourne (sussex-ifca-species); best quality March-June (fitd-crab).
+        Avail here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Eastern English Channel): Sussex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'England (Eastern English Channel): Kent and Essex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Southern North Sea): Kent and Essex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Eastern English Channel): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+    buy: Ask for pot-caught Sussex inshore crab, which the MCS rates better than Kent, Essex or offshore Channel
+      crab. All are OK but need improvement. Landing berried or soft crab is banned in England.
+  - name: Norfolk (Cromer)
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-crab
+    - cefas-crab-assessments-2019
+    - maff-norfolk-crab
+    - mcs-brown-crab
+    weeks:
+    - - 9
+      - 26
+      - in
+    - - 27
+      - 39
+      - avail
+    notes:
+      season: 'Split added: the southern North Sea, ICES IVc, North Norfolk, has a spring fishery, unlike the Eastern
+        Channel. In = best to eat: Seafish gives March-June as best quality, UK-wide (fitd-crab). Avail = landings:
+        Cefas says the spring fishery, March-May, has the highest catch rates and crab availability drops through
+        summer (cefas-crab-assessments-2019). The c. 1966 MAFF leaflet gives a season from late March or early April
+        to late September or early October, with the main moult July-October, poor catches while crabs are soft,
+        and winter crabbing generally unprofitable (maff-norfolk-crab). No current source on Norfolk winter landings
+        was found, so October-February has no weeks.'
+      discrepancy: Not resolved. Cefas (2021 update) gives March-May as the highest-catch spring fishery, but for
+        the Southern North Sea stock as a whole, not Norfolk alone (cefas-crab-assessments-2019). MAFF (c. 1966,
+        Norfolk-specific) puts the catch peak in May-June (maff-norfolk-crab). Both are landings statements; the
+        in window rests on fitd-crab. No current Eastern IFCA seasonal data was found.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Southern North Sea): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+    buy: Eastern IFCA inshore pot-caught crab is under review by the MCS; offshore Southern North Sea pot-caught
+      crab is OK but needs improvement. Landing berried or soft crab is banned in England.
+  - name: SW
+    kind: region
+    confidence: low
+    sources:
+    - cgsg-crab
+    - fitd-crab
+    - flyingfish-seasonality
+    - cefas-crab-assessments-2019
+    - mcs-brown-crab-northumberland
+    - mcs-brown-crab
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 39
+      - avail
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'In = best to eat: CGSG (updated January 2026) says crabs are best in winter, when fewer moult; freshly
+        moulted crabs are pale and watery and are not landed (cgsg-crab). Avail: CGSG says crab is landed all year
+        (cgsg-crab). Cefas notes the Western Channel pre-Christmas fishery is traditionally important, and that
+        in the Celtic Sea, ICES VIIf-g, crab is the main autumn target (cefas-crab-assessments-2019). Ports: Cornwall
+        IFCA, Devon and Severn IFCA, ICES VIIe-g.'
+      discrepancy: 'Best-to-eat sources disagree by more than 4 weeks, so confidence is low. cgsg-crab ticks all
+        12 months but its text says winter is best (rule 1 applied: October-March used). Seafish gives March-June
+        as best quality UK-wide (fitd-crab). Flying Fish, a Cornish wholesaler, marks best quality for live cock
+        crab and picked meat in March-June and September-December, not January-February or July-August (flyingfish-seasonality).
+        The regional guide is followed. MCS gives May-December as the key UK fishing season (mcs-brown-crab-northumberland).'
+      year_round: Landed all year (cgsg-crab); best in winter, October-March, when fewer crabs moult (cgsg-crab).
+        Avail here means out of its best season, not hard to get.
+      sustainability: 'CGSG (read 2026-11-10): brown crab no longer recommended, owing to overfishing; Cefas 2023
+        has fishing pressure above MSY and biomass below (cgsg-crab).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Western English Channel): Cornwall IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Celtic Sea): Cornwall IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Western English Channel): Devon and Severn IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Celtic Sea): Devon and Severn IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Western English Channel): Isles of Scilly IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Western English Channel): Southern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Western English Channel): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Celtic Sea): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Western English Channel): Cornwall IFCA District (0-6nm)'
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+      - stock: 'England (Celtic Sea): Cornwall IFCA District (0-6nm)'
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+    buy: Ask for pot-caught crab; avoid gill-net-caught Cornish crab, which the MCS rates Avoid. All South West
+      pot-caught crab is OK but needs improvement.
+- name: Lobster
+  slug: lobster
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-lobster
+    - northumberland-seafood-lobster
+    - mcs-lobster-scotland-east
+    - mcs-lobster
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'In = best to eat: Seafish''s consumer guide says UK lobster can be enjoyed in all four seasons and
+        names no best-quality months yet (fitd-lobster). Rule 3 applied. No source was found linking lobster moulting
+        to eating quality. Landings are concentrated in May-December, the key UK fishing season (mcs-lobster-scotland-east).
+        Northumberland Seafood gives no fishing season; it says females carry eggs from September to April-May (northumberland-seafood-lobster).
+        Areas: ICES IVa-IVb, Northumberland, Durham, Yorkshire and east Scotland.'
+      discrepancy: 'Pass 3 change: the earlier window (in May-December, avail January-April) came from the MCS key
+        fishing season, which is a landings statement (mcs-lobster-scotland-east), not a best-to-eat one.'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Northumberland and Durham): Northumberland IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Northumberland and Durham): North Eastern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Yorkshire Humber): North Eastern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Northumberland and Durham): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Yorkshire Humber): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'Scotland (Shetland): All areas'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'Scotland (Orkney): All areas'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'Scotland (East): All areas'
+        method: Pot, trap or creel
+        rating: 5
+        label: Avoid
+    buy: Pot-caught lobster from Northumberland, Durham and Yorkshire is OK but needs improvement; avoid lobster
+      from the east coast of Scotland, which the MCS rates Avoid.
+  - name: SE
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-lobster
+    - mcs-lobster-scotland-east
+    - mcs-lobster
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'In = best to eat: Seafish''s consumer guide says UK lobster can be enjoyed in all four seasons and
+        names no best-quality months yet; as a UK-wide guide it covers SE too (rule 8 exception; fitd-lobster).
+        Rule 3 applied. Landings are concentrated in May-December, the key UK fishing season (mcs-lobster-scotland-east).
+        No SE landings calendar could be read. ICES IVc, VIId.'
+      discrepancy: 'Pass 3 change: the earlier window (in May-December, avail January-April) came from the MCS key
+        fishing season, a landings statement (mcs-lobster-scotland-east).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Southeast South Coast): Sussex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Southeast South Coast): Kent and Essex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Southeast South Coast): Southern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Southeast South Coast): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (East Anglia): Kent and Essex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (East Anglia): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+    buy: All South East pot-caught lobster is OK but needs improvement; ask for pot-caught. Eastern IFCA, Norfolk
+      and Suffolk, lobster is under review by the MCS.
+  - name: SW
+    kind: region
+    confidence: high
+    sources:
+    - cgsg-lobster
+    - fitd-lobster
+    - flyingfish-seasonality
+    - mcs-lobster-scotland-east
+    - mcs-lobster
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: CGSG (updated January 2026) ticks all 12 months and says that, because berried females are protected,
+        lobster can be eaten at any time of year (cgsg-lobster). Seafish's consumer guide agrees, UK-wide (fitd-lobster),
+        and Flying Fish marks no best-quality months for native Cornish lobster, meaning consistent quality all
+        year (flyingfish-seasonality). Rule 3 applied. ICES VIIe-h, Cornwall and Devon.
+      discrepancy: MCS names May-December as the UK key fishing season (mcs-lobster-scotland-east), a landings statement;
+        the best-to-eat sources name no peak.
+      sustainability: 'CGSG (read 2026-11-10): pot-caught recommended; gill net not recommended because of bycatch
+        (cgsg-lobster).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Southwest): Cornwall IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'England (Southwest): Devon and Severn IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'England (Southwest): Isles of Scilly IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'England (Southwest): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'England (Southwest): Cornwall IFCA District (0-6nm)'
+        method: Net (gill or fixed)
+        rating: 4
+        label: OK
+    buy: Ask for pot-caught South West lobster; gill-netted Cornish lobster rates lower.
+- name: Langoustines
+  slug: langoustines
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-langoustines
+    - scotgov-nephrops-fmp
+    - scotgov-nephrops-stocks-2015
+    - mcs-scampi
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 39
+      - avail
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'In = best to eat: Seafish''s consumer guide says langoustines can be eaten all year and gives January,
+        February and October-December as best quality, UK-wide (fitd-langoustines). Avail = landings: on the Scottish
+        North Sea grounds, Fladen FU7, Firth of Forth FU8 and Moray Firth FU9 (ICES IVa-IVb), 2020-24 average monthly
+        landings peak in July and are lowest in May, but are landed every month (scotgov-nephrops-fmp, published
+        March 2026). Females spawn in September and carry eggs in their burrows until April-May, so winter catches
+        are mostly males (scotgov-nephrops-stocks-2015).'
+      discrepancy: 'Pass 3 change: the earlier in window, June-August, was the landings peak (scotgov-nephrops-fmp).
+        It now falls in avail, because the best-quality months are winter (fitd-langoustines).'
+      year_round: Landed all year (scotgov-nephrops-fmp); best quality October-February (fitd-langoustines). Avail
+        here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Fladen Ground (FU 7)
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK
+      - stock: Firth of Forth (FU 8)
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK
+      - stock: Moray Firth (FU 9)
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK
+      - stock: Noup (FU 10)
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK
+      - stock: Devil's Hole (FU 34)
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK
+    buy: Look for creel-caught langoustine where offered (the MCS's Best Choice creel fisheries are on the Scottish
+      west coast). Trawled Fladen, Moray Firth and Firth of Forth langoustine is OK; all are in a fishery improvement
+      project.
+  - name: Farn Deeps
+    kind: region
+    confidence: low
+    sources:
+    - fitd-langoustines
+    - mmo-farn-deeps-nephrops
+    - mcs-scampi-farn-deeps
+    - mcs-scampi
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 13
+      - avail
+    - - 36
+      - 39
+      - avail
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'Split added: the Farn Deeps, FU6, ICES IVb, off Northumberland, landed into North Shields, is a winter
+        fishery, generally September to March, the reverse of the Scottish grounds (mmo-farn-deeps-nephrops). In
+        = the best-quality months from Seafish, January, February and October-December, UK-wide (fitd-langoustines),
+        within that window. Avail = September and March. Low: the landings window rests only on a 2012 MMO plan;
+        the MCS rating page (December 2025) and 2025 gear rules give no months, and no newer source on the fishing
+        season was found.'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Farn Deeps (FU 6)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: The MCS rates trawled Farn Deeps langoustine Avoid (subject to overfishing, with insufficient management;
+      rating updated December 2025). Choose creel-caught langoustine from other grounds instead.
+- name: Mussels
+  slug: mussels
+  group: fish-shellfish
+  lines:
+  - name: SE
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-mussels
+    - grocer-mussels
+    - dalegate-brancaster-mussels
+    - saveur-norfolk-mussels
+    - eifca-wash-mussel-dredge-2025
+    - chipperfield-mussel-spawning
+    - mcs-blue-mussel
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 39
+      - avail
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'Wild-bed mussels from the Wash and North Norfolk, ICES IVc. In = best to eat: Seafish''s consumer
+        guide gives January-March and October-December as best quality, and says mussels spawn in spring and have
+        less meat then (fitd-mussels); The Grocer, quoting Seafish, also says mussels are fattest in winter (grocer-mussels).
+        Avail = landings: Seafish says mussel dredging runs August-May, UK-wide (fitd-mussels). A Brancaster retailer
+        says local mussels are sold in the months with an R, roughly September-April (dalegate-brancaster-mussels;
+        also saveur-norfolk-mussels). The Wash harvestable dredge fishery opened on 29 January 2025 (eifca-wash-mussel-dredge-2025).
+        British mussels spawn from mid-April to the end of May (chipperfield-mussel-spawning). Landings (`avail`)
+        include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      discrepancy: The Brancaster retailer's September-April runs about 4 weeks wider at each end than the Seafish
+        best-quality months (dalegate-brancaster-mussels, fitd-mussels). The Wash dredge notice gives an opening
+        date only (eifca-wash-mussel-dredge-2025). No Eastern IFCA page giving SE months was found.
+      sustainability: MCS (read 2026-11-10) has no rating for wild Wash or Norfolk mussels; its UK ratings cover
+        farmed rope-grown mussels, Northern Ireland and Poole Harbour (mcs-blue-mussel).
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - fitd-mussels
+    - flyingfish-seasonality
+    - cgsg-mussels
+    - grocer-mussels
+    - mcs-blue-mussel
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 39
+      - avail
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'Rope-grown in Cornish estuaries and bays. In = best to eat: Seafish gives January-March and October-December
+        as best quality, and says rope-grown mussels are available all year but not at their best in summer (fitd-mussels).
+        Flying Fish marks October-March as best quality for offshore St Austell Bay mussels (flyingfish-seasonality).
+        Rule 3 applied: a primary source names a peak, so the rest of the year is avail. CGSG advises against hand-gathering
+        wild mussels in summer because of the toxic algae risk (cgsg-mussels).'
+      discrepancy: 'CGSG (updated October 2017) ticks all 12 months as best to eat for farmed mussels and names
+        no peak (cgsg-mussels). Pass 3 change: the line was in all year.'
+      year_round: Rope-grown mussels are available all year (fitd-mussels); best quality October-March, since mussels
+        spawn in spring and have less meat then (fitd-mussels). Avail here means out of its best season, not hard
+        to get.
+      sustainability: 'CGSG (read 2026-11-10): Cornish farmed mussels recommended; hand-collected recommended, with
+        purification required (cgsg-mussels).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Europe: UK and Ireland (Republic of): All areas'
+        method: Culture, suspension
+        rating: 1
+        label: Best Choice
+      - stock: 'Dorset (Poole Harbour): Southern IFCA District (0-6nm)'
+        method: Dredge
+        rating: 3
+        label: OK
+    buy: Choose rope-grown (suspension-farmed) mussels, which the MCS rates Best Choice; dredged Poole Harbour mussels
+      are OK.
+- name: Oysters
+  slug: oysters
+  group: fish-shellfish
+  lines:
+  - name: Native – Fal
+    kind: region
+    confidence: high
+    sources:
+    - legislation-fal-order-2016
+    - cgsg-native-oyster
+    - fitd-oysters
+    - mcs-native-oyster
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'The Fal Fishery Order sets a closed season of 1 April to 30 September, so the open season is 1 October
+        to 31 March; the Authority can extend the closure by up to four weeks (legislation-fal-order-2016). Legal-week
+        rule applied (a week counts if it has at least one open day): 31 March falls in week 13 and 1 October starts
+        week 40, so the weeks are unchanged. CGSG (updated January 2026) ticks October-March as best to eat. Dredging
+        is by sail and oar only, with set daytime hours (cgsg-native-oyster). Seafish gives September-April for
+        native oysters UK-wide (fitd-oysters). Truro River and Fal estuary, Cornwall.'
+      sustainability: 'CGSG (read 2026-11-10): rated sustainably harvested, stock density highest in the survey
+        series in 2024 (cgsg-native-oyster).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Fal Estuary): All areas'
+        method: Dredge (sail and oar)
+        rating: 2
+        label: Best Choice
+    buy: Fal sail-and-oar dredged natives are a Best Choice; other wild-dredged natives rate only OK, because native
+      oyster populations are in trouble across Europe.
+  - name: Native – Colchester
+    kind: region
+    confidence: high
+    sources:
+    - colchester-colne-opening-2026
+    - fitd-oysters
+    - seafoodsource-natives
+    - lfm-blackwater-oysters
+    - mcs-native-oyster
+    weeks:
+    - - 1
+      - 17
+      - in
+    - - 36
+      - 52
+      - in
+    notes:
+      season: 'The Colne Oyster Fisheries open on the first Friday of September (4 September in 2026) (colchester-colne-opening-2026).
+        Legal-week rule applied to the opening: 4 September 2026 is in week 36. In years when the first Friday is
+        1 September (or 2 September outside leap years) the opening falls in week 35. No legal closing date was
+        found, so the end uses the usual most-days rule: Seafish says native oysters are available, and oysters
+        best bought, September-April (fitd-oysters); a Mersea oysterman (seafoodsource-natives) and a Blackwater
+        grower (lfm-blackwater-oysters) say the same, giving week 17. Colne and Blackwater estuaries, Essex. Pass
+        3: raised to high, as two primary sources now agree within two weeks.'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England and Scotland: All areas'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'Europe: UK: All areas'
+        method: Culture, suspension
+        rating: 1
+        label: Best Choice
+    buy: Farmed natives are a Best Choice; wild-dredged English natives are OK but need improvement. Ask whether
+      the oysters are farmed or wild.
+  - name: Rock
+    kind: variety
+    confidence: moderate
+    sources:
+    - cgsg-pacific-oyster
+    - fitd-oysters
+    - lfm-blackwater-oysters
+    - mcs-pacific-oyster
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Farmed Pacific oysters: CGSG ticks all 12 months; farmed oysters are depurated and sold all year,
+        and farmers use triploid spat that should not spawn (cgsg-pacific-oyster). Seafish says Pacific oysters
+        are available all year (fitd-oysters), and an Essex grower says the same (lfm-blackwater-oysters). Rule
+        3 applied.'
+      discrepancy: Seafish also says that, although oysters are on sale all year, the best time to buy them is September-April
+        (fitd-oysters). That sentence covers oysters in general; the Pacific-specific sources name no peak, so they
+        are followed.
+      sustainability: 'CGSG (read 2026-11-10): farmed recommended; feral hand-collected under review (cgsg-pacific-oyster).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Europe: UK: All areas'
+        method: Culture, suspension
+        rating: 1
+        label: Best Choice
+      - stock: 'Europe: UK: Cornwall'
+        method: Culture, bag
+        rating: 1
+        label: Best Choice
+    buy: Farmed rock oysters are a Best Choice. The MCS notes escapes from farms may threaten native species and
+      habitats.
+  - name: Porthilly rock
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-porthilly
+    - cgsg-pacific-oyster
+    - flyingfish-seasonality
+    - mcs-pacific-oyster
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Dates as for Rock. Porthilly Shellfish grows Pacific oysters at four sites on the Camel estuary (cgsg-porthilly),
+        where oysters have been farmed since the 1960s and are sold all year (cgsg-pacific-oyster). Flying Fish
+        marks no best-quality months for Porthilly oysters, meaning consistent quality all year (flyingfish-seasonality).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Europe: UK: Cornwall'
+        method: Culture, bag
+        rating: 1
+        label: Best Choice
+    buy: Cornish bag-farmed rock oysters are a Best Choice.
+- name: Scallops
+  slug: scallops
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: moderate
+    sources:
+    - neifca-scallop-dredge-2026
+    - neifca-scallop-permits-2026
+    - scotgov-scallop-stocks-2025
+    - defra-king-scallop-fmp-annexes-2023
+    - fitd-scallops
+    - mcs-king-scallop
+    weeks:
+    - - 1
+      - 18
+      - in
+    - - 19
+      - 43
+      - avail
+    - - 44
+      - 52
+      - in
+    notes:
+      season: 'Rule 4: in = the NEIFCA permitted inshore scallop dredge fishery (Tyne to Humber, 0-6nm), which opened
+        on 1 November 2026, with static gear cleared from the two dredge zones from 1 November 2026 to 30 April
+        2027 (neifca-scallop-dredge-2026). The 30 April end is read from that gear-clearance window; the notice
+        gives no separate closing date. Only four permits are issued, for vessels up to 12m, or 18.3m with a track
+        record (neifca-scallop-permits-2026). Legal-week rule applied: 1 November falls in week 44 and 30 April
+        in week 18. Outside it, avail: the Scottish king scallop fishery, including the east coast (ICES IVa-IVb),
+        is now a year-round activity (scotgov-scallop-stocks-2025). Defra notes clear seasonality in English scallop
+        landings, and that meat yield is best just before spawning and lowest just after (defra-king-scallop-fmp-annexes-2023).
+        Hartlepool, Scarborough and Whitby are significant landing ports.'
+      discrepancy: Seafish's consumer guide gives August-September as best quality and April-September as the most
+        readily available months, UK-wide (fitd-scallops). That clashes with Defra, which says summer scallops are
+        roe-less with poor meat yield (defra-king-scallop-fmp-annexes-2023), and with the legal season. The legal
+        season is kept (rule 4).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (North Sea - Central South: 4b.S): North Eastern IFCA District (0-6nm)'
+        method: Dredge
+        rating: 3
+        label: OK
+      - stock: 'England (North Sea - Central South: 4b.S): Offshore (beyond 6nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'Scotland (Shetland): Certified fleets only (0-6nm)'
+        method: Dredge
+        rating: 3
+        label: OK
+      - stock: 'Scotland (Shetland): Shetland (6-12nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'Scotland (East Coast): Scotland (3-12nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'Scotland (North-East & Orkney): Scotland (3-12nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'Scotland (East Coast): Scotland (0-3nm)'
+        method: Dredge
+        rating: 5
+        label: Avoid
+      - stock: 'Scotland (North-East & Orkney): Scotland (0-3nm)'
+        method: Dredge
+        rating: 5
+        label: Avoid
+    buy: Inshore North Eastern IFCA dredged scallops and MSC-certified Shetland inshore scallops are OK; avoid scallops
+      dredged within 3nm of the Scottish east coast. The MCS's Best Choice is farmed scallops.
+  - name: SE
+    kind: region
+    confidence: high
+    sources:
+    - sussex-ifca-regulations
+    - sussex-ifca-species
+    - mmo-king-scallop-closure-2026
+    - mmo-king-scallop-closure-2025
+    - defra-king-scallop-fmp-annexes-2023
+    - fitd-scallops
+    - mcs-king-scallop
+    weeks:
+    - - 1
+      - 22
+      - in
+    - - 23
+      - 43
+      - avail
+    - - 44
+      - 52
+      - in
+    notes:
+      season: 'Rule 4: in = the Sussex IFCA open season. Its Scallop Closed Season byelaw (2005) bans scallop dredging
+        from 1 June to 31 October, and limits trawlers to 200 scallops a day in that period; dredges are allowed
+        only 3-6nm offshore (sussex-ifca-regulations, sussex-ifca-species). Legal-week rule applied: 31 May falls
+        in week 22 and 1 November in week 44. Offshore in ICES VIId, the MMO closed UK waters to scallop dredgers
+        over 10m from 1 July to 30 September in 2025 and 2026, to protect the main spawning season (mmo-king-scallop-closure-2025,
+        mmo-king-scallop-closure-2026); vessels of 10m and under are exempt, so landings continue thinly (avail).
+        Defra says the English 7d fishery has been fished only in the six winter months for over four decades, and
+        that summer scallops are roe-less with poor meat yield, while winter fetches the best prices (defra-king-scallop-fmp-annexes-2023).'
+      discrepancy: The MMO offshore 7d closure (1 July-30 September; open weeks 1-26 and 40-52 by the legal-week
+        rule) is shorter than the Sussex inshore closure (1 June-31 October) by about 4 weeks at each end (mmo-king-scallop-closure-2026,
+        sussex-ifca-regulations). Defra describes the IFCA 3-6nm zone as closed for about six months over summer,
+        roughly May-September (defra-king-scallop-fmp-annexes-2023). Seafish's UK-wide consumer guide gives August-September
+        as best quality (fitd-scallops), which clashes with Defra's summer quality statement. The byelaw dates are
+        used.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (English Channel - North East: 7d.N): Inshore (0-6 nm)'
+        method: Dredge
+        rating: 3
+        label: OK
+      - stock: 'England (English Channel - North East: 7d.N): Offshore (beyond 6nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+    buy: Inshore Eastern Channel scallops rate better than offshore ones; both are dredged and OK but need improvement.
+      The MCS's Best Choice is farmed scallops.
+  - name: SW
+    kind: region
+    confidence: low
+    sources:
+    - cgsg-scallop
+    - fitd-scallops
+    - flyingfish-seasonality
+    - defra-king-scallop-fmp-annexes-2023
+    - dsifca-scallop-closure-response-2025
+    - mmo-king-scallop-closure-2026
+    - mcs-king-scallop
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: CGSG (updated January 2026) ticks all 12 months as best to eat. It notes spawning from April to September,
+        no seasonal closures, and a 7pm-7am dredging curfew in Cornwall and Devon IFCA waters (cgsg-scallop). Rule
+        3 applied. ICES VIIe-f.
+      discrepancy: 'Best-to-eat sources clash, so confidence is low. Seafish gives August-September as best quality
+        UK-wide (fitd-scallops); Flying Fish marks September-October as best quality for Looe Bay half-shell scallops
+        (flyingfish-seasonality); Defra says summer scallops are roe-less with poor meat yield (defra-king-scallop-fmp-annexes-2023).
+        With no agreed peak, the regional guide''s all-year window is kept. Closures: CGSG reports none in Cornwall,
+        but Devon and Severn IFCA closes its district to scallop dredgers from 1 July to 30 September (dsifca-scallop-closure-response-2025),
+        and in 2026 the MMO closed UK waters of ICES VIIe to dredgers over 12m for the same dates (mmo-king-scallop-closure-2026).
+        Divers and smaller Cornish boats are not covered; for dredged scallops from Devon or offshore, July-September
+        (weeks 27-39) is closed.'
+      sustainability: 'CGSG (read 2026-11-10): diver-caught and disco-pot scallops recommended; dredged has no recommendation
+        because of seabed damage (cgsg-scallop).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (English Channel - Inshore Cornwall: 7e.I): Cornwall IFCA District (0-6nm): Dive fishery'
+        method: Hand-gathering (diving)
+        rating: 3
+        label: OK
+      - stock: 'England (English Channel - Inshore Cornwall: 7e.I): Cornwall IFCA District (0-6nm)'
+        method: Pot, trap or creel (disco pots)
+        rating: 3
+        label: OK
+      - stock: 'England (English Channel - Lyme Bay: 7e.L): Dive fishery'
+        method: Hand-gathering (diving)
+        rating: 3
+        label: OK
+      - stock: 'England (English Channel - Lyme Bay: 7e.L): Inshore (0-6 nm)'
+        method: Dredge
+        rating: 3
+        label: OK
+      - stock: 'England (English Channel - Inshore Cornwall: 7e.I): Cornwall IFCA District (0-6nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'England (English Channel - Inshore Cornwall: 7e.I): Offshore (beyond 6nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'England (English Channel - Offshore West: 7e.O): Offshore (beyond 6nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+      - stock: 'England (Bristol Channel - Inshore: 7f.I): Offshore (beyond 6nm)'
+        method: Dredge
+        rating: 4
+        label: OK
+    buy: Ask for diver-caught or disco-pot Cornish scallops, or Lyme Bay scallops; dredged Cornish and offshore
+      scallops rate lower. The MCS's Best Choice is farmed scallops.
+  - name: Orkney hand-dived
+    kind: region
+    confidence: low
+    sources:
+    - scotgov-scallop-stocks-2025
+    - orkneynews-dived-scallops-2025
+    - flyingfish-seasonality
+    - mcs-king-scallop
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: No primary source names a season or peak for Orkney dived scallops, and Scotland has no general scallop
+        closed season. The Scottish Government says the Scottish king scallop fishery is now a year-round activity
+        (scotgov-scallop-stocks-2025); that covers the whole fishery, which is mostly dredged. An Orkney seafood
+        restaurateur says divers work separate summer and winter grounds (orkneynews-dived-scallops-2025). Flying
+        Fish, which sells Orkney hand-dived scallops, marks no best-quality months for them, meaning consistent
+        quality all year (flyingfish-seasonality). Rule 3 applied. Low because the dive-specific evidence is secondary.
+      sustainability: No MSC or other certifier's rating for the Orkney dive fishery was found.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Scotland (North-East & Orkney): Orkney'
+        method: Hand-gathering (diving)
+        rating: 3
+        label: OK
+    buy: Hand-dived Orkney scallops are OK but need improvement; avoid scallops dredged within 3nm of the Scottish
+      coast, which the MCS rates Avoid.
+- name: Cockles
+  slug: cockles
+  group: fish-shellfish
+  lines:
+  - name: Cockles
+    kind: whole
+    confidence: moderate
+    sources:
+    - mcs-cockle
+    - eifca-wash-cockle-2024
+    - eifca-wash-schedule-2025
+    - kefca-annual-plan-2026-27
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 13
+      - avail
+    - - 23
+      - 30
+      - avail
+    - - 31
+      - 52
+      - in
+    notes:
+      season: 'In = landed weeks outside the breeding season: the MCS advises against eating cockles in the March-July
+        breeding season (mcs-cockle); rule 5 applied. The Wash fishery opened on 20 June 2024, with open periods
+        into January-March 2025 (eifca-wash-cockle-2024). The 2025 schedule has open periods from mid-July to December
+        (eifca-wash-schedule-2025). Kent and Essex IFCA says the Thames (TECFO) cockle fishery season begins in
+        June, and the permit fishery opens later in summer (kefca-annual-plan-2026-27). Openings are set each year
+        and close when the TAC runs out. Legal-week rule applied to the Wash openings: 20 June 2024 falls in week
+        25 and 14 July 2025 in week 28. Pass 3: avail now starts in week 23 for the June Thames opening (no exact
+        date given, so the June month weeks are used). The Burry Inlet was not checked.'
+      sustainability: 'MCS (read 2026-11-10): Thames Estuary and Poole Harbour (suction dredge) and Dee Estuary,
+        hand-gathered, all MSC-certified, Best Choice; Wash hand-gathered OK - Needs Improvement; Thames outside
+        the TECFO area listed under review (an earlier read) and Avoid (a second read on the same day). The species
+        page shows labels but no numeric scores, so no structured mcs field is given (mcs-cockle).'
+    buy: Choose MSC-certified cockles from Poole Harbour, the Thames Estuary or the Dee Estuary, all rated Best
+      Choice by the MCS; hand-gathered Wash cockles are rated OK - Needs Improvement (mcs-cockle).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: England (Poole Harbour), certified fleets only
+        method: suction dredge, MSC-certified
+        rating: null
+        label: Best Choice
+        band: 1-2
+      - stock: England (Thames Estuary), certified fleets only
+        method: suction dredge, MSC-certified
+        rating: null
+        label: Best Choice
+        band: 1-2
+      - stock: Wales (Dee Estuary), certified fleets only
+        method: hand-gathering, MSC-certified
+        rating: null
+        label: Best Choice
+        band: 1-2
+      - stock: England (The Wash), Eastern IFCA district 0-6nm
+        method: hand-gathering
+        rating: null
+        label: OK - Needs Improvement
+        band: 3-4
+      - stock: England (Thames Estuary), Kent & Essex IFCA district outside the TECFO area
+        method: suction dredge
+        rating: null
+        label: Under review
+        band: null
+      note: The MCS species page shows labels only, no numeric scores.
+- name: Brown shrimp
+  slug: brown-shrimp
+  group: fish-shellfish
+  lines:
+  - name: Brown shrimp
+    kind: whole
+    confidence: moderate
+    sources:
+    - eifca-shrimp-workshop-2016
+    - fishingnews-wash-shrimp
+    - fishfacts-north-sea-shrimp-2009
+    - eifca-shrimp-effort-management
+    - msc-wash-brown-shrimp
+    - nwifca-shrimps
+    - mcs-brown-shrimp
+    - mcs-brown-shrimp-wash
+    - mcs-brown-shrimp-north-sea
+    weeks:
+    - - 1
+      - 52
+      - avail
+    notes:
+      season: 'No current best-to-eat source was found (Seafish''s consumer guide has no brown shrimp page, and
+        the MCS gives no season), so there are no in weeks; the landing weeks are avail (fish brief). Landings:
+        Fishing News says the Wash supplies most of the UK catch, autumn is the fishery''s traditional peak, shrimp
+        are fished to some extent all year as a fall-back fishery, and they move further offshore from November
+        to March (fishingnews-wash-shrimp). Eastern IFCA''s 2016 shrimp industry workshop records the main season
+        as September to December (eifca-shrimp-workshop-2016). Wash catch is landed into King''s Lynn (msc-wash-brown-shrimp).
+        Eastern IFCA''s trip limit runs on a 1 August-31 July year (eifca-shrimp-effort-management). North Western
+        IFCA (Morecambe Bay) gives no months (nwifca-shrimps).'
+      discrepancy: 'Pass 3 change: September-December was in; it is a landings peak, not a best-to-eat window, so
+        it is now avail. A 2009 North Sea fact sheet also names early spring as a landings peak alongside autumn
+        (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
+      year_round: Fished all year to some extent, with the main landing season September to December (eifca-shrimp-workshop-2016).
+        No source names a best-to-eat window, so the whole year is avail; it does not mean hard to get.
+      sustainability: 'MSC: Wash brown shrimp certified since 2020 (msc-wash-brown-shrimp).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'The Wash: All areas'
+        method: Bottom trawl (beam)
+        rating: 2
+        label: Best Choice
+      - stock: 'North Sea: All areas'
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK
+    buy: Choose MSC-certified Wash brown shrimp, the Best Choice; MSC-certified North Sea shrimp is OK, but the
+      MCS suggests alternatives where possible.
+- name: Spider crab
+  slug: spider-crab
+  group: fish-shellfish
+  lines:
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - nnn-norfolk-spider-crab
+    - sussex-ifca-regulations
+    - sussex-ifca-species
+    - bnfs-seasonality
+    - kefca-kent-2025-feb-jun
+    - kefca-essex-2025-jan-jun
+    - mcs-spider-crab
+    - mcs-spider-crab-all
+    - helen-bnfs-chart
+    weeks:
+    - - 18
+      - 26
+      - avail
+    notes:
+      season: 'No SE season found. Pass 3 searched Brighton & Newhaven Fish Sales and Sussex IFCA: the BNFS seasonality
+        chart is an image the research tools could not read (bnfs-seasonality), and Sussex IFCA''s species page
+        and byelaw list do not cover spider crab (sussex-ifca-species, sussex-ifca-regulations); its 2025 species
+        fishery reports PDF could not be opened. A Norfolk paper reports spider crabs newly appearing in pots from
+        Cromer to Weybourne, not sold locally, moving offshore in autumn (nnn-norfolk-spider-crab). Kent and Essex
+        IFCA''s 2025 shore reports describe spider crabs as an unwanted bycatch off East Kent and Hythe with no
+        market, and an occasional one off Harwich and Walton (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
+        The MCS rating page (December 2025) gives no months (mcs-spider-crab). Landings (`avail`) include weeks
+        Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not
+        read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'UK: All areas except Devon & Severn, Southern and Cornwall IFCA districts'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'UK: All areas'
+        method: Net (gill or fixed)
+        rating: 4
+        label: OK
+    buy: Choose pot-caught spider crab over tangle-net-caught, which has high bycatch and damages crabs. The MCS
+      notes the minimum landing sizes are below size at maturity.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-spider-crab
+    - mcs-spider-crab-all
+    weeks:
+    - - 9
+      - 52
+      - in
+    notes:
+      season: 'Split added: CGSG (updated January 2026) covers Cornish spider crab (''Cornish King Crab'') and ticks
+        March-December as best to eat, but not January or February, without giving a reason (cgsg-spider-crab).
+        139 tonnes were landed at Cornish ports in 2024, mostly exported to Spain (cgsg-spider-crab). No source
+        on January-February landings was found, and Flying Fish lists no spider crab. ICES VIIe-f.'
+      sustainability: 'CGSG (read 2026-11-10): pot-caught recommended; net-caught less favoured because of bycatch;
+        CIFCA work suggests the fishery is sustainable (cgsg-spider-crab).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Cornwall: Cornwall IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'UK: Devon and Severn IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'UK: Southern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 3
+        label: OK
+      - stock: 'Cornwall: Cornwall IFCA District (0-6nm)'
+        method: Net (gill or fixed)
+        rating: 4
+        label: OK
+    buy: Ask for pot-caught spider crab; tangle-net-caught rates lower.
+- name: Clams
+  slug: clams
+  group: fish-shellfish
+  lines:
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - kefca-manila-clam-trial
+    - kefca-manila-clam-update-2025-11
+    - kefca-essex-2025-nov-jan
+    - kefca-manila-clam-trial-report-2026-05
+    - kefca-annual-plan-2026-27
+    - sussex-ifca-regulations
+    - fitd-clams
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 8
+      - avail
+    - - 11
+      - 52
+      - avail
+    notes:
+      season: 'Thames Estuary Manila clams, Kent and Essex IFCA''s trial fishery. No best-to-eat source was found,
+        so there are no in weeks (fish brief). Avail = the spring 2026 trial window, 16 March to 1 May 2026 (kefca-manila-clam-trial-report-2026-05),
+        weeks 11-18 by the legal-week rule. The Authority moved the trial to spring because prices are higher then,
+        when other UK clam fisheries are closed, and plans the second trial year for spring 2027 (kefca-annual-plan-2026-27).
+        Earlier windows: one month in October 2024; a six-week trial from 3-4 November 2025 paused after about 10
+        days on low prices and saturated markets (kefca-manila-clam-trial, kefca-manila-clam-update-2025-11, kefca-essex-2025-nov-jan).
+        Sussex IFCA''s byelaw list has no clam-specific measure (sussex-ifca-regulations). Seafish says clams are
+        most available September-April and scarcest in June-July, UK-wide, with no best-quality months named (fitd-clams).
+        Low: a trial fishery, not a settled season. Landings (`avail`) include weeks Helen transcribed from Brighton
+        & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only
+        page); not re-checked against the chart (coordinator, 2026-11-10).'
+      discrepancy: 'Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its
+        window has moved each year, so these weeks may change.'
+      sustainability: MCS (read 2026-11-10) has no Manila clam rating.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-razor-clam
+    - flyingfish-seasonality
+    - mcs-razor-clam
+    - helen-ffs-chart
+    weeks:
+    - - 1
+      - 17
+      - in
+    - - 18
+      - 22
+      - avail
+    - - 31
+      - 39
+      - avail
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'Razor clams (Ensis), diver-caught in Cornwall: CGSG (updated March 2023) ticks October-April and
+        advises avoiding wild clams in the May-September spawning season (cgsg-razor-clam). Flying Fish lists palourde
+        clams with no best-quality months, meaning consistent quality all year, but its availability shading could
+        not be read (flyingfish-seasonality). Manila clams (Poole Harbour) were not checked. Landings (`avail`)
+        include weeks Helen transcribed from Flying Fish Seafoods''s seasonality chart, which the web tools could
+        not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      sustainability: 'CGSG (read 2026-11-10): rates diver-collected razor clams only (score not legible in the
+        page text); hand-gathering removed from its ratings; concerns include illegal electric fishing, no bag limits
+        and unstudied stocks (cgsg-razor-clam). This clashes with the MCS, which rates English dive-caught razor
+        clams Avoid (mcs-razor-clam).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England, Northern Ireland and Wales: Dive fishery'
+        method: Hand-gathering (diving)
+        rating: 5
+        label: Avoid
+      - stock: 'England, Northern Ireland and Wales: England & Northern Ireland'
+        method: Hand-gathering (shore)
+        rating: 5
+        label: Avoid
+      - stock: 'England, Northern Ireland and Wales: Dredge fishery'
+        method: Dredge
+        rating: 5
+        label: Avoid
+      - stock: 'England, Northern Ireland and Wales: Electro-fishery'
+        method: Electrical fishing
+        rating: 5
+        label: Avoid
+    buy: The MCS rates every English razor clam source Avoid, including diver-caught; it has no Best Choice. Its
+      better-rated razor clams are hand-gathered in Wales or Scotland (OK), and it warns that some are taken by
+      illegal electro-fishing.
+- name: Whelks
+  slug: whelks
+  group: fish-shellfish
+  lines:
+  - name: SE
+    kind: region
+    confidence: high
+    sources:
+    - sussex-ifca-species
+    - kefca-whelk-report-2025-01
+    - kefca-whelk-report-2026-01
+    - kefca-whelk-byelaw-2022
+    - kefca-kent-2025-feb-jun
+    - kefca-essex-2025-nov-jan
+    - kefca-annual-plan-2026-27
+    - eifca-whelk-sitrep-2024
+    - mcs-whelk
+    - mcs-whelk-kent-essex
+    - mcs-whelk-sussex
+    - maff-norfolk-crab
+    weeks:
+    - - 1
+      - 52
+      - avail
+    notes:
+      season: 'No best-to-eat source was found (the MCS gives no season and Seafish''s consumer guide has no whelk
+        page), so there are no in weeks; the landing weeks are avail (fish brief). Landings: Sussex IFCA says whelks
+        are fished all year, with the highest catch rates from January to April (sussex-ifca-species). Kent and
+        Essex IFCA''s permit reports say landings are consistently highest from April to June (kefca-whelk-report-2025-01,
+        kefca-whelk-report-2026-01), and its 2026-27 plan calls whelks a vital stock for many vessels in the colder
+        months (kefca-annual-plan-2026-27). The permit byelaw sets no closed season (kefca-whelk-byelaw-2022). Whelks
+        were landed in quantity through February-June 2025 in Kent and November 2025-January 2026 at West Mersea
+        (kefca-kent-2025-feb-jun, kefca-essex-2025-nov-jan). Minimum sizes: 45mm in Sussex, 53mm in Kent and Essex
+        (mcs-whelk-sussex, mcs-whelk-kent-essex). ICES IVc/VIId.'
+      discrepancy: 'Pass 3 change: April-June was in; it is a landings peak, not a best-to-eat window, so it is
+        now avail. Landings peaks differ by area: Sussex January-April (sussex-ifca-species); Kent and Essex April-June,
+        or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01);
+        Eastern IFCA, Norfolk and the Wash, January-June (as quoted in kefca-whelk-report-2026-01), where the fishery
+        used to be a marginal winter one (eifca-whelk-sitrep-2024; also maff-norfolk-crab, c. 1966). Sussex IFCA,
+        as quoted in the 2026 report, says catch per unit of effort is generally lower in November and December.'
+      year_round: Landed all year (sussex-ifca-species, kefca-whelk-report-2026-01). No source names a best-to-eat
+        window, so the whole year is avail; it does not mean hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'England (Sussex coast): Sussex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Kent and Essex coast): Kent and Essex IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (Lincolnshire, Norfolk and Suffolk coast): Eastern IFCA District (0-6nm)'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK
+      - stock: 'England (offshore): Offshore (beyond 6nm)'
+        method: Pot, trap or creel
+        rating: 5
+        label: Avoid
+    buy: Choose inshore pot-caught whelks from Sussex, Kent and Essex or Eastern IFCA waters; avoid offshore-caught
+      whelks. The MCS says the Sussex and Kent minimum sizes sit below the local size at maturity, so many whelks
+      are caught before they can breed.

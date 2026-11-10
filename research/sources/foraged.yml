@@ -1,0 +1,623 @@
+# Source registry — foraged group. All accessed 2026-11-10.
+# Ranking note: per the group brief, the Woodland Trust, RHS, the Wildlife Trusts (incl. local Trusts and
+# Wildlife Watch), the British Hop Association and the Forestry Commission count as primary where they give
+# harvest windows. NatureScot (the Scottish Government's nature body) is also treated as primary.
+
+- key: wt-foraging-hub
+  title: "Foraging: what to look out for each month"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/visiting-woods/things-to-do/foraging/
+  type: primary
+  published: 2026
+  published_note: "Living hub page with no date line; it lists posts up to October 2026, so counted as current."
+  accessed: 2026-11-10
+- key: wt-foraging-jan
+  title: "Foraging in January"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-january/
+  type: primary
+  published: 2018
+  published_note: "Dated 16 Jan 2018."
+  accessed: 2026-11-10
+- key: wt-foraging-feb
+  title: "Foraging in February"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-february/
+  type: primary
+  published: 2018
+  published_note: "Dated 22 Feb 2018."
+  accessed: 2026-11-10
+- key: wt-foraging-mar
+  title: "Foraging in March"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-march/
+  type: primary
+  published: 2018
+  published_note: "Dated 28 Mar 2018."
+  accessed: 2026-11-10
+- key: wt-foraging-apr
+  title: "Foraging in April"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-april/
+  type: primary
+  published: 2023
+  published_note: "Dated 27 Apr 2023."
+  accessed: 2026-11-10
+- key: wt-foraging-jun
+  title: "Foraging in June"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-june/
+  type: primary
+  published: 2021
+  published_note: "Dated 24 Jun 2021."
+  accessed: 2026-11-10
+- key: wt-foraging-jul
+  title: "Foraging in July"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-july/
+  type: primary
+  published: 2026
+  published_note: "Dated 16 Jul 2026."
+  accessed: 2026-11-10
+- key: wt-foraging-aug
+  title: "Foraging in August"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-august/
+  type: primary
+  published: 2026
+  published_note: "Dated 12 Aug 2026."
+  accessed: 2026-11-10
+- key: wt-foraging-sep
+  title: "Foraging in September"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-september/
+  type: primary
+  published: 2024
+  published_note: "Dated 25 Sep 2024."
+  accessed: 2026-11-10
+- key: wt-foraging-oct
+  title: "Foraging in October"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/blog/foraging-in-october/
+  type: primary
+  published: 2025
+  published_note: "Dated 6 Oct 2025."
+  accessed: 2026-11-10
+- key: wt-foraging-recipes
+  title: "Foraging recipes"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/visiting-woods/things-to-do/foraging/foraging-recipes
+  type: primary
+  published: 2026
+  published_note: "Living page with no date line of its own; the elderflower item cited is dated 1 Jul 2026."
+  accessed: 2026-11-10
+- key: wt-wild-garlic
+  title: "Wild garlic (Allium ursinum)"
+  publisher: Woodland Trust
+  url: https://woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/wild-garlic/
+  type: primary
+  published: 2026
+  published_note: "Living species page with no date line; counted as current (dating brief)."
+  accessed: 2026-11-10
+- key: wt-wild-garlic-pesto
+  title: "How to forage wild garlic and make wild garlic pesto"
+  publisher: Woodland Trust
+  url: https://woodlandtrust.org.uk/blog/2019/04/wild-garlic-pesto-and-foraging/
+  type: primary
+  published: 2019
+  published_note: "Year in URL; page dated 26 Apr 2019."
+  accessed: 2026-11-10
+- key: wt-wood-sorrel
+  title: "Wood sorrel (Oxalis acetosella)"
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/plants/wild-flowers/wood-sorrel/
+  type: primary
+  published: 2026
+  published_note: "Living species page with no date line; counted as current (dating brief)."
+  accessed: 2026-11-10
+- key: naturescot-foraging-plants
+  title: "Foraging for Wild Plants (Scotland's Natural Larder, Gaelic Foraging Project)"
+  publisher: NatureScot
+  url: https://nnr.nature.scot/sites/default/files/2020-03/Publication%202020%20-%20Foraging%20for%20Wild%20Plants.pdf
+  type: primary
+  published: 2020
+  published_note: "Year in title and URL."
+  accessed: 2026-11-10
+- key: srwt-wild-garlic
+  title: "Seasonal recipes: wild garlic pesto (Wild at Heart project)"
+  publisher: Sheffield and Rotherham Wildlife Trust
+  url: https://www.wildsheffield.com/wp-content/uploads/2020/10/4.-Seasonal-Recipes_Wild-Garlic-Pesto.pdf
+  type: primary
+  published: 2020
+  published_note: "Upload folder in URL is October 2020."
+  accessed: 2026-11-10
+- key: wildlifetrusts-sea-beet
+  title: "Sea beet"
+  publisher: The Wildlife Trusts
+  url: https://www.wildlifetrusts.org/node/364
+  type: primary
+  published: 2026
+  published_note: "Living Wildlife Explorer species page with no date line; counted as current (dating brief)."
+  accessed: 2026-11-10
+- key: kentwt-sea-beet
+  title: "Sea beet"
+  publisher: Kent Wildlife Trust
+  url: https://www.kentwildlifetrust.org.uk/wildlife-explorer/wildflowers/sea-beet
+  type: primary
+  published: 2026
+  published_note: "Living species page; no date line, footer copyright 2026."
+  accessed: 2026-11-10
+- key: wildlifetrusts-glasswort
+  title: "Common glasswort"
+  publisher: The Wildlife Trusts
+  url: https://wildlifetrusts.org/node/365
+  type: primary
+  published: 2026
+  published_note: "Living Wildlife Explorer species page with no date line; counted as current (dating brief)."
+  accessed: 2026-11-10
+- key: wildlifetrusts-sea-buckthorn
+  title: "Sea-buckthorn"
+  publisher: The Wildlife Trusts
+  url: https://wildlifetrusts.org/node/570
+  type: primary
+  published: 2026
+  published_note: "Living Wildlife Explorer species page with no date line; counted as current (dating brief)."
+  accessed: 2026-11-10
+- key: wildlifewatch-wood-sorrel
+  title: "Wood sorrel"
+  publisher: Wildlife Watch (The Wildlife Trusts)
+  url: https://www.wildlifewatch.org.uk/wildlife-explorer/wildflowers/wood-sorrel
+  type: primary
+  published: 2026
+  published_note: "Living Wildlife Explorer species page with no date line; counted as current (dating brief)."
+  accessed: 2026-11-10
+- key: bha-harvest-2015
+  title: "Press information: British hop harvest 2015"
+  publisher: British Hop Association
+  url: https://www.britishhops.org.uk/app/uploads/2017/07/Press-Release-British-Hop-Harvest.pdf
+  type: primary
+  published: 2015
+  published_note: "Year in title."
+  accessed: 2026-11-10
+- key: siba-hop-harvest-2015
+  title: "British Hop Harvest 2015"
+  publisher: Society of Independent Brewers (SIBA)
+  url: https://siba.co.uk/2015/08/14/british-hop-harvest-2015/
+  type: trade
+  published: 2015
+  published_note: "Dated 14 Aug 2015."
+  accessed: 2026-11-10
+- key: fpj-samphire
+  title: "Glasshouse growing method replicates coastal microclimates to allow continuous UK supply"
+  publisher: Fresh Produce Journal (Fruitnet)
+  url: https://www.fruitnet.com/fresh-produce-journal/waitrose-launches-year-round-british-samphire-thanks-to-hydroponics/271877.article
+  type: trade
+  published: 2026
+  published_note: "No date line; reports the Waitrose year-round samphire launch of June 2026 (farminguk-samphire)."
+  accessed: 2026-11-10
+- key: grocer-samphire
+  title: "Waitrose becomes first supermarket to launch year-round British samphire"
+  publisher: The Grocer
+  url: https://www.thegrocer.co.uk/news/waitrose-becomes-first-supermarket-to-launch-year-round-british-samphire/720253.article
+  type: trade
+  published: 2026
+  published_note: "No date line; reports the Waitrose year-round samphire launch of June 2026 (farminguk-samphire)."
+  accessed: 2026-11-10
+- key: farminguk-samphire
+  title: "British samphire gets year-round supermarket supply boost"
+  publisher: FarmingUK
+  url: https://www.farminguk.com/news/british-samphire-gets-year-round-supermarket-supply-boost_68664.html
+  type: trade
+  published: 2026
+  published_note: "Dated 16 Jun 2026."
+  accessed: 2026-11-10
+- key: westlands-samphire
+  title: "We've extended our British samphire season"
+  publisher: Westlands UK
+  url: https://westlandsuk.co.uk/2026/06/16/weve-extended-our-british-samphire-season/
+  type: secondary
+  published: 2026
+  published_note: "Dated 16 Jun 2026 (in URL)."
+  accessed: 2026-11-10
+- key: cpre-norfolk-samphire
+  title: "Samphire season on the Norfolk coast"
+  publisher: CPRE Norfolk
+  url: https://www.cprenorfolk.org.uk/discover/samphire-season-on-the-norfolk-coast/
+  type: secondary
+  published: 2026
+  published_note: "No date line; its images sit in a June 2026 upload folder, so taken as 2026."
+  accessed: 2026-11-10
+- key: galloway-marsh-samphire
+  title: "Marsh Samphire – Identification, Edibility, Distribution"
+  publisher: Galloway Wild Foods
+  url: https://gallowaywildfoods.com/july-marsh-samphire/
+  type: secondary
+  published: 2011
+  published_note: "Dated 17 Jul 2011."
+  accessed: 2026-11-10
+- key: galloway-rock-samphire
+  title: "Rock Samphire – Identification, Edibility, Distribution"
+  publisher: Galloway Wild Foods
+  url: https://gallowaywildfoods.com/?p=1542
+  type: secondary
+  published: 2013
+  published_note: "Dated 1 Jul 2013."
+  accessed: 2026-11-10
+- key: galloway-sea-beet
+  title: "Sea beet – Identification, Distribution, Edibility, Sustainable Harvesting, Recipes"
+  publisher: Galloway Wild Foods
+  url: https://gallowaywildfoods.com/sea-beet-identification-distribution-edibility/
+  type: secondary
+  published: 2012
+  published_note: "Dated 15 Feb 2012."
+  accessed: 2026-11-10
+- key: galloway-sea-buckthorn
+  title: "Sea Buckthorn – Identification, Edibility, Distribution"
+  publisher: Galloway Wild Foods
+  url: https://old.gallowaywildfoods.com/?p=1760
+  type: secondary
+  published: 2014
+  published_note: "Dated 9 Oct 2014."
+  accessed: 2026-11-10
+- key: galloway-wood-sorrel
+  title: "Wood Sorrel – Identification, Edibility, Distribution, Ecology, Recipes"
+  publisher: Galloway Wild Foods
+  url: https://gallowaywildfoods.com/?p=54
+  type: secondary
+  published: 2010
+  published_note: "Dated 23 Dec 2010."
+  accessed: 2026-11-10
+- key: galloway-conifers
+  title: "Forager's Guide to Conifers"
+  publisher: Galloway Wild Foods
+  url: https://gallowaywildfoods.com/foragers-guide-to-conifers/
+  type: secondary
+  published: 2021
+  published_note: "Dated 15 Feb 2021."
+  accessed: 2026-11-10
+- key: wildwalks-marsh-samphire
+  title: "Wild Food: Marsh Samphire"
+  publisher: Wild Walks Southwest (Rachel Lambert)
+  url: https://wildwalks-southwest.co.uk/wild-food-marsh-samphire/
+  type: secondary
+  published: 2022
+  published_note: "Dated 3 Aug 2022."
+  accessed: 2026-11-10
+- key: wildwalks-sea-buckthorn
+  title: "Foraging for Sea Buckthorn Berries"
+  publisher: Wild Walks Southwest (Rachel Lambert)
+  url: https://wildwalks-southwest.co.uk/foraging-for-sea-buckthorn-berries/
+  type: secondary
+  published: 2020
+  published_note: "Dated 20 Aug 2020, updated 24 Aug 2020."
+  accessed: 2026-11-10
+- key: fcc-sea-beet
+  title: "Sea beet identification guide"
+  publisher: The Foraging Course Company
+  url: https://www.foragingcoursecompany.co.uk/post/foraging-guide-sea-beet
+  type: secondary
+  published: 2025
+  published_note: "First published Feb 2022; updated 16 Jan 2025."
+  accessed: 2026-11-10
+- key: fcc-marsh-samphire
+  title: "Marsh Samphire Identification"
+  publisher: The Foraging Course Company
+  url: https://www.foragingcoursecompany.co.uk/post/foraging-guide-marsh-samphire
+  type: secondary
+  published: 2025
+  published_note: "First published Jun 2020; updated 3 Feb 2025."
+  accessed: 2026-11-10
+- key: fcc-sea-buckthorn
+  title: "Sea Buckthorn Identification"
+  publisher: The Foraging Course Company
+  url: https://www.foragingcoursecompany.co.uk/post/foraging-guide-sea-buckthorn
+  type: secondary
+  published: 2025
+  published_note: "First published Mar 2020; updated 16 Jan 2025."
+  accessed: 2026-11-10
+- key: fcc-wood-sorrel
+  title: "Wood sorrel (Oxalis acetosella) identification"
+  publisher: The Foraging Course Company
+  url: https://www.foragingcoursecompany.co.uk/post/foraging-guide-wood-sorrel
+  type: secondary
+  published: 2025
+  published_note: "Published 19 Feb 2025."
+  accessed: 2026-11-10
+- key: wildfooduk-sea-beet
+  title: "Sea Beet"
+  publisher: Wild Food UK
+  url: https://www.wildfooduk.com/?p=19773
+  type: secondary
+  published: 2021
+  published_note: "First published Jul 2019; page metadata shows it modified Feb 2021."
+  accessed: 2026-11-10
+- key: wildfooduk-wood-sorrel
+  title: "Wood Sorrel"
+  publisher: Wild Food UK
+  url: https://www.wildfooduk.com/wild-plants/wood-sorrel/
+  type: secondary
+  published: 2023
+  published_note: "First published Jan 2018; page metadata shows it modified May 2023."
+  accessed: 2026-11-10
+- key: lovecairngorms-spring
+  title: "Spring Foraging guide"
+  publisher: Love Cairngorms
+  url: https://www.lovecairngorms.com/spring-foraging-guide
+  type: secondary
+  published: undated
+  published_note: "No date line; only a site-wide footer copyright 2026, which does not show when this guide was written."
+  accessed: 2026-11-10
+- key: courier-foraging-may
+  title: "Everything you need to know about foraging in May (Leanne Townsend, Wild Food Stories)"
+  publisher: The Courier
+  url: https://www.thecourier.co.uk/fp/lifestyle/food-drink/1322167/watch-everything-you-need-to-know-about-foraging-in-may/
+  type: secondary
+  published: undated
+  published_note: "No publication date shown on the page."
+  accessed: 2026-11-10
+- key: countryfile-monthly
+  title: "Monthly foraging guide: what's in season, where to find it, and how to forage responsibly"
+  publisher: BBC Countryfile
+  url: https://www.countryfile.com/how-to/foraging/monthly-foraging-guide-whats-in-season-where-to-find-it-and-how-to-forage-responsibly/
+  type: secondary
+  published: 2023
+  published_note: "First published Mar 2022; updated Sep 2023."
+  accessed: 2026-11-10
+- key: natgeo-calendar
+  title: "A year-round foraging calendar: what to pick and where in the UK"
+  publisher: National Geographic
+  url: https://www.nationalgeographic.com/travel/article/year-round-foraging-calendar-uk
+  type: secondary
+  published: 2023
+  published_note: "First published Jul 2020; updated Apr 2023."
+  accessed: 2026-11-10
+- key: caterer-wild-garlic
+  title: "How to forage for and use wild garlic"
+  publisher: The Caterer
+  url: https://thecaterer.com/all-content/how-to-forage-wild-garlic
+  type: secondary
+  published: 2022
+  published_note: "Dated 14 Apr 2022."
+  accessed: 2026-11-10
+- key: nts-wild-garlic
+  title: "Spring is wild garlic season!"
+  publisher: National Trust for Scotland
+  url: https://www.nts.org.uk/stories/spring-is-wild-garlic-season
+  type: secondary
+  published: undated
+  published_note: "No publication date shown on the page."
+  accessed: 2026-11-10
+- key: riverford-autumn-foraging
+  title: "Forage your way through autumn"
+  publisher: Wicked Leeks (Riverford)
+  url: https://wickedleeks.riverford.co.uk/lifestyle/forage-your-way-through-autumn/
+  type: secondary
+  published: 2022
+  published_note: "First published 9 Oct 2019; page metadata shows it modified May 2022."
+  accessed: 2026-11-10
+- key: riverford-hedgerow
+  title: "Hedgerow treasures"
+  publisher: Wicked Leeks (Riverford)
+  url: https://wickedleeks.riverford.co.uk/lifestyle/hedgerow-treasures/
+  type: secondary
+  published: 2022
+  published_note: "First published 9 Oct 2020; page metadata shows it modified May 2022."
+  accessed: 2026-11-10
+- key: countrylife-wild-fruit
+  title: "Nibbling at wild fruit is in our bones, so here's how to harvest the finest hedgerow bounty (John Wright)"
+  publisher: Country Life
+  url: https://www.countrylife.co.uk/food-drink/nibbling-at-wild-fruit-is-in-our-bones-so-heres-how-to-harvest-the-finest-hedgerow-bounty
+  type: secondary
+  published: 2025
+  published_note: "Dated 25 Sep 2025."
+  accessed: 2026-11-10
+- key: hukins-hop-harvest
+  title: "When are hops harvested? Discover the UK harvesting season"
+  publisher: Hukins Hops
+  url: https://www.hukins-hops.co.uk/our-story/news-press/when-are-hops-harvested-discover-the-uk-harvesting-season/
+  type: secondary
+  published: 2023
+  published_note: "Dated 23 Nov 2023."
+  accessed: 2026-11-10
+- key: adnams-hop-harvest
+  title: "It's Hop Harvesting Time"
+  publisher: Adnams
+  url: https://adnams.co.uk/blogs/journal/we-want-your-hops
+  type: secondary
+  published: 2021
+  published_note: "Dated 1 Sep 2021."
+  accessed: 2026-11-10
+- key: maltmiller-wild-hops
+  title: "Wild Hops Brewing: How to Find, Pick & Brew Green Hops"
+  publisher: The Malt Miller
+  url: https://www.themaltmiller.co.uk/blog/foraging-brewing-green-hops/
+  type: secondary
+  published: 2026
+  published_note: "Dated 8 Jun 2026."
+  accessed: 2026-11-10
+- key: slowfood-hopshoots
+  title: "Hopshoots (Ark of Taste)"
+  publisher: Slow Food in the UK
+  url: https://www.slowfood.org.uk/ark-product/hopshoots/
+  type: secondary
+  published: 2023
+  published_note: "No date line; catalogue page with footer copyright 2023."
+  accessed: 2026-11-10
+- key: hogsback-hop-shoots
+  title: "Hop shoots aplenty for the Tongham TEA Club"
+  publisher: Hogs Back Brewery
+  url: https://hogsback.co.uk/blogs/latest-news/hop-shoots-aplenty-tongham-tea-club
+  type: secondary
+  published: undated
+  published_note: "No date line; the event is dated 13 April with no year, and the footer copyright (2026) is site-wide."
+  accessed: 2026-11-10
+- key: totallywild-hops
+  title: "Hops (Humulus lupulus) Identification"
+  publisher: Totally Wild UK
+  url: https://totallywilduk.co.uk/?p=49806
+  type: secondary
+  published: 2025
+  published_note: "First published Dec 2022; updated Mar 2025."
+  accessed: 2026-11-10
+- key: woodlandways-spruce-beer
+  title: "Spruce Beer"
+  publisher: Woodland Ways
+  url: https://blog.woodland-ways.co.uk/?p=2524
+  type: secondary
+  published: 2013
+  published_note: "Dated 12 Jun 2013."
+  accessed: 2026-11-10
+- key: rab-spruce-beer
+  title: "Spruce Beer Part 1: Spruce Picking"
+  publisher: Reading Amateur Brewers
+  url: https://readingamateurbrewers.co.uk/spruce-beer-part-1-spruce-picking/
+  type: secondary
+  published: undated
+  published_note: "No publication date shown on the page."
+  accessed: 2026-11-10
+# --- Second pass (gap fill), 2026-11-10. Trees for Life (Scottish conservation charity) is ranked primary,
+# in line with the Woodland Trust and Wildlife Trusts above.
+- key: tfl-blaeberry
+  title: "Blaeberry"
+  publisher: Trees for Life
+  url: https://treesforlife.org.uk/forest/species-profiles/blaeberry/
+  type: primary
+  published: 2025
+  published_note: "Living species profile; page metadata shows it modified Feb 2025."
+  accessed: 2026-11-10
+- key: wildlifetrusts-bilberry
+  title: "Bilberry"
+  publisher: The Wildlife Trusts
+  url: https://wildlifetrusts.org/node/284248
+  type: primary
+  published: 2026
+  published_note: "Living Wildlife Explorer species page with no date line; counted as current (dating brief)."
+  accessed: 2026-11-10
+- key: obantimes-blaeberry
+  title: "Wild Words (column, 20 August 2020; quotes A Handbook of Scotland's Wild Harvests)"
+  publisher: The Oban Times (via PressReader)
+  url: https://www.pressreader.com/uk/the-oban-times/20200820/282316797406296
+  type: secondary
+  published: 2020
+  published_note: "Dated 20 Aug 2020 (in title and URL)."
+  accessed: 2026-11-10
+- key: visitcairngorms-foraging
+  title: "Go wild for foraging in the Cairngorms National Park"
+  publisher: Visit Cairngorms
+  url: https://www.visitcairngorms.com/?p=1108
+  type: secondary
+  published: 2024
+  published_note: "First published Aug 2015; page metadata shows it modified Jan 2024."
+  accessed: 2026-11-10
+- key: ukh-hill-berries
+  title: "Food for Free: How to Identify Edible Berries on the Hills (Graham Uney)"
+  publisher: UKHillwalking
+  url: https://www.ukhillwalking.com/articles/page.php?id=8622
+  type: secondary
+  published: undated
+  published_note: "No publication date shown on the page."
+  accessed: 2026-11-10
+- key: spurtle-wild-garlic
+  title: "Food for free (Charlie Ellis, 27 March 2023)"
+  publisher: Broughton Spurtle
+  url: https://broughtonspurtle.org.uk/news/food-free
+  type: secondary
+  published: 2023
+  published_note: "Dated 27 Mar 2023."
+  accessed: 2026-11-10
+- key: galloway-wild-garlic
+  title: "Wild Garlic/Ramsons – Edibility, Identification, Distribution, Ecology, Recipes"
+  publisher: Galloway Wild Foods
+  url: https://gallowaywildfoods.com/wild-garlicramsons-edibility-identification-distribution/
+  type: secondary
+  published: 2012
+  published_note: "Dated 2 Feb 2012."
+  accessed: 2026-11-10
+- key: scotsman-wild-garlic
+  title: "How to harvest and cook wild garlic - and the best places to find it in Scotland"
+  publisher: The Scotsman Food and Drink
+  url: https://foodanddrink.scotsman.com/food/how-to-harvest-and-cook-wild-garlic-and-the-best-places-to-find-it-in-scotland/
+  type: secondary
+  published: undated
+  published_note: "No date line; only a site-wide footer copyright 2026."
+  accessed: 2026-11-10
+- key: totallywild-dandelion
+  title: "Dandelion (Taraxacum officinale) Identification"
+  publisher: Totally Wild UK
+  url: https://totallywilduk.co.uk/?p=5589
+  type: secondary
+  published: 2026
+  published_note: "First published Nov 2018; updated 7 Jan 2026."
+  accessed: 2026-11-10
+- key: klmag-samphire
+  title: "On the trail of a truly natural Norfolk delicacy"
+  publisher: KL Magazine
+  url: https://klmagazine.co.uk/articles/on-the-trail-of-a-truly-natural-norfolk-delicacy
+  type: secondary
+  published: undated
+  published_note: "No date line; only a site-wide footer copyright 2026."
+  accessed: 2026-11-10
+- key: riverford-donald-watson
+  title: "Growers & makers: Donald Watson"
+  publisher: Riverford
+  url: https://rc.riverford.co.uk/growers/donald-watson
+  type: secondary
+  published: undated
+  published_note: "Grower profile with no date line or copyright year."
+  accessed: 2026-11-10
+- key: riverford-foraging-mud
+  title: "Foraging in the mud (Guy Singh-Watson, 7 July 2022)"
+  publisher: Wicked Leeks (Riverford)
+  url: https://wickedleeks.riverford.co.uk/opinion/foraging-in-the-mud/
+  type: secondary
+  published: 2022
+  published_note: "Dated 7 Jul 2022."
+  accessed: 2026-11-10
+- key: vice-samphire
+  title: "Tracing the muddy roots of samphire, Norfolk's beloved sea vegetable (11 September 2018)"
+  publisher: Vice
+  url: https://vice.com/en/article/tracing-the-muddy-roots-of-samphire-norfolks-beloved-sea-vegetable
+  type: secondary
+  published: 2018
+  published_note: "Dated 11 Sep 2018."
+  accessed: 2026-11-10
+- key: wildwalks-rock-samphire
+  title: "Rock Samphire Salsa Verde"
+  publisher: Wild Walks Southwest (Rachel Lambert)
+  url: https://wildwalks-southwest.co.uk/?p=2906
+  type: secondary
+  published: 2023
+  published_note: "First published Jul 2018; updated 16 Sep 2023."
+  accessed: 2026-11-10
+- key: wildfooduk-rock-samphire
+  title: "Rock Samphire"
+  publisher: Wild Food UK
+  url: https://www.wildfooduk.com/wild-plants/rock-samphire/
+  type: secondary
+  published: 2023
+  published_note: "First published Mar 2020; page metadata shows it modified Sep 2023."
+  accessed: 2026-11-10
+- key: countryfile-wood-sorrel
+  title: "Wood sorrel: how to identify, forage and use this zingy herb (Sonya Patel Ellis)"
+  publisher: BBC Countryfile
+  url: https://countryfile.com/how-to/food-recipes/foraging-food-recipes/wood-sorrel-how-to-identify-forage-and-use-this-zingy-herb
+  type: secondary
+  published: 2024
+  published_note: "Dated 3 Jul 2024."
+  accessed: 2026-11-10
+- key: beerguild-hop-shoots
+  title: "Brewers eat shoots but don't leave: the London Hop Shoot Festival"
+  publisher: British Guild of Beer Writers
+  url: https://www.beerguild.co.uk/news/brewers-eat-shoots-but-dont-leave-the-london-hop-shoot-festiva/
+  type: trade
+  published: 2012
+  published_note: "No date line; it reports the London Hop Shoot Festival of 27-29 April 2012 (hotdinners-hop-shoots), so taken as 2012."
+  accessed: 2026-11-10
+- key: hotdinners-hop-shoots
+  title: "London's first hop shoot festival launches with Kent to London dash (27 April 2012)"
+  publisher: Hot Dinners
+  url: https://hot-dinners.com/Gastroblog/Latest-news/londons-first-hop-shoot-festival-launches-with-kent-to-london-dash
+  type: secondary
+  published: 2012
+  published_note: "Dated 27 Apr 2012."
+  accessed: 2026-11-10

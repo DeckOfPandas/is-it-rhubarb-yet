@@ -1,0 +1,330 @@
+# Is It Rhubarb Yet? — clean-room seasonality, group roots-alliums (researched 2026-11-10)
+# Week n = days 7n-6..7n from 1 Jan; month weeks: Jan 1-4, Feb 5-8, Mar 9-13, Apr 14-17, May 18-22,
+# Jun 23-26, Jul 27-30, Aug 31-35, Sep 36-39, Oct 40-43, Nov 44-48, Dec 49-52.
+
+# ---------------- Roots & tubers ----------------
+
+- name: "Beetroot"
+  slug: beetroot
+  group: roots-tubers
+  lines:
+    - name: "Beetroot"
+      kind: whole
+      confidence: moderate
+      sources: [countryside-foskett-beetroot, fpj-beetroot-season-underway, defra-wholesale-notice-2016-01, defra-wholesale-notice-2016-07, freshview-seasonality]
+      weeks:
+        - [1, 25, store]
+        - [26, 26, avail]
+        - [27, 43, in]
+        - [44, 52, store]
+      notes:
+        season: "Fresh harvest: a Suffolk grower supplying G's Fresh drills in March-April and lifts July to October, sending about a quarter straight to market and clamping the rest under straw to supply through the winter (countryside-foskett-beetroot). First UK crop of one season was lifted on 30 June (fpj-beetroot-season-underway), shown as avail. Store: Defra monthly wholesale notices quote home-grown beetroot in every month from Aug 2015 to Jul 2016 except January (defra-wholesale-notice-2016-01; defra-wholesale-notice-2016-07); with fresh lifting not starting until late June, the Nov-June supply must be stored crop. A supplier's calendar also lists UK beetroot all year (freshview-seasonality)."
+        discrepancy: "Clamp storage is straw-covered field storage, not controlled storage; it is marked store because the roots are lifted and held, not left growing. The store end (wk 25) is inferred from the Defra quotes, not stated by a grower; no source says how long clamped or cold-stored UK beetroot lasts."
+        year_round: "On sale all year, fresh July-October and from store otherwise (defra-wholesale-notice-2016-07). The single avail week is the first lifting in late June, not a shortage."
+
+- name: "Carrots"
+  slug: carrots
+  group: roots-tubers
+  lines:
+    - name: "Carrots"
+      kind: whole
+      confidence: high
+      sources: [ahdb-harvested-in-britain, bga-carrots-2019, farmersguide-bcga-carrots-2024, ahdb-carrot-field-storage, freshplaza-bcga-carrots-2026-01, freshplaza-bcga-carrots-2026-05, fpj-carrots-hungry-gap]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Lifted fresh almost all year (farmersguide-bcga-carrots-2024; bga-carrots-2019): early crops under fleece June-Aug, green-top Aug to first frosts, strawed crops left in the ground and lifted Dec to late May (ahdb-carrot-field-storage). Field-held carrots are fresh harvest, not store (rule 3). No source found for cold-stored UK carrots. New English crop from about the second week of June in Norfolk/Suffolk, mid-July in Yorkshire; Scottish field-held crop fills April-May (freshplaza-bcga-carrots-2026-05; fpj-carrots-hungry-gap)."
+        discrepancy: "Supply can be thin in late May to early June (wks 21-23) when the old English crop is finished; in 2026 imports filled the gap (freshplaza-bcga-carrots-2026-05). Not treated as a gap because primary sources describe year-round supply."
+
+- name: "Celeriac"
+  slug: celeriac
+  group: roots-tubers
+  lines:
+    - name: "Celeriac"
+      kind: whole
+      confidence: moderate
+      sources: [fpj-celeriac-sales-surge, jackbuck-fg-interview-2020]
+      weeks:
+        - [1, 30, store]
+        - [31, 48, in]
+        - [49, 52, store]
+      notes:
+        season: "Jack Buck Farms near Spalding, said to grow about 90% of UK celeriac, lifts August to November and holds the crop in store until July (fpj-celeriac-sales-surge). The farm's own account: plants raised under glass in April, main crop planted out in May, lifting from August/September and finished by November, then sold from store through winter, almost all year round; December is the busiest month (jackbuck-fg-interview-2020)."
+        discrepancy: "Both sources trace back to the same grower, so this is effectively one grower's season. 'Until July' read as through July (wk 30), leaving no gap before the August harvest."
+
+- name: "Horseradish"
+  slug: horseradish
+  group: roots-tubers
+  lines:
+    - name: "Cultivated"
+      kind: method
+      confidence: low
+      sources: [tracklements-horseradish, rhs-horseradish, defra-wholesale-notice-2016-01, freshview-seasonality, vegsoc-seasonal, nfu-seasonality-chart]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Third pass; split into Cultivated and Wild because the sources treat them separately. Tracklements says its fresh English horseradish root is grown for it in East Anglia and south-east England by a small company that grows only horseradish, and is harvested all year round (tracklements-horseradish). No peak named by a primary source, so in all year (rule 3). The RHS says garden roots are best lifted in autumn or early winter but can be lifted in spring and summer (rhs-horseradish); that is garden advice, not a commercial peak. Low: secondary sources only; the grower is unnamed. Not in AHDB's Harvested in Britain, the Defra wholesale price notices (defra-wholesale-notice-2016-01), a supplier calendar (freshview-seasonality), the Vegetarian Society calendar (vegsoc-seasonal) or the NFU seasonality chart (nfu-seasonality-chart)."
+    - name: "Wild"
+      kind: method
+      confidence: low
+      sources: [foragingcourse-horseradish, totallywild-horseradish]
+      weeks:
+        - [49, 52, in]
+      notes:
+        season: "Third pass: two foraging guides say wild horseradish root is best harvested in early winter (foragingcourse-horseradish, totallywild-horseradish), read as December. No months are given, so this is a narrow reading; secondary sources only. The young leaves are picked spring to autumn (foragingcourse-horseradish), but this line covers the root."
+
+- name: "Jerusalem artichokes"
+  slug: jerusalem-artichokes
+  group: roots-tubers
+  lines:
+    - name: "Jerusalem artichokes"
+      kind: whole
+      confidence: low
+      sources: [vegsoc-seasonal, freshview-seasonality]
+      weeks:
+        - [1, 8, in]
+        - [9, 13, avail]
+        - [40, 43, avail]
+        - [44, 52, in]
+      notes:
+        season: "Secondary sources only. In = November-February, the months both sources agree on: the Vegetarian Society lists Nov-Feb (vegsoc-seasonal); a North West supplier's market calendar has UK/English artichokes from October to March (freshview-seasonality), so October and March are shown as avail. No grower, AHDB, NFU or Defra source found; not in the NFU chart's item list or the Defra price notices."
+        discrepancy: "freshview-seasonality runs about four weeks longer at each end (Oct-Mar) than vegsoc-seasonal (Nov-Feb)."
+
+- name: "Parsnips"
+  slug: parsnips
+  group: roots-tubers
+  lines:
+    - name: "Parsnips"
+      kind: whole
+      confidence: moderate
+      sources: [ahdb-harvested-in-britain, fpj-roots-differing-seasons, fpj-parsnip-underdog, fpj-british-veg-roots, morningadvertiser-pauleys-2007, defra-wholesale-notice-2016-01, defra-wholesale-notice-2016-07, freshview-crop-report-2025-07]
+      weeks:
+        - [1, 17, in]
+        - [18, 26, avail]
+        - [27, 52, in]
+      notes:
+        season: "Field crop lifted fresh for most of the year; roots left in the ground under straw and lifted as needed are fresh, not store (rule 3; ahdb-harvested-in-britain). New British roots season, parsnips included, began in July (Huntapac, fpj-british-veg-roots); Produce World expected the new UK crop on shelves in June (fpj-parsnip-underdog). The old crop runs to April-May, when supply gets tight (Produce World, fpj-roots-differing-seasons). Alan Bartlett & Sons sells parsnips through the year but plans a three-to-four-week import window to bridge old and new crops (fpj-parsnip-underdog); its timing within May-June is not stated, so May-June is avail. Defra monthly notices quote home-grown parsnips in every month from Aug 2015 to Jun 2016, at their dearest in June (defra-wholesale-notice-2016-01; defra-wholesale-notice-2016-07). AHDB singles out winter, when frost sweetens the roots (ahdb-harvested-in-britain), and a foodservice supplier called November the start of the parsnip season (morningadvertiser-pauleys-2007), but neither gives months, so no winter peak is split out."
+        discrepancy: "New-crop start: June per Produce World (fpj-parsnip-underdog) vs July per Huntapac (fpj-british-veg-roots), up to four weeks apart; both articles are undated and from different years. In starts at July, with June as avail. Source-age pass: the season-naming sources are old or undated (fpj-roots-differing-seasons 2004; FPJ pieces about 2012-15), with year-round supply from the 2016 Defra notices. The only newer source found, a wholesaler's July 2025 crop report, expected UK parsnips back toward the end of July (about wk 30-31), three to four weeks after the July start; it is secondary and covers one year, so dates not moved (freshview-crop-report-2025-07)."
+        year_round: "On sale nearly all year. In = July to April, the season growers name; May-June is avail because the old crop is tailing off and the new crop just starting, not because parsnips are hard to find. Previous Dec-Feb window (a reading of AHDB's 'winter') replaced."
+
+- name: "Potatoes"
+  slug: potatoes
+  group: roots-tubers
+  lines:
+    - name: "New"
+      kind: variety
+      confidence: high
+      sources: [defra-pgi-pembrokeshire-earlies, scotgov-pgi-ayrshire-earlies, defra-pgi-comber-earlies, ahdb-harvested-in-britain, fpj-cornish-first-lifted, caterer-new-potatoes]
+      weeks:
+        - [17, 17, avail]
+        - [18, 30, in]
+        - [31, 33, avail]
+      notes:
+        season: "Three UK PGI specs (Pembrokeshire, Ayrshire, Comber in NI) all set harvest from the start of May to the end of July, and call anything lifted later maincrop; AHDB says earlies are usually harvested from May (ahdb-harvested-in-britain). First Cornish liftings can come in late April (fpj-cornish-first-lifted). Tail to mid-August from trade (caterer-new-potatoes). Ayrshire and Comber kept in this note rather than as lines because their dates match. Jersey Royals excluded (Jersey is not UK)."
+    - name: "Pembrokeshire"
+      kind: region
+      confidence: high
+      sources: [defra-pgi-pembrokeshire-earlies]
+      weeks:
+        - [18, 30, in]
+      notes:
+        season: "PGI spec: usually harvested from the beginning of May to the end of July, weather permitting, after test digs; sold as quickly as possible after lifting (defra-pgi-pembrokeshire-earlies). Added as Helen asked for it; dates as for New."
+    - name: "Cornish"
+      kind: region
+      confidence: low
+      sources: [freshplaza-cornish-potatoes-2024, fpj-cornish-campaign, fpj-cornish-first-lifted, grocer-cornish-campaign, wikipedia-uk-protected-foods, freshview-seasonality]
+      weeks:
+        - [17, 24, avail]
+        - [25, 33, in]
+      notes:
+        season: "Cornish new potatoes have no PGI (wikipedia-uk-protected-foods), so only trade sources exist. In = the national retail window named by the packer Branston: 24 June to mid-August in 2024, 20 June to early August in another year (freshplaza-cornish-potatoes-2024; fpj-cornish-campaign). Earlier liftings from late April go first to Cornish and South West stores (fpj-cornish-first-lifted; grocer-cornish-campaign), shown as avail. A North West supplier's calendar agrees: first Cornish in April, main Cornish supply from the end of June (freshview-seasonality). Second pass found no grower body or Defra source; the Caterer's alliums and potatoes pieces could not be fetched."
+        discrepancy: "The named window is a retailer programme rather than a grower season; the PGI earlies elsewhere run May-July (wks 18-30). Gap is more than four weeks at the start, hence low."
+    - name: "Maincrop"
+      kind: variety
+      confidence: moderate
+      sources: [ahdb-harvested-in-britain, ahdb-potato-lifting-2020, defra-pgi-pembrokeshire-earlies, fpj-potato-stocks-2017, potatopro-cranfield-storage-2025]
+      weeks:
+        - [1, 22, store]
+        - [31, 35, avail]
+        - [36, 43, in]
+        - [44, 52, store]
+      notes:
+        season: "Lifted late summer to early autumn and, with modern storage, usually on sale Sept to May (ahdb-harvested-in-britain). In = Sept-Oct lifting: by 20 Oct 2020, 77% of the GB area was lifted and maincrop lifting was well under way (ahdb-potato-lifting-2020). August = early maincrop after the PGI 31 July cut-off (defra-pgi-pembrokeshire-earlies). Store = Nov-May; AHDB estimated about 1 Mt still in growers' stores at end of March (fpj-potato-stocks-2017)."
+        discrepancy: "Cranfield researchers say storage of up to eight months may be halved to about four since the CIPC sprout suppressant was withdrawn (potatopro-cranfield-storage-2025), so the late-spring store tail may be thinner than AHDB's 2015 Sept-May figure suggests."
+
+- name: "Radishes"
+  slug: radishes
+  group: roots-tubers
+  lines:
+    - name: "Salad radish"
+      kind: variety
+      confidence: low
+      sources: [vegsoc-seasonal]
+      weeks:
+        - [9, 43, in]
+      notes:
+        season: "Added at the coordinator's request (ordinary red salad radish alongside Mooli). Secondary source only: the Vegetarian Society lists radishes March to October (vegsoc-seasonal). A Manchester co-op grocer sold local radishes in July 2019, consistent with this. No grower, AHDB, NFU or Defra source found (radishes are not in the Defra price notices). Whether early or late supply is under glass or fleece (rule 6) is unknown; the shared web-search budget ran out before a radish-specific grower search returned results."
+    - name: "Mooli"
+      kind: variety
+      confidence: low
+      sources: []
+      weeks: []
+      notes:
+        season: "Third pass: still no source for UK-grown mooli or daikon. Mooli is absent from the Vegetarian Society calendar (vegsoc-seasonal), a supplier calendar (freshview-seasonality), the Defra wholesale price notices (defra-wholesale-notice-2016-01), AHDB's Harvested in Britain and Fresh Direct's 2024 market reviews. Searches for mooli growers in Kent, Lincolnshire, Bedfordshire and the Fens, and in FPJ, FreshPlaza and The Grocer, found only garden seed listings and allotment forums; no named commercial grower. Whether any commercial UK supply exists is unconfirmed. Dates not copied from Salad radish (rule 8)."
+
+- name: "Salsify"
+  slug: salsify
+  group: roots-tubers
+  lines:
+    - name: "Salsify"
+      kind: whole
+      confidence: moderate
+      sources: [caterer-salsify-2019, scottishfarmer-ab-salsify, grocer-ab-salsify, freshview-seasonality]
+      weeks:
+        - [1, 8, in]
+        - [9, 13, avail]
+        - [39, 52, in]
+      notes:
+        season: "Main UK grower is Albert Bartlett (black salsify, Cambridgeshire and Ayrshire). UK harvest starts in late September and supply runs to the end of February (caterer-salsify-2019). Albert Bartlett says harvest is usually late September to December and expected the season to run into spring (scottishfarmer-ab-salsify; grocer-ab-salsify), so March is avail. A supplier calendar notes UK-grown salsify in March-April (freshview-seasonality)."
+        discrepancy: "Whether Jan-Mar supply is stored roots or late liftings is not stated: AB's harvest ends in December but supply continues to spring. The Caterer's 2019 market report said salsify then on sale was mainly Belgian (caterer-salsify-2019)."
+
+- name: "Swede"
+  slug: swede
+  group: roots-tubers
+  lines:
+    - name: "Swede"
+      kind: whole
+      confidence: moderate
+      sources: [caterer-swede-2017, fpj-roots-differing-seasons, freshplaza-esg-neeps-2025, defra-wholesale-notice-2016-01, defra-wholesale-notice-2016-07, freshview-seasonality, ltf-seasons-poster]
+      weeks:
+        - [1, 17, in]
+        - [18, 23, store]
+        - [24, 25, avail]
+        - [26, 52, in]
+      notes:
+        season: "Fresh harvest: a Devon grower (Frank Clarke and Sons) sows from early March and harvests from mid-June to April, using successive varieties; a market report has first roots in late June, continuing through winter (caterer-swede-2017). Mid-June liftings shown as avail, late June onwards as in. Store: swede can be cold-stored for year-round supply (caterer-swede-2017); Produce World used refrigerated storage to carry old-crop swede beyond May until the new season in June or July (fpj-roots-differing-seasons). ESG Drysdale, a large Scottish swede grower, says swede keeps well and is available all year (freshplaza-esg-neeps-2025). Defra monthly notices quote home-grown swede in every month from Aug 2015 to Jun 2016 (defra-wholesale-notice-2016-01; defra-wholesale-notice-2016-07). A supplier calendar has UK swede ending in May and restarting in July (freshview-seasonality); a schools poster lists it all year (ltf-seasons-poster)."
+        discrepancy: "Whether Jan-Apr supply is field-lifted or stored is unclear: the Devon grower harvests to April, but Produce World's storage ran before May too. New-season start varies: mid-June (caterer-swede-2017) vs June or July (fpj-roots-differing-seasons) vs July (freshview-seasonality)."
+        year_round: "On sale all year (freshplaza-esg-neeps-2025). Mid-June is avail only because it is the first liftings; May to mid-June is old crop from cold store."
+
+- name: "Turnips"
+  slug: turnips
+  group: roots-tubers
+  lines:
+    - name: "Turnips"
+      kind: whole
+      confidence: low
+      sources: [defra-wholesale-notice-2016-01, defra-wholesale-notice-2016-07, vegsoc-seasonal, freshview-seasonality, hortnews-turnip-grower-2023]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "No grower or body names a turnip season. Defra monthly notices quote home-grown turnip prices in every month from Aug 2015 to Jun 2016 (defra-wholesale-notice-2016-01; defra-wholesale-notice-2016-07); July was not covered by the notices read, but the Vegetarian Society lists June-July (vegsoc-seasonal). Treated as available all year with no named peak, so in all year (rule 3). Whether winter-spring supply is stored is unknown. UK turnip production has shrunk by about two-thirds in 15 years, and one London wholesaler imports 70-80% of its turnips from France (hortnews-turnip-grower-2023), so UK supply may be thin."
+        discrepancy: "vegsoc-seasonal lists only Jan, Jun-Jul and Sep-Dec; a supplier calendar has British turnips in December, ending in April (freshview-seasonality). Both are secondary and conflict with the year-round Defra quotes. Low because the dates rest on reading one year of price tables, not on a named season."
+
+# ---------------- Alliums ----------------
+
+- name: "Garlic"
+  slug: garlic
+  group: alliums
+  lines:
+    - name: "Wet (green)"
+      kind: method
+      confidence: low
+      sources: [garlicfarm-rhapsody-wight, garlicfarm-early-wight, fpj-garlic-veterans]
+      weeks:
+        - [18, 26, in]
+        - [27, 37, avail]
+      notes:
+        season: "Split added: wet garlic is lifted and sold undried, with dates distinct from dried bulbs. The Isle of Wight grower sells first-of-season bulbs as green garlic in May-June, drying from July (garlicfarm-rhapsody-wight; garlicfarm-early-wight). An East Anglian supplier sold fresh green garlic to supermarkets June to mid-September (fpj-garlic-veterans), shown as avail. Second pass found no further source; the Caterer's alliums piece could not be fetched and the web-search budget ran out."
+    - name: "Dried"
+      kind: method
+      confidence: low
+      sources: [garlicfarm-growing-guide, garlicfarm-early-wight, rhs-garlic, vegsoc-seasonal]
+      weeks:
+        - [1, 17, store]
+        - [27, 39, in]
+        - [40, 52, store]
+      notes:
+        season: "Split added: dried bulbs follow a later harvest and are then held in store. Harvest runs May-July, with spring-planted types ready in late July (garlicfarm-growing-guide); RHS says spring-planted garlic is ready mid-summer to early autumn. Dry bulbs on sale from July (garlicfarm-early-wight). The Vegetarian Society lists garlic July-September (vegsoc-seasonal), matching the in window. Second pass: no AHDB, NFU or Defra source covers garlic, and the Caterer's alliums piece could not be fetched, so still secondary only."
+        discrepancy: "Store end is my extrapolation from RHS home-storage guidance: softneck keeps to mid-spring, hardneck four to six months (rhs-garlic). No commercial storage source found."
+
+- name: "Leeks"
+  slug: leeks
+  group: alliums
+  lines:
+    - name: "Leeks"
+      kind: whole
+      confidence: moderate
+      sources: [freshplaza-esg-leeks-2026, ahdb-harvested-in-britain, freshview-crop-report-2025-07, defra-pgi-welsh-leeks]
+      weeks:
+        - [1, 17, in]
+        - [18, 22, avail]
+        - [27, 52, in]
+      notes:
+        season: "Source-age pass of 10 Nov 2026: the dates rested only on ahdb-harvested-in-britain (2015), so the line was lowered to low and refreshed. ESG Drysdale, a Scottish leek grower, runs its season from July to the end of April and can hold leeks in store through June (freshplaza-esg-leeks-2026, 2026). AHDB agrees on new-season leeks by early July, held in the ground over winter and on sale 11 months of the year (ahdb-harvested-in-britain); a wholesaler expected new-season UK leeks at the end of June or start of July 2025 (freshview-crop-report-2025-07). May is avail as the tail of the old crop. June (wks 23-26) is the gap; ESG's stored leeks are one grower's, so not marked store. Field-held leeks are fresh, not store (rule 3)."
+        discrepancy: "Dates moved in the source-age pass: previously in Jan-May (wks 1-22) and July-Dec, after AHDB's 11 months on sale (ahdb-harvested-in-britain, 2015); now in to the end of April (wk 17) per freshplaza-esg-leeks-2026, with May avail. Welsh Leeks PGI starts harvest in August (wk 31), about four weeks after the July start (defra-pgi-welsh-leeks)."
+    - name: "Welsh (PGI)"
+      kind: region
+      confidence: high
+      sources: [defra-pgi-welsh-leeks]
+      weeks:
+        - [1, 17, in]
+        - [18, 22, avail]
+        - [31, 52, in]
+      notes:
+        season: "Split added: Welsh Leeks is a UK PGI with its own dates. Harvested from August through to April/May; spring-sown crops ready from mid-August; some stand in the field up to 12 months. Short cold storage of up to four weeks is allowed to balance supply, too short to mark as store (defra-pgi-welsh-leeks). May shown as avail because the spec says April/May."
+
+- name: "Onions"
+  slug: onions
+  group: alliums
+  lines:
+    - name: "Maincrop (seed-grown)"
+      kind: variety
+      confidence: moderate
+      sources: [ahdb-harvested-in-britain, fpj-onions-year-round, freshplaza-bopa-2019, freshplaza-bopa-2026]
+      weeks:
+        - [1, 30, store]
+        - [34, 39, in]
+        - [40, 43, avail]
+        - [44, 52, store]
+      notes:
+        season: "Split added: sets and seed-grown maincrop are lifted at different times. Seed-grown onions are harvested late August and September (ahdb-harvested-in-britain). Store chain: ambient store Nov-Feb, cold store Feb-June, controlled atmosphere June-July; onions available nearly all year (ahdb-harvested-in-britain). October shown as avail (cured crop before ambient store). The 2026 crop matured early, some over a month ahead of normal, and supply is expected to be shorter (freshplaza-bopa-2026)."
+        discrepancy: "One grower finished packing UK stored crop in mid-July (wk 28), with two to three weeks of imports in July (fpj-onions-year-round); AHDB has CA stock covering all of July (to wk 30). In 2019 UK stocks ran very low by late May (freshplaza-bopa-2019)."
+    - name: "Sets and overwintered"
+      kind: variety
+      confidence: moderate
+      sources: [ahdb-harvested-in-britain, fpj-onions-year-round, freshplaza-bopa-2019]
+      weeks:
+        - [29, 39, in]
+      notes:
+        season: "Split added: onions grown from sets are ready to lift from mid-July (ahdb-harvested-in-britain); overwintered and early spring-set crops cover late July and run into September (fpj-onions-year-round). BOPA puts the new season start at late July/August (freshplaza-bopa-2019)."
+
+- name: "Shallots"
+  slug: shallots
+  group: alliums
+  lines:
+    - name: "Shallots"
+      kind: whole
+      confidence: low
+      sources: [fpj-shallots-back, rhs-shallots]
+      weeks:
+        - [1, 13, store]
+        - [31, 39, in]
+        - [40, 52, store]
+      notes:
+        season: "One grower's (Kitchen Garden Produce) British shallot season was due to start in August (fpj-shallots-back); RHS says shallots ripen mid to late summer and store for at least six to eight months (rhs-shallots). Second pass found no further source: shallots are absent from the NFU chart's item list, the Defra price notices and the Vegetarian Society calendar, and the web-search budget ran out."
+        discrepancy: "End of the season is undocumented; Aug-Sep harvest is a reading of 'mid to late summer', and the store window to end of March is my extrapolation from RHS home-storage guidance. No commercial storage source found."
+
+- name: "Spring onions"
+  slug: spring-onions
+  group: alliums
+  lines:
+    - name: "Spring onions"
+      kind: whole
+      confidence: moderate
+      sources: [freshplaza-spring-onions-2015, gs-sandfields-spring-onions, vegsoc-seasonal]
+      weeks:
+        - [14, 16, avail]
+        - [17, 40, in]
+      notes:
+        season: "First UK spring onions (Vale of Evesham, Worcestershire) reached shelves in the week of 24 April 2015; the season usually runs to about the beginning of October, with peak volumes about a month after the start (Jacana Produce, freshplaza-spring-onions-2015). G's, which packs spring onions at Pershore, gives availability as April to September (gs-sandfields-spring-onions); early April shown as avail. No source says any UK supply is protected, so no method line (rule 6)."
+        discrepancy: "vegsoc-seasonal lists spring onions January to October, about 16 weeks earlier at the start; it is secondary and gives no basis, so it is not used for dates. gs-sandfields-spring-onions starts in April, about three weeks before the trade source."

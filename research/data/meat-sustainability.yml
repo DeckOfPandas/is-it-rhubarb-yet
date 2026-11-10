@@ -1,0 +1,489 @@
+# Meat and game sustainability and environmental impact (researched 2026-11-10)
+# Third-party data only: every figure, tier and buying line is attributed to a named body.
+# No scores or tiers of our own. Source keys resolve in sources/meat-sustainability.yml.
+#
+# Statistics: OWID's Poore & Nemecek charts give global MEANS (owid-ghg-per-kg, owid-ghg-per-protein,
+# owid-land-use-per-protein). Medians appear only in OWID articles: per 100 g protein in owid-less-meat
+# (2020) and, per kg, in the old supply-chain chart quoted in owid-faq-impacts and
+# owid-environmental-impacts, which excluded supply-chain losses. Each block says which is which.
+# Units differ: OWID is per kg of food product; UK farm studies are per kg deadweight (carcase),
+# cradle to farm gate. They are not directly comparable.
+
+- slug: lamb
+  impact:
+    ghg_kg_co2e_per_kg:
+      category: "Lamb & Mutton"
+      median: null
+      source: owid-environmental-impacts
+      median_note: "No exact per-kg median found. OWID's text, based on its earlier median supply-chain chart, says only that lamb emits more than 20 kg CO2e per kg."
+      mean: 39.72
+      mean_source: owid-ghg-per-kg
+    ghg_per_100g_protein:
+      category: "Lamb & Mutton"
+      median: 20
+      source: owid-less-meat
+      median_note: "OWID's chart shows medians; its alt text describes lamb as around 20 kg CO2e. Lowest-impact tenth of producers: 12 kg CO2e."
+      p10: 12
+      mean: 19.85
+      mean_source: owid-ghg-per-protein
+    land_use_m2_per_kg: null
+    land_use_note: "No per-kg land-use value for Lamb & Mutton could be read. Per 100 g protein, OWID's mean is 184.8 m2, the highest of any food it lists (owid-land-use-per-protein)."
+    land_use_m2_per_100g_protein: {mean: 184.8, category: "Lamb & Mutton", source: owid-land-use-per-protein}
+    uk:
+      - figure: 22.3
+        unit: "kg CO2e per kg deadweight (average)"
+        system: "354 farms supplying ABP, mostly UK beef and sheep farms (Prism programme, with Andersons Centre and Harper Adams); farm results ranged from under 10 to over 55"
+        source: fwi-prism-2024
+      - figure: "21.8 to 36.4"
+        unit: "kg CO2e per kg deadweight, cradle to farm gate (Agrecalc)"
+        system: "Welsh lowland and upland lamb, 33 farms, by finishing diet; concentrate-finished averaged 25.0, grass-finished 28.1"
+        source: frontiers-welsh-lamb-2024
+  frameworks:
+    - body: "Eating Better (Sourcing Better, 2021)"
+      says: "Uses Basic, Better and Best tiers across eight impact areas, but names no certification for lamb or sheep at any tier; sheep appear only in the antibiotics section."
+      source: eatingbetter-sourcing-better-2021
+    - body: "Eating Better (Sourcing Better 2.0, 2026)"
+      says: "Keeps the Basic, Better and Best tiers and adds on-farm practice criteria; species detail not read, as the PDF would not load."
+      source: eatingbetter-sourcing-better-2026
+    - body: "Pasture for Life"
+      says: "Certifies ruminant meat from animals fed only on pasture and conserved forage, with no grain or manufactured feed; farms are audited by an independent body and already meet farm assurance standards."
+      source: pfl-standards-page
+    - body: "RSPCA Assured"
+      says: "Has a sheep welfare standard: grazing must supply most of the diet, sheep are shorn at least yearly, and newborn lambs must get colostrum."
+      source: rspca-higher-welfare
+  buy: "Look for Pasture for Life certification, meaning lamb fed wholly on grass and forage, or RSPCA Assured lamb, which is reared under the RSPCA's sheep standard (pfl-standards-page, rspca-assured-standards)."
+  notes:
+    - topic: diet
+      text: "The Climate Change Committee's Seventh Carbon Budget calls for meat eating to fall 25% by 2040 and 35% by 2050, with beef and lamb down 40%. AHDB disputes that a sustainable food system needs less meat."
+      source: ahdb-ccc-less-meat
+    - topic: method
+      text: "The Welsh study's authors say comparing lamb per kg can mislead: once omega-3 content is counted, the lowest-footprint finishing system changes."
+      source: frontiers-welsh-lamb-2024
+    - topic: certification
+      text: "Pasture for Life's current standard is version 5.1, covering ruminant livestock and their products."
+      source: pfl-standards-5-1
+    - topic: lines
+      text: "OWID's category Lamb & Mutton covers lamb and mutton together."
+      source: owid-ghg-per-kg
+  research_note: "No source found gives separate figures for new-season, milk-fed, hogget, salt marsh or mutton lines. The only Welsh-specific figure is the Bangor/HCC study (frontiers-welsh-lamb-2024)."
+  confidence: high
+
+- slug: beef
+  impact:
+    ghg_kg_co2e_per_kg:
+      category: "Beef (beef herd)"
+      median: 60
+      source: owid-faq-impacts
+      median_note: "From OWID's earlier supply-chain chart, which showed the median but left out supply-chain losses; OWID made the chart a mean, with losses included, on 15 June 2022."
+      mean: 99.48
+      mean_source: owid-ghg-per-kg
+      also:
+        - {category: "Beef (dairy herd)", mean: 33.3, source: owid-ghg-per-kg}
+    ghg_per_100g_protein:
+      category: "Beef"
+      median: 25
+      source: owid-less-meat
+      median_note: "OWID says the median for beef is 25 kg CO2e, with the lowest-impact tenth below 9 and the highest tenth above 105. The article does not say which herd; it gives a mean of about 35, which matches neither grapher mean below, so it appears to pool the two."
+      p10: 9
+      p90: 105
+      mean: 49.89
+      mean_source: owid-ghg-per-protein
+      also:
+        - {category: "Beef (dairy herd)", mean: 16.87, source: owid-ghg-per-protein}
+    land_use_m2_per_kg: {mean: 326, category: "Beef (beef herd)", source: statista-land-use-per-kg}
+    land_use_m2_per_100g_protein: {mean: 163.6, median: 104, category: "Beef (beef herd)", source: owid-land-use-per-protein, median_source: owid-less-meat}
+    uk:
+      - figure: 26.2
+        unit: "kg CO2e per kg deadweight (average)"
+        system: "354 farms supplying ABP (Prism programme); farm results ranged from under 10 to over 55"
+        source: fwi-prism-2024
+  frameworks:
+    - body: "Eating Better (Sourcing Better, 2021)"
+      says: "Basic: Red Tractor or UK legal minimum. Best: Pasture for Life, Soil Association organic, RSPCA Assured free-range or organic, or pasture-reared and extensive systems with strong welfare monitoring. Names nothing at Better."
+      source: eatingbetter-sourcing-better-2021
+    - body: "Eating Better (Sourcing Better 2.0, 2026)"
+      says: "Keeps Basic, Better and Best and adds on-farm practice criteria; species detail not read, as the PDF would not load."
+      source: eatingbetter-sourcing-better-2026
+    - body: "Pasture for Life"
+      says: "Certifies ruminant meat from animals fed only on pasture and conserved forage, with no grain, soya or manufactured feed; farms are independently audited."
+      source: pfl-standards-page
+    - body: "RSPCA Assured"
+      says: "Has a beef cattle welfare standard; the RSPCA says cattle on its farms graze outdoors at least four hours a day in spring and summer."
+      source: rspca-higher-welfare
+  buy: "Eating Better's Best tier for beef is Pasture for Life, Soil Association organic, or RSPCA Assured free-range or organic; Red Tractor alone is its Basic tier (eatingbetter-sourcing-better-2021)."
+  notes:
+    - topic: contested
+      text: "In May 2026 the ASA upheld Chris Packham's complaint about an AHDB ad claiming British beef has half the global average carbon footprint: the evidence AHDB cited (Poore & Nemecek's cradle-to-retail meta-analysis) did not support the ad's 'full lifecycle' wording. The ASA rejected the complaint's other points, including on grazing imagery."
+      source: asa-ahdb-2026
+    - topic: housing
+      text: "The ASA's ruling quotes Defra's 2019 survey: 87% of UK cattle farms mix housing and grazing, 9% graze all year, and 4% house cattle all year."
+      source: asa-ahdb-2026
+    - topic: diet
+      text: "The CCC's Seventh Carbon Budget calls for beef and lamb eating to fall 40% by 2050; AHDB argues production should become more sustainable instead."
+      source: ahdb-ccc-less-meat
+    - topic: spread
+      text: "Poore and Nemecek report that 90th-percentile beef emits 105 kg CO2e per 100 g protein, about 12 times 10th-percentile dairy beef."
+      source: poore-nemecek-2018
+    - topic: dairy-beef
+      text: "OWID says beef from dairy herds has about 60% lower emissions because its footprint is shared with dairy co-products."
+      source: owid-environmental-impacts
+  confidence: high
+
+- slug: pork
+  impact:
+    ghg_kg_co2e_per_kg:
+      category: "Pig Meat"
+      median: 7
+      source: owid-environmental-impacts
+      median_note: "OWID text gives pork at 7 kg CO2e per kg. The figure comes from its earlier supply-chain chart, which OWID's FAQ says showed medians and left out supply-chain losses (owid-faq-impacts)."
+      mean: 12.31
+      mean_source: owid-ghg-per-kg
+    ghg_per_100g_protein:
+      category: "Pig Meat"
+      median: 6.5
+      source: owid-less-meat
+      median_note: "OWID's chart shows medians, although its alt text calls 6.5 an average. Lowest-impact tenth: 4.5; highest-impact: 14."
+      p10: 4.5
+      mean: 7.61
+      mean_source: owid-ghg-per-protein
+    land_use_m2_per_kg: null
+    land_use_note: "Per-kg value for Pig Meat could not be read; OWID's mean per 100 g protein is 10.7 m2."
+    land_use_m2_per_100g_protein: {mean: 10.7, category: "Pig Meat", source: owid-land-use-per-protein}
+    uk: []
+    uk_note: "No absolute UK pork figure was found. A peer-reviewed Queen's University Belfast study using AHDB data reports that the global warming potential of British pig production fell 37.0% for indoor-bred pigs and 35.4% for outdoor-bred pigs between 2000 and 2020 (pigworld-pig-carbon-2021)."
+  frameworks:
+    - body: "Eating Better (Sourcing Better, 2021)"
+      says: "Basic: UK minimum or Red Tractor. Better: RSPCA Assured indoor, or organic. Best: free-range or organic (Soil Association), or RSPCA Assured free-range or organic."
+      source: eatingbetter-sourcing-better-2021
+    - body: "RSPCA"
+      says: "Recommends RSPCA Assured pork: no farrowing crates, and pigs get space and straw, plus mud to wallow in when kept outdoors."
+      source: rspca-higher-welfare
+    - body: "RSPCA Assured"
+      says: "Red Tractor is mainly about food safety and traceability, not welfare, and its sows may still be kept in farrowing crates; free range is not legally defined for pigs."
+      source: rspca-assured-labels
+  buy: "Look for free-range or organic pork, or RSPCA Assured; Eating Better puts free-range and organic in its Best tier and RSPCA Assured indoor in Better (eatingbetter-sourcing-better-2021, rspca-higher-welfare)."
+  notes:
+    - topic: labels
+      text: "Free range has a legal definition only for eggs and poultry, so outdoor claims on pork vary in meaning."
+      source: rspca-assured-labels
+  confidence: moderate
+
+- slug: chicken
+  impact:
+    ghg_kg_co2e_per_kg:
+      category: "Poultry Meat"
+      median: 6
+      source: owid-environmental-impacts
+      median_note: "OWID text gives poultry at 6 kg CO2e per kg, from its earlier median supply-chain chart, which left out supply-chain losses (owid-faq-impacts)."
+      mean: 9.87
+      mean_source: owid-ghg-per-kg
+    ghg_per_100g_protein:
+      category: "Poultry Meat"
+      median: 4.3
+      source: owid-less-meat
+      median_note: "OWID's chart shows medians (labelled chicken); its alt text calls 4.3 an average. Lowest-impact tenth: 2.4; highest-impact: 12."
+      p10: 2.4
+      mean: 5.7
+      mean_source: owid-ghg-per-protein
+    land_use_m2_per_kg: {mean: 12, category: "Poultry Meat", source: statista-land-use-per-kg}
+    land_use_m2_per_100g_protein: {mean: 7.1, category: "Poultry Meat", source: owid-land-use-per-protein}
+    uk: []
+    uk_note: "No UK per-kg chicken figure was found. The Soil Association says UK imports about 3 million tonnes of soya a year, mostly for animal feed and largely for chickens, needing about 1.7 million hectares overseas; about 65% comes from countries it calls high-risk for deforestation (soilassoc-peak-poultry)."
+  frameworks:
+    - body: "Eating Better (Sourcing Better, 2021)"
+      says: "Basic: Red Tractor. Better: RSPCA Assured indoor, Red Tractor Enhanced Welfare, or organic. Best: free-range or organic, Label Rouge, Soil Association, or RSPCA Assured free-range or organic."
+      source: eatingbetter-sourcing-better-2021
+    - body: "RSPCA"
+      says: "Recommends RSPCA Assured chicken, whose standard allows only slower-growing, higher-welfare breeds."
+      source: rspca-higher-welfare
+    - body: "Soil Association"
+      says: "Calls for 'peak poultry' and then less and better chicken, pointing to organic, free-range and agroecological systems; supports the Better Chicken Commitment."
+      source: soilassoc-peak-poultry
+    - body: "Which?"
+      says: "Advises shoppers to look for recognised schemes such as RSPCA Assured, free range, organic or Red Tractor, whose standards differ widely, and warns that supermarket farm names are brands and 'higher welfare' has no legal meaning."
+      source: which-chicken-labels-2019
+  buy: "Look for RSPCA Assured (slower-growing breeds), free-range or organic chicken; Eating Better puts free-range and organic in its Best tier and Red Tractor alone in Basic (rspca-higher-welfare, eatingbetter-sourcing-better-2021)."
+  notes:
+    - topic: scale
+      text: "The Soil Association says about 95% of UK broilers are fast-growing breeds in intensive units and that the UK is about 75% self-sufficient in poultry meat."
+      source: soilassoc-peak-poultry
+  confidence: moderate
+
+- slug: duck
+  impact: null
+  impact_note: "No figure of its own. OWID's nearest category is Poultry Meat, but no source found applies it to duck, so no proxy is recorded."
+  frameworks:
+    - body: "Eating Better (Sourcing Better, 2021)"
+      says: "Does not name duck or any duck certification."
+      source: eatingbetter-sourcing-better-2021
+    - body: "RSPCA Assured"
+      says: "Its standards page lists no duck standard (it covers meat chickens and turkeys among poultry)."
+      source: rspca-assured-standards
+    - body: "Compassion in World Farming (old guide)"
+      says: "Advised free-range or organic duck, or higher-welfare indoor birds on a budget. Old, undated guide; background only."
+      source: ciwf-shopping-guide
+  buy: "No current UK body gives duck-specific buying advice; CIWF's old shopping guide advised free-range or organic birds (ciwf-shopping-guide)."
+  notes: []
+  confidence: low
+
+- slug: goose
+  impact: null
+  impact_note: "No figure of its own, and no source-named proxy. OWID's Poultry Meat is not applied to geese by any source found."
+  frameworks:
+    - body: "Eating Better (Sourcing Better, 2021)"
+      says: "Does not name geese."
+      source: eatingbetter-sourcing-better-2021
+    - body: "RSPCA Assured"
+      says: "Its standards page lists no goose standard."
+      source: rspca-assured-standards
+  buy: "No UK body found gives goose-specific buying advice."
+  notes:
+    - topic: lead
+      text: "The FSA's lead-shot advice lists goose among wild game: frequent eaters should cut down, and toddlers, children, pregnant women and women trying for a baby especially so."
+      source: fsa-lead-shot-game
+    - topic: lead
+      text: "In England and Wales, lead shot is already banned for shooting ducks and geese."
+      source: code-good-shooting-practice
+  confidence: low
+
+- slug: turkey
+  impact: null
+  impact_note: "No figure of its own. OWID's Poultry Meat is the nearest category, but no source found applies it to turkey."
+  frameworks:
+    - body: "RSPCA Assured"
+      says: "Has a turkey welfare standard; the RSPCA says it gives birds room to move, dry bedding, natural light and enrichment such as straw bales."
+      source: rspca-higher-welfare
+    - body: "Eating Better (Sourcing Better, 2021)"
+      says: "Does not name turkey."
+      source: eatingbetter-sourcing-better-2021
+    - body: "Compassion in World Farming (old guide)"
+      says: "Advised free-range or organic turkey. Old, undated guide; background only."
+      source: ciwf-shopping-guide
+  buy: "Look for RSPCA Assured turkey, reared under the RSPCA's turkey standard (rspca-assured-standards)."
+  notes: []
+  confidence: low
+
+- slug: grouse
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "None"
+      says: "No UK framework found rates grouse or other wild game; Eating Better's framework covers farmed animals only."
+      source: eatingbetter-sourcing-better-2021
+  buy: "From April 2029 lead shot may not be used for live quarry (basc-lead-restrictions-2026); until then the FSA advises frequent eaters of lead-shot game, and especially children and pregnant women, to cut down (fsa-lead-shot-game)."
+  notes:
+    - topic: lead
+      text: "All 78 red grouse carcasses from the 2024/25 season examined in an RSPB-part-funded Cambridge and UHI study had been shot with lead."
+      source: shootinguk-lead-study-2025
+    - topic: lead
+      text: "FSA advice on lead-shot game includes red and black grouse."
+      source: fsa-lead-shot-game
+    - topic: grouse-moors
+      text: "The RSPB says it is neutral on the ethics of shooting but cites raptor persecution, burning on peat and lead shot; it wants grouse shooting licensed in England, as it now is in Scotland, rather than banned."
+      source: rspb-grouse-debate-2025
+    - topic: grouse-moors
+      text: "The Moorland Association says managed grouse moors hold over half of the UK's curlews, that controlled cool burning reduces wildfire risk, and that managers have blocked over 7,000 km of drains; it opposes both a ban and licensing."
+      source: moorland-assoc-briefing-2025
+    - topic: grouse-moors
+      text: "GWCT cites its studies (Langholm, Berwyn, the Uplands Predation Experiment) as showing that moor management and predator control help lapwing, curlew and golden plover, and condemns illegal raptor persecution."
+      source: gwct-grouse-debate-2025
+  confidence: moderate
+
+- slug: pheasant
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "Code of Good Shooting Practice"
+      says: "Treats all shot game as food; follows GWCT guidance of no more than 1,000 pheasants per hectare of release pen (700 in ancient semi-natural woodland), and pens on no more than about a third of a shoot's woodland."
+      source: code-good-shooting-practice
+  buy: "Lead shot for live quarry is banned from 1 April 2029 (basc-lead-restrictions-2026); until then the FSA advises frequent eaters of lead-shot pheasant, and especially children and pregnant women, to cut down and to ask the supplier how the game was shot (fsa-lead-shot-game)."
+  notes:
+    - topic: lead
+      text: "The 2020 pledge by nine UK shooting and rural organisations to drop lead shot by 2025 was not met: 99% of 171 pheasants bought in 2025 had been shot with lead, against 93% to 94% in 2022 to 2024."
+      source: cam-lead-pledge-2025
+    - topic: lead
+      text: "BASC replied that significant progress had been made, citing more than 150 non-lead cartridges on sale."
+      source: shootinguk-lead-study-2025
+    - topic: lead
+      text: "The restriction is now law under UK REACH (in force 1 April 2026): from 1 April 2029, lead shot may not be sold or used for live quarry."
+      source: shootinguk-lead-ban-2026
+    - topic: releases
+      text: "Natural England's 2020 evidence review cites estimates of 39 to 57 million pheasants released in the UK each year, about 85% of them in England."
+      source: ne-gamebird-rea-2020
+    - topic: releases
+      text: "The RSPB puts pheasant releases at about 31.5 million a year (citing Madden 2021)."
+      source: rspb-gamebird-register-2024
+    - topic: releases
+      text: "The RSPB calls released pheasants non-native and cites browsing, predation of reptiles and invertebrates, soil enrichment, disease and lead as concerns; it wants releases licensed."
+      source: rspb-gamebird-register-2024
+    - topic: releases
+      text: "Natural England's review found the stronger evidence was for local harms (soil enrichment, fewer plants and invertebrates near release pens), while habitat management on shoots usually benefited wildlife; smaller releases had smaller effects."
+      source: ne-gamebird-rea-2020
+    - topic: releases
+      text: "GWCT's review says most harms are local and can be reduced by good practice, and that well-run shoots can deliver a net biodiversity gain."
+      source: gwct-releasing-review-2021
+  confidence: moderate
+
+- slug: partridge
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "Code of Good Shooting Practice"
+      says: "Partridge pens belong in arable cover crops or improved grassland; wild grey partridges may be shot only where they are actively conserved and autumn stocks exceed 20 birds per 100 hectares."
+      source: code-good-shooting-practice
+  buy: "Lead shot for live quarry is banned from April 2029 (basc-lead-restrictions-2026); until then the FSA advises frequent eaters of lead-shot partridge, and especially children and pregnant women, to cut down (fsa-lead-shot-game)."
+  notes:
+    - topic: releases
+      text: "Natural England's 2020 review cites estimates of 8.1 to 13 million red-legged partridges released in the UK each year, and about 0.2 to 0.3 million grey partridges."
+      source: ne-gamebird-rea-2020
+    - topic: releases
+      text: "The RSPB puts red-legged partridge releases at about 9.1 million a year (citing Madden 2021)."
+      source: rspb-gamebird-register-2024
+    - topic: releases
+      text: "The RSPB calls released red-legged partridges non-native and wants releases licensed."
+      source: rspb-gamebird-register-2024
+    - topic: lead
+      text: "FSA lead-shot advice lists partridge."
+      source: fsa-lead-shot-game
+  confidence: moderate
+
+- slug: wild-duck
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "Code of Good Shooting Practice"
+      says: "In England and Wales lead shot is banned when shooting ducks and geese and over foreshore and certain wetlands; in Scotland and Northern Ireland, over most wetlands."
+      source: code-good-shooting-practice
+  buy: "In England and Wales, duck must already be shot without lead (code-good-shooting-practice); the FSA's lead-shot advice for frequent eaters still lists duck (fsa-lead-shot-game)."
+  notes:
+    - topic: releases
+      text: "GWCT estimates mallard released for shooting in the UK rose from about 870,000 in 2004 to 1.3 million in 2022."
+      source: gwct-mallard-releases-2024
+    - topic: releases
+      text: "The RSPB puts mallard releases at about 2.6 million a year and, because of bird flu, wants them licensed too."
+      source: rspb-gamebird-register-2024
+  confidence: moderate
+
+- slug: woodcock
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "GWCT"
+      says: "Advises holding off until after 1 December, when most migrants have arrived; judging the bag from local counts; and stopping after four days of frozen weather, which is stricter than the statutory suspension."
+      source: gwct-woodcock-faq
+  buy: "GWCT asks shoots to take woodcock only after 1 December, once migrant birds have arrived, to protect the declining resident population (gwct-woodcock-faq)."
+  notes:
+    - topic: decline
+      text: "GWCT puts British breeding woodcock at about 55,240 males in 2013, down about 29% since 2003; the bird was red-listed in 2015. An estimated 800,000 to 1.3 million migrants winter in Britain and Ireland."
+      source: gwct-woodcock-faq
+    - topic: decline
+      text: "GWCT says the causes are not fully understood, probably including woodland change, climate, predation and disturbance, and that it cannot rule out shooting."
+      source: gwct-woodcock-faq
+    - topic: lead
+      text: "FSA lead-shot advice lists woodcock."
+      source: fsa-lead-shot-game
+  confidence: moderate
+
+- slug: venison
+  impact:
+    ghg_kg_co2e_per_kg: null
+    ghg_note: "OWID / Poore & Nemecek have no venison category."
+    ghg_per_100g_protein: null
+    land_use_m2_per_kg: null
+    uk:
+      - figure: 22.3
+        unit: "kg CO2e per kg carcase weight, cradle to processor gate"
+        system: "Scottish wild venison (SAC Consulting for the Scottish Venison Association), including the deer's own methane (about 89% of the total); 2.5 kg CO2e per kg if wild-animal emissions are excluded; 11.9 per 100 g protein"
+        source: admg-sac-venison-ghg
+      - figure: "38% below beef, 49% below lamb"
+        unit: "relative carbon footprint"
+        system: "Scottish wild venison, first life-cycle assessment (2015, background only)"
+        source: naturescot-venison-lca-2015
+    uk_note: "No figure for farmed venison or for individual species (red, fallow, roe, Chinese water deer, muntjac)."
+  frameworks:
+    - body: "British Quality Wild Venison (Forestry Commission, Grown in Britain and venison sector)"
+      says: "Audited standard covering wild venison from forest to shop: correct carcass handling, registered premises and full traceability."
+      source: gov-bqwv-2023
+    - body: "Defra"
+      says: "Its 2026 deer policy aims to grow the domestic wild venison market, including through the British Quality Wild Venison standard, as part of managing deer impacts."
+      source: defra-deer-policy-2026
+  buy: "Look for wild venison under the British Quality Wild Venison standard (gov-bqwv-2023); for wild venison shot with lead the FSA advises frequent eaters to cut down, though it says supermarket farmed large game generally has little or no lead (fsa-lead-shot-game)."
+  notes:
+    - topic: overabundance
+      text: "Defra says deer have grown in range and number over 50 years, and about a third of English woodland is now harmed by them, up from about a quarter in the early 2000s; it calls lethal control the most effective option where fencing and guards fall short."
+      source: defra-deer-policy-2026
+    - topic: overabundance
+      text: "NatureScot estimates Scotland's deer cull must rise by about a quarter, roughly 50,000 more deer a year, to meet its biodiversity targets."
+      source: naturescot-deer-cull-2024
+    - topic: overabundance
+      text: "The government's 2023 announcement said the UK deer population is believed to be at its highest for 1,000 years, at about two million."
+      source: gov-bqwv-2023
+    - topic: non-native
+      text: "Of England's six wild deer, only red and roe are native; muntjac, sika and Chinese water deer are non-native, and muntjac is a Species of Special Concern under invasive species rules."
+      source: defra-deer-policy-2026
+    - topic: lead
+      text: "Large-calibre lead bullets for live quarry, including deer, are banned from 1 April 2029."
+      source: basc-lead-restrictions-2026
+    - topic: contested
+      text: "The SAC figure depends on whether wild deer's methane is counted: 22.3 with it, 2.5 without. The study excludes browsing damage and land-use change, and SAC itself made no comparison with other meats."
+      source: admg-sac-venison-ghg
+  confidence: moderate
+
+- slug: wood-pigeon
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "Natural England (general licence GL42)"
+      says: "Woodpigeon may be killed under the 2026 general licence to prevent serious damage to crops, fruit and vegetables, livestock feed, or the spread of disease."
+      source: ne-gl42-2026
+  buy: "No UK body found gives wood-pigeon buying advice beyond the FSA's lead-shot advice for frequent eaters (fsa-lead-shot-game)."
+  notes:
+    - topic: lead
+      text: "FSA lead-shot advice lists wood pigeon."
+      source: fsa-lead-shot-game
+  confidence: low
+
+- slug: rabbit
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "GWCT"
+      says: "Describes the wild rabbit as reclassified in the 20th century from resource to agricultural pest, with landowners still legally obliged to control it; cites a Natural England estimate of about £50 million a year in crop losses. Undated page."
+      source: gwct-ngc-rabbit
+  buy: "No UK body found gives rabbit buying advice beyond the FSA's lead-shot advice for frequent eaters (fsa-lead-shot-game)."
+  notes:
+    - topic: lead
+      text: "FSA lead-shot advice lists rabbit."
+      source: fsa-lead-shot-game
+  confidence: low
+
+- slug: hare
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "GWCT"
+      says: "Brown hare has been a UK Biodiversity Action Plan species since 1995; GWCT names farming change and predation, not shooting, as the main causes of decline, and opposes a broad closed season."
+      source: gwct-brown-hares-2022
+  buy: "No UK body found gives hare buying advice beyond the FSA's lead-shot advice for frequent eaters (fsa-lead-shot-game)."
+  notes:
+    - topic: decline
+      text: "GWCT says English shooting bags were about 70% lower in 2019 than in 1961, while the Breeding Bird Survey shows numbers roughly stable since 1995; the 2018 estimate was 579,000 hares, with a wide range."
+      source: gwct-brown-hares-2022
+    - topic: lead
+      text: "FSA lead-shot advice lists brown hare."
+      source: fsa-lead-shot-game
+  confidence: low
+
+- slug: squirrel
+  impact: null
+  impact_note: "No figure of its own and no source-named proxy."
+  frameworks:
+    - body: "Defra"
+      says: "Grey squirrel is a widespread invasive non-native species; policy is to control the population, limit spread and eradicate it in the wild where possible, using humane methods."
+      source: defra-grey-squirrel-2026
+  buy: "No UK body found gives buying advice for grey squirrel meat."
+  notes:
+    - topic: invasive
+      text: "Defra says grey squirrels strip bark, sometimes killing trees, and outcompete red squirrels and spread squirrel pox to them; it puts damage and control costs at about £37 million a year across England and Wales."
+      source: defra-grey-squirrel-2026
+  confidence: low

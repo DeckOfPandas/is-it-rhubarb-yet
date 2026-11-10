@@ -1,0 +1,658 @@
+- key: cgsg-plaice
+  title: Plaice - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/plaice.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-dover-sole
+  title: Sole, Dover sole - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/sole-dover-sole.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-lemon-sole
+  title: Lemon sole - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://www.cornwallgoodseafoodguide.org.uk/fish-guide/lemon-sole.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated October 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-brill
+  title: Brill - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://www.cornwallgoodseafoodguide.org.uk/fish-guide/brill.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated October 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-turbot
+  title: Turbot - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://www.cornwallgoodseafoodguide.org.uk/fish-guide/turbot.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated October 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-dab
+  title: Dab - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/dab.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-witch
+  title: Witch - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/witch.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-megrim
+  title: Cornish sole, Megrim - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/cornish-sole-megrim.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated October 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-halibut
+  title: Halibut - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/halibut.php
+  type: primary
+  published: undated
+  published_note: No last-updated line, unlike the other CGSG species pages; its newest cited material is from 2013
+    (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-thornback-ray
+  title: Thornback ray - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/thornback-ray.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-blonde-ray
+  title: Blonde ray - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/blonde-ray.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-cuckoo-ray
+  title: Cuckoo ray - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/cuckoo-ray.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-spotted-ray
+  title: Spotted ray - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/spotted-ray.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-small-eyed-ray
+  title: Small eyed ray - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/small-eyed-ray.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-undulate-ray
+  title: Undulate ray - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/undulate-ray.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-cuttlefish
+  title: Cuttlefish - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/cuttlefish.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-squid-european
+  title: Squid, European - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/squid-european.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-squid-veined
+  title: Squid, veined - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/squid-veined.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-octopus
+  title: Octopus - Fish Guide
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/fish-guide/octopus.php
+  type: primary
+  published: 2026
+  published_note: Living guide page; 'Updated Jan 2026' on the page (read 2026-11-10).
+  accessed: 2026-11-10
+- key: cgsg-recommended
+  title: Recommended species
+  publisher: Cornwall Good Seafood Guide
+  url: https://cornwallgoodseafoodguide.org.uk/recommended-species.php
+  type: primary
+  published: 2026
+  published_note: Living list headed November 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-plaice
+  title: Plaice - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/plaice/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-dover-sole
+  title: Dover sole - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/dover-sole/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-lemon-sole
+  title: Lemon sole - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/lemon-sole/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-brill
+  title: Brill - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/brill/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-turbot
+  title: Turbot - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/turbot/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-dab
+  title: Dab - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/dab/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-witch
+  title: Witch - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/witch/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-megrim
+  title: Megrim - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/megrim/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-atlantic-halibut
+  title: Atlantic halibut - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/atlantic-halibut/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-thornback-ray
+  title: Thornback ray - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/thornback-ray/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-blonde-ray
+  title: Blonde ray - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/blonde-ray/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-cuckoo-ray
+  title: Cuckoo ray - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/cuckoo-ray/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-spotted-ray
+  title: Spotted ray - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/spotted-ray/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-undulate-ray
+  title: Undulate ray - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/undulate-ray/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-flapper-skate
+  title: Flapper skate - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/flapper-skate/
+  type: primary
+  published: undated
+  published_note: Read earlier on 2026-11-10, but the page failed to load on re-check the same day, so no date could
+    be taken from it.
+  accessed: 2026-11-10
+- key: mcs-cuttlefish
+  title: Common cuttlefish - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/common-cuttlefish/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-european-squid
+  title: European squid - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/european-squid/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-common-octopus
+  title: Common octopus - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/common-octopus/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: mcs-horned-octopus
+  title: Horned octopus - Good Fish Guide
+  publisher: Marine Conservation Society
+  url: https://www.mcsuk.org/goodfishguide/species/horned-octopus/
+  type: primary
+  published: 2026
+  published_note: Living Good Fish Guide page; no rating date on the species page, footer copyright 2026; individual
+    rating pages read show updates from 2023 to January 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: gov-fmp-skates-rays
+  title: Fisheries management plan for Southern North Sea and Channel skates and rays
+  publisher: Defra (GOV.UK)
+  url: https://www.gov.uk/government/publications/southern-north-sea-and-channel-skate-and-ray-fisheries-management-plan-fmp/southern-north-sea-and-channel-skate-and-ray-fisheries-management-plan
+  type: primary
+  published: 2025
+  published_note: GOV.UK page last updated 16 December 2025.
+  accessed: 2026-11-10
+- key: legislation-eu-2016-72-art13
+  title: 'Council Regulation (EU) 2016/72, Article 13: Prohibited species (original adopted version)'
+  publisher: legislation.gov.uk
+  url: https://www.legislation.gov.uk/eur/2016/72/article/13/adopted
+  type: primary
+  published: 2016
+  published_note: Original adopted version of the 2016 regulation.
+  accessed: 2026-11-10
+- key: ices-fishmap-thornback
+  title: 'ICES FishMap species factsheet: thornback ray'
+  publisher: ICES
+  url: https://www.ices.dk/about-ICES/projects/EU-RFP/EU Repository/ICES FIshMap/ICES FishMap species factsheet-thornback.pdf
+  type: primary
+  published: undated
+  published_note: No date in the document; its newest data run to 2005, so probably compiled about 2005-06.
+  accessed: 2026-11-10
+- key: seafish-lemon-sole
+  title: 'Seafish Species Guide: Lemon sole (January 2014)'
+  publisher: Seafish
+  url: https://www.seafish.org/media/l3cf2g5e/seafishspeciesguide_lemon_sole_201401.pdf
+  type: primary
+  published: 2014
+  accessed: 2026-11-10
+- key: gov-sea4-cephalopods
+  title: Offshore Energy SEA 4, Appendix 1 Environmental Baseline, A1a.3 Cephalopods
+  publisher: UK Government (GOV.UK assets)
+  url: https://assets.publishing.service.gov.uk/media/623253808fa8f56c1e91ab5d/Appendix_1a_3_-_Cephalopods.pdf
+  type: primary
+  published: 2022
+  published_note: Appendix to the fourth Offshore Energy Strategic Environmental Assessment (OESEA4), published
+    by BEIS in March 2022.
+  accessed: 2026-11-10
+- key: guardian-cuttlefish
+  title: They called it black gold, but should cuttlefish be on our menus? (The Guardian, via inkl)
+  publisher: The Guardian
+  url: https://inkl.com/news/they-called-it-black-gold-but-should-cuttlefish-be-on-our-menus
+  type: secondary
+  published: 2025
+  published_note: Article carries an amendment dated 13 April 2025.
+  accessed: 2026-11-10
+- key: seafish-seafood-guide
+  title: The Seafood Guide (March 2009)
+  publisher: Seafish
+  url: https://seafoodacademy.org/pdfs/seafood-guide.pdf
+  type: primary
+  published: 2009
+  published_note: 'Background only from this pass (rules: never the sole basis for fish dates).'
+  accessed: 2026-11-10
+- key: sussex-ifca-commercial
+  title: Commercial Fishing
+  publisher: Sussex IFCA
+  url: https://www.sussex-ifca.gov.uk/commercial-fishing
+  type: primary
+  published: 2026
+  published_note: Living page with no date stamp; footer copyright 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: seafish-squid-uk-waters
+  title: Squid Fishing in UK Waters (May 2009)
+  publisher: Seafish
+  url: https://www.seafish.org/document/?id=33832
+  type: primary
+  published: 2009
+  accessed: 2026-11-10
+- key: gov-sea2-cephalopods
+  title: An Overview of Cephalopods Relevant to the SEA2 Area, Technical Report TR_009 (August 2001)
+  publisher: UK Government (GOV.UK assets), Offshore Energy SEA
+  url: https://assets.publishing.service.gov.uk/media/5a7b43d4ed915d429748deeb/TR_SEA2_Cephalopods.pdf
+  type: primary
+  published: 2001
+  accessed: 2026-11-10
+- key: mmo-cuttlefish-action-plan
+  title: Cuttlefish Fishery Action Plan (April 2025)
+  publisher: Marine Management Organisation
+  url: https://assets.publishing.service.gov.uk/media/67f78d456812c7adcf513e94/MMO_Cuttlefish_Action_Plan.pdf
+  type: primary
+  published: 2025
+  accessed: 2026-11-10
+- key: mmo-cuttlefish-sampling-2025
+  title: Cuttlefish Market Sampling Report (December 2025)
+  publisher: Marine Management Organisation
+  url: https://assets.publishing.service.gov.uk/media/69454170888ddc41b48a53f4/Cuttlefish_Market_Sampling_Report_2025.pdf
+  type: primary
+  published: 2025
+  accessed: 2026-11-10
+- key: mmo-cuttlefish-roadshow
+  title: Cuttlefish Roadshow Outputs v3.0 (January 2026)
+  publisher: Marine Management Organisation
+  url: https://assets.publishing.service.gov.uk/media/696f4fb87e827090d02d41f0/Cuttlefish_Roadshow_Outputs_Final_v3.0.pdf
+  type: primary
+  published: 2026
+  accessed: 2026-11-10
+- key: seafish-gear-cuttlefish-pots
+  title: Pots and Traps - Cuttlefish (Fishing gear database)
+  publisher: Seafish
+  url: https://www.seafish.org/responsible-sourcing/fishing-gear-database/gear/pots-and-traps-cuttlefish/
+  type: primary
+  published: 2026
+  published_note: Living database page with no date stamp; footer copyright 2026 (read 2026-11-10).
+  accessed: 2026-11-10
+- key: brighton-sepia-hastings
+  title: Sustaining sustainable Sepia stock (Hastings) - project page
+  publisher: University of Brighton
+  url: https://research.brighton.ac.uk/en/projects/sustaining-sustainable-sepia-stock-hastings/
+  type: secondary
+  published: 2019
+  published_note: Project ran 1 May 2018 to 29 March 2019.
+  accessed: 2026-11-10
+- key: kentessex-ifca-thornback
+  title: 'Local species: Thornback Ray'
+  publisher: Kent and Essex IFCA
+  url: https://kentandessex-ifca.gov.uk/i-want-to-find-out-about/local-species/thornback-ray
+  type: primary
+  published: undated
+  published_note: No date on the page; footer copyright 2026; the image upload suggests about June 2021, so the
+    text is probably at least that old.
+  accessed: 2026-11-10
+- key: kefca-thornback-smp-2014
+  title: SMPS - Thornback Ray (species management profile, updated February 2014)
+  publisher: Kent and Essex IFCA
+  url: https://kentandessex-ifca.gov.uk/im-interested-in/research/smps/thornback-ray3
+  type: primary
+  published: 2014
+  accessed: 2026-11-10
+- key: kefca-essex-2025-jan-jun
+  title: 'Agenda item C2: Essex shore report, January to June 2025'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1749671592.pdf
+  type: primary
+  published: 2025
+  published_note: Covers January-June 2025; no publication date in the document.
+  accessed: 2026-11-10
+- key: kefca-essex-2025-nov-jan
+  title: 'Agenda item C2: Essex shore report, November 2025 to January 2026'
+  publisher: Kent and Essex Inshore Fisheries and Conservation Authority
+  url: https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1768901355.pdf
+  type: primary
+  published: 2026
+  published_note: Covers November 2025 to January 2026; no publication date in the document.
+  accessed: 2026-11-10
+- key: weareaquaculture-gigha-2023
+  title: Scottish land-based Gigha Halibut farm to close (2 March 2023)
+  publisher: We Are Aquaculture
+  url: https://weareaquaculture.com/news/33433
+  type: trade
+  published: 2023
+  accessed: 2026-11-10
+- key: caithness-business-gigha-2025
+  title: Argyll seafood firm expands (14 April 2025)
+  publisher: Caithness Business Index
+  url: https://caithness-business.co.uk/article/26855
+  type: secondary
+  published: 2025
+  accessed: 2026-11-10
+- key: flyingfish-seasonality
+  title: Seasonality
+  publisher: Flying Fish Seafoods
+  url: https://flyingfishseafoods.co.uk/seasonality/
+  type: secondary
+  published: 2026
+  published_note: Living calendar; page last modified 8 June 2026, footer copyright 2026. Its Q marks (best quality)
+    are readable; its month-by-month availability colours are not in the page text.
+  accessed: '2026-11-10'
+- key: northumberland-seafood-seasonality
+  title: Seasonality (North East fish and shellfish species chart)
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/
+  type: secondary
+  published: 2015
+  published_note: Page last modified 29 September 2015; chart image uploaded July 2015. The chart is an image and
+    could not be read, so no dates are taken from it.
+  accessed: '2026-11-10'
+- key: northumberland-seafood-species
+  title: North East Fish & Shellfish Species
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 7 January 2016.
+  accessed: '2026-11-10'
+- key: northumberland-plaice
+  title: Plaice
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/plaice/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 14 January 2016.
+  accessed: '2026-11-10'
+- key: northumberland-dover-sole
+  title: Dover Sole
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/dover-sole/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 1 February 2016.
+  accessed: '2026-11-10'
+- key: northumberland-lemon-sole
+  title: Lemon Sole
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/lemon-sole/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 14 January 2016.
+  accessed: '2026-11-10'
+- key: northumberland-brill
+  title: Brill
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/brill/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 29 January 2016.
+  accessed: '2026-11-10'
+- key: northumberland-turbot
+  title: Turbot
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/turbot/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 14 January 2016.
+  accessed: '2026-11-10'
+- key: northumberland-dab
+  title: Dab
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/dab/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 1 February 2016.
+  accessed: '2026-11-10'
+- key: northumberland-halibut
+  title: Halibut
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/halibut/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 14 January 2016.
+  accessed: '2026-11-10'
+- key: northumberland-witch
+  title: Witch
+  publisher: Northumberland Seafood (Amble Development Trust)
+  url: https://northumberlandseafood.co.uk/portfolio-item/witch/
+  type: secondary
+  published: 2016
+  published_note: Page last modified 14 January 2016.
+  accessed: '2026-11-10'
+- key: bnfs-seasonality
+  title: Seasonality on the South Coast
+  publisher: Brighton & Newhaven Fish Sales
+  url: https://www.brighton-fish-sales.co.uk/brighton-and-newhaven-fish-sales-seasonality/
+  type: secondary
+  published: 2024
+  published_note: Page last modified 28 May 2024; footer copyright 2021. The chart is an image (in season / out
+    of season) and could not be read, so no dates are taken from it.
+  accessed: '2026-11-10'
+- key: bnfs-fleet
+  title: Our fleet
+  publisher: Brighton & Newhaven Fish Sales
+  url: https://www.brighton-fish-sales.co.uk/brighton-and-newhaven-fish-sales-fleet/
+  type: secondary
+  published: 2020
+  published_note: Page last modified 2 July 2020.
+  accessed: '2026-11-10'
+- key: directseafoods-spring-2025
+  title: Spring Market Report 2025 (March-May 2025)
+  publisher: Direct Seafoods
+  url: https://directseafoods.co.uk/market-reports/spring-market-report-2025
+  type: secondary
+  published: 2025
+  published_note: Page last modified 24 February 2025.
+  accessed: '2026-11-10'
+- key: directseafoods-summer-2025
+  title: Summer Market Report 2025 (June-August 2025)
+  publisher: Direct Seafoods
+  url: https://www.directseafoods.co.uk/market-reports/summer-market-report-2025/
+  type: secondary
+  published: 2025
+  published_note: Page last modified 29 May 2025.
+  accessed: '2026-11-10'
+- key: directseafoods-winter-2025
+  title: Winter Market Report 2025 (December 2025-February 2026)
+  publisher: Direct Seafoods
+  url: https://www.directseafoods.co.uk/market-reports/winter-market-report-2025/
+  type: secondary
+  published: 2025
+  published_note: Page last modified 25 November 2025.
+  accessed: '2026-11-10'
+- key: directseafoods-spring-2026
+  title: Spring Market Report 2026 (March-May 2026)
+  publisher: Direct Seafoods
+  url: https://www.directseafoods.co.uk/market-reports/spring-market-report-2026/
+  type: secondary
+  published: 2026
+  published_note: Page last modified 25 February 2026.
+  accessed: '2026-11-10'
+- key: fishingdaily-scot-squid-2025
+  title: MSP Inquiry Reveals Gaps In Inshore Fishery Information
+  publisher: The Fishing Daily
+  url: https://thefishingdaily.com/?p=87104
+  type: trade
+  published: 2025
+  published_note: No date on the page; it reports Scottish Government answers of 11 June 2025.
+  accessed: '2026-11-10'
+- key: helen-northumberland-chart
+  title: 'Northumberland Seafood: Seasonality chart (weeks as transcribed by Helen)'
+  publisher: Northumberland Seafood
+  url: https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/
+  type: primary
+  published: undated
+  published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'northumberland'); the
+    chart itself is an image and was not re-read.
+  accessed: '2026-11-10'
+- key: helen-bnfs-chart
+  title: 'Brighton & Newhaven Fish Sales: seasonality (weeks as transcribed by Helen)'
+  publisher: Brighton & Newhaven Fish Sales
+  url: https://www.brighton-fish-sales.co.uk/
+  type: primary
+  published: undated
+  published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'bnfs'); the chart itself
+    is an image and was not re-read.
+  accessed: '2026-11-10'

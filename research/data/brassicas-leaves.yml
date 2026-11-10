@@ -1,0 +1,805 @@
+- name: Broccoli
+  slug: broccoli
+  group: brassicas
+  lines:
+  - name: Calabrese
+    kind: variety
+    confidence: moderate
+    sources:
+    - ahdb-harvested-britain
+    - defra-wholesale-prices
+    - freshplaza-broccoli-riviera
+    - freshplaza-broccoli-peloton
+    - vegsoc-seasonal
+    weeks:
+    - - 18
+      - 48
+      - in
+    notes:
+      season: Season starts in May and ends with the Scottish crop in November (ahdb-harvested-britain). In 2025
+        cutting from early June was called three weeks early (freshplaza-broccoli-riviera); September-October gave
+        a good end to the season (freshplaza-broccoli-peloton).
+      discrepancy: Defra quotes home-grown calabrese from early June to late October (weeks 23-43; November not
+        in the data read); vegsoc-seasonal gives June-October. Riviera's comment implies a normal start in late
+        June (about week 25).
+  - name: Purple sprouting
+    kind: variety
+    confidence: moderate
+    sources:
+    - caterer-psb
+    - grocer-psb-frost
+    - ahdb-harvested-britain
+    - tozer-psb
+    - oddbox-seasonal
+    - vegsoc-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 1
+      - 4
+      - avail
+    - - 5
+      - 17
+      - in
+    - - 18
+      - 19
+      - avail
+    - - 40
+      - 52
+      - avail
+    notes:
+      season: 'Best from February to late April (caterer-psb, Total Produce); main season late January to early
+        May (grocer-psb-frost). AHDB says it is cut through autumn and winter, and Tozer sells varieties cropping
+        September-February and December-January, hence early avail from October. Pilot re-checked: May tail shortened
+        to early May.'
+      discrepancy: vegsoc-seasonal gives February-March only; oddbox-seasonal February-April; freshview-seasonality
+        August-March.
+  - name: Purple sprouting, summer
+    kind: variety
+    confidence: moderate
+    sources:
+    - ahdb-harvested-britain
+    - grocer-psb-frost
+    - tozer-psb
+    weeks:
+    - - 25
+      - 26
+      - avail
+    - - 27
+      - 43
+      - in
+    notes:
+      season: 'Split added: spring-sown purple sprouting first appears in July (ahdb-harvested-britain); a second
+        season runs from mid-June until the first frosts (grocer-psb-frost); summer types crop late June to October
+        (tozer-psb).'
+- name: Brussels sprouts
+  slug: brussels-sprouts
+  group: brassicas
+  lines:
+  - name: Brussels sprouts
+    kind: whole
+    confidence: moderate
+    sources:
+    - freshplaza-sprouts-clappison
+    - ahdb-harvested-britain
+    - defra-wholesale-prices
+    - sleafordstandard-sprouts
+    - vegsoc-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 15
+      - avail
+    - - 31
+      - 35
+      - avail
+    - - 36
+      - 52
+      - in
+    notes:
+      season: 'Harvest runs September to March with the peak in December (freshplaza-sprouts-clappison). Sprouts
+        begin in August and are still in full flow in January from Lincolnshire, Kent and the West Midlands (ahdb-harvested-britain).
+        T. H. Clements grows UK sprouts from end July to end March (sleafordstandard-sprouts). Defra quotes home-grown
+        sprouts mid-August to mid-April. Pilot re-checked: February-March now in, as growers name the season to
+        March.'
+      discrepancy: vegsoc-seasonal gives September-February; freshview-seasonality October-January.
+- name: Cabbage
+  slug: cabbage
+  group: brassicas
+  lines:
+  - name: Red
+    kind: variety
+    confidence: moderate
+    sources:
+    - caterer-red-cabbage
+    - freshplaza-cabbage-naylor
+    - freshplaza-redcabbage-produceworld
+    - defra-wholesale-prices
+    - freshplaza-cabbage-esg
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 1
+      - 13
+      - avail
+    - - 14
+      - 27
+      - store
+    - - 28
+      - 35
+      - avail
+    - - 36
+      - 52
+      - in
+    notes:
+      season: Main season roughly September to December; it keeps well, so it is on sale all year (caterer-red-cabbage,
+        Total Produce market report). Fresh field red and white cabbage runs mid-July to end November, then comes
+        from refrigerated store until mid-July (freshplaza-cabbage-naylor, Naylor Farms). Produce World harvests
+        winter cabbages including red from November to March (freshplaza-redcabbage-produceworld), so January-March
+        is avail rather than store. Sells most around Christmas (freshplaza-cabbage-esg). Defra quotes home-grown
+        red cabbage at every date read.
+      year_round: On sale all year. Best September-December (caterer-red-cabbage); avail and store here mean out
+        of its best season, not hard to get.
+      discrepancy: 'Naylor puts all stock in store from November (freshplaza-cabbage-naylor), but Produce World
+        cuts fresh until March (freshplaza-redcabbage-produceworld). Secondary calendars: September-February (vegsoc-seasonal,
+        oddbox-seasonal); March-August and October-January (freshview-seasonality).'
+  - name: Savoy
+    kind: variety
+    confidence: moderate
+    sources:
+    - ahdb-harvested-britain
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - defra-wholesale-prices
+    - freshplaza-cabbage-esg
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 35
+      - avail
+    - - 36
+      - 52
+      - in
+    notes:
+      season: Savoy is cut from September through autumn and winter; hardy Savoy and January King are harvested
+        in January (ahdb-harvested-britain). Sells most as the weather cools (freshplaza-cabbage-esg). Defra quotes
+        home-grown savoy at every date read, hence avail outside the winter window.
+      year_round: On sale all year (defra-wholesale-prices). Best September-February, the autumn-winter cutting
+        season (ahdb-harvested-britain); avail here means out of its best season, not hard to get.
+      discrepancy: vegsoc-seasonal and oddbox-seasonal start in October (about 4 weeks later than AHDB) and end
+        in February.
+  - name: Winter white
+    kind: variety
+    confidence: moderate
+    sources:
+    - freshplaza-cabbage-naylor
+    - defra-wholesale-prices
+    - freshplaza-cabbage-esg
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 1
+      - 27
+      - store
+    - - 28
+      - 48
+      - in
+    - - 49
+      - 52
+      - store
+    notes:
+      season: Fresh field white and red cabbage runs mid-July to end November; from November to mid-July it comes
+        from refrigerated store (freshplaza-cabbage-naylor, Naylor Farms, a major coleslaw-cabbage grower). Some
+        varieties store well over winter (freshplaza-cabbage-esg). Lincolnshire white from end July (freshview-seasonality).
+        Defra quotes home-grown white at every date read, consistent with stored supply.
+      discrepancy: 'Secondary calendars count winter months as in season with no store distinction: August-November
+        and January-February (vegsoc-seasonal); July-February (oddbox-seasonal).'
+  - name: Pointed
+    kind: variety
+    confidence: moderate
+    sources:
+    - vegsoc-seasonal
+    - defra-wholesale-prices
+    - freshplaza-cabbage-esg
+    weeks:
+    - - 1
+      - 3
+      - avail
+    - - 13
+      - 17
+      - avail
+    - - 18
+      - 43
+      - in
+    - - 44
+      - 52
+      - avail
+    notes:
+      season: 'Split added: sweetheart (pointed) cabbage runs May-October (vegsoc-seasonal), unlike the winter types.
+        Main cabbage cutting on Scotland''s east coast starts end May/early June, and pointed sells most in summer
+        (freshplaza-cabbage-esg). Defra quotes home-grown summer/autumn pointed from late March to late October,
+        plus December-January.'
+- name: Spring greens
+  slug: spring-greens
+  group: brassicas
+  lines:
+  - name: Spring greens
+    kind: whole
+    confidence: moderate
+    sources:
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - defra-wholesale-prices
+    - caterer-spring-greens
+    - freshview-seasonality
+    - kentishstour-seasonal
+    weeks:
+    - - 1
+      - 43
+      - in
+    - - 44
+      - 52
+      - avail
+    notes:
+      season: January-October in vegsoc-seasonal and oddbox-seasonal. Grown in Cornwall, Lincolnshire and Suffolk;
+        Cornish plantings give the early crop that bridges the March-April hungry gap (caterer-spring-greens). Defra
+        quotes home-grown prepacked spring greens at every date read. No source separates hearted spring cabbage,
+        so no split.
+      year_round: On sale all year (defra-wholesale-prices). Best January-October (vegsoc-seasonal, oddbox-seasonal);
+        avail here means out of its best season, not hard to get.
+      discrepancy: freshview-seasonality runs January-November; kentishstour-seasonal marks all year.
+- name: Cauliflower
+  slug: cauliflower
+  group: brassicas
+  lines:
+  - name: Lincolnshire, Scotland and other
+    kind: region
+    confidence: moderate
+    sources:
+    - freshplaza-cauli-sef-2024
+    - kentishstour-seasonal
+    - ahdb-harvested-britain
+    - defra-wholesale-prices
+    - vegsoc-seasonal
+    weeks:
+    - - 11
+      - 50
+      - in
+    notes:
+      season: Split added because the Cornish winter crop has different dates. Scotland and Lincolnshire stop in
+        December and restart in mid-March (freshplaza-cauli-sef-2024); Lincolnshire runs April to mid-December (kentishstour-seasonal).
+        Regions and varieties are staggered for year-round UK supply (ahdb-harvested-britain); Defra quotes cauliflower
+        at every date read.
+      discrepancy: vegsoc-seasonal gives June-November only.
+  - name: Cornwall winter
+    kind: region
+    confidence: moderate
+    sources:
+    - riverford-cornish-cauli
+    - freshplaza-broccoli-peloton
+    - freshplaza-cauli-sef-2024
+    - freshplaza-cauli-sef-2017
+    - freshplaza-cauli-sef-2021
+    - ahdb-harvested-britain
+    - kentishstour-seasonal
+    weeks:
+    - - 1
+      - 11
+      - in
+    - - 12
+      - 22
+      - avail
+    - - 44
+      - 52
+      - in
+    notes:
+      season: Split added. Cornish season starts in November and usually runs to mid-March (riverford-cornish-cauli,
+        grower Paul Badcock); first Cornish cut expected early-mid November 2025 (freshplaza-broccoli-peloton).
+        AHDB notes cutting in Cornwall in January. Overwintered Cornish crops can supply to end May (freshplaza-cauli-sef-2024);
+        strong availability into April (freshplaza-cauli-sef-2021); exports December-May (freshplaza-cauli-sef-2017).
+      discrepancy: kentishstour-seasonal gives Kent and Cornwall January-June.
+- name: Cavolo nero
+  slug: cavolo-nero
+  group: brassicas
+  lines:
+  - name: Cavolo nero
+    kind: whole
+    confidence: low
+    sources:
+    - freshplaza-cavolo-ahworth
+    - freshplaza-cavolo-mudwalls
+    - freshview-seasonality
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 13
+      - avail
+    - - 23
+      - 52
+      - in
+    notes:
+      season: UK harvest roughly June-December, with Spanish and Italian imports filling the rest (freshplaza-cavolo-ahworth,
+        Spalding). June-February, with the UK season ending in March (freshview-seasonality). March tail is avail.
+        Second pass found no further grower or market source before the search budget ran out.
+      discrepancy: Mudwalls Farm starts in late August and runs through winter to February/March (freshplaza-cavolo-mudwalls),
+        over 4 weeks later than A.H. Worth's June start; A.H. Worth ends in December.
+- name: Kale
+  slug: kale
+  group: brassicas
+  lines:
+  - name: Kale
+    kind: whole
+    confidence: moderate
+    sources:
+    - freshplaza-kale-reynolds
+    - freshplaza-kale-mkc
+    - grocer-kale-hardy
+    - ncgm-december-2021
+    - freshplaza-ncgm-sept-2026
+    - defra-wholesale-prices
+    - oddbox-seasonal
+    - vegsoc-seasonal
+    - hubbub-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 35
+      - avail
+    - - 36
+      - 52
+      - in
+    notes:
+      season: UK kale season generally runs September to end April or early May (freshplaza-kale-reynolds, Reynolds).
+        Molyneux Kale Company says kale is hard to grow April to June or July; coloured kales last to November and
+        its own varieties to March (freshplaza-kale-mkc). Listed as a British brassica in season in December (ncgm-december-2021);
+        UK variegated kale on the market in September (freshplaza-ncgm-sept-2026). Defra quotes home-grown curly
+        kale at every date read, hence avail through summer. April is avail because only Reynolds names it.
+      year_round: On sale all year. Best September-March (freshplaza-kale-reynolds, freshplaza-kale-mkc); avail
+        here means out of its best season, not hard to get.
+      discrepancy: 'grocer-kale-hardy gives June to early March, over 4 weeks earlier at the start than Reynolds.
+        Secondary: September-April (oddbox-seasonal); September-February plus April (vegsoc-seasonal); August-March
+        (hubbub-seasonal); curly kale also July-September (freshview-seasonality).'
+- name: Kohlrabi
+  slug: kohlrabi
+  group: brassicas
+  lines:
+  - name: Kohlrabi
+    kind: whole
+    confidence: low
+    sources:
+    - rhs-kohlrabi
+    - ncgm-october-2021
+    - ncgm-december-2021
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - esm-kohlrabi
+    weeks:
+    - - 18
+      - 52
+      - in
+    notes:
+      season: 'With repeat sowings, harvest runs May to November, into December in mild areas (rhs-kohlrabi); this
+        is garden timing. New Covent Garden Market lists British kohlrabi in season in October (ncgm-october-2021)
+        and December (ncgm-december-2021), so December is now in. Waitrose launched Lincolnshire-grown kohlrabi
+        in mid-August 2013 (esm-kohlrabi). Not in the Defra price series. Still low: the May start rests only on
+        garden timing.'
+      discrepancy: vegsoc-seasonal gives July-September; oddbox-seasonal June-February. More than 4 weeks apart.
+- name: Pak choi
+  slug: pak-choi
+  group: brassicas
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - freshview-seasonality
+    - hubbub-seasonal
+    - oddbox-seasonal
+    weeks:
+    - - 18
+      - 22
+      - avail
+    - - 23
+      - 35
+      - in
+    - - 36
+      - 39
+      - avail
+    notes:
+      season: June-August in hubbub-seasonal; May-August from Lancashire and Evesham (freshview-seasonality); June-September
+        (oddbox-seasonal). Secondary sources only; second pass found no grower or trade source before the search
+        budget ran out.
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - defra-wholesale-prices
+    - ncgm-december-2021
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Defra quotes home-grown pak choi at every date read, December 2025 to October 2026. The series does
+        not split by method, so assigning year-round supply to protected cropping is my inference; no grower source
+        found (searched Defra, trade press and market reports). Rule 6 applied: production window with no named
+        peak, so in. Pictured in New Covent Garden Market''s December post with origin not stated (ncgm-december-2021).'
+- name: Romanesco
+  slug: romanesco
+  group: brassicas
+  lines:
+  - name: Romanesco
+    kind: whole
+    confidence: low
+    sources:
+    - freshview-seasonality
+    - ncgm-august-2021
+    - ncgm-october-2021
+    weeks:
+    - - 23
+      - 48
+      - in
+    notes:
+      season: June-November from Cheshire (freshview-seasonality, a wholesaler). New Covent Garden Market lists
+        UK-grown romanesco in August (ncgm-august-2021) and British romanesco in season in October (ncgm-october-2021),
+        inside that window, but gives no start or end. Not in the Defra series.
+- name: Chard
+  slug: chard
+  group: leaves-salad
+  lines:
+  - name: Chard
+    kind: whole
+    confidence: low
+    sources:
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - hubbub-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 23
+      - 52
+      - in
+    notes:
+      season: June-December in vegsoc-seasonal and oddbox-seasonal. Secondary sources only; not in the Defra series.
+        Second pass found no grower or trade source before the search budget ran out.
+      discrepancy: hubbub-seasonal gives June-August; freshview-seasonality April and July-August from an Evesham
+        grower.
+- name: Chicory & Radicchio
+  slug: chicory-radicchio
+  group: leaves-salad
+  lines:
+  - name: Chicory & Radicchio
+    kind: whole
+    confidence: low
+    sources:
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - hubbub-seasonal
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 35
+      - avail
+    - - 36
+      - 52
+      - in
+    notes:
+      season: All three calendars include September-February (hubbub-seasonal omits December). None covers radicchio
+        separately or says whether chicory is forced; no grower source found. Second pass did not reach UK radicchio
+        growers before the search budget ran out.
+      discrepancy: vegsoc-seasonal marks all twelve months; oddbox-seasonal March-July and September-February; hubbub-seasonal
+        September-November and January-February.
+- name: Cucumber
+  slug: cucumber
+  group: leaves-salad
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - producedinkent-vegbox-2024
+    - rhs-cucumbers
+    - hortnews-cucumbers-2018
+    weeks: []
+    notes:
+      season: 'Third pass: no commercial UK outdoor cucumber crop found. Trade coverage of UK cucumber production
+        describes glasshouse growing only, citing Defra''s figure of just over 100 ha of commercial cucumber glasshouses
+        (hortnews-cucumbers-2018). The only outdoor evidence is small-scale: a Kent veg-box supplier said Kent outdoor
+        cucumbers had just started cropping at the end of July 2024, with no end date (producedinkent-vegbox-2024);
+        RHS says outdoor crops start later and finish earlier than greenhouse ones, with no months (rhs-cucumbers).
+        Searched trade press, Defra horticulture statistics and grower bodies. Left empty for the coordinator to
+        decide on never.'
+      no_supply: No commercial outdoor UK cucumber crop found; UK cucumbers are grown under glass.
+    no_supply: true
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - ahdb-harvested-britain
+    - defra-wholesale-prices
+    - kentishstour-seasonal
+    - farmdirect-cucumbers-2021
+    - lvga-home
+    weeks:
+    - - 1
+      - 48
+      - in
+    notes:
+      season: Cut under glass from January through November, with the crop replanted once or twice a season (ahdb-harvested-britain).
+        No peak named, so the whole window is in (rule 6). First hydroponic cucumbers from Thanet Earth arrived
+        in the week of 9 February 2021 (farmdirect-cucumbers-2021). The Lea Valley grows about 75% of British cucumbers
+        under glass but gives no season (lvga-home).
+      discrepancy: Defra quotes home-grown cucumbers only from mid-March to mid-October (weeks 11-41), over 4 weeks
+        shorter at each end than AHDB; kentishstour-seasonal gives protected April-September.
+- name: Edible flowers
+  slug: edible-flowers
+  group: leaves-salad
+  lines:
+  - name: Edible flowers
+    kind: whole
+    confidence: low
+    sources:
+    - oddbox-seasonal
+    - hubbub-seasonal
+    - vegsoc-seasonal
+    weeks:
+    - - 18
+      - 30
+      - in
+    notes:
+      season: 'Covers only nasturtium and elderflower, the flowers the calendars list: May-July (oddbox-seasonal);
+        nasturtium May-June, elderflower June (hubbub-seasonal); elderflower May-June (vegsoc-seasonal). No grower
+        source found for cultivated edible flowers; not reached in the second pass before the search budget ran
+        out.'
+- name: Lettuce
+  slug: lettuce
+  group: leaves-salad
+  lines:
+  - name: Cos
+    kind: variety
+    confidence: moderate
+    sources:
+    - defra-wholesale-prices
+    - ahdb-harvested-britain
+    - freshplaza-lettuce-2017
+    - vegsoc-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 14
+      - 17
+      - avail
+    - - 18
+      - 43
+      - in
+    - - 44
+      - 48
+      - avail
+    notes:
+      season: First field lettuce appears in April (ahdb-harvested-britain); UK salad season usually starts mid-May
+        (freshplaza-lettuce-2017); May-October (vegsoc-seasonal). Defra quotes home-grown cos late May to late October.
+        November tail from freshview-seasonality (English lettuce to November).
+      discrepancy: Defra also quotes cos on two December 2025 dates; no source explains winter supply.
+  - name: Curly
+    kind: variety
+    confidence: low
+    sources: []
+    weeks: []
+    notes:
+      season: 'Reset under rule 8: the earlier dates were copied from Cos. No source gives curly-leaf (frilly, lollo)
+        lettuce a season of its own, and it is not in the Defra series. Searched trade press, grower pages and the
+        New Covent Garden Market calendar (its month grid could not be read). General field-lettuce sources (April
+        first cut, ahdb-harvested-britain; May-October, vegsoc-seasonal) do not say they apply to every type. Third
+        pass searched lollo rosso, lollo bianco and frisee with UK growers and trade press: only seed-packet cropping
+        advice turned up, and a red butterhead sold as a British lollo rosso alternative (see Round), which is not
+        a curly type.'
+  - name: Iceberg
+    kind: variety
+    confidence: moderate
+    sources:
+    - defra-wholesale-prices
+    - ahdb-harvested-britain
+    - freshplaza-lettuce-2017
+    - vegsoc-seasonal
+    - freshview-seasonality
+    weeks:
+    - - 14
+      - 17
+      - avail
+    - - 18
+      - 43
+      - in
+    - - 44
+      - 48
+      - avail
+    notes:
+      season: Defra quotes home-grown crisp/iceberg from mid-May to late October, matching the mid-May start (freshplaza-lettuce-2017)
+        and May-October (vegsoc-seasonal). April first field lettuce (ahdb-harvested-britain); November tail per
+        freshview-seasonality.
+  - name: Little gem
+    kind: variety
+    confidence: low
+    sources:
+    - defra-wholesale-prices
+    - fpj-littlegem-snaith
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Earlier dates were copied from Cos; replaced with little gem's own data. Defra quotes home-grown little
+        gem at every fortnightly date read (December 2025 to October 2026), with no named peak, so in all year (rule
+        3). Some is grown in frost-protected unheated greenhouses (fpj-littlegem-snaith, grower Mark Hardwick, Snaith),
+        but no source says how much, so no separate field and protected split. Low because the line rests on price
+        data alone and may mix methods (rule 6).
+  - name: Round
+    kind: variety
+    confidence: low
+    sources:
+    - fpj-red-butterhead-bedfordshire
+    - freshplaza-red-butterhead-2015
+    - freshplaza-ncgm-sept-2026
+    weeks:
+    - - 23
+      - 48
+      - in
+    notes:
+      season: 'Third pass: Bedfordshire Growers and its growing partner Jepco grow a red butterhead (a Salanova-type
+        variety) in Lincolnshire in a short season from June to November, per its managing director Stephen Hedderly
+        (fpj-red-butterhead-bedfordshire; launch reported 30 June 2015 in freshplaza-red-butterhead-2015). No peak
+        named, so June-November is in. Low because it is one variety from one grower, about ten years old, and the
+        source does not say field or protected. New Covent Garden Market expected UK-grown butterhead to continue
+        through September 2026 (freshplaza-ncgm-sept-2026), which fits. Defra prices only indoor butterhead (see
+        the Glasshouse line). Earlier dates copied from Cos were reset under rule 8. Source-age pass of 10 Nov 2026:
+        the June-November dates rest only on 2015 sources (the 2026 report confirms September only), so the line
+        stays low; searches for a newer UK round or butterhead field-season source found only seed-packet advice.'
+  - name: Glasshouse
+    kind: method
+    confidence: high
+    sources:
+    - ahdb-harvested-britain
+    - defra-wholesale-prices
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Glasshouse lettuce is sown, grown and cut on a continuous year-round cycle (ahdb-harvested-britain);
+        Defra quotes indoor butterhead at every date read. Year-round with no named peak, so in all year (rule 3).
+- name: Rocket
+  slug: rocket
+  group: leaves-salad
+  lines:
+  - name: Rocket
+    kind: whole
+    confidence: moderate
+    sources:
+    - defra-wholesale-prices
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    - hubbub-seasonal
+    weeks:
+    - - 14
+      - 43
+      - in
+    notes:
+      season: April-October in vegsoc-seasonal and oddbox-seasonal; Defra quotes home-grown rocket from mid-April
+        to mid-October.
+      discrepancy: hubbub-seasonal ends in September.
+- name: Spinach
+  slug: spinach
+  group: leaves-salad
+  lines:
+  - name: Spinach
+    kind: whole
+    confidence: moderate
+    sources:
+    - defra-wholesale-prices
+    - freshview-seasonality
+    - kentishstour-seasonal
+    - vegsoc-seasonal
+    - oddbox-seasonal
+    weeks:
+    - - 14
+      - 17
+      - avail
+    - - 18
+      - 43
+      - in
+    notes:
+      season: Defra quotes home-grown loose spinach from mid-May to late October; freshview-seasonality gives May-October.
+        April start in kentishstour-seasonal and vegsoc-seasonal, so April is avail.
+      discrepancy: vegsoc-seasonal lists only April-May and September-October; oddbox-seasonal March-July and September-October.
+- name: Watercress
+  slug: watercress
+  group: leaves-salad
+  lines:
+  - name: Cultivated
+    kind: method
+    confidence: moderate
+    sources:
+    - farminguk-watercress-2020
+    - dorsetview-watercress-2023
+    - farmingmonthly-watercress
+    - hortidaily-watercress
+    - courier-watercress
+    - vegsoc-seasonal
+    - kentishstour-seasonal
+    weeks:
+    - - 18
+      - 43
+      - in
+    - - 44
+      - 48
+      - avail
+    notes:
+      season: Source-age pass of 10 Nov 2026 found the dates rested only on 2011, 2014 and undated sources, so the
+        line was lowered to low and refreshed. The Watercress Company's harvest runs until late October (farminguk-watercress-2020,
+        2020). The Watercress Alliance puts the season at May-October (farmingmonthly-watercress); its May festival
+        marks the start (hortidaily-watercress). The Watercress Company gives early May to end October; Vitacress
+        harvests until the first hard frosts in November (courier-watercress). Winter shelf supply is mainly imported,
+        from Spain for The Watercress Company (dorsetview-watercress-2023). Moderate restored on the 2020 trade source.
+      discrepancy: In 2023 The Watercress Company's managing director said the UK season usually runs May to November
+        (dorsetview-watercress-2023), about four weeks longer than its late-October end in 2020 (farminguk-watercress-2020);
+        the 2023 source is local news, so the trade source's end date is kept and November stays avail. vegsoc-seasonal
+        gives March-December; kentishstour-seasonal March-November.
+  - name: Glasshouse
+    kind: method
+    confidence: moderate
+    sources:
+    - westlands-watercress
+    - courier-watercress
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Split added under rule 6. Westlands UK (Evesham) grows watercress all year in controlled glasshouse
+        conditions (westlands-watercress). Production window with no named peak, so in all year. One grower only;
+        most winter shelf supply is imported (courier-watercress).
+  - name: Wild
+    kind: method
+    confidence: low
+    sources:
+    - wildfooduk-watercress
+    - countrylife-forage
+    - courier-watercress
+    weeks:
+    - - 9
+      - 48
+      - in
+    notes:
+      season: Foraging season March to November, no peak named (wildfooduk-watercress); always plentiful in July
+        (countrylife-forage, John Wright). Grows wild in Scotland (courier-watercress). Secondary sources only.
+- name: Cress
+  slug: cress
+  group: leaves-salad
+  lines:
+  - name: Cress
+    kind: whole
+    confidence: moderate
+    sources:
+    - deliciouslyorkshire-cress
+    - pocklington-cress
+    - grocer-cress-humbervhb
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'W.S. Bentley in Gomersal, Yorkshire grows cress all year round (deliciouslyorkshire-cress), under
+        glass with artificial heat and light (pocklington-cress). Humber VHB in West Sussex, one of the UK''s leading
+        cress growers, grows about 16 million punnets a year (grocer-cress-humbervhb). All UK supply found is protected,
+        so the single line follows rule 6: production window with no named peak, so in all year.'

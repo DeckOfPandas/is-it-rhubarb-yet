@@ -1,0 +1,332 @@
+# Is It Rhubarb Yet? — clean-room seasonality, group: foraged (researched 2026-11-10)
+# Weeks per rules.md: Jan 1-4, Feb 5-8, Mar 9-13, Apr 14-17, May 18-22, Jun 23-26,
+# Jul 27-30, Aug 31-35, Sep 36-39, Oct 40-43, Nov 44-48, Dec 49-52.
+# Seasons named only as "spring/summer/autumn/winter" are mapped to meteorological months
+# (spring Mar-May, summer Jun-Aug, autumn Sep-Nov, winter Dec-Feb); notes say where.
+
+- name: "Wild garlic"
+  slug: wild-garlic
+  group: foraged-wild
+  lines:
+    - name: "UK-wide"
+      kind: region
+      confidence: moderate
+      sources: [wt-wild-garlic, wt-foraging-feb, wt-foraging-mar, wt-foraging-apr, srwt-wild-garlic, wt-wild-garlic-pesto, natgeo-calendar, caterer-wild-garlic]
+      weeks:
+        - [5, 8, avail]
+        - [9, 13, in]
+        - [14, 26, avail]
+      notes:
+        season: "Leaves can appear from February (wt-foraging-feb); leaves come up in March and are best young (srwt-wild-garlic). Leaves are best before flowering (wt-wild-garlic), and flowers open from April, so April onwards is avail; WT says pick before the flowers die, usually by early May (wt-foraging-mar), and woods carry it to June (srwt-wild-garlic)."
+        discrepancy: "wt-wild-garlic-pesto says visit woods late March to July (weeks 12-30). natgeo-calendar puts the peak in April (14-17). caterer-wild-garlic says growth starts in Cornwall in late December and runs about 12 weeks, about two weeks later per degree north."
+    - name: "Scotland"
+      kind: region
+      confidence: low
+      sources: [lovecairngorms-spring, spurtle-wild-garlic, galloway-wild-garlic, scotsman-wild-garlic, nts-wild-garlic, caterer-wild-garlic, naturescot-foraging-plants]
+      weeks:
+        - [5, 13, avail]
+        - [14, 17, in]
+        - [18, 26, avail]
+      notes:
+        season: "Split added: Scottish sources give a later peak than the UK-wide line. Cairngorms: late winter to end of spring, peaking in April, flowering around May (lovecairngorms-spring). Edinburgh: first shoots late February, April and May the best months, starting to rot by June (spurtle-wild-garlic). Galloway: shoots obvious from early February, season February to June, leaves past their best once flowering in May (galloway-wild-garlic). Shows from February at NTS properties (nts-wild-garlic); arrives in Scotland around April (caterer-wild-garlic). The April peak is where all the Scottish sources overlap. Second pass found no primary source (searched NatureScot, Scottish Wildlife Trust, Woodland Trust Scotland, Forestry and Land Scotland); NatureScot's foraging guide says only that leaves appear in spring (naturescot-foraging-plants), too vague to set weeks. Otherwise secondary sources only."
+        discrepancy: "spurtle-wild-garlic names April and May as best (weeks 14-22), against April only in lovecairngorms-spring (14-17). scotsman-wild-garlic gives growth March to May (9-22)."
+
+- name: "Nettles"
+  slug: nettles
+  group: foraged-wild
+  lines:
+    - name: "Nettles"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-feb, wt-foraging-mar, wt-foraging-jun, naturescot-foraging-plants, countryfile-monthly, courier-foraging-may, natgeo-calendar]
+      weeks:
+        - [1, 7, avail]
+        - [8, 23, in]
+        - [24, 35, avail]
+        - [36, 48, in]
+        - [49, 52, avail]
+      notes:
+        season: "New growth from early February; best picked late February to early June, using the tips (wt-foraging-feb, wt-foraging-mar). NatureScot names spring and autumn as harvest times and advises against summer leaves (naturescot-foraging-plants); its autumn is mapped to Sep-Nov. Still findable in January (countryfile-monthly). In the north of Scotland, in season March to December (courier-foraging-may)."
+        discrepancy: "natgeo-calendar puts the peak in April only (weeks 14-17)."
+
+- name: "Dandelion"
+  slug: dandelion
+  group: foraged-wild
+  lines:
+    - name: "Dandelion"
+      kind: whole
+      confidence: low
+      sources: [wt-foraging-feb, wt-foraging-mar, wt-foraging-jun, lovecairngorms-spring, totallywild-dandelion, courier-foraging-may, natgeo-calendar]
+      weeks:
+        - [1, 8, avail]
+        - [9, 22, in]
+        - [23, 52, avail]
+      notes:
+        season: "Appears from February; young leaves from the rosette centre are best, outer leaves bitter (wt-foraging-feb, wt-foraging-mar); still listed in June (wt-foraging-jun). Pickable any time of year but most tender in spring (lovecairngorms-spring), mapped to Mar-May; fresh early spring growth is best (totallywild-dandelion). North of Scotland: March to November (courier-foraging-may). No source found that sets a before-flowering cut-off for the leaves, so none applied. WT gives the first appearance but no best window, so the 'in' window rests on secondary sources; second pass searched the Woodland Trust (March, April, May posts), The Wildlife Trusts and Plantlife without finding one."
+        year_round: "Leaves can be picked all year (lovecairngorms-spring); spring (Mar-May) is when they are most tender, so avail outside it means past their best, not hard to find."
+        discrepancy: "natgeo-calendar gives a June peak (weeks 23-26), probably for flowers."
+
+- name: "Sea beet"
+  slug: sea-beet
+  group: foraged-wild
+  lines:
+    - name: "Sea beet"
+      kind: whole
+      confidence: moderate
+      sources: [naturescot-foraging-plants, wildlifetrusts-sea-beet, kentwt-sea-beet, galloway-sea-beet, wildfooduk-sea-beet, fcc-sea-beet]
+      weeks:
+        - [1, 8, avail]
+        - [9, 22, in]
+        - [23, 52, avail]
+      notes:
+        season: "Edible all year, best in spring (naturescot-foraging-plants, wildfooduk-sea-beet, fcc-sea-beet); spring mapped to Mar-May. Leaves turn bitter while flowering, late spring through summer, and recover in autumn (galloway-sea-beet); Wildlife Trusts give flowering July-September (wildlifetrusts-sea-beet, kentwt-sea-beet). Can be below par in January-February in the north, and largely absent from Scotland's west, north and north-east coasts (galloway-sea-beet)."
+        discrepancy: "galloway-sea-beet gives flowering as May-August, Wildlife Trusts July-September."
+        year_round: "Edible all year (naturescot-foraging-plants, wildfooduk-sea-beet); spring (Mar-May) is best, before flowering makes the leaves bitter (galloway-sea-beet), so avail outside it means past its best, not hard to find."
+
+- name: "Samphire"
+  slug: samphire
+  group: foraged-wild
+  lines:
+    - name: "Marsh samphire (wild)"
+      kind: variety
+      confidence: low
+      sources: [galloway-marsh-samphire, cpre-norfolk-samphire, klmag-samphire, riverford-donald-watson, riverford-foraging-mud, vice-samphire, wildwalks-marsh-samphire, fcc-marsh-samphire, wildlifetrusts-glasswort, farminguk-samphire, countryfile-monthly]
+      weeks:
+        - [18, 22, avail]
+        - [23, 31, in]
+        - [32, 35, avail]
+      notes:
+        season: "Juiciest in June and July; May shoots are tender but hard work to gather (galloway-marsh-samphire). Norfolk season usually June into early August (cpre-norfolk-samphire); in Norfolk it appears late June or early July and lasts to the end of August, best early before the stems go woody (klmag-samphire). Goes woody later in the year (fcc-marsh-samphire, wildwalks-marsh-samphire). Commercial hand-gathered supply: Riverford's team cuts wild samphire by hand on the Erme estuary salt marsh in Devon, an SSSI, under Natural England permission, for a few weeks each summer, about a month's work (riverford-donald-watson); in 2022 they had been picking for the month before 7 July, so roughly June (riverford-foraging-mud). A Wells-next-the-Sea restaurant buys Norfolk samphire from local fishermen and serves it June to September (vice-samphire). Waitrose describes the traditional British season as about 12 weeks in summer (farminguk-samphire). Wildlife Trusts give flowering August-September and note it is an offence to uproot a wild plant (wildlifetrusts-glasswort). No harvest window from a primary source; searched Natural England, the Crown Estate and the Norfolk, Lincolnshire and Essex Wildlife Trusts in the second pass without finding one."
+        discrepancy: "wildwalks-marsh-samphire gives the peak as June-August (weeks 23-35); klmag-samphire late June or early July to end of August (26-35); vice-samphire has a restaurant serving it June-September (23-39), though sellers called it woody by the end of August. countryfile-monthly lists marsh samphire under December, which no other source supports."
+    - name: "Rock samphire"
+      kind: variety
+      confidence: low
+      sources: [wildwalks-rock-samphire, galloway-rock-samphire, wildfooduk-rock-samphire]
+      weeks:
+        - [18, 26, in]
+        - [27, 43, avail]
+      notes:
+        season: "Split added: a different, unrelated species with a longer season. Late spring or early summer is the best time to pick; in late summer only the young fronds, avoiding the flowering stems (wildwalks-rock-samphire); late spring and early summer mapped to May-June. Season May to September (galloway-rock-samphire), where a reader comment also advises spring or early summer before it toughens; May to October (wildfooduk-rock-samphire). Rare in Scotland except Galloway and South Ayrshire (galloway-rock-samphire). Secondary sources only; no primary source found."
+        discrepancy: "galloway-rock-samphire gives the whole of May-September (weeks 18-39) with no peak; wildfooduk-rock-samphire runs to October (week 43)."
+    - name: "Glasshouse (hydroponic)"
+      kind: method
+      confidence: moderate
+      sources: [fpj-samphire, grocer-samphire, farminguk-samphire, westlands-samphire]
+      weeks:
+        - [1, 52, in]
+      notes:
+        season: "Split added: Westlands grows marsh samphire hydroponically under glass, supplying Waitrose year-round (fpj-samphire, grocer-samphire, farminguk-samphire, June 2026). Production window given with no peak, so in throughout (rule 6, revised; first pass had avail). Westlands' own page (16 June 2026) says 'most of the year', with year-round supply still at trial stage (westlands-samphire). Commercially hand-gathered wild supply is covered on the wild line."
+        discrepancy: "Trade press reports year-round supply; the grower's own page says most of the year, with year-round still on trial (westlands-samphire). No months of any gap are given."
+
+- name: "Elderflower"
+  slug: elderflower
+  group: foraged-wild
+  lines:
+    - name: "Elderflower"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-jun, naturescot-foraging-plants, wt-foraging-recipes, natgeo-calendar]
+      weeks:
+        - [18, 20, avail]
+        - [21, 26, in]
+        - [27, 30, avail]
+      notes:
+        season: "At their best late May to June, depending on where in the UK you are (wt-foraging-jun). WT described them as in full bloom on 1 July 2026 (wt-foraging-recipes)."
+        discrepancy: "naturescot-foraging-plants says flowers can be gathered May to July (weeks 18-30), against WT's late May to June (21-26)."
+
+- name: "Meadowsweet"
+  slug: meadowsweet
+  group: foraged-wild
+  lines:
+    - name: "Meadowsweet"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-jul, naturescot-foraging-plants]
+      weeks:
+        - [23, 30, in]
+        - [31, 43, avail]
+      notes:
+        season: "Flowers June and July (naturescot-foraging-plants); in full flower in July, with flowering from June to October (wt-foraging-jul). Window is for the flowers."
+        discrepancy: "WT gives flowering to October (weeks to 43); NatureScot June-July only."
+
+- name: "Wild strawberries"
+  slug: wild-strawberries
+  group: foraged-wild
+  lines:
+    - name: "Wild strawberries"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-jul, wt-foraging-sep, countryfile-monthly, natgeo-calendar]
+      weeks:
+        - [23, 35, in]
+        - [36, 39, avail]
+      notes:
+        season: "Fruits ripen June to August (wt-foraging-jul). WT's September post still lists them, so September is avail."
+        discrepancy: "wt-foraging-sep says fruit appears from July onwards (week 27), against June (week 23) in wt-foraging-jul; the July post's text is used."
+
+- name: "Bilberries"
+  slug: bilberries
+  group: foraged-wild
+  lines:
+    - name: "UK-wide"
+      kind: region
+      confidence: moderate
+      sources: [wt-foraging-jul, wildlifetrusts-bilberry, ukh-hill-berries, countryfile-monthly]
+      weeks:
+        - [27, 39, in]
+      notes:
+        season: "Can ripen around the start of July and continue into August and September (wt-foraging-jul). Wildlife Trusts say summer and early autumn are the best time to find bilberry, with bushes covered in fruit by August (wildlifetrusts-bilberry). In season July to September on the hills (ukh-hill-berries). Line renamed from 'Bilberries' (kind whole) when the Scotland split was added."
+    - name: "Scotland"
+      kind: region
+      confidence: moderate
+      sources: [tfl-blaeberry, obantimes-blaeberry, visitcairngorms-foraging]
+      weeks:
+        - [27, 35, in]
+        - [36, 39, avail]
+      notes:
+        season: "Split added because Scottish sources treat blaeberry separately. Trees for Life (a Highland conservation charity) says the berries ripen in July and August (tfl-blaeberry). A Hebridean column quotes A Handbook of Scotland's Wild Harvests as giving ripe berries July to September, and found the first ripe berry on Lewis on 1 August (obantimes-blaeberry); September shown as avail. Neither source gives altitude or north-south differences, so no finer split is possible. It starts the same week as the UK-wide line and ends earlier only because the primary source stops at August."
+        discrepancy: "visitcairngorms-foraging (2015) says late summer and autumn (August-November, weeks 31-48), later than tfl-blaeberry's July-August (27-35)."
+
+- name: "Elderberries"
+  slug: elderberries
+  group: foraged-wild
+  lines:
+    - name: "Elderberries"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-aug, wt-foraging-sep, riverford-autumn-foraging, natgeo-calendar]
+      weeks:
+        - [27, 30, avail]
+        - [31, 39, in]
+        - [40, 43, avail]
+      notes:
+        season: "Normally ready in August and September (wt-foraging-aug); fruits from midsummer to mid-autumn, mostly July to October, with September a good time to collect (wt-foraging-sep)."
+        discrepancy: "riverford-autumn-foraging gives September-October (weeks 36-43)."
+
+- name: "Rosehips"
+  slug: rosehips
+  group: foraged-wild
+  lines:
+    - name: "Rosehips"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-sep, wt-foraging-oct, naturescot-foraging-plants, natgeo-calendar]
+      weeks:
+        - [1, 8, avail]
+        - [36, 48, in]
+        - [49, 52, avail]
+      notes:
+        season: "Dog rose hips are best September to November; yellow or orange hips are not yet ripe (wt-foraging-sep, wt-foraging-oct). Can still be gathered in winter (naturescot-foraging-plants), mapped to Dec-Feb."
+
+- name: "Crab apples"
+  slug: crab-apples
+  group: foraged-wild
+  lines:
+    - name: "Crab apples"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-aug, wt-foraging-hub, natgeo-calendar]
+      weeks:
+        - [31, 43, in]
+      notes:
+        season: "Ready from late summer into autumn, August to October (wt-foraging-aug); listed as ripening in August (wt-foraging-hub)."
+
+- name: "Sea buckthorn"
+  slug: sea-buckthorn
+  group: foraged-wild
+  lines:
+    - name: "Sea buckthorn"
+      kind: whole
+      confidence: moderate
+      sources: [wildlifetrusts-sea-buckthorn, riverford-autumn-foraging, riverford-hedgerow, countrylife-wild-fruit, galloway-sea-buckthorn, wildwalks-sea-buckthorn, fcc-sea-buckthorn]
+      weeks:
+        - [1, 8, avail]
+        - [31, 35, avail]
+        - [36, 48, in]
+        - [49, 52, avail]
+      notes:
+        season: "Wildlife Trusts name autumn for the berries but give no months (wildlifetrusts-sea-buckthorn). Best September to November (riverford-autumn-foraging). Berries from August, fading over the following months (countrylife-wild-fruit); fruiting sometimes to the end of the year (riverford-hedgerow); often persist well into the next year (galloway-sea-buckthorn) and can be picked through winter (wildwalks-sea-buckthorn), mapped to Jan-Feb."
+
+- name: "Sloes"
+  slug: sloes
+  group: foraged-wild
+  lines:
+    - name: "Sloes"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-jan, wt-foraging-sep, wt-foraging-oct, countrylife-wild-fruit]
+      weeks:
+        - [34, 38, avail]
+        - [39, 52, in]
+      notes:
+        season: "Ready from late September to December; the usual advice is to pick after the first frost, or pick early and freeze (wt-foraging-sep, wt-foraging-oct, wt-foraging-jan)."
+        discrepancy: "countrylife-wild-fruit (John Wright) has the fruit ripening late August to early November (weeks 34-45); its earlier start is shown as avail."
+
+- name: "Sweet chestnuts"
+  slug: sweet-chestnuts
+  group: foraged-wild
+  lines:
+    - name: "Sweet chestnuts"
+      kind: whole
+      confidence: moderate
+      sources: [wt-foraging-oct, wt-foraging-jan, natgeo-calendar]
+      weeks:
+        - [40, 43, in]
+        - [44, 49, avail]
+      notes:
+        season: "October is one of the best months; nuts drop from October into late autumn and early winter (wt-foraging-oct). Also listed among WT's winter finds (wt-foraging-jan)."
+
+- name: "Wood sorrel"
+  slug: wood-sorrel
+  group: foraged-wild
+  lines:
+    - name: "Wood sorrel"
+      kind: whole
+      confidence: low
+      sources: [galloway-wood-sorrel, countryfile-wood-sorrel, wildfooduk-wood-sorrel, fcc-wood-sorrel, wt-wood-sorrel, wildlifewatch-wood-sorrel]
+      weeks:
+        - [1, 8, avail]
+        - [9, 22, in]
+        - [23, 52, avail]
+      notes:
+        season: "Most abundant March to November with the best flavour in spring (galloway-wood-sorrel), mapped to Mar-May; found all year in Galloway though sparse in a long winter, and dies back in colder northern areas. Listed January to December (wildfooduk-wood-sorrel). Best foraged in spring and summer, at its peak early to mid spring (countryfile-wood-sorrel). WT gives flowering April-May (wt-wood-sorrel) and Wildlife Watch April-May for spotting (wildlifewatch-wood-sorrel), but neither gives a harvest window; second pass also searched the National Trust, Forestry England, Plantlife and Sheffield and Rotherham Wildlife Trust without finding one. Secondary sources only."
+        year_round: "Found all year in mild areas (galloway-wood-sorrel, wildfooduk-wood-sorrel); spring (Mar-May) has the best flavour, so avail outside it means past its best or sparse, not absent."
+
+- name: "Hops"
+  slug: hops
+  group: foraged-wild
+  lines:
+    - name: "Shoots"
+      kind: part
+      confidence: low
+      sources: [slowfood-hopshoots, totallywild-hops, hogsback-hop-shoots, beerguild-hop-shoots, hotdinners-hop-shoots]
+      weeks:
+        - [10, 13, avail]
+        - [14, 17, in]
+      notes:
+        season: "Available for a few weeks in March and April (slowfood-hopshoots); new shoots appear in early April, and side shoots can still be cut as the plant grows (totallywild-hops). A Surrey hop garden cut surplus shoots on 13 April (hogsback-hop-shoots). A Kent grower (Lenhall Farm, near Canterbury) supplied shoots thinned from his hop garden for a London hop shoot festival on 27-29 April 2012 (beerguild-hop-shoots, hotdinners-hop-shoots). April is where all four agree; March shown as avail. Second pass found no grower body or trade-press window (searched British Hop Association and Kent and Herefordshire growers)."
+        discrepancy: "slowfood-hopshoots starts in March (week 10); totallywild-hops starts in early April (week 14)."
+    - name: "Flowers"
+      kind: part
+      confidence: moderate
+      sources: [bha-harvest-2015, siba-hop-harvest-2015, hukins-hop-harvest, adnams-hop-harvest, maltmiller-wild-hops]
+      weeks:
+        - [34, 35, avail]
+        - [36, 39, in]
+        - [40, 41, avail]
+      notes:
+        season: "The British hop harvest is in September and lasts only a few weeks (bha-harvest-2015, siba-hop-harvest-2015). Wild cones: late August to September (maltmiller-wild-hops); late August start also given by a grower (hukins-hop-harvest). Commercial picking can run into October (adnams-hop-harvest)."
+
+- name: "Spruce tips"
+  slug: spruce-tips
+  group: foraged-wild
+  lines:
+    - name: "Spruce tips"
+      kind: whole
+      confidence: low
+      sources: [galloway-conifers, rab-spruce-beer, woodlandways-spruce-beer]
+      weeks:
+        - [14, 26, in]
+      notes:
+        season: "Earliest conifer growth, usually April to June in the UK, is soft enough to eat; spruce tips picked in spring are softest, and an April photo shows tips about to shed their sheath (galloway-conifers). A Hampshire picking for spruce beer took place in late May or June (rab-spruce-beer); a June 2013 post describes the new growth as full-sized but still soft then (woodlandways-spruce-beer). No primary source found; second pass searched the Woodland Trust, Forestry England, the Wildlife Trusts and Scottish distillers using spruce tips without finding a harvest window."
+        discrepancy: "rab-spruce-beer gives early May to mid-June (weeks 19-24), narrower than Galloway's April-June."

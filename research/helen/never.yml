@@ -1,0 +1,135 @@
+# Foods that are never in season in the UK. Each gets a verdict page at
+# /<slug>/ reading NEVER, with `line` under it instead of a date, and no
+# dial. `aliases` are other things people type for it; the checker keeps
+# slugs and aliases unique across this file and foods.yml.
+# A line is one sentence or two, played for laughs, never at anyone's
+# expense.
+#
+# Not on this list because they are grown here: tea, wasabi, saffron,
+# quinoa, lentils, chickpeas, figs, grapes, apricots, peaches, kiwi fruit
+# and sweet potatoes.
+
+- name: "Bananas"
+  slug: bananas
+  aliases: [banana, plantain, plantains]
+  line: "All Cavendish bananas worldwide can claim they're British, but they never visit."
+- name: "Avocados"
+  slug: avocados
+  aliases: [avocado, guacamole]
+  line: "Grown nowhere near here, and not getting any nearer."
+- name: "Lemons"
+  slug: lemons
+  aliases: [lemon]
+  line: "When life gives you lemons, it did not get them from Kent."
+- name: "Limes"
+  slug: limes
+  aliases: [lime]
+  line: "The clue is in what they called the sailors."
+- name: "Oranges"
+  slug: oranges
+  aliases: [orange, clementines, satsumas, tangerines, mandarins]
+  line: "Nell Gwyn's were imported too."
+- name: "Grapefruit"
+  slug: grapefruit
+  aliases: [grapefruits]
+  line: "Think of it as a mercy."
+- name: "Mangoes"
+  slug: mangoes
+  aliases: [mango]
+  line: "Wrong latitude. Lovely, though."
+- name: "Pineapples"
+  slug: pineapples
+  aliases: [pineapple]
+  line: "Georgian aristocrats grew them in heated pits and rented them out for dinner parties. That is not a season."
+- name: "Papayas"
+  slug: papayas
+  aliases: [papaya, pawpaw]
+  line: "No."
+- name: "Passion fruit"
+  slug: passion-fruit
+  aliases: [passionfruit]
+  line: "While passion flowers climb half the fences in Surrey, they grow the wrong fruit."
+- name: "Pomegranates"
+  slug: pomegranates
+  aliases: [pomegranate]
+  line: "Blame Persephone if you want, but it's still a no on the UK pomegranate thing."
+- name: "Dates"
+  slug: dates
+  aliases: [date, medjool]
+  line: "Torquay's palm trees don't date."
+- name: "Coconuts"
+  slug: coconuts
+  aliases: [coconut]
+  line: "Carried here by swallows, I am told, and even then not in season."
+- name: "Coffee"
+  slug: coffee
+  aliases: [espresso]
+  line: "No. Have a cup anyway."
+- name: "Chocolate"
+  slug: chocolate
+  aliases: [cocoa, cacao]
+  line: "Cacao needs a rainforest, but we only have rainy forests."
+- name: "Rice"
+  slug: rice
+  aliases: [risotto, basmati]
+  line: "Paddy fields need a different sort of rain."
+- name: "Olives"
+  slug: olives
+  aliases: [olive, olive oil]
+  line: "Olive trees are very fashionable in London front gardens, but for their shade, not their olives."
+- name: "Ginger"
+  slug: ginger
+  aliases: [root ginger]
+  line: "Ginger root wants a monsoon, but we only offer drizzle."
+- name: "Vanilla"
+  slug: vanilla
+  aliases: [vanilla pods]
+  line: "An orchid from Mexico, pollinated by hand. Not in a polytunnel in Lincolnshire."
+- name: "Cinnamon"
+  slug: cinnamon
+  line: "Tree bark from Sri Lanka. The UK is not Sri Lanka."
+- name: "Peanuts"
+  slug: peanuts
+  aliases: [peanut, groundnuts]
+  line: "They need a long hot summer. These days they can in theory be grown indoors and in polytunnels if you're really committed, so maybe this won't be a never forever."
+- name: "Lychees"
+  slug: lychees
+  aliases: [lychee, litchi, litchis]
+  line: "Subtropical we are not, even though London in the summer is like walking around under a hot, wet blanket."
+- name: "Dragon fruit"
+  slug: dragon-fruit
+  aliases: [dragonfruit, pitaya, pitahaya]
+  line: "Not the Welsh kind of dragon, sadly."
+- name: "Cashews"
+  slug: cashews
+  aliases: [cashew, cashew nuts]
+  line: "They need tropical heat. We're all still talking about that hot week in September 2023, and we still haven't beaten it."
+- name: "Brazil nuts"
+  slug: brazil-nuts
+  said: "Brazil nuts"
+  aliases: [brazil nut, brazils]
+  line: "If you don't know where these are from, you CAN work it out."
+- name: "Pistachios"
+  slug: pistachios
+  aliases: [pistachio]
+  line: "Our winters aren't winter enough and our summers aren't summer enough, thank goodness."
+- name: "Black pepper"
+  slug: black-pepper
+  aliases: [peppercorns, peppercorn]
+  line: "The whole spice trade thing wasn't just to pass the time."
+- name: "Nutmeg"
+  slug: nutmeg
+  aliases: [mace]
+  line: "If nutmeg could survive on drizzle and understatement, the UK would be a global superpower."
+- name: "Cardamom"
+  slug: cardamom
+  aliases: [cardamon, cardamum]
+  line: "We grow saffron, the priciest spice in the world. Cardamom, the third priciest, still declines us."
+- name: "Turmeric"
+  slug: turmeric
+  aliases: [tumeric]
+  line: "Needs endless tropical sunshine, which rules us out immediately."
+- name: "Sugar cane"
+  slug: sugar-cane
+  aliases: [sugarcane, cane sugar]
+  line: "Not the same as sugar beet, as anyone who's ever been within five miles of a sugar beet factory can confirm."
