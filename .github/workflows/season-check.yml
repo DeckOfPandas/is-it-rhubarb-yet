@@ -1,0 +1,24 @@
+# Checks a pull request's season file before it can merge. pages.yml runs
+# the same check, but only on main, where a failure is a failed deploy
+# rather than a red pull request. Other sites read /season/v1.json, so a
+# change that breaks its contract must be caught here. No Ruby, no build:
+# the season file is made from the data alone.
+name: Season file check
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  season:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: node --test tests/season/season.test.js
+      - run: node tools/season-json.js --check
