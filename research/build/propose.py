@@ -112,12 +112,21 @@ def main():
     log = collections.defaultdict(list)
     stats = collections.Counter()
     cited = set()
+    ring_keys = {k for f in helen for r in f["varieties"] for k in r.get("sources") or []}
     for f in helen:
         slug = SLUG.get(f["slug"], f["slug"])
         of = ours[slug]
         lines = {l["name"]: l for l in of["lines"]}
         used = set()
         new_rings = []
+        # A key Helen's food carries that none of her rings names backs the food's
+        # own notes or buy line, which are kept, so it stays on the food. Where a
+        # ring inherited the food's list, a key some ring elsewhere names is a
+        # season source, which the research replaces; general never stays.
+        inherits = any(not r.get("sources") for r in f["varieties"])
+        food_only = [k for k in f.get("sources") or []
+                     if k != "general" and not any(k in (r.get("sources") or []) for r in f["varieties"])
+                     and not (inherits and k in ring_keys)]
         for r in f["varieties"]:
             name = r["name"]
             target = RING.get((f["slug"], name)) or REGION.get(name) or name
@@ -220,7 +229,7 @@ def main():
                 f["mcs"] = None
                 f["mcs_note"] = "Not rated by the MCS Good Fish Guide." if not allr else "MCS ratings under review."
                 log[f["name"]].append("no MCS rating")
-        f["sources"] = list(dict.fromkeys(k for r in new_rings for k in r.get("sources") or []))
+        f["sources"] = list(dict.fromkeys([k for r in new_rings for k in r.get("sources") or []] + food_only))
         if of.get("never"):
             f["never_candidate"] = True
             stats["never_candidates"] += 1
@@ -252,8 +261,13 @@ def main():
                 if key in (m.get("buy") or ""):
                     cited.add(key)
             stats["meat_sustainability"] += 1
-    # Sources in Helen's schema: hers kept as they are; ours added.
-    out_src = list(hsrc_list)
+    # Sources in Helen's schema: hers kept as they are while something still cites
+    # them (or she marked them general or pending); ours added.
+    out_src = [s for s in hsrc_list if s["key"] in cited or s["key"] == "general" or s.get("pending")]
+    stats["sources_dropped"] = len(hsrc_list) - len(out_src)
+    for s in hsrc_list:
+        if s not in out_src:
+            log["(sources)"].append(f"dropped {s['key']}: nothing cites it any more")
     rank = collections.Counter(s.get("kind") for s in hsrc_list)
     group_kind = {}
     for f in helen:
@@ -305,8 +319,8 @@ def main():
         fh.write("".join(header).rstrip("\n") + "\n" + extra_header)
         fh.write(yaml.dump(helen, Dumper=Dumper, sort_keys=False, allow_unicode=True, width=100000))
     with open(f"{OUT}/sources.yml", "w") as fh:
-        fh.write("# Proposed sources: Helen's register, unchanged, followed by the clean-room sources\n"
-                 "# (with type, published and accessed).\n\n")
+        fh.write("# Proposed sources: Helen's register, unchanged but for the entries nothing cites\n"
+                 "# any more, followed by the clean-room sources (with type, published and accessed).\n\n")
         fh.write(yaml.dump(out_src, Dumper=Dumper, sort_keys=False, allow_unicode=True, width=100000))
     with open(f"{OUT}/CHANGES.md", "w") as fh:
         fh.write("# Proposed changes to foods.yml\n\n")
@@ -316,6 +330,7 @@ def main():
         fh.write(f"- Whole-food rings now combining several clean-room lines: {stats['envelope']}\n")
         fh.write(f"- New rings added as proposed (lead: false): {stats['new_rings']}\n")
         fh.write(f"- NEVER candidates: {stats['never_candidates']}\n- Sources added: {stats['sources_added']}\n")
+        fh.write(f"- Helen's sources dropped because nothing cites them: {stats['sources_dropped']}\n")
         fh.write(f"- Food-level confidence: {stats['food_conf_high']} high, {stats['food_conf_medium']} medium, "
                  f"{stats['food_conf_low']} low (the weakest of each food's lead rings)\n")
         fh.write(f"- Fish with a food-level MCS summary: {stats['fish_with_mcs']} (sea trout isn't rated by the MCS)\n")

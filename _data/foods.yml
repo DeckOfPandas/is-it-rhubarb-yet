@@ -4437,6 +4437,8 @@
   - bnfs
   - ffs-seasonality
   - mcs-mackerel-sw-handline
+  - seafish
+  - mcs
   notes:
   - "Flying Fish Seafoods have Cornish handline mackerel poor from June to September and only fair the rest of the year; the summer mackerel of common knowledge is a different fishery."
   - "The coasts disagree: Northumberland peaks June-August and has none November-April, while Flying Fish marks Cornish mackerel poor June-September and varying the rest of the year."
@@ -4567,6 +4569,8 @@
   - cgsg-bass
   - ffs-seasonality
   - ffs
+  - seafish
+  - mcs
   notes:
   - "Wild, line-caught; poor through the summer."
   - "Brighton & Newhaven marks February and March out of season, which matches the commercial bass closure of recent years."
@@ -4658,6 +4662,7 @@
   - msc-uk-sardines
   - csma-fishery
   - ttg-cgsg-winter-2026
+  - mcs
   notes:
   - "Cornish sardines, best in the cold months."
   - "Flying Fish shows Cornish sardines good most of the year (varying April-June), best quality in the cold months; Brighton & Newhaven has none March-July."
@@ -4780,6 +4785,7 @@
   - kefca-essex-2025-nov-jan
   - kefca-kent-2025-nov-jan
   - bnfs-seasonality
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) for North Sea autumn spawners (the North Sea and the eastern Channel) caught by drift net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   notes: ["Poor from January to March."]
   varieties:
@@ -4920,6 +4926,8 @@
   - mcs-sprat
   - mcs-sprat-ec
   - seafish-seafood-guide
+  - mcs_sprat
+  - mcs
   buy: "Good Fish Guide, October 2026: Channel sprats are the better choice, rated 3 (1 is the best, 5 is the worst). North Sea and West of Scotland sprats rate 4."
   notes: ["A winter fish. The Thames Estuary is the traditional fishery."]
   varieties:
@@ -4987,6 +4995,8 @@
   - cgsg-cod
   - ffs-seasonality
   - mcs-cod-celtic
+  - seafish
+  - mcs
   notes:
   - "Cornish cod is at its best from March to May and again in September and October."
   - "The coasts' own calendars are used over BBC Good Food's February to April spawning peak."
@@ -5122,6 +5132,7 @@
   - bnfs
   - cgsg-haddock
   - ffs-seasonality
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 1) from the North Sea, the west of Scotland or the Skagerrak, caught by seine net. Other stocks and methods rate from 1 to 5, so ask where and how it was caught."
   notes: ["Two peaks: late winter and late summer."]
   varieties:
@@ -5246,6 +5257,7 @@
   - cgsg-hake
   - ffs-seasonality
   - itv-mcs-oct-2026
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern stock (the North Sea, the Celtic Seas and northern Biscay), caught by gill or fixed net."
   notes: ["Consistent all year."]
   varieties:
@@ -5364,6 +5376,8 @@
   - cgsg-plaice
   - flyingfish-seasonality
   - cgsg-recommended
+  - seafish
+  - mcs
   notes:
   - "Poor in January and February after spawning."
   - "Flying Fish marks January-February poor, in line with Seafish's advice to avoid plaice in roe (February-April)."
@@ -5533,6 +5547,8 @@
   - cgsg-dover-sole
   - flyingfish-seasonality
   - cgsg-recommended
+  - seafish
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the western Channel, caught by gill or fixed net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
   - name: "North East"
@@ -5687,6 +5703,7 @@
   - cgsg-pollack
   - ffs-seasonality
   - mcs-pollack-handline
+  - mcs
   notes:
   - "Poor in January and February; good from March."
   - "Northumberland's row covers pollack and saithe (coley) together."
@@ -5782,6 +5799,7 @@
   - seafish-seafood-guide
   - cgsg-whiting
   - ffs-seasonality
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the eastern Channel, caught by otter trawl. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   notes: ["Consistent all year."]
   varieties:
@@ -5876,6 +5894,8 @@
   - bnfs
   - cgsg-monkfish-white
   - ffs-seasonality
+  - seafish
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, Rockall and the west of Scotland, or the Kattegat and Skagerrak, caught by otter trawl."
   notes: ["Seafish puts the best quality from October to May."]
   varieties:
@@ -6000,6 +6020,7 @@
   - bnfs-seasonality
   - cgsg-lemon-sole
   - flyingfish-seasonality
+  - mcs
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the North Sea, the Skagerrak and Kattegat or the eastern Channel, caught by otter trawl."
   varieties:
   - name: "North East"
@@ -6129,6 +6150,7 @@
   - bnfs
   - cgsg-red-gurnard
   - ffs-seasonality
+  - mcs
   notes:
   - "The coasts disagree sharply: North East peak June-August, South East out of season June-September."
   buy: "Good Fish Guide, October 2026: rated 3 at best (1 is the best, 5 is the worst), from the north-east Atlantic, caught by otter trawl. Other methods rate up to 5, so ask how it was caught."
@@ -6246,6 +6268,7 @@
   - cgsg-brill
   - flyingfish-seasonality
   - cgsg-recommended
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, the Skagerrak and Kattegat or the Channel, caught by gill or fixed net. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
   - name: "North East"
@@ -6416,6 +6439,7 @@
   - mcs-cuttlefish
   - cgsg-cuttlefish
   - flyingfish-seasonality
+  - mcs
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Channel or the Celtic Seas, caught by pot, trap or creel."
   notes: ["Poor from May to July."]
   varieties:
@@ -6524,6 +6548,10 @@
   - ea-cross-border-byelaws-2020
   - seafish-seafood-guide
   - mcs-atlantic-salmon
+  - countrylife_salmon
+  - nrw_salmon
+  - scot_salmon_sale
+  - mcs
   unsold: "It cannot be sold in England, Wales or Scotland"
   notes:
   - "Rod-caught Scottish; most salmon sold is farmed all year."
@@ -6589,6 +6617,8 @@
   - ea-sea-trout-net-2020
   - nasco-uk-mixed-stock-2025
   - seafish-seafood-guide
+  - nrw_salmon
+  - mcs
   notes:
   - "Rod-caught sea trout cannot be sold, as for wild salmon. What is sold comes from licensed net fisheries and carries an Environment Agency or Natural Resources Wales tag."
   buy: "Good Fish Guide, October 2026: not rated."
@@ -6632,6 +6662,8 @@
   - cgsg-squid-veined
   - cgsg-squid-european
   - flyingfish-seasonality
+  - seafish
+  - mcs
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Celtic Seas, caught by jig."
   notes: ["Seafish puts the best availability and quality from October to March."]
   varieties:
@@ -6765,6 +6797,8 @@
   - cgsg-crab
   - flyingfish-seasonality
   - maff-norfolk-crab
+  - seafish
+  - mcs
   notes:
   - "Poor in January."
   - "The coasts disagree: Northumberland peaks in winter (November-February); Flying Fish and Seafish say April-September, with Flying Fish marking October-January poor; Brighton & Newhaven has it all year."
@@ -7006,6 +7040,9 @@
   - mcs-lobster
   - cgsg-lobster
   - flyingfish-seasonality
+  - seafish
+  - defra_lobster
+  - mcs
   notes:
   - "Native Cornish lobster is of consistent quality all year; the summer peak is one of supply and price."
   - "Minimum landing size rising to 90 mm, phased in 2026-28 (Defra)."
@@ -7192,6 +7229,7 @@
   - mcs-scampi
   - mmo-farn-deeps-nephrops
   - mcs-scampi-farn-deeps
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the South Minch, caught by pot, trap or creel. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
   - name: "North East"
@@ -7286,6 +7324,8 @@
   - bnfs
   - flyingfish-seasonality
   - cgsg-mussels
+  - seafish
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 1) when rope-grown in the UK or Ireland. Other methods rate from 1 to 3, so ask how they were grown."
   notes:
   - "Rope-grown mussels are good all year and at their best from October to March."
@@ -7366,6 +7406,7 @@
   - flyingfish-seasonality
   - colchester-colne-opening-2026
   - seafoodsource-natives
+  - mcs
   notes:
   - "Natives in the months with an R; rock oysters all year."
   - "The traditional \"R months\" rule has a legal basis for native oysters; Pacific oysters are exempt."
@@ -7498,6 +7539,9 @@
   - flyingfish-seasonality
   - dsifca-scallop-closure-response-2025
   - orkneynews-dived-scallops-2025
+  - seafish
+  - ifca_scallop
+  - mcs
   notes:
   - "Cornish scallops are poor in midwinter and best in September and October; Orkney hand-dived scallops are consistent all year."
   - "Devon & Severn IFCA closes scallop dredging 1 July-30 September in its district."
@@ -7715,7 +7759,12 @@
   also: [fish, shellfish, seafood]
   colour: "#6a914a"
   text_on_custard: "#537832"
-  sources: [mcs-cockle, eifca-wash-cockle-2024, eifca-wash-schedule-2025, kefca-annual-plan-2026-27]
+  sources:
+  - mcs-cockle
+  - eifca-wash-cockle-2024
+  - eifca-wash-schedule-2025
+  - kefca-annual-plan-2026-27
+  - mcs
   buy: "Hand-raked from a managed bed is the good choice."
   varieties:
   - name: ""
@@ -7792,6 +7841,7 @@
   - mcs-brown-shrimp
   - mcs-brown-shrimp-wash
   - mcs-brown-shrimp-north-sea
+  - mcs
   buy: "Ask for shrimp from a certified fishery; Morecambe Bay and the Wash are the UK ones."
   varieties:
   - name: ""
@@ -7854,6 +7904,8 @@
   - bnfs
   - cgsg-turbot
   - flyingfish-seasonality
+  - seafish
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea, caught by otter trawl. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
   - name: "North East"
@@ -7983,6 +8035,8 @@
   - cgsg-red-mullet
   - ffs-seasonality
   - ffs
+  - seafish
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern area (the North Sea, the eastern Channel and the Skagerrak and Kattegat), caught by seine net. Other stocks and methods rate from 2 to 5, so ask where and how it was caught."
   varieties:
   - name: "North East"
@@ -8097,6 +8151,7 @@
   - cgsg-recommended
   - cgsg-undulate-ray
   - mcs-undulate-ray
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the Irish Sea, the Bristol Channel or the northern Celtic Sea, caught by otter trawl. Other species, stocks and methods rate from 2 to 5, so ask which it is and where and how it was caught."
   varieties:
   - name: "North East"
@@ -8448,6 +8503,7 @@
   - bnfs
   - cgsg-grey-mullet
   - ffs-seasonality
+  - mcs
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from Cornwall, caught by beach seine."
   varieties:
   - name: "South East"
@@ -8519,7 +8575,7 @@
   colour: "#787800"
   text_on_shed: "#828218"
   text_on_custard: "#727100"
-  sources: [cgsg-john-dory, ffs-seasonality, mcs-john-dory, seafish-seafood-guide]
+  sources: [cgsg-john-dory, ffs-seasonality, mcs-john-dory, seafish-seafood-guide, mcs]
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the north-east Atlantic, caught by gill or fixed net."
   varieties:
   - name: "South West"
@@ -8575,6 +8631,7 @@
   - mcs-common-octopus
   - mcs-horned-octopus
   - gov-sea4-cephalopods
+  - mcs
   buy: "Good Fish Guide, October 2026: not rated."
   varieties:
   - name: "South West"
@@ -8679,6 +8736,7 @@
   - cgsg-dab
   - flyingfish-seasonality
   - cgsg-recommended
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the North Sea or the Skagerrak and Kattegat, caught by otter trawl. Other stocks and methods rate from 2 to 4, so ask where and how it was caught."
   varieties:
   - name: "North East"
@@ -8761,6 +8819,7 @@
   - directseafoods-summer-2025
   - northumberland-witch
   - mcs-witch
+  - mcs
   aliases: [witch, "torbay sole"]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern North Sea or the west of Scotland, caught by otter trawl."
   varieties:
@@ -8819,6 +8878,7 @@
   - directseafoods-summer-2025
   - mcs-megrim
   - cgsg-recommended
+  - mcs
   aliases: ["megrim sole", "cornish sole"]
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) from the northern North Sea or the west of Scotland, caught by otter trawl."
   varieties:
@@ -8888,6 +8948,7 @@
   - mcs-ling
   - seafish-seafood-guide
   - cgsg-ling
+  - mcs
   buy: "Good Fish Guide, October 2026: rated Avoid, however and wherever it is caught."
   varieties:
   - name: "North East"
@@ -8984,6 +9045,7 @@
   - fishbase-atlantic-halibut
   - weareaquaculture-gigha-2023
   - caithness-business-gigha-2025
+  - mcs
   notes: ["Wild Atlantic halibut is rated Avoid; no UK-farmed halibut rating exists."]
   buy: "Good Fish Guide, October 2026: wild Atlantic halibut is rated Avoid, however it is caught. Farmed halibut is not rated."
   varieties:
@@ -9084,6 +9146,7 @@
   - undercurrent-loch-duart-rspca-2024
   - intrafish-loch-duart-standard-2025
   - salmonbusiness-loch-duart-standard-2025
+  - mcs
   buy: "Good Fish Guide, October 2026: a best choice (rated 2) when it is organic-certified and farmed in open sea pens in Scotland or Ireland."
   varieties:
   - name: "Glenarm, Northern Ireland"
@@ -9167,6 +9230,7 @@
   - mcs-spider-crab-all
   - bnfs
   - cgsg-spider-crab
+  - mcs
   buy: "Good Fish Guide, October 2026: rated 3 (1 is the best, 5 is the worst) from Cornwall, caught by pot, trap or creel."
   varieties:
   - name: "South East"
@@ -9266,6 +9330,7 @@
   - flyingfish-seasonality
   - mcs-razor-clam
   - ffs
+  - mcs
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from Scotland, gathered by hand by divers or from the shore."
   varieties:
   - name: "South East"
@@ -9354,6 +9419,7 @@
   - mcs-whelk-kent-essex
   - mcs-whelk-sussex
   - maff-norfolk-crab
+  - mcs
   buy: "Good Fish Guide, October 2026: rated 4 (1 is the best, 5 is the worst) from the Sussex coast, caught by pot, trap or creel."
   varieties:
   - name: "South East"
@@ -10020,7 +10086,7 @@
   colour: "#008269"
   text_on_shed: "#1d8e74"
   text_on_custard: "#007c64"
-  sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons]
+  sources: [basc-seasons, shootinguk-game-seasons, naturenet-seasons, defra_quarry]
   notes:
   - "Mallard, teal and wigeon: 1 September to 31 January inland, to 20 February on the foreshore."
   - "Defra's 2026 consultation proposed removing pochard (and in England pintail, goldeneye and white-fronted goose) from the quarry list."
@@ -10262,7 +10328,7 @@
   colour: "#7e70a0"
   text_on_shed: "#8577a7"
   text_on_custard: "#746696"
-  sources: [leg-wca-1981-sch3, basc-general-licences, shootinguk-game-seasons]
+  sources: [leg-wca-1981-sch3, basc-general-licences, shootinguk-game-seasons, defra_quarry]
   aliases: [pigeon]
   notes:
   - "No closed season; at its best from spring to autumn."
@@ -10333,6 +10399,7 @@
   - govwales-hare-consultation
   - leg-wane-scotland-2011-s6
   - naturenet-seasons
+  - hares_act
   notes:
   - "No closed season in England and Wales, but hare may only be sold from 1 August to 28 February."
   - "Scotland: close season 1 February-30 September. Northern Ireland: open 12 August-31 January. Mountain hare is fully protected in Scotland."

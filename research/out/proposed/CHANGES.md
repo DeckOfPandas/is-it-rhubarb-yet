@@ -6,6 +6,7 @@
 - New rings added as proposed (lead: false): 63
 - NEVER candidates: 1
 - Sources added: 743
+- Helen's sources dropped because nothing cites them: 34
 - Food-level confidence: 12 high, 93 medium, 73 low (the weakest of each food's lead rings)
 - Fish with a food-level MCS summary: 42 (sea trout isn't rated by the MCS)
 - Meat and game with a sustainability block and a buy line: 17
@@ -72,3 +73,4 @@ Every change in weeks is set out in `comparison.md`, with week strips and both s
 - **Woodcock:** new ring 'Scotland' (region, high)
 - **Venison:** new ring 'Red & fallow, Scotland' (region, high); new ring 'Farmed' (method, moderate)
 - **Hare:** new ring 'Scotland' (region, high); new ring 'Northern Ireland' (region, high)
+- **(sources):** dropped ahdb_lamb: nothing cites it any more; dropped ahdb_lamb_market: nothing cites it any more; dropped ashridge: nothing cites it any more; dropped bap: nothing cites it any more; dropped basc: nothing cites it any more; dropped defra: nothing cites it any more; dropped dowding: nothing cites it any more; dropped farming_uk_asparagus: nothing cites it any more; dropped fif_figs: nothing cites it any more; dropped first_nature: nothing cites it any more; dropped forestheart: nothing cites it any more; dropped fpj_iceberg: nothing cites it any more; dropped galloway: nothing cites it any more; dropped garden_organic: nothing cites it any more; dropped gbc_cavolo: nothing cites it any more; dropped goose: nothing cites it any more; dropped hcc: nothing cites it any more; dropped lishmans: nothing cites it any more; dropped mjseafood: nothing cites it any more; dropped msc_sardine: nothing cites it any more; dropped naturescot_game: nothing cites it any more; dropped nsa_lamb: nothing cites it any more; dropped rhs: nothing cites it any more; dropped rhs_figs: nothing cites it any more; dropped rhs_garlic: nothing cites it any more; dropped rhs_planner: nothing cites it any more; dropped rhs_savoy: nothing cites it any more; dropped rocket_gardens: nothing cites it any more; dropped saltmarsh: nothing cites it any more; dropped shellfish_act: nothing cites it any more; dropped tfta: nothing cites it any more; dropped tregothnan: nothing cites it any more; dropped westlands: nothing cites it any more; dropped wikipedia_sea_kale: nothing cites it any more
