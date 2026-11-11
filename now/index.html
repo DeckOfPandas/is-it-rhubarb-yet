@@ -7,9 +7,9 @@ permalink: /now/
 {%- comment -%}
 The weekly digest, in the order a cook reads it: just arrived, A to Z;
 on the way out and on the way in, under their timings, soonest first;
-great this week, a group per kind of food; all year, the foods that are
-YES every week, the same way; then the YES-ISH foods, available from
-storage and under glass. The
+great this week, a group per kind of food; here all year, the foods
+that are YES every week, the same way; then the YES-ISH foods, available
+now but from storage, and grown under glass. The
 build-day week is baked here from _data/baked.json; site.js redraws the
 lists from foods.json whenever the page was not baked today, and for
 another week, building the same markup as band.html. Without JavaScript
@@ -36,7 +36,7 @@ the baked week shows, dated.
   {%- include band.html cls="last" heading="On the way out" list=now.last shape="phrase" phrases=baked.phrases.last empty="Nothing on its way out." -%}
   {%- include band.html cls="onway" heading="On the way in" list=now.onway shape="phrase" phrases=baked.phrases.onway empty="Nothing due in the next few weeks." -%}
   {%- include band.html cls="still" heading="Great this week" list=now.still shape="kind" empty="Nothing at all, which cannot be right." -%}
-  {%- include band.html cls="allyear" heading="All year" list=now.allyear shape="kind" -%}
-  {%- include band.html cls="store" heading="Available from storage" list=now.store shape="kind" -%}
-  {%- include band.html cls="glass" heading="Under glass" list=now.glass shape="kind" -%}
+  {%- include band.html cls="allyear" heading="Here all year" list=now.allyear shape="kind" -%}
+  {%- include band.html cls="store" heading="Available now, but from storage" list=now.store shape="kind" -%}
+  {%- include band.html cls="glass" heading="Available now, grown under glass" list=now.glass shape="kind" -%}
 </div>

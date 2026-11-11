@@ -67,9 +67,8 @@ function main() {
   baked.phrases = { last: V.byPhrase(baked.now.last), onway: V.byPhrase(baked.now.onway) };
   baked.az = { arrived: V.azList(baked.now.arrived) };
 
-  // Per food: the verdict and date line for the whole food, whether it is
-  // YES every week of the year (`allYear`, home's All year group), its
-  // season in months (`season`, the page's "In season July to October."), and its
+  // Per food: the verdict and date line for the whole food, its season in
+  // months (`season`, the page's "In season July to October."), and its
   // rings longest season first (`rings`, indexes into its varieties), each
   // with its own phrase (`ringLines`, by index), for the dial and its ring
   // list.
@@ -80,7 +79,6 @@ function main() {
       verdict: fv.verdict,
       word: titleWord(fv.verdict),
       line: V.dateLine(fv.whole, year, date),
-      allYear: fv.verdict === "YES" && !!fv.whole.allYear,
       season: V.seasonWords(f.varieties, year),
       rings: V.ringOrder(f),
       ringLines: fv.varieties.map((r) => V.phrase(r, year, date)),

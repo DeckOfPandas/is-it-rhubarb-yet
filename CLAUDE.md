@@ -28,7 +28,8 @@ says so: "this project overrides the kit's <rule>: …".
   with `--base` set to the URL you are serving.
 - **The seasons review page** is `node tools/dev/before-after.js` after a
   build: each food's old dial beside its new one, at
-  `<base>/dev/before-after/`. A rebuild wipes it; nothing deploys it.
+  `<base>/dev/before-after/`. A rebuild keeps it (`keep_files`), so rerun
+  it after a data change; nothing deploys it.
 - **The site draws from `_data/shown.json`**, not `foods.yml`: bake.js
   writes it from `tools/shown.js`, which hides `proposed` and `no_supply`
   rings and the research's keys. Seasons are corrected in

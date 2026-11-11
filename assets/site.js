@@ -1216,9 +1216,9 @@
     box.appendChild(band("last", "On the way out", now.last, "phrase", "Nothing on its way out."));
     box.appendChild(band("onway", "On the way in", now.onway, "phrase", "Nothing due in the next few weeks."));
     box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
-    box.appendChild(band("allyear", "All year", now.allyear, "kind"));
-    box.appendChild(band("store", "Available from storage", now.store, "kind"));
-    box.appendChild(band("glass", "Under glass", now.glass, "kind"));
+    box.appendChild(band("allyear", "Here all year", now.allyear, "kind"));
+    box.appendChild(band("store", "Available now, but from storage", now.store, "kind"));
+    box.appendChild(band("glass", "Available now, grown under glass", now.glass, "kind"));
   }
 
   function initNow() {
