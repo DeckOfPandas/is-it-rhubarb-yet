@@ -1,6 +1,6 @@
 # Proposed changes to foods.yml
 
-- Rings whose weeks and sources now come from the clean-room data: 255 (226 with different weeks)
+- Rings whose weeks and sources now come from the clean-room data: 255 (211 with different weeks)
 - Rings kept as they were, because there's no clean-room data: 5
 - Whole-food rings now combining several clean-room lines: 7
 - New rings added as proposed (lead: false): 63

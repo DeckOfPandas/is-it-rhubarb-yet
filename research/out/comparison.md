@@ -6,8 +6,8 @@ You have 267 rings. Each one is matched to my line of the same name, or to the l
 
 | | Rings |
 |---|---|
-| Agree | 63 |
-| Same supply, different peak | 76 |
+| Agree | 81 |
+| Same supply, different peak | 58 |
 | Mine is longer | 69 |
 | Mine is shorter | 26 |
 | Shifted (the seasons overlap but start or end at different times) | 25 |
@@ -173,6 +173,19 @@ Mine     IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 - **Mine (moderate):** in January–December. Sources: National Sheep Association (primary), Mutton Renaissance (primary), Farmers Weekly, quoting Mutton Renaissance and the National Sheep Association (trade).
 - **My discrepancy note:** Older sources name a peak: the Mutton Renaissance campaign (undated page, campaign launched 2004) says the best meat is produced October to March, and a 2005 specification launch dated the mutton season from 1 October, after summer grazing (muttonrenaissance-what-is-mutton, fwi-mutton-spec). Under the source-age rule these pre-2016 sources don't override the current NSA guide; no newer source nami
 
+#### Brown shrimp, (whole)
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
+Mine     IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in June–October; avail May and November. Sources: Common knowledge, Good Fish Guide — includes "common knowledge".
+- **Mine (moderate):** in January–December. Sources: Eastern Inshore Fisheries and Conservation Authority (primary), Fishing News (trade), Responsible Fishing Committee (hosted by Eastern IFCA) (secondary).
+- **My discrepancy note:** Pass 3 change: September-December alone was in; it is a landings peak, not a best-to-eat window. Since 2026-11-11 every landed week is in (rule 5). A 2009 North Sea fact sheet also names early spring as a landings peak alongside autumn (fishfacts-north-sea-shrimp-2009); no UK source repeats it.
+
 #### Lamb, Welsh
 
 ```
@@ -198,19 +211,6 @@ Mine     aaaaaaaaIIIIIaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIII
 - **Yours:** in March–May and August–September; avail June–July and October. Sources: Flying Fish Seafoods.
 - **Mine (moderate):** in March and September–December; avail January–February and April–August. Sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary).
 - **My discrepancy note:** cgsg-red-gurnard ticks Mar-May and Aug-Dec, but its text says to avoid Apr-Aug (spawning). Rule 1 applied (text): Apr, May and Aug set to avail. ffs-seasonality (gurnard, species not named) marks best quality May-Sep, which is mostly CGSG's spawning period; CGSG (primary) kept.
-
-#### Brown shrimp, (whole)
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in June–October; avail May and November. Sources: Common knowledge, Good Fish Guide — includes "common knowledge".
-- **Mine (moderate):** avail January–December. Sources: Eastern Inshore Fisheries and Conservation Authority (primary), Fishing News (trade), Responsible Fishing Committee (hosted by Eastern IFCA) (secondary).
-- **My discrepancy note:** Pass 3 change: September-December was in; it is a landings peak, not a best-to-eat window, so it is now avail. A 2009 North Sea fact sheet also names early spring as a landings peak alongside autumn (fishfacts-north-sea-shrimp-2009); no UK source repeats it.
 
 #### Sea beet, (whole)
 
@@ -712,19 +712,6 @@ Mine     IIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIII
 - **Mine (low):** in September–February; avail March–August. Sources: The Vegetarian Society (secondary), Oddbox (secondary), Hubbub (secondary).
 - **My discrepancy note:** vegsoc-seasonal marks all twelve months; oddbox-seasonal March-July and September-February; hubbub-seasonal September-November and January-February.
 
-#### Clams, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIII·········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaa··aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in May–February. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail January–December. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary).
-- **My discrepancy note:** Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its window has moved each year, so these weeks may change.
-
 #### Lettuce, Little gem
 
 ```
@@ -877,6 +864,19 @@ Mine     ········aaaaaaaaaIIIIIIIIIIIIIIIIIIIIIIaaaa·········
 - **Yours:** in June–September; avail May and October. Sources: Common knowledge — includes "common knowledge".
 - **Mine (low):** in May–September; avail March–April and October. Sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade).
 - **My discrepancy note:** Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 4 weeks before the in window.
+
+#### Clams, South East
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    IIIIIIII·········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+Mine     IIIIIIII··IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in May–February. Sources: Brighton & Newhaven Fish Sales.
+- **Mine (low):** in January–December. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary).
+- **My discrepancy note:** Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its window has moved each year, so these weeks may change.
 
 #### Ceps, (whole)
 
@@ -1133,18 +1133,6 @@ Mine     ···································�
 - **Yours:** in December; avail November. Sources: Traditional Farmfresh Turkey Association.
 - **Mine (moderate):** in December. Sources: Love British Food (TFTA trade stand) (trade), Farmers Weekly, quoting the TFTA (trade), Farmers Weekly, quoting Peeles Rare Breed Turkeys (trade).
 
-#### Sprats, (whole)
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIII······················IIIIIIIIIIIIIIIII
-Mine     aaaa·······································aaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in September–March. Sources: M&J Seafood.
-- **Mine (low):** avail November–January. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary).
-
 #### Walnuts, Wild
 
 ```
@@ -1156,6 +1144,18 @@ Mine     ···································�
 
 - **Yours:** in June–November. Sources: Forestheart.
 - **Mine (low):** in October. Sources: Woodland Trust (primary).
+
+#### Sprats, (whole)
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    IIIIIIIIIIIII······················IIIIIIIIIIIIIIIII
+Mine     IIII·······································IIIIIIIII
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in September–March. Sources: M&J Seafood.
+- **Mine (low):** in November–January. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary).
 
 #### Edible flowers, (whole)
 
@@ -1601,22 +1601,9 @@ Mine     ······················IIIIIIIIIIIII·······
 - **Mine (low):** in June–August. Sources: Wild Food UK (secondary), The Foraging Course Company (secondary).
 - **My discrepancy note:** The Foraging Course Company gives fruit from summer to early autumn (foragingcourse-gooseberry), running about four weeks past Wild Food UK's August end.
 
-## 5. Same supply, different peak (76)
+## 5. Same supply, different peak (58)
 
 Both say the food is on sale in the same weeks, to within four. They disagree only on which of those weeks are `in`. Most of these come from the year-round rule or from a regional guide's best months.
-
-#### Whelks, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (high):** avail January–December. Sources: Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary).
-- **My discrepancy note:** Pass 3 change: April-June was in; it is a landings peak, not a best-to-eat window, so it is now avail. Landings peaks differ by area: Sussex January-April (sussex-ifca-species); Kent and Essex April-June, or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01); Eastern IFCA, Norfolk and the Wash, January-June (as quoted in kefca-whe
 
 #### Scallops, South East
 
@@ -2017,163 +2004,6 @@ Mine     ······················aaaIIIIIIIIaa·······
 - **Mine (low/moderate):** in June–August; avail June and August. Sources: Fresh Produce Journal (Fruitnet), quoting the Blackcurrant Foundation (trade), Fruit & Vine, quoting the Blackcurrant Foundation (trade), Fruit & Vine (trade), Countryside (NFU) (trade), Defra (primary), Borough Market (secondary), Rectory Farm (Stanton St John, Oxford) (secondary), The Vegetarian Society (secondary).
 - **My discrepancy note:** Other secondary lists give June to August (vegsoc-seasonal) and, for Scotland, end of May to end of July (courier-scotland-july). The Norfolk grower profile also says the season usually ends in early August (countryside-blackcurrant-grower), about two weeks before its own mid-August end. Defra's 2026 quotes start about five weeks after the secondary sources' late-June start and run about four week
 
-#### Cod, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News (trade), Seafish (primary).
-
-#### Cod, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail January–December. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News (trade).
-
-#### Haddock, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary).
-
-#### Haddock, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail January–December. Sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Brighton & Newhaven Fish Sales (primary).
-
-#### Pollock, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development Trust) (secondary).
-
-#### Monkfish, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail January–December. Sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary).
-
-#### Gurnard, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary).
-
-#### Skates and rays, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: Marine Conservation Society (primary).
-
-#### Skates and rays, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail January–December. Sources: Kent and Essex IFCA (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary).
-- **My discrepancy note:** The same profile says thornback are traditionally present from early spring to late autumn (kefca-thornback-smp-2014), and they lay eggs inshore March-September (ices-fishmap-thornback, kentessex-ifca-thornback); its explicit all-year season is used (rule 1).
-
-#### Dab, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society (primary), Northumberland Seafood (primary).
-
-#### Halibut, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: Northumberland Seafood (Amble Development Trust) (secondary), Cornwall Good Seafood Guide (primary), Marine Conservation Society (primary).
-
-#### Monkfish, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in January–November; avail December. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary).
-
-#### Hake, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in March–December; avail January–February. Sources: Northumberland Seafood.
-- **Mine (low):** avail January–December. Sources: Scottish Government (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development Trust) (secondary).
-
 #### Whiting, North East
 
 ```
@@ -2250,55 +2080,6 @@ Mine     aaaaaaaaIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 - **Yours:** in January–December. Sources: Forestheart.
 - **Mine (low):** in March–May; avail June–February. Sources: Galloway Wild Foods (secondary), BBC Countryfile (secondary), Wild Food UK (secondary), The Foraging Course Company (secondary).
 
-#### Mackerel, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    aaaaaaaa·····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
-Mine     aaaaaaaa·····aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in April–November; avail January–February. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail January–February and April–November. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary).
-- **My discrepancy note:** cgsg-mackerel (western Channel) marks Jan-Mar and Jul-Dec as best to eat. seafish-seafood-guide (2009) is background only under the fish brief (all year, best in summer); its in weeks (Jun-Aug) were dropped.
-
-#### Hake, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ····aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
-Mine     ····aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in March–October; avail February and November. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail February–November. Sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary).
-
-#### Gurnard, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIII·················IIIIIIIIIIIII
-Mine     aaaaaaaaaaaaaaaaaaaaaa·················aaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in October–May. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail October–May. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary).
-
-#### Grey mullet, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
-Mine     ·············aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in April–November. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail April–November. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary).
-
 #### Rosemary, (whole) (vs my *Outdoor*)
 
 ```
@@ -2311,30 +2092,6 @@ Mine     aaaaaaaaaaaaaaaaaIIIIIIIIIIIIIIIIIIaaaaaaaaaaaaaaaaa
 - **Yours:** in January–December. Sources: Common knowledge — includes "common knowledge".
 - **Mine (low):** in May–August; avail September–April. Sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade).
 - **My discrepancy note:** Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
-
-#### Red mullet, North East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ······················IIIIIIIIIIIIIaaaaIIIIIIIIIIIII
-Mine     ······················aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in June–August and October–December; avail September. Sources: Northumberland Seafood.
-- **Mine (low):** avail June–December. Sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary).
-
-#### Sardines, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    aaaaaaaa······················IIIIIIIIIIIIIIIIIIIIII
-Mine     aaaaaaaa······················aaaaaaaaaaaaaaaaaaaaaa
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in August–December; avail January–February. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail August–February. Sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary).
 
 #### Squid, South West
 
@@ -2374,19 +2131,6 @@ Mine     ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIII·······�
 - **Yours:** in June–September; avail May and October. Sources: Common knowledge — includes "common knowledge".
 - **Mine (low):** in April–October. Sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade).
 - **My discrepancy note:** Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) ends about 4 weeks earlier.
-
-#### Cuttlefish, South East
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ·············IIIIIIIIIIIII··························
-Mine     ·············aaaaaaaaaaaaaaaaa······················
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in April–June. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail April–July. Sources: Marine Management Organisation (primary), Brighton & Newhaven Fish Sales (secondary).
-- **My discrepancy note:** Seafish says the south-coast trap fishery usually runs in summer and autumn, when cuttlefish come inshore to spawn (seafish-gear-cuttlefish-pots), against April-July from the MMO, a gap of more than four weeks. A University of Brighton project, run 2018-19, describes the Hastings fishery as seasonal and targeting the overwintering population, without months (brighton-sepia-hastings).
 
 #### Turbot, North East
 
@@ -2527,17 +2271,54 @@ Mine     aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
 - **Mine (low):** in March–November; avail December–February. Sources: Northumberland Seafood (Amble Development Trust) (secondary), Fish Focus (trade), Marine Stewardship Council (primary).
 - **My discrepancy note:** The second pass had in = mid-Jul-Aug from the fishery report alone (fishfocus-mackerel-2024); under the fish brief that is a landings window, and the Northumberland best-to-eat window is wider. gov-sea4-fish-baseline gives Aug-Sep Buchan/Shetland spawning, inside the in window; no source links it to eating quality.
 
-#### Spider crab, South East
+#### Hake, South East
 
 ```
          J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ·················IIIIIIIII··························
-Mine     ·················aaaaaaaaa··························
+Yours    ····aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+Mine     ····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
 ```
 *Key: I = in season · a = avail · s = store · · = none*
 
-- **Yours:** in May–June. Sources: Brighton & Newhaven Fish Sales.
-- **Mine (low):** avail May–June. Sources: North Norfolk News (secondary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary).
+- **Yours:** in March–October; avail February and November. Sources: Brighton & Newhaven Fish Sales.
+- **Mine (low):** in February–November. Sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary).
+
+#### Mackerel, South East
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    aaaaaaaa·····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+Mine     IIIIIIII·····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in April–November; avail January–February. Sources: Brighton & Newhaven Fish Sales.
+- **Mine (low):** in January–February and April–November. Sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary).
+- **My discrepancy note:** cgsg-mackerel (western Channel) marks Jan-Mar and Jul-Dec as best to eat. seafish-seafood-guide (2009) is background only under the fish brief (all year, best in summer); its in weeks (Jun-Aug) were dropped.
+
+#### Sardines, South East
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    aaaaaaaa······················IIIIIIIIIIIIIIIIIIIIII
+Mine     IIIIIIII······················IIIIIIIIIIIIIIIIIIIIII
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in August–December; avail January–February. Sources: Brighton & Newhaven Fish Sales.
+- **Mine (low):** in August–February. Sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary).
+
+#### Hake, North East
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+Mine     IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in March–December; avail January–February. Sources: Northumberland Seafood.
+- **Mine (low):** in January–December. Sources: Scottish Government (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development Trust) (secondary).
 
 #### Hops, Shoots
 
@@ -2571,9 +2352,9 @@ Mine     ······························IIIIIIIII·
 - Courgette flowers, (whole): yours is in June–August (BBC Good Food)
 - Grapes, (whole): yours is in September–October; avail August (RHS, FreshPlaza)
 
-## 7. Agree (63)
+## 7. Agree (81)
 
-Romanesco, Runner & French beans, Quince, Bilberries, Spruce tips, Coriander, Mint, Plums, Elderflower, Wild duck, Gooseberries (Cultivated), Hazelnuts (Cultivated), Spinach, Sea kale (Wild), Apples (Braeburn), Apples (Golden Delicious), Apples (Royal Gala), Apples (Russet), Dill, Sea bass (South East), Clams (South West), Goose, Grouse, Partridge, Asparagus, Apples (Cox), Figs, Sea trout (North East), Pheasant, Woodcock, Venison (Red & fallow), Hare, Cauliflower, Pak choi (Glasshouse), Lettuce (Glasshouse), Rocket, Cress, Apples (Bramley), Cherries, Loganberries & Tayberries, Giant puffball, Oyster mushrooms (Cultivated), Cultivated mushrooms, Shiitake, Bay, Lobster (North East), Lobster (South East), Lobster (South West), Oysters (Rock), Oysters (Porthilly rock), Scallops (Orkney, hand-dived), Farmed salmon (Glenarm, Northern Ireland), Farmed salmon (Loch Duart, Scotland), Beef, Pork, Venison (Roe), Venison (Chinese water deer), Venison (Muntjac), Wood pigeon, Rabbit, Squirrel, Chicken, Duck.
+Romanesco, Runner & French beans, Quince, Bilberries, Spruce tips, Coriander, Mint, Cuttlefish (South East), Plums, Elderflower, Wild duck, Gooseberries (Cultivated), Hazelnuts (Cultivated), Spinach, Sea kale (Wild), Apples (Braeburn), Apples (Golden Delicious), Apples (Royal Gala), Apples (Russet), Dill, Sea bass (South East), Monkfish (North East), Red mullet (North East), Clams (South West), Goose, Grouse, Partridge, Asparagus, Apples (Cox), Figs, Sea trout (North East), Pheasant, Woodcock, Venison (Red & fallow), Hare, Cauliflower, Pak choi (Glasshouse), Lettuce (Glasshouse), Rocket, Cress, Apples (Bramley), Cherries, Loganberries & Tayberries, Giant puffball, Oyster mushrooms (Cultivated), Cultivated mushrooms, Shiitake, Bay, Cod (North East), Cod (South East), Haddock (North East), Haddock (South East), Pollock (North East), Monkfish (South East), Gurnard (North East), Gurnard (South East), Lobster (North East), Lobster (South East), Lobster (South West), Oysters (Rock), Oysters (Porthilly rock), Scallops (Orkney, hand-dived), Skates and rays (North East), Skates and rays (South East), Grey mullet (South East), Dab (North East), Halibut (North East), Farmed salmon (Glenarm, Northern Ireland), Farmed salmon (Loch Duart, Scotland), Spider crab (South East), Whelks (South East), Beef, Pork, Venison (Roe), Venison (Chinese water deer), Venison (Muntjac), Wood pigeon, Rabbit, Squirrel, Chicken, Duck.
 
 ## 8. Lines I have that you don't (48)
 

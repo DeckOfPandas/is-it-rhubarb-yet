@@ -1015,21 +1015,21 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'No current best-to-eat source was found (Seafish''s consumer guide has no brown shrimp page, and
-        the MCS gives no season), so there are no in weeks; the landing weeks are avail (fish brief). Landings:
-        Fishing News says the Wash supplies most of the UK catch, autumn is the fishery''s traditional peak, shrimp
-        are fished to some extent all year as a fall-back fishery, and they move further offshore from November
-        to March (fishingnews-wash-shrimp). Eastern IFCA''s 2016 shrimp industry workshop records the main season
-        as September to December (eifca-shrimp-workshop-2016). Wash catch is landed into King''s Lynn (msc-wash-brown-shrimp).
-        Eastern IFCA''s trip limit runs on a 1 August-31 July year (eifca-shrimp-effort-management). North Western
-        IFCA (Morecambe Bay) gives no months (nwifca-shrimps).'
-      discrepancy: 'Pass 3 change: September-December was in; it is a landings peak, not a best-to-eat window, so
-        it is now avail. A 2009 North Sea fact sheet also names early spring as a landings peak alongside autumn
-        (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No current best-to-eat source was found (Seafish''s consumer guide
+        has no brown shrimp page, and the MCS gives no season), so every landing week is in. Landings: Fishing News
+        says the Wash supplies most of the UK catch, autumn is the fishery''s traditional peak, shrimp are fished
+        to some extent all year as a fall-back fishery, and they move further offshore from November to March (fishingnews-wash-shrimp).
+        Eastern IFCA''s 2016 shrimp industry workshop records the main season as September to December (eifca-shrimp-workshop-2016).
+        Wash catch is landed into King''s Lynn (msc-wash-brown-shrimp). Eastern IFCA''s trip limit runs on a 1 August-31
+        July year (eifca-shrimp-effort-management). North Western IFCA (Morecambe Bay) gives no months (nwifca-shrimps).'
+      discrepancy: 'Pass 3 change: September-December alone was in; it is a landings peak, not a best-to-eat window.
+        Since 2026-11-11 every landed week is in (rule 5). A 2009 North Sea fact sheet also names early spring as
+        a landings peak alongside autumn (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
       year_round: Fished all year to some extent, with the main landing season September to December (eifca-shrimp-workshop-2016).
-        No source names a best-to-eat window, so the whole year is avail; it does not mean hard to get.
+        No source names a best-to-eat window, so the whole year is in; September-December is the landings peak.
       sustainability: 'MSC: Wash brown shrimp certified since 2020 (msc-wash-brown-shrimp).'
     mcs:
       read: 2026-11-10
@@ -1064,18 +1064,19 @@
     weeks:
     - - 18
       - 26
-      - avail
+      - in
     notes:
-      season: 'No SE season found. Pass 3 searched Brighton & Newhaven Fish Sales and Sussex IFCA: the BNFS seasonality
-        chart is an image the research tools could not read (bnfs-seasonality), and Sussex IFCA''s species page
-        and byelaw list do not cover spider crab (sussex-ifca-species, sussex-ifca-regulations); its 2025 species
-        fishery reports PDF could not be opened. A Norfolk paper reports spider crabs newly appearing in pots from
-        Cromer to Weybourne, not sold locally, moving offshore in autumn (nnn-norfolk-spider-crab). Kent and Essex
-        IFCA''s 2025 shore reports describe spider crabs as an unwanted bycatch off East Kent and Hythe with no
-        market, and an occasional one off Harwich and Walton (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
-        The MCS rating page (December 2025) gives no months (mcs-spider-crab). Landings (`avail`) include weeks
-        Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not
-        read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No SE season found. Pass 3 searched Brighton & Newhaven Fish Sales
+        and Sussex IFCA: the BNFS seasonality chart is an image the research tools could not read (bnfs-seasonality),
+        and Sussex IFCA''s species page and byelaw list do not cover spider crab (sussex-ifca-species, sussex-ifca-regulations);
+        its 2025 species fishery reports PDF could not be opened. A Norfolk paper reports spider crabs newly appearing
+        in pots from Cromer to Weybourne, not sold locally, moving offshore in autumn (nnn-norfolk-spider-crab).
+        Kent and Essex IFCA''s 2025 shore reports describe spider crabs as an unwanted bycatch off East Kent and
+        Hythe with no market, and an occasional one off Harwich and Walton (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
+        The MCS rating page (December 2025) gives no months (mcs-spider-crab). Landings include weeks Helen transcribed
+        from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or
+        colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -1145,22 +1146,24 @@
     weeks:
     - - 1
       - 8
-      - avail
+      - in
     - - 11
       - 52
-      - avail
+      - in
     notes:
-      season: 'Thames Estuary Manila clams, Kent and Essex IFCA''s trial fishery. No best-to-eat source was found,
-        so there are no in weeks (fish brief). Avail = the spring 2026 trial window, 16 March to 1 May 2026 (kefca-manila-clam-trial-report-2026-05),
-        weeks 11-18 by the legal-week rule. The Authority moved the trial to spring because prices are higher then,
-        when other UK clam fisheries are closed, and plans the second trial year for spring 2027 (kefca-annual-plan-2026-27).
-        Earlier windows: one month in October 2024; a six-week trial from 3-4 November 2025 paused after about 10
-        days on low prices and saturated markets (kefca-manila-clam-trial, kefca-manila-clam-update-2025-11, kefca-essex-2025-nov-jan).
-        Sussex IFCA''s byelaw list has no clam-specific measure (sussex-ifca-regulations). Seafish says clams are
-        most available September-April and scarcest in June-July, UK-wide, with no best-quality months named (fitd-clams).
-        Low: a trial fishery, not a settled season. Landings (`avail`) include weeks Helen transcribed from Brighton
-        & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only
-        page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Thames Estuary Manila clams, Kent and Essex IFCA''s trial fishery.
+        No best-to-eat source was found, so every landed week is in (rule 5). The spring 2026 trial window was 16
+        March to 1 May 2026 (kefca-manila-clam-trial-report-2026-05), weeks 11-18 by the legal-week rule. The Authority
+        moved the trial to spring because prices are higher then, when other UK clam fisheries are closed, and plans
+        the second trial year for spring 2027 (kefca-annual-plan-2026-27). Earlier windows: one month in October
+        2024; a six-week trial from 3-4 November 2025 paused after about 10 days on low prices and saturated markets
+        (kefca-manila-clam-trial, kefca-manila-clam-update-2025-11, kefca-essex-2025-nov-jan). Sussex IFCA''s byelaw
+        list has no clam-specific measure (sussex-ifca-regulations). Seafish says clams are most available September-April
+        and scarcest in June-July, UK-wide, with no best-quality months named (fitd-clams). Low: a trial fishery,
+        not a settled season. Landings include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality
+        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
+        (coordinator, 2026-11-10).'
       discrepancy: 'Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its
         window has moved each year, so these weeks may change.'
       sustainability: MCS (read 2026-11-10) has no Manila clam rating.
@@ -1241,25 +1244,26 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'No best-to-eat source was found (the MCS gives no season and Seafish''s consumer guide has no whelk
-        page), so there are no in weeks; the landing weeks are avail (fish brief). Landings: Sussex IFCA says whelks
-        are fished all year, with the highest catch rates from January to April (sussex-ifca-species). Kent and
-        Essex IFCA''s permit reports say landings are consistently highest from April to June (kefca-whelk-report-2025-01,
-        kefca-whelk-report-2026-01), and its 2026-27 plan calls whelks a vital stock for many vessels in the colder
-        months (kefca-annual-plan-2026-27). The permit byelaw sets no closed season (kefca-whelk-byelaw-2022). Whelks
-        were landed in quantity through February-June 2025 in Kent and November 2025-January 2026 at West Mersea
-        (kefca-kent-2025-feb-jun, kefca-essex-2025-nov-jan). Minimum sizes: 45mm in Sussex, 53mm in Kent and Essex
-        (mcs-whelk-sussex, mcs-whelk-kent-essex). ICES IVc/VIId.'
-      discrepancy: 'Pass 3 change: April-June was in; it is a landings peak, not a best-to-eat window, so it is
-        now avail. Landings peaks differ by area: Sussex January-April (sussex-ifca-species); Kent and Essex April-June,
-        or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01);
-        Eastern IFCA, Norfolk and the Wash, January-June (as quoted in kefca-whelk-report-2026-01), where the fishery
-        used to be a marginal winter one (eifca-whelk-sitrep-2024; also maff-norfolk-crab, c. 1966). Sussex IFCA,
-        as quoted in the 2026 report, says catch per unit of effort is generally lower in November and December.'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source was found (the MCS gives no season and Seafish''s
+        consumer guide has no whelk page), so every landing week is in. Landings: Sussex IFCA says whelks are fished
+        all year, with the highest catch rates from January to April (sussex-ifca-species). Kent and Essex IFCA''s
+        permit reports say landings are consistently highest from April to June (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01),
+        and its 2026-27 plan calls whelks a vital stock for many vessels in the colder months (kefca-annual-plan-2026-27).
+        The permit byelaw sets no closed season (kefca-whelk-byelaw-2022). Whelks were landed in quantity through
+        February-June 2025 in Kent and November 2025-January 2026 at West Mersea (kefca-kent-2025-feb-jun, kefca-essex-2025-nov-jan).
+        Minimum sizes: 45mm in Sussex, 53mm in Kent and Essex (mcs-whelk-sussex, mcs-whelk-kent-essex). ICES IVc/VIId.'
+      discrepancy: 'Pass 3 change: April-June alone was in; it is a landings peak, not a best-to-eat window. Since
+        2026-11-11 every landed week is in (rule 5). Landings peaks differ by area: Sussex January-April (sussex-ifca-species);
+        Kent and Essex April-June, or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01,
+        kefca-whelk-report-2026-01); Eastern IFCA, Norfolk and the Wash, January-June (as quoted in kefca-whelk-report-2026-01),
+        where the fishery used to be a marginal winter one (eifca-whelk-sitrep-2024; also maff-norfolk-crab, c.
+        1966). Sussex IFCA, as quoted in the 2026 report, says catch per unit of effort is generally lower in November
+        and December.'
       year_round: Landed all year (sussex-ifca-species, kefca-whelk-report-2026-01). No source names a best-to-eat
-        window, so the whole year is avail; it does not mean hard to get.
+        window, so the whole year is in; the landings peaks differ by area (see discrepancy).
     mcs:
       read: 2026-11-10
       ratings:

@@ -783,14 +783,15 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Still empty. No North Sea best-to-eat source and no landings source with months. Searched on 2026-11-10:
-        Northumberland Seafood''s dab page gives spawning in spring and early summer and an inshore move in summer,
-        linked to neither eating quality nor landings (northumberland-dab, 2016); Northumberland Seafood''s seasonality
-        chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No North Sea best-to-eat source and no landings source with months.
+        Searched on 2026-11-10: Northumberland Seafood''s dab page gives spawning in spring and early summer and
+        an inshore move in summer, linked to neither eating quality nor landings (northumberland-dab, 2016); Northumberland
+        Seafood''s seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
         Direct Seafoods'' 2025-26 market reports do not mention dab. Earlier passes searched Seafish, NEIFCA and
-        North Sea material. Landings (`avail`) include weeks Helen transcribed from Northumberland Seafood''s seasonality
+        North Sea material. Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality
         chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
         (coordinator, 2026-11-10).'
     mcs:
@@ -967,19 +968,21 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Wild Atlantic halibut. No current best-to-eat source: the 2009 national guide''s wild season (May-March,
-        seafish-seafood-guide) can no longer be the basis, and nothing newer was found, so there are no in weeks.
-        Northumberland Seafood says halibut is available all year, more widely March-September (northumberland-halibut,
-        2016); it does not say whether that is local wild fish or farmed supply, so this avail is weak. Northumberland
-        Seafood''s seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
-        Spawns in winter and early spring (cgsg-halibut). ICES IVa-b. Coordinator, 2026-11-11: still no in weeks,
-        by rule 5. Atlantic halibut spawns from December to April (fishbase-atlantic-halibut), and Norway closes
-        its halibut fishery from 20 December to 20 April for spawning (mcs-atlantic-halibut), but no source links
-        spawning to eating quality for UK-landed fish, so spawning can''t set in or avail. Searched MCS species
-        pages, Seafish, Northumberland Seafood and the scientific literature. This line now leads the food (see
-        the lead rule in propose.py), since the SW and Farmed lines are no_supply.'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Wild Atlantic halibut. No current best-to-eat source: the 2009 national
+        guide''s wild season (May-March, seafish-seafood-guide) can no longer be the basis, and nothing newer was
+        found, so there is no best-to-eat window. Northumberland Seafood says halibut is available all year, more
+        widely March-September (northumberland-halibut, 2016); it does not say whether that is local wild fish or
+        farmed supply, so these weeks are weak. Northumberland Seafood''s seasonality chart (the NE landings source)
+        is an image that could not be read (northumberland-seafood-seasonality). Spawns in winter and early spring
+        (cgsg-halibut). ICES IVa-b. Coordinator, 2026-11-11: still no best-to-eat window. Atlantic halibut spawns
+        from December to April (fishbase-atlantic-halibut), and Norway closes its halibut fishery from 20 December
+        to 20 April for spawning (mcs-atlantic-halibut), but no source links spawning to eating quality for UK-landed
+        fish, so spawning sets no window. Searched MCS species pages, Seafish, Northumberland Seafood and the scientific
+        literature. This line now leads the food (see the lead rule in propose.py), since the SW and Farmed lines
+        are no_supply.'
     mcs:
       read: 2026-11-10
       ratings:
@@ -1070,19 +1073,20 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Still empty: no North Sea best-to-eat or landings-by-month source. Searched Seafish, NEIFCA, the
-        Yorkshire Marine Nature Partnership and the Defra skate and ray FMP in earlier passes; this pass, Northumberland
-        Seafood''s list of 23 North East species has no skate or ray (northumberland-seafood-species) and its chart
-        could not be read (northumberland-seafood-seasonality). The FMP (updated 2025-12-16) says skates and rays
-        are caught in mixed and seasonal targeted fisheries but gives no months; starry ray may not be fished, retained
-        or landed in IIa, IIIa, IV or VIId, and small-eyed ray may not be targeted in the North Sea (gov-fmp-skates-rays).
-        The common skate complex (flapper and blue skate) was a prohibited species under the 2016 TAC regulation
-        (legislation-eu-2016-72-art13, original version); MCS rated flapper skate Avoid (5) when read earlier on
-        2026-11-10, but the page failed to load on re-check (mcs-flapper-skate). Landings (`avail`) include weeks
-        Helen transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an
-        image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No North Sea best-to-eat or landings-by-month source. Searched Seafish,
+        NEIFCA, the Yorkshire Marine Nature Partnership and the Defra skate and ray FMP in earlier passes; this
+        pass, Northumberland Seafood''s list of 23 North East species has no skate or ray (northumberland-seafood-species)
+        and its chart could not be read (northumberland-seafood-seasonality). The FMP (updated 2025-12-16) says
+        skates and rays are caught in mixed and seasonal targeted fisheries but gives no months; starry ray may
+        not be fished, retained or landed in IIa, IIIa, IV or VIId, and small-eyed ray may not be targeted in the
+        North Sea (gov-fmp-skates-rays). The common skate complex (flapper and blue skate) was a prohibited species
+        under the 2016 TAC regulation (legislation-eu-2016-72-art13, original version); MCS rated flapper skate
+        Avoid (5) when read earlier on 2026-11-10, but the page failed to load on re-check (mcs-flapper-skate).
+        Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -1142,18 +1146,20 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'No best-to-eat source for the eastern Channel or southern North Sea (the CGSG months are for Cornwall
-        only), so no in weeks; was in all year. Landed all year: Kent and Essex IFCA''s thornback profile gives
-        an all-year season by angling, nets and trawl and calls it one of four main commercial finfish in the district
-        (kefca-thornback-smp-2014, February 2014); its 2025 shore reports show thornback steadily in Essex commercial
-        catches January-June and dominating West Mersea by June, with small amounts still landed over Christmas
-        2025 (kefca-essex-2025-jan-jun, kefca-essex-2025-nov-jan). Brighton and Newhaven boats net skate from autumn
-        into winter (bnfs-fleet, 2020). July-August rests on the 2014 profile only. Thornback make up about 54%
-        of SE skate and ray landings, then blonde (27%), spotted (10%) and cuckoo (8%), 2016-2021; starry ray may
-        not be landed from VIId (gov-fmp-skates-rays). The Brighton & Newhaven Fish Sales seasonality chart (the
-        SE landings source) is an image that could not be read (bnfs-seasonality). ICES IVc and VIId.'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source for the eastern Channel or southern North Sea
+        (the CGSG months are for Cornwall only), so no best-to-eat window. Landed all year: Kent and Essex IFCA''s
+        thornback profile gives an all-year season by angling, nets and trawl and calls it one of four main commercial
+        finfish in the district (kefca-thornback-smp-2014, February 2014); its 2025 shore reports show thornback
+        steadily in Essex commercial catches January-June and dominating West Mersea by June, with small amounts
+        still landed over Christmas 2025 (kefca-essex-2025-jan-jun, kefca-essex-2025-nov-jan). Brighton and Newhaven
+        boats net skate from autumn into winter (bnfs-fleet, 2020). July-August rests on the 2014 profile only.
+        Thornback make up about 54% of SE skate and ray landings, then blonde (27%), spotted (10%) and cuckoo (8%),
+        2016-2021; starry ray may not be landed from VIId (gov-fmp-skates-rays). The Brighton & Newhaven Fish Sales
+        seasonality chart (the SE landings source) is an image that could not be read (bnfs-seasonality). ICES IVc
+        and VIId.'
       discrepancy: The same profile says thornback are traditionally present from early spring to late autumn (kefca-thornback-smp-2014),
         and they lay eggs inshore March-September (ices-fishmap-thornback, kentessex-ifca-thornback); its explicit
         all-year season is used (rule 1).
@@ -1403,18 +1409,19 @@
     weeks:
     - - 14
       - 30
-      - avail
+      - in
     notes:
-      season: 'No best-to-eat source for the eastern Channel (the CGSG months are for Cornwall), so no in weeks;
-        was in. Landings: the MMO action plan monitors the Channel pot season at its start (April), middle (May)
-        and end (July) (mmo-cuttlefish-action-plan); the MMO sampled Hastings in April 2025 during the potting season
-        (mmo-cuttlefish-sampling-2025); fishers describe a short pot season of about two months, later in bad weather
-        (mmo-cuttlefish-roadshow); Brighton and Newhaven boats join the cuttlefish fishery in spring as the weather
-        warms, for about six to eight weeks (bnfs-fleet, 2020). Taken as April-July avail. Adults gather on south-coast
-        inshore spawning grounds in spring (gov-sea4-cephalopods); Eastbourne is a landing port (guardian-cuttlefish).
-        The winter trawl season in the MMO sampling was recorded at south-west ports, so it is not applied here.
-        The Brighton & Newhaven Fish Sales seasonality chart (the SE landings source) is an image that could not
-        be read (bnfs-seasonality).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source for the eastern Channel (the CGSG months are
+        for Cornwall), so no best-to-eat window. Landings: the MMO action plan monitors the Channel pot season at
+        its start (April), middle (May) and end (July) (mmo-cuttlefish-action-plan); the MMO sampled Hastings in
+        April 2025 during the potting season (mmo-cuttlefish-sampling-2025); fishers describe a short pot season
+        of about two months, later in bad weather (mmo-cuttlefish-roadshow); Brighton and Newhaven boats join the
+        cuttlefish fishery in spring as the weather warms, for about six to eight weeks (bnfs-fleet, 2020). Taken
+        as April-July. Adults gather on south-coast inshore spawning grounds in spring (gov-sea4-cephalopods); Eastbourne
+        is a landing port (guardian-cuttlefish). The winter trawl season in the MMO sampling was recorded at south-west
+        ports, so it is not applied here. The Brighton & Newhaven Fish Sales seasonality chart (the SE landings
+        source) is an image that could not be read (bnfs-seasonality).'
       discrepancy: Seafish says the south-coast trap fishery usually runs in summer and autumn, when cuttlefish
         come inshore to spawn (seafish-gear-cuttlefish-pots), against April-July from the MMO, a gap of more than
         four weeks. A University of Brighton project, run 2018-19, describes the Hastings fishery as seasonal and

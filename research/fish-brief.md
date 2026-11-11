@@ -16,13 +16,13 @@ Helen has made three decisions about fish. Your job is to apply them to one fish
    - IFCA and Cefas reports
    - recent trade press quoting named fishers or merchants
 
-   A line with no current best-to-eat source gets no `in` weeks. Use the landing weeks as `avail` and say so in the note.
+   A line with no current best-to-eat source has its landing weeks as `in` (rule 5, no named window, Helen's decision of 2026-11-11). Say so in the note.
 2. **Set `avail` from landings.** These are the landings sources Helen uses. They may be read and cited now that the blind comparison is done. Register them, and fetch each page directly:
    - SW, Flying Fish Seafoods: https://flyingfishseafoods.co.uk/seasonality/
    - NE, Northumberland Seafood: https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/
    - SE, Brighton & Newhaven Fish Sales: https://www.brighton-fish-sales.co.uk/ (look for a seasonality or species page)
 
-   Also use IFCA and MMO landings material and market reports. `avail` = weeks a landings source shows the fish landed or sold that aren't `in`. Lines that are currently empty (mostly NE and SE) can often be filled this way, as `avail` at least. Rule 8 still applies: these are regional sources, so cite them for their own region only.
+   Also use IFCA and MMO landings material and market reports. `avail` = weeks a landings source shows the fish landed or sold outside a named best-to-eat window. Lines that are currently empty (mostly NE and SE) can often be filled this way. Rule 8 still applies: these are regional sources, so cite them for their own region only.
 3. **Add `mcs` and `buy`** to every line where the MCS rates the species, following the Sustainability section of rules.md. Use the MCS species pages (mcsuk.org/goodfishguide/species/...). Keep any existing `notes.sustainability` content that covers other schemes (MSC, CGSG, ASC, certification).
 4. **Add `published`** (and `published_note` if `undated`) to every source in your sources file, following the Source age rules. Get the date from the page, a "last updated" line, or the URL. Fetch the page if you need to.
 5. **Confidence:** re-grade honestly under the source-age rule. Keep `discrepancy` notes, and add new ones where best-to-eat and landings sources clash.

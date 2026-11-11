@@ -229,215 +229,24 @@ rows:
     season from 1 October, after summer grazing (muttonrenaissance-what-is-mutton, fwi-mutton-spec). Under the source-age rule these pre-2016 sources don''t override the current NSA guide; no newer source
     nami'
   cat: ours-longer
-- food: Cod
-  ring: North East
-  ours: NE
+- food: Brown shrimp
+  ring: (whole)
+  ours: Brown shrimp
   band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News (trade), Seafish (primary)
-  note: ''
-  cat: peak
-- food: Cod
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News
-    (trade)
-  note: ''
-  cat: peak
-- food: Haddock
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary)
-  note: ''
-  cat: peak
-- food: Haddock
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Brighton & Newhaven Fish Sales (primary)
-  note: ''
-  cat: peak
-- food: Pollock
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development
-    Trust) (secondary)
-  note: ''
-  cat: peak
-- food: Monkfish
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary)
-  note: ''
-  cat: peak
-- food: Gurnard
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary)
-  note: ''
-  cat: peak
-- food: Skates and rays
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Marine Conservation Society (primary)
-  note: ''
-  cat: peak
-- food: Skates and rays
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Kent and Essex IFCA (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
-  note: The same profile says thornback are traditionally present from early spring to late autumn (kefca-thornback-smp-2014), and they lay eggs inshore March-September (ices-fishmap-thornback, kentessex-ifca-thornback);
-    its explicit all-year season is used (rule 1).
-  cat: peak
-- food: Dab
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society (primary), Northumberland Seafood (primary)
-  note: ''
-  cat: peak
-- food: Halibut
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Cornwall Good Seafood Guide (primary), Marine Conservation Society (primary)
-  note: ''
-  cat: peak
-- food: Whelks
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 52
-  fresh_mis: 0
-  any_mis: 52
-  helen: in January–December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: high
-  our_sources: Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
-  note: 'Pass 3 change: April-June was in; it is a landings peak, not a best-to-eat window, so it is now avail. Landings peaks differ by area: Sussex January-April (sussex-ifca-species); Kent and Essex
-    April-June, or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01); Eastern IFCA, Norfolk and the Wash, January-June (as quoted in
-    kefca-whe'
-  cat: peak
+  in_mis: 31
+  fresh_mis: 21
+  any_mis: 31
+  helen: in June–October; avail May and November
+  mine: in January–December
+  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Common knowledge, Good Fish Guide
+  helen_general: true
+  our_conf: moderate
+  our_sources: Eastern Inshore Fisheries and Conservation Authority (primary), Fishing News (trade), Responsible Fishing Committee (hosted by Eastern IFCA) (secondary)
+  note: 'Pass 3 change: September-December alone was in; it is a landings peak, not a best-to-eat window. Since 2026-11-11 every landed week is in (rule 5). A 2009 North Sea fact sheet also names early
+    spring as a landings peak alongside autumn (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
+  cat: ours-longer
 - food: Lamb
   ring: Welsh
   ours: Welsh
@@ -473,23 +282,6 @@ rows:
   our_sources: The Vegetarian Society (secondary), Oddbox (secondary), Hubbub (secondary)
   note: vegsoc-seasonal marks all twelve months; oddbox-seasonal March-July and September-February; hubbub-seasonal September-November and January-February.
   cat: ours-longer
-- food: Clams
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 43
-  fresh_mis: 7
-  any_mis: 50
-  helen: in May–February
-  mine: avail January–December
-  hstrip: IIIIIIII·········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaa··aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary)
-  note: 'Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its window has moved each year, so these weeks may change.'
-  cat: ours-longer
 - food: Oyster mushrooms
   ring: Wild
   ours: Wild
@@ -507,40 +299,6 @@ rows:
   our_sources: Woodland Trust (primary), The Wildlife Trusts (primary)
   note: ''
   cat: ours-longer
-- food: Monkfish
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 48
-  fresh_mis: 0
-  any_mis: 48
-  helen: in January–November; avail December
-  mine: avail January–December
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary)
-  note: ''
-  cat: peak
-- food: Sprats
-  ring: (whole)
-  ours: Sprats
-  band: large
-  in_mis: 30
-  fresh_mis: 17
-  any_mis: 30
-  helen: in September–March
-  mine: avail November–January
-  hstrip: IIIIIIIIIIIII······················IIIIIIIIIIIIIIIII
-  ostrip: aaaa·······································aaaaaaaaa
-  helen_sources: M&J Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary)
-  note: ''
-  cat: ours-shorter
 - food: Garlic
   ring: (whole)
   ours: all lines combined
@@ -575,23 +333,6 @@ rows:
   our_sources: Woodland Trust (primary)
   note: ''
   cat: ours-shorter
-- food: Hake
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 44
-  fresh_mis: 0
-  any_mis: 44
-  helen: in March–December; avail January–February
-  mine: avail January–December
-  hstrip: aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Scottish Government (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development Trust) (secondary)
-  note: ''
-  cat: peak
 - food: Gurnard
   ring: South West
   ours: SW
@@ -661,24 +402,6 @@ rows:
   our_sources: Marine Conservation Society Good Fish Guide (primary), Eastern Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
   note: ''
   cat: shifted
-- food: Brown shrimp
-  ring: (whole)
-  ours: Brown shrimp
-  band: large
-  in_mis: 21
-  fresh_mis: 21
-  any_mis: 42
-  helen: in June–October; avail May and November
-  mine: avail January–December
-  hstrip: ·················aaaaaIIIIIIIIIIIIIIIIIIIIIaaaaa····
-  ostrip: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Common knowledge, Good Fish Guide
-  helen_general: true
-  our_conf: moderate
-  our_sources: Eastern Inshore Fisheries and Conservation Authority (primary), Fishing News (trade), Responsible Fishing Committee (hosted by Eastern IFCA) (secondary)
-  note: 'Pass 3 change: September-December was in; it is a landings peak, not a best-to-eat window, so it is now avail. A 2009 North Sea fact sheet also names early spring as a landings peak alongside autumn
-    (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
-  cat: ours-longer
 - food: Whiting
   ring: North East
   ours: NE
@@ -907,24 +630,6 @@ rows:
   our_sources: Fresh Produce Journal (Fruitnet) (trade), The Vegetarian Society (secondary), Foodomarket (wholesaler) (secondary), Plantura (secondary)
   note: vegsoc-seasonal gives butternut from September, about four weeks before the Barfoots harvest; plantura-calendar lists butternut in November only.
   cat: shifted
-- food: Mackerel
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 35
-  fresh_mis: 0
-  any_mis: 35
-  helen: in April–November; avail January–February
-  mine: avail January–February and April–November
-  hstrip: aaaaaaaa·····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
-  ostrip: aaaaaaaa·····aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
-  note: cgsg-mackerel (western Channel) marks Jan-Mar and Jul-Dec as best to eat. seafish-seafood-guide (2009) is background only under the fish brief (all year, best in summer); its in weeks (Jun-Aug)
-    were dropped.
-  cat: peak
 - food: Cod
   ring: South West
   ours: SW
@@ -960,41 +665,6 @@ rows:
   note: ffs-seasonality marks best quality Feb-Apr and Jul-Sep, which includes the breeding season cgsg-haddock says to avoid; CGSG (primary) kept. seafish-seafood-guide (2009, background only) gives best
     Feb-Sep.
   cat: ours-longer
-- food: Hake
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 35
-  fresh_mis: 0
-  any_mis: 35
-  helen: in March–October; avail February and November
-  mine: avail February–November
-  hstrip: ····aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
-  ostrip: ····aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
-  note: ''
-  cat: peak
-- food: Gurnard
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 35
-  fresh_mis: 0
-  any_mis: 35
-  helen: in October–May
-  mine: avail October–May
-  hstrip: IIIIIIIIIIIIIIIIIIIIII·················IIIIIIIIIIIII
-  ostrip: aaaaaaaaaaaaaaaaaaaaaa·················aaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary),
-    Seafish (primary)
-  note: ''
-  cat: peak
 - food: Red mullet
   ring: South West
   ours: SW
@@ -1013,23 +683,6 @@ rows:
   note: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against cgsg-red-mullet's May-Nov; CGSG kept. The best-to-eat source marks 9 weeks as in that Flying Fish
     Seafoods's chart (as transcribed) doesn't show as landed; kept in under rule 5.
   cat: ours-longer
-- food: Grey mullet
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 35
-  fresh_mis: 0
-  any_mis: 35
-  helen: in April–November
-  mine: avail April–November
-  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
-  ostrip: ·············aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa····
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary)
-  note: ''
-  cat: peak
 - food: Rosemary
   ring: (whole)
   ours: Outdoor
@@ -1064,6 +717,23 @@ rows:
   our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
   note: ''
   cat: ours-longer
+- food: Sprats
+  ring: (whole)
+  ours: Sprats
+  band: large
+  in_mis: 17
+  fresh_mis: 17
+  any_mis: 17
+  helen: in September–March
+  mine: in November–January
+  hstrip: IIIIIIIIIIIII······················IIIIIIIIIIIIIIIII
+  ostrip: IIII·······································IIIIIIIII
+  helen_sources: M&J Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: ''
+  cat: ours-shorter
 - food: Brown crab
   ring: North East
   ours: NE
@@ -1431,23 +1101,6 @@ rows:
   our_sources: legislation.gov.uk (primary), Cornwall Good Seafood Guide (primary), Fish is the Dish (Seafish) (primary), Marine Conservation Society Good Fish Guide (primary)
   note: ''
   cat: ours-shorter
-- food: Red mullet
-  ring: North East
-  ours: NE
-  band: large
-  in_mis: 26
-  fresh_mis: 0
-  any_mis: 26
-  helen: in June–August and October–December; avail September
-  mine: avail June–December
-  hstrip: ······················IIIIIIIIIIIIIaaaaIIIIIIIIIIIII
-  ostrip: ······················aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Northumberland Seafood
-  helen_general: false
-  our_conf: low
-  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary)
-  note: ''
-  cat: peak
 - food: Chives
   ring: (whole)
   ours: Outdoor
@@ -1728,23 +1381,6 @@ rows:
   our_sources: Tregothnan (primary)
   note: ''
   cat: ours-longer
-- food: Sardines
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 22
-  fresh_mis: 0
-  any_mis: 22
-  helen: in August–December; avail January–February
-  mine: avail August–February
-  hstrip: aaaaaaaa······················IIIIIIIIIIIIIIIIIIIIII
-  ostrip: aaaaaaaa······················aaaaaaaaaaaaaaaaaaaaaa
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
-  note: ''
-  cat: peak
 - food: Dab
   ring: South West
   ours: SW
@@ -2265,24 +1901,6 @@ rows:
   note: cgsg-sardine ticks Jul-Feb as best to eat; its text says the main season is Aug-Jan. Rule 1 applied (text). ffs-seasonality marks best quality Jan-Apr and Oct-Dec, so it adds Feb-Apr and drops Aug-Sep
     against cgsg-sardine; CGSG (primary) kept.
   cat: ours-longer
-- food: Cuttlefish
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 13
-  fresh_mis: 4
-  any_mis: 17
-  helen: in April–June
-  mine: avail April–July
-  hstrip: ·············IIIIIIIIIIIII··························
-  ostrip: ·············aaaaaaaaaaaaaaaaa······················
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: Marine Management Organisation (primary), Brighton & Newhaven Fish Sales (secondary)
-  note: Seafish says the south-coast trap fishery usually runs in summer and autumn, when cuttlefish come inshore to spawn (seafish-gear-cuttlefish-pots), against April-July from the MMO, a gap of more
-    than four weeks. A University of Brighton project, run 2018-19, describes the Hastings fishery as seasonal and targeting the overwintering population, without months (brighton-sepia-hastings).
-  cat: peak
 - food: Witch sole
   ring: (whole)
   ours: Witch sole
@@ -2854,6 +2472,23 @@ rows:
   note: ''
   cat: ours-longer
 - food: Hake
+  ring: South East
+  ours: SE
+  band: large
+  in_mis: 9
+  fresh_mis: 0
+  any_mis: 9
+  helen: in March–October; avail February and November
+  mine: in February–November
+  hstrip: ····aaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaaa····
+  ostrip: ····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: ''
+  cat: peak
+- food: Hake
   ring: South West
   ours: SW
   band: large
@@ -2922,23 +2557,6 @@ rows:
   our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary)
   note: Flying Fish Seafoods marks no best-quality months for octopus, which on its key means consistent quality all year (flyingfish-seasonality), against the regional guide's window; the primary source
     is used.
-  cat: peak
-- food: Spider crab
-  ring: South East
-  ours: SE
-  band: large
-  in_mis: 9
-  fresh_mis: 0
-  any_mis: 9
-  helen: in May–June
-  mine: avail May–June
-  hstrip: ·················IIIIIIIII··························
-  ostrip: ·················aaaaaaaaa··························
-  helen_sources: Brighton & Newhaven Fish Sales
-  helen_general: false
-  our_conf: low
-  our_sources: North Norfolk News (secondary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
-  note: ''
   cat: peak
 - food: Tomatoes
   ring: Outdoor
@@ -3024,6 +2642,23 @@ rows:
   our_conf: moderate
   our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
   note: ffs-seasonality marks best quality Jan-Apr and Oct-Dec only, against cgsg-monkfish-white's all year; CGSG (primary) kept. seafish-seafood-guide (2009, background only) gives best Oct-May.
+  cat: ours-longer
+- food: Clams
+  ring: South East
+  ours: SE
+  band: small
+  in_mis: 7
+  fresh_mis: 7
+  any_mis: 7
+  helen: in May–February
+  mine: in January–December
+  hstrip: IIIIIIII·········IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIII··IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: 'Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its window has moved each year, so these weeks may change.'
   cat: ours-longer
 - food: Samphire
   ring: (whole)
@@ -3355,6 +2990,58 @@ rows:
   our_sources: Woodland Trust (primary), National Geographic (secondary)
   note: ''
   cat: peak
+- food: Mackerel
+  ring: South East
+  ours: SE
+  band: small
+  in_mis: 8
+  fresh_mis: 0
+  any_mis: 8
+  helen: in April–November; avail January–February
+  mine: in January–February and April–November
+  hstrip: aaaaaaaa·····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: IIIIIIII·····IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: cgsg-mackerel (western Channel) marks Jan-Mar and Jul-Dec as best to eat. seafish-seafood-guide (2009) is background only under the fish brief (all year, best in summer); its in weeks (Jun-Aug)
+    were dropped.
+  cat: peak
+- food: Sardines
+  ring: South East
+  ours: SE
+  band: small
+  in_mis: 8
+  fresh_mis: 0
+  any_mis: 8
+  helen: in August–December; avail January–February
+  mine: in August–February
+  hstrip: aaaaaaaa······················IIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIII······················IIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Conservation Society, Good Fish Guide (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: ''
+  cat: peak
+- food: Hake
+  ring: North East
+  ours: NE
+  band: small
+  in_mis: 8
+  fresh_mis: 0
+  any_mis: 8
+  helen: in March–December; avail January–February
+  mine: in January–December
+  hstrip: aaaaaaaaIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Scottish Government (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development Trust) (secondary)
+  note: ''
+  cat: peak
 - food: Lamb
   ring: New-season
   ours: New-season
@@ -3647,6 +3334,24 @@ rows:
   our_sources: Horticultural Development Company (AHDB) (primary), Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
   note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
   cat: agree
+- food: Cuttlefish
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 4
+  fresh_mis: 4
+  any_mis: 4
+  helen: in April–June
+  mine: in April–July
+  hstrip: ·············IIIIIIIIIIIII··························
+  ostrip: ·············IIIIIIIIIIIIIIIII······················
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Management Organisation (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: Seafish says the south-coast trap fishery usually runs in summer and autumn, when cuttlefish come inshore to spawn (seafish-gear-cuttlefish-pots), against April-July from the MMO, a gap of more
+    than four weeks. A University of Brighton project, run 2018-19, describes the Hastings fishery as seasonal and targeting the overwintering population, without months (brighton-sepia-hastings).
+  cat: agree
 - food: Plums
   ring: (whole)
   ours: all lines combined
@@ -3876,6 +3581,40 @@ rows:
   our_conf: high
   our_sources: GOV.UK (Defra / Marine Management Organisation) (primary), Marine Conservation Society, Good Fish Guide (primary), Brighton & Newhaven Fish Sales (secondary), Seafish (primary)
   note: seafish-seafood-guide (2009, background only) gives a wild season of Aug-Mar, which predates the Feb-Mar closure.
+  cat: agree
+- food: Monkfish
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 4
+  fresh_mis: 0
+  any_mis: 4
+  helen: in January–November; avail December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIaaaa
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ''
+  cat: agree
+- food: Red mullet
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 4
+  fresh_mis: 0
+  any_mis: 4
+  helen: in June–August and October–December; avail September
+  mine: in June–December
+  hstrip: ······················IIIIIIIIIIIIIaaaaIIIIIIIIIIIII
+  ostrip: ······················IIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary)
+  note: ''
   cat: agree
 - food: Clams
   ring: South West
@@ -4308,6 +4047,145 @@ rows:
   our_sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade)
   note: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
   cat: agree
+- food: Cod
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News (trade), Seafish (primary)
+  note: ''
+  cat: agree
+- food: Cod
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Undercurrent News
+    (trade)
+  note: ''
+  cat: agree
+- food: Haddock
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (primary)
+  note: ''
+  cat: agree
+- food: Haddock
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Brighton & Newhaven Fish Sales (primary)
+  note: ''
+  cat: agree
+- food: Pollock
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary), Northumberland Seafood (Amble Development
+    Trust) (secondary)
+  note: ''
+  cat: agree
+- food: Monkfish
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Brighton & Newhaven Fish Sales (secondary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ''
+  cat: agree
+- food: Gurnard
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: UK Government (Offshore Energy Strategic Environmental Assessment) (primary), Marine Conservation Society, Good Fish Guide (primary), Seafish (primary)
+  note: ''
+  cat: agree
+- food: Gurnard
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in October–May
+  mine: in October–May
+  hstrip: IIIIIIIIIIIIIIIIIIIIII·················IIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIII·················IIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Sussex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary),
+    Seafish (primary)
+  note: ''
+  cat: agree
 - food: Lobster
   ring: North East
   ours: NE
@@ -4411,6 +4289,92 @@ rows:
   our_sources: Scottish Government (primary), The Orkney News (secondary), Flying Fish Seafoods (secondary), Marine Conservation Society Good Fish Guide (primary)
   note: ''
   cat: agree
+- food: Skates and rays
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Marine Conservation Society (primary)
+  note: ''
+  cat: agree
+- food: Skates and rays
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex IFCA (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: The same profile says thornback are traditionally present from early spring to late autumn (kefca-thornback-smp-2014), and they lay eggs inshore March-September (ices-fishmap-thornback, kentessex-ifca-thornback);
+    its explicit all-year season is used (rule 1).
+  cat: agree
+- food: Grey mullet
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in April–November
+  mine: in April–November
+  hstrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  ostrip: ·············IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII····
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: Kent and Essex Inshore Fisheries and Conservation Authority (primary), Marine Conservation Society, Good Fish Guide (primary)
+  note: ''
+  cat: agree
+- food: Dab
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Marine Conservation Society (primary), Northumberland Seafood (primary)
+  note: ''
+  cat: agree
+- food: Halibut
+  ring: North East
+  ours: NE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Northumberland Seafood
+  helen_general: false
+  our_conf: low
+  our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Cornwall Good Seafood Guide (primary), Marine Conservation Society (primary)
+  note: ''
+  cat: agree
 - food: Farmed salmon
   ring: Glenarm, Northern Ireland
   ours: Glenarm, Northern Ireland
@@ -4444,6 +4408,41 @@ rows:
   our_conf: low
   our_sources: Flying Fish Seafoods (secondary), Loch Duart (secondary), Northern Times (secondary), Undercurrent News (trade)
   note: ''
+  cat: agree
+- food: Spider crab
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in May–June
+  mine: in May–June
+  hstrip: ·················IIIIIIIII··························
+  ostrip: ·················IIIIIIIII··························
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: low
+  our_sources: North Norfolk News (secondary), Sussex Inshore Fisheries and Conservation Authority (primary), Brighton & Newhaven Fish Sales (secondary)
+  note: ''
+  cat: agree
+- food: Whelks
+  ring: South East
+  ours: SE
+  band: agree
+  in_mis: 0
+  fresh_mis: 0
+  any_mis: 0
+  helen: in January–December
+  mine: in January–December
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  ostrip: IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  helen_sources: Brighton & Newhaven Fish Sales
+  helen_general: false
+  our_conf: high
+  our_sources: Sussex Inshore Fisheries and Conservation Authority (primary), Kent and Essex Inshore Fisheries and Conservation Authority (primary)
+  note: 'Pass 3 change: April-June alone was in; it is a landings peak, not a best-to-eat window. Since 2026-11-11 every landed week is in (rule 5). Landings peaks differ by area: Sussex January-April (sussex-ifca-species);
+    Kent and Essex April-June, or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01); Eastern IFCA, Norfolk and the Wash,'
   cat: agree
 - food: Beef
   ring: (whole)

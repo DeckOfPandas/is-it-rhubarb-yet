@@ -4846,19 +4846,20 @@
     weeks:
     - - 1
       - 8
-      - avail
+      - in
     - - 14
       - 48
-      - avail
+      - in
     notes:
-      season: 'No current SE best-to-eat source, so no in weeks. Landings: Kent and Essex IFCA report mackerel arriving
-        earlier than usual at Dover in spring 2026 (kefca-kent-2026-jan-may) and appearing on the Essex coast in
-        late summer 2025 (kefca-essex-2025-jul-nov); Sussex IFCA says the local catch is mostly by angling with
-        low-level drift netting, no months (sussexifca-species). Avail May-Sep joins those two reports, so the middle
-        months are extrapolated. Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text
-        (bnfs-seasonality). ICES IVc/VIId. Landings (`avail`) include weeks Helen transcribed from Brighton & Newhaven
-        Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only page); not
-        re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No current SE best-to-eat source, so no best-to-eat window. Landings:
+        Kent and Essex IFCA report mackerel arriving earlier than usual at Dover in spring 2026 (kefca-kent-2026-jan-may)
+        and appearing on the Essex coast in late summer 2025 (kefca-essex-2025-jul-nov); Sussex IFCA says the local
+        catch is mostly by angling with low-level drift netting, no months (sussexifca-species). May-Sep joins those
+        two reports, so the middle months are extrapolated. Brighton & Newhaven Fish Sales'' seasonality chart is
+        an image not legible as text (bnfs-seasonality). ICES IVc/VIId. Landings include weeks Helen transcribed
+        from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or
+        colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
       discrepancy: cgsg-mackerel (western Channel) marks Jan-Mar and Jul-Dec as best to eat. seafish-seafood-guide
         (2009) is background only under the fish brief (all year, best in summer); its in weeks (Jun-Aug) were dropped.
     mcs:
@@ -5070,21 +5071,22 @@
     weeks:
     - - 1
       - 8
-      - avail
+      - in
     - - 31
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset under rule 8: the earlier dates were copied from SW. Searched Sussex IFCA''s species page (no
-        sardine entry; sussexifca-species), Kent and Essex IFCA quarterly shore reports for 2025-26 (no sardines
-        mentioned; kefca-essex-2025-jul-nov, kefca-kent-2025-nov-jan), Fishing News sardine coverage (Cornish only)
-        and Cefas/ICES landings pages. No SE sardine fishery or landing season found. Third pass, 2026-11-10: the
-        full Seafish guide has no sardine season (it says most UK catch goes to France; seafish-seafood-guide),
-        and searches for sardine landings in Sussex, Kent, Norfolk or the North Sea found only Cornish coverage.
-        Fish pass, 2026-11-10: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text
-        (bnfs-seasonality); no other SE landings source mentions sardines. Landings (`avail`) include weeks Helen
-        transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read
-        (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Searched
+        Sussex IFCA''s species page (no sardine entry; sussexifca-species), Kent and Essex IFCA quarterly shore
+        reports for 2025-26 (no sardines mentioned; kefca-essex-2025-jul-nov, kefca-kent-2025-nov-jan), Fishing
+        News sardine coverage (Cornish only) and Cefas/ICES landings pages. No SE sardine fishery or landing season
+        found. Third pass, 2026-11-10: the full Seafish guide has no sardine season (it says most UK catch goes
+        to France; seafish-seafood-guide), and searches for sardine landings in Sussex, Kent, Norfolk or the North
+        Sea found only Cornish coverage. Fish pass, 2026-11-10: Brighton & Newhaven Fish Sales'' seasonality chart
+        is an image not legible as text (bnfs-seasonality); no other SE landings source mentions sardines. Landings
+        include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -5161,18 +5163,19 @@
     weeks:
     - - 1
       - 4
-      - avail
+      - in
     - - 40
       - 52
-      - avail
+      - in
     notes:
-      season: 'Split added: SE sources give a winter fishery unlike NE or SW. No current SE best-to-eat source found,
-        so these landings weeks are avail (fish brief). Sussex IFCA says herring is fished commercially in its district
-        only from October to December (sussexifca-species). Kent and Essex IFCA: Thames and Blackwater herring and
-        sprat run builds as autumn turns to winter (kefca-essex-2025-jul-nov) and ran as normal to the end of January
-        in 2025-26; herring and sprats landed and sold locally at Deal, Queenborough and Margate (kefca-essex-2025-nov-jan,
-        kefca-kent-2025-nov-jan). Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as
-        text (bnfs-seasonality). ICES IVc/VIId.'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Split added: SE sources give a winter fishery unlike NE or SW. No
+        current SE best-to-eat source found, so the landing weeks set the season. Sussex IFCA says herring is fished
+        commercially in its district only from October to December (sussexifca-species). Kent and Essex IFCA: Thames
+        and Blackwater herring and sprat run builds as autumn turns to winter (kefca-essex-2025-jul-nov) and ran
+        as normal to the end of January in 2025-26; herring and sprats landed and sold locally at Deal, Queenborough
+        and Margate (kefca-essex-2025-nov-jan, kefca-kent-2025-nov-jan). Brighton & Newhaven Fish Sales'' seasonality
+        chart is an image not legible as text (bnfs-seasonality). ICES IVc/VIId.'
       discrepancy: sussexifca-species ends the season in December; kefca-essex-2025-nov-jan has the Thames fishery
         running to the end of January, about four weeks later. Kent and Essex IFCA also report poor December 2025
         landings after mild weather kept the water warm (kefca-essex-2025-nov-jan).
@@ -5245,19 +5248,20 @@
     weeks:
     - - 1
       - 4
-      - avail
+      - in
     - - 44
       - 52
-      - avail
+      - in
     notes:
-      season: 'No current best-to-eat source found, so these landings weeks are avail (fish brief). Kent and Essex
-        IFCA shore reports: the Thames herring and sprat run builds as autumn turns to winter (kefca-essex-2025-jul-nov);
-        sprats landed at Deal, Hythe and Queenborough in Nov-Jan, and Leigh and Southend boats switched to sprat
-        trawling in January 2026 with more landed than the year before (kefca-kent-2025-nov-jan, kefca-essex-2025-nov-jan).
-        A Queenborough boat also trawled sprats at some point in Jan-May 2026 (kefca-kent-2026-jan-may). MCS says
-        the UK season for English Channel sprat is short, without months (mcs-sprat-ec). seafish-seafood-guide (2009,
-        background only) gives no months. Low: Thames and Kent port reports only (ICES IVc), applied to a whole-UK
-        line.'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No current best-to-eat source found, so the landing weeks set the
+        season. Kent and Essex IFCA shore reports: the Thames herring and sprat run builds as autumn turns to winter
+        (kefca-essex-2025-jul-nov); sprats landed at Deal, Hythe and Queenborough in Nov-Jan, and Leigh and Southend
+        boats switched to sprat trawling in January 2026 with more landed than the year before (kefca-kent-2025-nov-jan,
+        kefca-essex-2025-nov-jan). A Queenborough boat also trawled sprats at some point in Jan-May 2026 (kefca-kent-2026-jan-may).
+        MCS says the UK season for English Channel sprat is short, without months (mcs-sprat-ec). seafish-seafood-guide
+        (2009, background only) gives no months. Low: Thames and Kent port reports only (ICES IVc), applied to a
+        whole-UK line.'
     mcs:
       read: 2026-11-10
       ratings:
@@ -5292,16 +5296,15 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s 2009 national guide (all
-        year, best Jul-Oct; seafish-seafood-guide), which may now be background only. No current NE best-to-eat
-        or landings calendar found: Northumberland Seafood''s seasonality chart is an image not legible as text
-        (northumberland-seasonality), and its cod page gives no months. ICES IVa-b. Landings (`avail`) include weeks
-        Helen transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an
-        image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Jul-Oct; seafish-seafood-guide), which may now be background only. No
+        current NE best-to-eat or landings calendar found: Northumberland Seafood''s seasonality chart is an image
+        not legible as text (northumberland-seasonality), and its cod page gives no months. ICES IVa-b. Landings
+        include weeks Helen transcribed from Northumberland Seafood''s seasonality chart, which the web tools could
+        not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -5332,17 +5335,16 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s 2009 national guide (all
-        year, best Jul-Oct; seafish-seafood-guide), now background only. No current SE best-to-eat or landings calendar
-        found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text (bnfs-seasonality).
-        Kent and Essex IFCA report that cod have all but gone from the Essex coast, with most catches now further
-        north off Suffolk (kefca-essex-2025-jul-nov). ICES IVc/VIId. Landings (`avail`) include weeks Helen transcribed
-        from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or
-        colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Jul-Oct; seafish-seafood-guide), now background only. No current SE
+        best-to-eat or landings calendar found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not
+        legible as text (bnfs-seasonality). Kent and Essex IFCA report that cod have all but gone from the Essex
+        coast, with most catches now further north off Suffolk (kefca-essex-2025-jul-nov). ICES IVc/VIId. Landings
+        include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -5419,16 +5421,15 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s 2009 national guide (all
-        year, best Feb-Sep; seafish-seafood-guide), now background only. No current best-to-eat or landings calendar
-        found: Northumberland Seafood''s seasonality chart is an image not legible as text (northumberland-seasonality);
-        its haddock page gives no months. ICES IVa-b. Landings (`avail`) include weeks Helen transcribed from Northumberland
-        Seafood''s seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked
-        against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Feb-Sep; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Northumberland Seafood''s seasonality chart is an image not legible as text
+        (northumberland-seasonality); its haddock page gives no months. ICES IVa-b. Landings include weeks Helen
+        transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an image
+        or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings: &id004
@@ -5464,16 +5465,15 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s 2009 national guide (all
-        year, best Feb-Sep; seafish-seafood-guide), now background only. No current best-to-eat or landings calendar
-        found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text (bnfs-seasonality);
-        no other SE source found. ICES IVc/VIId. Landings (`avail`) include weeks Helen transcribed from Brighton
-        & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only
-        page); not re-checked against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Feb-Sep; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as
+        text (bnfs-seasonality); no other SE source found. ICES IVc/VIId. Landings include weeks Helen transcribed
+        from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or
+        colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings: *id004
@@ -5539,20 +5539,19 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset under rule 8: the earlier dates were copied from SW. Searched Scottish Government''s proposed
-        Northern Shelf hake FMP (hake landed at Peterhead, Lerwick, Scrabster and others, but no months; spawning
-        later in the year for more northerly fish, no months; govscot-hake-fmp-2025), Seafish''s 2013 hake sourcing
-        guide (no seasonality) and Fishing News. No NE season found. Third pass, 2026-11-10: the full Seafish guide
-        has no hake availability line (seafish-seafood-guide); the MCS northern-stock rating page has no season
-        text; Scottish Sea Fisheries Statistics give annual, not monthly, landings by port. Fish pass, 2026-11-10:
-        Northumberland Seafood''s seasonality chart is an image not legible as text (northumberland-seasonality);
-        its hake page gives spawning habits but no months. Landings (`avail`) include weeks Helen transcribed from
-        Northumberland Seafood''s seasonality chart, which the web tools could not read (an image or colour-only
-        page); not re-checked against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Searched
+        Scottish Government''s proposed Northern Shelf hake FMP (hake landed at Peterhead, Lerwick, Scrabster and
+        others, but no months; spawning later in the year for more northerly fish, no months; govscot-hake-fmp-2025),
+        Seafish''s 2013 hake sourcing guide (no seasonality) and Fishing News. No NE season found. Third pass, 2026-11-10:
+        the full Seafish guide has no hake availability line (seafish-seafood-guide); the MCS northern-stock rating
+        page has no season text; Scottish Sea Fisheries Statistics give annual, not monthly, landings by port. Fish
+        pass, 2026-11-10: Northumberland Seafood''s seasonality chart is an image not legible as text (northumberland-seasonality);
+        its hake page gives spawning habits but no months. Landings include weeks Helen transcribed from Northumberland
+        Seafood''s seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked
+        against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings: &id005
@@ -5585,17 +5584,18 @@
     weeks:
     - - 5
       - 48
-      - avail
+      - in
     notes:
-      season: 'Reset under rule 8: the earlier dates were copied from SW. Searched Sussex IFCA''s species page (no
-        hake entry; sussexifca-species), Kent and Essex IFCA 2025-26 shore reports (no hake mentioned; kefca-essex-2025-jul-nov,
-        kefca-kent-2025-nov-jan) and Seafish''s 2013 hake guide. No SE season found. Third pass, 2026-11-10: the
-        full Seafish guide has no hake availability line (seafish-seafood-guide), and Kent and Essex IFCA''s 2025
-        shore reports and Sussex IFCA''s commercial-fishing page do not mention hake (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
-        Fish pass, 2026-11-10: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text
-        (bnfs-seasonality). Landings (`avail`) include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s
-        seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked against
-        the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Searched
+        Sussex IFCA''s species page (no hake entry; sussexifca-species), Kent and Essex IFCA 2025-26 shore reports
+        (no hake mentioned; kefca-essex-2025-jul-nov, kefca-kent-2025-nov-jan) and Seafish''s 2013 hake guide. No
+        SE season found. Third pass, 2026-11-10: the full Seafish guide has no hake availability line (seafish-seafood-guide),
+        and Kent and Essex IFCA''s 2025 shore reports and Sussex IFCA''s commercial-fishing page do not mention
+        hake (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun). Fish pass, 2026-11-10: Brighton & Newhaven Fish
+        Sales'' seasonality chart is an image not legible as text (bnfs-seasonality). Landings include weeks Helen
+        transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read
+        (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings: *id005
@@ -5656,18 +5656,18 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Pollack (Pollachius pollachius). Reset under rule 8: the earlier dates were copied from SW. gov-sea4-fish-baseline
-        puts North Sea spawning in winter and spring but does not link it to eating quality or catch timing. Searched
-        MCS, IFCA and North Sea port and trade sources; no NE season found. Third pass, 2026-11-10: the full Seafish
-        guide has no pollack availability line (it says much UK catch goes to France; seafish-seafood-guide); NEIFCA''s
-        commercial page names no species by season. Fish pass, 2026-11-10: Northumberland Seafood''s seasonality
-        chart is an image not legible as text (northumberland-seasonality). Landings (`avail`) include weeks Helen
-        transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an image
-        or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Pollack (Pollachius pollachius). Reset under rule 8: the earlier
+        dates were copied from SW. gov-sea4-fish-baseline puts North Sea spawning in winter and spring but does
+        not link it to eating quality or catch timing. Searched MCS, IFCA and North Sea port and trade sources;
+        no NE season found. Third pass, 2026-11-10: the full Seafish guide has no pollack availability line (it
+        says much UK catch goes to France; seafish-seafood-guide); NEIFCA''s commercial page names no species by
+        season. Fish pass, 2026-11-10: Northumberland Seafood''s seasonality chart is an image not legible as text
+        (northumberland-seasonality). Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality
+        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
+        (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -5832,16 +5832,15 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s 2009 national guide (all
-        year, best Oct-May; seafish-seafood-guide), now background only. No current best-to-eat or landings calendar
-        found: Northumberland Seafood''s seasonality chart is an image not legible as text (northumberland-seasonality).
-        ICES IVa-b. Landings (`avail`) include weeks Helen transcribed from Northumberland Seafood''s seasonality
-        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
-        (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Oct-May; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Northumberland Seafood''s seasonality chart is an image not legible as text
+        (northumberland-seasonality). ICES IVa-b. Landings include weeks Helen transcribed from Northumberland Seafood''s
+        seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked against
+        the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings: &id006
@@ -5868,16 +5867,15 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s 2009 national guide (all
-        year, best Oct-May; seafish-seafood-guide), now background only. No current best-to-eat or landings calendar
-        found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text (bnfs-seasonality).
-        ICES IVc/VIId. Landings (`avail`) include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s
-        seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked against
-        the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Oct-May; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as
+        text (bnfs-seasonality). ICES IVc/VIId. Landings include weeks Helen transcribed from Brighton & Newhaven
+        Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only page); not
+        re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings: *id006
@@ -5943,21 +5941,20 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset under rule 8: the earlier dates were copied from SW. gov-sea4-fish-baseline gives grey gurnard
-        spawning Jan-Jun and red gurnard over summer, but does not link this to eating quality or catch timing.
-        Searched North Sea port, IFCA and trade sources; no NE season found. Third pass, 2026-11-10: the full Seafish
-        guide calls gurnard always a good buy but gives no months (seafish-seafood-guide); Seafish''s 2010 gurnard
-        species guide gives only spawning (red in summer, tub May-July, grey April-August) and nothing on when it
-        is best or landed (seafish-species-guide-gurnard-2010). Fish pass, 2026-11-10: Northumberland Seafood gives
-        spawning May-Jul and says gurnard is mainly a bycatch of mixed bottom-trawl fisheries, much of it discarded,
-        with no months for landings or eating (northumberland-gurnard); Northumberland Seafood''s seasonality chart
-        is an image not legible as text (northumberland-seasonality). Landings (`avail`) include weeks Helen transcribed
-        from Northumberland Seafood''s seasonality chart, which the web tools could not read (an image or colour-only
-        page); not re-checked against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. gov-sea4-fish-baseline
+        gives grey gurnard spawning Jan-Jun and red gurnard over summer, but does not link this to eating quality
+        or catch timing. Searched North Sea port, IFCA and trade sources; no NE season found. Third pass, 2026-11-10:
+        the full Seafish guide calls gurnard always a good buy but gives no months (seafish-seafood-guide); Seafish''s
+        2010 gurnard species guide gives only spawning (red in summer, tub May-July, grey April-August) and nothing
+        on when it is best or landed (seafish-species-guide-gurnard-2010). Fish pass, 2026-11-10: Northumberland
+        Seafood gives spawning May-Jul and says gurnard is mainly a bycatch of mixed bottom-trawl fisheries, much
+        of it discarded, with no months for landings or eating (northumberland-gurnard); Northumberland Seafood''s
+        seasonality chart is an image not legible as text (northumberland-seasonality). Landings include weeks Helen
+        transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an image
+        or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -5982,20 +5979,22 @@
     weeks:
     - - 1
       - 22
-      - avail
+      - in
     - - 40
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset under rule 8: the earlier dates were copied from SW. Kent and Essex IFCA note smaller quantities
-        of gurnard in Essex catches over summer 2025 (kefca-essex-2025-jul-nov), which is too thin to set a season;
-        Sussex IFCA''s species page has no gurnard entry (sussexifca-species). Third pass, 2026-11-10: the Seafish
-        guide gives no months (seafish-seafood-guide); Seafish''s 2010 gurnard guide gives spawning only, not linked
-        to eating or landings (seafish-species-guide-gurnard-2010); Kent and Essex IFCA''s 2025 shore reports do
-        not mention gurnard (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun). Fish pass, 2026-11-10: Brighton
-        & Newhaven Fish Sales'' seasonality chart is an image not legible as text (bnfs-seasonality). Landings (`avail`)
-        include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web
-        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Kent and
+        Essex IFCA note smaller quantities of gurnard in Essex catches over summer 2025 (kefca-essex-2025-jul-nov),
+        which is too thin to set a season; Sussex IFCA''s species page has no gurnard entry (sussexifca-species).
+        Third pass, 2026-11-10: the Seafish guide gives no months (seafish-seafood-guide); Seafish''s 2010 gurnard
+        guide gives spawning only, not linked to eating or landings (seafish-species-guide-gurnard-2010); Kent and
+        Essex IFCA''s 2025 shore reports do not mention gurnard (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
+        Fish pass, 2026-11-10: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text
+        (bnfs-seasonality). Landings include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality
+        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
+        (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -6068,14 +6067,16 @@
     weeks:
     - - 23
       - 52
-      - avail
+      - in
     notes:
-      season: 'Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s 2009 national guide (UK season
-        May-Nov, best in summer; seafish-seafood-guide), now background only. No current NE best-to-eat or landings
-        source found: Northumberland Seafood''s seasonality chart is an image not legible as text (northumberland-seasonality),
-        and Northumberland Seafood has no red mullet species page. ICES IVa-b. Landings (`avail`) include weeks
-        Helen transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an
-        image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (UK season May-Nov, best in summer; seafish-seafood-guide), now background only. No
+        current NE best-to-eat or landings source found: Northumberland Seafood''s seasonality chart is an image
+        not legible as text (northumberland-seasonality), and Northumberland Seafood has no red mullet species page.
+        ICES IVa-b. Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality chart, which
+        the web tools could not read (an image or colour-only page); not re-checked against the chart (coordinator,
+        2026-11-10).'
       sustainability: 'MCS: northern stock (North Sea, eastern Channel, Skagerrak/Kattegat) demersal seine Best
         Choice (2); otter trawl and gill net OK (3) (read 2026-11-10).'
     mcs:
@@ -6163,18 +6164,19 @@
     weeks:
     - - 14
       - 48
-      - avail
+      - in
     notes:
-      season: 'Reset under rule 8: the earlier dates were copied from SW. Kent and Essex IFCA say mullet are caught
-        in the Thames over the summer (kefca-essex-2025-jul-nov) but do not name the species, so it cannot set a
-        grey mullet season. Sussex IFCA, Kent and Essex IFCA and MCS pages give no SE months. Third pass, 2026-11-10:
-        later Kent and Essex IFCA reports again mention mullet without species or season (netting at Holehaven,
-        where the catch is usually limited to mullet, and a short-lived run off Herne Bay and Whitstable, both Feb-Jun
-        2025; kefca-essex-2025-jan-jun, kefca-kent-2025-feb-jun); the Seafish guide has no grey mullet availability
-        line (seafish-seafood-guide). Fish pass, 2026-11-10: Brighton & Newhaven Fish Sales'' seasonality chart
-        is an image not legible as text (bnfs-seasonality). Landings (`avail`) include weeks Helen transcribed from
-        Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only
-        page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Kent and
+        Essex IFCA say mullet are caught in the Thames over the summer (kefca-essex-2025-jul-nov) but do not name
+        the species, so it cannot set a grey mullet season. Sussex IFCA, Kent and Essex IFCA and MCS pages give
+        no SE months. Third pass, 2026-11-10: later Kent and Essex IFCA reports again mention mullet without species
+        or season (netting at Holehaven, where the catch is usually limited to mullet, and a short-lived run off
+        Herne Bay and Whitstable, both Feb-Jun 2025; kefca-essex-2025-jan-jun, kefca-kent-2025-feb-jun); the Seafish
+        guide has no grey mullet availability line (seafish-seafood-guide). Fish pass, 2026-11-10: Brighton & Newhaven
+        Fish Sales'' seasonality chart is an image not legible as text (bnfs-seasonality). Landings include weeks
+        Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not
+        read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -7309,18 +7311,17 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Still empty. No North Sea best-to-eat source and no landings source with months. Searched on 2026-11-10:
-        Northumberland Seafood''s dab page gives spawning in spring and early summer and an inshore move in summer,
-        linked to neither eating quality nor landings (northumberland-dab, 2016); Northumberland Seafood''s seasonality
-        chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No North Sea best-to-eat source and no landings source with months.
+        Searched on 2026-11-10: Northumberland Seafood''s dab page gives spawning in spring and early summer and
+        an inshore move in summer, linked to neither eating quality nor landings (northumberland-dab, 2016); Northumberland
+        Seafood''s seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
         Direct Seafoods'' 2025-26 market reports do not mention dab. Earlier passes searched Seafish, NEIFCA and
-        North Sea material. Landings (`avail`) include weeks Helen transcribed from Northumberland Seafood''s seasonality
+        North Sea material. Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality
         chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
         (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
     mcs:
       read: 2026-11-10
       ratings:
@@ -7499,21 +7500,21 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Wild Atlantic halibut. No current best-to-eat source: the 2009 national guide''s wild season (May-March,
-        seafish-seafood-guide) can no longer be the basis, and nothing newer was found, so there are no in weeks.
-        Northumberland Seafood says halibut is available all year, more widely March-September (northumberland-halibut,
-        2016); it does not say whether that is local wild fish or farmed supply, so this avail is weak. Northumberland
-        Seafood''s seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
-        Spawns in winter and early spring (cgsg-halibut). ICES IVa-b. Coordinator, 2026-11-11: still no in weeks,
-        by rule 5. Atlantic halibut spawns from December to April (fishbase-atlantic-halibut), and Norway closes
-        its halibut fishery from 20 December to 20 April for spawning (mcs-atlantic-halibut), but no source links
-        spawning to eating quality for UK-landed fish, so spawning can''t set in or avail. Searched MCS species
-        pages, Seafish, Northumberland Seafood and the scientific literature. This line now leads the food (see
-        the lead rule in propose.py), since the SW and Farmed lines are no_supply.'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Wild Atlantic halibut. No current best-to-eat source: the 2009 national
+        guide''s wild season (May-March, seafish-seafood-guide) can no longer be the basis, and nothing newer was
+        found, so there is no best-to-eat window. Northumberland Seafood says halibut is available all year, more
+        widely March-September (northumberland-halibut, 2016); it does not say whether that is local wild fish or
+        farmed supply, so these weeks are weak. Northumberland Seafood''s seasonality chart (the NE landings source)
+        is an image that could not be read (northumberland-seafood-seasonality). Spawns in winter and early spring
+        (cgsg-halibut). ICES IVa-b. Coordinator, 2026-11-11: still no best-to-eat window. Atlantic halibut spawns
+        from December to April (fishbase-atlantic-halibut), and Norway closes its halibut fishery from 20 December
+        to 20 April for spawning (mcs-atlantic-halibut), but no source links spawning to eating quality for UK-landed
+        fish, so spawning sets no window. Searched MCS species pages, Seafish, Northumberland Seafood and the scientific
+        literature. This line now leads the food (see the lead rule in propose.py), since the SW and Farmed lines
+        are no_supply.'
     mcs:
       read: 2026-11-10
       ratings:
@@ -7604,21 +7605,20 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'Still empty: no North Sea best-to-eat or landings-by-month source. Searched Seafish, NEIFCA, the
-        Yorkshire Marine Nature Partnership and the Defra skate and ray FMP in earlier passes; this pass, Northumberland
-        Seafood''s list of 23 North East species has no skate or ray (northumberland-seafood-species) and its chart
-        could not be read (northumberland-seafood-seasonality). The FMP (updated 2025-12-16) says skates and rays
-        are caught in mixed and seasonal targeted fisheries but gives no months; starry ray may not be fished, retained
-        or landed in IIa, IIIa, IV or VIId, and small-eyed ray may not be targeted in the North Sea (gov-fmp-skates-rays).
-        The common skate complex (flapper and blue skate) was a prohibited species under the 2016 TAC regulation
-        (legislation-eu-2016-72-art13, original version); MCS rated flapper skate Avoid (5) when read earlier on
-        2026-11-10, but the page failed to load on re-check (mcs-flapper-skate). Landings (`avail`) include weeks
-        Helen transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an
-        image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No North Sea best-to-eat or landings-by-month source. Searched Seafish,
+        NEIFCA, the Yorkshire Marine Nature Partnership and the Defra skate and ray FMP in earlier passes; this
+        pass, Northumberland Seafood''s list of 23 North East species has no skate or ray (northumberland-seafood-species)
+        and its chart could not be read (northumberland-seafood-seasonality). The FMP (updated 2025-12-16) says
+        skates and rays are caught in mixed and seasonal targeted fisheries but gives no months; starry ray may
+        not be fished, retained or landed in IIa, IIIa, IV or VIId, and small-eyed ray may not be targeted in the
+        North Sea (gov-fmp-skates-rays). The common skate complex (flapper and blue skate) was a prohibited species
+        under the 2016 TAC regulation (legislation-eu-2016-72-art13, original version); MCS rated flapper skate
+        Avoid (5) when read earlier on 2026-11-10, but the page failed to load on re-check (mcs-flapper-skate).
+        Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -7678,25 +7678,25 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'No best-to-eat source for the eastern Channel or southern North Sea (the CGSG months are for Cornwall
-        only), so no in weeks; was in all year. Landed all year: Kent and Essex IFCA''s thornback profile gives
-        an all-year season by angling, nets and trawl and calls it one of four main commercial finfish in the district
-        (kefca-thornback-smp-2014, February 2014); its 2025 shore reports show thornback steadily in Essex commercial
-        catches January-June and dominating West Mersea by June, with small amounts still landed over Christmas
-        2025 (kefca-essex-2025-jan-jun, kefca-essex-2025-nov-jan). Brighton and Newhaven boats net skate from autumn
-        into winter (bnfs-fleet, 2020). July-August rests on the 2014 profile only. Thornback make up about 54%
-        of SE skate and ray landings, then blonde (27%), spotted (10%) and cuckoo (8%), 2016-2021; starry ray may
-        not be landed from VIId (gov-fmp-skates-rays). The Brighton & Newhaven Fish Sales seasonality chart (the
-        SE landings source) is an image that could not be read (bnfs-seasonality). ICES IVc and VIId.'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source for the eastern Channel or southern North Sea
+        (the CGSG months are for Cornwall only), so no best-to-eat window. Landed all year: Kent and Essex IFCA''s
+        thornback profile gives an all-year season by angling, nets and trawl and calls it one of four main commercial
+        finfish in the district (kefca-thornback-smp-2014, February 2014); its 2025 shore reports show thornback
+        steadily in Essex commercial catches January-June and dominating West Mersea by June, with small amounts
+        still landed over Christmas 2025 (kefca-essex-2025-jan-jun, kefca-essex-2025-nov-jan). Brighton and Newhaven
+        boats net skate from autumn into winter (bnfs-fleet, 2020). July-August rests on the 2014 profile only.
+        Thornback make up about 54% of SE skate and ray landings, then blonde (27%), spotted (10%) and cuckoo (8%),
+        2016-2021; starry ray may not be landed from VIId (gov-fmp-skates-rays). The Brighton & Newhaven Fish Sales
+        seasonality chart (the SE landings source) is an image that could not be read (bnfs-seasonality). ICES IVc
+        and VIId.'
       discrepancy: The same profile says thornback are traditionally present from early spring to late autumn (kefca-thornback-smp-2014),
         and they lay eggs inshore March-September (ices-fishmap-thornback, kentessex-ifca-thornback); its explicit
         all-year season is used (rule 1).
       drift: Kent and Essex IFCA says more thornback seem to be staying inshore further into winter, with some thought
         to be resident all year in the Thames estuary area (kentessex-ifca-thornback).
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
     mcs:
       read: 2026-11-10
       ratings:
@@ -7942,18 +7942,19 @@
     weeks:
     - - 14
       - 30
-      - avail
+      - in
     notes:
-      season: 'No best-to-eat source for the eastern Channel (the CGSG months are for Cornwall), so no in weeks;
-        was in. Landings: the MMO action plan monitors the Channel pot season at its start (April), middle (May)
-        and end (July) (mmo-cuttlefish-action-plan); the MMO sampled Hastings in April 2025 during the potting season
-        (mmo-cuttlefish-sampling-2025); fishers describe a short pot season of about two months, later in bad weather
-        (mmo-cuttlefish-roadshow); Brighton and Newhaven boats join the cuttlefish fishery in spring as the weather
-        warms, for about six to eight weeks (bnfs-fleet, 2020). Taken as April-July avail. Adults gather on south-coast
-        inshore spawning grounds in spring (gov-sea4-cephalopods); Eastbourne is a landing port (guardian-cuttlefish).
-        The winter trawl season in the MMO sampling was recorded at south-west ports, so it is not applied here.
-        The Brighton & Newhaven Fish Sales seasonality chart (the SE landings source) is an image that could not
-        be read (bnfs-seasonality).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source for the eastern Channel (the CGSG months are
+        for Cornwall), so no best-to-eat window. Landings: the MMO action plan monitors the Channel pot season at
+        its start (April), middle (May) and end (July) (mmo-cuttlefish-action-plan); the MMO sampled Hastings in
+        April 2025 during the potting season (mmo-cuttlefish-sampling-2025); fishers describe a short pot season
+        of about two months, later in bad weather (mmo-cuttlefish-roadshow); Brighton and Newhaven boats join the
+        cuttlefish fishery in spring as the weather warms, for about six to eight weeks (bnfs-fleet, 2020). Taken
+        as April-July. Adults gather on south-coast inshore spawning grounds in spring (gov-sea4-cephalopods); Eastbourne
+        is a landing port (guardian-cuttlefish). The winter trawl season in the MMO sampling was recorded at south-west
+        ports, so it is not applied here. The Brighton & Newhaven Fish Sales seasonality chart (the SE landings
+        source) is an image that could not be read (bnfs-seasonality).'
       discrepancy: Seafish says the south-coast trap fishery usually runs in summer and autumn, when cuttlefish
         come inshore to spawn (seafish-gear-cuttlefish-pots), against April-July from the MMO, a gap of more than
         four weeks. A University of Brighton project, run 2018-19, describes the Hastings fishery as seasonal and
@@ -9291,23 +9292,21 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'No current best-to-eat source was found (Seafish''s consumer guide has no brown shrimp page, and
-        the MCS gives no season), so there are no in weeks; the landing weeks are avail (fish brief). Landings:
-        Fishing News says the Wash supplies most of the UK catch, autumn is the fishery''s traditional peak, shrimp
-        are fished to some extent all year as a fall-back fishery, and they move further offshore from November
-        to March (fishingnews-wash-shrimp). Eastern IFCA''s 2016 shrimp industry workshop records the main season
-        as September to December (eifca-shrimp-workshop-2016). Wash catch is landed into King''s Lynn (msc-wash-brown-shrimp).
-        Eastern IFCA''s trip limit runs on a 1 August-31 July year (eifca-shrimp-effort-management). North Western
-        IFCA (Morecambe Bay) gives no months (nwifca-shrimps). Fished all year to some extent, with the main landing
-        season September to December (eifca-shrimp-workshop-2016). No source names a best-to-eat window, so the
-        whole year is avail; it does not mean hard to get.'
-      discrepancy: 'Pass 3 change: September-December was in; it is a landings peak, not a best-to-eat window, so
-        it is now avail. A 2009 North Sea fact sheet also names early spring as a landings peak alongside autumn
-        (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No current best-to-eat source was found (Seafish''s consumer guide
+        has no brown shrimp page, and the MCS gives no season), so every landing week is in. Landings: Fishing News
+        says the Wash supplies most of the UK catch, autumn is the fishery''s traditional peak, shrimp are fished
+        to some extent all year as a fall-back fishery, and they move further offshore from November to March (fishingnews-wash-shrimp).
+        Eastern IFCA''s 2016 shrimp industry workshop records the main season as September to December (eifca-shrimp-workshop-2016).
+        Wash catch is landed into King''s Lynn (msc-wash-brown-shrimp). Eastern IFCA''s trip limit runs on a 1 August-31
+        July year (eifca-shrimp-effort-management). North Western IFCA (Morecambe Bay) gives no months (nwifca-shrimps).
+        Fished all year to some extent, with the main landing season September to December (eifca-shrimp-workshop-2016).
+        No source names a best-to-eat window, so the whole year is in; September-December is the landings peak.'
+      discrepancy: 'Pass 3 change: September-December alone was in; it is a landings peak, not a best-to-eat window.
+        Since 2026-11-11 every landed week is in (rule 5). A 2009 North Sea fact sheet also names early spring as
+        a landings peak alongside autumn (fishfacts-north-sea-shrimp-2009); no UK source repeats it.'
       sustainability: 'MSC: Wash brown shrimp certified since 2020 (msc-wash-brown-shrimp).'
     mcs:
       read: 2026-11-10
@@ -9342,18 +9341,19 @@
     weeks:
     - - 18
       - 26
-      - avail
+      - in
     notes:
-      season: 'No SE season found. Pass 3 searched Brighton & Newhaven Fish Sales and Sussex IFCA: the BNFS seasonality
-        chart is an image the research tools could not read (bnfs-seasonality), and Sussex IFCA''s species page
-        and byelaw list do not cover spider crab (sussex-ifca-species, sussex-ifca-regulations); its 2025 species
-        fishery reports PDF could not be opened. A Norfolk paper reports spider crabs newly appearing in pots from
-        Cromer to Weybourne, not sold locally, moving offshore in autumn (nnn-norfolk-spider-crab). Kent and Essex
-        IFCA''s 2025 shore reports describe spider crabs as an unwanted bycatch off East Kent and Hythe with no
-        market, and an occasional one off Harwich and Walton (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
-        The MCS rating page (December 2025) gives no months (mcs-spider-crab). Landings (`avail`) include weeks
-        Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not
-        read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No SE season found. Pass 3 searched Brighton & Newhaven Fish Sales
+        and Sussex IFCA: the BNFS seasonality chart is an image the research tools could not read (bnfs-seasonality),
+        and Sussex IFCA''s species page and byelaw list do not cover spider crab (sussex-ifca-species, sussex-ifca-regulations);
+        its 2025 species fishery reports PDF could not be opened. A Norfolk paper reports spider crabs newly appearing
+        in pots from Cromer to Weybourne, not sold locally, moving offshore in autumn (nnn-norfolk-spider-crab).
+        Kent and Essex IFCA''s 2025 shore reports describe spider crabs as an unwanted bycatch off East Kent and
+        Hythe with no market, and an occasional one off Harwich and Walton (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
+        The MCS rating page (December 2025) gives no months (mcs-spider-crab). Landings include weeks Helen transcribed
+        from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or
+        colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
     mcs:
       read: 2026-11-10
       ratings:
@@ -9423,22 +9423,24 @@
     weeks:
     - - 1
       - 8
-      - avail
+      - in
     - - 11
       - 52
-      - avail
+      - in
     notes:
-      season: 'Thames Estuary Manila clams, Kent and Essex IFCA''s trial fishery. No best-to-eat source was found,
-        so there are no in weeks (fish brief). Avail = the spring 2026 trial window, 16 March to 1 May 2026 (kefca-manila-clam-trial-report-2026-05),
-        weeks 11-18 by the legal-week rule. The Authority moved the trial to spring because prices are higher then,
-        when other UK clam fisheries are closed, and plans the second trial year for spring 2027 (kefca-annual-plan-2026-27).
-        Earlier windows: one month in October 2024; a six-week trial from 3-4 November 2025 paused after about 10
-        days on low prices and saturated markets (kefca-manila-clam-trial, kefca-manila-clam-update-2025-11, kefca-essex-2025-nov-jan).
-        Sussex IFCA''s byelaw list has no clam-specific measure (sussex-ifca-regulations). Seafish says clams are
-        most available September-April and scarcest in June-July, UK-wide, with no best-quality months named (fitd-clams).
-        Low: a trial fishery, not a settled season. Landings (`avail`) include weeks Helen transcribed from Brighton
-        & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only
-        page); not re-checked against the chart (coordinator, 2026-11-10).'
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Thames Estuary Manila clams, Kent and Essex IFCA''s trial fishery.
+        No best-to-eat source was found, so every landed week is in (rule 5). The spring 2026 trial window was 16
+        March to 1 May 2026 (kefca-manila-clam-trial-report-2026-05), weeks 11-18 by the legal-week rule. The Authority
+        moved the trial to spring because prices are higher then, when other UK clam fisheries are closed, and plans
+        the second trial year for spring 2027 (kefca-annual-plan-2026-27). Earlier windows: one month in October
+        2024; a six-week trial from 3-4 November 2025 paused after about 10 days on low prices and saturated markets
+        (kefca-manila-clam-trial, kefca-manila-clam-update-2025-11, kefca-essex-2025-nov-jan). Sussex IFCA''s byelaw
+        list has no clam-specific measure (sussex-ifca-regulations). Seafish says clams are most available September-April
+        and scarcest in June-July, UK-wide, with no best-quality months named (fitd-clams). Low: a trial fishery,
+        not a settled season. Landings include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality
+        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
+        (coordinator, 2026-11-10).'
       discrepancy: 'Pass 3 change: the line was empty. The trial is under a voluntary code, not a byelaw, and its
         window has moved each year, so these weeks may change.'
       sustainability: MCS (read 2026-11-10) has no Manila clam rating.
@@ -9519,26 +9521,26 @@
     weeks:
     - - 1
       - 52
-      - avail
+      - in
     notes:
-      season: 'No best-to-eat source was found (the MCS gives no season and Seafish''s consumer guide has no whelk
-        page), so there are no in weeks; the landing weeks are avail (fish brief). Landings: Sussex IFCA says whelks
-        are fished all year, with the highest catch rates from January to April (sussex-ifca-species). Kent and
-        Essex IFCA''s permit reports say landings are consistently highest from April to June (kefca-whelk-report-2025-01,
-        kefca-whelk-report-2026-01), and its 2026-27 plan calls whelks a vital stock for many vessels in the colder
-        months (kefca-annual-plan-2026-27). The permit byelaw sets no closed season (kefca-whelk-byelaw-2022). Whelks
-        were landed in quantity through February-June 2025 in Kent and November 2025-January 2026 at West Mersea
-        (kefca-kent-2025-feb-jun, kefca-essex-2025-nov-jan). Minimum sizes: 45mm in Sussex, 53mm in Kent and Essex
-        (mcs-whelk-sussex, mcs-whelk-kent-essex). ICES IVc/VIId. Landed all year (sussex-ifca-species, kefca-whelk-report-2026-01).
-        No source names a best-to-eat window, so the whole year is avail; it does not mean hard to get.'
-      discrepancy: 'Pass 3 change: April-June was in; it is a landings peak, not a best-to-eat window, so it is
-        now avail. Landings peaks differ by area: Sussex January-April (sussex-ifca-species); Kent and Essex April-June,
-        or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01);
-        Eastern IFCA, Norfolk and the Wash, January-June (as quoted in kefca-whelk-report-2026-01), where the fishery
-        used to be a marginal winter one (eifca-whelk-sitrep-2024; also maff-norfolk-crab, c. 1966). Sussex IFCA,
-        as quoted in the 2026 report, says catch per unit of effort is generally lower in November and December.'
-      year_round: On sale all year, with no named best season. The rest of the year it's still easy to find, just
-        not at its peak.
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source was found (the MCS gives no season and Seafish''s
+        consumer guide has no whelk page), so every landing week is in. Landings: Sussex IFCA says whelks are fished
+        all year, with the highest catch rates from January to April (sussex-ifca-species). Kent and Essex IFCA''s
+        permit reports say landings are consistently highest from April to June (kefca-whelk-report-2025-01, kefca-whelk-report-2026-01),
+        and its 2026-27 plan calls whelks a vital stock for many vessels in the colder months (kefca-annual-plan-2026-27).
+        The permit byelaw sets no closed season (kefca-whelk-byelaw-2022). Whelks were landed in quantity through
+        February-June 2025 in Kent and November 2025-January 2026 at West Mersea (kefca-kent-2025-feb-jun, kefca-essex-2025-nov-jan).
+        Minimum sizes: 45mm in Sussex, 53mm in Kent and Essex (mcs-whelk-sussex, mcs-whelk-kent-essex). ICES IVc/VIId.
+        Landed all year (sussex-ifca-species, kefca-whelk-report-2026-01). No source names a best-to-eat window,
+        so the whole year is in; the landings peaks differ by area (see discrepancy).'
+      discrepancy: 'Pass 3 change: April-June alone was in; it is a landings peak, not a best-to-eat window. Since
+        2026-11-11 every landed week is in (rule 5). Landings peaks differ by area: Sussex January-April (sussex-ifca-species);
+        Kent and Essex April-June, or April-July in the 2025 report, with the low in July-September (kefca-whelk-report-2025-01,
+        kefca-whelk-report-2026-01); Eastern IFCA, Norfolk and the Wash, January-June (as quoted in kefca-whelk-report-2026-01),
+        where the fishery used to be a marginal winter one (eifca-whelk-sitrep-2024; also maff-norfolk-crab, c.
+        1966). Sussex IFCA, as quoted in the 2026 report, says catch per unit of effort is generally lower in November
+        and December.'
     mcs:
       read: 2026-11-10
       ratings:
