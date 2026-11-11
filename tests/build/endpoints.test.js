@@ -1,5 +1,5 @@
 // The built endpoints: search.json and foods.json parse and carry what
-// the scripts read; the season file matches its schema; the calendar feeds are well formed as RFC 5545 asks,
+// the scripts read; the calendar feeds are well formed as RFC 5545 asks,
 // every line CRLF-ended and at most 75 octets, every event complete and
 // its UID unique. Run after a build (tools/build.sh folds the feeds).
 //
@@ -36,14 +36,6 @@ test("search.json parses, one entry per food and never-food, with what the scrip
   }
   const slugs = items.map((it) => it.slug);
   assert.equal(new Set(slugs).size, slugs.length, "every slug once");
-});
-
-test("the season file and its schema are built, and the file matches the schema", () => {
-  const { validate } = require("../../tools/schema-check.js");
-  const file = JSON.parse(read("season/v1.json"));
-  const schema = JSON.parse(read("season/v1.schema.json"));
-  assert.deepEqual(validate(schema, file), []);
-  assert.equal(file.foods.length, foods.length + never.length);
 });
 
 test("foods.json parses and is the data file, one entry per food", () => {

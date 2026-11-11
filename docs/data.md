@@ -254,15 +254,6 @@ words holding throughout.
   baked verdict and date line, the season in months, a line per ring),
   read from `_data/baked.json` and never recomputed. A never-food reads
   NEVER with its line. The Source data page says what the fields mean.
-- `/season/v1.json`: every food and never-food with its id, name,
-  aliases, a glasshouse flag and one state per month (`coming_in`,
-  `great_now`, `going_out`, `from_store`, `out`, `never`), written into
-  `_site` by `tools/season-json.js` from the data alone, so it changes only
-  when the data does. Its contract is `season/v1.schema.json`, published
-  beside it; the month rule is in the script's header. Other sites read
-  it (Helen Triages Food keeps a copy), so `season-check.yml` checks it on
-  every pull request. A change that removes a field or changes what one
-  means is a new version at a new path, never an edit to v1.
 - `search.json`: what the header search and the not-found page match
   against: every food and never-food with its name, its varieties as
   said (not its rings), aliases, shared words and the baked verdict.
