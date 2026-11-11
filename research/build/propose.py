@@ -5,7 +5,14 @@ Keeps every field of Helen's file (colours, said, aliases, lead, buy, her notes)
 weeks and sources with the clean-room line it matches, adds confidence/research/mcs/buy at ring level,
 and appends clean-room lines Helen doesn't have as new rings marked proposed: true, lead: false.
 Writes out/proposed/foods.yml, out/proposed/sources.yml, out/proposed/CHANGES.md.
+
+usage: python3 build/propose.py [--base FOODS SOURCES] [--out DIR]
+  --base  start from these files instead of helen/ (the site's own _data/ files, for the pull:
+          the research's keys are cleared and rebuilt, Helen's kept, so running it on its own
+          output changes nothing)
+  --out   write here instead of out/proposed
 """
+import argparse
 import collections
 import os
 import sys
@@ -27,6 +34,12 @@ KIND = {"roots": "veg", "alliums": "veg", "brassicas": "veg", "leaves": "veg", "
         "orchard": "veg", "soft-fruit": "veg", "nuts": "veg", "foraged": "foraging", "fungi": "foraging",
         "herbs": "herbs", "fish": "fish", "meat": "meat"}
 METHODS = {"glasshouse", "outdoor", "cultivated", "wild", "fresh", "market", "farmed"}
+# The keys this script writes, cleared from a base before it rebuilds them, so a key the research
+# drops goes too. Everything else on a food or ring is Helen's. A meat food's buy is the research's
+# where Helen's 10 November file had none.
+FOOD_OWNED = ("confidence", "mcs", "mcs_note", "never_candidate", "sustainability")
+RING_OWNED = ("confidence", "research", "mcs", "buy", "no_supply", "unsold")
+HEADER_MARK = "# PROPOSED by the clean-room seasonality research"
 
 
 class Dumper(yaml.SafeDumper):
@@ -95,16 +108,37 @@ def ring_from_line(line, base=None):
 
 
 def main():
-    helen = yaml.safe_load(open(f"{ROOT}/helen/foods.yml"))
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--base", nargs=2, metavar=("FOODS", "SOURCES"),
+                    default=[f"{ROOT}/helen/foods.yml", f"{ROOT}/helen/sources.yml"])
+    ap.add_argument("--out", default=OUT)
+    args = ap.parse_args()
+    base_foods, base_sources = args.base
+    out_dir = args.out
+    helen = yaml.safe_load(open(base_foods))
+    snapshot = {f["slug"]: f for f in yaml.safe_load(open(f"{ROOT}/helen/foods.yml"))}
+    for f in helen:
+        for k in FOOD_OWNED:
+            f.pop(k, None)
+        if f["group"] == "meat" and not snapshot.get(f["slug"], {}).get("buy"):
+            f.pop("buy", None)
+        for r in f["varieties"]:
+            for k in RING_OWNED:
+                r.pop(k, None)
     header = []
-    for ln in open(f"{ROOT}/helen/foods.yml"):
+    for ln in open(base_foods):
+        if ln.startswith(HEADER_MARK):
+            # A base this script wrote: its own header goes, and is written afresh below.
+            while header and header[-1].strip() == "#":
+                header.pop()
+            break
         if ln.startswith("#"):
             header.append(ln)
         elif ln.strip():
             break
     ours = {f["slug"]: f for f in yaml.safe_load(open(f"{ROOT}/out/seasonality.yml"))}
     osrc = {s["key"]: s for s in yaml.safe_load(open(f"{ROOT}/out/sources.yml"))}
-    hsrc_list = yaml.safe_load(open(f"{ROOT}/helen/sources.yml"))
+    hsrc_list = yaml.safe_load(open(base_sources))
     hsrc = {s["key"]: s for s in hsrc_list}
     meat = {m["slug"]: m for m in yaml.safe_load(open(f"{ROOT}/data/meat-sustainability.yml"))}
     for ms in yaml.safe_load(open(f"{ROOT}/sources/meat-sustainability.yml")):
@@ -115,6 +149,12 @@ def main():
     ring_keys = {k for f in helen for r in f["varieties"] for k in r.get("sources") or []}
     for f in helen:
         slug = SLUG.get(f["slug"], f["slug"])
+        if slug not in ours:  # a food Helen added after the research: hers as it stands
+            cited.update(f.get("sources") or [])
+            for r in f["varieties"]:
+                cited.update(r.get("sources") or [])
+            log[f["name"]].append("no clean-room data: kept as it is")
+            continue
         of = ours[slug]
         lines = {l["name"]: l for l in of["lines"]}
         used = set()
@@ -137,7 +177,7 @@ def main():
             line = lines.get(target)
             if line is not None:
                 used.add(target)
-                if not line.get("weeks") and not (line.get("no_supply") or line.get("unsold")):
+                if not line.get("weeks") and not (line.get("no_supply") or line.get("unsold")) and not r.get("proposed"):
                     nr = dict(r)
                     if not nr.get("sources"):  # Helen's ring cites nothing of its own: inherit the food's sources
                         nr["sources"] = list(f.get("sources") or [])
@@ -199,8 +239,11 @@ def main():
         if leads and all(flagged(r) for r in leads):
             cand = next((r for r in new_rings if not flagged(r) and not r.get("proposed") and r.get("weeks")), None)
             if cand:
-                for r in leads:
-                    r["lead"] = False
+                for r in leads:  # lead sits before weeks, where a re-run from this output finds it
+                    items = [(k, v) for k, v in r.items() if k != "lead"]
+                    at = next((i for i, (k, _) in enumerate(items) if k == "weeks"), len(items))
+                    r.clear()
+                    r.update(items[:at] + [("lead", False)] + items[at:])
                 cand.pop("lead", None)
                 log[f["name"]].append(f"lead moved to '{cand['name']}' (every lead ring was no_supply or unsold)")
                 stats["lead_moved"] += 1
@@ -268,6 +311,16 @@ def main():
     for s in hsrc_list:
         if s not in out_src:
             log["(sources)"].append(f"dropped {s['key']}: nothing cites it any more")
+    # An entry this script added before (it has a type) takes the research's current details.
+    for s in out_src:
+        o = osrc.get(s["key"])
+        if s.get("type") and o:
+            s.update({"name": o.get("title"), "short": o.get("publisher"), "url": o.get("url"),
+                      "type": o.get("type"), "published": o.get("published"), "accessed": o.get("accessed")})
+            if o.get("published_note"):
+                s["note"] = o["published_note"]
+            else:
+                s.pop("note", None)
     rank = collections.Counter(s.get("kind") for s in hsrc_list)
     group_kind = {}
     for f in helen:
@@ -292,7 +345,7 @@ def main():
             entry["note"] = s["published_note"]
         out_src.append(entry)
         stats["sources_added"] += 1
-    os.makedirs(OUT, exist_ok=True)
+    os.makedirs(out_dir, exist_ok=True)
     extra_header = (
         "#\n# PROPOSED by the clean-room seasonality research, 10 November 2026 (rules: rules.md).\n"
         "# Added keys on a ring: confidence (high/medium/low); research (the line's\n"
@@ -315,14 +368,14 @@ def main():
         "#   RSPCA Assured and others say), notes (attributed, incl. contested points)};\n"
         "#   buy from those third parties. No invented scores: third-party data only.\n"
         "# Confidence on rings and foods: high/medium/low (rules.md's 'moderate' = medium).\n\n")
-    with open(f"{OUT}/foods.yml", "w") as fh:
+    with open(f"{out_dir}/foods.yml", "w") as fh:
         fh.write("".join(header).rstrip("\n") + "\n" + extra_header)
         fh.write(yaml.dump(helen, Dumper=Dumper, sort_keys=False, allow_unicode=True, width=100000))
-    with open(f"{OUT}/sources.yml", "w") as fh:
+    with open(f"{out_dir}/sources.yml", "w") as fh:
         fh.write("# Proposed sources: Helen's register, unchanged but for the entries nothing cites\n"
                  "# any more, followed by the clean-room sources (with type, published and accessed).\n\n")
         fh.write(yaml.dump(out_src, Dumper=Dumper, sort_keys=False, allow_unicode=True, width=100000))
-    with open(f"{OUT}/CHANGES.md", "w") as fh:
+    with open(f"{out_dir}/CHANGES.md", "w") as fh:
         fh.write("# Proposed changes to foods.yml\n\n")
         fh.write(f"- Rings whose weeks and sources now come from the clean-room data: {stats['replaced']} "
                  f"({stats['weeks_changed']} with different weeks)\n")

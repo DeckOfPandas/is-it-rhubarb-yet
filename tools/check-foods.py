@@ -29,6 +29,12 @@ The research's keys (research/rules.md) are checked for shape: on a ring
 is hidden (tools/shown.js): its weeks may be empty and it is left out of
 the colour and season checks, which are about what the site draws.
 
+foods.yml and sources.yml must be what the research pull
+(tools/pull-research.py) makes of them: the research's propose.py, run
+from these files, may change nothing. So a season, a ring's sources or
+the research's notes edited here by hand fail, and an editorial edit
+passes. That step needs PyYAML, as the research pipeline does.
+
 Warnings (printed, never failing): a source key nothing cites and no
 entry marks `pending`; a just-about run touching no in-season run, or
 nine weeks or longer; a note beginning with a working word; two foods'
@@ -42,6 +48,7 @@ import json
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -108,6 +115,10 @@ LONG_AVAIL = 9
 # for a visitor.
 WORKING_WORDS = re.compile(r"^(fudge|todo|tbc|tbd|xxx|verify|check|fix|fixme|note to self)\b", re.I)
 SWEEP = ROOT / "tools" / "sweep-verdicts.js"
+# The research pull's last step (tools/pull-research.py), run from _data/
+# itself: whatever it would change is an edit the research does not hold.
+PULL = ROOT / "research" / "build" / "propose.py"
+PULL_SHOWN = 12
 
 
 def load(path):
@@ -263,6 +274,55 @@ def sweep_verdicts():
         return json.loads(subprocess.check_output(["node", str(SWEEP)], text=True))
     except (OSError, subprocess.CalledProcessError):
         return {}
+
+
+def pull_differences(have, want):
+    """Where two foods.yml lists differ, food by food and ring by ring,
+    naming the keys."""
+    out = []
+    by = {f.get("slug"): f for f in want}
+    for f in have:
+        g = by.pop(f.get("slug"), None)
+        if g is None:
+            out.append(f"{f.get('slug')}: not in the pull")
+            continue
+        keys = sorted(k for k in set(f) | set(g) if k != "varieties" and f.get(k) != g.get(k))
+        if keys:
+            out.append(f"{f['slug']}: {', '.join(keys)}")
+        rings, wanted = f.get("varieties") or [], g.get("varieties") or []
+        if len(rings) != len(wanted):
+            out.append(f"{f['slug']}: {len(rings)} rings, the pull has {len(wanted)}")
+            continue
+        for r, s in zip(rings, wanted):
+            keys = sorted(k for k in set(r) | set(s) if r.get(k) != s.get(k))
+            if keys:
+                out.append(f"{f['slug']}/{r.get('name') or '-'}: {', '.join(keys)}")
+    out += [f"{slug}: only in the pull" for slug in by]
+    return out
+
+
+def check_pulled(problems):
+    """foods.yml and sources.yml are what the research pull makes of
+    them: seasons, ring sources, confidence and the research's notes come
+    from research/data/ alone. An editorial edit (a colour, said, a note)
+    survives the pull and passes."""
+    with tempfile.TemporaryDirectory() as tmp:
+        run = subprocess.run([sys.executable, str(PULL), "--base", str(DATA), str(SOURCES_FILE), "--out", tmp],
+                             capture_output=True, text=True)
+        if run.returncode:
+            last = (run.stderr.strip().splitlines() or ["no output"])[-1]
+            problems.append(f"the research pull did not run ({PULL.relative_to(ROOT)}): {last}")
+            return
+        diffs = pull_differences(load(DATA), load(Path(tmp) / "foods.yml"))
+        have_src, want_src = load(SOURCES_FILE), load(Path(tmp) / "sources.yml")
+        if have_src != want_src:
+            a = {s["key"]: s for s in have_src}
+            b = {s["key"]: s for s in want_src}
+            diffs += [f"sources.yml/{k}" for k in sorted(set(a) | set(b)) if a.get(k) != b.get(k)] or ["sources.yml: the order"]
+    for d in diffs[:PULL_SHOWN]:
+        problems.append(f"{d}: differs from the research; seasons change in research/data/, then python3 tools/pull-research.py")
+    if len(diffs) > PULL_SHOWN:
+        problems.append(f"... and {len(diffs) - PULL_SHOWN} more differences from the research")
 
 
 def check_one_week_verdicts(sweep, names, warnings):
@@ -723,6 +783,7 @@ def main() -> int:
                     problems.append(f"quotes/{verdict}: unknown food {slug!r} in {q.get('text')!r}")
     for extra in sorted(set(quotes) - VERDICTS):
         problems.append(f"quotes: unknown verdict {extra!r}")
+    check_pulled(problems)
 
     for w in warnings:
         print(f"warning: {w}")

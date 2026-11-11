@@ -1214,6 +1214,7 @@
   - name: Outdoor
     ring: method
     method: outdoor
+    lead: false
     weeks: []
     sources: [producedinkent-vegbox-2024, rhs-cucumbers, hortnews-cucumbers-2018]
     confidence: low
@@ -1221,7 +1222,6 @@
     research:
       season: "Third pass: no commercial UK outdoor cucumber crop found. Trade coverage of UK cucumber production describes glasshouse growing only, citing Defra's figure of just over 100 ha of commercial cucumber glasshouses (hortnews-cucumbers-2018). The only outdoor evidence is small-scale: a Kent veg-box supplier said Kent outdoor cucumbers had just started cropping at the end of July 2024, with no end date (producedinkent-vegbox-2024); RHS says outdoor crops start later and finish earlier than greenhouse ones, with no months (rhs-cucumbers). Searched trade press, Defra horticulture statistics and grower bodies. Left empty for the coordinator to decide on never."
       no_supply: "No commercial outdoor UK cucumber crop found; UK cucumbers are grown under glass."
-    lead: false
   - name: Glasshouse
     ring: method
     method: glasshouse
@@ -9080,6 +9080,7 @@
       year_round: "On sale all year, with no named best season. The rest of the year it's still easy to find, just not at its peak."
   - name: "South West"
     ring: region
+    lead: false
     weeks: []
     sources: [seafish-seafood-guide, cgsg-halibut, mcs-atlantic-halibut]
     confidence: low
@@ -9101,7 +9102,6 @@
       discrepancy: "cgsg-halibut ticks no month as best to eat and says the fish is rare locally, so the national season may overstate Cornish supply."
       sustainability: "CGSG: listed as one to avoid, all methods; overfished and rare in local waters (cgsg-halibut, read 2026-11-10)."
       no_supply: "Wild halibut is rarely landed in Cornwall, only as occasional bycatch with no directed fishery, and both MCS and CGSG rate it Avoid."
-    lead: false
   - name: Farmed
     ring: method
     method: farmed

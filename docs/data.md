@@ -6,15 +6,21 @@ is `docs/design.md`; the decision log is `docs/decisions.md`.
 
 ## The files
 
-- `_data/foods.yml` is the truth for seasons: one entry per food. Edit it
-  by hand. The comment at the top of the file is the schema and is kept
-  in step with `tools/check-foods.py`. Its seasons and sources now come
-  from the research in `research/` (the pipeline's `out/proposed/`),
-  which also adds keys the site does not show yet: `confidence`,
-  `research`, `mcs`, ring-level `buy`, `sustainability`,
-  `never_candidate`, and the flags `proposed` and `no_supply`. How hand
-  edits and the pipeline share the file is not settled; until it is,
-  correct a season in `research/data/` and re-run the pipeline.
+- `_data/foods.yml` is one entry per food, and two owners share it, one
+  way only. **The research owns the seasons**: a ring's `weeks`,
+  `sources`, `confidence`, `research`, `mcs`, `buy`, `no_supply` and
+  `unsold`, and a food's `confidence`, `mcs`, `mcs_note`,
+  `never_candidate`, `sustainability` and (on meat) `buy`. They change
+  only in `research/data/`, then `python3 tools/pull-research.py`
+  rewrites `foods.yml` and `sources.yml`. **Everything else is
+  editorial and edited here by hand**: names, colours, `said`,
+  `aliases`, `lead`, notes, a fish's `buy`, a ring's `proposed` flag
+  (remove it to show the ring). The pull keeps them. The checker runs
+  the pull from these files and fails if it would change anything, so a
+  season edited here by hand never ships. A ring with no research data
+  (marked `research.kept`) keeps its own weeks, and a food the research
+  does not have is kept as it is. The comment at the top of the file is
+  the schema and is kept in step with `tools/check-foods.py`.
 - **The site reads `_data/shown.json`, not `foods.yml`.** `tools/bake.js`
   writes it before every build from `tools/shown.js`: every food with its
   `proposed` and `no_supply` rings left out, the research's keys and a
