@@ -197,13 +197,13 @@
     weeks:
     - - 18
       - 22
-      - avail
+      - in
     notes:
-      season: One UK wholesaler lists UK morels as available in May, at the start of their season, and names no
-        other month (freshview-seasonality); May is shown as avail, the first arrivals, since no source names a
-        UK market season. Most fresh morels on the UK market are imported, for example from Turkey (staffcanteen-wildharvest-20140407,
-        jancisrobinson-mushroom-man), and UK morels are uncommon (woodlandtrust-morel). Single secondary source,
-        so confidence low.
+      season: 'One UK wholesaler lists UK morels as available in May, at the start of their season, and names no
+        other month (freshview-seasonality); May is in under rule 2: no source names a UK market season, so the
+        availability evidence sets in (coordinator, 2026-11-11). Most fresh morels on the UK market are imported,
+        for example from Turkey (staffcanteen-wildharvest-20140407, jancisrobinson-mushroom-man), and UK morels
+        are uncommon (woodlandtrust-morel). Single secondary source, so confidence low.'
 - name: Hen of the woods
   slug: hen-of-the-woods
   group: fungi

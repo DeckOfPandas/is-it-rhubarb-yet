@@ -69,6 +69,11 @@
 #   no_supply); mcs (Good Fish Guide ratings by stock and method) and buy
 #   (what to ask for) on fish; no_supply (no regular UK supply of this ring);
 #   proposed: true on a ring the research added (lead: false until promoted).
+# A ring kept as Helen had it (no clean-room data) cites the food's sources if it
+#   had none, and carries the research notes' sources in research.sources (and
+#   sources searched without result in research.searched).
+# If every lead ring of a food is no_supply or unsold, the first ring with weeks
+#   leads instead (logged in CHANGES.md).
 # On a food: confidence (low/medium/high: the weakest of its lead rings, the
 #   ones that drive the verdict); never_candidate (not grown here; belongs in
 #   never.yml); on fish, mcs: {read, best, worst, ratings} summarising every
@@ -387,6 +392,7 @@
     research:
       kept: "No clean-room data for this line; Helen's original weeks kept."
       season: "Third pass: still no source for UK-grown mooli or daikon. Mooli is absent from the Vegetarian Society calendar (vegsoc-seasonal), a supplier calendar (freshview-seasonality), the Defra wholesale price notices (defra-wholesale-notice-2016-01), AHDB's Harvested in Britain and Fresh Direct's 2024 market reviews. Searches for mooli growers in Kent, Lincolnshire, Bedfordshire and the Fens, and in FPJ, FreshPlaza and The Grocer, found only garden seed listings and allotment forums; no named commercial grower. Whether any commercial UK supply exists is unconfirmed. Dates not copied from Salad radish (rule 8)."
+      searched: [defra-wholesale-notice-2016-01, vegsoc-seasonal, freshview-seasonality]
     confidence: low
   confidence: low
 - name: Salsify
@@ -1013,6 +1019,10 @@
   - ahdb-harvested-in-britain
   - freshview-crop-report-2025-07
   - defra-pgi-welsh-leeks
+  - fwi-leeks-growing
+  - freshplaza-askew-leeks
+  - freshplaza-lga-casey
+  - freshview-crop-report-2026-06
   notes: ["Defra's wholesale prices list UK leeks from July to May most years."]
   varieties:
   - name: ""
@@ -1025,9 +1035,13 @@
     - ahdb-harvested-in-britain
     - freshview-crop-report-2025-07
     - defra-pgi-welsh-leeks
+    - fwi-leeks-growing
+    - freshplaza-askew-leeks
+    - freshplaza-lga-casey
+    - freshview-crop-report-2026-06
     confidence: medium
     research:
-      season: "Source-age pass of 10 Nov 2026: the dates rested only on ahdb-harvested-in-britain (2015), so the line was lowered to low and refreshed. ESG Drysdale, a Scottish leek grower, runs its season from July to the end of April and can hold leeks in store through June (freshplaza-esg-leeks-2026, 2026). AHDB agrees on new-season leeks by early July, held in the ground over winter and on sale 11 months of the year (ahdb-harvested-in-britain); a wholesaler expected new-season UK leeks at the end of June or start of July 2025 (freshview-crop-report-2025-07). May is avail as the tail of the old crop. June (wks 23-26) is the gap; ESG's stored leeks are one grower's, so not marked store. Field-held leeks are fresh, not store (rule 3)."
+      season: "Source-age pass of 10 Nov 2026: the dates rested only on ahdb-harvested-in-britain (2015), so the line was lowered to low and refreshed. ESG Drysdale, a Scottish leek grower, runs its season from July to the end of April and can hold leeks in store through June (freshplaza-esg-leeks-2026, 2026). AHDB agrees on new-season leeks by early July, held in the ground over winter and on sale 11 months of the year (ahdb-harvested-in-britain); a wholesaler expected new-season UK leeks at the end of June or start of July 2025 (freshview-crop-report-2025-07). May is avail as the tail of the old crop. June (wks 23-26) is the gap; ESG's stored leeks are one grower's, so not marked store. Field-held leeks are fresh, not store (rule 3). The June gap (weeks 23-26) is sourced, not a gap in the research: Farmers Weekly says British leeks are available nearly all year except June (fwi-leeks-growing); a Merseyside grower has a few weeks' gap from mid-May until the new season at the end of June or start of July (freshplaza-askew-leeks); the British Leek Growers Association's chairman says harvest starts in June or July and can still run in May (freshplaza-lga-casey); and in June 2026 a wholesaler reported British leeks finished, with French and Spanish cover until the UK new season in late June to early July (freshview-crop-report-2026-06). Coordinator, 2026-11-11."
       discrepancy: "Dates moved in the source-age pass: previously in Jan-May (wks 1-22) and July-Dec, after AHDB's 11 months on sale (ahdb-harvested-in-britain, 2015); now in to the end of April (wk 17) per freshplaza-esg-leeks-2026, with May avail. Welsh Leeks PGI starts harvest in August (wk 31), about four weeks after the July start (defra-pgi-welsh-leeks)."
   - name: "Welsh (PGI)"
     ring: region
@@ -1103,19 +1117,19 @@
   also: [veg, vegetables]
   colour: "#b3492d"
   text_on_shed: "#ca5e41"
-  sources: [fpj-shallots-back, rhs-shallots]
+  sources: [oldershaw-shallots, fpj-shallots-back, rhs-shallots]
   varieties:
   - name: ""
     weeks:
-    - [1, 13, store]
-    - [31, 39, in]
-    - [40, 52, store]
-    sources: [fpj-shallots-back, rhs-shallots]
-    confidence: low
+    - [1, 26, store]
+    - [36, 43, in]
+    - [44, 52, store]
+    sources: [oldershaw-shallots, fpj-shallots-back, rhs-shallots]
+    confidence: medium
     research:
-      season: "One grower's (Kitchen Garden Produce) British shallot season was due to start in August (fpj-shallots-back); RHS says shallots ripen mid to late summer and store for at least six to eight months (rhs-shallots). Second pass found no further source: shallots are absent from the NFU chart's item list, the Defra price notices and the Vegetarian Society calendar, and the web-search budget ran out."
-      discrepancy: "End of the season is undocumented; Aug-Sep harvest is a reading of 'mid to late summer', and the store window to end of March is my extrapolation from RHS home-storage guidance. No commercial storage source found."
-  confidence: low
+      season: "Oldershaw, a Lincolnshire grower and one of a handful of UK shallot growers (it supplies the supermarkets), says the British season runs from September to the following June: shallots are harvested, cured, then held in controlled-atmosphere stores (oldershaw-shallots). In from September, when the cured new crop reaches market, to the end of October; store from November to the end of June. The in/store boundary isn't stated, so it follows the onion convention of about two months of new crop. Coordinator, 2026-11-11."
+      discrepancy: "A smaller grower's British season was due to start in August (fpj-shallots-back), and RHS says shallots ripen mid to late summer (rhs-shallots): that is harvest, before the curing Oldershaw describes, so the market start follows Oldershaw. The previous store end (end of March) was extrapolated from RHS home-storage advice and is replaced by Oldershaw's June."
+  confidence: medium
 - name: "Spring onions"
   slug: spring-onions
   aliases: [scallions, "salad onions"]
@@ -1207,10 +1221,10 @@
     research:
       season: "Third pass: no commercial UK outdoor cucumber crop found. Trade coverage of UK cucumber production describes glasshouse growing only, citing Defra's figure of just over 100 ha of commercial cucumber glasshouses (hortnews-cucumbers-2018). The only outdoor evidence is small-scale: a Kent veg-box supplier said Kent outdoor cucumbers had just started cropping at the end of July 2024, with no end date (producedinkent-vegbox-2024); RHS says outdoor crops start later and finish earlier than greenhouse ones, with no months (rhs-cucumbers). Searched trade press, Defra horticulture statistics and grower bodies. Left empty for the coordinator to decide on never."
       no_supply: "No commercial outdoor UK cucumber crop found; UK cucumbers are grown under glass."
+    lead: false
   - name: Glasshouse
     ring: method
     method: glasshouse
-    lead: false
     weeks:
     - [1, 48, in]
     sources:
@@ -1292,6 +1306,7 @@
     research:
       kept: "No clean-room data for this line; Helen's original weeks kept."
       season: "Reset under rule 8: the earlier dates were copied from Cos. No source gives curly-leaf (frilly, lollo) lettuce a season of its own, and it is not in the Defra series. Searched trade press, grower pages and the New Covent Garden Market calendar (its month grid could not be read). General field-lettuce sources (April first cut, ahdb-harvested-britain; May-October, vegsoc-seasonal) do not say they apply to every type. Third pass searched lollo rosso, lollo bianco and frisee with UK growers and trade press: only seed-packet cropping advice turned up, and a red butterhead sold as a British lollo rosso alternative (see Round), which is not a curly type."
+      searched: [vegsoc-seasonal, ahdb-harvested-britain]
     confidence: low
   - name: Iceberg
     colour: "#728692"
@@ -1866,6 +1881,7 @@
     research:
       kept: "No clean-room data for this line; Helen's original weeks kept."
       season: "Still no dated UK-grown window. Third pass: a London organic box scheme sold courgette flowers hand-picked by a named grower at Wild Fields in early July 2013, calling them something never seen in supermarkets (farmdirect-courgette-flowers-2013); one dated sale, no window. A UK foodservice supplier lists Israeli flowers and says it imports from the Netherlands outside the UK season, which it calls late spring and summer without months (osolocal-courgette-flowers). Searched The Caterer, FPJ, The Grocer, FreshPlaza and Hortidaily (Dutch growers only), and chef-facing growers in Cornwall, Kent, Sussex, Norfolk and Worcestershire (Westlands and Nurtured in Norfolk do not list them). Small UK supply evidently exists, so not a never case, but no source names months."
+      sources: [farmdirect-courgette-flowers-2013, osolocal-courgette-flowers]
     confidence: low
   confidence: low
 - name: Marrow
@@ -2044,6 +2060,9 @@
   - fpj-braeburn
   - fpj-sainsburys-braeburn
   - ncgm-october-2025
+  - freshplaza-scripps-braeburn-a
+  - freshplaza-scripps-braeburn-b
+  - caterer-apples-2016
   - fpj-apples-early-start
   - fpj-apple-pear-season-start
   - fpj-year-round-apples
@@ -2079,8 +2098,8 @@
     text_on_shed: "#e83f2b"
     weeks:
     - [1, 33, store]
-    - [43, 43, avail]
-    - [44, 52, store]
+    - [43, 48, in]
+    - [49, 52, store]
     sources:
     - defra-wholesale-prices
     - bapl-british-season
@@ -2089,10 +2108,13 @@
     - fpj-braeburn
     - fpj-sainsburys-braeburn
     - ncgm-october-2025
+    - freshplaza-scripps-braeburn-a
+    - freshplaza-scripps-braeburn-b
+    - caterer-apples-2016
     confidence: low
     research:
-      season: "Second pass: dates now follow BAPL's season page, late December to May (bapl-british-season), because English Apples & Pears (BAPL's predecessor) said British Braeburn is not fit to eat until mid-December, at the very earliest the end of November (fpj-eap-braeburn), and Worldwide Fruit said it was hard to market before December, when it reaches eating quality after time in store (fpj-braeburn). Those trade sources (about 2005 to 2008) put sales after storage; Defra's 2026 quotes (see discrepancy) now set the weeks. Coordinator, 2026-11-10: availability-only rule applied (rules.md, rule 2). The season named by growers or guides sets `in`; weeks resting only on Defra's 2026 wholesale quotes are `avail` (or `store`)."
-      discrepancy: "BAPL contradicts itself: its varieties page gives November to May (bapl-apple-varieties), about seven weeks earlier than its season page. Two other sources are earlier still: Sainsbury's and Worldwide Fruit offered all-English Braeburn in October in one year (fpj-sainsburys-braeburn), and New Covent Garden expected first Braeburns later in October 2025, in a season running two weeks early (ncgm-october-2025). Sources span more than four weeks, so confidence stays low. Source-age pass: Defra's wholesale series quoted home-grown Braeburn from 24 Nov 2025 (the first date in the preview) through to 17 Aug 2026, then again on 26 Oct 2026 after a gap (defra-wholesale-prices). Those quotes run eleven weeks past BAPL's May end and start four weeks before its late-December start, so the store range now runs to week 33 and from week 44, and the single new-season October quote is in, as October is fresh harvest elsewhere in this group. The fpj sources on late eating quality date from about 2005 to 2008."
+      season: "Harvest is sourced: Adrian Scripps (Kent) has harvested Braeburn from late September or early October through to the end of October (freshplaza-scripps-braeburn-a, freshplaza-scripps-braeburn-b), and the British apple harvest finishes in November with Braeburn (caterer-apples-2016). First sales follow: New Covent Garden expected first Braeburns later in October 2025 (ncgm-october-2025), and BAPL's varieties page starts the season in November (bapl-apple-varieties). So in from late October to the end of November (weeks 43-48), as with other apples (in = harvest and first sales), then store. Store runs to mid-August only on Defra's 2026 wholesale quotes of home-grown Braeburn (defra-wholesale-prices); BAPL ends the season in May (bapl-british-season, bapl-apple-varieties). Rule 2 lets availability evidence extend store, so June to mid-August stays store, at low confidence. Coordinator, 2026-11-11."
+      discrepancy: "BAPL contradicts itself: its varieties page gives November to May (bapl-apple-varieties), about seven weeks earlier than its season page. Two other sources are earlier still: Sainsbury's and Worldwide Fruit offered all-English Braeburn in October in one year (fpj-sainsburys-braeburn), and New Covent Garden expected first Braeburns later in October 2025, in a season running two weeks early (ncgm-october-2025). Sources span more than four weeks, so confidence stays low. Source-age pass: Defra's wholesale series quoted home-grown Braeburn from 24 Nov 2025 (the first date in the preview) through to 17 Aug 2026, then again on 26 Oct 2026 after a gap (defra-wholesale-prices). Those quotes run eleven weeks past BAPL's May end and start four weeks before its late-December start, so the store range now runs to week 33 and from week 44, and the single new-season October quote is in, as October is fresh harvest elsewhere in this group. The fpj sources on late eating quality date from about 2005 to 2008. Older trade sources (about 2005 to 2008) said British Braeburn is not fit to eat until mid-December, at the earliest the end of November, after time in store (fpj-eap-braeburn, fpj-braeburn), and BAPL's season page starts in late December (bapl-british-season); the in weeks follow the newer first-sale evidence and BAPL's varieties page instead."
   - name: Cox
     cultivar: true
     colour: "#bf6b00"
@@ -2798,6 +2820,12 @@
     research:
       kept: "No clean-room data for this line; Helen's original weeks kept."
       season: "Third pass: no current commercial UK table-grape supply found. Past attempts only: Mack trialled seedless table grapes in polytunnels at Plumpton College, Sussex, from 2011 (fpj-uk-grapes-mack); Asda and East Malling Research trialled Kent-grown seedless grapes in tunnels and open air, with harvest expected August to October (fpj-kent-grape-trial), and Asda announced UK grapes for shelves in 2016 (freshplaza-asda-grapes-2015, dated 2 December 2015); Chatsworth's heated-glasshouse grapes were sold briefly through Waitrose (fpj-waitrose-chatsworth-grapes, undated). No later report of an ongoing crop was found. Fresh Direct's 2024 grape sourcing calendar lists no UK origin (freshdirect-review-summer-2024), and New Covent Garden's October 2025 report lists only continental grapes. A search naming English vineyards and Wine GB found no fresh table-grape sales. Left empty for the coordinator to decide on never; if a window is wanted, the only one named is the 2015 trial's August to October. Grapes do grow here (Helen, 2026-11-10: NEVER means 'doesn't grow here'), so this is not a NEVER; no source for UK fresh table-grape supply has been found."
+      sources:
+      - freshplaza-asda-grapes-2015
+      - fpj-kent-grape-trial
+      - fpj-uk-grapes-mack
+      - fpj-waitrose-chatsworth-grapes
+      - freshdirect-review-summer-2024
     confidence: low
   confidence: low
 - name: Hazelnuts
@@ -3643,7 +3671,7 @@
     ring: method
     method: market
     weeks:
-    - [18, 22, avail]
+    - [18, 22, in]
     sources:
     - freshview-seasonality
     - staffcanteen-wildharvest-20140407
@@ -3651,7 +3679,7 @@
     - woodlandtrust-morel
     confidence: low
     research:
-      season: "One UK wholesaler lists UK morels as available in May, at the start of their season, and names no other month (freshview-seasonality); May is shown as avail, the first arrivals, since no source names a UK market season. Most fresh morels on the UK market are imported, for example from Turkey (staffcanteen-wildharvest-20140407, jancisrobinson-mushroom-man), and UK morels are uncommon (woodlandtrust-morel). Single secondary source, so confidence low."
+      season: "One UK wholesaler lists UK morels as available in May, at the start of their season, and names no other month (freshview-seasonality); May is in under rule 2: no source names a UK market season, so the availability evidence sets in (coordinator, 2026-11-11). Most fresh morels on the UK market are imported, for example from Turkey (staffcanteen-wildharvest-20140407, jancisrobinson-mushroom-man), and UK morels are uncommon (woodlandtrust-morel). Single secondary source, so confidence low."
   confidence: low
 - name: "Hen of the woods"
   slug: hen-of-the-woods
@@ -3754,6 +3782,7 @@
       kept: "No clean-room data for this line; Helen's original weeks kept."
       season: "No evidence of commercial UK enoki growing found. FSA says enoki on sale are generally imported from China, South Korea, Thailand or Taiwan (fsa-enoki-listeria). A 2015 report lists enoki in a Leicestershire grower's range but does not say they were UK-grown (dailymail-livesey-exotic). Pass 2 found no UK enoki grower either; left empty."
       never: "No UK commercial grower found; the Food Standards Agency says enoki on sale in the UK are imported from East Asia. Not grown here, so it belongs in never.yml (food-level NEVER); Helen to write its line."
+      sources: [fsa-enoki-listeria, dailymail-livesey-exotic, sruc-mushroom-factsheet]
     confidence: low
   confidence: low
   never_candidate: true
@@ -8952,6 +8981,7 @@
   - cgsg-halibut
   - mcs-atlantic-halibut
   - seafish-seafood-guide
+  - fishbase-atlantic-halibut
   - weareaquaculture-gigha-2023
   - caithness-business-gigha-2025
   notes: ["Wild Atlantic halibut is rated Avoid; no UK-farmed halibut rating exists."]
@@ -8959,7 +8989,6 @@
   varieties:
   - name: "North East"
     ring: region
-    lead: false
     weeks:
     - [1, 52, avail]
     sources:
@@ -8968,6 +8997,7 @@
     - cgsg-halibut
     - mcs-atlantic-halibut
     - seafish-seafood-guide
+    - fishbase-atlantic-halibut
     confidence: low
     mcs:
       read: &id300 2026-11-10
@@ -8984,7 +9014,7 @@
         label: Avoid
     buy: "Avoid wild halibut; the MCS's only Best Choice is GLOBALG.A.P.-certified farmed halibut from Norway, an import."
     research:
-      season: "Wild Atlantic halibut. No current best-to-eat source: the 2009 national guide's wild season (May-March, seafish-seafood-guide) can no longer be the basis, and nothing newer was found, so there are no in weeks. Northumberland Seafood says halibut is available all year, more widely March-September (northumberland-halibut, 2016); it does not say whether that is local wild fish or farmed supply, so this avail is weak. Northumberland Seafood's seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality). Spawns in winter and early spring (cgsg-halibut). ICES IVa-b."
+      season: "Wild Atlantic halibut. No current best-to-eat source: the 2009 national guide's wild season (May-March, seafish-seafood-guide) can no longer be the basis, and nothing newer was found, so there are no in weeks. Northumberland Seafood says halibut is available all year, more widely March-September (northumberland-halibut, 2016); it does not say whether that is local wild fish or farmed supply, so this avail is weak. Northumberland Seafood's seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality). Spawns in winter and early spring (cgsg-halibut). ICES IVa-b. Coordinator, 2026-11-11: still no in weeks, by rule 5. Atlantic halibut spawns from December to April (fishbase-atlantic-halibut), and Norway closes its halibut fishery from 20 December to 20 April for spawning (mcs-atlantic-halibut), but no source links spawning to eating quality for UK-landed fish, so spawning can't set in or avail. Searched MCS species pages, Seafish, Northumberland Seafood and the scientific literature. This line now leads the food (see the lead rule in propose.py), since the SW and Farmed lines are no_supply."
       year_round: "On sale all year, with no named best season. The rest of the year it's still easy to find, just not at its peak."
   - name: "South West"
     ring: region
@@ -9009,6 +9039,7 @@
       discrepancy: "cgsg-halibut ticks no month as best to eat and says the fish is rare locally, so the national season may overstate Cornish supply."
       sustainability: "CGSG: listed as one to avoid, all methods; overfished and rare in local waters (cgsg-halibut, read 2026-11-10)."
       no_supply: "Wild halibut is rarely landed in Cornwall, only as occasional bycatch with no directed fishery, and both MCS and CGSG rate it Avoid."
+    lead: false
   - name: Farmed
     ring: method
     method: farmed
@@ -9438,11 +9469,11 @@
     colour: "#988673"
     text_on_custard: "#7c6b59"
     weeks:
-    - [14, 17, avail]
+    - [14, 17, in]
     sources: [fcdo-rhug-milk-lamb-2014, thecaterer-milk-fed-lamb, nsa-buyers-guide-lamb]
     confidence: low
     research:
-      season: "Third pass: one UK producer found. Rhug Estate (organic, North Wales) sells milk lambs, still suckling their mothers while also eating grass, as the first lambs off the farm each year; the first are available in April (fcdo-rhug-milk-lamb-2014, a 2014 government blog describing the estate). April only, marked avail because no season or end date is named; Rhug's current lamb pages do not list milk lamb, so whether it is still sold is unconfirmed. Low: one secondary source, one producer. Source age: the April date rests only on the 2014 blog (the Caterer piece is 2007; nsa-buyers-guide-lamb is current but gives no milk-lamb dates). Dating pass, 2026-11-10: no newer source found; Rhug's 2024 lambing news (updated 2025) does not mention milk lamb. The only other milk-fed lamb in UK trade press was imported Pyrenean lamb (thecaterer-milk-fed-lamb, 2007), out of scope. NSA mentions early-born lambs for Easter but not milk-fed lamb (nsa-buyers-guide-lamb)."
+      season: "Third pass: one UK producer found. Rhug Estate (organic, North Wales) sells milk lambs, still suckling their mothers while also eating grass, as the first lambs off the farm each year; the first are available in April (fcdo-rhug-milk-lamb-2014, a 2014 government blog describing the estate). April only, marked avail because no season or end date is named; Rhug's current lamb pages do not list milk lamb, so whether it is still sold is unconfirmed. Low: one secondary source, one producer. Source age: the April date rests only on the 2014 blog (the Caterer piece is 2007; nsa-buyers-guide-lamb is current but gives no milk-lamb dates). Dating pass, 2026-11-10: no newer source found; Rhug's 2024 lambing news (updated 2025) does not mention milk lamb. The only other milk-fed lamb in UK trade press was imported Pyrenean lamb (thecaterer-milk-fed-lamb, 2007), out of scope. NSA mentions early-born lambs for Easter but not milk-fed lamb (nsa-buyers-guide-lamb). Coordinator, 2026-11-11: rule 2 applied. No source names a season or a peak, so the only availability evidence (April) sets in. Still low: one producer, a 2014 source, and Rhug's current pages don't list milk lamb, so current supply is unconfirmed; a search on 2026-11-11 found no other UK producer. If no current producer turns up, this line is a candidate for no_supply."
     notes: ["Butcher's guide only; not an industry source."]
   - name: Hogget
     said: Hogget

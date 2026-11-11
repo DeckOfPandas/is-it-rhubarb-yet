@@ -656,3 +656,11 @@
   published_note: Chart weeks taken from Helen's foods.yml transcription (her source key 'bnfs'); the chart itself
     is an image and was not re-read.
   accessed: '2026-11-10'
+- key: fishbase-atlantic-halibut
+  title: 'FishBase: Hippoglossus hippoglossus, Atlantic halibut'
+  publisher: FishBase
+  url: https://fishbase.se/summary/SpeciesSummary.php?id=1371
+  type: primary
+  published: undated
+  published_note: Living species page; no date shown.
+  accessed: '2026-11-11'

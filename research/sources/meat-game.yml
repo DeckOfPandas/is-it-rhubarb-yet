@@ -1,486 +1,440 @@
 - key: basc-seasons
-  title: "Shooting seasons"
-  publisher: "BASC"
-  url: "https://basc.org.uk/shooting-seasons"
+  title: Shooting seasons
+  publisher: BASC
+  url: https://basc.org.uk/shooting-seasons
   type: primary
   published: 2025
-  published_note: "Living page: last modified 29 January 2025 (page metadata); footer copyright 2026."
+  published_note: 'Living page: last modified 29 January 2025 (page metadata); footer copyright 2026.'
   accessed: 2026-11-10
-
 - key: basc-woodcock-restraint
-  title: "Does voluntary restraint on woodcock shooting work?"
-  publisher: "BASC"
-  url: "https://basc.org.uk/does-voluntary-restraint-on-woodcock-shooting-work"
+  title: Does voluntary restraint on woodcock shooting work?
+  publisher: BASC
+  url: https://basc.org.uk/does-voluntary-restraint-on-woodcock-shooting-work
   type: primary
   published: 2024
   accessed: 2026-11-10
-
 - key: shootinguk-game-seasons
-  title: "Dates for UK game shooting seasons"
-  publisher: "Shooting UK (Shooting Times / Sporting Gun)"
-  url: "https://www.shootinguk.co.uk/shooting/game-shooting/game-shooting-seasons-32229/"
+  title: Dates for UK game shooting seasons
+  publisher: Shooting UK (Shooting Times / Sporting Gun)
+  url: https://www.shootinguk.co.uk/shooting/game-shooting/game-shooting-seasons-32229/
   type: trade
   published: 2025
-  published_note: "First published February 2020; last modified October 2025."
+  published_note: First published February 2020; last modified October 2025.
   accessed: 2026-11-10
-
 - key: naturenet-seasons
-  title: "Open and close seasons"
-  publisher: "Naturenet"
-  url: "https://naturenet.net/law/seasons.htm"
+  title: Open and close seasons
+  publisher: Naturenet
+  url: https://naturenet.net/law/seasons.htm
   type: secondary
   published: undated
-  published_note: "No date or copyright year on the page. Its Scottish deer seasons predate the October 2023 change, so the content is at least three years old."
+  published_note: No date or copyright year on the page. Its Scottish deer seasons predate the October 2023 change,
+    so the content is at least three years old.
   accessed: 2026-11-10
-
 - key: leg-deer-act-1991-sch1
-  title: "Deer Act 1991, Schedule 1: Close seasons"
-  publisher: "legislation.gov.uk"
-  url: "https://legislation.gov.uk/ukpga/1991/54/schedule/1/data.html"
+  title: 'Deer Act 1991, Schedule 1: Close seasons'
+  publisher: legislation.gov.uk
+  url: https://legislation.gov.uk/ukpga/1991/54/schedule/1/data.html
   type: primary
   published: 2026
-  published_note: "Legislation in force, read 2026-11-10; counted as current."
+  published_note: Legislation in force, read 2026-11-10; counted as current.
   accessed: 2026-11-10
-
 - key: naturescot-deer
-  title: "Protected species: deer"
-  publisher: "NatureScot"
-  url: "https://www.nature.scot/node/1936909"
+  title: 'Protected species: deer'
+  publisher: NatureScot
+  url: https://www.nature.scot/node/1936909
   type: primary
   published: 2026
-  published_note: "Living guidance page with no date stamp; it reflects the close-season changes in force from 21 October 2023. Counted as current (read 2026-11-10)."
+  published_note: Living guidance page with no date stamp; it reflects the close-season changes in force from 21
+    October 2023. Counted as current (read 2026-11-10).
   accessed: 2026-11-10
-
 - key: bds-open-seasons
-  title: "BDS Open Season Chart"
-  publisher: "British Deer Society"
-  url: "https://bds.org.uk/wp-content/uploads/2024/05/BDS_Open_Season_Chart.pdf"
+  title: BDS Open Season Chart
+  publisher: British Deer Society
+  url: https://bds.org.uk/wp-content/uploads/2024/05/BDS_Open_Season_Chart.pdf
   type: primary
   published: 2024
-  published_note: "Upload date in URL (May 2024)."
+  published_note: Upload date in URL (May 2024).
   accessed: 2026-11-10
-
 - key: deer-initiative-legislation
-  title: "Deer legislation (England and Wales)"
-  publisher: "The Deer Initiative"
-  url: "https://thedeerinitiative.co.uk/wp-content/uploads/2024/07/deer-legislation.pdf"
+  title: Deer legislation (England and Wales)
+  publisher: The Deer Initiative
+  url: https://thedeerinitiative.co.uk/wp-content/uploads/2024/07/deer-legislation.pdf
   type: primary
   published: 2024
-  published_note: "Upload date in URL (July 2024)."
+  published_note: Upload date in URL (July 2024).
   accessed: 2026-11-10
-
 - key: caterer-venison
-  title: "UK's growing population of deer could be a menu opportunity for caterers"
-  publisher: "The Caterer"
-  url: "https://thecaterer.com/news/in-depth/uks-growing-population-of-deer-could-be-a-menu-opportunity-for-caterers"
+  title: UK's growing population of deer could be a menu opportunity for caterers
+  publisher: The Caterer
+  url: https://thecaterer.com/news/in-depth/uks-growing-population-of-deer-could-be-a-menu-opportunity-for-caterers
   type: trade
   published: undated
-  published_note: "No date on the page. It cites sales figures to 2009 and the horsemeat scandal, so probably about 2013."
+  published_note: No date on the page. It cites sales figures to 2009 and the horsemeat scandal, so probably about
+    2013.
   accessed: 2026-11-10
-
 - key: fwi-venison-farming
-  title: "So you want to... start producing venison?"
-  publisher: "Farmers Weekly"
-  url: "https://www.fwi.co.uk/business/diversification/so-you-want-to-start-producing-venison"
+  title: So you want to... start producing venison?
+  publisher: Farmers Weekly
+  url: https://www.fwi.co.uk/business/diversification/so-you-want-to-start-producing-venison
   type: trade
   published: 2022
   accessed: 2026-11-10
-
 - key: grocer-waitrose-venison
-  title: "Waitrose to source 100% British venison meat from autumn 2021"
-  publisher: "The Grocer"
-  url: "https://thegrocer.co.uk/news/waitrose-to-source-100-british-venison-meat-from-autumn-2021/660011.article"
+  title: Waitrose to source 100% British venison meat from autumn 2021
+  publisher: The Grocer
+  url: https://thegrocer.co.uk/news/waitrose-to-source-100-british-venison-meat-from-autumn-2021/660011.article
   type: trade
   published: 2021
-  published_note: "No date line; title and text refer to autumn 2021, and other trade press carried the story in September 2021."
+  published_note: No date line; title and text refer to autumn 2021, and other trade press carried the story in
+    September 2021.
   accessed: 2026-11-10
-
 - key: leg-hares-preservation-1892
-  title: "Hares Preservation Act 1892, section 2 (Close time)"
-  publisher: "legislation.gov.uk"
-  url: "https://legislation.gov.uk/ukpga/1892/8/section/2"
+  title: Hares Preservation Act 1892, section 2 (Close time)
+  publisher: legislation.gov.uk
+  url: https://legislation.gov.uk/ukpga/1892/8/section/2
   type: primary
   published: 2026
-  published_note: "Legislation in force, no outstanding changes, read 2026-11-10; counted as current."
+  published_note: Legislation in force, no outstanding changes, read 2026-11-10; counted as current.
   accessed: 2026-11-10
-
 - key: leg-wane-scotland-2011-s6
-  title: "Wildlife and Natural Environment (Scotland) Act 2011, section 6 (close seasons for hares)"
-  publisher: "legislation.gov.uk"
-  url: "https://www.legislation.gov.uk/asp/2011/6/section/6"
+  title: Wildlife and Natural Environment (Scotland) Act 2011, section 6 (close seasons for hares)
+  publisher: legislation.gov.uk
+  url: https://www.legislation.gov.uk/asp/2011/6/section/6
   type: primary
   published: 2026
-  published_note: "Legislation in force, read 2026-11-10; counted as current."
+  published_note: Legislation in force, read 2026-11-10; counted as current.
   accessed: 2026-11-10
-
 - key: gwct-hares-code
-  title: "Hares: code of practice"
-  publisher: "GWCT (in association with BASC)"
-  url: "https://www.gwct.org.uk/media/202687/hares_code_of_practice.pdf"
+  title: 'Hares: code of practice'
+  publisher: GWCT (in association with BASC)
+  url: https://www.gwct.org.uk/media/202687/hares_code_of_practice.pdf
   type: primary
   published: 2013
-  published_note: "Date line: published March 2013."
+  published_note: 'Date line: published March 2013.'
   accessed: 2026-11-10
-
 - key: shootinguk-hare-close-season
-  title: "Brown hare close season campaign, England"
-  publisher: "Shooting UK (Shooting Times)"
-  url: "https://www.shootinguk.co.uk/news/brown-hare-close-season-campaign-england/"
+  title: Brown hare close season campaign, England
+  publisher: Shooting UK (Shooting Times)
+  url: https://www.shootinguk.co.uk/news/brown-hare-close-season-campaign-england/
   type: trade
   published: 2025
   accessed: 2026-11-10
-
 - key: parliament-hares-bill
-  title: "Hares (Close Season) Bill [HL]"
-  publisher: "UK Parliament"
-  url: "https://bills.parliament.uk/bills/4278"
+  title: Hares (Close Season) Bill [HL]
+  publisher: UK Parliament
+  url: https://bills.parliament.uk/bills/4278
   type: primary
   published: 2026
-  published_note: "Bill page last updated 22 July 2026; first reading 21 July 2026, second reading not yet scheduled (checked 2026-11-10)."
+  published_note: Bill page last updated 22 July 2026; first reading 21 July 2026, second reading not yet scheduled
+    (checked 2026-11-10).
   accessed: 2026-11-10
-
 - key: westminsterbrief-hares-debate
-  title: "Hares: Close Season (debate, 24 June 2026)"
-  publisher: "Westminster Brief"
-  url: "https://westminsterbrief.co.uk/archive/debate/24-june-2026/hares-close-season-40dd"
+  title: 'Hares: Close Season (debate, 24 June 2026)'
+  publisher: Westminster Brief
+  url: https://westminsterbrief.co.uk/archive/debate/24-june-2026/hares-close-season-40dd
   type: secondary
   published: 2026
   accessed: 2026-11-10
-
 - key: govwales-hare-consultation
-  title: "Written statement: wild animal welfare white paper consultation"
-  publisher: "Welsh Government"
-  url: "https://www.gov.wales/written-statement-wild-animal-welfare-white-paper-consultation"
+  title: 'Written statement: wild animal welfare white paper consultation'
+  publisher: Welsh Government
+  url: https://www.gov.wales/written-statement-wild-animal-welfare-white-paper-consultation
   type: primary
   published: 2026
-  published_note: "Statement dated 10 September 2026. Consultation closed 19 October 2026; outcome not yet published (checked 2026-11-10)."
+  published_note: Statement dated 10 September 2026. Consultation closed 19 October 2026; outcome not yet published
+    (checked 2026-11-10).
   accessed: 2026-11-10
-
 - key: leg-wca-1981-sch3
-  title: "Wildlife and Countryside Act 1981, Schedule 3 (birds which may be sold)"
-  publisher: "legislation.gov.uk"
-  url: "https://www.legislation.gov.uk/ukpga/1981/69/schedule/3/data.html"
+  title: Wildlife and Countryside Act 1981, Schedule 3 (birds which may be sold)
+  publisher: legislation.gov.uk
+  url: https://www.legislation.gov.uk/ukpga/1981/69/schedule/3/data.html
   type: primary
   published: 2026
-  published_note: "Legislation in force, read 2026-11-10; counted as current."
+  published_note: Legislation in force, read 2026-11-10; counted as current.
   accessed: 2026-11-10
-
 - key: naturescot-wildfowl
-  title: "Food and drink: wildfowl"
-  publisher: "NatureScot"
-  url: "https://www.nature.scot/professional-advice/social-and-economic-benefits-nature/food-and-drink/wildfowl"
+  title: 'Food and drink: wildfowl'
+  publisher: NatureScot
+  url: https://www.nature.scot/professional-advice/social-and-economic-benefits-nature/food-and-drink/wildfowl
   type: primary
   published: undated
-  published_note: "The page's last-updated field is blank."
+  published_note: The page's last-updated field is blank.
   accessed: 2026-11-10
-
 - key: hcc-welsh-lamb-pgi
-  title: "Welsh Lamb PGI product specification"
-  publisher: "Defra / Hybu Cig Cymru (EU eAmbrosia register)"
-  url: "https://ec.europa.eu/geographical-indications-register/eambrosia-public-api/api/v1/attachments/75691"
+  title: Welsh Lamb PGI product specification
+  publisher: Defra / Hybu Cig Cymru (EU eAmbrosia register)
+  url: https://ec.europa.eu/geographical-indications-register/eambrosia-public-api/api/v1/attachments/75691
   type: primary
   published: 2026
-  published_note: "PGI specification in force; the document itself is undated. Counted as current, like legislation in force (read 2026-11-10)."
+  published_note: PGI specification in force; the document itself is undated. Counted as current, like legislation
+    in force (read 2026-11-10).
   accessed: 2026-11-10
-
 - key: hcc-lamb-day
-  title: "1 August sees the official start of PGI Welsh Lamb season with Lamb Day"
-  publisher: "Business Wales (Welsh Government), quoting Hybu Cig Cymru"
-  url: "https://businesswales.gov.wales/foodanddrink/node/652"
+  title: 1 August sees the official start of PGI Welsh Lamb season with Lamb Day
+  publisher: Business Wales (Welsh Government), quoting Hybu Cig Cymru
+  url: https://businesswales.gov.wales/foodanddrink/node/652
   type: primary
   published: 2018
   accessed: 2026-11-10
-
 - key: hcc-lamb-summer-tips
-  title: "Top tips for a great Welsh Lamb taste and summer treats"
-  publisher: "Hybu Cig Cymru (Meat Promotion Wales)"
-  url: "https://meatpromotion.wales/en/news-industry-info/top-tips-for-a-great-welsh-lamb-taste-and-summer-treats"
+  title: Top tips for a great Welsh Lamb taste and summer treats
+  publisher: Hybu Cig Cymru (Meat Promotion Wales)
+  url: https://meatpromotion.wales/en/news-industry-info/top-tips-for-a-great-welsh-lamb-taste-and-summer-treats
   type: primary
   published: 2016
-  published_note: "No date line; the text describes the first Llamb's Day on 1 August, which other press dates to 2016."
+  published_note: No date line; the text describes the first Llamb's Day on 1 August, which other press dates to
+    2016.
   accessed: 2026-11-10
-
 - key: farminguk-hcc-lamb-season
-  title: "Meat sector seeks to address confused shoppers' belief Spring is best time to source lamb"
-  publisher: "FarmingUK, quoting Hybu Cig Cymru"
-  url: "https://www.farminguk.com/News/Meat-sector-seeks-to-address-confused-shoppers-belief-Spring-is-best-time-to-source-lamb_43028.html"
+  title: Meat sector seeks to address confused shoppers' belief Spring is best time to source lamb
+  publisher: FarmingUK, quoting Hybu Cig Cymru
+  url: https://www.farminguk.com/News/Meat-sector-seeks-to-address-confused-shoppers-belief-Spring-is-best-time-to-source-lamb_43028.html
   type: trade
   published: 2016
   accessed: 2026-11-10
-
 - key: agriland-hcc-lamb-peak
-  title: "HCC launches new seasonal recipes"
-  publisher: "Agriland, quoting Hybu Cig Cymru"
-  url: "https://www.agriland.co.uk/farming-news/hcc-launches-new-seasonal-recipes/"
+  title: HCC launches new seasonal recipes
+  publisher: Agriland, quoting Hybu Cig Cymru
+  url: https://www.agriland.co.uk/farming-news/hcc-launches-new-seasonal-recipes/
   type: trade
   published: 2021
   accessed: 2026-11-10
-
 - key: specialityfood-welsh-lamb
-  title: "Consumers unaware of lower seasonal prices"
-  publisher: "Speciality Food Magazine"
-  url: "https://www.specialityfoodmagazine.com/content/news/consumers_unaware_of_lower_seasonal_prices"
+  title: Consumers unaware of lower seasonal prices
+  publisher: Speciality Food Magazine
+  url: https://www.specialityfoodmagazine.com/content/news/consumers_unaware_of_lower_seasonal_prices
   type: trade
   published: 2013
   accessed: 2026-11-10
-
 - key: hcc-welsh-beef-pgi
-  title: "Welsh Beef PGI product specification"
-  publisher: "Defra / Hybu Cig Cymru (GOV.UK)"
-  url: "https://assets.publishing.service.gov.uk/media/60141e4a8fa8f53fc3d79978/Product_Specification_Welsh_Beef_.pdf"
+  title: Welsh Beef PGI product specification
+  publisher: Defra / Hybu Cig Cymru (GOV.UK)
+  url: https://assets.publishing.service.gov.uk/media/60141e4a8fa8f53fc3d79978/Product_Specification_Welsh_Beef_.pdf
   type: primary
   published: 2026
-  published_note: "PGI specification in force; the document itself is undated. Counted as current, like legislation in force (read 2026-11-10)."
+  published_note: PGI specification in force; the document itself is undated. Counted as current, like legislation
+    in force (read 2026-11-10).
   accessed: 2026-11-10
-
 - key: nsa-buyers-guide-lamb
-  title: "Buyers guide to lamb"
-  publisher: "National Sheep Association"
-  url: "https://nationalsheep.org.uk/for-the-public/eat-wear-enjoy/buyers-guide-to-lamb/"
+  title: Buyers guide to lamb
+  publisher: National Sheep Association
+  url: https://nationalsheep.org.uk/for-the-public/eat-wear-enjoy/buyers-guide-to-lamb/
   type: primary
   published: 2026
-  published_note: "Current buyer's guide with no date line; footer copyright 2026."
+  published_note: Current buyer's guide with no date line; footer copyright 2026.
   accessed: 2026-11-10
-
 - key: ahdb-sheep-slaughter-patterns
-  title: "Patterns in sheep slaughter: 40 years of change"
-  publisher: "AHDB"
-  url: "https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change"
+  title: 'Patterns in sheep slaughter: 40 years of change'
+  publisher: AHDB
+  url: https://ahdb.org.uk/news/patterns-in-sheep-slaughter-40-years-of-change
   type: primary
   published: 2021
   accessed: 2026-11-10
-
 - key: qms-lamb-q2-2026
-  title: "QMS Lamb Market Update Q2 2026"
-  publisher: "Quality Meat Scotland"
-  url: "https://qmscotland.co.uk/wp-content/uploads/2026/07/QMS-Lamb-Market-Update-Q2-2026.pdf"
+  title: QMS Lamb Market Update Q2 2026
+  publisher: Quality Meat Scotland
+  url: https://qmscotland.co.uk/wp-content/uploads/2026/07/QMS-Lamb-Market-Update-Q2-2026.pdf
   type: primary
   published: 2026
   accessed: 2026-11-10
-
 - key: qms-hoggs-may-2013
-  title: "Positive outlook for lamb producers as new season gets underway"
-  publisher: "Quality Meat Scotland"
-  url: "https://qmscotland.co.uk/news/positive-outlook-lamb-producers-new-season-gets-underway"
+  title: Positive outlook for lamb producers as new season gets underway
+  publisher: Quality Meat Scotland
+  url: https://qmscotland.co.uk/news/positive-outlook-lamb-producers-new-season-gets-underway
   type: primary
   published: 2013
   accessed: 2026-11-10
-
 - key: ahdb-spring-lamb-2023
-  title: "Spring lamb prices off to a strong start"
-  publisher: "AHDB"
-  url: "https://ahdb.org.uk/news/spring-lamb-prices-off-to-a-strong-start"
+  title: Spring lamb prices off to a strong start
+  publisher: AHDB
+  url: https://ahdb.org.uk/news/spring-lamb-prices-off-to-a-strong-start
   type: primary
   published: 2023
   accessed: 2026-11-10
-
 - key: fwi-hogget-mutton-upland
-  title: "How selling mutton and hogget is benefiting upland sheep farm"
-  publisher: "Farmers Weekly"
-  url: "https://fwi.co.uk/livestock/livestock-feed-nutrition/mutton-hoggets-benefits-extensive-upland-sheep-system"
+  title: How selling mutton and hogget is benefiting upland sheep farm
+  publisher: Farmers Weekly
+  url: https://fwi.co.uk/livestock/livestock-feed-nutrition/mutton-hoggets-benefits-extensive-upland-sheep-system
   type: trade
   published: 2017
-  published_note: "Published June 2017; last modified March 2018."
+  published_note: Published June 2017; last modified March 2018.
   accessed: 2026-11-10
-
 - key: muttonrenaissance-what-is-mutton
-  title: "What is mutton?"
-  publisher: "Mutton Renaissance"
-  url: "https://www.muttonrenaissance.org.uk/whatIsMutton.html"
+  title: What is mutton?
+  publisher: Mutton Renaissance
+  url: https://www.muttonrenaissance.org.uk/whatIsMutton.html
   type: primary
   published: undated
-  published_note: "No date or copyright year on the page; the campaign was launched in 2004."
+  published_note: No date or copyright year on the page; the campaign was launched in 2004.
   accessed: 2026-11-10
-
 - key: fwi-mutton-spec
-  title: "Sheep specs published in mutton drive"
-  publisher: "Farmers Weekly, quoting Mutton Renaissance and the National Sheep Association"
-  url: "https://www.fwi.co.uk/business/sheep-specs-published-in-mutton-drive"
+  title: Sheep specs published in mutton drive
+  publisher: Farmers Weekly, quoting Mutton Renaissance and the National Sheep Association
+  url: https://www.fwi.co.uk/business/sheep-specs-published-in-mutton-drive
   type: trade
   published: 2005
   accessed: 2026-11-10
-
 - key: thecaterer-milk-fed-lamb
-  title: "Milk-fed lamb from Wild Harvest"
-  publisher: "The Caterer"
-  url: "https://www.thecaterer.com/news/foodservice/milk-fed-lamb-from-wild-harvest"
+  title: Milk-fed lamb from Wild Harvest
+  publisher: The Caterer
+  url: https://www.thecaterer.com/news/foodservice/milk-fed-lamb-from-wild-harvest
   type: trade
   published: 2007
   accessed: 2026-11-10
-
 - key: gower-saltmarsh-lamb-pdo
-  title: "Gower Salt Marsh Lamb PDO product specification (UK GI scheme)"
-  publisher: "Defra (GOV.UK)"
-  url: "https://assets.publishing.service.gov.uk/media/607d6f80d3bf7f401244785f/product_specification_Gower_Salt_Marsh_Lamb_PDO_UK_GI_scheme_F0082___3_.pdf"
+  title: Gower Salt Marsh Lamb PDO product specification (UK GI scheme)
+  publisher: Defra (GOV.UK)
+  url: https://assets.publishing.service.gov.uk/media/607d6f80d3bf7f401244785f/product_specification_Gower_Salt_Marsh_Lamb_PDO_UK_GI_scheme_F0082___3_.pdf
   type: primary
   published: 2021
-  published_note: "Specification on the UK GI register (template dated December 2020); in force, as amended in 2024."
+  published_note: Specification on the UK GI register (template dated December 2020); in force, as amended in 2024.
   accessed: 2026-11-10
-
 - key: gower-saltmarsh-lamb-pdo-amendment
-  title: "Gower Salt Marsh Lamb PDO non-minor amendment"
-  publisher: "Defra (GOV.UK)"
-  url: "https://assets.publishing.service.gov.uk/media/65e04ff6f1cab30f17fc46e8/Gower_Salt_Marsh_Lamb_pdo-pgi-non-minor-amendment-pn04__1___003_.pdf"
+  title: Gower Salt Marsh Lamb PDO non-minor amendment
+  publisher: Defra (GOV.UK)
+  url: https://assets.publishing.service.gov.uk/media/65e04ff6f1cab30f17fc46e8/Gower_Salt_Marsh_Lamb_pdo-pgi-non-minor-amendment-pn04__1___003_.pdf
   type: primary
   published: 2024
-  published_note: "No date line beyond the December 2020 template version; posted on GOV.UK in 2024."
+  published_note: No date line beyond the December 2020 template version; posted on GOV.UK in 2024.
   accessed: 2026-11-10
-
 - key: fwi-holker-saltmarsh-lamb
-  title: "Marketing drive steps up a gear"
-  publisher: "Farmers Weekly, quoting a Holker Estate tenant"
-  url: "https://www.fwi.co.uk/news/marketing-drive-steps-up-a-gear"
+  title: Marketing drive steps up a gear
+  publisher: Farmers Weekly, quoting a Holker Estate tenant
+  url: https://www.fwi.co.uk/news/marketing-drive-steps-up-a-gear
   type: trade
   published: 2002
   accessed: 2026-11-10
-
 - key: lishmans-saltmarsh-lamb
-  title: "Salt marsh lamb: the Case family farm"
-  publisher: "Lishman's of Ilkley (butcher)"
-  url: "https://www.lishmansbutchers.co.uk/salt-marsh-lamb-the-case-family-farm/"
+  title: 'Salt marsh lamb: the Case family farm'
+  publisher: Lishman's of Ilkley (butcher)
+  url: https://www.lishmansbutchers.co.uk/salt-marsh-lamb-the-case-family-farm/
   type: secondary
   published: 2024
   accessed: 2026-11-10
-
 - key: booths-saltmarsh-lamb
-  title: "Saltmarsh lamb"
-  publisher: "Booths (retailer)"
-  url: "https://www.booths.co.uk/seasonal/salt-marsh-lamb"
+  title: Saltmarsh lamb
+  publisher: Booths (retailer)
+  url: https://www.booths.co.uk/seasonal/salt-marsh-lamb
   type: secondary
   published: 2026
-  published_note: "Current retailer seasonal page with no date line; footer copyright 2026."
+  published_note: Current retailer seasonal page with no date line; footer copyright 2026.
   accessed: 2026-11-10
-
 - key: qms-beef-q3-2026
-  title: "Beef Market Update Q3 2026"
-  publisher: "Quality Meat Scotland"
-  url: "https://qmscotland.co.uk/wp-content/uploads/2026/08/Beef-Market-Update-Q3-2026.pdf"
+  title: Beef Market Update Q3 2026
+  publisher: Quality Meat Scotland
+  url: https://qmscotland.co.uk/wp-content/uploads/2026/08/Beef-Market-Update-Q3-2026.pdf
   type: primary
   published: 2026
   accessed: 2026-11-10
-
 - key: ahdb-beef-production-oct-2021
-  title: "UK beef production steady in October"
-  publisher: "AHDB"
-  url: "https://ahdb.org.uk/news/uk-beef-production-steady-in-october"
+  title: UK beef production steady in October
+  publisher: AHDB
+  url: https://ahdb.org.uk/news/uk-beef-production-steady-in-october
   type: primary
   published: 2021
   accessed: 2026-11-10
-
 - key: npa-porkwatch-jan-2023
-  title: "Retail support for British pork remains steady at start of the year"
-  publisher: "National Pig Association"
-  url: "https://www.npa-uk.org.uk/Retail_support_for_British_pork_remains_steady_at_start_of_the_year.html"
+  title: Retail support for British pork remains steady at start of the year
+  publisher: National Pig Association
+  url: https://www.npa-uk.org.uk/Retail_support_for_British_pork_remains_steady_at_start_of_the_year.html
   type: primary
   published: 2023
-  published_note: "Published February 2023; last modified October 2024."
+  published_note: Published February 2023; last modified October 2024.
   accessed: 2026-11-10
-
 - key: grocer-ahdb-pork-supplies
-  title: "Ample supplies push UK pork prices down"
-  publisher: "The Grocer, quoting AHDB"
-  url: "https://www.thegrocer.co.uk/fmcg-prices-and-promotions/ample-supplies-push-uk-pork-prices-down/559607.article"
+  title: Ample supplies push UK pork prices down
+  publisher: The Grocer, quoting AHDB
+  url: https://www.thegrocer.co.uk/fmcg-prices-and-promotions/ample-supplies-push-uk-pork-prices-down/559607.article
   type: trade
   published: 2017
-  published_note: "No date line; the text cites the week ending 21 October and forecasts for 2018, so late October 2017."
+  published_note: No date line; the text cites the week ending 21 October and forecasts for 2018, so late October
+    2017.
   accessed: 2026-11-10
-
 - key: fwi-michaelmas-geese
-  title: "Michaelmas geese on the move"
-  publisher: "Farmers Weekly, quoting the British Goose Producers' Association"
-  url: "https://www.fwi.co.uk/livestock/poultry/michaelmas-geese-on-the-move"
+  title: Michaelmas geese on the move
+  publisher: Farmers Weekly, quoting the British Goose Producers' Association
+  url: https://www.fwi.co.uk/livestock/poultry/michaelmas-geese-on-the-move
   type: trade
   published: 2004
   accessed: 2026-11-10
-
 - key: farminguk-michaelmas-goose
-  title: "Growing appeal of Michaelmas goose"
-  publisher: "FarmingUK, quoting British Goose Producers"
-  url: "https://www.farminguk.com/news/growing-appeal-of-michaelmas-goose_17015.html"
+  title: Growing appeal of Michaelmas goose
+  publisher: FarmingUK, quoting British Goose Producers
+  url: https://www.farminguk.com/news/growing-appeal-of-michaelmas-goose_17015.html
   type: trade
   published: 2009
   accessed: 2026-11-10
-
 - key: defra-poultry-statsnotice-jan2021
-  title: "United Kingdom poultry and poultry meat statistics, December 2020 (published 25 January 2021)"
-  publisher: "Defra"
-  url: "https://assets.publishing.service.gov.uk/media/602d2f67e90e0709e43e4b82/poultry-statsnotice-25jan21.pdf"
+  title: United Kingdom poultry and poultry meat statistics, December 2020 (published 25 January 2021)
+  publisher: Defra
+  url: https://assets.publishing.service.gov.uk/media/602d2f67e90e0709e43e4b82/poultry-statsnotice-25jan21.pdf
   type: primary
   published: 2021
   accessed: 2026-11-10
-
 - key: defra-poultry-statsnotice-mar2017
-  title: "United Kingdom poultry and poultry meat statistics, February 2017 (published 23 March 2017)"
-  publisher: "Defra"
-  url: "https://assets.publishing.service.gov.uk/media/5a82a4d3e5274a2e87dc23e3/poultry-statsnotice-23mar17.pdf"
+  title: United Kingdom poultry and poultry meat statistics, February 2017 (published 23 March 2017)
+  publisher: Defra
+  url: https://assets.publishing.service.gov.uk/media/5a82a4d3e5274a2e87dc23e3/poultry-statsnotice-23mar17.pdf
   type: primary
   published: 2017
   accessed: 2026-11-10
-
 - key: defra-poultry-statsnotice-sep2024
-  title: "United Kingdom poultry and poultry meat statistics, September 2024"
-  publisher: "Defra (GOV.UK)"
-  url: "https://gov.uk/government/statistics/historical-statistics-notices-on-poultry-and-poultry-meat-production-2024/a28aa7c3-fcbc-4c7b-a75c-7edc0c9105dc"
+  title: United Kingdom poultry and poultry meat statistics, September 2024
+  publisher: Defra (GOV.UK)
+  url: https://gov.uk/government/statistics/historical-statistics-notices-on-poultry-and-poultry-meat-production-2024/a28aa7c3-fcbc-4c7b-a75c-7edc0c9105dc
   type: primary
   published: 2025
-  published_note: "First published November 2024; last updated February 2025."
+  published_note: First published November 2024; last updated February 2025.
   accessed: 2026-11-10
-
 - key: tfta-golden-turkey
-  title: "The Traditional Farmfresh Turkey Association: Golden Turkeys"
-  publisher: "Love British Food (TFTA trade stand)"
-  url: "https://lovebritishfood.co.uk/trade-stand/traditional-farmfresh-turkey-association"
+  title: 'The Traditional Farmfresh Turkey Association: Golden Turkeys'
+  publisher: Love British Food (TFTA trade stand)
+  url: https://lovebritishfood.co.uk/trade-stand/traditional-farmfresh-turkey-association
   type: trade
   published: 2026
-  published_note: "No date line; the page carries 2026 British Food Fortnight banners and copyright 2026."
+  published_note: No date line; the page carries 2026 British Food Fortnight banners and copyright 2026.
   accessed: 2026-11-10
-
 - key: fwi-tfta-standards
-  title: "TFTA steps up quality standards for its Christmas turkeys"
-  publisher: "Farmers Weekly, quoting the TFTA"
-  url: "https://www.fwi.co.uk/business/tfta-steps-up-quality-standards-for-its-christmas-turkeys"
+  title: TFTA steps up quality standards for its Christmas turkeys
+  publisher: Farmers Weekly, quoting the TFTA
+  url: https://www.fwi.co.uk/business/tfta-steps-up-quality-standards-for-its-christmas-turkeys
   type: trade
   published: 2007
   accessed: 2026-11-10
-
 - key: fwi-norfolk-black-turkey
-  title: "Norfolk Blacks: an alternative kind of turkey"
-  publisher: "Farmers Weekly, quoting Peeles Rare Breed Turkeys"
-  url: "https://www.fwi.co.uk/livestock/poultry/norfolk-blacks-an-alternative-kind-of-turkey"
+  title: 'Norfolk Blacks: an alternative kind of turkey'
+  publisher: Farmers Weekly, quoting Peeles Rare Breed Turkeys
+  url: https://www.fwi.co.uk/livestock/poultry/norfolk-blacks-an-alternative-kind-of-turkey
   type: trade
   published: 2013
   accessed: 2026-11-10
-
 - key: basc-general-licences
-  title: "General licences"
-  publisher: "BASC"
-  url: "https://basc.org.uk/gl"
+  title: General licences
+  publisher: BASC
+  url: https://basc.org.uk/gl
   type: primary
   published: 2026
-  published_note: "Last modified 2 January 2026."
+  published_note: Last modified 2 January 2026.
   accessed: 2026-11-10
-
 - key: fcdo-rhug-milk-lamb-2014
-  title: "Blog post on Rhug Estate, North Wales (18 March 2014)"
-  publisher: "Foreign, Commonwealth & Development Office blogs (Martin Oxley)"
-  url: "https://blogs.fcdo.gov.uk/martinoxley/2014/03/18/593"
+  title: Blog post on Rhug Estate, North Wales (18 March 2014)
+  publisher: Foreign, Commonwealth & Development Office blogs (Martin Oxley)
+  url: https://blogs.fcdo.gov.uk/martinoxley/2014/03/18/593
   type: secondary
   published: 2014
   accessed: 2026-11-10
-
 - key: bgp-goose-leaflet-2016
-  title: "British Goose Producers recipe leaflet"
-  publisher: "British Goose Producers (British Poultry Council)"
-  url: "https://cdn.shopify.com/s/files/1/0391/7709/files/recipe_leaflet_2016.pdf"
+  title: British Goose Producers recipe leaflet
+  publisher: British Goose Producers (British Poultry Council)
+  url: https://cdn.shopify.com/s/files/1/0391/7709/files/recipe_leaflet_2016.pdf
   type: primary
   published: 2016
-  published_note: "No date line; file name and print stamp give November 2016."
+  published_note: No date line; file name and print stamp give November 2016.
   accessed: 2026-11-10
-
 - key: poultrysite-goose-farm-walk-2021
-  title: "Britain's Goose Farm Walk kicks off the Christmas season"
-  publisher: "The Poultry Site, reporting the British Poultry Council goose farm walk"
-  url: "https://thepoultrysite.com/news/2021/10/britains-goose-farm-walk-kicks-off-the-christmas-season"
+  title: Britain's Goose Farm Walk kicks off the Christmas season
+  publisher: The Poultry Site, reporting the British Poultry Council goose farm walk
+  url: https://thepoultrysite.com/news/2021/10/britains-goose-farm-walk-kicks-off-the-christmas-season
   type: trade
   published: 2021
   accessed: 2026-11-10

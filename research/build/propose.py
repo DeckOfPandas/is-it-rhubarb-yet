@@ -130,12 +130,16 @@ def main():
                 used.add(target)
                 if not line.get("weeks") and not (line.get("no_supply") or line.get("unsold")):
                     nr = dict(r)
-                    # A ring with no sources inherits its food's; say so, since the
-                    # food's list is rebuilt from its rings' below.
-                    if not nr.get("sources"):
+                    if not nr.get("sources"):  # Helen's ring cites nothing of its own: inherit the food's sources
                         nr["sources"] = list(f.get("sources") or [])
                     nr["research"] = {"kept": "No clean-room data for this line; Helen's original weeks kept.",
                                       **(research(line) or {})}
+                    if line.get("sources"):  # sources the research notes cite, so they reach the register
+                        nr["research"]["sources"] = keys(line["sources"])
+                        cited.update(nr["research"]["sources"])
+                    if line.get("searched"):  # searched and found nothing: cited in the notes, not evidence
+                        nr["research"]["searched"] = keys(line["searched"])
+                        cited.update(nr["research"]["searched"])
                     nr["confidence"] = "low"
                     stats["kept_helen"] += 1
                     log[f["name"]].append(f"{name or '(whole)'}: kept yours (no clean-room data)")
@@ -180,6 +184,17 @@ def main():
             stats["new_rings"] += 1
             log[f["name"]].append(f"new ring '{nm}' ({kind}, {l['confidence']})")
         f["varieties"] = new_rings
+        # Lead rule: if every lead ring is no_supply or unsold, the first ring with weeks leads instead.
+        flagged = lambda r: r.get("no_supply") or r.get("unsold")
+        leads = [r for r in new_rings if r.get("lead") is not False and not r.get("proposed")]
+        if leads and all(flagged(r) for r in leads):
+            cand = next((r for r in new_rings if not flagged(r) and not r.get("proposed") and r.get("weeks")), None)
+            if cand:
+                for r in leads:
+                    r["lead"] = False
+                cand.pop("lead", None)
+                log[f["name"]].append(f"lead moved to '{cand['name']}' (every lead ring was no_supply or unsold)")
+                stats["lead_moved"] += 1
         lead = [r for r in new_rings if r.get("lead") is not False and not r.get("proposed")
                 and not (r.get("no_supply") or r.get("unsold"))] or [r for r in new_rings if not r.get("proposed")]
         f["confidence"] = MEDIUM.get(c := min((r.get("confidence", "low") for r in lead), key=CONF.get), c)
@@ -271,6 +286,11 @@ def main():
         "#   no_supply); mcs (Good Fish Guide ratings by stock and method) and buy\n"
         "#   (what to ask for) on fish; no_supply (no regular UK supply of this ring);\n"
         "#   proposed: true on a ring the research added (lead: false until promoted).\n"
+        "# A ring kept as Helen had it (no clean-room data) cites the food's sources if it\n"
+        "#   had none, and carries the research notes' sources in research.sources (and\n"
+        "#   sources searched without result in research.searched).\n"
+        "# If every lead ring of a food is no_supply or unsold, the first ring with weeks\n"
+        "#   leads instead (logged in CHANGES.md).\n"
         "# On a food: confidence (low/medium/high: the weakest of its lead rings, the\n"
         "#   ones that drive the verdict); never_candidate (not grown here; belongs in\n"
         "#   never.yml); on fish, mcs: {read, best, worst, ratings} summarising every\n"

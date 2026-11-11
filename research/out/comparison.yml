@@ -50,24 +50,6 @@ rows:
   our_sources: Produced in Kent (secondary), Royal Horticultural Society (secondary), Hortnews (The Commercial Greenhouse Grower) (trade)
   note: ''
   cat: never-mismatch
-- food: Shallots
-  ring: (whole)
-  ours: Shallots
-  band: large
-  in_mis: 44
-  fresh_mis: 44
-  any_mis: 44
-  helen: in September–June
-  mine: in August–September; store October–March
-  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIII·········IIIIIIIIIIIIIIIII
-  ostrip: sssssssssssss·················IIIIIIIIIsssssssssssss
-  helen_sources: New Covent Garden Market
-  helen_general: false
-  our_conf: low
-  our_sources: Fresh Produce Journal (Fruitnet) (trade), Royal Horticultural Society (secondary)
-  note: End of the season is undocumented; Aug-Sep harvest is a reading of 'mid to late summer', and the store window to end of March is my extrapolation from RHS home-storage guidance. No commercial storage
-    source found.
-  cat: shifted
 - food: Horseradish
   ring: (whole)
   ours: Cultivated
@@ -102,6 +84,24 @@ rows:
   our_sources: Cornwall Good Seafood Guide (primary), Flying Fish Seafoods (secondary), Marine Conservation Society (primary), UK Government (GOV.UK assets) (primary)
   note: Flying Fish Seafoods marks November-February as best quality (flyingfish-seasonality), leaving out May-October, which cgsg-cuttlefish ticks; the primary regional guide is used.
   cat: ours-longer
+- food: Shallots
+  ring: (whole)
+  ours: Shallots
+  band: large
+  in_mis: 35
+  fresh_mis: 35
+  any_mis: 35
+  helen: in September–June
+  mine: in September–October; store November–June
+  hstrip: IIIIIIIIIIIIIIIIIIIIIIIIII·········IIIIIIIIIIIIIIIII
+  ostrip: ssssssssssssssssssssssssss·········IIIIIIIIsssssssss
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: moderate
+  our_sources: Oldershaw Group (primary), Fresh Produce Journal (Fruitnet) (trade), Royal Horticultural Society (secondary)
+  note: 'A smaller grower''s British season was due to start in August (fpj-shallots-back), and RHS says shallots ripen mid to late summer (rhs-shallots): that is harvest, before the curing Oldershaw describes,
+    so the market start follows Oldershaw. The previous store end (end of March) was extrapolated from RHS home-storage advice and is replaced by Oldershaw''s June.'
+  cat: ours-shorter
 - food: Sea bass
   ring: South West
   ours: SW
@@ -2057,23 +2057,6 @@ rows:
   our_sources: British Apples & Pears Ltd (primary), Fresh Produce Journal (Fruitnet) (trade), FoodIngredientsFirst (trade)
   note: ''
   cat: ours-shorter
-- food: Morels
-  ring: Market
-  ours: Market
-  band: large
-  in_mis: 9
-  fresh_mis: 9
-  any_mis: 14
-  helen: in April–May; avail March
-  mine: avail May
-  hstrip: ········aaaaaIIIIIIIII······························
-  ostrip: ·················aaaaa······························
-  helen_sources: New Covent Garden Market
-  helen_general: false
-  our_conf: low
-  our_sources: Freshview Foods (secondary), The Staff Canteen (trade), JancisRobinson.com (secondary), Woodland Trust (primary)
-  note: ''
-  cat: ours-shorter
 - food: Lovage
   ring: (whole)
   ours: Outdoor
@@ -2126,23 +2109,6 @@ rows:
   note: 'cgsg-squid-european ticks July-January, leaving February unticked. Flying Fish Seafoods marks October-March as best quality (flyingfish-seasonality), and a national market report says native squid
     is in season in winter (directseafoods-winter-2025): both start about thirteen weeks later than cgsg-squid-veined, so confidence is low.'
   cat: peak
-- food: Lamb
-  ring: Milk-fed spring
-  ours: Milk-fed spring
-  band: large
-  in_mis: 9
-  fresh_mis: 9
-  any_mis: 13
-  helen: in April–May; avail June
-  mine: avail April
-  hstrip: ·············IIIIIIIIIaaaa··························
-  ostrip: ·············aaaa···································
-  helen_sources: Lishman's
-  helen_general: false
-  our_conf: low
-  our_sources: Foreign, Commonwealth & Development Office blogs (Martin Oxley) (secondary), The Caterer (trade), National Sheep Association (primary)
-  note: ''
-  cat: ours-shorter
 - food: Spring greens
   ring: (whole)
   ours: Spring greens
@@ -2559,6 +2525,23 @@ rows:
   our_sources: Northumberland Seafood (Amble Development Trust) (secondary), Scottish Government (primary), Marine Conservation Society, Good Fish Guide (primary)
   note: govscot-ling-fmp-2025 gives Northern Shelf spawning as April-June at 100-300 m, about a month later than northumberland-ling's spring, and does not link it to eating or catch timing.
   cat: peak
+- food: Lamb
+  ring: Milk-fed spring
+  ours: Milk-fed spring
+  band: large
+  in_mis: 5
+  fresh_mis: 9
+  any_mis: 9
+  helen: in April–May; avail June
+  mine: in April
+  hstrip: ·············IIIIIIIIIaaaa··························
+  ostrip: ·············IIII···································
+  helen_sources: Lishman's
+  helen_general: false
+  our_conf: low
+  our_sources: Foreign, Commonwealth & Development Office blogs (Martin Oxley) (secondary), The Caterer (trade), National Sheep Association (primary)
+  note: ''
+  cat: ours-shorter
 - food: Watercress
   ring: Cultivated
   ours: Cultivated
@@ -2662,6 +2645,23 @@ rows:
   our_sources: Wild Food UK (secondary), Mushroom Diary (secondary), The Staff Canteen (trade)
   note: ''
   cat: peak
+- food: Morels
+  ring: Market
+  ours: Market
+  band: large
+  in_mis: 4
+  fresh_mis: 9
+  any_mis: 9
+  helen: in April–May; avail March
+  mine: in May
+  hstrip: ········aaaaaIIIIIIIII······························
+  ostrip: ·················IIIII······························
+  helen_sources: New Covent Garden Market
+  helen_general: false
+  our_conf: low
+  our_sources: Freshview Foods (secondary), The Staff Canteen (trade), JancisRobinson.com (secondary), Woodland Trust (primary)
+  note: ''
+  cat: ours-shorter
 - food: Plaice
   ring: North East
   ours: NE
@@ -3025,24 +3025,6 @@ rows:
   our_sources: Cornwall Good Seafood Guide (Cornwall Wildlife Trust) (primary), Flying Fish Seafoods (secondary), Marine Conservation Society, Good Fish Guide (primary)
   note: ffs-seasonality marks best quality Jan-Apr and Oct-Dec only, against cgsg-monkfish-white's all year; CGSG (primary) kept. seafish-seafood-guide (2009, background only) gives best Oct-May.
   cat: ours-longer
-- food: Apples
-  ring: Braeburn
-  ours: Braeburn
-  band: small
-  in_mis: 5
-  fresh_mis: 8
-  any_mis: 24
-  helen: in November; avail October; store December–April
-  mine: avail October; store November–August
-  hstrip: sssssssssssssssss······················aaaaIIIIIssss
-  ostrip: sssssssssssssssssssssssssssssssss·········asssssssss
-  helen_sources: New Covent Garden Market, Defra
-  helen_general: false
-  our_conf: low
-  our_sources: Defra (primary), British Apples & Pears Ltd (primary), Fresh Produce Journal (Fruitnet), quoting English Apples & Pears (trade)
-  note: 'BAPL contradicts itself: its varieties page gives November to May (bapl-apple-varieties), about seven weeks earlier than its season page. Two other sources are earlier still: Sainsbury''s and Worldwide
-    Fruit offered all-English Braeburn in October in one year (fpj-sainsburys-braeburn), and New Covent Garden expected first Braeburns later in October 2025, in a season running two weeks early (ncgm-oc'
-  cat: ours-shorter
 - food: Samphire
   ring: (whole)
   ours: Marsh samphire (wild)
@@ -3789,6 +3771,24 @@ rows:
   our_conf: low
   our_sources: Galloway Wild Foods (secondary)
   note: ''
+  cat: agree
+- food: Apples
+  ring: Braeburn
+  ours: Braeburn
+  band: agree
+  in_mis: 1
+  fresh_mis: 3
+  any_mis: 20
+  helen: in November; avail October; store December–April
+  mine: in October–November; store December–August
+  hstrip: sssssssssssssssss······················aaaaIIIIIssss
+  ostrip: sssssssssssssssssssssssssssssssss·········IIIIIIssss
+  helen_sources: New Covent Garden Market, Defra
+  helen_general: false
+  our_conf: low
+  our_sources: Defra (primary), British Apples & Pears Ltd (primary), Fresh Produce Journal (Fruitnet), quoting English Apples & Pears (trade)
+  note: 'BAPL contradicts itself: its varieties page gives November to May (bapl-apple-varieties), about seven weeks earlier than its season page. Two other sources are earlier still: Sainsbury''s and Worldwide
+    Fruit offered all-English Braeburn in October in one year (fpj-sainsburys-braeburn), and New Covent Garden expected first Braeburns later in October 2025, in a season running two weeks early (ncgm-oc'
   cat: agree
 - food: Apples
   ring: Golden Delicious

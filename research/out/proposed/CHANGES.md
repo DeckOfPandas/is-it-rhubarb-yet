@@ -5,8 +5,8 @@
 - Whole-food rings now combining several clean-room lines: 7
 - New rings added as proposed (lead: false): 63
 - NEVER candidates: 1
-- Sources added: 726
-- Food-level confidence: 12 high, 92 medium, 74 low (the weakest of each food's lead rings)
+- Sources added: 743
+- Food-level confidence: 12 high, 93 medium, 73 low (the weakest of each food's lead rings)
 - Fish with a food-level MCS summary: 42 (sea trout isn't rated by the MCS)
 - Meat and game with a sustainability block and a buy line: 17
 
@@ -23,6 +23,7 @@ Every change in weeks is set out in `comparison.md`, with week strips and both s
 - **Garlic:** (whole): weeks now combine 2 clean-room lines; new ring 'Wet (green)' (method, low); new ring 'Dried' (method, low)
 - **Leeks:** new ring 'Welsh (PGI)' (region, high)
 - **Onions:** (whole): weeks now combine 2 clean-room lines; new ring 'Maincrop (seed-grown)' (variety, moderate); new ring 'Sets and overwintered' (variety, moderate)
+- **Cucumber:** lead moved to 'Glasshouse' (every lead ring was no_supply or unsold)
 - **Lettuce:** Curly: kept yours (no clean-room data)
 - **Watercress:** new ring 'Glasshouse' (method, moderate)
 - **Asparagus:** new ring 'Protected' (method, moderate)
@@ -61,7 +62,7 @@ Every change in weeks is set out in `comparison.md`, with week strips and both s
 - **Oysters:** new ring 'Native – Colchester' (region, high)
 - **Skates and rays:** new ring 'Undulate ray (Channel)' (variety, high)
 - **Ling:** new ring 'South West' (region, moderate)
-- **Halibut:** new ring 'Farmed' (method, low)
+- **Halibut:** new ring 'Farmed' (method, low); lead moved to 'North East' (every lead ring was no_supply or unsold)
 - **Spider crab:** new ring 'South West' (region, moderate)
 - **Turkey:** new ring 'Turkey' (whole, moderate)
 - **Grouse:** new ring 'Northern Ireland' (region, high)

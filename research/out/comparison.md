@@ -6,11 +6,11 @@ You have 267 rings. Each one is matched to my line of the same name, or to the l
 
 | | Rings |
 |---|---|
-| Agree | 62 |
+| Agree | 63 |
 | Same supply, different peak | 76 |
 | Mine is longer | 69 |
 | Mine is shorter | 26 |
-| Shifted (the seasons overlap but start or end at different times) | 26 |
+| Shifted (the seasons overlap but start or end at different times) | 25 |
 | I found no data; yours stands | 4 |
 | NEVER on one side only | 3 |
 | NEVER on both sides | 1 |
@@ -970,6 +970,19 @@ Mine     IIIIIIIIIIIII··························IIIIII
 - **Yours:** in September–April; avail May and August. Sources: Shellfish Act 1967.
 - **Mine (high):** in October–March. Sources: legislation.gov.uk (primary), Cornwall Good Seafood Guide (primary), Fish is the Dish (Seafish) (primary), Marine Conservation Society Good Fish Guide (primary).
 
+#### Shallots, (whole)
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    IIIIIIIIIIIIIIIIIIIIIIIIII·········IIIIIIIIIIIIIIIII
+Mine     ssssssssssssssssssssssssss·········IIIIIIIIsssssssss
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in September–June. Sources: New Covent Garden Market.
+- **Mine (moderate):** in September–October; store November–June. Sources: Oldershaw Group (primary), Fresh Produce Journal (Fruitnet) (trade), Royal Horticultural Society (secondary).
+- **My discrepancy note:** A smaller grower's British season was due to start in August (fpj-shallots-back), and RHS says shallots ripen mid to late summer (rhs-shallots): that is harvest, before the curing Oldershaw describes, so the market start follows Oldershaw. The previous store end (end of March) was extrapolated from RHS home-storage advice and is replaced by Oldershaw's June.
+
 #### Globe artichokes, (whole)
 
 ```
@@ -1168,18 +1181,6 @@ Mine     ······························IIIIIIIIIII
 - **Yours:** in May–October. Sources: New Covent Garden Market.
 - **Mine (low):** in August–October. Sources: Plantura (secondary), Horticultural Development Company, a division of AHDB (primary).
 
-#### Morels, Market
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ········aaaaaIIIIIIIII······························
-Mine     ·················aaaaa······························
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in April–May; avail March. Sources: New Covent Garden Market.
-- **Mine (low):** avail May. Sources: Freshview Foods (secondary), The Staff Canteen (trade), JancisRobinson.com (secondary), Woodland Trust (primary).
-
 #### Parsley, (whole) (vs my *Outdoor*)
 
 ```
@@ -1192,18 +1193,6 @@ Mine     ·················IIIIIIIIIIIIIIIIIIIIIIIIII·····�
 - **Yours:** in April–October; avail March and November. Sources: Common knowledge — includes "common knowledge".
 - **Mine (low):** in May–October. Sources: Royal Horticultural Society (secondary), Fresh Produce Journal (trade), Horticultural Development Company (AHDB) (primary).
 - **My discrepancy note:** Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
-
-#### Lamb, Milk-fed spring
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    ·············IIIIIIIIIaaaa··························
-Mine     ·············aaaa···································
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in April–May; avail June. Sources: Lishman's.
-- **Mine (low):** avail April. Sources: Foreign, Commonwealth & Development Office blogs (Martin Oxley) (secondary), The Caterer (trade), National Sheep Association (primary).
 
 #### Cavolo nero, (whole)
 
@@ -1255,18 +1244,29 @@ Mine     ·················IIIIIIIIIIIIIIIIIIIIIIIIII·····�
 - **Yours:** in May–November; avail December. Sources: New Covent Garden Market.
 - **Mine (low):** in May–October. Sources: Horticultural Development Company, a division of AHDB (primary), The Vegetarian Society (secondary).
 
-#### Apples, Braeburn
+#### Lamb, Milk-fed spring
 
 ```
          J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    sssssssssssssssss······················aaaaIIIIIssss
-Mine     sssssssssssssssssssssssssssssssss·········asssssssss
+Yours    ·············IIIIIIIIIaaaa··························
+Mine     ·············IIII···································
 ```
 *Key: I = in season · a = avail · s = store · · = none*
 
-- **Yours:** in November; avail October; store December–April. Sources: New Covent Garden Market, Defra.
-- **Mine (low):** avail October; store November–August. Sources: Defra (primary), British Apples & Pears Ltd (primary), Fresh Produce Journal (Fruitnet), quoting English Apples & Pears (trade).
-- **My discrepancy note:** BAPL contradicts itself: its varieties page gives November to May (bapl-apple-varieties), about seven weeks earlier than its season page. Two other sources are earlier still: Sainsbury's and Worldwide Fruit offered all-English Braeburn in October in one year (fpj-sainsburys-braeburn), and New Covent Garden expected first Braeburns later in October 2025, in a season running two weeks early (ncgm-oc
+- **Yours:** in April–May; avail June. Sources: Lishman's.
+- **Mine (low):** in April. Sources: Foreign, Commonwealth & Development Office blogs (Martin Oxley) (secondary), The Caterer (trade), National Sheep Association (primary).
+
+#### Morels, Market
+
+```
+         J   F   M    A   M   J    J   A   S    O   N   D    
+Yours    ········aaaaaIIIIIIIII······························
+Mine     ·················IIIII······························
+```
+*Key: I = in season · a = avail · s = store · · = none*
+
+- **Yours:** in April–May; avail March. Sources: New Covent Garden Market.
+- **Mine (low):** in May. Sources: Freshview Foods (secondary), The Staff Canteen (trade), JancisRobinson.com (secondary), Woodland Trust (primary).
 
 #### Girolles, Market
 
@@ -1280,7 +1280,7 @@ Mine     ···························IIIIIIIIIIIIIIII�
 - **Yours:** in July–November. Sources: New Covent Garden Market.
 - **Mine (low):** in July–October. Sources: The Staff Canteen (trade), The Staff Canteen (secondary).
 
-## 4. Shifted (26)
+## 4. Shifted (25)
 
 The seasons overlap, but they start or end at different times.
 
@@ -1435,19 +1435,6 @@ Mine     ·································aaIII
 
 - **Yours:** in August–September. Sources: Forestheart.
 - **Mine (moderate):** in September; avail August and October. Sources: British Hop Association (primary), Society of Independent Brewers (SIBA) (trade), Hukins Hops (secondary), Adnams (secondary).
-
-#### Shallots, (whole)
-
-```
-         J   F   M    A   M   J    J   A   S    O   N   D    
-Yours    IIIIIIIIIIIIIIIIIIIIIIIIII·········IIIIIIIIIIIIIIIII
-Mine     sssssssssssss·················IIIIIIIIIsssssssssssss
-```
-*Key: I = in season · a = avail · s = store · · = none*
-
-- **Yours:** in September–June. Sources: New Covent Garden Market.
-- **Mine (low):** in August–September; store October–March. Sources: Fresh Produce Journal (Fruitnet) (trade), Royal Horticultural Society (secondary).
-- **My discrepancy note:** End of the season is undocumented; Aug-Sep harvest is a reading of 'mid to late summer', and the store window to end of March is my extrapolation from RHS home-storage guidance. No commercial storage source found.
 
 #### Chervil, (whole) (vs my *Outdoor*)
 
@@ -2584,9 +2571,9 @@ Mine     ······························IIIIIIIII·
 - Courgette flowers, (whole): yours is in June–August (BBC Good Food)
 - Grapes, (whole): yours is in September–October; avail August (RHS, FreshPlaza)
 
-## 7. Agree (62)
+## 7. Agree (63)
 
-Romanesco, Runner & French beans, Quince, Bilberries, Spruce tips, Coriander, Mint, Plums, Elderflower, Wild duck, Gooseberries (Cultivated), Hazelnuts (Cultivated), Spinach, Sea kale (Wild), Apples (Golden Delicious), Apples (Royal Gala), Apples (Russet), Dill, Sea bass (South East), Clams (South West), Goose, Grouse, Partridge, Asparagus, Apples (Cox), Figs, Sea trout (North East), Pheasant, Woodcock, Venison (Red & fallow), Hare, Cauliflower, Pak choi (Glasshouse), Lettuce (Glasshouse), Rocket, Cress, Apples (Bramley), Cherries, Loganberries & Tayberries, Giant puffball, Oyster mushrooms (Cultivated), Cultivated mushrooms, Shiitake, Bay, Lobster (North East), Lobster (South East), Lobster (South West), Oysters (Rock), Oysters (Porthilly rock), Scallops (Orkney, hand-dived), Farmed salmon (Glenarm, Northern Ireland), Farmed salmon (Loch Duart, Scotland), Beef, Pork, Venison (Roe), Venison (Chinese water deer), Venison (Muntjac), Wood pigeon, Rabbit, Squirrel, Chicken, Duck.
+Romanesco, Runner & French beans, Quince, Bilberries, Spruce tips, Coriander, Mint, Plums, Elderflower, Wild duck, Gooseberries (Cultivated), Hazelnuts (Cultivated), Spinach, Sea kale (Wild), Apples (Braeburn), Apples (Golden Delicious), Apples (Royal Gala), Apples (Russet), Dill, Sea bass (South East), Clams (South West), Goose, Grouse, Partridge, Asparagus, Apples (Cox), Figs, Sea trout (North East), Pheasant, Woodcock, Venison (Red & fallow), Hare, Cauliflower, Pak choi (Glasshouse), Lettuce (Glasshouse), Rocket, Cress, Apples (Bramley), Cherries, Loganberries & Tayberries, Giant puffball, Oyster mushrooms (Cultivated), Cultivated mushrooms, Shiitake, Bay, Lobster (North East), Lobster (South East), Lobster (South West), Oysters (Rock), Oysters (Porthilly rock), Scallops (Orkney, hand-dived), Farmed salmon (Glenarm, Northern Ireland), Farmed salmon (Loch Duart, Scotland), Beef, Pork, Venison (Roe), Venison (Chinese water deer), Venison (Muntjac), Wood pigeon, Rabbit, Squirrel, Chicken, Duck.
 
 ## 8. Lines I have that you don't (48)
 
@@ -2643,5 +2630,5 @@ These are splits the research found. Each has a reason in its `notes.season`.
 
 ## 9. Sources
 
-- You cite 60 sources and I cite 692. Only 30 websites appear in both: agriland.co.uk, ahdb.org.uk, basc.org.uk, brighton-fish-sales.co.uk, britishapplesandpears.co.uk, businesswales.gov.wales, countrylife.co.uk, devonandsevernifca.gov.uk, en.wikipedia.org, farming.co.uk, first-nature.com, flyingfishseafoods.co.uk, foodingredientsfirst.com, freshplaza.com, fruitnet.com, fwi.co.uk, gallowaywildfoods.com, gov.uk, greatbritishchefs.com, legislation.gov.uk, lishmansbutchers.co.uk, mcsuk.org, msc.org, nature.scot, newcoventgardenmarket.com, northumberlandseafood.co.uk, rhs.org.uk, seafish.org, thestaffcanteen.com, tregothnan.co.uk.
+- You cite 60 sources and I cite 701. Only 30 websites appear in both: agriland.co.uk, ahdb.org.uk, basc.org.uk, brighton-fish-sales.co.uk, britishapplesandpears.co.uk, businesswales.gov.wales, countrylife.co.uk, devonandsevernifca.gov.uk, en.wikipedia.org, farming.co.uk, first-nature.com, flyingfishseafoods.co.uk, foodingredientsfirst.com, freshplaza.com, fruitnet.com, fwi.co.uk, gallowaywildfoods.com, gov.uk, greatbritishchefs.com, legislation.gov.uk, lishmansbutchers.co.uk, mcsuk.org, msc.org, nature.scot, newcoventgardenmarket.com, northumberlandseafood.co.uk, rhs.org.uk, seafish.org, thestaffcanteen.com, tregothnan.co.uk.
 - Your rings citing "common knowledge" (38): Basil, Bay, Beef, Bilberries, Brown shrimp, Ceps, Chervil, Chicken, Chives, Cockles, Coriander, Crab apples, Dandelion, Dill, Duck, Elderberries, Elderflower, Field mushrooms, Lovage, Marjoram & Oregano, Meadowsweet, Mint, Nettles, Parsley, Pork, Rosehips, Rosemary, Sage, Sea beet, Sea buckthorn, Sloes, Sorrel, Squirrel, Sweet chestnuts, Tarragon, Thyme, Wild garlic, Wild strawberries.

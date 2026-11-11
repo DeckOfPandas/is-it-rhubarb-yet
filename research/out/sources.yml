@@ -292,6 +292,13 @@
   type: secondary
   published: 2025
   accessed: 2026-11-10
+- key: caterer-apples-2016
+  title: 'The Caterer: Home-grown harvest: Apples'
+  publisher: The Caterer
+  url: https://www.thecaterer.com/sector/chef/home-grown-harvest-apples
+  type: trade
+  published: 2016
+  accessed: '2026-11-11'
 - key: caterer-artichokes-2018
   title: 'Home-grown harvest: artichokes'
   publisher: The Caterer
@@ -1257,6 +1264,14 @@
   published_note: No date line; the text mentions a book republished in September 2022, so it was revised then or
     later.
   accessed: '2026-11-10'
+- key: fishbase-atlantic-halibut
+  title: 'FishBase: Hippoglossus hippoglossus, Atlantic halibut'
+  publisher: FishBase
+  url: https://fishbase.se/summary/SpeciesSummary.php?id=1371
+  type: primary
+  published: undated
+  published_note: Living species page; no date shown.
+  accessed: '2026-11-11'
 - key: fishfacts-north-sea-shrimp-2009
   title: 'Fishfacts: North Sea brown shrimp (version September 2009), hosted by Eastern IFCA'
   publisher: Responsible Fishing Committee (hosted by Eastern IFCA)
@@ -1907,6 +1922,14 @@
   type: trade
   published: 2015
   accessed: 2026-11-10
+- key: freshplaza-askew-leeks
+  title: 'FreshPlaza: Low demand and prices in leek market while costs continue to increase (SS Askew)'
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/article/9404295/low-demand-and-prices-in-leek-market-while-costs-continue-to-increase
+  type: trade
+  published: undated
+  published_note: Year not shown in the text seen; article number suggests about 2022.
+  accessed: '2026-11-11'
 - key: freshplaza-asparagus-2022
   title: By the first week of May it should be 100% British asparagus on the shelves
   publisher: FreshPlaza
@@ -2110,6 +2133,14 @@
   type: trade
   published: 2017
   accessed: 2026-11-10
+- key: freshplaza-lga-casey
+  title: 'FreshPlaza: UK leek shortage will worsen in January (Tim Casey, British Leek Growers Association)'
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/article/9056389/uk-leek-shortage-will-worsen-in-january/
+  type: trade
+  published: undated
+  published_note: Year not shown in the text seen; article number suggests about 2018.
+  accessed: '2026-11-11'
 - key: freshplaza-lincolnshire-herbs
   title: Sunshine brings increased demand for herbs (19 April 2013)
   publisher: FreshPlaza
@@ -2167,6 +2198,24 @@
   type: trade
   published: 2015
   accessed: 2026-11-10
+- key: freshplaza-scripps-braeburn-a
+  title: 'FreshPlaza: Most growers were expecting an earlier start and seem to have harvest well under control (Adrian
+    Scripps)'
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/article/9878908/most-growers-were-expecting-an-earlier-start-and-seem-to-have-harvest-well-under-control/
+  type: trade
+  published: undated
+  published_note: Year not shown in the text seen; article number suggests about 2022.
+  accessed: '2026-11-11'
+- key: freshplaza-scripps-braeburn-b
+  title: 'FreshPlaza: We are very pleased with quality; the fruit size looks to be very good for the UK market (Adrian
+    Scripps)'
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/north-america/article/9768091/we-are-very-pleased-with-quality-the-fruit-size-looks-to-be-very-good-for-the-uk-market/
+  type: trade
+  published: undated
+  published_note: Year not shown in the text seen; article number suggests about 2021.
+  accessed: '2026-11-11'
 - key: freshplaza-smithy-exotic
   title: Vegans fuel UK exotic mushroom boom (27 January 2020)
   publisher: FreshPlaza
@@ -2205,6 +2254,13 @@
   published: 2025
   published_note: Crop report dated July 2025.
   accessed: 2026-11-10
+- key: freshview-crop-report-2026-06
+  title: 'Freshview Foods: Crop report, 6 June 2026'
+  publisher: Freshview Foods
+  url: https://freshviewfoods.co.uk/wp-content/uploads/2026/06/Freshview-Foods-Crop-Report-6-June-2026.pdf
+  type: secondary
+  published: 2026
+  accessed: '2026-11-11'
 - key: freshview-seasonality
   title: Seasonality calendar
   publisher: Freshview Foods
@@ -2258,6 +2314,14 @@
   type: trade
   published: 2002
   accessed: 2026-11-10
+- key: fwi-leeks-growing
+  title: 'Farmers Weekly: Discover the secrets to successfully growing leeks'
+  publisher: Farmers Weekly
+  url: https://fwi.co.uk/arable/discover-secrets-successfully-growing-leeks
+  type: trade
+  published: undated
+  published_note: Year not shown on the page.
+  accessed: '2026-11-11'
 - key: fwi-michaelmas-geese
   title: Michaelmas geese on the move
   publisher: Farmers Weekly, quoting the British Goose Producers' Association
@@ -4237,6 +4301,14 @@
   type: secondary
   published: 2021
   accessed: 2026-11-10
+- key: oldershaw-shallots
+  title: 'Oldershaw Group: Shallots'
+  publisher: Oldershaw Group
+  url: https://www.oldershawgroup.co.uk/shallots
+  type: primary
+  published: undated
+  published_note: Living product page of a current Lincolnshire grower; no date shown.
+  accessed: '2026-11-11'
 - key: orkneynews-dived-scallops-2025
   title: '''They have trashed the summer grounds and are into our winter grounds now'': the destruction of Orkney''s
     dived scallops sector (22 October 2025)'

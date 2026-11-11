@@ -30,6 +30,8 @@ Every food in the clean-room dataset follows these rules. Where a rule needed a 
 - **`unsold: true`** is a line that exists here but can't legally be sold fresh: wild salmon. It has `weeks: []` and a sourced `notes.unsold`. It matches the `unsold` key in Helen's `foods.yml`.
 - **`no_supply: true`** is a line for which there is no regular UK supply, though the food itself grows or lives here: farmed halibut since Gigha closed, outdoor cucumber, wild halibut from the South West. It has `weeks: []` and a sourced `notes.no_supply`.
 
+When every lead ring of a food is `no_supply` or `unsold`, the first ring with weeks leads instead (`build/propose.py` does this and logs it in `CHANGES.md`). Cucumber is now led by Glasshouse, and halibut by North East.
+
 Don't use any of the three for a line that is only unresearched. That stays `weeks: []` with `confidence: low`.
 
 Judgement calls, applied the same way everywhere:
@@ -81,6 +83,8 @@ Ranked, best first:
 1. **primary:** industry or grower bodies, regulators, legislation, IFCA byelaws, PDO/PGI specifications, Defra/AHDB/Seafish/Cefas data, MCS Good Fish Guide, Cornwall Good Seafood Guide, BASC.
 2. **trade:** trade press quoting a named grower or body (Fresh Produce Journal, The Grocer, The Caterer, FreshPlaza, Fish Focus).
 3. **secondary:** retailers, wholesalers' blogs, chefs, gardening sites, food writers.
+
+A line may also list `searched`: sources its notes cite as searched and found to have nothing on the line. They are not evidence, so they never count towards confidence, but they're registered so the keys resolve.
 
 Registry fields in `sources.yml`: `key`, `title`, `publisher`, `url`, `type`, `published`, `accessed` (ISO date).
 

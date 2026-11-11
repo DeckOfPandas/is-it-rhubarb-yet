@@ -605,6 +605,9 @@
         pass searched lollo rosso, lollo bianco and frisee with UK growers and trade press: only seed-packet cropping
         advice turned up, and a red butterhead sold as a British lollo rosso alternative (see Round), which is not
         a curly type.'
+    searched:
+    - vegsoc-seasonal
+    - ahdb-harvested-britain
   - name: Iceberg
     kind: variety
     confidence: moderate
@@ -750,7 +753,8 @@
         2020). The Watercress Alliance puts the season at May-October (farmingmonthly-watercress); its May festival
         marks the start (hortidaily-watercress). The Watercress Company gives early May to end October; Vitacress
         harvests until the first hard frosts in November (courier-watercress). Winter shelf supply is mainly imported,
-        from Spain for The Watercress Company (dorsetview-watercress-2023). Moderate restored on the 2020 trade source.
+        from Spain for The Watercress Company (dorsetview-watercress-2023). Moderate restored on the 2020 trade
+        source.
       discrepancy: In 2023 The Watercress Company's managing director said the UK season usually runs May to November
         (dorsetview-watercress-2023), about four weeks longer than its late-October end in 2020 (farminguk-watercress-2020);
         the 2023 source is local news, so the trade source's end date is kept and November stays avail. vegsoc-seasonal

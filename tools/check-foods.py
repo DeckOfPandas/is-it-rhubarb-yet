@@ -70,6 +70,9 @@ CONFIDENCE = {"high", "medium", "low"}
 # made of several lines), never (a NEVER candidate).
 RESEARCH_KEYS = {"season", "discrepancy", "drift", "year_round", "sustainability",
                  "unsold", "no_supply", "kept", "combined", "never"}
+# On a kept ring, the keys the research's notes cite: sources, its evidence,
+# and searched, looked at and found to have nothing.
+RESEARCH_SOURCES = {"sources", "searched"}
 SUSTAINABILITY_KEYS = {"confidence", "impact", "frameworks", "notes", "buy"}
 SOURCE_TYPES = {"primary", "trade", "secondary"}
 # The Good Fish Guide's scale: 1-2 Best Choice, 3-4 OK, 5 Avoid.
@@ -354,8 +357,9 @@ def check_confidence(item, label, problems):
         problems.append(f"{label}: confidence is one of {sorted(CONFIDENCE)}, not {item['confidence']!r}")
 
 
-def check_research(v, label, problems):
-    """`research` maps a kind of note to its sentence."""
+def check_research(v, label, problems, known, used):
+    """`research` maps a kind of note to its sentence, and sources or
+    searched to a list of registered keys, which count as cited."""
     if "research" not in v:
         return
     r = v["research"]
@@ -363,6 +367,15 @@ def check_research(v, label, problems):
         problems.append(f"{label}: research must map a kind of note to a sentence")
         return
     for k, text in r.items():
+        if k in RESEARCH_SOURCES:
+            if not (isinstance(text, list) and text and all(isinstance(s, str) for s in text)):
+                problems.append(f"{label}: research.{k} must be a list of source keys")
+                continue
+            for s in text:
+                if s not in known:
+                    problems.append(f"{label}: research.{k} cites {s}, which is not in sources.yml")
+            used.update(text)
+            continue
         if k not in RESEARCH_KEYS:
             problems.append(f"{label}: research.{k} is not one of {sorted(RESEARCH_KEYS)}")
         if not (isinstance(text, str) and text.strip()):
@@ -580,7 +593,7 @@ def main() -> int:
             if v.get("unsold") is True and not f.get("unsold"):
                 problems.append(f"{label}: an unsold ring needs the food's unsold sentence")
             check_confidence(v, label, problems)
-            check_research(v, label, problems)
+            check_research(v, label, problems, known, used_keys)
             check_phrase(v, "buy", label, problems)
             if "mcs" in v:
                 check_mcs(v["mcs"], label, problems)

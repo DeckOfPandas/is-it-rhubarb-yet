@@ -5,6 +5,7 @@ Reads data/*.yml and sources/*.yml (never modifies them). Writes out/seasonality
 out/sources.yml and out/report.md.
 """
 import collections
+import re
 import datetime as dt
 import glob
 import os
@@ -56,6 +57,38 @@ def month_span(weeks):
     return " and ".join(parts)
 
 
+def write_report(foods, out_sources):
+    """out/report.md: confidence by group, empty and flagged lines, drift notes."""
+    by = collections.defaultdict(collections.Counter)
+    empty, flagged, drift = [], [], []
+    for f in foods:
+        for l in f["lines"]:
+            by[f["group"]][l["confidence"]] += 1
+            where = f"{f['name']} / {l['name']}"
+            n = l.get("notes") or {}
+            if l.get("unsold") or l.get("no_supply"):
+                flagged.append(f"- {where}: {'unsold' if l.get('unsold') else 'no supply'}. {n.get('unsold') or n.get('no_supply')}")
+            elif not l.get("weeks") and not f.get("never"):
+                empty.append(f"- {where}")
+            if n.get("drift"):
+                drift.append(f"- **{where}:** {n['drift']}")
+    never = [f"- {f['name']}: {next((l.get('notes') or {}).get('never', '') for l in f['lines'])}" for f in foods if f.get("never")]
+    ages = collections.Counter()
+    for s in out_sources:
+        p = str(s.get("published", ""))
+        ages["undated" if not p[:4].isdigit() else "2021+" if int(p[:4]) >= 2021 else "2016-20" if int(p[:4]) >= 2016 else "before 2016"] += 1
+    rows = "\n".join(f"| {g} | {c['high']} | {c['moderate']} | {c['low']} |" for g, c in by.items())
+    md = [f"# Seasonality dataset: build report\n\nGenerated {dt.date.today().isoformat()} by `build/merge.py`. Rules: `rules.md`.\n",
+          f"{len(foods)} foods, {sum(len(f['lines']) for f in foods)} lines, {len(out_sources)} cited sources "
+          f"(published {ages['2021+']} from 2021, {ages['2016-20']} 2016-20, {ages['before 2016']} before 2016, {ages['undated']} undated).\n",
+          "## Confidence by group\n\n| Group | High | Moderate | Low |\n|---|---|---|---|\n" + rows + "\n",
+          f"## Lines with no dates ({len(empty)})\n\nNo usable source found. These are not NEVER, unsold or no supply.\n\n" + "\n".join(empty) + "\n",
+          f"## Unsold and no-supply lines ({len(flagged)})\n\n" + "\n".join(flagged) + "\n",
+          f"## NEVER candidates ({len(never)})\n\nNot grown here; these belong in never.yml.\n\n" + "\n".join(never) + "\n",
+          f"## Drift notes ({len(drift)})\n\nOnly where a source says the season is moving.\n\n" + "\n".join(drift) + "\n"]
+    open(f"{ROOT}/out/report.md", "w").write("\n".join(md))
+
+
 def main():
     sources, src_origin = {}, {}
     for g in GROUP_ORDER:
@@ -84,7 +117,7 @@ def main():
                     errors.append(f"{where}: bad kind {line.get('kind')}")
                 if line.get("confidence") not in CONFS:
                     errors.append(f"{where}: bad confidence {line.get('confidence')}")
-                for k in line.get("sources") or []:
+                for k in (line.get("sources") or []) + (line.get("searched") or []):
                     if k not in sources:
                         errors.append(f"{where}: unknown source {k}")
                 weeks = line.get("weeks") or []
@@ -106,6 +139,12 @@ def main():
                         stats[flag] += 1
                 if food.get("group") == "fish-shellfish" and weeks and not line.get("mcs"):
                     stats["fish_lines_without_mcs"] += 1
+                txt = " ".join(str(v) for v in notes.values())
+                for k in sources:
+                    if k not in (line.get("sources") or []) + (line.get("searched") or []) and re.search(rf"[(,; ]{re.escape(k)}[),;]", txt):
+                        if True:
+                            log.append(f"{where}: notes cite {k}, which the line's sources don't list")
+                            stats["notes_cite_unlisted"] += 1
                 # Confidence floor: no primary or trade source -> low.
                 types = {sources[k]["type"] for k in line.get("sources") or [] if k in sources}
                 if weeks and line.get("confidence") in ("high", "moderate") and not types & {"primary", "trade"}:
@@ -140,7 +179,7 @@ def main():
             foods.append(food)
             stats["foods"] += 1
 
-    cited = {k for f in foods for l in f["lines"] for k in l.get("sources") or []}
+    cited = {k for f in foods for l in f["lines"] for k in (l.get("sources") or []) + (l.get("searched") or [])}
     out_sources = [sources[k] for k in sorted(sources) if k in cited]
     stats["sources_cited"] = len(out_sources)
     stats.update({f"sources_{t}": n for t, n in collections.Counter(s["type"] for s in out_sources).items()})
@@ -155,6 +194,7 @@ def main():
         yaml.safe_dump(out_sources, fh, sort_keys=False, allow_unicode=True, width=110)
     with open(f"{ROOT}/out/merge-log.txt", "w") as fh:
         fh.write("\n".join(errors + log) + "\n")
+    write_report(foods, out_sources)
     print(dict(stats))
     print(f"{len(errors)} errors, {len(log)} log entries")
     for e in errors:

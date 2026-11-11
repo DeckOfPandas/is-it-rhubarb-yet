@@ -1,742 +1,775 @@
-# Source registry for group: fruit-nuts. All pages read 2026-11-10.
 - key: bapl-british-season
-  title: "The British Season"
+  title: The British Season
   publisher: British Apples & Pears Ltd
   url: https://www.britishapplesandpears.co.uk/the-british-season/
   type: primary
   published: 2026
-  published_note: "Living page; modified 19 August 2026."
+  published_note: Living page; modified 19 August 2026.
   accessed: 2026-11-10
 - key: bapl-apple-varieties
-  title: "Apple varieties"
+  title: Apple varieties
   publisher: British Apples & Pears Ltd
   url: https://www.britishapplesandpears.co.uk/apple-varieties/
   type: primary
   published: 2024
-  published_note: "Living page; modified 29 October 2024."
+  published_note: Living page; modified 29 October 2024.
   accessed: 2026-11-10
 - key: bapl-pear-varieties
-  title: "Pear varieties"
+  title: Pear varieties
   publisher: British Apples & Pears Ltd
   url: https://www.britishapplesandpears.co.uk/pear-varieties/
   type: primary
   published: 2021
-  published_note: "Living page; modified 14 May 2021."
+  published_note: Living page; modified 14 May 2021.
   accessed: 2026-11-10
 - key: niab-apple-picking
-  title: "Picking date criteria"
+  title: Picking date criteria
   publisher: NIAB
   url: https://www.niab.com/node/2795
   type: primary
   published: 2026
-  published_note: "No date line; copyright 2026, and the text refers to years 2020 to 2027."
+  published_note: No date line; copyright 2026, and the text refers to years 2020 to 2027.
   accessed: 2026-11-10
 - key: bramleyapples-faq
-  title: "Frequently Asked Questions"
+  title: Frequently Asked Questions
   publisher: Bramley Apples (bramleyapples.co.uk)
   url: https://www.bramleyapples.co.uk/faq
   type: primary
   published: 2019
-  published_note: "Updated 23 October 2019."
+  published_note: Updated 23 October 2019.
   accessed: 2026-11-10
 - key: visitarmagh-bramley
-  title: "Picking and Storage"
+  title: Picking and Storage
   publisher: Visit Armagh
   url: https://visitarmagh.com/?p=15420
   type: secondary
   published: 2018
-  published_note: "Modified 17 September 2018."
+  published_note: Modified 17 September 2018.
   accessed: 2026-11-10
 - key: fpj-apples-early-start
-  title: "Early start for UK apples"
+  title: Early start for UK apples
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/early-start-for-uk-apples/143263.article
   type: trade
   published: 2007
-  published_note: "No date line. Cox picking from the week of Monday 10 September fits 2007, as does the Fruitnet article number."
+  published_note: No date line. Cox picking from the week of Monday 10 September fits 2007, as does the Fruitnet
+    article number.
   accessed: 2026-11-10
 - key: fpj-apple-pear-season-start
-  title: "Apple and pear season start brought forward"
+  title: Apple and pear season start brought forward
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/apple-and-pear-season-start-brought-forward/143395.article
   type: trade
   published: 2007
-  published_note: "No date line. Year estimated from the Fruitnet article number (next to fpj-apples-early-start)."
+  published_note: No date line. Year estimated from the Fruitnet article number (next to fpj-apples-early-start).
   accessed: 2026-11-10
 - key: fpj-year-round-apples
-  title: "Year-round English apples nearing"
+  title: Year-round English apples nearing
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/year-round-english-apples-nearing/159619.article
   type: trade
   published: 2012
-  published_note: "No date line. Year estimated from the Fruitnet article number (between 2011 and 2014 articles)."
+  published_note: No date line. Year estimated from the Fruitnet article number (between 2011 and 2014 articles).
   accessed: 2026-11-10
 - key: fpj-warm-autumn-apples
-  title: "Warm autumn drags English apples back"
+  title: Warm autumn drags English apples back
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/warm-autumn-drags-english-apples-back/170294.article
   type: trade
   published: 2016
-  published_note: "No date line. Year estimated from the Fruitnet article number (after a September 2015 article) and its mention of Greenyard's takeover, which was in 2015."
+  published_note: No date line. Year estimated from the Fruitnet article number (after a September 2015 article)
+    and its mention of Greenyard's takeover, which was in 2015.
   accessed: 2026-11-10
 - key: fpj-braeburn
-  title: "English Braeburn makes its mark"
+  title: English Braeburn makes its mark
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/english-braeburn-makes-its-mark/145201.article
   type: trade
   published: 2008
-  published_note: "No date line. Refers to the 2007 Braeburn harvest."
+  published_note: No date line. Refers to the 2007 Braeburn harvest.
   accessed: 2026-11-10
 - key: grocer-goatham-gala
-  title: "Goatham & Son to sell Royal Gala apples in summer for first time"
+  title: Goatham & Son to sell Royal Gala apples in summer for first time
   publisher: The Grocer
   url: https://www.thegrocer.co.uk/fruit-and-veg/goatham-and-son-to-sell-royal-gala-apples-in-summer-for-first-time/593881.article
   type: trade
   published: 2019
-  published_note: "No date line. Year estimated from The Grocer article number (next to a 2019 article)."
+  published_note: No date line. Year estimated from The Grocer article number (next to a 2019 article).
   accessed: 2026-11-10
 - key: fif-tesco-pears
-  title: "Tesco to offer English pears all year round"
+  title: Tesco to offer English pears all year round
   publisher: FoodIngredientsFirst
   url: https://www.foodingredientsfirst.com/news/tesco-to-offer-english-pears-all-year-round.html
   type: trade
   published: 2010
-  published_note: "Published 21 September 2010."
+  published_note: Published 21 September 2010.
   accessed: 2026-11-10
 - key: freshplaza-cherries-2021
-  title: "UK growers set for another strong cherry season"
+  title: UK growers set for another strong cherry season
   publisher: FreshPlaza
   url: https://www.freshplaza.com/europe/article/9328184/uk-growers-set-for-another-strong-cherry-season
   type: trade
   published: 2021
-  published_note: "Published 8 June 2021."
+  published_note: Published 8 June 2021.
   accessed: 2026-11-10
 - key: freshplaza-cherries-2026
-  title: "I am very optimistic for the remainder of the season through to September"
+  title: I am very optimistic for the remainder of the season through to September
   publisher: FreshPlaza
   url: https://www.freshplaza.com/latin-america/article/9859930/i-am-very-optimistic-for-the-remainder-of-the-season-through-to-september/
   type: trade
   published: 2026
-  published_note: "Published 24 July 2026."
+  published_note: Published 24 July 2026.
   accessed: 2026-11-10
 - key: fpj-cherries-josims
-  title: "Better weather gives rise to larger English cherry crop, says supplier"
+  title: Better weather gives rise to larger English cherry crop, says supplier
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/better-weather-gives-rise-to-larger-english-cherry-crop-says-supplier/246593.article
   type: trade
   published: 2022
-  published_note: "No date line. Year estimated from the Fruitnet article number (next to 2022 articles)."
+  published_note: No date line. Year estimated from the Fruitnet article number (next to 2022 articles).
   accessed: 2026-11-10
 - key: fpj-cherries-haygrove
-  title: "Best British cherry season in 30 years"
+  title: Best British cherry season in 30 years
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/best-british-cherry-season-in-30-years/166383.article
   type: trade
   published: 2015
-  published_note: "No date line. Cites industry figures to 24 August 2015."
+  published_note: No date line. Cites industry figures to 24 August 2015.
   accessed: 2026-11-10
 - key: grocer-cherries-2015
-  title: "Cherry crop booms as youthful farmers innovate"
+  title: Cherry crop booms as youthful farmers innovate
   publisher: The Grocer
   url: https://www.thegrocer.co.uk/fruit-and-veg/cherry-crop-booms-as-youthful-farmers-innovate/521942.article
   type: trade
   published: 2015
-  published_note: "No date line; latest year mentioned is 2015."
+  published_note: No date line; latest year mentioned is 2015.
   accessed: 2026-11-10
 - key: list-angus-soft-fruit
-  title: "Innovating soft fruits"
+  title: Innovating soft fruits
   publisher: The List
   url: https://list.co.uk/news/7608/innovating-soft-fruits
   type: secondary
   published: undated
-  published_note: "No date line; The List marks it as archive content from before 1 January 2022. Mentions a business started in 2012."
+  published_note: No date line; The List marks it as archive content from before 1 January 2022. Mentions a business
+    started in 2012.
   accessed: 2026-11-10
 - key: vegsoc-seasonal
-  title: "Seasonal UK-grown produce"
+  title: Seasonal UK-grown produce
   publisher: The Vegetarian Society
   url: https://vegsoc.org/blog/seasonal-uk-grown-produce/
   type: secondary
   published: 2026
-  published_note: "First published 1 January 2022; modified 24 September 2026."
+  published_note: First published 1 January 2022; modified 24 September 2026.
   accessed: 2026-11-10
 - key: borough-currants
-  title: "Currant affairs"
+  title: Currant affairs
   publisher: Borough Market
   url: https://boroughmarket.org.uk/market-blog/currant-affairs/
   type: secondary
   published: 2024
-  published_note: "Published 7 June 2020; modified 21 November 2024."
+  published_note: Published 7 June 2020; modified 21 November 2024.
   accessed: 2026-11-10
 - key: courier-scotland-july
-  title: "Season's eatings: fruits and veggies that are available locally now"
+  title: 'Season''s eatings: fruits and veggies that are available locally now'
   publisher: The Courier
   url: https://thecourier.co.uk/fp/lifestyle/food-drink/1459799/seasons-eatings-fruits-and-veggies-that-are-available-locally-now
   type: secondary
   published: undated
-  published_note: "No date line found."
+  published_note: No date line found.
   accessed: 2026-11-10
 - key: farmingcouk-blackberries
-  title: "Blackberries available through to November"
+  title: Blackberries available through to November
   publisher: Farming UK News (farming.co.uk)
   url: https://www.farming.co.uk/news/blackberries-available-through-to-november
   type: trade
   published: 2023
-  published_note: "Published 13 September 2023."
+  published_note: Published 13 September 2023.
   accessed: 2026-11-10
 - key: farmingcouk-blueberries
-  title: "British blueberry season is here with largest and sweetest crop ever"
+  title: British blueberry season is here with largest and sweetest crop ever
   publisher: Farming UK News (farming.co.uk)
   url: https://farming.co.uk/news/british-blueberry-season-is-here-with-largest-and-sweetest-crop-ever
   type: trade
   published: 2023
-  published_note: "Published 6 June 2023."
+  published_note: Published 6 June 2023.
   accessed: 2026-11-10
 - key: fpj-blueberries-hallhunter
-  title: "Growers forecast bumper crop of UK blueberries"
+  title: Growers forecast bumper crop of UK blueberries
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/growers-forecast-bumper-crop-of-uk-blueberries/249334.article
   type: trade
   published: 2023
-  published_note: "No date line. Gives the same 9 June season start as the June 2023 farming.co.uk report."
+  published_note: No date line. Gives the same 9 June season start as the June 2023 farming.co.uk report.
   accessed: 2026-11-10
 - key: fpj-raspberries-2021
-  title: "Raspberry volumes set for big rise as season begins"
+  title: Raspberry volumes set for big rise as season begins
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/raspberry-volumes-set-for-big-rise-as-season-begins/185604.article
   type: trade
   published: 2021
-  published_note: "No date line. Cites sales to 16 May 2021."
+  published_note: No date line. Cites sales to 16 May 2021.
   accessed: 2026-11-10
 - key: fpj-raspberries-november
-  title: "Quality raspberry crop to last until November"
+  title: Quality raspberry crop to last until November
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/quality-raspberry-crop-to-last-until-november/182320.article
   type: trade
   published: 2020
-  published_note: "No date line. Year estimated from the Fruitnet article number (between late-2016 and May 2021 articles)."
+  published_note: No date line. Year estimated from the Fruitnet article number (between late-2016 and May 2021
+    articles).
   accessed: 2026-11-10
 - key: farminguk-raspberries-2019
-  title: "Raspberry season starts three weeks earlier than usual"
+  title: Raspberry season starts three weeks earlier than usual
   publisher: FarmingUK
   url: https://www.farminguk.com/news/raspberry-season-starts-three-weeks-earlier-than-usual_53203.html
   type: trade
   published: 2019
-  published_note: "Published 12 June 2019."
+  published_note: Published 12 June 2019.
   accessed: 2026-11-10
 - key: grocer-raspberries-2019
-  title: "Spring in step of raspberry growers as UK season kicks off early"
+  title: Spring in step of raspberry growers as UK season kicks off early
   publisher: The Grocer
   url: https://www.thegrocer.co.uk/news/spring-in-step-of-raspberry-growers-as-uk-season-kicks-off-early/594304.article
   type: trade
   published: 2019
-  published_note: "No date line; latest year mentioned is 2019."
+  published_note: No date line; latest year mentioned is 2019.
   accessed: 2026-11-10
 - key: fruitandvine-raspberries-2024
-  title: "August to see high volumes of larger British raspberries"
+  title: August to see high volumes of larger British raspberries
   publisher: Fruit & Vine
   url: https://www.fruitandvine.co.uk/?p=70806
   type: trade
   published: 2024
-  published_note: "Published 12 August 2024."
+  published_note: Published 12 August 2024.
   accessed: 2026-11-10
 - key: fpj-raspberries-march
-  title: "UK raspberries hit shop shelves for first time in March"
+  title: UK raspberries hit shop shelves for first time in March
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/uk-raspberries-hit-shop-shelves-for-first-time-in-march/164720.article
   type: trade
   published: 2015
-  published_note: "No date line. Year estimated from the Fruitnet article number (just before a September 2015 article); matches the March 2015 FreshPlaza report."
+  published_note: No date line. Year estimated from the Fruitnet article number (just before a September 2015 article);
+    matches the March 2015 FreshPlaza report.
   accessed: 2026-11-10
 - key: fpj-strawberries-2022
-  title: "British strawberries sweet and plentiful as season gets underway"
+  title: British strawberries sweet and plentiful as season gets underway
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/british-strawberries-sweet-and-plentiful-as-season-gets-underway/246264.article
   type: trade
   published: 2022
   accessed: 2026-11-10
 - key: fpj-strawberries-and-cream
-  title: "Strawberries and cream"
+  title: Strawberries and cream
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/strawberries-and-cream/155771.article
   type: trade
   published: 2011
-  published_note: "No date line. Refers to a 2010 promotion; the Fruitnet article number fits 2011."
+  published_note: No date line. Refers to a 2010 promotion; the Fruitnet article number fits 2011.
   accessed: 2026-11-10
 - key: freshplaza-strawberries-2026
-  title: "British strawberry growers expect higher late-season volumes"
+  title: British strawberry growers expect higher late-season volumes
   publisher: FreshPlaza
   url: https://www.freshplaza.com/article/9870914/british-strawberry-growers-expect-higher-late-season-volumes/
   type: trade
   published: 2026
-  published_note: "Published 8 September 2026."
+  published_note: Published 8 September 2026.
   accessed: 2026-11-10
 - key: fpj-dyson-strawberries
-  title: "Dyson Farming extends UK strawberry season"
+  title: Dyson Farming extends UK strawberry season
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/dyson-farming-extends-uk-strawberry-season/184759.article
   type: trade
   published: 2021
-  published_note: "No date line. Dyson's first glasshouse strawberry crop was in 2021; the Fruitnet article number fits."
+  published_note: No date line. Dyson's first glasshouse strawberry crop was in 2021; the Fruitnet article number
+    fits.
   accessed: 2026-11-10
-# ---- Added in the second (gap-fill) pass, 2026-11-10 ----
 - key: fpj-eap-braeburn
-  title: "Braeburn: unfairly accused"
+  title: 'Braeburn: unfairly accused'
   publisher: Fresh Produce Journal (Fruitnet), quoting English Apples & Pears
   url: https://www.fruitnet.com/fresh-produce-journal/eap-hits-back-at-tabloid-apple-investigation/146861.article
   type: trade
   published: 2008
-  published_note: "No date line. Year estimated from the Fruitnet article number (2008 neighbours)."
+  published_note: No date line. Year estimated from the Fruitnet article number (2008 neighbours).
   accessed: 2026-11-10
 - key: fpj-sainsburys-braeburn
-  title: "Sainsbury's goes 100 per cent English on Braeburn"
+  title: Sainsbury's goes 100 per cent English on Braeburn
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/sainsburys-goes-100-per-cent-english-on-braeburn/132299.article
   type: trade
   published: 2005
-  published_note: "No date line. Year estimated from the Fruitnet article number, one of the lowest here (mid-2000s)."
+  published_note: No date line. Year estimated from the Fruitnet article number, one of the lowest here (mid-2000s).
   accessed: 2026-11-10
 - key: ncgm-october-2025
-  title: "Fruit and veg in season for October 2025"
+  title: Fruit and veg in season for October 2025
   publisher: New Covent Garden Market
   url: https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-for-october-2025/
   type: secondary
   published: 2025
   accessed: 2026-11-10
 - key: ncgm-august-2024
-  title: "Fruit and Veg in Season for August 2024"
+  title: Fruit and Veg in Season for August 2024
   publisher: New Covent Garden Market
   url: https://newcoventgardenmarket.com/?p=669034
   type: secondary
   published: 2024
-  published_note: "Published 1 August 2024."
+  published_note: Published 1 August 2024.
   accessed: 2026-11-10
 - key: rhs-damsons
-  title: "How to grow damsons"
+  title: How to grow damsons
   publisher: Royal Horticultural Society
   url: https://www.rhs.org.uk/fruit/damsons/grow-your-own
   type: primary
   published: 2026
-  published_note: "Living RHS guide; no date line, copyright 2026."
+  published_note: Living RHS guide; no date line, copyright 2026.
   accessed: 2026-11-10
 - key: wda-home
-  title: "Westmorland Damsons"
+  title: Westmorland Damsons
   publisher: Westmorland Damson Association
   url: https://lythdamsons.org.uk/
   type: primary
   published: undated
-  published_note: "No date line or copyright year."
+  published_note: No date line or copyright year.
   accessed: 2026-11-10
 - key: wda-damson
-  title: "The Westmorland Damson"
+  title: The Westmorland Damson
   publisher: Westmorland Damson Association
   url: https://lythdamsons.org.uk/thedamson.html
   type: primary
   published: undated
-  published_note: "No date line or copyright year."
+  published_note: No date line or copyright year.
   accessed: 2026-11-10
 - key: wda-fruit-sale
-  title: "Fruit and trees for sale"
+  title: Fruit and trees for sale
   publisher: Westmorland Damson Association
   url: https://www.lythdamsons.org.uk/fruit-and-trees-for-sale
   type: primary
   published: undated
-  published_note: "No date line or copyright year."
+  published_note: No date line or copyright year.
   accessed: 2026-11-10
 - key: booths-lyth-damsons
-  title: "Lyth Valley Damsons"
+  title: Lyth Valley Damsons
   publisher: Booths
   url: https://www.booths.co.uk/producer/lyth-valley-damsons
   type: secondary
   published: undated
-  published_note: "No date line or copyright year."
+  published_note: No date line or copyright year.
   accessed: 2026-11-10
 - key: rhs-medlars
-  title: "How to grow medlars"
+  title: How to grow medlars
   publisher: Royal Horticultural Society
   url: https://www.rhs.org.uk/fruit/medlars/grow-your-own
   type: primary
   published: 2026
-  published_note: "Living RHS guide; no date line, copyright 2026."
+  published_note: Living RHS guide; no date line, copyright 2026.
   accessed: 2026-11-10
 - key: fpj-medlars-norfolk
-  title: "Medlars making East Anglian comeback"
+  title: Medlars making East Anglian comeback
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/medlars-making-east-anglian-comeback/171953.article
   type: trade
   published: 2016
-  published_note: "No date line. Year estimated from the Fruitnet article number (late 2016 neighbours)."
+  published_note: No date line. Year estimated from the Fruitnet article number (late 2016 neighbours).
   accessed: 2026-11-10
 - key: fpj-plums-collett
-  title: "English plums set for bumper crop"
+  title: English plums set for bumper crop
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/english-plums-set-for-bumper-crop/149247.article
   type: trade
   published: 2009
-  published_note: "No date line. Refers to the 2008-09 winter and 2009 forecasts."
+  published_note: No date line. Refers to the 2008-09 winter and 2009 forecasts.
   accessed: 2026-11-10
 - key: freshplaza-plums-waitrose-2015
-  title: "First British plums of the season at Waitrose"
+  title: First British plums of the season at Waitrose
   publisher: FreshPlaza
   url: https://www.freshplaza.com/north-america/article/2143242/first-british-plums-of-the-season-at-waitrose
   type: trade
   published: 2015
   accessed: 2026-11-10
 - key: freshplaza-plums-2015
-  title: "UK: Positive plum season, despite English weather"
+  title: 'UK: Positive plum season, despite English weather'
   publisher: FreshPlaza
   url: https://www.freshplaza.com/north-america/article/2145057/uk-positive-plum-season-despite-english-weather/
   type: trade
   published: 2015
   accessed: 2026-11-10
 - key: freshplaza-plums-2013
-  title: "First British plums at Waitrose"
+  title: First British plums at Waitrose
   publisher: FreshPlaza
   url: https://www.freshplaza.com/north-america/article/2111687/first-british-plums-at-waitrose/
   type: trade
   published: 2013
   accessed: 2026-11-10
 - key: freshplaza-figs-2013
-  title: "UK grown figs go on sale at Sainsbury's"
+  title: UK grown figs go on sale at Sainsbury's
   publisher: FreshPlaza
   url: https://www.freshplaza.com/north-america/article/2112244/uk-grown-figs-go-on-sale-at-sainsbury-s/
   type: trade
   published: 2013
   accessed: 2026-11-10
 - key: fpj-figs-sainsburys
-  title: "First British figs of the season on sale at Sainsbury's"
+  title: First British figs of the season on sale at Sainsbury's
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/first-british-figs-of-the-season-on-sale-at-sainsburys/166245.article
   type: trade
   published: 2015
-  published_note: "No date line. Says Sainsbury's launched UK figs in 2013 and has had three seasons."
+  published_note: No date line. Says Sainsbury's launched UK figs in 2013 and has had three seasons.
   accessed: 2026-11-10
 - key: rhs-figs
-  title: "How to grow figs"
+  title: How to grow figs
   publisher: Royal Horticultural Society
   url: https://www.rhs.org.uk/fruit/figs/grow-your-own
   type: primary
   published: 2026
-  published_note: "Living RHS guide; no date line, copyright 2026."
+  published_note: Living RHS guide; no date line, copyright 2026.
   accessed: 2026-11-10
 - key: wt-foraging-aug
-  title: "Foraging in August"
+  title: Foraging in August
   publisher: Woodland Trust
   url: https://www.woodlandtrust.org.uk/blog/foraging-in-august/
   type: primary
   published: 2026
-  published_note: "Published 12 August 2026."
+  published_note: Published 12 August 2026.
   accessed: 2026-11-10
 - key: wt-foraging-sep
-  title: "Foraging in September"
+  title: Foraging in September
   publisher: Woodland Trust
   url: https://www.woodlandtrust.org.uk/blog/foraging-in-september/
   type: primary
   published: 2024
-  published_note: "Published 25 September 2024."
+  published_note: Published 25 September 2024.
   accessed: 2026-11-10
 - key: wt-foraging-oct-2025
-  title: "Foraging in October: berries and nuts to find this autumn"
+  title: 'Foraging in October: berries and nuts to find this autumn'
   publisher: Woodland Trust
   url: https://woodlandtrust.org.uk/blog/2025/10/foraging-in-october/
   type: primary
   published: 2025
-  published_note: "Date in URL (October 2025)."
+  published_note: Date in URL (October 2025).
   accessed: 2026-11-10
 - key: wt-hazelnuts-2019
-  title: "Hazelnuts: where and when to forage"
+  title: 'Hazelnuts: where and when to forage'
   publisher: Woodland Trust
   url: https://www.woodlandtrust.org.uk/blog/2019/08/hazelnuts-where-and-when-to-forage/
   type: primary
   published: 2019
-  published_note: "Date in URL (August 2019)."
+  published_note: Date in URL (August 2019).
   accessed: 2026-11-10
 - key: fpj-blackcurrants-underway
-  title: "British blackcurrant season underway"
+  title: British blackcurrant season underway
   publisher: Fresh Produce Journal (Fruitnet), quoting the Blackcurrant Foundation
   url: https://fruitnet.com/fresh-produce-journal/british-blackcurrant-season-underway/151774.article
   type: trade
   published: 2010
-  published_note: "No date line. Year estimated from the Fruitnet article number (next to the February 2010 rhubarb PDO report)."
+  published_note: No date line. Year estimated from the Fruitnet article number (next to the February 2010 rhubarb
+    PDO report).
   accessed: 2026-11-10
 - key: fruitandvine-blackcurrants-2025
-  title: "UK blackcurrant harvest arrives two weeks earlier"
+  title: UK blackcurrant harvest arrives two weeks earlier
   publisher: Fruit & Vine, quoting the Blackcurrant Foundation
   url: https://www.fruitandvine.co.uk/?p=73892
   type: trade
   published: 2025
   accessed: 2026-11-10
 - key: fruitandvine-blackcurrants-2022
-  title: "Hot and dry summer makes for a challenging blackcurrant harvest"
+  title: Hot and dry summer makes for a challenging blackcurrant harvest
   publisher: Fruit & Vine
   url: https://www.fruitandvine.co.uk/?p=65587
   type: trade
   published: 2022
   accessed: 2026-11-10
 - key: countryside-blackcurrant-grower
-  title: "British blackcurrants: Tasty, nutritious and environmentally friendly"
+  title: 'British blackcurrants: Tasty, nutritious and environmentally friendly'
   publisher: Countryside (NFU)
   url: https://www.countrysideonline.co.uk/people-in-farming/meet-the-blackcurrant-grower/
   type: trade
   published: 2020
-  published_note: "Published 29 June 2020."
+  published_note: Published 29 June 2020.
   accessed: 2026-11-10
 - key: rectory-redcurrants
-  title: "Redcurrants"
+  title: Redcurrants
   publisher: Rectory Farm (Stanton St John, Oxford)
   url: https://rectoryfarmpyo.co.uk/?p=33821
   type: secondary
   published: 2026
-  published_note: "Living page; modified 3 August 2026."
+  published_note: Living page; modified 3 August 2026.
   accessed: 2026-11-10
 - key: freshplaza-currants-2017
-  title: "UK: New season blackcurrants selling like hot cakes"
+  title: 'UK: New season blackcurrants selling like hot cakes'
   publisher: FreshPlaza
   url: https://www.freshplaza.com/north-america/article/2178799/uk-new-season-blackcurrants-selling-like-hot-cakes
   type: trade
   published: 2017
   accessed: 2026-11-10
 - key: fpj-gooseberries-winterwood
-  title: "Gooseberries nobody's fool"
+  title: Gooseberries nobody's fool
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/gooseberries-nobodys-fool/146342.article
   type: trade
   published: 2008
-  published_note: "No date line. Mentions River Cottage Spring (2008); the Fruitnet article number fits."
+  published_note: No date line. Mentions River Cottage Spring (2008); the Fruitnet article number fits.
   accessed: 2026-11-10
 - key: hortidaily-gooseberries-pittormie
-  title: "Every year is different for our gooseberry production and demand is also a bit unpredictable"
+  title: Every year is different for our gooseberry production and demand is also a bit unpredictable
   publisher: HortiDaily
   url: https://www.hortidaily.com/article/9443246/every-year-is-different-for-our-gooseberry-production-and-demand-is-also-a-bit-unpredictable/
   type: trade
   published: 2022
-  published_note: "Published 12 July 2022."
+  published_note: Published 12 July 2022.
   accessed: 2026-11-10
 - key: caterer-gooseberries
-  title: "Home-grown harvest: sweet and savoury ways with gooseberries"
+  title: 'Home-grown harvest: sweet and savoury ways with gooseberries'
   publisher: The Caterer
   url: https://thecaterer.com/all-content/home-grown-harvest-sweet-and-savoury-ways-with-gooseberries
   type: trade
   published: 2017
-  published_note: "Published 11 August 2017."
+  published_note: Published 11 August 2017.
   accessed: 2026-11-10
 - key: rhs-tayberry
-  title: "Rubus Tayberry Group (F)"
+  title: Rubus Tayberry Group (F)
   publisher: Royal Horticultural Society
   url: https://www.rhs.org.uk/plants/131374/rubus-tayberry-group-f/details
   type: primary
   published: 2026
-  published_note: "Living RHS plant profile; no date line, copyright 2026."
+  published_note: Living RHS plant profile; no date line, copyright 2026.
   accessed: 2026-11-10
 - key: caterer-forced-rhubarb
-  title: "Supplier spotlight: Forced rhubarb"
+  title: 'Supplier spotlight: Forced rhubarb'
   publisher: The Caterer
   url: https://www.thecaterer.com/articles/364857/supplier-spotlight-forced-rhubarb
   type: trade
   published: undated
-  published_note: "No date line. Mentions the 2010 PDO, so 2010 or later."
+  published_note: No date line. Mentions the 2010 PDO, so 2010 or later.
   accessed: 2026-11-10
 - key: caterer-outdoor-rhubarb
-  title: "Home-grown harvest: outdoor rhubarb"
+  title: 'Home-grown harvest: outdoor rhubarb'
   publisher: The Caterer
   url: https://thecaterer.com/all-content/home-grown-harvest-outdoor-rhubarb
   type: trade
   published: 2018
-  published_note: "Published 6 April 2018."
+  published_note: Published 6 April 2018.
   accessed: 2026-11-10
 - key: fpj-oldroyd-rhubarb
-  title: "Fighting the cause"
+  title: Fighting the cause
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://fruitnet.com/fresh-produce-journal/fighting-the-cause/147569.article
   type: trade
   published: 2009
-  published_note: "No date line. Says the PDO application (granted 2010) is still pending."
+  published_note: No date line. Says the PDO application (granted 2010) is still pending.
   accessed: 2026-11-10
 - key: defra-yorkshire-rhubarb-pdo
-  title: "Summary: Application to register Yorkshire Forced Rhubarb (PDO)"
+  title: 'Summary: Application to register Yorkshire Forced Rhubarb (PDO)'
   publisher: Defra (GOV.UK)
   url: https://assets.publishing.service.gov.uk/media/5fd36354e90e07662b09d931/pfn-indoor-yorks-rhubarb-pdo.pdf
   type: primary
   published: 2020
-  published_note: "No date in the document; GOV.UK file uploaded December 2020 (from its asset ID). The PDO is in force, so it counts as current."
+  published_note: No date in the document; GOV.UK file uploaded December 2020 (from its asset ID). The PDO is in
+    force, so it counts as current.
   accessed: 2026-11-10
 - key: kca-cobnut
-  title: "The Cobnut"
+  title: The Cobnut
   publisher: The Kentish Cobnuts Association
   url: https://kentishcobnutsassociation.org.uk/the-cobnut/
   type: primary
   published: undated
-  published_note: "No date line or copyright year; the association's current site."
+  published_note: No date line or copyright year; the association's current site.
   accessed: 2026-11-10
 - key: kca-faqs
-  title: "FAQs"
+  title: FAQs
   publisher: The Kentish Cobnuts Association
   url: https://kentishcobnutsassociation.org.uk/faqs/
   type: primary
   published: undated
-  published_note: "No date line or copyright year; the association's current site."
+  published_note: No date line or copyright year; the association's current site.
   accessed: 2026-11-10
 - key: fpj-cobnuts-early
-  title: "Cobnuts arrive early"
+  title: Cobnuts arrive early
   publisher: Fresh Produce Journal (Fruitnet), quoting the Kentish Cobnuts Association
   url: https://www.fruitnet.com/fresh-produce-journal/cobnuts-arrive-early/154153.article
   type: trade
   published: 2011
-  published_note: "No date line. Year estimated from the Fruitnet article number (2011 neighbours)."
+  published_note: No date line. Year estimated from the Fruitnet article number (2011 neighbours).
   accessed: 2026-11-10
 - key: fpj-cobnuts-too-early
-  title: "Cobnuts on market too early"
+  title: Cobnuts on market too early
   publisher: Fresh Produce Journal (Fruitnet), quoting the Association of Kentish Cobnuts Growers
   url: https://fruitnet.com/fresh-produce-journal/cobnuts-on-market-too-early/146254.article
   type: trade
   published: 2008
-  published_note: "No date line. Year estimated from the Fruitnet article number (2008 neighbours)."
+  published_note: No date line. Year estimated from the Fruitnet article number (2008 neighbours).
   accessed: 2026-11-10
 - key: roughway-cobnut-faq
-  title: "Kent cobnuts frequently asked questions"
+  title: Kent cobnuts frequently asked questions
   publisher: Roughway Farm
   url: https://roughwayfarm.co.uk/shop/kent-cobnuts-frequently-asked-questions/
   type: secondary
   published: 2026
-  published_note: "Living shop page; copyright 2026 and 2026-season labels."
+  published_note: Living shop page; copyright 2026 and 2026-season labels.
   accessed: 2026-11-10
 - key: grocer-cobnut-renaissance
-  title: "Cobnut renaissance hailed by growers"
+  title: Cobnut renaissance hailed by growers
   publisher: The Grocer
   url: https://www.thegrocer.co.uk/news/cobnut-renaissance-hailed-by-growers-/122524.article
   type: trade
   published: undated
-  published_note: "No date line. The Grocer article number is far below its 2015 articles, so probably well before 2015."
+  published_note: No date line. The Grocer article number is far below its 2015 articles, so probably well before
+    2015.
   accessed: 2026-11-10
 - key: sharpham-walnuts
-  title: "Wet v Dry Walnuts"
+  title: Wet v Dry Walnuts
   publisher: Sharpham Park
   url: https://sharphampark.com/blogs/news/wet-v-dry-walnuts
   type: secondary
   published: 2024
-  published_note: "Published 14 June 2024."
+  published_note: Published 14 June 2024.
   accessed: 2026-11-10
 - key: hodmedod-wet-walnuts
-  title: "Whole wet walnuts in shell"
+  title: Whole wet walnuts in shell
   publisher: Hodmedod's
   url: https://hodmedods.co.uk/products/whole-wet-walnuts-in-shell
   type: secondary
   published: undated
-  published_note: "Product page; no date line or copyright year."
+  published_note: Product page; no date line or copyright year.
   accessed: 2026-11-10
 - key: roughway-walnuts
-  title: "Fresh British Walnuts"
+  title: Fresh British Walnuts
   publisher: Roughway Farm
   url: https://roughwayfarm.co.uk/product/british-walnuts-500g-10kg/
   type: secondary
   published: 2026
-  published_note: "Living product page; copyright 2026; reports the 2025 crop sold out on 17 November 2025."
+  published_note: Living product page; copyright 2026; reports the 2025 crop sold out on 17 November 2025.
   accessed: 2026-11-10
 - key: wildfooduk-gooseberry
-  title: "Wild Gooseberry"
+  title: Wild Gooseberry
   publisher: Wild Food UK
   url: https://www.wildfooduk.com/wild-plants/wild-gooseberry/
   type: secondary
   published: 2018
-  published_note: "Published 18 January 2018; modified 20 September 2018."
+  published_note: Published 18 January 2018; modified 20 September 2018.
   accessed: 2026-11-10
 - key: foragingcourse-gooseberry
-  title: "Foraging guide: Gooseberry (Ribes uva-crispa)"
+  title: 'Foraging guide: Gooseberry (Ribes uva-crispa)'
   publisher: The Foraging Course Company
   url: https://www.foragingcoursecompany.co.uk/foraging-guide-gooseberry
   type: secondary
   published: 2025
-  published_note: "Published 16 January 2025; modified 3 February 2025."
+  published_note: Published 16 January 2025; modified 3 February 2025.
   accessed: 2026-11-10
 - key: hortnews-raspberries-2017
-  title: "Berry Jewel glasshouse raspberries on sale at Waitrose from 2 April (3 April 2017)"
+  title: Berry Jewel glasshouse raspberries on sale at Waitrose from 2 April (3 April 2017)
   publisher: Hortnews
   url: https://hortnews.com/?p=7406
   type: trade
   published: 2017
   accessed: 2026-11-10
 - key: freshplaza-raspberries-2015
-  title: "UK raspberries 2 weeks early on the shelves (27 March 2015)"
+  title: UK raspberries 2 weeks early on the shelves (27 March 2015)
   publisher: FreshPlaza
   url: https://www.freshplaza.com/north-america/article/2137417/uk-raspberries-2-weeks-early-on-the-shelves/
   type: trade
   published: 2015
   accessed: 2026-11-10
 - key: fpj-berries-switch-over
-  title: "Berries switch over"
+  title: Berries switch over
   publisher: Fresh Produce Journal
   url: https://fruitnet.com/fresh-produce-journal/berries-switch-over/134805.article
   type: trade
   published: 2005
-  published_note: "No date line. Mentions 2003 as a past year; the Fruitnet article number suggests about 2005."
+  published_note: No date line. Mentions 2003 as a past year; the Fruitnet article number suggests about 2005.
   accessed: 2026-11-10
 - key: freshplaza-asda-grapes-2015
-  title: "British grapes on shelves after 3 years (2 December 2015)"
+  title: British grapes on shelves after 3 years (2 December 2015)
   publisher: FreshPlaza
   url: https://www.freshplaza.com/north-america/article/2150006/british-grapes-on-shelves-after-3-years/
   type: trade
   published: 2015
   accessed: 2026-11-10
 - key: fpj-kent-grape-trial
-  title: "Kent seedless grape trial targets 2016 crop"
+  title: Kent seedless grape trial targets 2016 crop
   publisher: Fresh Produce Journal
   url: https://fruitnet.com/fresh-produce-journal/kent-seedless-grape-trial-targets-2016-crop/155456.article
   type: trade
   published: 2011
-  published_note: "No date line. Project began 2007 and targets 2016; the Fruitnet article number fits 2011."
+  published_note: No date line. Project began 2007 and targets 2016; the Fruitnet article number fits 2011.
   accessed: 2026-11-10
 - key: fpj-uk-grapes-mack
-  title: "UK-grown grapes ready for retail"
+  title: UK-grown grapes ready for retail
   publisher: Fresh Produce Journal
   url: https://www.fruitnet.com/fresh-produce-journal/uk-grown-grapes-ready-for-retail/162217.article
   type: trade
   published: 2014
-  published_note: "No date line. Expects first sales in 2014."
+  published_note: No date line. Expects first sales in 2014.
   accessed: 2026-11-10
 - key: fpj-waitrose-chatsworth-grapes
-  title: "Waitrose unveils posh UK grapes"
+  title: Waitrose unveils posh UK grapes
   publisher: Fresh Produce Journal
   url: https://fruitnet.com/fresh-produce-journal/waitrose-unveils-posh-uk-grapes/154292.article
   type: trade
   published: 2011
-  published_note: "No date line. Year estimated from the Fruitnet article number (2011 neighbours)."
+  published_note: No date line. Year estimated from the Fruitnet article number (2011 neighbours).
   accessed: 2026-11-10
 - key: freshdirect-review-summer-2024
-  title: "Market Review, Summer 2024"
+  title: Market Review, Summer 2024
   publisher: Fresh Direct
   url: https://freshdirect.co.uk/media/ebhdyzgt/fresh-direct-market-review-summer-2024-digital.pdf
   type: secondary
   published: 2024
   accessed: 2026-11-10
-# ---- Added in the source-dating pass, 2026-11-10 ----
 - key: defra-wholesale-prices
-  title: "Wholesale fruit and vegetable prices: weekly time series, home-grown produce (CSV to 26 Oct 2026; preview shows 24 Nov 2025 to 26 Oct 2026)"
+  title: 'Wholesale fruit and vegetable prices: weekly time series, home-grown produce (CSV to 26 Oct 2026; preview
+    shows 24 Nov 2025 to 26 Oct 2026)'
   publisher: Department for Environment, Food & Rural Affairs (GOV.UK)
   url: https://www.gov.uk/csv-preview/6adb512cd798ae11e9bc5c36/fruitvegprices-261026.csv
   type: primary
   published: 2026
-  published_note: "Data to 26 October 2026. Quotes are fortnightly; 5 January 2026 has no quotes for any item, and the preview is cut off part-way through 24 November 2025."
+  published_note: Data to 26 October 2026. Quotes are fortnightly; 5 January 2026 has no quotes for any item, and
+    the preview is cut off part-way through 24 November 2025.
   accessed: 2026-11-10
 - key: ncgm-august-2025
-  title: "Fruit and veg in season for August 2025"
+  title: Fruit and veg in season for August 2025
   publisher: New Covent Garden Market
   url: https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-for-august-2025/
   type: secondary
   published: 2025
-  published_note: "Published 1 August 2025."
+  published_note: Published 1 August 2025.
   accessed: 2026-11-10
 - key: ncgm-september-2025
-  title: "Fruit and veg in season for September 2025"
+  title: Fruit and veg in season for September 2025
   publisher: New Covent Garden Market
   url: https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-for-september-2025/
   type: secondary
   published: 2025
-  published_note: "Published 31 August 2025."
+  published_note: Published 31 August 2025.
   accessed: 2026-11-10
 - key: fpj-uk-figs-trial
-  title: "UK figs, olives and citrus near"
+  title: UK figs, olives and citrus near
   publisher: Fresh Produce Journal (Fruitnet)
   url: https://www.fruitnet.com/fresh-produce-journal/uk-figs-olives-and-citrus-near/183331.article
   type: trade
   published: 2020
-  published_note: "No date line. Refers to summer 2020 citrus trials as recent."
+  published_note: No date line. Refers to summer 2020 citrus trials as recent.
   accessed: 2026-11-10
+- key: freshplaza-scripps-braeburn-a
+  title: 'FreshPlaza: Most growers were expecting an earlier start and seem to have harvest well under control (Adrian
+    Scripps)'
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/article/9878908/most-growers-were-expecting-an-earlier-start-and-seem-to-have-harvest-well-under-control/
+  type: trade
+  published: undated
+  published_note: Year not shown in the text seen; article number suggests about 2022.
+  accessed: '2026-11-11'
+- key: freshplaza-scripps-braeburn-b
+  title: 'FreshPlaza: We are very pleased with quality; the fruit size looks to be very good for the UK market (Adrian
+    Scripps)'
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/north-america/article/9768091/we-are-very-pleased-with-quality-the-fruit-size-looks-to-be-very-good-for-the-uk-market/
+  type: trade
+  published: undated
+  published_note: Year not shown in the text seen; article number suggests about 2021.
+  accessed: '2026-11-11'
+- key: caterer-apples-2016
+  title: 'The Caterer: Home-grown harvest: Apples'
+  publisher: The Caterer
+  url: https://www.thecaterer.com/sector/chef/home-grown-harvest-apples
+  type: trade
+  published: 2016
+  accessed: '2026-11-11'

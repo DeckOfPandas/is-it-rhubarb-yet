@@ -788,12 +788,21 @@
   published: 2025
   accessed: 2026-11-10
   note: "Published 6 March 2025; reports Green, Taggart et al. in Conservation Evidence."
+- key: caterer-apples-2016
+  name: "The Caterer: Home-grown harvest: Apples"
+  short: "The Caterer"
+  url: "https://www.thecaterer.com/sector/chef/home-grown-harvest-apples"
+  kind: veg
+  rank: 37
+  type: trade
+  published: 2016
+  accessed: '2026-11-11'
 - key: caterer-artichokes-2018
   name: "Home-grown harvest: artichokes"
   short: "The Caterer"
   url: "https://thecaterer.com/indepth/home-grown-harvest-artichokes"
   kind: veg
-  rank: 37
+  rank: 38
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -803,7 +812,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/indepth/home-grown-harvest-aubergines"
   kind: veg
-  rank: 38
+  rank: 39
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -813,7 +822,7 @@
   short: "The Caterer"
   url: "https://www.thecaterer.com/articles/364857/supplier-spotlight-forced-rhubarb"
   kind: veg
-  rank: 39
+  rank: 40
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -823,7 +832,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/all-content/home-grown-harvest-sweet-and-savoury-ways-with-gooseberries"
   kind: veg
-  rank: 40
+  rank: 41
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -833,7 +842,7 @@
   short: "The Caterer"
   url: "https://www.thecaterer.com/news/foodservice/home-grown-harvest-new-potatoes"
   kind: veg
-  rank: 41
+  rank: 42
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -843,7 +852,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/all-content/home-grown-harvest-outdoor-rhubarb"
   kind: veg
-  rank: 42
+  rank: 43
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -853,7 +862,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/all-content/home-grown-harvest-purple-sprouting-broccoli"
   kind: veg
-  rank: 43
+  rank: 44
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -862,7 +871,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/indepth/home-grown-harvest-red-cabbage"
   kind: veg
-  rank: 44
+  rank: 45
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -871,7 +880,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/indepth/home-grown-harvest-salsify"
   kind: veg
-  rank: 45
+  rank: 46
   type: trade
   published: 2019
   accessed: 2026-11-10
@@ -880,7 +889,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/all-content/home-grown-harvest-spring-greens"
   kind: veg
-  rank: 46
+  rank: 47
   type: trade
   published: 2019
   accessed: 2026-11-10
@@ -889,7 +898,7 @@
   short: "The Caterer"
   url: "https://thecaterer.com/sector/chef/home-grown-harvest-swede"
   kind: veg
-  rank: 47
+  rank: 48
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -1426,7 +1435,7 @@
   short: "Country Life"
   url: "https://www.countrylife.co.uk/gardens/live-off-the-land-12-foods-you-can-forage-throughout-the-year-212973"
   kind: veg
-  rank: 48
+  rank: 49
   type: secondary
   published: 2020
   accessed: 2026-11-10
@@ -1445,7 +1454,7 @@
   short: "Countryside (NFU)"
   url: "https://www.countrysideonline.co.uk/people-in-farming/meet-the-blackcurrant-grower/"
   kind: veg
-  rank: 49
+  rank: 50
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -1455,7 +1464,7 @@
   short: "Countryside (NFU Countryside Online)"
   url: "https://www.countrysideonline.co.uk/people-in-farming/meet-the-beetroot-grower/"
   kind: veg
-  rank: 50
+  rank: 51
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -1475,7 +1484,7 @@
   short: "The Courier"
   url: "https://thecourier.co.uk/fp/lifestyle/food-drink/1459799/seasons-eatings-fruits-and-veggies-that-are-available-locally-now"
   kind: veg
-  rank: 51
+  rank: 52
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -1485,7 +1494,7 @@
   short: "The Courier"
   url: "https://www.thecourier.co.uk/fp/lifestyle/food-drink/1475165/seasons-eatings-watercress/"
   kind: veg
-  rank: 52
+  rank: 53
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -1575,7 +1584,7 @@
   short: "Defra (UK GI scheme)"
   url: "https://assets.publishing.service.gov.uk/media/5fd36588e90e07662c96cf30/pfn-new-season-combers.pdf"
   kind: veg
-  rank: 53
+  rank: 54
   type: primary
   published: 2020
   accessed: 2026-11-10
@@ -1585,7 +1594,7 @@
   short: "Defra (UK GI scheme)"
   url: "https://assets.publishing.service.gov.uk/media/635bb28fe90e070bbde1117e/product_specification_Pembrokeshire_Earlies_amended_Oct_2022.pdf"
   kind: veg
-  rank: 54
+  rank: 55
   type: primary
   published: 2022
   accessed: 2026-11-10
@@ -1595,7 +1604,7 @@
   short: "Defra (UK GI scheme)"
   url: "https://assets.publishing.service.gov.uk/media/62de3a4fe90e0766ad5a6ef7/19052022_UK_GI_Welsh_Leek_product_specification_final_.pdf"
   kind: veg
-  rank: 55
+  rank: 56
   type: primary
   published: 2022
   accessed: 2026-11-10
@@ -1633,7 +1642,7 @@
   short: Defra
   url: "https://assets.publishing.service.gov.uk/media/5a80e71ce5274a2e8ab52d07/fruitveg-statsnotice-08feb16.pdf"
   kind: veg
-  rank: 56
+  rank: 57
   type: primary
   published: 2016
   accessed: 2026-11-10
@@ -1643,7 +1652,7 @@
   short: Defra
   url: "https://assets.publishing.service.gov.uk/media/5a816072ed915d74e6231eca/fruitveg-statsnotice-08aug16.pdf"
   kind: veg
-  rank: 57
+  rank: 58
   type: primary
   published: 2016
   accessed: 2026-11-10
@@ -1653,7 +1662,7 @@
   short: Defra
   url: "https://www.gov.uk/csv-preview/6adb512cd798ae11e9bc5c36/fruitvegprices-261026.csv"
   kind: veg
-  rank: 58
+  rank: 59
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -1662,7 +1671,7 @@
   short: "Defra (GOV.UK)"
   url: "https://assets.publishing.service.gov.uk/media/5fd36354e90e07662b09d931/pfn-indoor-yorks-rhubarb-pdo.pdf"
   kind: veg
-  rank: 59
+  rank: 60
   type: primary
   published: 2020
   accessed: 2026-11-10
@@ -1672,7 +1681,7 @@
   short: Deliciouslyorkshire
   url: "https://deliciouslyorkshire.co.uk/local-salad-grower-on-a-mission-to-bring-back-cress/"
   kind: veg
-  rank: 60
+  rank: 61
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -1721,7 +1730,7 @@
   short: "Dorset View"
   url: "https://www.dorsetview.co.uk/?p=68525"
   kind: veg
-  rank: 61
+  rank: 62
   type: secondary
   published: 2023
   accessed: 2026-11-10
@@ -1847,7 +1856,7 @@
   short: "ESM Magazine"
   url: "https://www.esmmagazine.com/retail/waitrose-introduces-british-grown-kohlrabi-1987"
   kind: veg
-  rank: 62
+  rank: 63
   type: trade
   published: 2013
   accessed: 2026-11-10
@@ -1856,17 +1865,26 @@
   short: "EUR-Lex (Official Journal of the European Union)"
   url: "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:52012XC1117(01)"
   kind: veg
-  rank: 63
+  rank: 64
   type: primary
   published: 2012
   accessed: 2026-11-10
   note: "OJ publication of 17 November 2012. The PGI specification is still in force (UK register), so it counts as current under the Source age rule."
+- key: farmdirect-courgette-flowers-2013
+  name: "Courgette Flowers - The Gardeners Privilege (2 July 2013)"
+  short: "Farm Direct"
+  url: "https://farm-direct.com/news/553-courgette-flowers-the-gardeners-privilege.aspx"
+  kind: veg
+  rank: 65
+  type: secondary
+  published: 2013
+  accessed: 2026-11-10
 - key: farmdirect-cucumbers-2021
   name: "First cucumbers, watercress and baby leeks (9 Feb 2021; names Thanet Earth)"
   short: Farm-Direct
   url: "https://farm-direct.com/news/7108-first-cucumbers-watercress-baby-leeks.aspx"
   kind: veg
-  rank: 64
+  rank: 66
   type: secondary
   published: 2021
   accessed: 2026-11-10
@@ -1875,7 +1893,7 @@
   short: "Farmers Guide"
   url: "https://farmersguide.co.uk/?p=95948"
   kind: veg
-  rank: 65
+  rank: 67
   type: trade
   published: 2024
   accessed: 2026-11-10
@@ -1884,7 +1902,7 @@
   short: "Farming UK News (farming.co.uk)"
   url: "https://www.farming.co.uk/news/blackberries-available-through-to-november"
   kind: veg
-  rank: 66
+  rank: 68
   type: trade
   published: 2023
   accessed: 2026-11-10
@@ -1894,7 +1912,7 @@
   short: "Farming UK News (farming.co.uk)"
   url: "https://farming.co.uk/news/british-blueberry-season-is-here-with-largest-and-sweetest-crop-ever"
   kind: veg
-  rank: 67
+  rank: 69
   type: trade
   published: 2023
   accessed: 2026-11-10
@@ -1904,7 +1922,7 @@
   short: "Farming Monthly"
   url: "https://www.farmingmonthly.co.uk/news/1170-another-successful-watercress-festival-heralds-the-start-of-a-bumper-season-for-watercress-growers/"
   kind: veg
-  rank: 68
+  rank: 70
   type: trade
   published: 2011
   accessed: 2026-11-10
@@ -1931,7 +1949,7 @@
   short: FarmingUK
   url: "https://www.farminguk.com/news/raspberry-season-starts-three-weeks-earlier-than-usual_53203.html"
   kind: veg
-  rank: 69
+  rank: 71
   type: trade
   published: 2019
   accessed: 2026-11-10
@@ -1951,7 +1969,7 @@
   short: FarmingUK
   url: "https://www.farminguk.com/news/uk-watercress-harvest-underway-as-planned-despite-covid-19_55746.html"
   kind: veg
-  rank: 70
+  rank: 72
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -2020,7 +2038,7 @@
   short: FoodIngredientsFirst
   url: "https://www.foodingredientsfirst.com/news/tesco-to-offer-english-pears-all-year-round.html"
   kind: veg
-  rank: 71
+  rank: 73
   type: trade
   published: 2010
   accessed: 2026-11-10
@@ -2035,12 +2053,22 @@
   published: undated
   accessed: '2026-11-10'
   note: "No date line; the text mentions a book republished in September 2022, so it was revised then or later."
+- key: fishbase-atlantic-halibut
+  name: "FishBase: Hippoglossus hippoglossus, Atlantic halibut"
+  short: FishBase
+  url: "https://fishbase.se/summary/SpeciesSummary.php?id=1371"
+  kind: fish
+  rank: 83
+  type: primary
+  published: undated
+  accessed: '2026-11-11'
+  note: "Living species page; no date shown."
 - key: fishfacts-north-sea-shrimp-2009
   name: "Fishfacts: North Sea brown shrimp (version September 2009), hosted by Eastern IFCA"
   short: "Responsible Fishing Committee (hosted by Eastern IFCA)"
   url: "https://www.eastern-ifca.gov.uk/wp-content/uploads/2016/03/Fishfacts_North_Sea_shrimp.pdf"
   kind: fish
-  rank: 83
+  rank: 84
   type: secondary
   published: 2009
   accessed: 2026-11-10
@@ -2050,7 +2078,7 @@
   short: "Fish Focus"
   url: "https://fishfocus.co.uk/good-start-of-the-year-mackerel-fishery-for-scottish-fleet/"
   kind: fish
-  rank: 84
+  rank: 85
   type: trade
   published: 2024
   accessed: 2026-11-10
@@ -2059,7 +2087,7 @@
   short: "Fish Focus"
   url: "https://fishfocus.co.uk/high-quality-scottish-mackerel-in-strong-demand-from-markets/"
   kind: fish
-  rank: 85
+  rank: 86
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2068,7 +2096,7 @@
   short: "Fish Focus"
   url: "https://fishfocus.co.uk/good-abundance-of-mackerel-for-scottish-fishery-this-autumn/"
   kind: fish
-  rank: 86
+  rank: 87
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2077,7 +2105,7 @@
   short: "The Fishing Daily"
   url: "https://thefishingdaily.com/featured-news/end-of-the-year-mackerel-fishery-successfully-completed-for-scottish-fleet/"
   kind: fish
-  rank: 87
+  rank: 88
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2087,7 +2115,7 @@
   short: "The Fishing Daily"
   url: "https://thefishingdaily.com/?p=87104"
   kind: fish
-  rank: 88
+  rank: 89
   type: trade
   published: 2025
   accessed: '2026-11-10'
@@ -2097,7 +2125,7 @@
   short: "Fishing News"
   url: "https://fishingnews.co.uk/?p=65725"
   kind: fish
-  rank: 89
+  rank: 90
   type: trade
   published: 2019
   accessed: 2026-11-10
@@ -2107,7 +2135,7 @@
   short: "Fish is the Dish (Seafish)"
   url: "https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/clams"
   kind: fish
-  rank: 90
+  rank: 91
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -2117,7 +2145,7 @@
   short: "Fish is the Dish (Seafish)"
   url: "https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/crab"
   kind: fish
-  rank: 91
+  rank: 92
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -2127,7 +2155,7 @@
   short: "Fish is the Dish (Seafish)"
   url: "https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/langoustines"
   kind: fish
-  rank: 92
+  rank: 93
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -2137,7 +2165,7 @@
   short: "Fish is the Dish (Seafish)"
   url: "https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/lobster"
   kind: fish
-  rank: 93
+  rank: 94
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -2147,7 +2175,7 @@
   short: "Fish is the Dish (Seafish)"
   url: "https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/mussels"
   kind: fish
-  rank: 94
+  rank: 95
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -2157,7 +2185,7 @@
   short: "Fish is the Dish (Seafish)"
   url: "https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/oysters"
   kind: fish
-  rank: 95
+  rank: 96
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -2167,7 +2195,7 @@
   short: "Fish is the Dish (Seafish)"
   url: "https://www.fishisthedish.co.uk/learn/fish-guide/species-of-fish/scallops"
   kind: fish
-  rank: 96
+  rank: 97
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -2177,7 +2205,7 @@
   short: "Flying Fish Seafoods"
   url: "https://flyingfishseafoods.co.uk/seasonality/"
   kind: fish
-  rank: 97
+  rank: 98
   type: secondary
   published: 2026
   accessed: '2026-11-10'
@@ -2187,7 +2215,7 @@
   short: "Food and Travel"
   url: "https://foodandtravel.com/food/in-season/artichokes"
   kind: veg
-  rank: 72
+  rank: 74
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -2197,7 +2225,7 @@
   short: "Food and Travel"
   url: "https://foodandtravel.com/food/in-season/broad-beans"
   kind: veg
-  rank: 73
+  rank: 75
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -2207,7 +2235,7 @@
   short: "Food and Travel"
   url: "https://foodandtravel.com/food/in-season/french-beans"
   kind: veg
-  rank: 74
+  rank: 76
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -2227,7 +2255,7 @@
   short: "Foodomarket (wholesaler)"
   url: "https://www.foodomarket.com/en-gb/guides/whats-in-season-uk"
   kind: veg
-  rank: 75
+  rank: 77
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -2237,7 +2265,7 @@
   short: "The Foraging Course Company"
   url: "https://www.foragingcoursecompany.co.uk/foraging-guide-gooseberry"
   kind: veg
-  rank: 76
+  rank: 78
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -2247,7 +2275,7 @@
   short: "The Foraging Course Company"
   url: "https://foragingcoursecompany.co.uk/foraging-guide-horseradish"
   kind: veg
-  rank: 77
+  rank: 79
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -2257,7 +2285,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/apple-and-pear-season-start-brought-forward/143395.article"
   kind: veg
-  rank: 78
+  rank: 80
   type: trade
   published: 2007
   accessed: 2026-11-10
@@ -2267,7 +2295,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/early-start-for-uk-apples/143263.article"
   kind: veg
-  rank: 79
+  rank: 81
   type: trade
   published: 2007
   accessed: 2026-11-10
@@ -2277,7 +2305,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/british-asparagus-season-officially-begins/271291.article"
   kind: veg
-  rank: 80
+  rank: 82
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2287,7 +2315,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/english-aubergines-hit-shelves/153354.article"
   kind: veg
-  rank: 81
+  rank: 83
   type: trade
   published: 2011
   accessed: 2026-11-10
@@ -2297,7 +2325,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/barfoots-expands-uk-butternut-production/263808.article"
   kind: veg
-  rank: 82
+  rank: 84
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2307,7 +2335,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/uk-beetroot-season-underway/151758.article"
   kind: veg
-  rank: 83
+  rank: 85
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2317,7 +2345,7 @@
   short: "Fresh Produce Journal"
   url: "https://fruitnet.com/fresh-produce-journal/berries-switch-over/134805.article"
   kind: veg
-  rank: 84
+  rank: 86
   type: trade
   published: 2005
   accessed: 2026-11-10
@@ -2327,7 +2355,7 @@
   short: "Fresh Produce Journal (Fruitnet), quoting the Blackcurrant Foundation"
   url: "https://fruitnet.com/fresh-produce-journal/british-blackcurrant-season-underway/151774.article"
   kind: veg
-  rank: 85
+  rank: 87
   type: trade
   published: 2010
   accessed: 2026-11-10
@@ -2337,7 +2365,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/growers-forecast-bumper-crop-of-uk-blueberries/249334.article"
   kind: veg
-  rank: 86
+  rank: 88
   type: trade
   published: 2023
   accessed: 2026-11-10
@@ -2347,7 +2375,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/english-braeburn-makes-its-mark/145201.article"
   kind: veg
-  rank: 87
+  rank: 89
   type: trade
   published: 2008
   accessed: 2026-11-10
@@ -2357,7 +2385,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/british-veg-shows-shoppers-their-roots/151817.article"
   kind: veg
-  rank: 88
+  rank: 90
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2367,7 +2395,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/buy-british-tomatoes-growers-say/248824.article"
   kind: veg
-  rank: 89
+  rank: 91
   type: trade
   published: 2023
   accessed: 2026-11-10
@@ -2377,7 +2405,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/uk-carrots-close-hungry-gap/136620.article"
   kind: veg
-  rank: 90
+  rank: 92
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2387,7 +2415,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/celeriac-back-in-fashion-with-sales-surge/248522.article"
   kind: veg
-  rank: 91
+  rank: 93
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2397,7 +2425,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/best-british-cherry-season-in-30-years/166383.article"
   kind: veg
-  rank: 92
+  rank: 94
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -2407,7 +2435,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/better-weather-gives-rise-to-larger-english-cherry-crop-says-supplier/246593.article"
   kind: veg
-  rank: 93
+  rank: 95
   type: trade
   published: 2022
   accessed: 2026-11-10
@@ -2417,7 +2445,7 @@
   short: "Fresh Produce Journal (Fruitnet), quoting the Kentish Cobnuts Association"
   url: "https://www.fruitnet.com/fresh-produce-journal/cobnuts-arrive-early/154153.article"
   kind: veg
-  rank: 94
+  rank: 96
   type: trade
   published: 2011
   accessed: 2026-11-10
@@ -2427,7 +2455,7 @@
   short: "Fresh Produce Journal (Fruitnet), quoting the Association of Kentish Cobnuts Growers"
   url: "https://fruitnet.com/fresh-produce-journal/cobnuts-on-market-too-early/146254.article"
   kind: veg
-  rank: 95
+  rank: 97
   type: trade
   published: 2008
   accessed: 2026-11-10
@@ -2437,7 +2465,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/first-cornish-spuds-on-sale-with-new-campaign/175844.article"
   kind: veg
-  rank: 96
+  rank: 98
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2447,7 +2475,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/first-cornish-new-potatoes-lifted/151183.article"
   kind: veg
-  rank: 97
+  rank: 99
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2457,7 +2485,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/dyson-farming-extends-uk-strawberry-season/184759.article"
   kind: veg
-  rank: 98
+  rank: 100
   type: trade
   published: 2021
   accessed: 2026-11-10
@@ -2467,7 +2495,7 @@
   short: "Fresh Produce Journal (Fruitnet), quoting English Apples & Pears"
   url: "https://www.fruitnet.com/fresh-produce-journal/eap-hits-back-at-tabloid-apple-investigation/146861.article"
   kind: veg
-  rank: 99
+  rank: 101
   type: trade
   published: 2008
   accessed: 2026-11-10
@@ -2477,7 +2505,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/first-british-figs-of-the-season-on-sale-at-sainsburys/166245.article"
   kind: veg
-  rank: 100
+  rank: 102
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -2487,7 +2515,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/veterans-chew-the-garlic/141693.article"
   kind: veg
-  rank: 101
+  rank: 103
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2497,7 +2525,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/gooseberries-nobodys-fool/146342.article"
   kind: veg
-  rank: 102
+  rank: 104
   type: trade
   published: 2008
   accessed: 2026-11-10
@@ -2522,12 +2550,22 @@
   published: undated
   accessed: '2026-11-10'
   note: "No date line. The text cites 2009 research and says Lincolnshire Herbs was called Swedeponic until the year before, which points to about 2010-11; treat as pre-2016."
+- key: fpj-kent-grape-trial
+  name: "Kent seedless grape trial targets 2016 crop"
+  short: "Fresh Produce Journal"
+  url: "https://fruitnet.com/fresh-produce-journal/kent-seedless-grape-trial-targets-2016-crop/155456.article"
+  kind: veg
+  rank: 105
+  type: trade
+  published: 2011
+  accessed: 2026-11-10
+  note: "No date line. Project began 2007 and targets 2016; the Fruitnet article number fits 2011."
 - key: fpj-littlegem-snaith
   name: "A little gem for Yorkshire Asda stores (undated; grower Mark Hardwick via English Village Salads)"
   short: "Fresh Produce Journal"
   url: "https://fruitnet.com/fresh-produce-journal/a-little-gem-for-yorkshire-asda-stores/145012.article"
   kind: veg
-  rank: 103
+  rank: 106
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2537,7 +2575,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/medlars-making-east-anglian-comeback/171953.article"
   kind: veg
-  rank: 104
+  rank: 107
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -2557,7 +2595,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/fighting-the-cause/147569.article"
   kind: veg
-  rank: 105
+  rank: 108
   type: trade
   published: 2009
   accessed: 2026-11-10
@@ -2567,7 +2605,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/closing-in-on-year-round-uk-onions/170264.article"
   kind: veg
-  rank: 106
+  rank: 109
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -2577,7 +2615,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/parsnip-suppliers-urge-consumers-to-root-for-the-underdog/165603.article"
   kind: veg
-  rank: 107
+  rank: 110
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -2587,7 +2625,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/24-hour-british-pea-harvest-underway/182242.article"
   kind: veg
-  rank: 108
+  rank: 111
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -2597,7 +2635,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/peas-pop-up-early-at-sainsburys/142104.article"
   kind: veg
-  rank: 109
+  rank: 112
   type: trade
   published: 2007
   accessed: 2026-11-10
@@ -2607,7 +2645,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/english-plums-set-for-bumper-crop/149247.article"
   kind: veg
-  rank: 110
+  rank: 113
   type: trade
   published: 2009
   accessed: 2026-11-10
@@ -2617,7 +2655,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/potato-stocks-keep-pace-with-2015-16-season/172196.article"
   kind: veg
-  rank: 111
+  rank: 114
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -2627,7 +2665,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/raspberry-volumes-set-for-big-rise-as-season-begins/185604.article"
   kind: veg
-  rank: 112
+  rank: 115
   type: trade
   published: 2021
   accessed: 2026-11-10
@@ -2637,7 +2675,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/uk-raspberries-hit-shop-shelves-for-first-time-in-march/164720.article"
   kind: veg
-  rank: 113
+  rank: 116
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -2647,7 +2685,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/quality-raspberry-crop-to-last-until-november/182320.article"
   kind: veg
-  rank: 114
+  rank: 117
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -2657,7 +2695,7 @@
   short: "Fresh Produce Journal"
   url: "https://www.fruitnet.com/fresh-produce-journal/new-sweet-lettuce-variety-unveiled-at-sainsburys/165717.article"
   kind: veg
-  rank: 115
+  rank: 118
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -2667,7 +2705,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/roots-face-differing-seasons/134895.article"
   kind: veg
-  rank: 116
+  rank: 119
   type: trade
   published: 2004
   accessed: 2026-11-10
@@ -2677,7 +2715,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/suppliers-throw-weight-behind-runner-bean-campaign/154166.article"
   kind: veg
-  rank: 117
+  rank: 120
   type: trade
   published: 2011
   accessed: 2026-11-10
@@ -2687,7 +2725,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/sainsburys-goes-100-per-cent-english-on-braeburn/132299.article"
   kind: veg
-  rank: 118
+  rank: 121
   type: trade
   published: 2005
   accessed: 2026-11-10
@@ -2707,7 +2745,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/british-sea-kale-lands-at-waitrose-stores/167669.article"
   kind: veg
-  rank: 119
+  rank: 122
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -2717,7 +2755,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/british-shallots-back-on-the-menu/146211.article"
   kind: veg
-  rank: 120
+  rank: 123
   type: trade
   published: 2008
   accessed: 2026-11-10
@@ -2727,7 +2765,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/british-strawberries-sweet-and-plentiful-as-season-gets-underway/246264.article"
   kind: veg
-  rank: 121
+  rank: 124
   type: trade
   published: 2022
   accessed: 2026-11-10
@@ -2736,7 +2774,7 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/strawberries-and-cream/155771.article"
   kind: veg
-  rank: 122
+  rank: 125
   type: trade
   published: 2011
   accessed: 2026-11-10
@@ -2746,17 +2784,37 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://www.fruitnet.com/fresh-produce-journal/uk-figs-olives-and-citrus-near/183331.article"
   kind: veg
-  rank: 123
+  rank: 126
   type: trade
   published: 2020
   accessed: 2026-11-10
   note: "No date line. Refers to summer 2020 citrus trials as recent."
+- key: fpj-uk-grapes-mack
+  name: "UK-grown grapes ready for retail"
+  short: "Fresh Produce Journal"
+  url: "https://www.fruitnet.com/fresh-produce-journal/uk-grown-grapes-ready-for-retail/162217.article"
+  kind: veg
+  rank: 127
+  type: trade
+  published: 2014
+  accessed: 2026-11-10
+  note: "No date line. Expects first sales in 2014."
+- key: fpj-waitrose-chatsworth-grapes
+  name: "Waitrose unveils posh UK grapes"
+  short: "Fresh Produce Journal"
+  url: "https://fruitnet.com/fresh-produce-journal/waitrose-unveils-posh-uk-grapes/154292.article"
+  kind: veg
+  rank: 128
+  type: trade
+  published: 2011
+  accessed: 2026-11-10
+  note: "No date line. Year estimated from the Fruitnet article number (2011 neighbours)."
 - key: fpj-warm-autumn-apples
   name: "Warm autumn drags English apples back"
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/warm-autumn-drags-english-apples-back/170294.article"
   kind: veg
-  rank: 124
+  rank: 129
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -2766,17 +2824,45 @@
   short: "Fresh Produce Journal (Fruitnet)"
   url: "https://fruitnet.com/fresh-produce-journal/year-round-english-apples-nearing/159619.article"
   kind: veg
-  rank: 125
+  rank: 130
   type: trade
   published: 2012
   accessed: 2026-11-10
   note: "No date line. Year estimated from the Fruitnet article number (between 2011 and 2014 articles)."
+- key: freshdirect-review-summer-2024
+  name: "Market Review, Summer 2024"
+  short: "Fresh Direct"
+  url: "https://freshdirect.co.uk/media/ebhdyzgt/fresh-direct-market-review-summer-2024-digital.pdf"
+  kind: veg
+  rank: 131
+  type: secondary
+  published: 2024
+  accessed: 2026-11-10
+- key: freshplaza-asda-grapes-2015
+  name: "British grapes on shelves after 3 years (2 December 2015)"
+  short: FreshPlaza
+  url: "https://www.freshplaza.com/north-america/article/2150006/british-grapes-on-shelves-after-3-years/"
+  kind: veg
+  rank: 132
+  type: trade
+  published: 2015
+  accessed: 2026-11-10
+- key: freshplaza-askew-leeks
+  name: "FreshPlaza: Low demand and prices in leek market while costs continue to increase (SS Askew)"
+  short: FreshPlaza
+  url: "https://www.freshplaza.com/article/9404295/low-demand-and-prices-in-leek-market-while-costs-continue-to-increase"
+  kind: veg
+  rank: 133
+  type: trade
+  published: undated
+  accessed: '2026-11-11'
+  note: "Year not shown in the text seen; article number suggests about 2022."
 - key: freshplaza-asparagus-2022
   name: "By the first week of May it should be 100% British asparagus on the shelves"
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/9421091/by-the-first-week-of-may-it-should-be-100-british-asparagus-on-the-shelves/"
   kind: veg
-  rank: 126
+  rank: 134
   type: trade
   published: 2022
   accessed: 2026-11-10
@@ -2785,7 +2871,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/asia/article/9816283/uk-grower-harvests-asparagus-six-weeks-early-using-coir-tunnels"
   kind: veg
-  rank: 127
+  rank: 135
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2794,7 +2880,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9801118/the-uk-carrot-crop-won-t-be-far-from-going-right-through-to-the-new-season/"
   kind: veg
-  rank: 128
+  rank: 136
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2803,7 +2889,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/asia/article/9835711/there-is-still-a-fair-bit-of-uk-carrots-around-but-we-are-also-seeing-some-imports/"
   kind: veg
-  rank: 129
+  rank: 137
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2812,7 +2898,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/article/9109509/british-onion-producers-association-reports-a-positive-start-for-2019-season/"
   kind: veg
-  rank: 130
+  rank: 138
   type: trade
   published: 2019
   accessed: 2026-11-10
@@ -2821,7 +2907,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9864084/british-onion-crop-faces-early-harvest-smaller-bulbs-and-lower-yields/"
   kind: veg
-  rank: 131
+  rank: 139
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2830,7 +2916,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/9775848/good-end-to-broccoli-season-but-it-will-not-make-up-for-losses-at-the-start-of-the-uk-brassica-campaign/"
   kind: veg
-  rank: 132
+  rank: 140
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2839,7 +2925,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9734784/uk-broccoli-harvest-expected-three-weeks-early/"
   kind: veg
-  rank: 133
+  rank: 141
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2848,7 +2934,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/oceania/article/9886628/vogue-has-called-2026-the-year-of-the-cabbage/"
   kind: veg
-  rank: 134
+  rank: 142
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2857,7 +2943,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2154406/uk-cabbage-prices-picking-up/"
   kind: veg
-  rank: 135
+  rank: 143
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -2866,7 +2952,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2186430/cornish-cauliflower-in-good-supply/"
   kind: veg
-  rank: 136
+  rank: 144
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -2875,7 +2961,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/article/9306067/cauliflower-availability-is-now-very-strong-and-will-continue-to-be-so-into-april"
   kind: veg
-  rank: 137
+  rank: 145
   type: trade
   published: 2021
   accessed: 2026-11-10
@@ -2884,7 +2970,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/9597793/big-demand-for-cornwall-s-cauliflower/"
   kind: veg
-  rank: 138
+  rank: 146
   type: trade
   published: 2024
   accessed: 2026-11-10
@@ -2893,7 +2979,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9746298/we-have-been-bold-with-our-cavolo-nero-growing-plan-to-ensure-we-can-meet-demand/"
   kind: veg
-  rank: 139
+  rank: 147
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2902,7 +2988,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2162318/uk-cavolo-nero-is-back-in-season/"
   kind: veg
-  rank: 140
+  rank: 148
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -2911,7 +2997,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9328184/uk-growers-set-for-another-strong-cherry-season"
   kind: veg
-  rank: 141
+  rank: 149
   type: trade
   published: 2021
   accessed: 2026-11-10
@@ -2921,7 +3007,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/latin-america/article/9859930/i-am-very-optimistic-for-the-remainder-of-the-season-through-to-september/"
   kind: veg
-  rank: 142
+  rank: 150
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2931,7 +3017,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9637854/cornish-new-potatoes-herald-the-arrival-of-uk-summer/"
   kind: veg
-  rank: 143
+  rank: 151
   type: trade
   published: 2024
   accessed: 2026-11-10
@@ -2950,7 +3036,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2178799/uk-new-season-blackcurrants-selling-like-hot-cakes"
   kind: veg
-  rank: 144
+  rank: 152
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -2959,7 +3045,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9812954/we-are-having-to-plan-our-harvesting-very-carefully-to-minimise-impact-on-soils/"
   kind: veg
-  rank: 145
+  rank: 153
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -2968,7 +3054,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9776912/neeps-rising-scotland-s-rooted-revolution-begins"
   kind: veg
-  rank: 146
+  rank: 154
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2977,7 +3063,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2114248/uk-fenland-celery-wins-protected-status-from-european-commission/"
   kind: veg
-  rank: 147
+  rank: 155
   type: trade
   published: 2013
   accessed: 2026-11-10
@@ -2986,7 +3072,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/europe/article/9780351/fenland-celery-harvest-begins-in-eastern-england/"
   kind: veg
-  rank: 148
+  rank: 156
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -2995,7 +3081,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2112244/uk-grown-figs-go-on-sale-at-sainsbury-s/"
   kind: veg
-  rank: 149
+  rank: 157
   type: trade
   published: 2013
   accessed: 2026-11-10
@@ -3004,7 +3090,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/9276423/mkc-only-uk-grower-to-produce-year-round-kale/"
   kind: veg
-  rank: 150
+  rank: 158
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -3013,7 +3099,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2152621/terrible-season-uk-for-kale-growers/"
   kind: veg
-  rank: 151
+  rank: 159
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -3022,10 +3108,20 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2174743/uk-iceberg-lettuce-harvest-comes-early-ending-spanish-veg-shortage/"
   kind: veg
-  rank: 152
+  rank: 160
   type: trade
   published: 2017
   accessed: 2026-11-10
+- key: freshplaza-lga-casey
+  name: "FreshPlaza: UK leek shortage will worsen in January (Tim Casey, British Leek Growers Association)"
+  short: FreshPlaza
+  url: "https://www.freshplaza.com/article/9056389/uk-leek-shortage-will-worsen-in-january/"
+  kind: veg
+  rank: 161
+  type: trade
+  published: undated
+  accessed: '2026-11-11'
+  note: "Year not shown in the text seen; article number suggests about 2018."
 - key: freshplaza-lincolnshire-herbs
   name: "Sunshine brings increased demand for herbs (19 April 2013)"
   short: FreshPlaza
@@ -3041,7 +3137,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/article/9868785/uk-apples-begin-as-summer-produce-season-winds-down/"
   kind: veg
-  rank: 153
+  rank: 162
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -3050,7 +3146,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2111687/first-british-plums-at-waitrose/"
   kind: veg
-  rank: 154
+  rank: 163
   type: trade
   published: 2013
   accessed: 2026-11-10
@@ -3059,7 +3155,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2145057/uk-positive-plum-season-despite-english-weather/"
   kind: veg
-  rank: 155
+  rank: 164
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -3068,7 +3164,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2143242/first-british-plums-of-the-season-at-waitrose"
   kind: veg
-  rank: 156
+  rank: 165
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -3077,7 +3173,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2137417/uk-raspberries-2-weeks-early-on-the-shelves/"
   kind: veg
-  rank: 157
+  rank: 166
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -3086,7 +3182,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2142305/100-british-lettuce-turns-heads/"
   kind: veg
-  rank: 158
+  rank: 167
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -3095,10 +3191,30 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2135889/uk-red-cabbage-in-big-demand/"
   kind: veg
-  rank: 159
+  rank: 168
   type: trade
   published: 2015
   accessed: 2026-11-10
+- key: freshplaza-scripps-braeburn-a
+  name: "FreshPlaza: Most growers were expecting an earlier start and seem to have harvest well under control (Adrian Scripps)"
+  short: FreshPlaza
+  url: "https://www.freshplaza.com/article/9878908/most-growers-were-expecting-an-earlier-start-and-seem-to-have-harvest-well-under-control/"
+  kind: veg
+  rank: 169
+  type: trade
+  published: undated
+  accessed: '2026-11-11'
+  note: "Year not shown in the text seen; article number suggests about 2022."
+- key: freshplaza-scripps-braeburn-b
+  name: "FreshPlaza: We are very pleased with quality; the fruit size looks to be very good for the UK market (Adrian Scripps)"
+  short: FreshPlaza
+  url: "https://www.freshplaza.com/north-america/article/9768091/we-are-very-pleased-with-quality-the-fruit-size-looks-to-be-very-good-for-the-uk-market/"
+  kind: veg
+  rank: 170
+  type: trade
+  published: undated
+  accessed: '2026-11-11'
+  note: "Year not shown in the text seen; article number suggests about 2021."
 - key: freshplaza-smithy-exotic
   name: "Vegans fuel UK exotic mushroom boom (27 January 2020)"
   short: FreshPlaza
@@ -3114,7 +3230,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2138827/first-uk-spring-onions-hit-the-shelves/"
   kind: veg
-  rank: 160
+  rank: 171
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -3123,7 +3239,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/north-america/article/2091055/uk-east-yorkshire-farm-benefits-from-sprouts-bonanza"
   kind: veg
-  rank: 161
+  rank: 172
   type: trade
   published: 2012
   accessed: 2026-11-10
@@ -3132,7 +3248,7 @@
   short: FreshPlaza
   url: "https://www.freshplaza.com/article/9870914/british-strawberry-growers-expect-higher-late-season-volumes/"
   kind: veg
-  rank: 162
+  rank: 173
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -3142,17 +3258,26 @@
   short: "Freshview Foods"
   url: "https://freshviewfoods.co.uk/freshview-foods-crop-report-july-2025"
   kind: veg
-  rank: 163
+  rank: 174
   type: secondary
   published: 2025
   accessed: 2026-11-10
   note: "Crop report dated July 2025."
+- key: freshview-crop-report-2026-06
+  name: "Freshview Foods: Crop report, 6 June 2026"
+  short: "Freshview Foods"
+  url: "https://freshviewfoods.co.uk/wp-content/uploads/2026/06/Freshview-Foods-Crop-Report-6-June-2026.pdf"
+  kind: veg
+  rank: 175
+  type: secondary
+  published: 2026
+  accessed: '2026-11-11'
 - key: freshview-seasonality
   name: "Seasonality calendar"
   short: "Freshview Foods"
   url: "https://freshviewfoods.co.uk/seasonality-calendar/"
   kind: veg
-  rank: 164
+  rank: 176
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -3172,7 +3297,7 @@
   short: "Fruit & Vine"
   url: "https://www.fruitandvine.co.uk/?p=65587"
   kind: veg
-  rank: 165
+  rank: 177
   type: trade
   published: 2022
   accessed: 2026-11-10
@@ -3181,7 +3306,7 @@
   short: "Fruit & Vine, quoting the Blackcurrant Foundation"
   url: "https://www.fruitandvine.co.uk/?p=73892"
   kind: veg
-  rank: 166
+  rank: 178
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -3190,11 +3315,21 @@
   short: "Fruit & Vine"
   url: "https://www.fruitandvine.co.uk/?p=70806"
   kind: veg
-  rank: 167
+  rank: 179
   type: trade
   published: 2024
   accessed: 2026-11-10
   note: "Published 12 August 2024."
+- key: fsa-enoki-listeria
+  name: "Rapid risk assessment of the detection of Listeria monocytogenes in enoki mushrooms (10 September 2024)"
+  short: "Food Standards Agency"
+  url: "https://science.food.gov.uk/article/122719-rapid-risk-assessment-of-the-detection-of-listeria-monocytogenes-in-enoki-mushrooms"
+  kind: veg
+  rank: 180
+  type: primary
+  published: 2024
+  accessed: '2026-11-10'
+  note: "Dated 10 Sep 2024 (in title)."
 - key: fsa-lead-shot-game
   name: "Advice to frequent eaters of game shot with lead"
   short: "Food Standards Agency"
@@ -3224,6 +3359,16 @@
   type: trade
   published: 2002
   accessed: 2026-11-10
+- key: fwi-leeks-growing
+  name: "Farmers Weekly: Discover the secrets to successfully growing leeks"
+  short: "Farmers Weekly"
+  url: "https://fwi.co.uk/arable/discover-secrets-successfully-growing-leeks"
+  kind: veg
+  rank: 181
+  type: trade
+  published: undated
+  accessed: '2026-11-11'
+  note: "Year not shown on the page."
 - key: fwi-michaelmas-geese
   name: "Michaelmas geese on the move"
   short: "Farmers Weekly, quoting the British Goose Producers' Association"
@@ -3354,7 +3499,7 @@
   short: "Galloway Wild Foods"
   url: "https://gallowaywildfoods.com/?p=365"
   kind: veg
-  rank: 168
+  rank: 182
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -3374,7 +3519,7 @@
   short: "The Garlic Farm (Isle of Wight)"
   url: "https://www.thegarlicfarm.co.uk/collections/garlic-for-eating/products/rustic-early-wight-5-bulb-bunch"
   kind: veg
-  rank: 169
+  rank: 183
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -3384,7 +3529,7 @@
   short: "The Garlic Farm (Isle of Wight)"
   url: "https://www.thegarlicfarm.co.uk/blogs/news/a-guide-to-garlic-growing"
   kind: veg
-  rank: 170
+  rank: 184
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -3394,7 +3539,7 @@
   short: "The Garlic Farm (Isle of Wight)"
   url: "https://thegarlicfarm.co.uk/products/new-season-rhapsody-wight-bulb"
   kind: veg
-  rank: 171
+  rank: 185
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -3404,7 +3549,7 @@
   short: "Great British Chefs"
   url: "https://www.greatbritishchefs.com/how-to-cook/how-to-cook-courgette/amp"
   kind: veg
-  rank: 172
+  rank: 186
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -3414,7 +3559,7 @@
   short: "GOV.UK (Defra / Marine Management Organisation)"
   url: "https://www.gov.uk/government/publications/bass-industry-guidance-2026/bass-fishing-guidance-2025"
   kind: fish
-  rank: 98
+  rank: 99
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -3433,7 +3578,7 @@
   short: "GOV.UK (Defra)"
   url: "https://www.gov.uk/protected-food-drink-names/fenland-celery"
   kind: veg
-  rank: 173
+  rank: 187
   type: primary
   published: 2021
   accessed: 2026-11-10
@@ -3443,7 +3588,7 @@
   short: "Defra (GOV.UK)"
   url: "https://www.gov.uk/government/publications/southern-north-sea-and-channel-skate-and-ray-fisheries-management-plan-fmp/southern-north-sea-and-channel-skate-and-ray-fisheries-management-plan"
   kind: fish
-  rank: 99
+  rank: 100
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -3453,7 +3598,7 @@
   short: "Environment Agency (GOV.UK)"
   url: "https://gov.uk/government/news/decision-on-sea-trout-netting-season-extension-announced"
   kind: fish
-  rank: 100
+  rank: 101
   type: primary
   published: 2020
   accessed: 2026-11-10
@@ -3462,7 +3607,7 @@
   short: "UK Government (GOV.UK assets), Offshore Energy SEA"
   url: "https://assets.publishing.service.gov.uk/media/5a7b43d4ed915d429748deeb/TR_SEA2_Cephalopods.pdf"
   kind: fish
-  rank: 101
+  rank: 102
   type: primary
   published: 2001
   accessed: 2026-11-10
@@ -3471,7 +3616,7 @@
   short: "UK Government (GOV.UK assets)"
   url: "https://assets.publishing.service.gov.uk/media/623253808fa8f56c1e91ab5d/Appendix_1a_3_-_Cephalopods.pdf"
   kind: fish
-  rank: 102
+  rank: 103
   type: primary
   published: 2022
   accessed: 2026-11-10
@@ -3481,7 +3626,7 @@
   short: "UK Government (Offshore Energy Strategic Environmental Assessment)"
   url: "https://assets.publishing.service.gov.uk/media/623253a78fa8f56c20996990/Appendix_1a_4_-_Fish___Shellfish.pdf"
   kind: fish
-  rank: 103
+  rank: 104
   type: primary
   published: 2022
   accessed: 2026-11-10
@@ -3491,7 +3636,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/publications/proposed-northern-shelf-hake-fisheries-management-plan/pages/9/"
   kind: fish
-  rank: 104
+  rank: 105
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -3500,7 +3645,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/publications/review-trial-mackerel-inshore-fishery-2014-2017/pages/3/"
   kind: fish
-  rank: 105
+  rank: 106
   type: primary
   published: 2017
   accessed: 2026-11-10
@@ -3509,7 +3654,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/publications/proposed-northern-shelf-ling-fisheries-management-plan/pages/9/"
   kind: fish
-  rank: 106
+  rank: 107
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -3518,7 +3663,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/policies/salmon-and-recreational-fisheries/conservation/"
   kind: fish
-  rank: 107
+  rank: 108
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -3528,7 +3673,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/publications/salmon-sea-trout-fishery-statistics-2025/pages/6/"
   kind: fish
-  rank: 108
+  rank: 109
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -3568,7 +3713,7 @@
   short: "The Grocer"
   url: "https://thegrocer.co.uk/news/albert-bartlett-brings-back-forgotten-veg-salsify/573561.article"
   kind: veg
-  rank: 174
+  rank: 188
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -3588,7 +3733,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/fruit-and-veg/cherry-crop-booms-as-youthful-farmers-innovate/521942.article"
   kind: veg
-  rank: 175
+  rank: 189
   type: trade
   published: 2015
   accessed: 2026-11-10
@@ -3598,7 +3743,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/news/cobnut-renaissance-hailed-by-growers-/122524.article"
   kind: veg
-  rank: 176
+  rank: 190
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -3608,7 +3753,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/news/here-come-the-cornish/109274.article"
   kind: veg
-  rank: 177
+  rank: 191
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -3618,7 +3763,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/news/campaign-to-impress-with-cress/108952.article"
   kind: veg
-  rank: 178
+  rank: 192
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -3628,7 +3773,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/fruit-and-veg/goatham-and-son-to-sell-royal-gala-apples-in-summer-for-first-time/593881.article"
   kind: veg
-  rank: 179
+  rank: 193
   type: trade
   published: 2019
   accessed: 2026-11-10
@@ -3638,7 +3783,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/fresh/winter-hardy-kale-is-new-star-of-brassicas/237738.article"
   kind: veg
-  rank: 180
+  rank: 194
   type: trade
   published: 2013
   accessed: 2026-11-10
@@ -3658,7 +3803,7 @@
   short: "The Grocer"
   url: "https://thegrocer.co.uk/in-season-mussels/197526.article"
   kind: fish
-  rank: 109
+  rank: 110
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -3668,7 +3813,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/news/severe-frosts-wreck-purple-broccoli-crops/215885.article"
   kind: veg
-  rank: 181
+  rank: 195
   type: trade
   published: 2011
   accessed: 2026-11-10
@@ -3678,7 +3823,7 @@
   short: "The Grocer"
   url: "https://www.thegrocer.co.uk/news/spring-in-step-of-raspberry-growers-as-uk-season-kicks-off-early/594304.article"
   kind: veg
-  rank: 182
+  rank: 196
   type: trade
   published: 2019
   accessed: 2026-11-10
@@ -3698,7 +3843,7 @@
   short: "The Grocer"
   url: "https://thegrocer.co.uk/news/waitrose-claims-first-with-british-sea-kale-listing/530850.article"
   kind: veg
-  rank: 183
+  rank: 197
   type: trade
   published: 2016
   accessed: 2026-11-10
@@ -3718,7 +3863,7 @@
   short: "Grocery Gazette"
   url: "https://www.grocerygazette.co.uk/2022/10/10/tesco-pumpkin-good-quality/"
   kind: veg
-  rank: 184
+  rank: 198
   type: trade
   published: 2022
   accessed: 2026-11-10
@@ -3728,7 +3873,7 @@
   short: "G's Fresh"
   url: "https://www.gs-fresh.com/sandfields-farms"
   kind: veg
-  rank: 185
+  rank: 199
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -3738,7 +3883,7 @@
   short: "The Guardian"
   url: "https://inkl.com/news/they-called-it-black-gold-but-should-cuttlefish-be-on-our-menus"
   kind: fish
-  rank: 110
+  rank: 111
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -3855,7 +4000,7 @@
   short: Hodmedod's
   url: "https://hodmedods.co.uk/products/whole-wet-walnuts-in-shell"
   kind: veg
-  rank: 186
+  rank: 200
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -3875,7 +4020,7 @@
   short: HortiDaily
   url: "https://www.hortidaily.com/article/9443246/every-year-is-different-for-our-gooseberry-production-and-demand-is-also-a-bit-unpredictable/"
   kind: veg
-  rank: 187
+  rank: 201
   type: trade
   published: 2022
   accessed: 2026-11-10
@@ -3895,7 +4040,7 @@
   short: HortiDaily
   url: "https://www.hortidaily.com/article/6036261/uk-peppers-see-good-production-and-demand/"
   kind: veg
-  rank: 188
+  rank: 202
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -3905,7 +4050,7 @@
   short: HortiDaily
   url: "https://www.hortidaily.com/article/9826261/british-tomato-fortnight-dates-announced-for-2026"
   kind: veg
-  rank: 189
+  rank: 203
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -3914,7 +4059,7 @@
   short: HortiDaily
   url: "https://www.hortidaily.com/article/6008768/uk-watercress-farmers-help-get-bride-to-the-church-on-time/"
   kind: veg
-  rank: 190
+  rank: 204
   type: trade
   published: 2014
   accessed: 2026-11-10
@@ -3923,7 +4068,7 @@
   short: "Hortnews (The Commercial Greenhouse Grower)"
   url: "https://hortnews.com/uk-grown-cucumbers-show-promise-planting-area-continues-grow/"
   kind: veg
-  rank: 191
+  rank: 205
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -3933,7 +4078,7 @@
   short: Hortnews
   url: "https://hortnews.com/?p=7406"
   kind: veg
-  rank: 192
+  rank: 206
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -3942,7 +4087,7 @@
   short: Hortnews
   url: "https://hortnews.com/uks-largest-turnip-grower-packs-up/"
   kind: veg
-  rank: 193
+  rank: 207
   type: trade
   published: 2023
   accessed: 2026-11-10
@@ -3961,7 +4106,7 @@
   short: Hubbub
   url: "https://hubbub.org.uk/how-to-eat-seasonally-in-the-uk-a-month-by-month-guide"
   kind: veg
-  rank: 194
+  rank: 208
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -3981,7 +4126,7 @@
   short: ICES
   url: "https://www.ices.dk/about-ICES/projects/EU-RFP/EU Repository/ICES FIshMap/ICES FishMap species factsheet-thornback.pdf"
   kind: fish
-  rank: 111
+  rank: 112
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -3991,7 +4136,7 @@
   short: IntraFish
   url: "https://www.intrafish.com/salmon/scottish-salmon-producer-launches-bespoke-farming-standard/2-1-1816653"
   kind: fish
-  rank: 112
+  rank: 113
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -4000,7 +4145,7 @@
   short: "The Irish News"
   url: "https://www.irishnews.com/business/2015/05/05/news/glenarm-firm-takes-further-leap-into-export-markets-129371/"
   kind: fish
-  rank: 113
+  rank: 114
   type: secondary
   published: 2015
   accessed: 2026-11-10
@@ -4009,7 +4154,7 @@
   short: "ITV News"
   url: "https://www.itv.com/news/2026-10-13/some-hake-and-coley-stocks-suffering-from-population-decline-consumers-warned"
   kind: fish
-  rank: 114
+  rank: 115
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -4018,7 +4163,7 @@
   short: "Jack Buck Farms / Farmers Guardian"
   url: "https://jackbuckfarms.squarespace.com/news-overview/farmers-guardian-interview-september-2020"
   kind: veg
-  rank: 195
+  rank: 209
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -4037,7 +4182,7 @@
   short: "The Kentish Cobnuts Association"
   url: "https://kentishcobnutsassociation.org.uk/the-cobnut/"
   kind: veg
-  rank: 196
+  rank: 210
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -4047,7 +4192,7 @@
   short: "The Kentish Cobnuts Association"
   url: "https://kentishcobnutsassociation.org.uk/faqs/"
   kind: veg
-  rank: 197
+  rank: 211
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -4057,7 +4202,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/annual-plan-2026-27-1768909917.pdf"
   kind: fish
-  rank: 115
+  rank: 116
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4067,7 +4212,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1749671592.pdf"
   kind: fish
-  rank: 116
+  rank: 117
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4077,7 +4222,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1763458637.pdf"
   kind: fish
-  rank: 117
+  rank: 118
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4087,7 +4232,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c2-essex-shore-report-1768901355.pdf"
   kind: fish
-  rank: 118
+  rank: 119
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4097,7 +4242,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c1-kent-shore-1749671582.pdf"
   kind: fish
-  rank: 119
+  rank: 120
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4107,7 +4252,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c1-kent-shore-report-1768901346.pdf"
   kind: fish
-  rank: 120
+  rank: 121
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4117,7 +4262,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-c1-kent-shore-report-1778576740.pdf"
   kind: fish
-  rank: 121
+  rank: 122
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4127,7 +4272,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://kentandessex-ifca.gov.uk/im-interested-in/research/manila-clam-trial"
   kind: fish
-  rank: 122
+  rank: 123
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4137,7 +4282,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b6-mc-trial-report-1778576658.pdf"
   kind: fish
-  rank: 123
+  rank: 124
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4147,7 +4292,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b3-manila-clam-update-1764588358.pdf"
   kind: fish
-  rank: 124
+  rank: 125
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4157,7 +4302,7 @@
   short: "Kent and Essex IFCA"
   url: "https://kentandessex-ifca.gov.uk/im-interested-in/research/smps/thornback-ray3"
   kind: fish
-  rank: 125
+  rank: 126
   type: primary
   published: 2014
   accessed: 2026-11-10
@@ -4166,7 +4311,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/keifca-whelk-fishery-flexible-permit-byelaw-signed-1646653098.pdf"
   kind: fish
-  rank: 126
+  rank: 127
   type: primary
   published: 2022
   accessed: 2026-11-10
@@ -4176,7 +4321,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b3-whelk-report-1737461902.pdf"
   kind: fish
-  rank: 127
+  rank: 128
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4186,7 +4331,7 @@
   short: "Kent and Essex Inshore Fisheries and Conservation Authority"
   url: "https://www.kentandessex-ifca.gov.uk/website-content/agenda-item-b5-whelk-report-2025-2026-1768901273.pdf"
   kind: fish
-  rank: 128
+  rank: 129
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4196,7 +4341,7 @@
   short: "Kent and Essex IFCA"
   url: "https://kentandessex-ifca.gov.uk/i-want-to-find-out-about/local-species/thornback-ray"
   kind: fish
-  rank: 129
+  rank: 130
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -4206,7 +4351,7 @@
   short: "Kentish Stour Countryside Partnership"
   url: "https://kentishstour.org.uk/about-the-stour-valley/action-to-help-the-stour-valley/countryside-products/seasonal-calendar/"
   kind: veg
-  rank: 198
+  rank: 212
   type: secondary
   published: 2021
   accessed: 2026-11-10
@@ -4216,7 +4361,7 @@
   short: "Kentish Stour Countryside Partnership"
   url: "https://kentishstour.org.uk/about-the-stour-valley/action-to-help-the-stour-valley/countryside-products/seasonal-calendar/"
   kind: veg
-  rank: 199
+  rank: 213
   type: secondary
   published: 2021
   accessed: 2026-11-10
@@ -4286,7 +4431,7 @@
   short: legislation.gov.uk
   url: "https://www.legislation.gov.uk/ssi/2007/19/data.xht"
   kind: fish
-  rank: 130
+  rank: 131
   type: primary
   published: 2007
   accessed: 2026-11-10
@@ -4316,7 +4461,7 @@
   short: legislation.gov.uk
   url: "https://www.legislation.gov.uk/eur/2016/72/article/13/adopted"
   kind: fish
-  rank: 131
+  rank: 132
   type: primary
   published: 2016
   accessed: 2026-11-10
@@ -4326,7 +4471,7 @@
   short: legislation.gov.uk
   url: "https://www.legislation.gov.uk/uksi/2016/716"
   kind: fish
-  rank: 132
+  rank: 133
   type: primary
   published: 2016
   accessed: 2026-11-10
@@ -4336,7 +4481,7 @@
   short: "London Farmers' Markets"
   url: "https://www.lfm.org.uk/producers/black-water-oysters/"
   kind: fish
-  rank: 133
+  rank: 134
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -4355,7 +4500,7 @@
   short: "The List"
   url: "https://list.co.uk/news/7608/innovating-soft-fruits"
   kind: veg
-  rank: 200
+  rank: 214
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -4365,7 +4510,7 @@
   short: "The List"
   url: "https://list.co.uk/news/meet-the-only-sea-kale-producer-in-scotland-7609"
   kind: veg
-  rank: 201
+  rank: 215
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -4375,7 +4520,7 @@
   short: "Loch Duart"
   url: "https://lochduart.com/?p=5412"
   kind: fish
-  rank: 134
+  rank: 135
   type: secondary
   published: 2021
   accessed: 2026-11-10
@@ -4394,7 +4539,7 @@
   short: lovefood.com
   url: "https://lovefood.com/news/59104/the-uks-top-pea-and-broad-bean-producers"
   kind: veg
-  rank: 202
+  rank: 216
   type: secondary
   published: 2011
   accessed: 2026-11-10
@@ -4404,7 +4549,7 @@
   short: "Countryside Classroom / Let's Talk Farming"
   url: "https://countrysideclassroom.org.uk/storage/resource/downloads/c1e80e28-1125-40b3-934c-476b3f5e1304/original/wfm-poster-seasons-a3-high-res-1.pdf"
   kind: veg
-  rank: 203
+  rank: 217
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -4414,7 +4559,7 @@
   short: "Lea Valley Growers Association"
   url: "https://www.lvga.co.uk/"
   kind: veg
-  rank: 204
+  rank: 218
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4424,7 +4569,7 @@
   short: "The Morning Advertiser"
   url: "https://www.morningadvertiser.co.uk/Article/2007/06/28/In-season-Summer-specials/"
   kind: veg
-  rank: 205
+  rank: 219
   type: trade
   published: 2007
   accessed: 2026-11-10
@@ -4434,7 +4579,7 @@
   short: "Ministry of Agriculture, Fisheries and Food, Fisheries Laboratory Burnham-on-Crouch (hosted by Cefas)"
   url: "https://www.cefas.co.uk/Publications/lableaflets/lableaflet12.pdf"
   kind: fish
-  rank: 135
+  rank: 136
   type: primary
   published: 1966
   accessed: 2026-11-10
@@ -4454,7 +4599,7 @@
   short: "Marine Directorate, Scottish Government"
   url: "https://marine.gov.scot/sma/node/17412"
   kind: fish
-  rank: 136
+  rank: 137
   type: primary
   published: 2020
   accessed: 2026-11-10
@@ -4464,7 +4609,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/atlantic-halibut/"
   kind: fish
-  rank: 137
+  rank: 138
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4474,7 +4619,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/atlantic-salmon/"
   kind: fish
-  rank: 138
+  rank: 139
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4484,7 +4629,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/blonde-ray/"
   kind: fish
-  rank: 139
+  rank: 140
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4494,7 +4639,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/blue-mussel/"
   kind: fish
-  rank: 140
+  rank: 141
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4504,7 +4649,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/brill/"
   kind: fish
-  rank: 141
+  rank: 142
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4514,7 +4659,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/brown-crab/"
   kind: fish
-  rank: 142
+  rank: 143
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4524,7 +4669,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/brown-crab/wild/522/"
   kind: fish
-  rank: 143
+  rank: 144
   type: primary
   published: 2024
   accessed: 2026-11-10
@@ -4534,7 +4679,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/brown-crab/wild/206/"
   kind: fish
-  rank: 144
+  rank: 145
   type: primary
   published: 2023
   accessed: 2026-11-10
@@ -4544,7 +4689,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/brown-shrimp/"
   kind: fish
-  rank: 145
+  rank: 146
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4554,7 +4699,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/brown-shrimp/wild/511/"
   kind: fish
-  rank: 146
+  rank: 147
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4564,7 +4709,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/brown-shrimp/wild/727/"
   kind: fish
-  rank: 147
+  rank: 148
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4574,7 +4719,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/cockle/"
   kind: fish
-  rank: 148
+  rank: 149
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4584,7 +4729,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/atlantic-cod/"
   kind: fish
-  rank: 149
+  rank: 150
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4594,7 +4739,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/atlantic-cod/wild/34/"
   kind: fish
-  rank: 150
+  rank: 151
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4604,7 +4749,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/atlantic-cod/wild/1321/"
   kind: fish
-  rank: 151
+  rank: 152
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4614,7 +4759,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/common-octopus/"
   kind: fish
-  rank: 152
+  rank: 153
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4624,7 +4769,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/cuckoo-ray/"
   kind: fish
-  rank: 153
+  rank: 154
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4634,7 +4779,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/common-cuttlefish/"
   kind: fish
-  rank: 154
+  rank: 155
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4644,7 +4789,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/dab/"
   kind: fish
-  rank: 155
+  rank: 156
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4654,7 +4799,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/dover-sole/"
   kind: fish
-  rank: 156
+  rank: 157
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4664,7 +4809,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/european-squid/"
   kind: fish
-  rank: 157
+  rank: 158
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4674,7 +4819,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/flapper-skate/"
   kind: fish
-  rank: 158
+  rank: 159
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -4684,7 +4829,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/grey-mullet/"
   kind: fish
-  rank: 159
+  rank: 160
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4694,7 +4839,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/grey-mullet/wild/152/"
   kind: fish
-  rank: 160
+  rank: 161
   type: primary
   published: 2023
   accessed: 2026-11-10
@@ -4704,7 +4849,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/haddock/"
   kind: fish
-  rank: 161
+  rank: 162
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4714,7 +4859,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/european-hake/"
   kind: fish
-  rank: 162
+  rank: 163
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4724,7 +4869,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/herring/"
   kind: fish
-  rank: 163
+  rank: 164
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4734,7 +4879,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/horned-octopus/"
   kind: fish
-  rank: 164
+  rank: 165
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4744,7 +4889,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/john-dory/"
   kind: fish
-  rank: 165
+  rank: 166
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4754,7 +4899,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/king-scallop/"
   kind: fish
-  rank: 166
+  rank: 167
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4764,7 +4909,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/lemon-sole/"
   kind: fish
-  rank: 167
+  rank: 168
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4774,7 +4919,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/ling/"
   kind: fish
-  rank: 168
+  rank: 169
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4784,7 +4929,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/european-lobster/"
   kind: fish
-  rank: 169
+  rank: 170
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4794,7 +4939,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/european-lobster/wild/464/"
   kind: fish
-  rank: 170
+  rank: 171
   type: primary
   published: 2023
   accessed: 2026-11-10
@@ -4804,7 +4949,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/mackerel/"
   kind: fish
-  rank: 171
+  rank: 172
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4814,7 +4959,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/mackerel/wild/193/"
   kind: fish
-  rank: 172
+  rank: 173
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4824,7 +4969,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/megrim/"
   kind: fish
-  rank: 173
+  rank: 174
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4834,7 +4979,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/monkfish/"
   kind: fish
-  rank: 174
+  rank: 175
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4844,7 +4989,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/black-bellied-monkfish"
   kind: fish
-  rank: 175
+  rank: 176
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4854,7 +4999,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/white-monkfish"
   kind: fish
-  rank: 176
+  rank: 177
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4864,7 +5009,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/native-oyster/"
   kind: fish
-  rank: 177
+  rank: 178
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4874,7 +5019,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/pacific-oyster/"
   kind: fish
-  rank: 178
+  rank: 179
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4884,7 +5029,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/plaice/"
   kind: fish
-  rank: 179
+  rank: 180
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4894,7 +5039,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/pollack/"
   kind: fish
-  rank: 180
+  rank: 181
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4904,7 +5049,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/pollack/wild/783/"
   kind: fish
-  rank: 181
+  rank: 182
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4914,7 +5059,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/razor-clam/"
   kind: fish
-  rank: 182
+  rank: 183
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4924,7 +5069,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/red-gurnard/"
   kind: fish
-  rank: 183
+  rank: 184
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4934,7 +5079,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/red-mullet/"
   kind: fish
-  rank: 184
+  rank: 185
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4944,7 +5089,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/sardine/"
   kind: fish
-  rank: 185
+  rank: 186
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4954,7 +5099,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/sardine/wild/954/"
   kind: fish
-  rank: 186
+  rank: 187
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -4964,7 +5109,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/sardine/wild/475/"
   kind: fish
-  rank: 187
+  rank: 188
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4974,7 +5119,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/scampi/"
   kind: fish
-  rank: 188
+  rank: 189
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -4984,7 +5129,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/scampi/wild/582/"
   kind: fish
-  rank: 189
+  rank: 190
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -4994,7 +5139,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/seabass/"
   kind: fish
-  rank: 190
+  rank: 191
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5004,7 +5149,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/spider-crab/wild/509/"
   kind: fish
-  rank: 191
+  rank: 192
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -5014,7 +5159,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/spider-crab/"
   kind: fish
-  rank: 192
+  rank: 193
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5024,7 +5169,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/spotted-ray/"
   kind: fish
-  rank: 193
+  rank: 194
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5034,7 +5179,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/sprat/"
   kind: fish
-  rank: 194
+  rank: 195
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5044,7 +5189,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/sprat/wild/202/"
   kind: fish
-  rank: 195
+  rank: 196
   type: primary
   published: 2024
   accessed: 2026-11-10
@@ -5054,7 +5199,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/thornback-ray/"
   kind: fish
-  rank: 196
+  rank: 197
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5064,7 +5209,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/turbot/"
   kind: fish
-  rank: 197
+  rank: 198
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5074,7 +5219,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/undulate-ray/"
   kind: fish
-  rank: 198
+  rank: 199
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5084,7 +5229,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/common-whelk/"
   kind: fish
-  rank: 199
+  rank: 200
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5094,7 +5239,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/common-whelk/wild/1039/"
   kind: fish
-  rank: 200
+  rank: 201
   type: primary
   published: 2023
   accessed: 2026-11-10
@@ -5104,7 +5249,7 @@
   short: "Marine Conservation Society Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/common-whelk/wild/1033/"
   kind: fish
-  rank: 201
+  rank: 202
   type: primary
   published: 2023
   accessed: 2026-11-10
@@ -5114,7 +5259,7 @@
   short: "Marine Conservation Society, Good Fish Guide"
   url: "https://www.mcsuk.org/goodfishguide/species/whiting/"
   kind: fish
-  rank: 202
+  rank: 203
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5124,7 +5269,7 @@
   short: "Marine Conservation Society"
   url: "https://www.mcsuk.org/goodfishguide/species/witch/"
   kind: fish
-  rank: 203
+  rank: 204
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5134,7 +5279,7 @@
   short: "Marine Management Organisation"
   url: "https://assets.publishing.service.gov.uk/media/67f78d456812c7adcf513e94/MMO_Cuttlefish_Action_Plan.pdf"
   kind: fish
-  rank: 204
+  rank: 205
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -5143,7 +5288,7 @@
   short: "Marine Management Organisation"
   url: "https://assets.publishing.service.gov.uk/media/696f4fb87e827090d02d41f0/Cuttlefish_Roadshow_Outputs_Final_v3.0.pdf"
   kind: fish
-  rank: 205
+  rank: 206
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5152,7 +5297,7 @@
   short: "Marine Management Organisation"
   url: "https://assets.publishing.service.gov.uk/media/69454170888ddc41b48a53f4/Cuttlefish_Market_Sampling_Report_2025.pdf"
   kind: fish
-  rank: 206
+  rank: 207
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -5161,7 +5306,7 @@
   short: "Marine Management Organisation (hosted by Northumberland IFCA)"
   url: "https://nifca.gov.uk/wp-content/uploads/2022/02/MMO_nephrops-Farne-Deeps-sustainable-fishing-plan_May-2012.pdf"
   kind: fish
-  rank: 207
+  rank: 208
   type: primary
   published: 2012
   accessed: 2026-11-10
@@ -5171,7 +5316,7 @@
   short: "Marine Management Organisation (GOV.UK)"
   url: "https://assets.publishing.service.gov.uk/media/67c87107ae2aa47d2f5ae321/1_Page_Poster_King_Scallop_Closure_decision_2025.pdf"
   kind: fish
-  rank: 208
+  rank: 209
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -5180,7 +5325,7 @@
   short: "Marine Management Organisation (GOV.UK)"
   url: "https://assets.publishing.service.gov.uk/media/69c1422c7e02b81c0d1c7663/King_scallop_closure__decision_2026.pdf"
   kind: fish
-  rank: 209
+  rank: 210
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5199,7 +5344,7 @@
   short: "The Morning Advertiser"
   url: "https://www.morningadvertiser.co.uk/Article/2007/10/31/In-season-Cold-weather-comfort-food"
   kind: veg
-  rank: 206
+  rank: 220
   type: trade
   published: 2007
   accessed: 2026-11-10
@@ -5208,7 +5353,7 @@
   short: "Marine Stewardship Council"
   url: "https://fisheries.msc.org/en/fisheries/cornwall-sardine-uk/"
   kind: fish
-  rank: 210
+  rank: 211
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5218,7 +5363,7 @@
   short: "Marine Stewardship Council"
   url: "https://www.msc.org/uk/what-you-can-do/sustainable-fish-to-eat-in-the-uk/herring"
   kind: fish
-  rank: 211
+  rank: 212
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -5228,7 +5373,7 @@
   short: "Marine Stewardship Council"
   url: "https://www.msc.org/uk/what-you-can-do/sustainable-fish-to-eat-in-the-uk/sardines"
   kind: fish
-  rank: 212
+  rank: 213
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -5238,7 +5383,7 @@
   short: "Marine Stewardship Council UK"
   url: "https://www.msc.org/uk/what-we-are-doing/uk-irish-fisheries/wash-brown-shrimp"
   kind: fish
-  rank: 213
+  rank: 214
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -5268,7 +5413,7 @@
   short: "North Atlantic Salmon Conservation Organization (UK submission)"
   url: "https://nasco.int/wp-content/uploads/2025/05/NEA2505_Mixed-Stock-Fisheries-Tabled-by-the-United-Kingdom.pdf"
   kind: fish
-  rank: 214
+  rank: 215
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -5357,7 +5502,7 @@
   short: "New Covent Garden Market (Covent Garden Market Authority)"
   url: "https://newcoventgardenmarket.com/?p=1063"
   kind: veg
-  rank: 207
+  rank: 221
   type: trade
   published: 2021
   accessed: 2026-11-10
@@ -5366,7 +5511,7 @@
   short: "New Covent Garden Market"
   url: "https://newcoventgardenmarket.com/?p=669034"
   kind: veg
-  rank: 208
+  rank: 222
   type: secondary
   published: 2024
   accessed: 2026-11-10
@@ -5376,7 +5521,7 @@
   short: "New Covent Garden Market"
   url: "https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-for-august-2025/"
   kind: veg
-  rank: 209
+  rank: 223
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -5386,7 +5531,7 @@
   short: "New Covent Garden Market (Covent Garden Market Authority)"
   url: "https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-this-december/"
   kind: veg
-  rank: 210
+  rank: 224
   type: trade
   published: 2021
   accessed: 2026-11-10
@@ -5395,7 +5540,7 @@
   short: "New Covent Garden Market (Covent Garden Market Authority)"
   url: "https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-this-october/"
   kind: veg
-  rank: 211
+  rank: 225
   type: trade
   published: 2021
   accessed: 2026-11-10
@@ -5404,7 +5549,7 @@
   short: "New Covent Garden Market"
   url: "https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-for-october-2025/"
   kind: veg
-  rank: 212
+  rank: 226
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -5413,7 +5558,7 @@
   short: "New Covent Garden Market"
   url: "https://newcoventgardenmarket.com/blog/fruit-and-veg-in-season-for-september-2025/"
   kind: veg
-  rank: 213
+  rank: 227
   type: secondary
   published: 2025
   accessed: 2026-11-10
@@ -5443,7 +5588,7 @@
   short: "North Eastern Inshore Fisheries and Conservation Authority"
   url: "https://www.ne-ifca.gov.uk/Press-Releases/20262027-neifca-permitted-scallop-dredge-fishery"
   kind: fish
-  rank: 215
+  rank: 216
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5453,7 +5598,7 @@
   short: "North Eastern Inshore Fisheries and Conservation Authority"
   url: "https://www.ne-ifca.gov.uk/Press-Releases/scallop-dredging-permits-20231"
   kind: fish
-  rank: 216
+  rank: 217
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5463,7 +5608,7 @@
   short: "National Farmers' Union"
   url: "https://www.nfuonline.com/news/back-british-farming-seasonality-chart"
   kind: veg
-  rank: 214
+  rank: 228
   type: primary
   published: 2024
   accessed: 2026-11-10
@@ -5473,7 +5618,7 @@
   short: NIAB
   url: "https://www.niab.com/node/2795"
   kind: veg
-  rank: 215
+  rank: 229
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -5483,7 +5628,7 @@
   short: "Northumberland Inshore Fisheries and Conservation Authority"
   url: "https://nifca.gov.uk/wp-content/uploads/2023/08/NIFCA-report-Crab-2023-Status-Report.pdf"
   kind: fish
-  rank: 217
+  rank: 218
   type: primary
   published: 2023
   accessed: 2026-11-10
@@ -5492,7 +5637,7 @@
   short: "North Norfolk News"
   url: "https://www.northnorfolknews.co.uk/news/north-norfolk-fishermen-catching-spiny-spider-crabs-9168568"
   kind: fish
-  rank: 218
+  rank: 219
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -5502,7 +5647,7 @@
   short: "Northern Times"
   url: "https://www.northern-times.co.uk/news/salmon-firms-french-connection-is-a-source-of-pride-233885/"
   kind: fish
-  rank: 219
+  rank: 220
   type: secondary
   published: 2021
   accessed: 2026-11-10
@@ -5511,7 +5656,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/brill/"
   kind: fish
-  rank: 220
+  rank: 221
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5521,7 +5666,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/dab/"
   kind: fish
-  rank: 221
+  rank: 222
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5531,7 +5676,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/dover-sole/"
   kind: fish
-  rank: 222
+  rank: 223
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5541,7 +5686,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/gurnard/"
   kind: fish
-  rank: 223
+  rank: 224
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -5551,7 +5696,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/halibut/"
   kind: fish
-  rank: 224
+  rank: 225
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5561,7 +5706,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/herring/"
   kind: fish
-  rank: 225
+  rank: 226
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -5571,7 +5716,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/lemon-sole/"
   kind: fish
-  rank: 226
+  rank: 227
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5581,7 +5726,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/ling/"
   kind: fish
-  rank: 227
+  rank: 228
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -5591,7 +5736,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/mackerel/"
   kind: fish
-  rank: 228
+  rank: 229
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -5601,7 +5746,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/plaice/"
   kind: fish
-  rank: 229
+  rank: 230
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5611,7 +5756,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/brown-crab/"
   kind: fish
-  rank: 230
+  rank: 231
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -5621,7 +5766,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/lobster/"
   kind: fish
-  rank: 231
+  rank: 232
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -5631,7 +5776,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/"
   kind: fish
-  rank: 232
+  rank: 233
   type: secondary
   published: 2015
   accessed: '2026-11-10'
@@ -5641,7 +5786,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/"
   kind: fish
-  rank: 233
+  rank: 234
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5651,7 +5796,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/north-east-fish-shellfish-species/seasonality/"
   kind: fish
-  rank: 234
+  rank: 235
   type: secondary
   published: 2015
   accessed: 2026-11-10
@@ -5661,7 +5806,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/turbot/"
   kind: fish
-  rank: 235
+  rank: 236
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5671,7 +5816,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/whiting/"
   kind: fish
-  rank: 236
+  rank: 237
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -5681,7 +5826,7 @@
   short: "Northumberland Seafood (Amble Development Trust)"
   url: "https://northumberlandseafood.co.uk/portfolio-item/witch/"
   kind: fish
-  rank: 237
+  rank: 238
   type: secondary
   published: 2016
   accessed: '2026-11-10'
@@ -5721,7 +5866,7 @@
   short: "North Western Inshore Fisheries and Conservation Authority"
   url: "https://www.nw-ifca.gov.uk/shrimps_northwest"
   kind: fish
-  rank: 238
+  rank: 239
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -5741,7 +5886,7 @@
   short: Ocado
   url: "https://www.ocado.com/content/in-season-courgettes"
   kind: veg
-  rank: 216
+  rank: 230
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -5751,20 +5896,40 @@
   short: Oddbox
   url: "https://www.oddbox.co.uk/blog/whats-in-season-when-a-guide-to-uk-seasonal-eating"
   kind: veg
-  rank: 217
+  rank: 231
   type: secondary
   published: 2021
   accessed: 2026-11-10
+- key: oldershaw-shallots
+  name: "Oldershaw Group: Shallots"
+  short: "Oldershaw Group"
+  url: "https://www.oldershawgroup.co.uk/shallots"
+  kind: veg
+  rank: 232
+  type: primary
+  published: undated
+  accessed: '2026-11-11'
+  note: "Living product page of a current Lincolnshire grower; no date shown."
 - key: orkneynews-dived-scallops-2025
   name: "'They have trashed the summer grounds and are into our winter grounds now': the destruction of Orkney's dived scallops sector (22 October 2025)"
   short: "The Orkney News"
   url: "https://theorkneynews.scot/2025/10/22/they-have-trashed-the-summer-grounds-and-are-into-our-winter-grounds-now-the-destruction-of-orkneys-dived-scallops-sector/comment-page-1/amp/"
   kind: fish
-  rank: 239
+  rank: 240
   type: secondary
   published: 2025
   accessed: 2026-11-10
   note: "22 October 2025."
+- key: osolocal-courgette-flowers
+  name: "Courgette flowers (product page)"
+  short: "Oso Local"
+  url: "https://www.osolocal2u.com/collections/all-products/products/courgette-flowers"
+  kind: veg
+  rank: 233
+  type: secondary
+  published: 2022
+  accessed: 2026-11-10
+  note: "Product listing created 8 April 2022; site copyright 2026."
 - key: owid-environmental-impacts
   name: "Environmental impacts of food production"
   short: "Our World in Data"
@@ -5840,7 +6005,7 @@
   short: "Yes Peas! (PEAS / BGA Ltd)"
   url: "https://peas.org/?p=450"
   kind: veg
-  rank: 218
+  rank: 234
   type: primary
   published: 2021
   accessed: 2026-11-10
@@ -5880,7 +6045,7 @@
   short: Plantura
   url: "https://plantura.garden/uk/garden-calendar/seasonal-calendar"
   kind: veg
-  rank: 219
+  rank: 235
   type: secondary
   published: 2023
   accessed: 2026-11-10
@@ -5890,7 +6055,7 @@
   short: "Pocklington Post"
   url: "https://www.pocklingtonpost.co.uk/news/environment/farm-of-the-week-enterprise-on-the-cress-of-a-wave-1892233"
   kind: veg
-  rank: 220
+  rank: 236
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -5910,7 +6075,7 @@
   short: PotatoPro
   url: "https://www.potatopro.com/zh-hans/news/2025/scientists-chip-away-potato-storage-problems"
   kind: veg
-  rank: 221
+  rank: 237
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -5928,7 +6093,7 @@
   short: "Produced in Kent"
   url: "https://www.producedinkent.co.uk/news/august-update-from-kent-veg-box"
   kind: veg
-  rank: 222
+  rank: 238
   type: secondary
   published: 2024
   accessed: 2026-11-10
@@ -5974,7 +6139,7 @@
   short: "Rectory Farm (Stanton St John, Oxford)"
   url: "https://rectoryfarmpyo.co.uk/?p=33821"
   kind: veg
-  rank: 223
+  rank: 239
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6034,7 +6199,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/vegetables/cucumbers/grow-your-own?type=v"
   kind: veg
-  rank: 224
+  rank: 240
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6044,7 +6209,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/fruit/damsons/grow-your-own"
   kind: veg
-  rank: 225
+  rank: 241
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6064,7 +6229,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/fruit/figs/grow-your-own"
   kind: veg
-  rank: 226
+  rank: 242
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6074,7 +6239,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/vegetables/garlic/grow-your-own?type=v"
   kind: veg
-  rank: 227
+  rank: 243
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6084,7 +6249,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/vegetables/horseradish/grow-your-own"
   kind: veg
-  rank: 228
+  rank: 244
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6094,7 +6259,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/vegetables/kohl-rabi"
   kind: veg
-  rank: 229
+  rank: 245
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6124,7 +6289,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/fruit/medlars/grow-your-own"
   kind: veg
-  rank: 230
+  rank: 246
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6184,7 +6349,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/vegetables/shallots/grow-your-own"
   kind: veg
-  rank: 231
+  rank: 247
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6214,7 +6379,7 @@
   short: "Royal Horticultural Society"
   url: "https://www.rhs.org.uk/plants/131374/rubus-tayberry-group-f/details"
   kind: veg
-  rank: 232
+  rank: 248
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6244,7 +6409,7 @@
   short: "Wicked Leeks (Riverford)"
   url: "https://wickedleeks.riverford.co.uk/opinion/growing-caulis-is-in-my-cornish-heritage/"
   kind: veg
-  rank: 233
+  rank: 249
   type: trade
   published: 2020
   accessed: 2026-11-10
@@ -6283,7 +6448,7 @@
   short: "Rockfish (Skipper's Log blog)"
   url: "https://therockfish.co.uk/blogs/skippers-log/the-return-of-salmon-at-rockfish"
   kind: fish
-  rank: 240
+  rank: 241
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -6293,7 +6458,7 @@
   short: "Roughway Farm"
   url: "https://roughwayfarm.co.uk/shop/kent-cobnuts-frequently-asked-questions/"
   kind: veg
-  rank: 234
+  rank: 250
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6303,7 +6468,7 @@
   short: "Roughway Farm"
   url: "https://roughwayfarm.co.uk/product/british-walnuts-500g-10kg/"
   kind: veg
-  rank: 235
+  rank: 251
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6363,7 +6528,7 @@
   short: "Salmon Business"
   url: "https://www.salmonbusiness.com/loch-duart-introduces-bespoke-welfare-standard-for-small-scale-salmon-farming/"
   kind: fish
-  rank: 241
+  rank: 242
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -6372,7 +6537,7 @@
   short: Saveur
   url: "https://www.saveur.com/norfolk-england-mussels/"
   kind: fish
-  rank: 242
+  rank: 243
   type: secondary
   published: 2016
   accessed: 2026-11-10
@@ -6381,7 +6546,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/publications/proposed-fisheries-management-plan-north-sea-nephrops/pages/9/"
   kind: fish
-  rank: 243
+  rank: 244
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -6391,7 +6556,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/publications/fish-shellfish-stocks-2015-edition/pages/19/"
   kind: fish
-  rank: 244
+  rank: 245
   type: primary
   published: 2015
   accessed: 2026-11-10
@@ -6400,7 +6565,7 @@
   short: "Scottish Government"
   url: "https://consult.gov.scot/food-and-drink/aryshire-early-new-potatoes-ayrshire-earlies/results/specification-ayrshire-earlies---final.pdf"
   kind: veg
-  rank: 236
+  rank: 252
   type: primary
   published: 2019
   accessed: 2026-11-10
@@ -6410,7 +6575,7 @@
   short: "Scottish Government"
   url: "https://www.gov.scot/publications/scottish-scallop-stocks-results-2025-stock-assessments/pages/3/"
   kind: fish
-  rank: 245
+  rank: 246
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -6439,7 +6604,7 @@
   short: "The Scottish Farmer"
   url: "https://www.thescottishfarmer.co.uk/news/17210797.bartlett-revives-classic-root-vegetable/"
   kind: veg
-  rank: 237
+  rank: 253
   type: trade
   published: 2018
   accessed: 2026-11-10
@@ -6449,7 +6614,7 @@
   short: Seafish
   url: "https://www.seafish.org/responsible-sourcing/fishing-gear-database/gear/pots-and-traps-cuttlefish/"
   kind: fish
-  rank: 246
+  rank: 247
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -6459,7 +6624,7 @@
   short: Seafish
   url: "https://www.seafish.org/media/l3cf2g5e/seafishspeciesguide_lemon_sole_201401.pdf"
   kind: fish
-  rank: 247
+  rank: 248
   type: primary
   published: 2014
   accessed: 2026-11-10
@@ -6468,7 +6633,7 @@
   short: Seafish
   url: "https://seafoodacademy.org/pdfs/seafood-guide.pdf"
   kind: fish
-  rank: 248
+  rank: 249
   type: primary
   published: 2009
   accessed: 2026-11-10
@@ -6477,7 +6642,7 @@
   short: Seafish
   url: "https://issuu.com/capnh/docs/seafishspeciesguide_gurnard_201012"
   kind: fish
-  rank: 249
+  rank: 250
   type: primary
   published: 2010
   accessed: 2026-11-10
@@ -6486,7 +6651,7 @@
   short: Seafish
   url: "https://www.seafish.org/document/?id=33832"
   kind: fish
-  rank: 250
+  rank: 251
   type: primary
   published: 2009
   accessed: 2026-11-10
@@ -6495,7 +6660,7 @@
   short: SeafoodSource
   url: "https://www.seafoodsource.com/features/bring-on-the-natives"
   kind: fish
-  rank: 251
+  rank: 252
   type: trade
   published: undated
   accessed: 2026-11-10
@@ -6505,7 +6670,7 @@
   short: "Sharpham Park"
   url: "https://sharphampark.com/blogs/news/wet-v-dry-walnuts"
   kind: veg
-  rank: 238
+  rank: 254
   type: secondary
   published: 2024
   accessed: 2026-11-10
@@ -6564,7 +6729,7 @@
   short: "Sleaford Standard"
   url: "https://www.sleafordstandard.co.uk/news/ready-to-harvest-150m-plus-sprouts-754274"
   kind: veg
-  rank: 239
+  rank: 255
   type: secondary
   published: undated
   accessed: 2026-11-10
@@ -6643,7 +6808,7 @@
   short: "The Staff Canteen"
   url: "https://www.thestaffcanteen.com/Editorials-and-Advertorials/the-british-sea-kale-season-is-now-upon-us-advertorial-by-westlands"
   kind: veg
-  rank: 240
+  rank: 256
   type: trade
   published: 2017
   accessed: 2026-11-10
@@ -6732,7 +6897,7 @@
   short: "Sussex IFCA"
   url: "https://www.sussex-ifca.gov.uk/commercial-fishing"
   kind: fish
-  rank: 252
+  rank: 253
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -6742,7 +6907,7 @@
   short: "Sussex Inshore Fisheries and Conservation Authority"
   url: "https://www.sussex-ifca.gov.uk/regulations"
   kind: fish
-  rank: 253
+  rank: 254
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -6752,7 +6917,7 @@
   short: "Sussex Inshore Fisheries and Conservation Authority"
   url: "https://www.sussex-ifca.gov.uk/species"
   kind: fish
-  rank: 254
+  rank: 255
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -6762,7 +6927,7 @@
   short: "Sussex Inshore Fisheries and Conservation Authority"
   url: "https://www.sussex-ifca.gov.uk/species"
   kind: fish
-  rank: 255
+  rank: 256
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -6821,7 +6986,7 @@
   short: "Totally Wild UK"
   url: "https://totallywilduk.co.uk/2021/04/14/identify-horseradish/"
   kind: veg
-  rank: 241
+  rank: 257
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6831,7 +6996,7 @@
   short: "Tozer Seeds"
   url: "https://www.tozerseeds.com/product-category/brassicas/broccoli-purple-sprouting/?country=UK"
   kind: veg
-  rank: 242
+  rank: 258
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6841,7 +7006,7 @@
   short: Tracklements
   url: "https://tracklements.co.uk/?p=2004"
   kind: veg
-  rank: 243
+  rank: 259
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6871,7 +7036,7 @@
   short: "Through the Gaps (blog)"
   url: "https://blog.through-the-gaps.co.uk/2026/02/cornwall-good-seafood-guide-winter-2026.html"
   kind: fish
-  rank: 256
+  rank: 257
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6890,7 +7055,7 @@
   short: "Undercurrent News"
   url: "https://www.undercurrentnews.com/2024/08/29/loch-duart-exits-unfit-rspca-certification-scheme/"
   kind: fish
-  rank: 257
+  rank: 258
   type: trade
   published: 2024
   accessed: 2026-11-10
@@ -6899,7 +7064,7 @@
   short: "Undercurrent News"
   url: "https://www.undercurrentnews.com/2026/04/09/latest-mcs-good-fish-guide-has-no-recommended-choices-for-uk-caught-cod/"
   kind: fish
-  rank: 258
+  rank: 259
   type: trade
   published: 2026
   accessed: 2026-11-10
@@ -6908,7 +7073,7 @@
   short: "Unicorn Grocery"
   url: "https://www.unicorn-grocery.coop/?p=11734"
   kind: veg
-  rank: 244
+  rank: 260
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6917,7 +7082,7 @@
   short: "The Vegetarian Society"
   url: "https://vegsoc.org/blog/seasonal-uk-grown-produce/"
   kind: veg
-  rank: 245
+  rank: 261
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -6937,7 +7102,7 @@
   short: "Visit Armagh"
   url: "https://visitarmagh.com/?p=15420"
   kind: veg
-  rank: 246
+  rank: 262
   type: secondary
   published: 2018
   accessed: 2026-11-10
@@ -6967,7 +7132,7 @@
   short: "Westmorland Damson Association"
   url: "https://lythdamsons.org.uk/thedamson.html"
   kind: veg
-  rank: 247
+  rank: 263
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -6977,7 +7142,7 @@
   short: "Westmorland Damson Association"
   url: "https://www.lythdamsons.org.uk/fruit-and-trees-for-sale"
   kind: veg
-  rank: 248
+  rank: 264
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -6987,7 +7152,7 @@
   short: "Westmorland Damson Association"
   url: "https://lythdamsons.org.uk/"
   kind: veg
-  rank: 249
+  rank: 265
   type: primary
   published: undated
   accessed: 2026-11-10
@@ -6997,7 +7162,7 @@
   short: "We Are Aquaculture"
   url: "https://weareaquaculture.com/news/33433"
   kind: fish
-  rank: 259
+  rank: 260
   type: trade
   published: 2023
   accessed: 2026-11-10
@@ -7016,7 +7181,7 @@
   short: "Westlands UK"
   url: "https://westlandsuk.co.uk/2025/10/17/about-westlands-uk-watercress/"
   kind: veg
-  rank: 250
+  rank: 266
   type: trade
   published: 2025
   accessed: 2026-11-10
@@ -7044,7 +7209,7 @@
   short: Wikipedia
   url: "https://en.wikipedia.org/wiki/List_of_United_Kingdom_food_and_drink_products_with_protected_status"
   kind: veg
-  rank: 251
+  rank: 267
   type: secondary
   published: 2026
   accessed: 2026-11-10
@@ -7084,7 +7249,7 @@
   short: "Wild Food UK"
   url: "https://www.wildfooduk.com/wild-plants/wild-gooseberry/"
   kind: veg
-  rank: 252
+  rank: 268
   type: secondary
   published: 2018
   accessed: 2026-11-10
@@ -7134,7 +7299,7 @@
   short: "Wild Food UK"
   url: "https://www.wildfooduk.com/edible-wild-plants/watercress/"
   kind: veg
-  rank: 253
+  rank: 269
   type: secondary
   published: 2024
   accessed: 2026-11-10
@@ -7314,7 +7479,7 @@
   short: "World Fishing & Aquaculture"
   url: "https://www.worldfishing.net/fisheries/scottish-mackerel-enjoys-bumper-year-end/1489492.article"
   kind: fish
-  rank: 260
+  rank: 261
   type: trade
   published: 2023
   accessed: 2026-11-10
@@ -7333,7 +7498,7 @@
   short: "Woodland Trust"
   url: "https://www.woodlandtrust.org.uk/blog/foraging-in-august/"
   kind: veg
-  rank: 254
+  rank: 270
   type: primary
   published: 2026
   accessed: 2026-11-10
@@ -7413,7 +7578,7 @@
   short: "Woodland Trust"
   url: "https://woodlandtrust.org.uk/blog/2025/10/foraging-in-october/"
   kind: veg
-  rank: 255
+  rank: 271
   type: primary
   published: 2025
   accessed: 2026-11-10
@@ -7433,7 +7598,7 @@
   short: "Woodland Trust"
   url: "https://www.woodlandtrust.org.uk/blog/foraging-in-september/"
   kind: veg
-  rank: 256
+  rank: 272
   type: primary
   published: 2024
   accessed: 2026-11-10
@@ -7443,7 +7608,7 @@
   short: "Woodland Trust"
   url: "https://www.woodlandtrust.org.uk/blog/2019/08/hazelnuts-where-and-when-to-forage/"
   kind: veg
-  rank: 257
+  rank: 273
   type: primary
   published: 2019
   accessed: 2026-11-10
@@ -7483,7 +7648,7 @@
   short: "Yahoo News UK"
   url: "https://uk.news.yahoo.com/mild-winter-brings-british-asparagus-161721387.html"
   kind: veg
-  rank: 258
+  rank: 274
   type: secondary
   published: 2022
   accessed: 2026-11-10

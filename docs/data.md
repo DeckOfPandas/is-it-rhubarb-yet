@@ -305,7 +305,8 @@ empty list, no name twice once folded, no food whose every ring is
 `lead: false`), the reserved slugs, every stub, and that every verdict
 has a general quotation. It checks the research's keys for shape too
 (confidence, research notes by kind, Good Fish Guide ratings that agree
-with their labels, sustainability's source keys, a source's type and
+with their labels, sustainability's source keys, a kept ring's
+`research.sources` and `research.searched` keys, a source's type and
 dates), and lets a hidden, `no_supply` or `unsold` ring have no weeks; a
 hidden ring is left out of the colour and season checks. Problems fail;
 warnings print: a source nothing cites (unless `pending`), a just-about
