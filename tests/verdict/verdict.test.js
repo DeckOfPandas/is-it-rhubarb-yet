@@ -499,9 +499,13 @@ test("the weekly digest for week 42: its lists, by kind, by time left", () => {
   assert.ok(stillVeg.items.map((i) => i.slug).includes("celeriac"));
   assert.ok(!slugs(now.arrived).includes("celeriac"), "all-year foods never just arrived");
   V.flatten(now.arrived).forEach((i) => assert.ok(i.since < V.C.NEW_WEEKS));
+  // A food that is YES every week is in All year, and in no other list.
+  assert.ok(slugs(now.allyear).includes("mushrooms-cultivated"));
+  assert.ok(!slugs(now.still).includes("mushrooms-cultivated"));
+  V.flatten(now.allyear).forEach((i) => assert.equal(i.verdict, "YES", i.slug));
   // Kinds come in the order of groups.yml, and each kind appears once.
   const order = ["veg", "fruit", "wild", "herbs", "fish", "meat"];
-  ["arrived", "last", "onway", "still", "store", "glass"].forEach((name) => {
+  ["arrived", "last", "onway", "still", "allyear", "store", "glass"].forEach((name) => {
     const kinds = now[name].map((k) => k.kind);
     assert.deepEqual(kinds, order.filter((k) => kinds.includes(k)), name + " is in kind order");
     assert.equal(new Set(kinds).size, kinds.length);
@@ -513,7 +517,7 @@ test("the weekly digest for week 42: its lists, by kind, by time left", () => {
   now.last.forEach((k) => assert.ok(ascending(k.items), "last chance " + k.kind));
   now.onway.forEach((k) => assert.ok(ascending(k.items), "on the way " + k.kind));
   const keys = (items) => items.map((i) => i.name + " " + i.variety);
-  now.arrived.concat(now.still).forEach((k) => assert.deepEqual(keys(k.items), keys(k.items).slice().sort(), k.kind + " is A to Z"));
+  now.arrived.concat(now.still, now.allyear).forEach((k) => assert.deepEqual(keys(k.items), keys(k.items).slice().sort(), k.kind + " is A to Z"));
   // Each item is the whole food, unnamed by variety.
   assert.equal(V.flatten(now.onway).find((i) => i.slug === "rhubarb").variety, "");
   // YES-ISH foods are in the storage and glasshouse lists alone.

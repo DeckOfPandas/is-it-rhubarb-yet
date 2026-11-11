@@ -584,15 +584,15 @@
 
   // --- About: tonight's dinner ---------------------------------------------
   // The dinner line names a food in season on the visitor's day, picked
-  // at random from everything that is YES (just arrived or great this
-  // week) on every visit. The build bakes the first such food, which
-  // stands without JavaScript.
+  // at random from everything that is YES (just arrived, great this week
+  // or all year) on every visit. The build bakes the first such food,
+  // which stands without JavaScript.
   function initAbout() {
     var a = document.getElementById("dinner");
     if (!a) return;
     loadFoods().then(function (foods) {
       var now = V.nowLists(foods, [], WEEK, YEAR, TODAY);
-      var pick = pickSome(V.flatten(now.arrived).concat(V.flatten(now.still)), 1)[0];
+      var pick = pickSome(V.flatten(now.arrived).concat(V.flatten(now.still), V.flatten(now.allyear)), 1)[0];
       if (!pick) return;
       a.textContent = V.foodSaid(pick);
       a.href = foodUrl(pick.slug);
@@ -1207,14 +1207,16 @@
     return s;
   }
   // Now's bands, from nowLists, into `box`, under Now's own labels for
-  // any week. The YES-ISH foods come last, from storage and then from a
-  // glasshouse, each band left out when it is empty.
+  // any week. The foods that are YES all year follow great this week; the
+  // YES-ISH foods come last, from storage and then from a glasshouse;
+  // each of those three is left out when it is empty.
   function fillDigest(box, now) {
     box.textContent = "";
     box.appendChild(band("arrived", "Just arrived", now.arrived, "plain"));
     box.appendChild(band("last", "On the way out", now.last, "phrase", "Nothing on its way out."));
     box.appendChild(band("onway", "On the way in", now.onway, "phrase", "Nothing due in the next few weeks."));
     box.appendChild(band("still", "Great this week", now.still, "kind", "Nothing at all, which cannot be right."));
+    box.appendChild(band("allyear", "All year", now.allyear, "kind"));
     box.appendChild(band("store", "Available from storage", now.store, "kind"));
     box.appendChild(band("glass", "Under glass", now.glass, "kind"));
   }

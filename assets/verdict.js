@@ -696,12 +696,13 @@
     var x = a.name + " " + a.variety, y = b.name + " " + b.variety;
     return x < y ? -1 : x > y ? 1 : 0;
   }
-  // Which of Now's bands a food's verdict puts it in: arrived (YES, its
-  // in-season run began within NEW_WEEKS), last (JUST), onway (NEARLY),
-  // still (the rest of YES), store and glass (YES-ISH, from storage or a
-  // glasshouse), or later (NO), which Now leaves out.
+  // Which of Now's bands a food's verdict puts it in: allyear (YES every
+  // week of the year), arrived (YES, its in-season run began within
+  // NEW_WEEKS), last (JUST), onway (NEARLY), still (the rest of YES),
+  // store and glass (YES-ISH, from storage or a glasshouse), or later
+  // (NO), which Now leaves out.
   function bandOf(r) {
-    if (r.verdict === "YES") return !r.allYear && r.since < C.NEW_WEEKS ? "arrived" : "still";
+    if (r.verdict === "YES") return r.allYear ? "allyear" : r.since < C.NEW_WEEKS ? "arrived" : "still";
     if (r.verdict === "JUST") return "last";
     if (r.verdict === "YES-ISH") return r.glass ? "glass" : "store";
     if (r.verdict === "NEARLY") return "onway";
@@ -715,11 +716,11 @@
     return a - b;
   }
 
-  // Six lists for one week, one per band of bandOf but later. Each list
+  // Seven lists for one week, one per band of bandOf but later. Each list
   // is split by kind of food (veg, fruit, wild, herbs, fish, meat, in the
   // order of groups.yml) as [{kind, items}], kinds with nothing in them
-  // left out. Within a kind, just arrived, great now, storage and
-  // glasshouse run A to Z, and last chance and on the way by time left,
+  // left out. Within a kind, just arrived, great now, all year, storage
+  // and glasshouse run A to Z, and last chance and on the way by time left,
   // soonest first, names breaking ties. Each item is a whole food, with
   // its phrase and its timing. `today` defaults to the middle of the week
   // asked about.
@@ -730,7 +731,7 @@
       kindOf[g.key] = g.kind;
       if (kinds.indexOf(g.kind) < 0) kinds.push(g.kind);
     });
-    var buckets = { arrived: {}, last: {}, onway: {}, still: {}, store: {}, glass: {} };
+    var buckets = { arrived: {}, last: {}, onway: {}, still: {}, allyear: {}, store: {}, glass: {} };
     foods.forEach(function (f) {
       var fv = foodVerdict(f, week);
       var v = fv.whole;
