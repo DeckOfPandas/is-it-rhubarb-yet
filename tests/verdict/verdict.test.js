@@ -346,6 +346,10 @@ test("a fish answers for all its coasts together", () => {
   assert.equal(verdictOf("haddock").whole.allYear, true, "an all-year coast makes the fish all year");
   assert.equal(V.dateLine(verdictOf("oysters").whole, YEAR, TODAY), "All year.", "a variety in all year (rock oysters) makes the food's all year its own");
   assert.equal(V.dateLine(verdictOf("salmon-farmed").whole, YEAR, TODAY), "All year.", "every ring all year names none");
+  const relay = { name: "T", slug: "t", colour: "#000000", varieties: [
+    { name: "North East", ring: "region", weeks: [[1, 30, "in"]] }, { name: "South East", ring: "region", weeks: [[20, 52, "in"]] }] };
+  assert.equal(V.dateLine(V.foodVerdict(relay, WEEK).whole, YEAR, TODAY), "All year.", "a year no one coast covers alone (mackerel) names none");
+  assert.equal(V.dateLine(verdictOf("mackerel").whole, YEAR, TODAY), "All year.");
   const sw = fv.varieties.find((r) => r.name === "South West");
   assert.equal(V.phrase(sw, YEAR, TODAY), "A week or two left", "its Cornish ring still has its own season, to week 43");
 });

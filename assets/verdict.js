@@ -377,10 +377,11 @@
     // which: "All year, from the North East and South East". Only when
     // every all-year ring is a coast or a place (`ring: region`); a
     // variety that is in all year (rock oysters, cultivated mushrooms)
-    // makes the food's "All year" its own.
+    // makes the food's "All year" its own, and so does a year that no
+    // one coast covers alone (mackerel): there is no coast to name.
     if (whole.allYear && whole.verdict === "YES") {
       var allYear = results.filter(function (r) { return r.allYear && r.verdict === "YES"; });
-      if (allYear.length < results.length && allYear.every(function (r) { return r.v.ring === "region" && r.v.name; })) {
+      if (allYear.length > 0 && allYear.length < results.length && allYear.every(function (r) { return r.v.ring === "region" && r.v.name; })) {
         whole.fromRings = allYear.map(function (r) { return r.v.name; });
       }
     }
