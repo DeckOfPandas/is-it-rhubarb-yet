@@ -54,6 +54,13 @@ jobs:
           key: playwright-chromium-1.63.0
       - run: npm install --no-save --no-audit --no-fund --prefix tmp/playwright playwright@1.63.0
       - run: node tmp/playwright/node_modules/playwright/cli.js install --with-deps chromium
+      # The checker runs the research pull (research/build/propose.py) to
+      # prove no season was edited by hand, and the pull reads YAML in
+      # Python: PyYAML, pinned.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m pip install pyyaml==6.0.2
       - run: python3 -I tools/check-foods.py
       - run: node --test tests/verdict/verdict.test.js tests/site/search.test.js tests/site/magnifier.test.js
       - run: node tools/bake.js

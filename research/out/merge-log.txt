@@ -1,0 +1,16 @@
+source key lvga-home registered twice with different URLs (brassicas-leaves, shoots-fruiting); kept first
+source rhs-kohlrabi: RHS reclassified primary -> secondary
+source rhs-cucumbers: RHS reclassified primary -> secondary
+source rhs-damsons: RHS reclassified primary -> secondary
+source rhs-medlars: RHS reclassified primary -> secondary
+source rhs-figs: RHS reclassified primary -> secondary
+source rhs-tayberry: RHS reclassified primary -> secondary
+Beetroot / Beetroot: year_round note moved to season (line doesn't qualify)
+Swede / Swede: year_round note moved to season (line doesn't qualify)
+Cabbage / Red: year_round note moved to season (line doesn't qualify)
+Celery / Field: renamed to 'Outdoor'
+Loganberries & Tayberries / Tayberries: confidence moderate -> low (secondary sources only)
+Raspberries / Tunnel & field: renamed to 'Field & tunnel'
+Strawberries / Tunnel & field: renamed to 'Field & tunnel'
+Brown shrimp / Brown shrimp: year_round note moved to season (line doesn't qualify)
+Whelks / SE: year_round note moved to season (line doesn't qualify)

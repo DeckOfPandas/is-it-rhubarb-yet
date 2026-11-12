@@ -14,7 +14,7 @@ whatever is empty.
 {%- assign baked = site.data.baked -%}
 {%- assign first = true -%}
 [
-{%- for food in site.data.foods -%}
+{%- for food in site.data.shown -%}
   {%- unless first -%},{%- endunless -%}{%- assign first = false -%}
   {%- assign b = baked.foods[food.slug] -%}
   {%- assign terms = "" | split: "" | push: food.name -%}

@@ -1,0 +1,1030 @@
+- name: Ceps
+  slug: ceps
+  group: fungi
+  lines:
+  - name: Ceps
+    kind: whole
+    confidence: low
+    sources:
+    - woodlandtrust-penny-bun
+    - wildfooduk-cep
+    - mushroomdiary-calendar
+    - freshview-seasonality
+    - staffcanteen-wildharvest-20151006
+    - staffcanteen-wildharvest-20131104
+    - gange-fungal-fruiting
+    - nature-fungi-season-news
+    weeks:
+    - - 27
+      - 43
+      - in
+    - - 44
+      - 48
+      - avail
+    notes:
+      season: 'Wild penny bun fruits summer to autumn (woodlandtrust-penny-bun), the highest-ranked source, so its
+        season sets the in window, read as Jul-Oct under the convention used for herbs: an open start or end is
+        the middle month of the season. A wholesaler lists UK ceps as in season in October and the UK wild mushroom
+        season as ending in November (freshview-seasonality); a calendar also runs to Nov (mushroomdiary-calendar),
+        so Nov is avail. Ceps on the UK wholesale market are mostly imported (staffcanteen-wildharvest-20151006,
+        staffcanteen-wildharvest-20131104). Confidence low because the primary source gives only season words.'
+      discrepancy: wildfooduk-cep gives Aug-Oct, starting about 4 weeks after the primary source's summer start.
+      drift: Long-run UK fruiting records show autumn fungi now start fruiting earlier and finish later, and many
+        species also fruit in spring (gange-fungal-fruiting, nature-fungi-season-news).
+- name: Field mushrooms
+  slug: field-mushrooms
+  group: fungi
+  lines:
+  - name: Field mushrooms
+    kind: whole
+    confidence: low
+    sources:
+    - firstnature-field-mushroom
+    - wildfooduk-field-mushroom
+    - mushroomdiary-calendar
+    - gange-fungal-fruiting
+    - nature-fungi-season-news
+    weeks:
+    - - 18
+      - 26
+      - avail
+    - - 27
+      - 43
+      - in
+    - - 44
+      - 48
+      - avail
+    notes:
+      season: 'Wild Agaricus campestris in pasture. All three sources include Jul-Oct, used as in; earlier and later
+        months named by only some are avail. Secondary sources only; no primary found. Pass 2: the Woodland Trust
+        and Wildlife Trusts species indexes were checked and have no page for this species; no other primary source
+        was found before the search budget ran out.'
+      discrepancy: 'firstnature-field-mushroom: Jun-Oct; wildfooduk-field-mushroom: May-Nov; mushroomdiary-calendar:
+        Jul-Oct.'
+      drift: Long-run UK fruiting records show autumn fungi now start fruiting earlier and finish later, and many
+        species also fruit in spring (gange-fungal-fruiting, nature-fungi-season-news).
+- name: Giant puffball
+  slug: giant-puffball
+  group: fungi
+  lines:
+  - name: Giant puffball
+    kind: whole
+    confidence: low
+    sources:
+    - wildlifetrusts-giant-puffball
+    - mushroomdiary-calendar
+    - gange-fungal-fruiting
+    - nature-fungi-season-news
+    weeks:
+    - - 27
+      - 48
+      - in
+    notes:
+      season: Jul-Nov per the highest-ranked source (wildlifetrusts-giant-puffball).
+      discrepancy: mushroomdiary-calendar gives Jul-Sep, ending about 8 weeks earlier; so confidence low.
+      drift: Long-run UK fruiting records show autumn fungi now start fruiting earlier and finish later, and many
+        species also fruit in spring (gange-fungal-fruiting, nature-fungi-season-news).
+- name: Girolles
+  slug: girolles
+  group: fungi
+  lines:
+  - name: Wild
+    kind: method
+    confidence: low
+    sources:
+    - woodlandtrust-chanterelle
+    - wildfooduk-chanterelle
+    - mushroomdiary-calendar
+    - staffcanteen-wildharvest-20160704
+    - gange-fungal-fruiting
+    - nature-fungi-season-news
+    weeks:
+    - - 27
+      - 52
+      - in
+    notes:
+      season: Chanterelle/girolle fruits Jul-Dec, cannot be farmed (woodlandtrust-chanterelle). Scottish girolles
+        usually reach the trade in mid-July (staffcanteen-wildharvest-20160704).
+      discrepancy: 'wildfooduk-chanterelle: May-Nov; mushroomdiary-calendar: Jun-Nov. Start differs by about 8 weeks
+        from the primary source, so confidence low.'
+      drift: Long-run UK fruiting records show autumn fungi now start fruiting earlier and finish later, and many
+        species also fruit in spring (gange-fungal-fruiting, nature-fungi-season-news).
+  - name: Market
+    kind: method
+    confidence: low
+    sources:
+    - staffcanteen-wildharvest-20160704
+    - staffcanteen-mash-scottish-girolles
+    - staffcanteen-wildharvest-20130909
+    - staffcanteen-wildharvest-20151006
+    - freshview-seasonality
+    - staffcanteen-wildharvest-20130729
+    - staffcanteen-wildharvest-20140407
+    - jancisrobinson-mushroom-man
+    - staffcanteen-wildharvest-mushrooms
+    weeks:
+    - - 28
+      - 43
+      - in
+    notes:
+      season: 'Weeks show UK supply only, from market reports of UK girolles, not copied from the Wild line: Scottish
+        girolles usually reach the trade from mid-July (staffcanteen-wildharvest-20160704, staffcanteen-mash-scottish-girolles);
+        still offered in early September and early October (staffcanteen-wildharvest-20130909, staffcanteen-wildharvest-20151006);
+        a wholesaler lists UK chanterelles as in season in October (freshview-seasonality). No source names an end
+        date, so the window stops at the last month with a girolle-specific UK report. Most market girolles are
+        imported from Portugal, Bulgaria, the Baltics, Russia, Belarus and Turkey (staffcanteen-wildharvest-20160704,
+        staffcanteen-wildharvest-20140407, jancisrobinson-mushroom-man, staffcanteen-wildharvest-mushrooms).'
+- name: Hedgehog fungus
+  slug: hedgehog-fungus
+  group: fungi
+  lines:
+  - name: Hedgehog fungus
+    kind: whole
+    confidence: low
+    sources:
+    - wildfooduk-hedgehog
+    - mushroomdiary-calendar
+    - staffcanteen-wildharvest-20151006
+    - staffcanteen-wildharvest-20131104
+    - gange-fungal-fruiting
+    - nature-fungi-season-news
+    weeks:
+    - - 31
+      - 43
+      - in
+    - - 44
+      - 48
+      - avail
+    notes:
+      season: 'Aug-Oct (wildfooduk-hedgehog); calendar extends to Nov, shown as avail (mushroomdiary-calendar).
+        Secondary sources only. Limited Scottish pied de mouton reached the trade in Oct 2015; other market supply
+        was imported from Turkey, Croatia, Bulgaria (staffcanteen-wildharvest-20151006, staffcanteen-wildharvest-20131104).
+        Pass 2: the Woodland Trust and Wildlife Trusts species indexes were checked and have no page for this species;
+        no other primary source was found before the search budget ran out.'
+      drift: Long-run UK fruiting records show autumn fungi now start fruiting earlier and finish later, and many
+        species also fruit in spring (gange-fungal-fruiting, nature-fungi-season-news).
+- name: Morels
+  slug: morels
+  group: fungi
+  lines:
+  - name: Wild
+    kind: method
+    confidence: moderate
+    sources:
+    - wildlifetrusts-morel
+    - woodlandtrust-morel
+    - kew-yellow-morel
+    weeks:
+    - - 9
+      - 13
+      - avail
+    - - 14
+      - 22
+      - in
+    notes:
+      season: Spring fungus (kew-yellow-morel). Apr-May (wildlifetrusts-morel) used as in; March, named only by
+        woodlandtrust-morel, shown as avail. Uncommon in the UK and not farmed at scale (woodlandtrust-morel).
+      discrepancy: 'woodlandtrust-morel: Mar-May; wildlifetrusts-morel: Apr-May.'
+      drift: Kew lists climate change altering the timing of spring fruiting among threats to the species (kew-yellow-morel).
+  - name: Market
+    kind: method
+    confidence: low
+    sources:
+    - freshview-seasonality
+    - staffcanteen-wildharvest-20140407
+    - jancisrobinson-mushroom-man
+    - woodlandtrust-morel
+    weeks:
+    - - 18
+      - 22
+      - in
+    notes:
+      season: 'One UK wholesaler lists UK morels as available in May, at the start of their season, and names no
+        other month (freshview-seasonality); May is in under rule 2: no source names a UK market season, so the
+        availability evidence sets in (coordinator, 2026-11-11). Most fresh morels on the UK market are imported,
+        for example from Turkey (staffcanteen-wildharvest-20140407, jancisrobinson-mushroom-man), and UK morels
+        are uncommon (woodlandtrust-morel). Single secondary source, so confidence low.'
+- name: Hen of the woods
+  slug: hen-of-the-woods
+  group: fungi
+  lines:
+  - name: Hen of the woods
+    kind: whole
+    confidence: low
+    sources:
+    - wildfooduk-hen-of-the-woods
+    - mushroomdiary-calendar
+    - gange-fungal-fruiting
+    - nature-fungi-season-news
+    weeks:
+    - - 27
+      - 30
+      - avail
+    - - 31
+      - 43
+      - in
+    - - 44
+      - 48
+      - avail
+    notes:
+      season: 'Grifola frondosa. Aug-Oct is common to both sources and used as in; Jul and Nov, named by one each,
+        are avail. Secondary sources only. Pass 2: the Woodland Trust and Wildlife Trusts species indexes were checked
+        and have no page for this species; no other primary source was found before the search budget ran out.'
+      discrepancy: 'wildfooduk-hen-of-the-woods: Aug-Nov; mushroomdiary-calendar: Jul-Oct.'
+      drift: Long-run UK fruiting records show autumn fungi now start fruiting earlier and finish later, and many
+        species also fruit in spring (gange-fungal-fruiting, nature-fungi-season-news).
+- name: Oyster mushrooms
+  slug: oyster-mushrooms
+  group: fungi
+  lines:
+  - name: Wild
+    kind: method
+    confidence: high
+    sources:
+    - woodlandtrust-oyster
+    - wildlifetrusts-oyster
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Both sources give the fruiting season as all year, with no named peak (woodlandtrust-oyster, wildlifetrusts-oyster).
+        Rule 3 applied.
+  - name: Cultivated
+    kind: method
+    confidence: moderate
+    sources:
+    - freshplaza-smithy-exotic
+    - booths-smithy
+    - woodlandtrust-oyster
+    - sruc-mushroom-factsheet
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Grown in 26 growing rooms at Ormskirk, Lancashire, about 6 t a week in January 2020 (freshplaza-smithy-exotic);
+        the grower is working to supply its exotic mushrooms all year (booths-smithy). No named peak; rule 3 applied.
+      discrepancy: sruc-mushroom-factsheet (April 2020) says no commercial speciality mushroom production is reported
+        in Ireland or the UK, citing the spawn firm Mycelia. Trade press the same quarter names a UK farm and its
+        weekly tonnage (freshplaza-smithy-exotic), so the data follows the named-grower report.
+- name: Cultivated mushrooms
+  slug: cultivated-mushrooms
+  group: fungi
+  lines:
+  - name: Cultivated mushrooms
+    kind: whole
+    confidence: moderate
+    sources:
+    - grocer-mushroom-miles
+    - fpj-mushroom-sector
+    - sruc-mushroom-factsheet
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: White and chestnut Agaricus grown indoors (sruc-mushroom-factsheet). The Mushroom Bureau says UK and
+        Irish growers can meet demand all year (grocer-mushroom-miles); no named peak, so rule 3 applied. UK farms
+        supply only part of UK sales; the rest comes from Ireland and the continent (fpj-mushroom-sector, grocer-mushroom-miles).
+- name: Enoki
+  slug: enoki
+  group: fungi
+  lines:
+  - name: Enoki
+    kind: whole
+    confidence: low
+    sources:
+    - fsa-enoki-listeria
+    - dailymail-livesey-exotic
+    - sruc-mushroom-factsheet
+    weeks: []
+    notes:
+      season: No evidence of commercial UK enoki growing found. FSA says enoki on sale are generally imported from
+        China, South Korea, Thailand or Taiwan (fsa-enoki-listeria). A 2015 report lists enoki in a Leicestershire
+        grower's range but does not say they were UK-grown (dailymail-livesey-exotic). Pass 2 found no UK enoki
+        grower either; left empty.
+      never: No UK commercial grower found; the Food Standards Agency says enoki on sale in the UK are imported
+        from East Asia. Not grown here, so it belongs in never.yml (food-level NEVER); Helen to write its line.
+  never: true
+- name: Shiitake
+  slug: shiitake
+  group: fungi
+  lines:
+  - name: Shiitake
+    kind: whole
+    confidence: moderate
+    sources:
+    - freshplaza-smithy-exotic
+    - booths-smithy
+    - dailymail-livesey-exotic
+    - sruc-mushroom-factsheet
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Commercially grown in the UK: about 9 t a week in 26 growing rooms at Ormskirk, Lancashire in January
+        2020 (freshplaza-smithy-exotic); the same farm is described as the leading UK shiitake grower for 20 years
+        and as working to supply its exotic mushrooms all year (booths-smithy); British shiitake also from a Leicestershire
+        grower in 2015 (dailymail-livesey-exotic). Indoor crop with no named peak; rule 3 applied.'
+      discrepancy: sruc-mushroom-factsheet (April 2020) says no commercial speciality mushroom production is reported
+        in Ireland or the UK, citing the spawn firm Mycelia. Trade press the same quarter names a UK farm and its
+        weekly tonnage (freshplaza-smithy-exotic), so the data follows the named-grower report; the SRUC line probably
+        reflects a gap in reported statistics, not an absence of growers.
+- name: Basil
+  slug: basil
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-basil
+    - fpj-herbfresh-early-start
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 23
+      - 35
+      - in
+    notes:
+      season: 'Tender annual. Not hardy in the UK; grown outside in summer and picked throughout summer (rhs-basil).
+        Commercial UK basil came on stream in June in a Surrey grower''s earliest-ever season (fpj-herbfresh-early-start).
+        Herb-specific sources are a gardening guide and one undated grower report, so confidence low. Season words
+        converted as: a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early,
+        mid and late mean its first, middle and last month; an open start or end such as from spring or to autumn
+        is taken as the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep, with Mar and Oct as shoulders (fpj-herbs-uk-kitchens), runs about
+        9 weeks earlier and 4 weeks later than the basil-specific dates.
+  - name: Glasshouse
+    kind: method
+    confidence: moderate
+    sources:
+    - vitacress-herbs
+    - ahdb-grown-in-britain
+    - ahdb-harvested-britain
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Vitacress grows cut herbs in its 13.5 ha West Sussex glasshouse and on farms in Spain and Portugal
+        to supply all year; the page does not say the UK site alone covers every month (vitacress-herbs); AHDB names
+        basil among herbs grown in UK glasshouses for supermarket pots (ahdb-grown-in-britain); AHDB describes glasshouse
+        pot herbs sown, grown and harvested on a continuous cycle (ahdb-harvested-britain); Lincolnshire Herbs grows
+        living herbs under heated, lit glass, producing through winter, and supplies the Co-op, Morrisons, Asda
+        and Ocado (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); it supplies cut and bunched basil
+        to Morrisons; Country Herbs and Plants has always produced year-round under glass, mainly for garden centres
+        (freshplaza-country-herbs). No named production peak, so rule 6 gives in all year. Lincolnshire Herbs names
+        Christmas as its sales peak; that is demand, not a production peak, so rule 6 leaves the whole window in.
+        Winter cut herbs on UK sale are largely imported (fpj-herbs-uk-kitchens).
+- name: Bay
+  slug: bay
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-bay
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Hardy evergreen; leaves can be picked all year whenever required, with no named best season, so rule
+        3 applies (rhs-bay). Only a gardening source is herb-specific and no commercial UK bay grower was found,
+        so confidence low. No UK glasshouse supply found.
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+- name: Chervil
+  slug: chervil
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-chervil
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 23
+      - 48
+      - in
+    notes:
+      season: 'Annual sown outdoors Apr-Aug; first leaves about eight weeks after sowing, and repeat sowings give
+        pickings through summer and autumn; bolts in hot, dry weather (rhs-chervil). Only a gardening source is
+        herb-specific, and no commercial UK chervil grower was found, so confidence low. Season words converted
+        as: a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late
+        mean its first, middle and last month; an open start or end such as from spring or to autumn is taken as
+        the middle month (Apr, Oct). No UK glasshouse supply found.'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 9 weeks earlier and ends about
+        9 weeks earlier than the chervil-specific dates.
+- name: Chives
+  slug: chives
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-chives
+    - fpj-herbfresh-early-start
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 18
+      - 43
+      - in
+    notes:
+      season: 'Hardy herbaceous perennial; outdoor leaves from late spring until it dies back in autumn (rhs-chives).
+        Season words converted as: a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov);
+        early, mid and late mean its first, middle and last month; an open start or end such as from spring or to
+        autumn is taken as the middle month (Apr, Oct).'
+      discrepancy: A Surrey grower expected UK chives from June even in its earliest-ever season (fpj-herbfresh-early-start),
+        about 5 weeks after the start here; this is a single undated year, so the herb-specific season is kept.
+        Category-wide window Apr-Sep (fpj-herbs-uk-kitchens).
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - leaf-ofs-lincolnshire-herbs
+    - foodmanufacture-langmead-herbs
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Lincolnshire Herbs grows living herbs under heated, lit glass, producing through winter, and supplies
+        the Co-op, Morrisons, Asda and Ocado (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); Country
+        Herbs and Plants has always produced year-round under glass, mainly for garden centres (freshplaza-country-herbs).
+        No named production peak, so rule 6 gives in all year. Lincolnshire Herbs names Christmas as its sales peak;
+        that is demand, not a production peak, so rule 6 leaves the whole window in. Source age (pass 3): every
+        source that names chives under glass dates from 2013, so confidence is low (rules, Source age). Lincolnshire
+        Herbs still described year-round glasshouse production of fresh-cut and living herbs in 2026 (leaf-ofs-lincolnshire-herbs),
+        and Langmead grows potted herbs under glass in Sussex (foodmanufacture-langmead-herbs), but neither names
+        chives. No 2021-or-later source naming UK glasshouse chives was found; searched Lincolnshire Herbs, Vitacress,
+        Langmead, Herbs Unlimited, Westlands and UK vertical farms. Weeks kept from the 2013 sources.'
+- name: Coriander
+  slug: coriander
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-coriander
+    - fpj-herbfresh-early-start
+    - ahdb-fv359-coriander-mint
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 18
+      - 26
+      - avail
+    - - 27
+      - 39
+      - in
+    notes:
+      season: 'Tender annual that bolts in hot, dry weather. Spring and early summer sowings give leafy harvests
+        from mid-summer to early autumn; later crops need cloches or glass (rhs-coriander). A Surrey grower was
+        already cutting UK coriander in spring in its earliest-ever season, so May-Jun shown as avail (fpj-herbfresh-early-start).
+        Field coriander was drilled May-Aug in AHDB trials, with up to three crops a year possible (ahdb-fv359-coriander-mint).
+        Season words converted as: a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov);
+        early, mid and late mean its first, middle and last month; an open start or end such as from spring or to
+        autumn is taken as the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 13 weeks before the coriander-specific
+        in window.
+  - name: Glasshouse
+    kind: method
+    confidence: moderate
+    sources:
+    - vitacress-herbs
+    - ahdb-grown-in-britain
+    - ahdb-harvested-britain
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Vitacress grows cut herbs in its 13.5 ha West Sussex glasshouse and on farms in Spain and Portugal
+        to supply all year; the page does not say the UK site alone covers every month (vitacress-herbs); AHDB names
+        coriander among herbs grown in UK glasshouses (ahdb-grown-in-britain); AHDB describes glasshouse pot herbs
+        sown, grown and harvested on a continuous cycle (ahdb-harvested-britain); Lincolnshire Herbs grows living
+        herbs under heated, lit glass, producing through winter, and supplies the Co-op, Morrisons, Asda and Ocado
+        (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); it has a glasshouse built for coriander;
+        Country Herbs and Plants has always produced year-round under glass, mainly for garden centres (freshplaza-country-herbs).
+        No named production peak, so rule 6 gives in all year. Lincolnshire Herbs names Christmas as its sales peak;
+        that is demand, not a production peak, so rule 6 leaves the whole window in. Winter cut herbs on UK sale
+        are largely imported (fpj-herbs-uk-kitchens).
+- name: Dill
+  slug: dill
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-dill
+    - fpj-herbfresh-early-start
+    - ahdb-fv381-itersonilia
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 23
+      - 43
+      - in
+    notes:
+      season: 'Tender annual sown outdoors mid-spring to mid-summer; leaves from early summer through to autumn
+        with successive sowings (rhs-dill). In its earliest-ever season a Surrey grower expected UK dill a month
+        after its first coriander (fpj-herbfresh-early-start). Commercial outdoor dill is still cropped in Sep-Oct,
+        when leaf-blight risk peaks (ahdb-fv381-itersonilia). Season words converted as: a named season is its full
+        months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late mean its first, middle and
+        last month; an open start or end such as from spring or to autumn is taken as the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 9 weeks earlier and ends about
+        4 weeks earlier.
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - leaf-ofs-lincolnshire-herbs
+    - foodmanufacture-langmead-herbs
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Split added in pass 2: dill is in Lincolnshire Herbs'' range of living herbs, grown under heated,
+        lit glass and produced through winter for supermarkets (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs).
+        Year-round supply of dill itself is inferred from the firm''s general winter production, so confidence low.
+        No named peak; rule 6 gives in all year. Source age (pass 3): every source that names dill under glass dates
+        from 2013, so confidence is low (rules, Source age). Lincolnshire Herbs still described year-round glasshouse
+        production of fresh-cut and living herbs in 2026 (leaf-ofs-lincolnshire-herbs), and Langmead grows potted
+        herbs under glass in Sussex (foodmanufacture-langmead-herbs), but neither names dill. No 2021-or-later source
+        naming UK glasshouse dill was found; searched Lincolnshire Herbs, Vitacress, Langmead, Herbs Unlimited,
+        Westlands and UK vertical farms. Weeks kept from the 2013 sources.'
+- name: Lovage
+  slug: lovage
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-lovage
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 9
+      - 35
+      - in
+    notes:
+      season: 'Hardy herbaceous perennial; a flush of leaves in spring and young leaves through spring and summer,
+        turning bitter once it flowers in late summer; dies down in late autumn (rhs-lovage). Only a gardening source
+        is herb-specific, so confidence low. Season words converted as: a named season is its full months (spring
+        Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late mean its first, middle and last month; an
+        open start or end such as from spring or to autumn is taken as the middle month (Apr, Oct). No UK glasshouse
+        supply found.'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
+- name: Marjoram & Oregano
+  slug: marjoram-oregano
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-oregano
+    - rhs-marjoram
+    - fpj-herbfresh-early-start
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 9
+      - 17
+      - avail
+    - - 18
+      - 39
+      - in
+    - - 40
+      - 43
+      - avail
+    notes:
+      season: 'Oregano is picked from late spring through to autumn (rhs-oregano); marjoram gives fresh leaves from
+        new growth in spring, summer and early autumn, and sweet marjoram is not reliably hardy (rhs-marjoram).
+        Months named by both are in; Mar-Apr (marjoram only) and Oct (oregano only) are avail. A Surrey grower expected
+        UK oregano from June in its earliest-ever season (fpj-herbfresh-early-start). Season words converted as:
+        a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late
+        mean its first, middle and last month; an open start or end such as from spring or to autumn is taken as
+        the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) starts about 4 weeks before the in window.
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - freshplaza-country-herbs
+    - leaf-ofs-lincolnshire-herbs
+    - foodmanufacture-langmead-herbs
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Oregano is grown year-round under glass by a UK pot-herb grower whose market is mainly garden centres
+        (freshplaza-country-herbs); marjoram is not named, and no culinary-supply grower naming either herb was
+        found. No named peak; rule 6 gives in all year. Source age (pass 3): every source that names marjoram or
+        oregano under glass dates from 2013, so confidence is low (rules, Source age). Lincolnshire Herbs still
+        described year-round glasshouse production of fresh-cut and living herbs in 2026 (leaf-ofs-lincolnshire-herbs),
+        and Langmead grows potted herbs under glass in Sussex (foodmanufacture-langmead-herbs), but neither names
+        marjoram or oregano. No 2021-or-later source naming UK glasshouse marjoram or oregano was found; searched
+        Lincolnshire Herbs, Vitacress, Langmead, Herbs Unlimited, Westlands and UK vertical farms. Weeks kept from
+        the 2013 sources.'
+- name: Mint
+  slug: mint
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: moderate
+    sources:
+    - ahdb-fv359-coriander-mint
+    - rhs-mint
+    - fpj-herbfresh-early-start
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 18
+      - 43
+      - in
+    notes:
+      season: 'Hardy herbaceous perennial. In AHDB field trials at a commercial grower, mint was cut from May (2010)
+        and cut back at the end of the season in early October (ahdb-fv359-coriander-mint). Leaves from late spring
+        to autumn, before it dies back over winter (rhs-mint). A Surrey grower was cutting UK mint in spring in
+        its earliest-ever season (fpj-herbfresh-early-start). Season words converted as: a named season is its full
+        months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late mean its first, middle and
+        last month; an open start or end such as from spring or to autumn is taken as the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
+  - name: Glasshouse
+    kind: method
+    confidence: moderate
+    sources:
+    - vitacress-herbs
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Vitacress grows cut herbs in its 13.5 ha West Sussex glasshouse and on farms in Spain and Portugal
+        to supply all year; the page does not say the UK site alone covers every month (vitacress-herbs); Lincolnshire
+        Herbs grows living herbs under heated, lit glass, producing through winter, and supplies the Co-op, Morrisons,
+        Asda and Ocado (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); Country Herbs and Plants
+        has always produced year-round under glass, mainly for garden centres (freshplaza-country-herbs); its mint
+        also reaches supermarkets through a local packer. No named production peak, so rule 6 gives in all year.
+        Lincolnshire Herbs names Christmas as its sales peak; that is demand, not a production peak, so rule 6 leaves
+        the whole window in. Winter cut herbs on UK sale are largely imported (fpj-herbs-uk-kitchens).
+- name: Parsley
+  slug: parsley
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-parsley
+    - fpj-herbfresh-early-start
+    - ahdb-fv318-parsley-coriander
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 18
+      - 43
+      - in
+    notes:
+      season: 'Biennial grown as an annual; leaves from late spring through to autumn, dying down outdoors over
+        winter (rhs-parsley). Commercial field parsley is planted in succession from April to early October, and
+        some crops are over-wintered, but no harvest months are given (ahdb-fv318-parsley-coriander). A Surrey grower
+        was cutting UK parsley in spring in its earliest-ever season (fpj-herbfresh-early-start). Season words converted
+        as: a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late
+        mean its first, middle and last month; an open start or end such as from spring or to autumn is taken as
+        the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) differs by about 4 weeks at each end.
+  - name: Glasshouse
+    kind: method
+    confidence: moderate
+    sources:
+    - vitacress-herbs
+    - ahdb-grown-in-britain
+    - ahdb-harvested-britain
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Vitacress grows cut herbs in its 13.5 ha West Sussex glasshouse and on farms in Spain and Portugal
+        to supply all year; the page does not say the UK site alone covers every month (vitacress-herbs); AHDB names
+        parsley among herbs grown in UK glasshouses (ahdb-grown-in-britain); AHDB describes glasshouse pot herbs
+        sown, grown and harvested on a continuous cycle (ahdb-harvested-britain); Lincolnshire Herbs grows living
+        herbs under heated, lit glass, producing through winter, and supplies the Co-op, Morrisons, Asda and Ocado
+        (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); Country Herbs and Plants has always produced
+        year-round under glass, mainly for garden centres (freshplaza-country-herbs). No named production peak,
+        so rule 6 gives in all year. Lincolnshire Herbs names Christmas as its sales peak; that is demand, not a
+        production peak, so rule 6 leaves the whole window in. Winter cut herbs on UK sale are largely imported
+        (fpj-herbs-uk-kitchens).
+- name: Rosemary
+  slug: rosemary
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-rosemary
+    - fpj-herbfresh-early-start
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 17
+      - avail
+    - - 18
+      - 35
+      - in
+    - - 36
+      - 52
+      - avail
+    notes:
+      season: 'Hardy evergreen; sprigs can be picked all year, and the soft new growth of late spring and summer
+        has the best flavour, so May-Aug is in (rhs-rosemary). UK rosemary output fell after cold damage over one
+        Christmas (fpj-herbfresh-early-start). Season words converted as: a named season is its full months (spring
+        Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late mean its first, middle and last month; an
+        open start or end such as from spring or to autumn is taken as the middle month (Apr, Oct).'
+      year_round: Outdoor rosemary can be picked all year; late spring and summer growth is best (rhs-rosemary).
+        Avail here means out of its best season, not hard to get.
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+  - name: Glasshouse
+    kind: method
+    confidence: moderate
+    sources:
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - vitacress-herbs
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Lincolnshire Herbs grows living herbs under heated, lit glass, producing through winter, and supplies
+        the Co-op, Morrisons, Asda and Ocado (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); Country
+        Herbs and Plants has always produced year-round under glass, mainly for garden centres (freshplaza-country-herbs);
+        Vitacress lists rosemary among living herbs grown in its Sussex glasshouse, without months (vitacress-herbs).
+        No named production peak, so rule 6 gives in all year. Lincolnshire Herbs names Christmas as its sales peak;
+        that is demand, not a production peak, so rule 6 leaves the whole window in.
+- name: Sage
+  slug: sage
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-sage
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 8
+      - avail
+    - - 9
+      - 35
+      - in
+    - - 36
+      - 52
+      - avail
+    notes:
+      season: 'Hardy evergreen shrub; leaves can be picked at any time of year, and spring and summer growth has
+        the best flavour, so Mar-Aug is in (rhs-sage). Season words converted as: a named season is its full months
+        (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late mean its first, middle and last month;
+        an open start or end such as from spring or to autumn is taken as the middle month (Apr, Oct).'
+      year_round: Outdoor sage can be picked all year; spring and summer growth is best (rhs-sage). Avail here means
+        out of its best season, not hard to get.
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - leaf-ofs-lincolnshire-herbs
+    - foodmanufacture-langmead-herbs
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Lincolnshire Herbs grows living herbs under heated, lit glass, producing through winter, and supplies
+        the Co-op, Morrisons, Asda and Ocado (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); Country
+        Herbs and Plants has always produced year-round under glass, mainly for garden centres (freshplaza-country-herbs).
+        No named production peak, so rule 6 gives in all year. Lincolnshire Herbs names Christmas as its sales peak;
+        that is demand, not a production peak, so rule 6 leaves the whole window in. Source age (pass 3): every
+        source that names sage under glass dates from 2013, so confidence is low (rules, Source age). Lincolnshire
+        Herbs still described year-round glasshouse production of fresh-cut and living herbs in 2026 (leaf-ofs-lincolnshire-herbs),
+        and Langmead grows potted herbs under glass in Sussex (foodmanufacture-langmead-herbs), but neither names
+        sage. No 2021-or-later source naming UK glasshouse sage was found; searched Lincolnshire Herbs, Vitacress,
+        Langmead, Herbs Unlimited, Westlands and UK vertical farms. Weeks kept from the 2013 sources.'
+- name: Sorrel
+  slug: sorrel
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-sorrel
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 14
+      - 43
+      - in
+    notes:
+      season: 'Hardy herbaceous perennial; leaves from when new growth starts in spring through into autumn, dying
+        back over winter (rhs-sorrel). Only a gardening source is herb-specific, so confidence low. Season words
+        converted as: a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early,
+        mid and late mean its first, middle and last month; an open start or end such as from spring or to autumn
+        is taken as the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) ends about 4 weeks earlier.
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - leaf-ofs-lincolnshire-herbs
+    - foodmanufacture-langmead-herbs
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Split added in pass 2: sorrel is in Lincolnshire Herbs'' range of living herbs, grown under heated,
+        lit glass and produced through winter for supermarkets (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs).
+        Year-round supply of sorrel itself is inferred from the firm''s general winter production, so confidence
+        low. No named peak; rule 6 gives in all year. Source age (pass 3): every source that names sorrel under
+        glass dates from 2013, so confidence is low (rules, Source age). Lincolnshire Herbs still described year-round
+        glasshouse production of fresh-cut and living herbs in 2026 (leaf-ofs-lincolnshire-herbs), and Langmead
+        grows potted herbs under glass in Sussex (foodmanufacture-langmead-herbs), but neither names sorrel. No
+        2021-or-later source naming UK glasshouse sorrel was found; searched Lincolnshire Herbs, Vitacress, Langmead,
+        Herbs Unlimited, Westlands and UK vertical farms. Weeks kept from the 2013 sources.'
+- name: Tarragon
+  slug: tarragon
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-tarragon
+    - fpj-herbfresh-early-start
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 14
+      - 43
+      - in
+    notes:
+      season: 'Herbaceous perennial; picked from when new growth starts in spring into autumn, dying back after
+        the first hard frost; French tarragon often suffers in UK winters (rhs-tarragon). A Surrey grower was cutting
+        UK tarragon in spring in its earliest-ever season (fpj-herbfresh-early-start). Season words converted as:
+        a named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late
+        mean its first, middle and last month; an open start or end such as from spring or to autumn is taken as
+        the middle month (Apr, Oct).'
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) ends about 4 weeks earlier.
+  - name: Glasshouse
+    kind: method
+    confidence: low
+    sources:
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - leaf-ofs-lincolnshire-herbs
+    - foodmanufacture-langmead-herbs
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Lincolnshire Herbs grows living herbs under heated, lit glass, producing through winter, and supplies
+        the Co-op, Morrisons, Asda and Ocado (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); Country
+        Herbs and Plants has always produced year-round under glass, mainly for garden centres (freshplaza-country-herbs).
+        No named production peak, so rule 6 gives in all year. Lincolnshire Herbs names Christmas as its sales peak;
+        that is demand, not a production peak, so rule 6 leaves the whole window in. Source age (pass 3): every
+        source that names tarragon under glass dates from 2013, so confidence is low (rules, Source age). Lincolnshire
+        Herbs still described year-round glasshouse production of fresh-cut and living herbs in 2026 (leaf-ofs-lincolnshire-herbs),
+        and Langmead grows potted herbs under glass in Sussex (foodmanufacture-langmead-herbs), but neither names
+        tarragon. No 2021-or-later source naming UK glasshouse tarragon was found; searched Lincolnshire Herbs,
+        Vitacress, Langmead, Herbs Unlimited, Westlands and UK vertical farms. Weeks kept from the 2013 sources.'
+- name: Thyme
+  slug: thyme
+  group: herbs
+  lines:
+  - name: Outdoor
+    kind: method
+    confidence: low
+    sources:
+    - rhs-thyme
+    - fpj-herbfresh-early-start
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 17
+      - avail
+    - - 18
+      - 35
+      - in
+    - - 36
+      - 52
+      - avail
+    notes:
+      season: 'Evergreen; most common varieties withstand UK winters; leaves can be picked all year, and soft new
+        growth in late spring and summer has the best flavour, so May-Aug is in (rhs-thyme). A Surrey grower expected
+        UK thyme from June in its earliest-ever season (fpj-herbfresh-early-start). Season words converted as: a
+        named season is its full months (spring Mar-May, summer Jun-Aug, autumn Sep-Nov); early, mid and late mean
+        its first, middle and last month; an open start or end such as from spring or to autumn is taken as the
+        middle month (Apr, Oct).'
+      year_round: Outdoor thyme can be picked all year; late spring and summer growth is best (rhs-thyme). Avail
+        here means out of its best season, not hard to get.
+      discrepancy: Category-wide window Apr-Sep (fpj-herbs-uk-kitchens) is not specific to evergreen herbs.
+  - name: Glasshouse
+    kind: method
+    confidence: moderate
+    sources:
+    - vitacress-herbs
+    - freshplaza-lincolnshire-herbs
+    - hortidaily-lincolnshire-herbs
+    - freshplaza-country-herbs
+    - fpj-herbs-uk-kitchens
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: Vitacress grows cut herbs in its 13.5 ha West Sussex glasshouse and on farms in Spain and Portugal
+        to supply all year; the page does not say the UK site alone covers every month (vitacress-herbs); Lincolnshire
+        Herbs grows living herbs under heated, lit glass, producing through winter, and supplies the Co-op, Morrisons,
+        Asda and Ocado (freshplaza-lincolnshire-herbs, hortidaily-lincolnshire-herbs); Country Herbs and Plants
+        has always produced year-round under glass, mainly for garden centres (freshplaza-country-herbs). No named
+        production peak, so rule 6 gives in all year. Lincolnshire Herbs names Christmas as its sales peak; that
+        is demand, not a production peak, so rule 6 leaves the whole window in. Winter cut herbs on UK sale are
+        largely imported (fpj-herbs-uk-kitchens).
+- name: Tea
+  slug: tea
+  group: herbs
+  lines:
+  - name: Cornwall
+    kind: region
+    confidence: moderate
+    sources:
+    - tregothnan-faq
+    - tregothnan-fresh-leaves
+    weeks:
+    - - 1
+      - 13
+      - avail
+    - - 14
+      - 43
+      - in
+    - - 44
+      - 52
+      - avail
+    notes:
+      season: Tregothnan usually plucks Apr-Oct, each bush at least monthly (tregothnan-faq). Fresh leaves are most
+        abundant Apr-Oct but can be picked on nearly any day of the year, so the rest is avail (tregothnan-fresh-leaves).
+        No flush dates given.
+  - name: Scotland
+    kind: region
+    confidence: low
+    sources:
+    - scotsmag-tea-gardens
+    - pekoe-kinnettles-tea
+    weeks:
+    - - 18
+      - 39
+      - in
+    notes:
+      season: 'Bushes are dormant from about October to April/May, giving a short plucking season (scotsmag-tea-gardens);
+        May-Sep is inferred from that. Scottish tea is grown mainly in polytunnels, fleeced against frost to protect
+        the prized first flush; one grower makes 36-37 batches a year (pekoe-kinnettles-tea). No outdoor-only Scottish
+        source was found, so this region line in effect describes a protected crop (rule 6). Pass 2: the growers''
+        own site could not be reached, so sources are still secondary and confidence stays low.'

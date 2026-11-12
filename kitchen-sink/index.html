@@ -21,13 +21,13 @@ photographs it.
 {%- assign examples = "" | split: "" -%}
 {%- for v in verdicts -%}
   {%- assign found = false -%}
-  {%- for f in site.data.foods -%}
+  {%- for f in site.data.shown -%}
     {%- assign b = baked.foods[f.slug] -%}
     {%- if found == false and b.verdict == v and f.slug != "rhubarb" -%}{%- assign found = f -%}{%- endif -%}
   {%- endfor -%}
   {%- comment -%} A verdict no food has this week still shows, in the
      first food's colour. {%- endcomment -%}
-  {%- if found == false -%}{%- assign found = site.data.foods | first -%}{%- endif -%}
+  {%- if found == false -%}{%- assign found = site.data.shown | first -%}{%- endif -%}
   {%- assign examples = examples | push: found -%}
 {%- endfor -%}
 {%- assign never0 = site.data.never | first -%}

@@ -2,7 +2,9 @@
 // read, so that the HTML is right for anything that does not run
 // JavaScript: link previews, search engines, no-JS visitors. The browser
 // recomputes everything from the same module (assets/verdict.js) for
-// whatever day the visitor opens the page.
+// whatever day the visitor opens the page. Also writes _data/shown.json,
+// the foods as the site shows them (tools/shown.js), which every template
+// reads in place of foods.yml.
 //
 // usage: node tools/bake.js                     bake for today
 //        node tools/bake.js --date 2026-10-18   bake for a given day
@@ -13,6 +15,7 @@ const fs = require("fs");
 const path = require("path");
 const V = require("../assets/verdict.js");
 const { loadYaml } = require("./yaml.js");
+const { shownFoods } = require("./shown.js");
 
 const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "_data");
@@ -38,7 +41,8 @@ function titleWord(verdict) {
 }
 
 function main() {
-  const foods = loadYaml(path.join(DATA, "foods.yml"));
+  const foods = shownFoods(loadYaml(path.join(DATA, "foods.yml")));
+  fs.writeFileSync(path.join(DATA, "shown.json"), JSON.stringify(foods) + "\n");
   const groups = loadYaml(path.join(DATA, "groups.yml"));
   const quotes = loadYaml(path.join(DATA, "quotes.yml"));
   const never = fs.existsSync(path.join(DATA, "never.yml")) ? loadYaml(path.join(DATA, "never.yml")) : [];

@@ -57,11 +57,13 @@ defaults:
 # The share cards and the icons are drawn into _site/cards and _site/icons
 # by tools/cards.js after the build, and the per-food JSON into
 # _site/foods by tools/food-json.js; a regenerating `jekyll serve` must
-# not sweep them away.
+# not sweep them away. Nor a rebuild the dev review pages in _site/dev,
+# which tools/dev/ writes and nothing deploys.
 keep_files:
   - cards
   - icons
   - foods
+  - dev
 
 exclude:
   - Gemfile
@@ -73,6 +75,7 @@ exclude:
   - tests/
   - tools/
   - tmp/
+  - research/
   - screenshots/
   - scripts/
   - model_instructions/

@@ -26,8 +26,23 @@ says so: "this project overrides the kit's <rule>: …".
   red step stops the deploy, the daily rebake included.
 - **The design-review screenshot set** is `node tools/dev/shots.js`; run it
   with `--base` set to the URL you are serving.
+- **The seasons review page** is `node tools/dev/before-after.js` after a
+  build: each food's old dial beside its new one, at
+  `<base>/dev/before-after/`. A rebuild keeps it (`keep_files`), so rerun
+  it after a data change; nothing deploys it.
+- **The site draws from `_data/shown.json`**, not `foods.yml`: bake.js
+  writes it from `tools/shown.js`, which hides `proposed` and `no_supply`
+  rings and the research's keys.
+- **Seasons come one way, from the research.** Change a season, a ring's
+  sources or a research note only in `research/data/`, then
+  `python3 tools/pull-research.py`, which runs the research pipeline and
+  rewrites `_data/foods.yml` and `sources.yml`, keeping every editorial
+  field. Edit names, colours, `said`, aliases, `lead`, notes and fish
+  `buy` lines in `foods.yml` by hand. The checker fails on a season
+  edited by hand. `docs/data.md` lists who owns which key.
 - The site is Jekyll with no plugins, vanilla JS and inline SVG only. No
   raster images, no npm, no new gems without asking.
-- **`_data/foods.yml` is the source of truth for seasons.**
-  `tools/make-foods.py` derived it once from the New Covent Garden Market PDF
-  and is kept for provenance; rerunning it overwrites hand edits.
+- **`research/data/` is the source of truth for seasons**, pulled into
+  `_data/foods.yml` as above. `tools/make-foods.py` derived the first
+  `foods.yml` from the New Covent Garden Market PDF and is kept for
+  provenance only: never rerun it.

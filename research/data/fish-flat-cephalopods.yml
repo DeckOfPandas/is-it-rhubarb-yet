@@ -1,0 +1,1722 @@
+- name: Plaice
+  slug: plaice
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2025
+    - directseafoods-summer-2025
+    - directseafoods-winter-2025
+    - directseafoods-spring-2026
+    - northumberland-plaice
+    - northumberland-seafood-seasonality
+    - mcs-plaice
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: 'No regional best-to-eat source for this area. National market reports: plaice deteriorates towards
+        the end of December as it roes up, spawns from the new year and is best avoided until spring (directseafoods-winter-2025);
+        quality returns in April (directseafoods-spring-2026) and it is fully in season in summer (directseafoods-summer-2025).
+        Direct Seafoods'' quarterly market reports are national, so their dates are applied to every region. Plaice
+        is still sold in January-March, dearer and with poor fillet yields (directseafoods-spring-2025), so those
+        weeks are avail. Northumberland Seafood gives spawning as mostly January-March but no landing months (northumberland-plaice,
+        2016). Northumberland Seafood''s seasonality chart (the NE landings source) is an image that could not be
+        read (northumberland-seafood-seasonality). ICES IVa-b.'
+      discrepancy: 'The 2009 national guide, now background only, gave best May-January (seafish-seafood-guide):
+        about four weeks later at the start, and January in, against the 2025-26 reports.'
+      year_round: Sold all year; best April-December, outside the roe and spawning period (directseafoods-winter-2025,
+        directseafoods-spring-2026). Avail here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak
+        method: Bottom trawl (beam)
+        rating: 2
+        label: Best Choice
+    buy: North Sea plaice is the MCS's Best Choice, otter- or beam-trawled.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2025
+    - directseafoods-summer-2025
+    - directseafoods-winter-2025
+    - directseafoods-spring-2026
+    - bnfs-fleet
+    - bnfs-seasonality
+    - mcs-plaice
+    weeks:
+    - - 1
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: 'No regional best-to-eat source for this area. National market reports: plaice deteriorates towards
+        the end of December as it roes up, spawns from the new year and is best avoided until spring (directseafoods-winter-2025);
+        quality returns in April (directseafoods-spring-2026) and it is fully in season in summer (directseafoods-summer-2025).
+        Direct Seafoods'' quarterly market reports are national, so their dates are applied to every region. Plaice
+        is still sold in January-March, dearer and with poor fillet yields (directseafoods-spring-2025), so those
+        weeks are avail. For the south coast, landings pick up in April as fish return to best quality, with yields
+        recovering by May (directseafoods-spring-2025). Brighton and Newhaven boats land plaice in winter and net
+        it from autumn into winter (bnfs-fleet, 2020), which also supports avail in January-March. The Brighton
+        & Newhaven Fish Sales seasonality chart (the SE landings source) is an image that could not be read (bnfs-seasonality).
+        ICES IVc and VIId.'
+      year_round: Sold all year; best April-December, outside the roe and spawning period (directseafoods-winter-2025,
+        directseafoods-spring-2026). Avail here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak
+        method: Bottom trawl (beam)
+        rating: 2
+        label: Best Choice
+      - stock: English Channel (East)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: English Channel (East)
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+    buy: Avoid eastern Channel plaice (Sussex and Kent inshore waters), rated Avoid for both trawl methods; choose
+      North Sea plaice, which is Best Choice.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-plaice
+    - flyingfish-seasonality
+    - directseafoods-spring-2025
+    - mcs-plaice
+    - cgsg-recommended
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: Best to eat January and April-December; spawns February-March, when the north Cornwall fishery (about
+        20 miles off, VIIf) has its peak landings, with a second peak in September (cgsg-plaice, updated January
+        2026). So February-March is landed but out of season (avail). A national market report agrees that south-coast
+        plaice returns to best quality in April (directseafoods-spring-2025).
+      discrepancy: Flying Fish Seafoods marks only June-August as best quality (flyingfish-seasonality), much narrower
+        than cgsg-plaice; the primary regional guide is used (rule 2).
+      year_round: Landed all year; best January and April-December, outside spawning (cgsg-plaice). Avail here means
+        out of its best season, not hard to get.
+      sustainability: 'CGSG: south coast (VIIe) plaice recommended, demersal trawl scored 3; north coast plaice
+        to avoid (cgsg-plaice, cgsg-recommended, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: English Channel (West)
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: English Channel (West)
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: English Channel (West)
+        method: Net (gill or fixed)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: Celtic Sea, Bristol Channel (Cornwall)
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Sea, Bristol Channel
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Sea, Bristol Channel
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+    buy: Choose western Channel plaice (south Cornwall, Devon, Dorset), otter-trawled where possible; avoid Celtic
+      Sea and Bristol Channel plaice, which includes the north Cornwall fishery.
+- name: Dover sole
+  slug: dover-sole
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2026
+    - directseafoods-summer-2025
+    - directseafoods-spring-2025
+    - northumberland-dover-sole
+    - northumberland-seafood-seasonality
+    - mcs-dover-sole
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 26
+      - avail
+    - - 27
+      - 52
+      - in
+    notes:
+      season: No North Sea best-to-eat source from 2021 on. A 2026 national market report says sole spawn April-June
+        and advises avoiding them after March (directseafoods-spring-2026); the summer 2025 report says spawning
+        is over by summer and quality should be excellent (directseafoods-summer-2025). Direct Seafoods' quarterly
+        market reports are national, so their dates are applied to every region. So July-March is in. Northumberland
+        Seafood says sole is available all year (northumberland-dover-sole, 2016), so April-June is avail. Northumberland
+        Seafood's seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
+        ICES IVa-b.
+      discrepancy: Northumberland Seafood says sole is at its best April-June (northumberland-dover-sole, 2016),
+        the opposite of the 2026 report; the newer source is used. The spring 2025 report put best quality from
+        May (directseafoods-spring-2025), against July here.
+      year_round: Available all year (northumberland-dover-sole); best July-March, outside spawning (directseafoods-spring-2026).
+        Avail here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea
+        method: Bottom trawl (beam)
+        rating: 2
+        label: Best Choice
+    buy: North Sea beam-trawled sole is rated Best Choice.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2026
+    - directseafoods-summer-2025
+    - directseafoods-spring-2025
+    - sussex-ifca-commercial
+    - bnfs-fleet
+    - kefca-essex-2025-jan-jun
+    - kefca-essex-2025-nov-jan
+    - bnfs-seasonality
+    - mcs-dover-sole
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 26
+      - avail
+    - - 27
+      - 52
+      - in
+    notes:
+      season: 'No eastern Channel best-to-eat source found. A 2026 national market report says sole spawn April-June
+        and advises avoiding them after March (directseafoods-spring-2026); the summer 2025 report says spawning
+        is over by summer and quality should be excellent (directseafoods-summer-2025). Direct Seafoods'' quarterly
+        market reports are national, so their dates are applied to every region. So July-March is in. Landed all
+        year: Sussex IFCA says sole are fished in spring and autumn (sussex-ifca-commercial); Brighton and Newhaven
+        boats take it in winter and net it in autumn (bnfs-fleet, 2020); Essex trawl catches were poor in early
+        2025, dominated West Mersea by June and dropped off in November (kefca-essex-2025-jan-jun, kefca-essex-2025-nov-jan).
+        So April-June is avail. The Brighton & Newhaven Fish Sales seasonality chart (the SE landings source) is
+        an image that could not be read (bnfs-seasonality). ICES IVc and VIId.'
+      discrepancy: 'Sussex IFCA''s main sole seasons are spring and autumn (sussex-ifca-commercial), and Essex sole
+        peaked around June 2025 (kefca-essex-2025-jan-jun): both partly inside the April-June spawning window that
+        the 2026 report advises avoiding. The spring 2025 report put best quality from May (directseafoods-spring-2025).'
+      year_round: Landed all year (sussex-ifca-commercial, bnfs-fleet); best July-March, outside spawning (directseafoods-spring-2026).
+        Avail here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea
+        method: Bottom trawl (beam)
+        rating: 2
+        label: Best Choice
+      - stock: English Channel (East)
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: English Channel (East)
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+      - stock: English Channel (East)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: English Channel (East)
+        method: Net (demersal seine)
+        rating: 5
+        label: Avoid
+    buy: Avoid eastern Channel sole (Sussex and Kent), rated Avoid for every method; North Sea beam-trawled sole
+      is Best Choice.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-dover-sole
+    - flyingfish-seasonality
+    - mcs-dover-sole
+    - cgsg-recommended
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: Best to eat January and May-December; spawns usually February-April, mainly off Trevose Head, where
+        a winter closure protects spawning sole; sole move offshore in winter and back inshore in spring (cgsg-dover-sole,
+        updated January 2026). Flying Fish Seafoods lists Dover sole among its Cornish fresh fish in a calendar
+        graded month by month for availability (poor, varying or good); the grades are colours that could not be
+        read from the page, so the weeks outside the best-to-eat window are taken as landed (avail) (flyingfish-seasonality).
+      discrepancy: 'Flying Fish Seafoods marks March-April and July-November as best quality (flyingfish-seasonality):
+        it includes two of cgsg-dover-sole''s spawning months and leaves out December-January and May-June. The
+        primary regional guide is used.'
+      year_round: Landed all year; best January and May-December, outside spawning (cgsg-dover-sole). Avail here
+        means out of its best season, not hard to get.
+      sustainability: 'CGSG: recommended by gill net 3, demersal trawl scored 2-3 and beam trawl 3 (cgsg-recommended,
+        read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Celtic Sea, Bristol Channel
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: English Channel (West)
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: English Channel (West)
+        method: Bottom trawl (beam)
+        rating: 2
+        label: Best Choice
+      - stock: English Channel (West)
+        method: Net (gill or fixed)
+        rating: 2
+        label: Best Choice
+      - stock: Celtic Sea, Bristol Channel
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+    buy: Western Channel sole by any method, and Celtic Sea otter-trawled sole, are Best Choice; Celtic Sea beam-trawled
+      sole is OK.
+- name: Lemon sole
+  slug: lemon-sole
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-summer-2025
+    - directseafoods-spring-2025
+    - directseafoods-winter-2025
+    - northumberland-lemon-sole
+    - northumberland-seafood-seasonality
+    - seafish-lemon-sole
+    - seafish-seafood-guide
+    - mcs-lemon-sole
+    weeks:
+    - - 1
+      - 22
+      - avail
+    - - 23
+      - 35
+      - in
+    - - 36
+      - 52
+      - avail
+    notes:
+      season: 'No North Sea best-to-eat source from 2021 on. National market reports: lemon sole improves into summer
+        (directseafoods-spring-2025) and is in season in summer (directseafoods-summer-2025). Direct Seafoods''
+        quarterly market reports are national, so their dates are applied to every region. So June-August is in.
+        It is sold the rest of the year, consistently in spring and as a core December line (directseafoods-spring-2025,
+        directseafoods-winter-2025), so the other weeks are avail. Northumberland Seafood says it is caught as bycatch
+        of turbot and monkfish fishing, without months (northumberland-lemon-sole, 2016). Northumberland Seafood''s
+        seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
+        ICES IVa-b.'
+      discrepancy: The winter 2025 report says lemon sole spawns in summer (directseafoods-winter-2025), against
+        spring in Seafish's 2014 species guide (seafish-lemon-sole). The 2009 national guide, now background only,
+        gave a season of May-March (seafish-seafood-guide), much wider than the summer window here.
+      year_round: Sold all year; best in summer (directseafoods-summer-2025). Avail here means out of its best season,
+        not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (East)
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (East)
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+    buy: Choose otter-trawled lemon sole (OK); avoid beam-trawled North Sea and eastern Channel fish.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-summer-2025
+    - directseafoods-spring-2025
+    - directseafoods-winter-2025
+    - bnfs-fleet
+    - bnfs-seasonality
+    - seafish-lemon-sole
+    - seafish-seafood-guide
+    - mcs-lemon-sole
+    weeks:
+    - - 1
+      - 22
+      - avail
+    - - 23
+      - 35
+      - in
+    - - 36
+      - 52
+      - avail
+    notes:
+      season: 'No eastern Channel best-to-eat source found. National market reports: lemon sole improves into summer
+        (directseafoods-spring-2025) and is in season in summer (directseafoods-summer-2025). Direct Seafoods''
+        quarterly market reports are national, so their dates are applied to every region. So June-August is in.
+        It is sold the rest of the year, consistently in spring and as a core December line (directseafoods-spring-2025,
+        directseafoods-winter-2025), so the other weeks are avail. The spring 2025 report says south-coast lemon
+        sole is dearer than other origins (directseafoods-spring-2025). Brighton and Newhaven boats land lemon sole,
+        season not given (bnfs-fleet, 2020). The Brighton & Newhaven Fish Sales seasonality chart (the SE landings
+        source) is an image that could not be read (bnfs-seasonality). ICES IVc and VIId.'
+      discrepancy: The winter 2025 report says lemon sole spawns in summer (directseafoods-winter-2025), against
+        spring in Seafish's 2014 species guide (seafish-lemon-sole). The 2009 national guide, now background only,
+        gave a season of May-March (seafish-seafood-guide), much wider than the summer window here.
+      year_round: Sold all year; best in summer (directseafoods-summer-2025). Avail here means out of its best season,
+        not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (East)
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (East)
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+    buy: Choose otter-trawled lemon sole (OK); avoid beam-trawled North Sea and eastern Channel fish.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-lemon-sole
+    - directseafoods-summer-2025
+    - flyingfish-seasonality
+    - mcs-lemon-sole
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 26
+      - avail
+    - - 27
+      - 52
+      - in
+    notes:
+      season: Best to eat July-February; spawns in spring; most Cornish landings are beam-trawled (cgsg-lemon-sole,
+        updated October 2026). A national market report also says Cornish lemon sole is at its best from July (directseafoods-summer-2025).
+        Flying Fish Seafoods lists lemon sole among its Cornish fresh fish in a calendar graded month by month for
+        availability (poor, varying or good); the grades are colours that could not be read from the page, so the
+        weeks outside the best-to-eat window are taken as landed (avail) (flyingfish-seasonality).
+      discrepancy: Flying Fish Seafoods marks June-September as best quality (flyingfish-seasonality), against July-February
+        in cgsg-lemon-sole. The 2009 national guide's May-March season no longer counts.
+      year_round: Landed all year; best July-February (cgsg-lemon-sole). Avail here means out of its best season,
+        not hard to get.
+      sustainability: 'CGSG: cannot get a good rating as stocks are poorly studied and at risk of overfishing; not
+        on its recommended list (cgsg-lemon-sole, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Cornwall
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: Cornwall
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+    buy: Cornish lemon sole is OK - needs improvement by otter or beam trawl; the MCS asks buyers to check the source.
+- name: Brill
+  slug: brill
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2025
+    - directseafoods-summer-2025
+    - directseafoods-winter-2025
+    - directseafoods-spring-2026
+    - northumberland-brill
+    - northumberland-seafood-seasonality
+    - mcs-brill
+    weeks:
+    - - 1
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: 'Filled this pass (was empty). No North Sea best-to-eat source. National market reports: brill returns
+        to season in April (directseafoods-spring-2026, directseafoods-spring-2025) and is in season through summer,
+        with landings improving (directseafoods-summer-2025). Direct Seafoods'' quarterly market reports are national,
+        so their dates are applied to every region. So April-December is in. In winter wild brill is still sold
+        but can be short and dear (directseafoods-winter-2025), so January-March is avail. Northumberland Seafood
+        says most brill off Northumberland are caught in autumn, in modest numbers (northumberland-brill, 2016).
+        Northumberland Seafood''s seasonality chart (the NE landings source) is an image that could not be read
+        (northumberland-seafood-seasonality). ICES IVa-b.'
+      year_round: Sold all year, thinly in winter; best April-December (directseafoods-spring-2026). Avail here
+        means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Net (gill or fixed)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+    buy: Choose otter-trawled or gill-netted brill (Best Choice); beam-trawled is OK.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2025
+    - directseafoods-summer-2025
+    - directseafoods-winter-2025
+    - directseafoods-spring-2026
+    - bnfs-fleet
+    - bnfs-seasonality
+    - mcs-brill
+    weeks:
+    - - 1
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: 'Filled this pass (was empty). No eastern Channel best-to-eat source. National market reports: brill
+        returns to season in April (directseafoods-spring-2026, directseafoods-spring-2025) and is in season through
+        summer, with landings improving (directseafoods-summer-2025). Direct Seafoods'' quarterly market reports
+        are national, so their dates are applied to every region. So April-December is in. In winter wild brill
+        is still sold but can be short and dear (directseafoods-winter-2025), so January-March is avail. Brighton
+        and Newhaven boats net brill from autumn into winter (bnfs-fleet, 2020). The Brighton & Newhaven Fish Sales
+        seasonality chart (the SE landings source) is an image that could not be read (bnfs-seasonality). ICES IVc
+        and VIId.'
+      year_round: Sold all year, thinly in winter; best April-December (directseafoods-spring-2026). Avail here
+        means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Net (gill or fixed)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+    buy: Choose otter-trawled or gill-netted brill (Best Choice); beam-trawled is OK.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-brill
+    - directseafoods-spring-2026
+    - flyingfish-seasonality
+    - mcs-brill
+    - cgsg-recommended
+    weeks:
+    - - 1
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: Best to eat April-December (cgsg-brill, updated October 2026); a national market report also says
+        brill returns to season in April (directseafoods-spring-2026). Flying Fish Seafoods lists brill among its
+        Cornish fresh fish in a calendar graded month by month for availability (poor, varying or good); the grades
+        are colours that could not be read from the page, so the weeks outside the best-to-eat window are taken
+        as landed (avail) (flyingfish-seasonality).
+      discrepancy: cgsg-brill says brill spawn in spring and summer, yet ticks April-December, so its ticks are
+        not spawning-based; the ticks are used. Flying Fish Seafoods marks no best-quality months for brill, which
+        on its key means consistent quality all year (flyingfish-seasonality), against the regional guide's window;
+        the primary source is used.
+      year_round: Landed all year; best April-December (cgsg-brill). Avail here means out of its best season, not
+        hard to get.
+      sustainability: 'CGSG: Western Channel demersal trawl, beam trawl and gill net recommended; north coast demersal
+        trawl recommended, north coast beam and gill net not (cgsg-brill, cgsg-recommended, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Net (gill or fixed)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat, English Channel
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (Cornwall IFCA District, 0-6nm)
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (Cornwall IFCA District, 0-6nm)
+        method: Net (gill or fixed)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (Cornwall IFCA District, 0-6nm)
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: Celtic Sea, Bristol Channel (Cornwall)
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: Celtic Sea, Bristol Channel (Cornwall)
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: Celtic Sea, Bristol Channel (Cornwall)
+        method: Net (gill or fixed)
+        rating: 4
+        label: OK - Needs Improvement
+    buy: Choose otter-trawled or gill-netted Channel brill (Best Choice); inshore Cornish and Celtic Sea brill is
+      OK.
+- name: Turbot
+  slug: turbot
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2026
+    - directseafoods-spring-2025
+    - directseafoods-summer-2025
+    - northumberland-turbot
+    - northumberland-seafood-seasonality
+    - mcs-turbot
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 22
+      - avail
+    - - 23
+      - 52
+      - in
+    notes:
+      season: 'No North Sea best-to-eat source. National market reports: wild turbot spawns and is out of season
+        in March-May (directseafoods-spring-2026, directseafoods-spring-2025) and is in season in summer (directseafoods-summer-2025).
+        Direct Seafoods'' quarterly market reports are national, so their dates are applied to every region. So
+        June-February is in. Northumberland Seafood says turbot is available all year and breeds April-August (northumberland-turbot,
+        2016), so March-May is avail. Northumberland Seafood''s seasonality chart (the NE landings source) is an
+        image that could not be read (northumberland-seafood-seasonality). ICES IVa-b.'
+      discrepancy: northumberland-turbot's April-August breeding overlaps June-August, which the market reports
+        treat as in season.
+      year_round: Available all year (northumberland-turbot); best June-February (directseafoods-spring-2026). Avail
+        here means out of its best season, not hard to get.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+    buy: Choose wild North Sea otter-trawled turbot (Best Choice); the MCS's other Best Choice, Spanish farmed turbot,
+      is an import.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-spring-2026
+    - directseafoods-spring-2025
+    - directseafoods-summer-2025
+    - bnfs-fleet
+    - bnfs-seasonality
+    - mcs-turbot
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 22
+      - avail
+    - - 23
+      - 52
+      - in
+    notes:
+      season: 'No eastern Channel best-to-eat source. National market reports: wild turbot spawns and is out of
+        season in March-May (directseafoods-spring-2026, directseafoods-spring-2025) and is in season in summer
+        (directseafoods-summer-2025). Direct Seafoods'' quarterly market reports are national, so their dates are
+        applied to every region. So June-February is in. Brighton and Newhaven boats net turbot from autumn into
+        winter (bnfs-fleet, 2020). No source for SE landings of wild turbot in March-May, so those weeks have no
+        range. The Brighton & Newhaven Fish Sales seasonality chart (the SE landings source) is an image that could
+        not be read (bnfs-seasonality). ICES IVc and VIId. Landings (`avail`) include weeks Helen transcribed from
+        Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only
+        page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      note: MCS has no separate eastern Channel turbot rating; the North Sea ratings cover IVc.
+    buy: Choose wild North Sea otter-trawled turbot (Best Choice); beam-trawled is OK.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-turbot
+    - directseafoods-spring-2026
+    - directseafoods-summer-2025
+    - flyingfish-seasonality
+    - mcs-turbot
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 22
+      - avail
+    - - 23
+      - 52
+      - in
+    notes:
+      season: Best to eat January-February and June-December (cgsg-turbot, updated October 2026). National market
+        reports agree that wild turbot is out of season March-May and in season in summer (directseafoods-spring-2026,
+        directseafoods-summer-2025). Flying Fish Seafoods lists turbot among its Cornish fresh fish in a calendar
+        graded month by month for availability (poor, varying or good); the grades are colours that could not be
+        read from the page, so the weeks outside the best-to-eat window are taken as landed (avail) (flyingfish-seasonality).
+      discrepancy: cgsg-turbot says turbot spawn April-August in most of their range, which overlaps its June-August
+        ticks; the ticks are used. Flying Fish Seafoods marks no best-quality months for turbot, which on its key
+        means consistent quality all year (flyingfish-seasonality), against the regional guide's window; the primary
+        source is used.
+      year_round: Landed all year; best June-February (cgsg-turbot). Avail here means out of its best season, not
+        hard to get.
+      sustainability: 'CGSG: advises avoiding turbot until management and science improve (cgsg-turbot, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Cornwall
+        method: Net (gill or fixed)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: Cornwall
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: Cornwall
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+    buy: All Cornish turbot is OK - needs improvement; the MCS's best wild choice is North Sea otter-trawled turbot.
+- name: Dab
+  slug: dab
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-dab
+    - northumberland-seafood-seasonality
+    - mcs-dab
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No North Sea best-to-eat source and no landings source with months.
+        Searched on 2026-11-10: Northumberland Seafood''s dab page gives spawning in spring and early summer and
+        an inshore move in summer, linked to neither eating quality nor landings (northumberland-dab, 2016); Northumberland
+        Seafood''s seasonality chart (the NE landings source) is an image that could not be read (northumberland-seafood-seasonality).
+        Direct Seafoods'' 2025-26 market reports do not mention dab. Earlier passes searched Seafish, NEIFCA and
+        North Sea material. Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality
+        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
+        (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat
+        method: Net (demersal seine)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Skagerrak and Kattegat
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+    buy: Choose seine-netted or otter-trawled North Sea dab (Best Choice).
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-dab
+    - flyingfish-seasonality
+    - mcs-dab
+    - cgsg-recommended
+    weeks:
+    - - 1
+      - 22
+      - avail
+    - - 23
+      - 52
+      - in
+    notes:
+      season: Best to eat June-January; spawns January-May in Cornish waters (cgsg-dab, updated January 2026). Flying
+        Fish Seafoods lists dabs among its Cornish fresh fish in a calendar graded month by month for availability
+        (poor, varying or good); the grades are colours that could not be read from the page, so the weeks outside
+        the best-to-eat window are taken as landed (avail) (flyingfish-seasonality).
+      discrepancy: cgsg-dab also ticks January, inside its own stated spawning period; rule 1 applied, so January
+        is avail. Flying Fish Seafoods marks no best-quality months for dabs, which on its key means consistent
+        quality all year (flyingfish-seasonality), against the regional guide's window; the primary source is used.
+      year_round: Landed all year; best June-December, outside spawning (cgsg-dab). Avail here means out of its
+        best season, not hard to get.
+      sustainability: 'CGSG: recommended, demersal trawl scored 3 (cgsg-recommended, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Cornwall
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: Cornwall
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+    buy: Otter-trawled Cornish dab is the better choice over beam-trawled; both are OK.
+- name: Witch sole
+  slug: witch-sole
+  group: fish-shellfish
+  lines:
+  - name: Witch sole
+    kind: whole
+    confidence: moderate
+    sources:
+    - cgsg-witch
+    - directseafoods-spring-2025
+    - directseafoods-spring-2026
+    - directseafoods-summer-2025
+    - northumberland-witch
+    - mcs-witch
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 30
+      - avail
+    - - 31
+      - 52
+      - in
+    notes:
+      season: Best to eat August-March; spawns in summer; caught mainly as trawl bycatch (cgsg-witch, updated January
+        2026). A national market report agrees that Cornish witch spawns April-July and is best bought in March,
+        with spawning later further north (directseafoods-spring-2025). Witch is sold through the summer (directseafoods-summer-2025),
+        so April-July is avail. Cornish and market sources only; also common in the northern North Sea.
+      discrepancy: For the North Sea, the 2026 report says witch spawns from March and should be avoided then (directseafoods-spring-2026),
+        and Northumberland Seafood gives spawning as May-September (northumberland-witch, 2016). The summer 2025
+        report calls witch in season in summer (directseafoods-summer-2025), inside cgsg-witch's spawning period.
+      year_round: Sold all year; best August-March, outside spawning (cgsg-witch). Avail here means out of its best
+        season, not hard to get.
+      sustainability: 'CGSG: no catch limits in Cornish waters; Cornwall IFCA minimum size 28 cm, avoid smaller
+        fish; not on its recommended list (cgsg-witch, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat, English Channel (East)
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: Cornwall
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+    buy: Witch is OK - needs improvement from the North Sea and eastern Channel or Cornwall by otter trawl; the
+      MCS suggests alternatives where possible.
+- name: Megrim
+  slug: megrim
+  group: fish-shellfish
+  lines:
+  - name: Megrim
+    kind: whole
+    confidence: moderate
+    sources:
+    - cgsg-megrim
+    - directseafoods-winter-2025
+    - directseafoods-spring-2025
+    - directseafoods-spring-2026
+    - directseafoods-summer-2025
+    - mcs-megrim
+    - cgsg-recommended
+    weeks:
+    - - 1
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: 'Best to eat May-December; spawns January-April on the shelf edge south-west and west of the British
+        Isles (cgsg-megrim, updated October 2026). National market reports agree: megrim spawns in the new year
+        and improves in May (directseafoods-winter-2025, directseafoods-spring-2025) and is at its best in summer
+        (directseafoods-summer-2025). It is still sold in winter, priced like plaice (directseafoods-winter-2025),
+        so January-April is avail. Sold in Cornwall as Cornish sole.'
+      discrepancy: The 2026 report has megrim improving in April (directseafoods-spring-2026), four weeks before
+        cgsg-megrim and the 2025 report.
+      year_round: Sold all year; best May-December, outside spawning (cgsg-megrim). Avail here means out of its
+        best season, not hard to get.
+      sustainability: 'CGSG: recommended, beam trawl 3 and demersal trawl 2 (cgsg-recommended, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea (North), West of Scotland
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: Celtic Sea, west and southwest of Ireland, Bay of Biscay
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: Celtic Sea, west and southwest of Ireland, Bay of Biscay
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: Rockall
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+    buy: Northern North Sea and West of Scotland megrim (otter trawl) is the Best Choice; Celtic Sea and Rockall
+      megrim is OK.
+- name: Halibut
+  slug: halibut
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-halibut
+    - northumberland-seafood-seasonality
+    - cgsg-halibut
+    - mcs-atlantic-halibut
+    - seafish-seafood-guide
+    - fishbase-atlantic-halibut
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Wild Atlantic halibut. No current best-to-eat source: the 2009 national
+        guide''s wild season (May-March, seafish-seafood-guide) can no longer be the basis, and nothing newer was
+        found, so there is no best-to-eat window. Northumberland Seafood says halibut is available all year, more
+        widely March-September (northumberland-halibut, 2016); it does not say whether that is local wild fish or
+        farmed supply, so these weeks are weak. Northumberland Seafood''s seasonality chart (the NE landings source)
+        is an image that could not be read (northumberland-seafood-seasonality). Spawns in winter and early spring
+        (cgsg-halibut). ICES IVa-b. Coordinator, 2026-11-11: still no best-to-eat window. Atlantic halibut spawns
+        from December to April (fishbase-atlantic-halibut), and Norway closes its halibut fishery from 20 December
+        to 20 April for spawning (mcs-atlantic-halibut), but no source links spawning to eating quality for UK-landed
+        fish, so spawning sets no window. Searched MCS species pages, Seafish, Northumberland Seafood and the scientific
+        literature. This line now leads the food (see the lead rule in propose.py), since the SW and Farmed lines
+        are no_supply.'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Northeast Atlantic (wild)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: Northeast Atlantic (wild)
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+    buy: Avoid wild halibut; the MCS's only Best Choice is GLOBALG.A.P.-certified farmed halibut from Norway, an
+      import.
+  - name: SW
+    kind: region
+    confidence: low
+    sources:
+    - seafish-seafood-guide
+    - cgsg-halibut
+    - mcs-atlantic-halibut
+    weeks: []
+    notes:
+      season: 'National guide: wild season May-March (seafish-seafood-guide, 2009). Replaces the earlier unsourced
+        all-year avail. Wild halibut is rarely landed in Cornwall, as trawl or tangle-net bycatch with no directed
+        fishery (cgsg-halibut).'
+      discrepancy: cgsg-halibut ticks no month as best to eat and says the fish is rare locally, so the national
+        season may overstate Cornish supply.
+      sustainability: 'CGSG: listed as one to avoid, all methods; overfished and rare in local waters (cgsg-halibut,
+        read 2026-11-10).'
+      no_supply: Wild halibut is rarely landed in Cornwall, only as occasional bycatch with no directed fishery,
+        and both MCS and CGSG rate it Avoid.
+    no_supply: true
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Northeast Atlantic (wild)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: Northeast Atlantic (wild)
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+    buy: Avoid wild halibut; the MCS's only Best Choice is GLOBALG.A.P.-certified farmed halibut from Norway, an
+      import.
+  - name: Farmed
+    kind: method
+    confidence: low
+    sources:
+    - weareaquaculture-gigha-2023
+    - caithness-business-gigha-2025
+    - seafish-seafood-guide
+    - cgsg-halibut
+    - mcs-atlantic-halibut
+    weeks: []
+    notes:
+      season: No UK farmed halibut is now produced for sale. Gigha Halibut, a land-based farm on Gigha, announced
+        in March 2023 that it would close after 15 years, stop restocking and harvest its last fish by May 2023,
+        citing energy costs for its recirculating system, changing water conditions and climate effects (weareaquaculture-gigha-2023).
+        In April 2025 it was described as having been the only such farm in the UK; Otter Ferry Seafish on Loch
+        Fyne still rears juvenile halibut, mainly for farms in Norway and Canada, and is looking for future Scottish
+        grow-out sites, but no source says it sells halibut for food (caithness-business-gigha-2025). Seafish's
+        2009 guide said farmed halibut was available all year (seafish-seafood-guide), which no longer applies to
+        UK production. CGSG says most halibut on sale is farmed outside Cornwall (cgsg-halibut). Line left empty;
+        a never verdict may suit if Helen wants to show it.
+      sustainability: 'MCS: no UK farmed halibut rating; its only farmed rating is Norway, open net pen, GLOBALG.A.P.,
+        Best Choice (2), an import and so out of scope (mcs-atlantic-halibut, read 2026-11-10).'
+      no_supply: Gigha Halibut, the UK's only halibut farm, closed in 2023, so there is no UK farmed halibut.
+    no_supply: true
+- name: Skates and rays
+  slug: skates-and-rays
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - mcs-thornback-ray
+    - mcs-blonde-ray
+    - mcs-cuckoo-ray
+    - mcs-spotted-ray
+    - gov-fmp-skates-rays
+    - legislation-eu-2016-72-art13
+    - mcs-flapper-skate
+    - northumberland-seafood-species
+    - northumberland-seafood-seasonality
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No North Sea best-to-eat or landings-by-month source. Searched Seafish,
+        NEIFCA, the Yorkshire Marine Nature Partnership and the Defra skate and ray FMP in earlier passes; this
+        pass, Northumberland Seafood''s list of 23 North East species has no skate or ray (northumberland-seafood-species)
+        and its chart could not be read (northumberland-seafood-seasonality). The FMP (updated 2025-12-16) says
+        skates and rays are caught in mixed and seasonal targeted fisheries but gives no months; starry ray may
+        not be fished, retained or landed in IIa, IIIa, IV or VIId, and small-eyed ray may not be targeted in the
+        North Sea (gov-fmp-skates-rays). The common skate complex (flapper and blue skate) was a prohibited species
+        under the 2016 TAC regulation (legislation-eu-2016-72-art13, original version); MCS rated flapper skate
+        Avoid (5) when read earlier on 2026-11-10, but the page failed to load on re-check (mcs-flapper-skate).
+        Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Thornback ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Net (gill or fixed)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Blonde ray: Northern North Sea and West of Scotland'
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Northern North Sea and West of Scotland'
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Central and Southern North Sea and Eastern English Channel'
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      unscored:
+      - stock: 'Cuckoo ray: North Sea and Skagerrak and Kattegat'
+        method: Bottom trawl (otter)
+        label: Under review
+      - stock: 'Spotted ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (otter)
+        label: OK - Needs Improvement
+      - stock: 'Spotted ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (beam)
+        label: OK - Needs Improvement
+      note: The MCS species pages for spotted and cuckoo ray show these under a label with no number, and the individual
+        rating pages give no score either (read 2026-11-10), so they are listed without a rating.
+    buy: Ask which species a skate wing is and don't buy it if no one can say; thornback is OK, but avoid northern
+      North Sea blonde ray.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - kefca-thornback-smp-2014
+    - kefca-essex-2025-jan-jun
+    - kefca-essex-2025-nov-jan
+    - bnfs-fleet
+    - bnfs-seasonality
+    - gov-fmp-skates-rays
+    - kentessex-ifca-thornback
+    - ices-fishmap-thornback
+    - mcs-thornback-ray
+    - mcs-blonde-ray
+    - mcs-spotted-ray
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source for the eastern Channel or southern North Sea
+        (the CGSG months are for Cornwall only), so no best-to-eat window. Landed all year: Kent and Essex IFCA''s
+        thornback profile gives an all-year season by angling, nets and trawl and calls it one of four main commercial
+        finfish in the district (kefca-thornback-smp-2014, February 2014); its 2025 shore reports show thornback
+        steadily in Essex commercial catches January-June and dominating West Mersea by June, with small amounts
+        still landed over Christmas 2025 (kefca-essex-2025-jan-jun, kefca-essex-2025-nov-jan). Brighton and Newhaven
+        boats net skate from autumn into winter (bnfs-fleet, 2020). July-August rests on the 2014 profile only.
+        Thornback make up about 54% of SE skate and ray landings, then blonde (27%), spotted (10%) and cuckoo (8%),
+        2016-2021; starry ray may not be landed from VIId (gov-fmp-skates-rays). The Brighton & Newhaven Fish Sales
+        seasonality chart (the SE landings source) is an image that could not be read (bnfs-seasonality). ICES IVc
+        and VIId.'
+      discrepancy: The same profile says thornback are traditionally present from early spring to late autumn (kefca-thornback-smp-2014),
+        and they lay eggs inshore March-September (ices-fishmap-thornback, kentessex-ifca-thornback); its explicit
+        all-year season is used (rule 1).
+      drift: Kent and Essex IFCA says more thornback seem to be staying inshore further into winter, with some thought
+        to be resident all year in the Thames estuary area (kentessex-ifca-thornback).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Thornback ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Net (gill or fixed)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Blonde ray: Central and Southern North Sea and Eastern English Channel'
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      unscored:
+      - stock: 'Spotted ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (otter)
+        label: OK - Needs Improvement
+      - stock: 'Spotted ray: North Sea, Skagerrak, Kattegat and Eastern English Channel'
+        method: Bottom trawl (beam)
+        label: OK - Needs Improvement
+      note: The MCS species pages for spotted and cuckoo ray show these under a label with no number, and the individual
+        rating pages give no score either (read 2026-11-10), so they are listed without a rating.
+    buy: 'Know the species: thornback, and beam-trawled blonde ray from the southern North Sea and eastern Channel,
+      are OK; don''t buy wings of unknown species. Undulate ray has its own line.'
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-thornback-ray
+    - cgsg-blonde-ray
+    - cgsg-cuckoo-ray
+    - cgsg-small-eyed-ray
+    - cgsg-spotted-ray
+    - flyingfish-seasonality
+    - ices-fishmap-thornback
+    - mcs-thornback-ray
+    - mcs-blonde-ray
+    - mcs-cuckoo-ray
+    - mcs-spotted-ray
+    - cgsg-recommended
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 22
+      - avail
+    - - 23
+      - 52
+      - in
+    notes:
+      season: Thornback and blonde ray best to eat June-February (cgsg-thornback-ray, cgsg-blonde-ray, updated January
+        2026). The ray fishery runs all year with the biggest landings late in the year; the Bristol Channel Ray
+        Box is closed to trawlers 1 December-31 May (cgsg-blonde-ray). Flying Fish Seafoods lists skate wings among
+        its Cornish fresh fish in a calendar graded month by month for availability (poor, varying or good); the
+        grades are colours that could not be read from the page, so the weeks outside the best-to-eat window are
+        taken as landed (avail) (flyingfish-seasonality). Species landed in Cornwall include thornback, blonde,
+        cuckoo, small-eyed, spotted and undulate ray.
+      discrepancy: Cuckoo and small-eyed ray are ticked from July, not June (cgsg-cuckoo-ray, cgsg-small-eyed-ray);
+        spotted ray is ticked all year (cgsg-spotted-ray). Thornback lay eggs March-September (ices-fishmap-thornback)
+        and blonde ray February-August (cgsg-blonde-ray), overlapping the June-August ticks. Flying Fish Seafoods
+        marks no best-quality months for skate wings, which on its key means consistent quality all year (flyingfish-seasonality),
+        against the regional guide's window; the primary source is used.
+      year_round: Landed all year, most late in the year (cgsg-blonde-ray); best June-February (cgsg-thornback-ray).
+        Avail here means out of its best season, not hard to get.
+      sustainability: 'CGSG: thornback north coast (VIIf-g) recommended, south coast (VIIe) to avoid; cuckoo ray
+        (all methods) and small-eyed ray (demersal trawl) recommended; blonde and spotted not on its recommended
+        list; do not buy wings under 22 cm (cgsg-recommended, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Thornback ray: Irish Sea, Bristol Channel, Celtic Sea North (Bristol Channel, NDFA)'
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: 'Thornback ray: Irish Sea, Bristol Channel, Celtic Sea North (Bristol Channel, NDFA)'
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: Irish Sea, Bristol Channel, Celtic Sea North'
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: Irish Sea, Bristol Channel, Celtic Sea North'
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: Irish Sea, Bristol Channel, Celtic Sea North (Cornwall)'
+        method: Bottom trawl (otter)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: Irish Sea, Bristol Channel, Celtic Sea North (Cornwall)'
+        method: Net (gill or fixed)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: 'Thornback ray: Western English Channel'
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Thornback ray: Western English Channel'
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: 'Thornback ray: Western English Channel (Cornwall)'
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Thornback ray: Western English Channel (Cornwall)'
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Irish Sea, Bristol Channel, Celtic Sea North (Bristol Channel, NDFA)'
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Irish Sea, Bristol Channel, Celtic Sea North (Bristol Channel, NDFA)'
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Irish Sea, Bristol Channel, Celtic Sea North'
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Irish Sea, Bristol Channel, Celtic Sea North'
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Irish Sea, Bristol Channel, Celtic Sea North (Cornwall)'
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Western English Channel'
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Western English Channel (Cornwall)'
+        method: Net (gill or fixed)
+        rating: 5
+        label: Avoid
+      - stock: 'Blonde ray: Western English Channel (Cornwall)'
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      unscored:
+      - stock: 'Cuckoo ray: West of Scotland, Southern Celtic Sea, Western English Channel and Bay of Biscay'
+        method: Bottom trawl (otter)
+        label: OK - Needs Improvement
+      - stock: 'Cuckoo ray: West of Scotland, Southern Celtic Sea, Western English Channel and Bay of Biscay (Cornwall)'
+        method: Net (gill or fixed)
+        label: OK - Needs Improvement
+      - stock: 'Cuckoo ray: West of Scotland, Southern Celtic Sea, Western English Channel and Bay of Biscay (Cornwall)'
+        method: Bottom trawl (beam)
+        label: OK - Needs Improvement
+      - stock: 'Spotted ray: Southern Celtic Seas (Bristol Channel, NDFA)'
+        method: Bottom trawl (otter)
+        label: OK - Needs Improvement
+      - stock: 'Spotted ray: Southern Celtic Seas'
+        method: Bottom trawl (otter)
+        label: OK - Needs Improvement
+      - stock: 'Spotted ray: Southern Celtic Seas (Bristol Channel, NDFA)'
+        method: Net (gill or fixed)
+        label: OK - Needs Improvement
+      - stock: 'Spotted ray: Southern Celtic Seas (Cornwall)'
+        method: Bottom trawl (beam)
+        label: OK - Needs Improvement
+      - stock: 'Spotted ray: Southern Celtic Seas (Cornwall)'
+        method: Net (gill or fixed)
+        label: OK - Needs Improvement
+      note: The MCS species pages for spotted and cuckoo ray show these under a label with no number, and the individual
+        rating pages give no score either (read 2026-11-10), so they are listed without a rating.
+    buy: Know the species. Choose Bristol Channel (NDFA) otter-trawled thornback; avoid western Channel thornback
+      and all South West blonde ray; don't buy wings of unknown species.
+  - name: Undulate ray (Channel)
+    kind: variety
+    confidence: high
+    sources:
+    - gov-fmp-skates-rays
+    - cgsg-undulate-ray
+    - mcs-undulate-ray
+    weeks:
+    - - 1
+      - 18
+      - in
+    - - 35
+      - 52
+      - in
+    notes:
+      season: Split added because undulate ray has a legal closed period, May-August inclusive, in VIId and VIIe
+        under domestic licence conditions (gov-fmp-skates-rays, updated 2025-12-16; cgsg-undulate-ray, updated January
+        2026); rule 4 applied. Weeks follow the legal-dates rule (a week counts if it has at least one open day),
+        so week 18 (open to 30 April) and week 35 (open from 1 September) are in. Landings capped at 200 kg per
+        trip, size limits 78-97 cm, landed whole or gutted (gov-fmp-skates-rays).
+      discrepancy: cgsg-undulate-ray ticks January-March and August-December as best to eat, so it leaves April
+        unticked and ticks August, which falls in the closed period.
+      sustainability: 'CGSG: Channel stock recovered and harvested sustainably; recommended, all methods (cgsg-undulate-ray,
+        read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: English Channel
+        method: Bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: English Channel
+        method: Net (gill or fixed)
+        rating: 2
+        label: Best Choice
+      - stock: English Channel
+        method: Bottom trawl (beam)
+        rating: 3
+        label: OK - Needs Improvement
+      - stock: English Channel (Cornwall)
+        method: Net (gill or fixed)
+        rating: 3
+        label: OK - Needs Improvement
+    buy: Choose otter-trawled or gill-netted Channel undulate ray (Best Choice); beam-trawled and Cornish netted
+      fish are OK.
+- name: Cuttlefish
+  slug: cuttlefish
+  group: fish-shellfish
+  lines:
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - mmo-cuttlefish-action-plan
+    - mmo-cuttlefish-sampling-2025
+    - mmo-cuttlefish-roadshow
+    - bnfs-fleet
+    - bnfs-seasonality
+    - seafish-gear-cuttlefish-pots
+    - brighton-sepia-hastings
+    - gov-sea4-cephalopods
+    - guardian-cuttlefish
+    - mcs-cuttlefish
+    weeks:
+    - - 14
+      - 30
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No best-to-eat source for the eastern Channel (the CGSG months are
+        for Cornwall), so no best-to-eat window. Landings: the MMO action plan monitors the Channel pot season at
+        its start (April), middle (May) and end (July) (mmo-cuttlefish-action-plan); the MMO sampled Hastings in
+        April 2025 during the potting season (mmo-cuttlefish-sampling-2025); fishers describe a short pot season
+        of about two months, later in bad weather (mmo-cuttlefish-roadshow); Brighton and Newhaven boats join the
+        cuttlefish fishery in spring as the weather warms, for about six to eight weeks (bnfs-fleet, 2020). Taken
+        as April-July. Adults gather on south-coast inshore spawning grounds in spring (gov-sea4-cephalopods); Eastbourne
+        is a landing port (guardian-cuttlefish). The winter trawl season in the MMO sampling was recorded at south-west
+        ports, so it is not applied here. The Brighton & Newhaven Fish Sales seasonality chart (the SE landings
+        source) is an image that could not be read (bnfs-seasonality).'
+      discrepancy: Seafish says the south-coast trap fishery usually runs in summer and autumn, when cuttlefish
+        come inshore to spawn (seafish-gear-cuttlefish-pots), against April-July from the MMO, a gap of more than
+        four weeks. A University of Brighton project, run 2018-19, describes the Hastings fishery as seasonal and
+        targeting the overwintering population, without months (brighton-sepia-hastings).
+      drift: Fishers at the MMO roadshow reported rising water temperatures leading to earlier spawning and a longer
+        fishing season (mmo-cuttlefish-roadshow).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: English Channel and Celtic Seas (inshore, 0-6nm)
+        method: Pot, trap or creel
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: English Channel and Celtic Seas (offshore, beyond 6nm, including France)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: English Channel and Celtic Seas (offshore, beyond 6nm, including France)
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+    buy: Choose inshore pot-caught cuttlefish (OK); avoid trawled. The MCS has no Best Choice cuttlefish and suggests
+      alternatives.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-cuttlefish
+    - flyingfish-seasonality
+    - mcs-cuttlefish
+    - gov-sea4-cephalopods
+    - mmo-cuttlefish-roadshow
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: Best to eat January and May-December. Eggs are laid February-May, peaking mid-April to mid-May; pots
+        are worked inshore in spring and summer, while trawlers target deep-water overwintering shoals before they
+        breed (cgsg-cuttlefish, updated January 2026), so February-April is landed but out of season (avail). February
+        is no longer ticked on the current page. Cornish landings 392 t in 2024.
+      discrepancy: Flying Fish Seafoods marks November-February as best quality (flyingfish-seasonality), leaving
+        out May-October, which cgsg-cuttlefish ticks; the primary regional guide is used.
+      drift: Fishers at the MMO's Channel cuttlefish roadshow reported rising water temperatures leading to earlier
+        spawning and a longer fishing season (mmo-cuttlefish-roadshow).
+      year_round: Landed all year, by trawl in winter and pots in spring and summer (cgsg-cuttlefish); best January
+        and May-December. Avail here means out of its best season, not hard to get.
+      sustainability: 'CGSG: pot-caught is the best option but not yet considered sustainable; no catch limits (cgsg-cuttlefish,
+        read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: English Channel and Celtic Seas (inshore, 0-6nm)
+        method: Pot, trap or creel
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: English Channel and Celtic Seas (offshore, beyond 6nm, including France)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: English Channel and Celtic Seas (offshore, beyond 6nm, including France)
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: English Channel and Celtic Seas (Cornwall IFCA District, 0-6nm)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: Choose inshore pot-caught cuttlefish (OK); avoid trawled, including Cornish inshore otter trawl. The MCS
+      has no Best Choice cuttlefish.
+- name: Squid
+  slug: squid
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-winter-2025
+    - fishingdaily-scot-squid-2025
+    - gov-sea2-cephalopods
+    - seafish-squid-uk-waters
+    - seafish-seafood-guide
+    - mcs-european-squid
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 48
+      - avail
+    - - 49
+      - 52
+      - in
+    notes:
+      season: 'A national market report says native squid is in season in winter, December-February (directseafoods-winter-2025);
+        applied to every region. Landings: the Scottish Government says most Scottish squid landings are May-October,
+        with the Moray Firth the long-standing fishery and squid increasingly common around Shetland (fishingdaily-scot-squid-2025,
+        June 2025), so May-October is avail. November is avail on older sources only: the Moray Firth (IVa) directed
+        fishery runs about eight weeks between September and November, and Scottish coastal veined squid catches
+        peak October-November (gov-sea2-cephalopods, 2001); Seafish called it a summer-autumn fishery (seafish-squid-uk-waters,
+        2009). No landings source for March-April. Landings (`avail`) include weeks Helen transcribed from Northumberland
+        Seafood''s seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked
+        against the chart (coordinator, 2026-11-10).'
+      discrepancy: The best-to-eat source (December-February) and the landings source (mostly May-October) disagree
+        about when squid is landed; in is kept (rule 5). The 2009 national guide, now background only, gave best
+        October-March (seafish-seafood-guide).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: Avoid trawled squid, rated Avoid; the MCS advises alternatives to UK-caught squid, octopus and cuttlefish.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - directseafoods-winter-2025
+    - gov-sea4-cephalopods
+    - seafish-seafood-guide
+    - bnfs-seasonality
+    - mcs-european-squid
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 48
+      - avail
+    - - 49
+      - 52
+      - in
+    notes:
+      season: A national market report says native squid is in season in winter, December-February (directseafoods-winter-2025);
+        applied to every region. No eastern Channel or southern North Sea landings source found, so the other weeks
+        have no range; was available all year on the 2009 national guide. The Brighton & Newhaven Fish Sales seasonality
+        chart (the SE landings source) is an image that could not be read (bnfs-seasonality). Veined squid hatch
+        in the western Channel and move east to the southern North Sea in summer; European squid is commonest there
+        late spring to summer (gov-sea4-cephalopods, 2022). Landings (`avail`) include weeks Helen transcribed from
+        Brighton & Newhaven Fish Sales's seasonality chart, which the web tools could not read (an image or colour-only
+        page); not re-checked against the chart (coordinator, 2026-11-10).
+      discrepancy: gov-sea4-cephalopods puts squid in the southern North Sea mainly in late spring and summer, outside
+        the winter in-season window. The 2009 national guide, now background only, said squid was available all
+        year, best October-March (seafish-seafood-guide).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: English Channel
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: Avoid trawled squid, rated Avoid; the MCS advises alternatives to UK-caught squid, octopus and cuttlefish.
+  - name: SW
+    kind: region
+    confidence: low
+    sources:
+    - cgsg-squid-veined
+    - cgsg-squid-european
+    - flyingfish-seasonality
+    - directseafoods-winter-2025
+    - gov-sea4-cephalopods
+    - mcs-european-squid
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 26
+      - avail
+    - - 27
+      - 52
+      - in
+    notes:
+      season: Veined squid best to eat July-February; squid breed December-May; the biggest catches come in late
+        summer and autumn, though some years large catches come at random times (cgsg-squid-veined, cgsg-squid-european,
+        updated January 2026). Veined squid ticks used as it is the main UK commercial species (gov-sea4-cephalopods).
+        Flying Fish Seafoods lists squid among its Cornish fresh fish in a calendar graded month by month for availability
+        (poor, varying or good); the grades are colours that could not be read from the page, so the weeks outside
+        the best-to-eat window are taken as landed (avail) (flyingfish-seasonality).
+      discrepancy: 'cgsg-squid-european ticks July-January, leaving February unticked. Flying Fish Seafoods marks
+        October-March as best quality (flyingfish-seasonality), and a national market report says native squid is
+        in season in winter (directseafoods-winter-2025): both start about thirteen weeks later than cgsg-squid-veined,
+        so confidence is low.'
+      year_round: Landed all year in varying amounts (cgsg-squid-european); best July-February (cgsg-squid-veined).
+        Avail here means out of its best season, not hard to get.
+      sustainability: 'CGSG: jigged (hook and line) squid is the low-impact option; trawl takes about 97% of landings;
+        squid not recommended overall (cgsg-squid-european, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Celtic Seas (Cornwall)
+        method: Hook & line (jig)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: Celtic Seas (Cornwall)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (all areas except Cornwall)
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: English Channel
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: Choose jig-caught Cornish squid (OK); avoid trawled squid, all rated Avoid.
+- name: Octopus
+  slug: octopus
+  group: fish-shellfish
+  lines:
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-octopus
+    - flyingfish-seasonality
+    - mcs-common-octopus
+    - mcs-horned-octopus
+    - gov-sea4-cephalopods
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: Best to eat January-February and May-December (cgsg-octopus, updated January 2026). Curled (horned)
+        octopus is the usual bycatch species; common octopus boomed on Cornwall's south coast and into south Devon
+        in summer 2025, with many caught in shellfish pots and trawls (cgsg-octopus). Flying Fish Seafoods lists
+        octopus among its Cornish fresh fish in a calendar graded month by month for availability (poor, varying
+        or good); the grades are colours that could not be read from the page, so the weeks outside the best-to-eat
+        window are taken as landed (avail) (flyingfish-seasonality).
+      discrepancy: Flying Fish Seafoods marks no best-quality months for octopus, which on its key means consistent
+        quality all year (flyingfish-seasonality), against the regional guide's window; the primary source is used.
+      year_round: Landed all year as bycatch (cgsg-octopus); best January-February and May-December. Avail here
+        means out of its best season, not hard to get.
+      sustainability: 'CGSG: no favourable rating possible until management exists; no UK quotas, landing sizes
+        or pot limits (cgsg-octopus, read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Common octopus: Cornwall'
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Common octopus: Cornwall'
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Common octopus: Cornwall'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Common octopus: UK EEZ (except Cornwall)'
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Common octopus: UK EEZ (except Cornwall)'
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Horned octopus: Cornwall'
+        method: Bottom trawl (beam)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Horned octopus: Cornwall'
+        method: Bottom trawl (otter)
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Horned octopus: Cornwall'
+        method: Pot, trap or creel
+        rating: 4
+        label: OK - Needs Improvement
+      - stock: 'Horned octopus: UK EEZ (except Cornwall)'
+        method: Bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Horned octopus: UK EEZ (except Cornwall)'
+        method: Bottom trawl (beam)
+        rating: 5
+        label: Avoid
+    buy: Cornish octopus, by any method, is OK - needs improvement; avoid trawled horned (curled) octopus from elsewhere
+      in UK waters, such as Devon. The MCS suggests alternatives where possible.

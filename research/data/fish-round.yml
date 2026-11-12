@@ -1,0 +1,1756 @@
+- name: Mackerel
+  slug: mackerel
+  group: fish-shellfish
+  lines:
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-mackerel
+    - ffs-seasonality
+    - mcs-mackerel
+    - mcs-mackerel-sw-handline
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 13
+      - in
+    - - 14
+      - 26
+      - avail
+    - - 27
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks Jan-Mar and Jul-Dec; Apr-Jun unticked as main spawning runs Mar-Jul. Cornish handlining
+        runs nearly all year (spring Newlyn/Mousehole, summer St Ives, Oct-Jan Looe); winter gill nets on the south
+        coast (cgsg-mackerel). Avail = Apr-Jun landings: Flying Fish lists it on its seasonality chart; the chart''s
+        availability shading is not legible in page text, so avail rests on the listing (ffs-seasonality). ICES
+        VIIe-f.'
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against
+        cgsg-mackerel's Apr-Jun gap; CGSG (primary) kept. seafish-seafood-guide (2009) is background only under
+        the fish brief (all year, best in summer).
+      sustainability: 'CGSG: cannot recommend mackerel as sustainable; handline is the best of the methods (updated
+        Jan 2026; read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Northeast Atlantic and adjacent waters
+        method: hook and line (handline), South West UK
+        rating: 5
+        label: Avoid
+      - stock: Northeast Atlantic and adjacent waters
+        method: gill or fixed net, Cornwall IFCA district (0-6 nm)
+        rating: 5
+        label: Avoid
+      - stock: Northeast Atlantic and adjacent waters
+        method: purse seine or ring net, Cornwall IFCA district (0-6 nm)
+        rating: 5
+        label: Avoid
+      - stock: Northeast Atlantic and adjacent waters
+        method: pelagic trawl or purse seine, all areas
+        rating: 5
+        label: Avoid
+    buy: MCS rates every Atlantic mackerel sold in the UK Avoid, Cornish handline fish included, so there is no
+      better choice to ask for.
+  - name: NE
+    kind: region
+    confidence: moderate
+    sources:
+    - fishfocus-mackerel-2025
+    - fishfocus-mackerel-2024
+    - fishfocus-mackerel-autumn-2025
+    - fishingdaily-mackerel-autumn
+    - worldfishing-mackerel-2023
+    - govscot-inshore-mackerel-review
+    - northumberland-mackerel
+    - northumberland-seasonality
+    - mcs-mackerel
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 5
+      - in
+    - - 14
+      - 39
+      - avail
+    - - 40
+      - 46
+      - in
+    - - 47
+      - 48
+      - avail
+    notes:
+      season: 'Scottish pelagic fleet has two seasons. Winter: the January fishery west of Shetland and north-west
+        of Orkney, mostly over by the first week of February, with good-sized, high-quality fish (fishfocus-mackerel-2025,
+        quoting the SPFA vice-chairman; fishfocus-mackerel-2024). Autumn: October to mid-November in the North Sea
+        and around Shetland (fishfocus-mackerel-2024, worldfishing-mackerel-2023); in Nov 2025 the SPFA reported
+        abundant fish west of Shetland, landed at Lerwick in premium condition (fishfocus-mackerel-autumn-2025);
+        one season ran from 30 Sep, peaked in early November and was over by the end of November (fishingdaily-mackerel-autumn),
+        hence late-November avail. Avail Apr-Sep: Northumberland Seafood says mackerel arrive in UK waters in spring
+        and early summer and move off to spawn in autumn (northumberland-mackerel); a small-boat handline fishery
+        in Shetland, Orkney and the Moray Firth is managed to stay open 12 weeks or more over the summer (govscot-inshore-mackerel-review).
+        Northumberland Seafood''s seasonality chart is an image not legible as text (northumberland-seasonality).
+        ICES IVa and VIa.'
+      discrepancy: northumberland-mackerel (2016, secondary) puts the peak in July, in the inshore summer fishery;
+        the SPFA-quoted trade sources (higher rank) name Jan-early Feb and Oct-Nov for the pelagic fleet, so July
+        is avail here. seafish-seafood-guide (2009) is background only under the fish brief (all year, best Jun-Aug);
+        its all-year avail was dropped, leaving Feb-Mar and December empty.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Northeast Atlantic and adjacent waters
+        method: pelagic trawl or purse seine, all areas
+        rating: 5
+        label: Avoid
+    buy: MCS rates every Atlantic mackerel sold in the UK Avoid, Cornish handline fish included, so there is no
+      better choice to ask for.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - kefca-kent-2026-jan-may
+    - kefca-essex-2025-jul-nov
+    - sussexifca-species
+    - bnfs-seasonality
+    - cgsg-mackerel
+    - mcs-mackerel
+    - seafish-seafood-guide
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 14
+      - 48
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No current SE best-to-eat source, so no best-to-eat window. Landings:
+        Kent and Essex IFCA report mackerel arriving earlier than usual at Dover in spring 2026 (kefca-kent-2026-jan-may)
+        and appearing on the Essex coast in late summer 2025 (kefca-essex-2025-jul-nov); Sussex IFCA says the local
+        catch is mostly by angling with low-level drift netting, no months (sussexifca-species). May-Sep joins those
+        two reports, so the middle months are extrapolated. Brighton & Newhaven Fish Sales'' seasonality chart is
+        an image not legible as text (bnfs-seasonality). ICES IVc/VIId. Landings include weeks Helen transcribed
+        from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or
+        colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      discrepancy: cgsg-mackerel (western Channel) marks Jan-Mar and Jul-Dec as best to eat. seafish-seafood-guide
+        (2009) is background only under the fish brief (all year, best in summer); its in weeks (Jun-Aug) were dropped.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Northeast Atlantic and adjacent waters
+        method: pelagic trawl or purse seine, all areas
+        rating: 5
+        label: Avoid
+    buy: MCS rates every Atlantic mackerel sold in the UK Avoid, Cornish handline fish included, so there is no
+      better choice to ask for.
+- name: Sea bass
+  slug: sea-bass
+  group: fish-shellfish
+  lines:
+  - name: SE
+    kind: region
+    confidence: high
+    sources:
+    - gov-bass-guidance-2026
+    - mcs-seabass
+    - bnfs-seasonality
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 5
+      - in
+    - - 13
+      - 52
+      - in
+    notes:
+      season: 'Legal season (rule 4), weeks counted if they hold at least one open day (week 5 holds 29-31 Jan;
+        week 13 holds 1 Apr): all commercial bass fishing closed in February and March in ICES IVb, IVc and VIId;
+        recreational catch-and-release only 1 Feb-31 Mar; 42 cm minimum size; hook-and-line limit 8 t/vessel/year;
+        ring and drift nets may not take bass (gov-bass-guidance-2026). No SE source names a peak; Brighton & Newhaven
+        Fish Sales'' seasonality chart is an image not legible as text (bnfs-seasonality).'
+      discrepancy: seafish-seafood-guide (2009, background only) gives a wild season of Aug-Mar, which predates
+        the Feb-Mar closure.
+    mcs:
+      read: 2026-11-10
+      ratings: &id001
+      - stock: North Sea (Central and South), Irish Sea, English Channel, Bristol Channel, Celtic Sea
+        method: hook and line (handline)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea (Central and South), Irish Sea, English Channel, Bristol Channel, Celtic Sea
+        method: bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea (Central and South), Irish Sea, English Channel, Bristol Channel, Celtic Sea
+        method: demersal seine
+        rating: 2
+        label: Best Choice
+      - stock: North Sea (Central and South), Irish Sea, English Channel, Bristol Channel, Celtic Sea
+        method: gill or fixed net
+        rating: 3
+        label: OK
+    buy: Choose handline, otter-trawl or demersal-seine bass from the North Sea, Channel or Celtic Sea (MCS Best
+      Choice); gill-netted bass is OK; avoid bass from the West of Scotland.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-bass
+    - gov-bass-guidance-2026
+    - ffs-seasonality
+    - mcs-seabass
+    - helen-ffs-chart
+    weeks:
+    - - 1
+      - 22
+      - avail
+    - - 23
+      - 48
+      - in
+    - - 49
+      - 52
+      - avail
+    notes:
+      season: 'Best-to-eat ticks Jun-Nov (cgsg-bass); that window uses the most-days rule. Open-season edges use
+        the at-least-one-open-day rule (weeks 5 and 13). Closed to commercial and recreational take in February
+        and March in ICES VIIe-h (gov-bass-guidance-2026); bass nursery areas in Cornish estuaries are closed to
+        taking bass (cgsg-bass). Avail = open-season weeks outside the best months: Flying Fish lists it on its
+        seasonality chart; the chart''s availability shading is not legible in page text, so avail rests on the
+        listing (ffs-seasonality). Landings (`avail`) include weeks Helen transcribed from Flying Fish Seafoods''s
+        seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked against
+        the chart (coordinator, 2026-11-10).'
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year) (line-caught
+        wild bass), against cgsg-bass's Jun-Nov; CGSG kept. seafish-seafood-guide (2009, background only) gives
+        a wild season of Aug-Mar, which predates the closure. cgsg-bass quotes a 2-fish recreational bag limit;
+        current guidance is 3 per day (gov-bass-guidance-2026). The best-to-eat source marks 17 weeks as in that
+        Flying Fish Seafoods's chart (as transcribed) doesn't show as landed; kept in under rule 5.
+      sustainability: 'CGSG: hook-and-line bass landed in Cornwall is the best choice, the only wild fish with its
+        top rating of 1; gill nets and trawls score lower (updated Oct 2026; read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings: *id001
+    buy: Choose handline, otter-trawl or demersal-seine bass from the North Sea, Channel or Celtic Sea (MCS Best
+      Choice); gill-netted bass is OK; avoid bass from the West of Scotland.
+- name: Sardines
+  slug: sardines
+  group: fish-shellfish
+  lines:
+  - name: Cornish fishery MSC
+    kind: method
+    confidence: moderate
+    sources:
+    - cgsg-sardine
+    - msc-cornwall-sardine
+    - msc-uk-sardines
+    - csma-fishery
+    - ffs-seasonality
+    - mcs-sardine
+    - mcs-sardine-msc
+    - mcs-sardine-uncertified
+    - ttg-cgsg-winter-2026
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 17
+      - avail
+    - - 27
+      - 30
+      - avail
+    - - 31
+      - 52
+      - in
+    notes:
+      season: Main season Aug-Jan, with some fish caught outside it (cgsg-sardine). MSC record says the fishery
+        runs Jul-Apr within 6 nm of the Cornish coast (msc-cornwall-sardine). About 15 ring-netters from Newlyn,
+        Mevagissey and Plymouth, mainly in Mounts Bay and Mevagissey Bay (csma-fishery). Flying Fish lists sardines
+        (ffs-seasonality).
+      discrepancy: cgsg-sardine ticks Jul-Feb as best to eat; its text says the main season is Aug-Jan. Rule 1 applied
+        (text). ffs-seasonality marks best quality Jan-Apr and Oct-Dec, so it adds Feb-Apr and drops Aug-Sep against
+        cgsg-sardine; CGSG (primary) kept.
+      sustainability: 'MSC certified since June 2010; certificate runs to 27 Aug 2027 (msc-cornwall-sardine, read
+        2026-11-10); MSC calls it the only certified European pilchard source worldwide (msc-uk-sardines). CGSG:
+        advises choosing MSC Cornish sardines; overview updated Jan 2026 (read 2026-11-10); its winter 2026 review
+        raised the rating as the stock grew (ttg-cgsg-winter-2026).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - &id002
+        stock: Southern Celtic Seas and English Channel
+        method: purse seine or ring net, MSC-certified Cornish fleets
+        rating: null
+        label: Best Choice
+        band: 1-2
+    buy: Choose MSC-certified Cornish sardines (MCS Best Choice); uncertified sardines from the same stock are OK.
+      MCS notes that fish under about 15 cm may not yet have spawned.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-sardine
+    - msc-cornwall-sardine
+    - ffs-seasonality
+    - mcs-sardine
+    - mcs-sardine-msc
+    - mcs-sardine-uncertified
+    - helen-ffs-chart
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 30
+      - avail
+    - - 31
+      - 52
+      - in
+    notes:
+      season: Dates as for Cornish fishery MSC; same stock (Southern Celtic Seas and English Channel) and same sources
+        (cgsg-sardine, ffs-seasonality). Landings (`avail`) include weeks Helen transcribed from Flying Fish Seafoods's
+        seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked against
+        the chart (coordinator, 2026-11-10).
+      discrepancy: 'As for Cornish fishery MSC: ffs-seasonality marks best quality Jan-Apr and Oct-Dec against cgsg-sardine''s
+        Aug-Jan.'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - *id002
+      - &id003
+        stock: Southern Celtic Seas and English Channel
+        method: pelagic trawl or purse seine, uncertified, all areas
+        rating: null
+        label: OK
+        band: 3-4
+    buy: Choose MSC-certified Cornish sardines (MCS Best Choice); uncertified sardines from the same stock are OK.
+      MCS notes that fish under about 15 cm may not yet have spawned.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - mcs-sardine
+    - mcs-sardine-uncertified
+    - sussexifca-species
+    - kefca-essex-2025-jul-nov
+    - kefca-kent-2025-nov-jan
+    - bnfs-seasonality
+    - seafish-seafood-guide
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 31
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Searched
+        Sussex IFCA''s species page (no sardine entry; sussexifca-species), Kent and Essex IFCA quarterly shore
+        reports for 2025-26 (no sardines mentioned; kefca-essex-2025-jul-nov, kefca-kent-2025-nov-jan), Fishing
+        News sardine coverage (Cornish only) and Cefas/ICES landings pages. No SE sardine fishery or landing season
+        found. Third pass, 2026-11-10: the full Seafish guide has no sardine season (it says most UK catch goes
+        to France; seafish-seafood-guide), and searches for sardine landings in Sussex, Kent, Norfolk or the North
+        Sea found only Cornish coverage. Fish pass, 2026-11-10: Brighton & Newhaven Fish Sales'' seasonality chart
+        is an image not legible as text (bnfs-seasonality); no other SE landings source mentions sardines. Landings
+        include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - *id003
+    buy: Uncertified sardines from the Channel and Celtic Sea stock are OK; MCS's Best Choice is MSC-certified Cornish
+      sardines.
+- name: Herring
+  slug: herring
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-herring
+    - fishfocus-mackerel-2024
+    - northumberland-seasonality
+    - msc-uk-herring
+    - mcs-herring
+    - gov-sea4-fish-baseline
+    weeks:
+    - - 1
+      - 8
+      - avail
+    - - 9
+      - 48
+      - in
+    - - 49
+      - 52
+      - avail
+    notes:
+      season: 'Northumberland Seafood says herring is available all year but its flavour is best from spring to
+        autumn (northumberland-herring), read here as Mar-Nov in and the winter months avail. The Scottish pelagic
+        fleet''s North Sea herring fishery generally runs mid-July to the end of August (fishfocus-mackerel-2024,
+        unattributed trade report), inside that window. Northumberland Seafood''s seasonality chart is an image
+        not legible as text (northumberland-seasonality). Low: one secondary source from 2016 for best to eat, with
+        a loose seasonal phrase. ICES IVa-b.'
+      discrepancy: The second pass had in = mid-Jul-Aug from the fishery report alone (fishfocus-mackerel-2024);
+        under the fish brief that is a landings window, and the Northumberland best-to-eat window is wider. gov-sea4-fish-baseline
+        gives Aug-Sep Buchan/Shetland spawning, inside the in window; no source links it to eating quality.
+      sustainability: 'MSC: several certified North Sea herring fisheries supply the UK (read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'North Sea Autumn Spawners: North Sea, Skagerrak and Kattegat, English Channel (East)'
+        method: drift net, North Sea and eastern English Channel
+        rating: 2
+        label: Best Choice
+      - stock: 'North Sea Autumn Spawners: North Sea, Skagerrak and Kattegat, English Channel (East)'
+        method: pelagic trawl, MSC-certified fleets
+        rating: 2
+        label: Best Choice
+      - stock: 'North Sea Autumn Spawners: North Sea, Skagerrak and Kattegat, English Channel (East)'
+        method: pelagic trawl, North Sea and eastern English Channel
+        rating: 3
+        label: OK
+      - stock: 'North Sea Autumn Spawners: North Sea, Skagerrak and Kattegat, English Channel (East)'
+        method: purse seine or ring net, North Sea and eastern English Channel
+        rating: 3
+        label: OK
+    buy: Choose North Sea drift-net or MSC-certified pelagic-trawl herring (MCS Best Choice).
+  - name: SE
+    kind: region
+    confidence: moderate
+    sources:
+    - sussexifca-species
+    - kefca-essex-2025-jul-nov
+    - kefca-essex-2025-nov-jan
+    - kefca-kent-2025-nov-jan
+    - bnfs-seasonality
+    - mcs-herring
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Split added: SE sources give a winter fishery unlike NE or SW. No
+        current SE best-to-eat source found, so the landing weeks set the season. Sussex IFCA says herring is fished
+        commercially in its district only from October to December (sussexifca-species). Kent and Essex IFCA: Thames
+        and Blackwater herring and sprat run builds as autumn turns to winter (kefca-essex-2025-jul-nov) and ran
+        as normal to the end of January in 2025-26; herring and sprats landed and sold locally at Deal, Queenborough
+        and Margate (kefca-essex-2025-nov-jan, kefca-kent-2025-nov-jan). Brighton & Newhaven Fish Sales'' seasonality
+        chart is an image not legible as text (bnfs-seasonality). ICES IVc/VIId.'
+      discrepancy: sussexifca-species ends the season in December; kefca-essex-2025-nov-jan has the Thames fishery
+        running to the end of January, about four weeks later. Kent and Essex IFCA also report poor December 2025
+        landings after mild weather kept the water warm (kefca-essex-2025-nov-jan).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'North Sea Autumn Spawners: North Sea, Skagerrak and Kattegat, English Channel (East)'
+        method: drift net, North Sea and eastern English Channel
+        rating: 2
+        label: Best Choice
+      - stock: 'North Sea Autumn Spawners: North Sea, Skagerrak and Kattegat, English Channel (East)'
+        method: pelagic trawl, North Sea and eastern English Channel
+        rating: 3
+        label: OK
+    buy: Drift-net herring from the North Sea and eastern Channel, the method of the small local fisheries, is an
+      MCS Best Choice; trawled herring from the same stock is OK.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-herring
+    - ffs-seasonality
+    - mcs-herring
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: All twelve months ticked as best to eat; UK waters hold spring and autumn spawners, with at least
+        one population spawning in any month (cgsg-herring). Flying Fish lists herring with no best-quality months,
+        which agrees (ffs-seasonality).
+      sustainability: 'CGSG: default rating 5 (fish to avoid) for all methods, as ICES advises zero catch for this
+        stock in 2026 (updated Oct 2026; read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Irish Sea (South), Celtic Sea and southwest of Ireland
+        method: purse seine or ring net, Cornwall
+        rating: 5
+        label: Avoid
+      - stock: Irish Sea (South), Celtic Sea and southwest of Ireland
+        method: drift net, Cornwall
+        rating: 5
+        label: Avoid
+      - stock: Irish Sea (South), Celtic Sea and southwest of Ireland
+        method: hook and line (handline), Cornwall
+        rating: 5
+        label: Avoid
+      - stock: Irish Sea (South), Celtic Sea and southwest of Ireland
+        method: pelagic trawl, all areas
+        rating: 5
+        label: Avoid
+    buy: MCS rates Celtic Sea and Cornish herring Avoid whatever the method; it points to North Sea drift-net or
+      MSC herring instead.
+- name: Sprats
+  slug: sprats
+  group: fish-shellfish
+  lines:
+  - name: Sprats
+    kind: whole
+    confidence: low
+    sources:
+    - kefca-essex-2025-jul-nov
+    - kefca-essex-2025-nov-jan
+    - kefca-kent-2025-nov-jan
+    - kefca-kent-2026-jan-may
+    - mcs-sprat
+    - mcs-sprat-ec
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 44
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. No current best-to-eat source found, so the landing weeks set the
+        season. Kent and Essex IFCA shore reports: the Thames herring and sprat run builds as autumn turns to winter
+        (kefca-essex-2025-jul-nov); sprats landed at Deal, Hythe and Queenborough in Nov-Jan, and Leigh and Southend
+        boats switched to sprat trawling in January 2026 with more landed than the year before (kefca-kent-2025-nov-jan,
+        kefca-essex-2025-nov-jan). A Queenborough boat also trawled sprats at some point in Jan-May 2026 (kefca-kent-2026-jan-may).
+        MCS says the UK season for English Channel sprat is short, without months (mcs-sprat-ec). seafish-seafood-guide
+        (2009, background only) gives no months. Low: Thames and Kent port reports only (ICES IVc), applied to a
+        whole-UK line.'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: English Channel
+        method: pelagic trawl
+        rating: 3
+        label: OK
+      - stock: North Sea, Skagerrak and Kattegat
+        method: pelagic trawl
+        rating: null
+        label: OK
+        band: 3-4
+      - stock: West of Scotland, Celtic Seas (South)
+        method: pelagic trawl
+        rating: null
+        label: OK
+        band: 3-4
+    buy: All UK sprat is rated OK; MCS recommends English Channel sprat.
+- name: Cod
+  slug: cod
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-seasonality
+    - mcs-cod
+    - undercurrent-mcs-cod-2026
+    - seafish-seafood-guide
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Jul-Oct; seafish-seafood-guide), which may now be background only. No
+        current NE best-to-eat or landings calendar found: Northumberland Seafood''s seasonality chart is an image
+        not legible as text (northumberland-seasonality), and its cod page gives no months. ICES IVa-b. Landings
+        include weeks Helen transcribed from Northumberland Seafood''s seasonality chart, which the web tools could
+        not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Northern Shelf: Northwestern substock'
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Northern Shelf: Viking substock'
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Northern Shelf: Southern substock'
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: MCS lists no UK-caught cod as a better choice (April 2026 update); North Sea cod is Avoid. MCS points to
+      Icelandic line- or net-caught cod instead.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - kefca-essex-2025-jul-nov
+    - bnfs-seasonality
+    - mcs-cod-southern-substock
+    - undercurrent-mcs-cod-2026
+    - seafish-seafood-guide
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Jul-Oct; seafish-seafood-guide), now background only. No current SE
+        best-to-eat or landings calendar found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not
+        legible as text (bnfs-seasonality). Kent and Essex IFCA report that cod have all but gone from the Essex
+        coast, with most catches now further north off Suffolk (kefca-essex-2025-jul-nov). ICES IVc/VIId. Landings
+        include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web
+        tools could not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Northern Shelf: Southern substock'
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: MCS lists no UK-caught cod as a better choice (April 2026 update); North Sea cod is Avoid. MCS points to
+      Icelandic line- or net-caught cod instead.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-cod
+    - ffs-seasonality
+    - mcs-cod-celtic
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks all months except Mar-Apr; cod spawn Feb-Apr, and the Trevose box protects spawning
+        cod (cgsg-cod). Avail Mar-Apr: Flying Fish lists it on its seasonality chart; the chart''s availability
+        shading is not legible in page text, so avail rests on the listing (ffs-seasonality). ICES VIIe-h.'
+      discrepancy: ffs-seasonality marks best quality Jul-Oct only, against cgsg-cod's all months but Mar-Apr; CGSG
+        (primary) kept. seafish-seafood-guide (2009, background only) also gives best Jul-Oct.
+      sustainability: 'CGSG: rated 5, fish to avoid regardless of method (updated Jul 2026; read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: hook and line (handline)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: demersal seine
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: gill or fixed net
+        rating: 5
+        label: Avoid
+    buy: MCS rates Celtic Sea and western Channel cod Avoid for every method, and lists no UK-caught cod as a better
+      choice.
+- name: Haddock
+  slug: haddock
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-seasonality
+    - mcs-haddock
+    - seafish-seafood-guide
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Feb-Sep; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Northumberland Seafood''s seasonality chart is an image not legible as text
+        (northumberland-seasonality); its haddock page gives no months. ICES IVa-b. Landings include weeks Helen
+        transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an image
+        or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings: &id004
+      - stock: North Sea, West of Scotland, Skagerrak
+        method: demersal seine, MSC-certified fleets
+        rating: 1
+        label: Best Choice
+      - stock: North Sea, West of Scotland, Skagerrak
+        method: hook and line (longline)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, West of Scotland, Skagerrak
+        method: demersal seine
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, West of Scotland, Skagerrak
+        method: bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, West of Scotland, Skagerrak
+        method: bottom trawl (otter), MSC-certified fleets
+        rating: 2
+        label: Best Choice
+    buy: North Sea haddock is an MCS Best Choice by any rated method; MSC-certified seine-net haddock rates best.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - bnfs-seasonality
+    - mcs-haddock
+    - seafish-seafood-guide
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Feb-Sep; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as
+        text (bnfs-seasonality); no other SE source found. ICES IVc/VIId. Landings include weeks Helen transcribed
+        from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read (an image or
+        colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings: *id004
+    buy: North Sea haddock is an MCS Best Choice by any rated method; MSC-certified seine-net haddock rates best.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-haddock
+    - ffs-seasonality
+    - mcs-haddock
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks Jan and May-Dec; text advises avoiding the Mar-Apr breeding season and fish under
+        30 cm (cgsg-haddock). Avail Feb-Apr: Flying Fish lists it on its seasonality chart; the chart''s availability
+        shading is not legible in page text, so avail rests on the listing (ffs-seasonality). ICES VIIe-h.'
+      discrepancy: ffs-seasonality marks best quality Feb-Apr and Jul-Sep, which includes the breeding season cgsg-haddock
+        says to avoid; CGSG (primary) kept. seafish-seafood-guide (2009, background only) gives best Feb-Sep.
+      sustainability: 'CGSG: stock score raised to 0.25 in 2023; demersal trawl defaults to the lowest method score
+        for cod and whiting bycatch (updated Jan 2026; read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: gill or fixed net, Cornwall
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: bottom trawl (beam)
+        rating: 5
+        label: Avoid
+    buy: MCS rates Celtic Sea and western Channel haddock Avoid; it points to North Sea or West of Scotland haddock
+      instead.
+- name: Hake
+  slug: hake
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - govscot-hake-fmp-2025
+    - mcs-hake
+    - seafish-seafood-guide
+    - northumberland-seasonality
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Searched
+        Scottish Government''s proposed Northern Shelf hake FMP (hake landed at Peterhead, Lerwick, Scrabster and
+        others, but no months; spawning later in the year for more northerly fish, no months; govscot-hake-fmp-2025),
+        Seafish''s 2013 hake sourcing guide (no seasonality) and Fishing News. No NE season found. Third pass, 2026-11-10:
+        the full Seafish guide has no hake availability line (seafish-seafood-guide); the MCS northern-stock rating
+        page has no season text; Scottish Sea Fisheries Statistics give annual, not monthly, landings by port. Fish
+        pass, 2026-11-10: Northumberland Seafood''s seasonality chart is an image not legible as text (northumberland-seasonality);
+        its hake page gives spawning habits but no months. Landings include weeks Helen transcribed from Northumberland
+        Seafood''s seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked
+        against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings: &id005
+      - stock: Northern stock (North Sea, Celtic Seas, Bay of Biscay (north))
+        method: bottom trawl (otter), North Sea and Celtic Seas
+        rating: 3
+        label: OK
+      - stock: Northern stock (North Sea, Celtic Seas, Bay of Biscay (north))
+        method: hook and line (longline), North Sea and Celtic Seas
+        rating: 3
+        label: OK
+      - stock: Northern stock (North Sea, Celtic Seas, Bay of Biscay (north))
+        method: gill or fixed net, North Sea and Celtic Seas
+        rating: 3
+        label: OK
+    buy: North Sea hake is OK by any rated method; MCS's only Best Choice is MSC-certified gill-net hake from Cornwall.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - mcs-hake
+    - sussexifca-species
+    - kefca-essex-2025-jul-nov
+    - kefca-kent-2025-nov-jan
+    - seafish-seafood-guide
+    - kefca-kent-2025-feb-jun
+    - kefca-essex-2025-jan-jun
+    - bnfs-seasonality
+    - helen-bnfs-chart
+    weeks:
+    - - 5
+      - 48
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Searched
+        Sussex IFCA''s species page (no hake entry; sussexifca-species), Kent and Essex IFCA 2025-26 shore reports
+        (no hake mentioned; kefca-essex-2025-jul-nov, kefca-kent-2025-nov-jan) and Seafish''s 2013 hake guide. No
+        SE season found. Third pass, 2026-11-10: the full Seafish guide has no hake availability line (seafish-seafood-guide),
+        and Kent and Essex IFCA''s 2025 shore reports and Sussex IFCA''s commercial-fishing page do not mention
+        hake (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun). Fish pass, 2026-11-10: Brighton & Newhaven Fish
+        Sales'' seasonality chart is an image not legible as text (bnfs-seasonality). Landings include weeks Helen
+        transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not read
+        (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings: *id005
+    buy: North Sea hake is OK by any rated method; MCS's only Best Choice is MSC-certified gill-net hake from Cornwall.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-hake
+    - ffs-seasonality
+    - mcs-hake
+    - itv-mcs-oct-2026
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks Jan and Apr-Dec; peak spawning Feb-Mar (cgsg-hake). Avail Feb-Mar: Flying Fish
+        lists it on its seasonality chart; the chart''s availability shading is not legible in page text, so avail
+        rests on the listing (ffs-seasonality). ICES VIIe-h.'
+      sustainability: Cornish hake gill-net fishery MSC certified since 2015 (cgsg-hake, updated Jan 2026; read
+        2026-11-10). MCS moved northern hake from green to amber on 14 Oct 2026, as reported (itv-mcs-oct-2026).
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against
+        cgsg-hake's Feb-Mar spawning gap; CGSG kept.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Northern stock (North Sea, Celtic Seas, Bay of Biscay (north))
+        method: gill or fixed net, MSC-certified Cornish fleets
+        rating: 2
+        label: Best Choice
+      - stock: Northern stock (North Sea, Celtic Seas, Bay of Biscay (north))
+        method: bottom trawl (otter), Cornwall
+        rating: 3
+        label: OK
+    buy: Choose MSC-certified gill-net hake from Cornwall (MCS Best Choice); Cornish trawled hake is OK.
+- name: Pollock
+  slug: pollock
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - gov-sea4-fish-baseline
+    - mcs-pollack
+    - seafish-seafood-guide
+    - northumberland-seasonality
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Pollack (Pollachius pollachius). Reset under rule 8: the earlier
+        dates were copied from SW. gov-sea4-fish-baseline puts North Sea spawning in winter and spring but does
+        not link it to eating quality or catch timing. Searched MCS, IFCA and North Sea port and trade sources;
+        no NE season found. Third pass, 2026-11-10: the full Seafish guide has no pollack availability line (it
+        says much UK catch goes to France; seafish-seafood-guide); NEIFCA''s commercial page names no species by
+        season. Fish pass, 2026-11-10: Northumberland Seafood''s seasonality chart is an image not legible as text
+        (northumberland-seasonality). Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality
+        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
+        (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Skagerrak and Kattegat
+        method: bottom trawl (otter)
+        rating: null
+        label: OK
+        band: 3-4
+      - stock: North Sea, Skagerrak and Kattegat
+        method: gill or fixed net
+        rating: null
+        label: OK
+        band: 3-4
+    buy: North Sea pollack is OK; MCS advises choosing hook-and-line pollack.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-pollack
+    - ffs-seasonality
+    - mcs-pollack
+    - mcs-pollack-handline
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks Jan and May-Dec; spawns Jan-Apr; 30 cm minimum landing size (cgsg-pollack). MCS
+        says pollack is mainly targeted in Jan-Mar, during spawning (mcs-pollack-handline). Avail Feb-Apr: Flying
+        Fish lists it on its seasonality chart; the chart''s availability shading is not legible in page text, so
+        avail rests on the listing (ffs-seasonality). ICES VIIe-h.'
+      sustainability: 'CGSG: line-caught pollack is back on the recommended list, and handline is the most sustainable
+        option; wreck gill-netting is flagged as very risky (updated Jan 2026; read 2026-11-10).'
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against
+        cgsg-pollack's Feb-Apr spawning gap; CGSG kept.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: English Channel and Celtic Seas
+        method: hook and line (handline)
+        rating: 3
+        label: OK
+      - stock: English Channel and Celtic Seas
+        method: bottom trawl (otter)
+        rating: null
+        label: OK
+        band: 3-4
+      - stock: English Channel and Celtic Seas
+        method: gill or fixed net
+        rating: null
+        label: OK
+        band: 3-4
+    buy: Ask for handline-caught pollack. MCS flags that most pollack is caught in Jan-Mar while spawning, and that
+      the 30 cm landing size is below the 35 cm or more at which females mature.
+- name: Whiting
+  slug: whiting
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-whiting
+    - northumberland-seasonality
+    - mcs-whiting
+    - gov-sea4-fish-baseline
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 48
+      - avail
+    - - 49
+      - 52
+      - in
+    notes:
+      season: 'Northumberland Seafood says whiting is available all year but comes into its own in winter, when
+        it is found in UK waters in numbers (northumberland-whiting); winter read as Dec-Feb in, the rest avail.
+        Low: one secondary source, last updated 2016. Northumberland Seafood''s seasonality chart is an image not
+        legible as text (northumberland-seasonality). The earlier spawning-based window (gov-sea4-fish-baseline)
+        stays dropped. ICES IVa-b.'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, English Channel (East)
+        method: bottom trawl (otter), MSC-certified fleets
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, English Channel (East)
+        method: bottom trawl (otter)
+        rating: 3
+        label: OK
+    buy: Look for MSC-certified North Sea whiting (MCS Best Choice); uncertified trawled North Sea whiting is OK.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-whiting
+    - ffs-seasonality
+    - mcs-whiting
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks Jan-Feb and May-Dec; breeds Jan-Jul, with a Mar-Apr peak (cgsg-whiting). Avail
+        Mar-Apr: Flying Fish lists it on its seasonality chart; the chart''s availability shading is not legible
+        in page text, so avail rests on the listing (ffs-seasonality). ICES VIIe-h.'
+      sustainability: 'CGSG: rated 5, fish to avoid, including handline (updated Jan 2026; read 2026-11-10).'
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against
+        cgsg-whiting's Mar-Apr gap; CGSG kept.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: bottom trawl (beam), Cornwall
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: Celtic Seas (southern), English Channel (west)
+        method: demersal seine
+        rating: 5
+        label: Avoid
+    buy: MCS rates Celtic Sea and western Channel whiting Avoid; it points to MSC-certified North Sea whiting instead.
+- name: Monkfish
+  slug: monkfish
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-seasonality
+    - mcs-monkfish
+    - mcs-monkfish-white
+    - mcs-monkfish-black
+    - seafish-seafood-guide
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Oct-May; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Northumberland Seafood''s seasonality chart is an image not legible as text
+        (northumberland-seasonality). ICES IVa-b. Landings include weeks Helen transcribed from Northumberland Seafood''s
+        seasonality chart, which the web tools could not read (an image or colour-only page); not re-checked against
+        the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings: &id006
+      - stock: 'White monkfish: North Sea, Rockall and West of Scotland, Kattegat and Skagerrak'
+        method: gill or fixed net
+        rating: 2
+        label: Best Choice
+      - stock: 'White monkfish: North Sea, Rockall and West of Scotland, Kattegat and Skagerrak'
+        method: bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+    buy: North Sea white monkfish, netted or trawled, is an MCS Best Choice. The two monkfish species are hard to
+      tell apart; if in doubt, MCS says go by the black-bellied ratings.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - bnfs-seasonality
+    - mcs-monkfish
+    - mcs-monkfish-white
+    - mcs-monkfish-black
+    - seafish-seafood-guide
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (all year, best Oct-May; seafish-seafood-guide), now background only. No current best-to-eat
+        or landings calendar found: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as
+        text (bnfs-seasonality). ICES IVc/VIId. Landings include weeks Helen transcribed from Brighton & Newhaven
+        Fish Sales''s seasonality chart, which the web tools could not read (an image or colour-only page); not
+        re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings: *id006
+    buy: North Sea white monkfish, netted or trawled, is an MCS Best Choice. The two monkfish species are hard to
+      tell apart; if in doubt, MCS says go by the black-bellied ratings.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-monkfish-white
+    - ffs-seasonality
+    - mcs-monkfish
+    - mcs-monkfish-white
+    - mcs-monkfish-black
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: All twelve months ticked as best to eat; monkfish spawn Jan-Jul in deep water off the shelf edge,
+        not where Cornish boats fish (cgsg-monkfish-white). ICES VIIe-h.
+      discrepancy: ffs-seasonality marks best quality Jan-Apr and Oct-Dec only, against cgsg-monkfish-white's all
+        year; CGSG (primary) kept. seafish-seafood-guide (2009, background only) gives best Oct-May.
+      sustainability: 'CGSG: best choice is net- or trawl-caught monkfish from day boats landing in Cornwall (updated
+        Oct 2026; read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'White monkfish: Celtic Seas (South), Bay of Biscay'
+        method: bottom trawl (otter)
+        rating: 2
+        label: Best Choice
+      - stock: 'White monkfish: Celtic Seas (South), Bay of Biscay'
+        method: gill or fixed net, Cornwall
+        rating: 3
+        label: OK
+      - stock: 'White monkfish: Celtic Seas (South), Bay of Biscay'
+        method: gill or fixed net, all areas
+        rating: 3
+        label: OK
+      - stock: 'White monkfish: Celtic Seas (South), Bay of Biscay'
+        method: bottom trawl (beam)
+        rating: 3
+        label: OK
+    buy: Otter-trawled white monkfish from the Celtic Sea is the MCS Best Choice; Cornish gill-netted and beam-trawled
+      monkfish is OK.
+- name: Gurnard
+  slug: gurnard
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - gov-sea4-fish-baseline
+    - mcs-red-gurnard
+    - seafish-seafood-guide
+    - seafish-species-guide-gurnard-2010
+    - northumberland-gurnard
+    - northumberland-seasonality
+    - helen-northumberland-chart
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. gov-sea4-fish-baseline
+        gives grey gurnard spawning Jan-Jun and red gurnard over summer, but does not link this to eating quality
+        or catch timing. Searched North Sea port, IFCA and trade sources; no NE season found. Third pass, 2026-11-10:
+        the full Seafish guide calls gurnard always a good buy but gives no months (seafish-seafood-guide); Seafish''s
+        2010 gurnard species guide gives only spawning (red in summer, tub May-July, grey April-August) and nothing
+        on when it is best or landed (seafish-species-guide-gurnard-2010). Fish pass, 2026-11-10: Northumberland
+        Seafood gives spawning May-Jul and says gurnard is mainly a bycatch of mixed bottom-trawl fisheries, much
+        of it discarded, with no months for landings or eating (northumberland-gurnard); Northumberland Seafood''s
+        seasonality chart is an image not legible as text (northumberland-seasonality). Landings include weeks Helen
+        transcribed from Northumberland Seafood''s seasonality chart, which the web tools could not read (an image
+        or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Red gurnard: Northeast Atlantic'
+        method: bottom trawl (otter), all areas
+        rating: 3
+        label: OK
+    buy: MCS rates trawled red gurnard OK; no better-rated source is listed. MCS notes there is no quota for it.
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - kefca-essex-2025-jul-nov
+    - sussexifca-species
+    - mcs-red-gurnard
+    - seafish-seafood-guide
+    - seafish-species-guide-gurnard-2010
+    - kefca-kent-2025-feb-jun
+    - kefca-essex-2025-jan-jun
+    - bnfs-seasonality
+    - helen-bnfs-chart
+    weeks:
+    - - 1
+      - 22
+      - in
+    - - 40
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Kent and
+        Essex IFCA note smaller quantities of gurnard in Essex catches over summer 2025 (kefca-essex-2025-jul-nov),
+        which is too thin to set a season; Sussex IFCA''s species page has no gurnard entry (sussexifca-species).
+        Third pass, 2026-11-10: the Seafish guide gives no months (seafish-seafood-guide); Seafish''s 2010 gurnard
+        guide gives spawning only, not linked to eating or landings (seafish-species-guide-gurnard-2010); Kent and
+        Essex IFCA''s 2025 shore reports do not mention gurnard (kefca-kent-2025-feb-jun, kefca-essex-2025-jan-jun).
+        Fish pass, 2026-11-10: Brighton & Newhaven Fish Sales'' seasonality chart is an image not legible as text
+        (bnfs-seasonality). Landings include weeks Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality
+        chart, which the web tools could not read (an image or colour-only page); not re-checked against the chart
+        (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Red gurnard: Northeast Atlantic'
+        method: bottom trawl (otter), all areas
+        rating: 3
+        label: OK
+    buy: MCS rates trawled red gurnard OK; no better-rated source is listed. MCS notes there is no quota for it.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-red-gurnard
+    - ffs-seasonality
+    - mcs-red-gurnard
+    weeks:
+    - - 1
+      - 8
+      - avail
+    - - 9
+      - 13
+      - in
+    - - 14
+      - 35
+      - avail
+    - - 36
+      - 52
+      - in
+    notes:
+      season: 'Red gurnard. Text advises avoiding gurnard during the Apr-Aug spawning season and under 25 cm (cgsg-red-gurnard).
+        In = ticked months outside spawning; Jan-Feb are unticked. Avail: Flying Fish lists it on its seasonality
+        chart; the chart''s availability shading is not legible in page text, so avail rests on the listing (ffs-seasonality).
+        ICES VIIe-h.'
+      discrepancy: 'cgsg-red-gurnard ticks Mar-May and Aug-Dec, but its text says to avoid Apr-Aug (spawning). Rule
+        1 applied (text): Apr, May and Aug set to avail. ffs-seasonality (gurnard, species not named) marks best
+        quality May-Sep, which is mostly CGSG''s spawning period; CGSG (primary) kept.'
+      sustainability: 'CGSG: method scores for trawl and gill net not legible in page text (updated Jan 2026; read
+        2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Red gurnard: Northeast Atlantic'
+        method: bottom trawl (otter), all areas
+        rating: 3
+        label: OK
+      - stock: 'Red gurnard: Northeast Atlantic'
+        method: gill or fixed net, Cornwall
+        rating: 4
+        label: OK
+      - stock: 'Red gurnard: Northeast Atlantic'
+        method: bottom trawl (beam), Cornwall
+        rating: 4
+        label: OK
+    buy: All rated red gurnard is OK; otter-trawled (3) rates a little better than Cornish gill-netted or beam-trawled
+      (4).
+- name: Red mullet
+  slug: red-mullet
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-seasonality
+    - mcs-red-mullet
+    - seafish-seafood-guide
+    - helen-northumberland-chart
+    weeks:
+    - - 23
+      - 52
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset in the fish pass, 2026-11-10: the dates rested only on Seafish''s
+        2009 national guide (UK season May-Nov, best in summer; seafish-seafood-guide), now background only. No
+        current NE best-to-eat or landings source found: Northumberland Seafood''s seasonality chart is an image
+        not legible as text (northumberland-seasonality), and Northumberland Seafood has no red mullet species page.
+        ICES IVa-b. Landings include weeks Helen transcribed from Northumberland Seafood''s seasonality chart, which
+        the web tools could not read (an image or colour-only page); not re-checked against the chart (coordinator,
+        2026-11-10).'
+      sustainability: 'MCS: northern stock (North Sea, eastern Channel, Skagerrak/Kattegat) demersal seine Best
+        Choice (2); otter trawl and gill net OK (3) (read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North Sea, Eastern English Channel and Skagerrak and Kattegat (Northern Area)
+        method: demersal seine
+        rating: 2
+        label: Best Choice
+      - stock: North Sea, Eastern English Channel and Skagerrak and Kattegat (Northern Area)
+        method: bottom trawl (otter)
+        rating: 3
+        label: OK
+      - stock: North Sea, Eastern English Channel and Skagerrak and Kattegat (Northern Area)
+        method: gill or fixed net
+        rating: 3
+        label: OK
+    buy: Choose demersal-seine red mullet from the North Sea and eastern Channel (MCS Best Choice); trawled or netted
+      fish from there is OK.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-red-mullet
+    - ffs-seasonality
+    - mcs-red-mullet
+    - seafish-seafood-guide
+    - helen-ffs-chart
+    weeks:
+    - - 1
+      - 17
+      - avail
+    - - 18
+      - 48
+      - in
+    notes:
+      season: 'Best-to-eat ticks May-Nov; a regular summer visitor, targeted by static nets in summer; spawns May-Jul
+        in the Channel; some winter trawl catches in deeper western Channel water, mostly by French boats (cgsg-red-mullet).
+        Flying Fish lists red mullet (ffs-seasonality), but its availability shading is not legible, so no avail
+        weeks were added. Moderate, not high: Seafish''s 2009 May-Nov agrees but is background only. Landings (`avail`)
+        include weeks Helen transcribed from Flying Fish Seafoods''s seasonality chart, which the web tools could
+        not read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+      sustainability: 'CGSG: red-rated, fish to avoid, owing to no stock data and landings above ICES advice (updated
+        Jan 2026; read 2026-11-10).'
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against
+        cgsg-red-mullet's May-Nov; CGSG kept. The best-to-eat source marks 9 weeks as in that Flying Fish Seafoods's
+        chart (as transcribed) doesn't show as landed; kept in under rule 5.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: West of Scotland, Bay of Biscay, southern Celtic Seas, Atlantic Iberian Waters (Western Area)
+        method: bottom trawl (otter), all areas
+        rating: 5
+        label: Avoid
+      - stock: West of Scotland, Bay of Biscay, southern Celtic Seas, Atlantic Iberian Waters (Western Area)
+        method: gill or fixed net, Cornwall
+        rating: 5
+        label: Avoid
+      - stock: West of Scotland, Bay of Biscay, southern Celtic Seas, Atlantic Iberian Waters (Western Area)
+        method: bottom trawl (beam), Cornwall
+        rating: 5
+        label: Avoid
+      - stock: West of Scotland, Bay of Biscay, southern Celtic Seas, Atlantic Iberian Waters (Western Area)
+        method: bottom trawl (otter), Cornwall
+        rating: 5
+        label: Avoid
+    buy: MCS rates western-stock red mullet, Cornish included, Avoid; it points to North Sea and eastern Channel
+      red mullet instead.
+- name: Grey mullet
+  slug: grey-mullet
+  group: fish-shellfish
+  lines:
+  - name: SE
+    kind: region
+    confidence: low
+    sources:
+    - kefca-essex-2025-jul-nov
+    - mcs-grey-mullet
+    - mcs-grey-mullet-ns-channel
+    - kefca-essex-2025-jan-jun
+    - kefca-kent-2025-feb-jun
+    - seafish-seafood-guide
+    - bnfs-seasonality
+    - helen-bnfs-chart
+    weeks:
+    - - 14
+      - 48
+      - in
+    notes:
+      season: 'Rule 5, no named window (Helen''s decision, 2026-11-11): no source names a best-to-eat window for
+        this line, so every landed week is in. Reset under rule 8: the earlier dates were copied from SW. Kent and
+        Essex IFCA say mullet are caught in the Thames over the summer (kefca-essex-2025-jul-nov) but do not name
+        the species, so it cannot set a grey mullet season. Sussex IFCA, Kent and Essex IFCA and MCS pages give
+        no SE months. Third pass, 2026-11-10: later Kent and Essex IFCA reports again mention mullet without species
+        or season (netting at Holehaven, where the catch is usually limited to mullet, and a short-lived run off
+        Herne Bay and Whitstable, both Feb-Jun 2025; kefca-essex-2025-jan-jun, kefca-kent-2025-feb-jun); the Seafish
+        guide has no grey mullet availability line (seafish-seafood-guide). Fish pass, 2026-11-10: Brighton & Newhaven
+        Fish Sales'' seasonality chart is an image not legible as text (bnfs-seasonality). Landings include weeks
+        Helen transcribed from Brighton & Newhaven Fish Sales''s seasonality chart, which the web tools could not
+        read (an image or colour-only page); not re-checked against the chart (coordinator, 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Grey mullet (thick-lipped): North Sea and English Channel'
+        method: gill or fixed net
+        rating: 5
+        label: Avoid
+    buy: MCS calls grey mullet in general a fish to avoid; North Sea and Channel gill-netted mullet is Avoid.
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-grey-mullet
+    - ffs-seasonality
+    - mcs-grey-mullet
+    weeks:
+    - - 1
+      - 17
+      - avail
+    - - 18
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks May-Dec. Thick-lipped grey mullet shoal to spawn Jan-Feb; thin-lipped spawn Jul-Sep
+        and golden grey Sep-Nov (cgsg-grey-mullet). Avail Jan-Apr: Flying Fish lists it on its seasonality chart;
+        the chart''s availability shading is not legible in page text, so avail rests on the listing (ffs-seasonality).
+        ICES VIIe-h.'
+      sustainability: 'CGSG: method scores for gill net and beach seine not legible in page text (updated Jan 2026;
+        read 2026-11-10).'
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against
+        cgsg-grey-mullet's May-Dec; CGSG kept.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Grey mullet (thick-lipped): Cornwall'
+        method: beach seine
+        rating: 4
+        label: OK
+      - stock: 'Grey mullet (thick-lipped): Cornwall'
+        method: gill or fixed net
+        rating: 4
+        label: OK
+    buy: Cornish beach-seine or gill-net grey mullet is OK (4), though MCS calls grey mullet in general a fish to
+      avoid.
+- name: John Dory
+  slug: john-dory
+  group: fish-shellfish
+  lines:
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-john-dory
+    - ffs-seasonality
+    - mcs-john-dory
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 5
+      - 13
+      - avail
+    - - 14
+      - 52
+      - in
+    notes:
+      season: 'Best-to-eat ticks Jan and Apr-Dec; spawns at the end of winter and start of spring; avoid fish under
+        29 cm (cgsg-john-dory). Avail Feb-Mar: Flying Fish lists it on its seasonality chart; the chart''s availability
+        shading is not legible in page text, so avail rests on the listing (ffs-seasonality). ICES VIIe-h.'
+      sustainability: 'CGSG: method scores for beam trawl, demersal trawl and gill net not legible in page text
+        (updated Jan 2026; read 2026-11-10).'
+      discrepancy: ffs-seasonality marks no best-quality months for it (meaning consistent quality all year), against
+        cgsg-john-dory's Feb-Mar gap; CGSG kept. seafish-seafood-guide (2009, background only) lists it as available
+        all year.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: North East Atlantic
+        method: gill or fixed net, Cornwall IFCA district (0-6 nm)
+        rating: 4
+        label: OK
+      - stock: North East Atlantic
+        method: bottom trawl (otter)
+        rating: 4
+        label: OK
+      - stock: North East Atlantic
+        method: bottom trawl (beam)
+        rating: 4
+        label: OK
+    buy: All rated John Dory is OK (4); MCS advises avoiding fish under 35 cm, which won't have bred.
+- name: Ling
+  slug: ling
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - northumberland-ling
+    - govscot-ling-fmp-2025
+    - northumberland-seasonality
+    - mcs-ling
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 8
+      - in
+    - - 9
+      - 22
+      - avail
+    - - 23
+      - 52
+      - in
+    notes:
+      season: 'Northumberland Seafood says ling spawn in spring and are less often caught then, are caught fairly
+        regularly the rest of the year, and that inshore line-caught ling taken outside spawning is a seasonal treat
+        (northumberland-ling). Spring read as Mar-May avail, the rest in. Landings split between Wick, Shetland
+        and Peterhead (govscot-ling-fmp-2025). Low: one secondary source, last updated 2016, with a loose seasonal
+        phrase. ICES IVa-b.'
+      discrepancy: govscot-ling-fmp-2025 gives Northern Shelf spawning as April-June at 100-300 m, about a month
+        later than northumberland-ling's spring, and does not link it to eating or catch timing.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Northeast Atlantic and Arctic Ocean
+        method: hook and line (longline)
+        rating: 5
+        label: Avoid
+      - stock: Northeast Atlantic and Arctic Ocean
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+    buy: 'MCS rates all ling Avoid: catches are too high.'
+  - name: SW
+    kind: region
+    confidence: moderate
+    sources:
+    - cgsg-ling
+    - mcs-ling
+    weeks:
+    - - 1
+      - 4
+      - in
+    - - 23
+      - 52
+      - in
+    notes:
+      season: 'Split added: the Cornwall guide treats ling separately. Best-to-eat ticks Jan and Jun-Dec; spawns
+        Feb-May (cgsg-ling). The Feb-May avail was removed in the fish pass, 2026-11-10: no SW landings source lists
+        ling (Flying Fish''s chart does not include it). ICES VIIe-h.'
+      sustainability: 'CGSG: gill-net rating reduced for bycatch concerns; scores not legible in page text (updated
+        Jan 2026; read 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Ling: Cornwall'
+        method: bottom trawl (beam)
+        rating: 5
+        label: Avoid
+      - stock: 'Ling: Cornwall'
+        method: bottom trawl (otter)
+        rating: 5
+        label: Avoid
+      - stock: 'Ling: Cornwall'
+        method: gill or fixed net
+        rating: 5
+        label: Avoid
+      - stock: 'Ling: Cornwall'
+        method: hook and line (longline)
+        rating: 5
+        label: Avoid
+    buy: 'MCS rates all ling Avoid: catches are too high.'
+- name: Wild salmon
+  slug: wild-salmon
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: low
+    sources:
+    - govscot-salmon-conservation
+    - govscot-salmon-stats-2025
+    - marinescot-sma-salmon
+    - leg-tweed-order-2007
+    - nasco-uk-mixed-stock-2025
+    - ea-cross-border-byelaws-2020
+    - seafish-seafood-guide
+    - mcs-atlantic-salmon
+    weeks: []
+    notes:
+      season: Where retention is allowed in Scotland, no salmon may be taken before 1 April (govscot-salmon-conservation);
+        the Tweed annual close time is 15 Sep-31 Mar (leg-tweed-order-2007). Other districts' net close times were
+        not found.
+      discrepancy: seafish-seafood-guide (2009) gives a wild season of Apr-Sep, before the 2016 Scottish coastal
+        netting ban.
+      unsold: Selling rod-caught salmon is illegal in Scotland (govscot-salmon-conservation) and England (ea-cross-border-byelaws-2020);
+        English net fisheries must release salmon and Scottish coastal nets may not keep them (nasco-uk-mixed-stock-2025);
+        the few Scottish in-river net-and-coble fisheries allowed to keep salmon landed 175 fish in 2025, the fewest
+        since 1952 (govscot-salmon-stats-2025; marinescot-sma-salmon).
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: 'Atlantic salmon, Northeast Atlantic (Scotland): rivers graded 2 or 3 by Marine Scotland'
+        method: drift net; gill or fixed net
+        rating: 5
+        label: Avoid
+      - stock: 'Atlantic salmon, Northeast Atlantic (England and Wales): rivers not classed "not at risk" by the
+          Environment Agency'
+        method: drift net; gill or fixed net
+        rating: 5
+        label: Avoid
+      - stock: 'Atlantic salmon, Northeast Atlantic: all areas and rivers not achieving conservation limits'
+        method: drift net; gill or fixed net
+        rating: 5
+        label: Avoid
+    buy: MCS says avoid wild Atlantic salmon, as numbers are dangerously low; it cannot legally be sold anyway.
+    unsold: true
+- name: Sea trout
+  slug: sea-trout
+  group: fish-shellfish
+  lines:
+  - name: NE
+    kind: region
+    confidence: moderate
+    sources:
+    - ea-ne-coast-net-amendments-2018
+    - gov-sea-trout-net-decision-2020
+    - ea-sea-trout-net-2020
+    - nasco-uk-mixed-stock-2025
+    - seafish-seafood-guide
+    weeks:
+    - - 13
+      - 35
+      - in
+    notes:
+      season: 'Yorkshire and North East coast T and J beach nets, sea trout only, under the 2018 national salmon
+        byelaws (confirmed Dec 2018): districts 1-2 open 26 Mar-31 May, district 3 to 30 Jun, districts 4-5 to 31
+        Jul, districts 6-7 to 31 Aug; drift nets closed from 1 Jan 2019; any salmon must be released (ea-ne-coast-net-amendments-2018).
+        In March 2020 the EA decided not to extend the season and kept these district dates, with a review promised
+        by December 2022 under a new Net Limitation Order (gov-sea-trout-net-decision-2020; ea-sea-trout-net-2020).
+        Catch sold through merchants and direct to restaurants (ea-sea-trout-net-2020). The UK told NASCO in 2025
+        the fishery is being phased to zero, with 17 nets in 2024, down from 32, and further season changes to cut
+        salmon bycatch (nasco-uk-mixed-stock-2025). Weeks use the at-least-one-open-day rule for legal seasons (26
+        Mar falls in week 13, 31 Aug in week 35).'
+      discrepancy: seafish-seafood-guide (2009) gives 1 Mar-31 Aug, starting about 3.5 weeks earlier. The outcome
+        of the promised post-2022 review, and the exact season changes NASCO mentions, could not be confirmed (search
+        budget ran out), so confidence stays moderate rather than high despite the byelaw basis.
+      sustainability: No MCS Good Fish Guide rating found for sea trout (searched 2026-11-10).
+- name: Farmed salmon
+  slug: farmed-salmon
+  group: fish-shellfish
+  lines:
+  - name: Glenarm, Northern Ireland
+    kind: region
+    confidence: low
+    sources:
+    - ffs-seasonality
+    - rockfish-glenarm-2025
+    - abelandcole-glenarm
+    - irishnews-glenarm-2015
+    - mcs-atlantic-salmon
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Flying Fish lists Glenarm Organic Salmon with no best-quality months, meaning consistent quality
+        all year (ffs-seasonality); no peak named, so in all year (rule 3). Farmed at two small sites, Glenarm Bay
+        and Red Bay, on the Antrim coast (rockfish-glenarm-2025; abelandcole-glenarm). Low: secondary sources only;
+        Seafish''s 2009 all-year listing (seafish-seafood-guide) is background only.'
+      sustainability: 'Organic: farms certified organic and audited by Global Trust (rockfish-glenarm-2025); sold
+        as organic (abelandcole-glenarm; irishnews-glenarm-2015). No ASC, RSPCA Assured or Label Rouge certification
+        found (searched 2026-11-10).'
+      discrepancy: rockfish-glenarm-2025 describes its 2025 supply as a limited allocation, sold while stocks last,
+        which may mean supply is not continuous.
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: Ireland (all areas); UK (Scotland)
+        method: open net pen, marine, organic
+        rating: 2
+        label: Best Choice
+    buy: Glenarm is sold as certified organic, which MCS rates Best Choice; MCS's organic rating names Ireland and
+      Scotland, not Northern Ireland as such. MCS's Best Choices for farmed salmon are organic or ASC-certified;
+      uncertified Scottish salmon is OK.
+  - name: Loch Duart, Scotland
+    kind: region
+    confidence: low
+    sources:
+    - ffs-seasonality
+    - lochduart-label-rouge-2021
+    - northern-times-loch-duart-2021
+    - undercurrent-loch-duart-rspca-2024
+    - intrafish-loch-duart-standard-2025
+    - salmonbusiness-loch-duart-standard-2025
+    - mcs-atlantic-salmon
+    - seafish-seafood-guide
+    weeks:
+    - - 1
+      - 52
+      - in
+    notes:
+      season: 'Flying Fish lists Loch Duart salmon with no best-quality months, meaning consistent quality all year
+        (ffs-seasonality); no peak named, so in all year (rule 3). Low: one secondary source; Seafish''s 2009 all-year
+        listing (seafish-seafood-guide) is background only.'
+      sustainability: 'Label Rouge: all Loch Duart salmon raised to the French Label Rouge standard; first non-French
+        producer to hold it (lochduart-label-rouge-2021, northern-times-loch-duart-2021; 2021 sources, current status
+        not re-confirmed). RSPCA Assured: Loch Duart left the scheme after about 20 years, as reported in August
+        2024 (undercurrent-loch-duart-rspca-2024). Own welfare standard, the Loch Duart Standard, launched May 2025
+        and independently verified by Leigh Grant Consulting and Partners in Welfare (intrafish-loch-duart-standard-2025,
+        salmonbusiness-loch-duart-standard-2025). No ASC or organic certification found (searched 2026-11-10).'
+    mcs:
+      read: 2026-11-10
+      ratings:
+      - stock: UK (Scotland)
+        method: open net pen, marine, no certification MCS rates separately
+        rating: 3
+        label: OK
+    buy: MCS has no rating for Label Rouge or the Loch Duart Standard, so Loch Duart falls under uncertified Scottish
+      salmon, rated OK. MCS's Best Choices for farmed salmon are organic or ASC-certified; uncertified Scottish
+      salmon is OK.

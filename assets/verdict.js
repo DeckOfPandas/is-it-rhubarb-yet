@@ -130,6 +130,19 @@
     return null;
   }
 
+  // The storage run straight after a variety's fresh weeks end at
+  // `freshEnd`, as thenHeld gives it for a whole food: {kind, until}, or
+  // {kind, on: true} when it never ends; null when none follows.
+  function storeAfter(variety, freshEnd) {
+    if (freshEnd.all) return null;
+    var n = nextWeek(freshEnd.week);
+    if (stateAt(variety, n) !== "store") return null;
+    var years = (freshEnd.wrapped || freshEnd.week === 52) ? 1 : 0;
+    var end = walk(variety, n, 1, isStore);
+    if (end.all) return { kind: "store", on: true };
+    return { kind: "store", until: { week: end.week, years: years + (end.wrapped ? 1 : 0) } };
+  }
+
   // --- The verdict for one variety in week `week` -------------------------
   // Returns {verdict, state, ...}. Weeks in the result are {week, years}
   // relative to the year of the week asked about:
@@ -161,7 +174,13 @@
       var began = walk(variety, week, -1, isIn);
       r.hardStop = spanEnd.steps === inEnd.steps;
       r.until = ahead(inEnd);
-      r.spanUntil = ahead(spanEnd);
+      // A near end follows the fresh weeks, as a whole food's does: one
+      // that goes into storage says so (`stored`, which only softEnd's
+      // words read, so a far end stays "Until late December").
+      var freshEnd = walk(variety, week, 1, isFresh);
+      r.spanUntil = ahead(freshEnd);
+      r.freshAll = freshEnd.all;
+      r.stored = storeAfter(variety, freshEnd);
       r.since = began.steps;
       r.began = behind(began);
       r.verdict = (r.hardStop && inEnd.steps < C.JUST_WEEKS) ? "JUST" : "YES";
@@ -182,6 +201,9 @@
           return r;
         }
       }
+      // A just-about span round the whole year has no in-season week and
+      // no end: isolated, all year.
+      if (span.all) { r.verdict = C.ISOLATED_AVAIL; r.isolated = true; r.allYear = true; return r; }
       var back = walk(variety, week, -1, covered);
       var inBehind = false;
       w = week;
@@ -287,6 +309,7 @@
       r.hardStop = freshEnd.steps === inEnd.steps;
       r.until = ahead(inEnd);
       r.spanUntil = ahead(freshEnd);
+      r.freshAll = freshEnd.all;
       r.since = began.steps;
       r.began = behind(began);
       r.verdict = (r.hardStop && inEnd.steps < C.JUST_WEEKS) ? "JUST" : "YES";
@@ -310,6 +333,7 @@
           return r;
         }
       }
+      if (span.all) { r.verdict = C.ISOLATED_AVAIL; r.isolated = true; r.allYear = true; return r; }
       var back = walk(t, week, -1, isFresh);
       var inBehind = false;
       w = week;
@@ -353,10 +377,11 @@
     // which: "All year, from the North East and South East". Only when
     // every all-year ring is a coast or a place (`ring: region`); a
     // variety that is in all year (rock oysters, cultivated mushrooms)
-    // makes the food's "All year" its own.
+    // makes the food's "All year" its own, and so does a year that no
+    // one coast covers alone (mackerel): there is no coast to name.
     if (whole.allYear && whole.verdict === "YES") {
       var allYear = results.filter(function (r) { return r.allYear && r.verdict === "YES"; });
-      if (allYear.length < results.length && allYear.every(function (r) { return r.v.ring === "region" && r.v.name; })) {
+      if (allYear.length > 0 && allYear.length < results.length && allYear.every(function (r) { return r.v.ring === "region" && r.v.name; })) {
         whole.fromRings = allYear.map(function (r) { return r.v.name; });
       }
     }
@@ -544,7 +569,9 @@
   // JUST next week; further off it is "Until late October" as before. A
   // JUST that is the tail itself, or an isolated just-about run, says
   // "Tailing off until late November": JUST is for a hard stop within two
-  // weeks, and a tail can last a quarter.
+  // weeks, and a tail can last a quarter. A just-about run round the whole
+  // year has no end to name: "A few about all year", and a tail that runs
+  // on until the season is back is "then a few about the rest of the year".
   function softEnd(r, year, today) {
     return r.hardStop === false && daysBetween(today, endDate(r.until, year)) <= 27;
   }
@@ -554,10 +581,14 @@
       case "YES":
         if (r.allYear) return r.fromRings ? "All year, from " + placesSaid(r.fromRings) : "All year";
         if (softEnd(r, year, today)) {
-          return cap(leaving(r.until, year, today).left) + ", then tailing off " + leaving(r.spanUntil, year, today).after + thenSaid(r, year, today);
+          if (r.freshAll) return cap(leaving(r.until, year, today).left) + ", then a few about the rest of the year";
+          var tails = r.spanUntil.week !== r.until.week || r.spanUntil.years !== r.until.years;
+          var then = r.stored ? thenSaid({ then: r.stored }, year, today) : thenSaid(r, year, today);
+          return cap(leaving(r.until, year, today).left) + (tails ? ", then tailing off " + leaving(r.spanUntil, year, today).after : "") + then;
         }
         return cap(leaving(r.until, year, today).left) + thenSaid(r, year, today);
       case "JUST":
+        if (r.allYear) return "A few about all year";
         if (r.tail || r.isolated) return stateUntil("Tailing off", r.until, year, today) + thenSaid(r, year, today);
         return cap(leaving(r.until, year, today).left) + thenSaid(r, year, today);
       case "YES-ISH":
@@ -599,7 +630,7 @@
   // how long for. The words are `phrase`'s own.
   function timing(r, year, today) {
     var whole = { when: phrase(r, year, today), aside: "", days: daysTo(r, year, today) };
-    if (r.verdict === "JUST") {
+    if (r.verdict === "JUST" && !r.allYear) {
       return { when: cap(leaving(r.until, year, today).left), aside: thenSaid(r, year, today).replace(/^, /, ""), days: whole.days };
     }
     if (r.verdict !== "NEARLY") return whole;
@@ -666,12 +697,13 @@
     var x = a.name + " " + a.variety, y = b.name + " " + b.variety;
     return x < y ? -1 : x > y ? 1 : 0;
   }
-  // Which of Now's bands a food's verdict puts it in: arrived (YES, its
-  // in-season run began within NEW_WEEKS), last (JUST), onway (NEARLY),
-  // still (the rest of YES), store and glass (YES-ISH, from storage or a
-  // glasshouse), or later (NO), which Now leaves out.
+  // Which of Now's bands a food's verdict puts it in: allyear (YES every
+  // week of the year), arrived (YES, its in-season run began within
+  // NEW_WEEKS), last (JUST), onway (NEARLY), still (the rest of YES),
+  // store and glass (YES-ISH, from storage or a glasshouse), or later
+  // (NO), which Now leaves out.
   function bandOf(r) {
-    if (r.verdict === "YES") return !r.allYear && r.since < C.NEW_WEEKS ? "arrived" : "still";
+    if (r.verdict === "YES") return r.allYear ? "allyear" : r.since < C.NEW_WEEKS ? "arrived" : "still";
     if (r.verdict === "JUST") return "last";
     if (r.verdict === "YES-ISH") return r.glass ? "glass" : "store";
     if (r.verdict === "NEARLY") return "onway";
@@ -685,11 +717,11 @@
     return a - b;
   }
 
-  // Six lists for one week, one per band of bandOf but later. Each list
+  // Seven lists for one week, one per band of bandOf but later. Each list
   // is split by kind of food (veg, fruit, wild, herbs, fish, meat, in the
   // order of groups.yml) as [{kind, items}], kinds with nothing in them
-  // left out. Within a kind, just arrived, great now, storage and
-  // glasshouse run A to Z, and last chance and on the way by time left,
+  // left out. Within a kind, just arrived, great now, all year, storage
+  // and glasshouse run A to Z, and last chance and on the way by time left,
   // soonest first, names breaking ties. Each item is a whole food, with
   // its phrase and its timing. `today` defaults to the middle of the week
   // asked about.
@@ -700,7 +732,7 @@
       kindOf[g.key] = g.kind;
       if (kinds.indexOf(g.kind) < 0) kinds.push(g.kind);
     });
-    var buckets = { arrived: {}, last: {}, onway: {}, still: {}, store: {}, glass: {} };
+    var buckets = { arrived: {}, last: {}, onway: {}, still: {}, allyear: {}, store: {}, glass: {} };
     foods.forEach(function (f) {
       var fv = foodVerdict(f, week);
       var v = fv.whole;

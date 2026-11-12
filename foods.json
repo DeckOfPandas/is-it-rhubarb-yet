@@ -2,4 +2,6 @@
 layout: null
 permalink: /foods.json
 ---
-{{ site.data.foods | jsonify }}
+{%- comment -%} The foods as the site shows them (tools/shown.js), not
+   every key of _data/foods.yml. {%- endcomment -%}
+{{ site.data.shown | jsonify }}

@@ -17,7 +17,7 @@ it has one, is the link preview's title; its <title> stays page.title.
 {%- if page.collection == "foods" or page.collection == "never" -%}
   {%- assign card = page.slug | append: ".png" -%}
   {%- if page.collection == "foods" -%}
-    {%- assign thing = site.data.foods | where: "slug", page.slug | first -%}
+    {%- assign thing = site.data.shown | where: "slug", page.slug | first -%}
   {%- else -%}
     {%- assign thing = site.data.never | where: "slug", page.slug | first -%}
   {%- endif -%}

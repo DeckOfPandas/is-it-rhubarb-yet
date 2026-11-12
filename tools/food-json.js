@@ -1,5 +1,5 @@
 // One JSON file per food and never-food, /foods/<slug>.json: the food's
-// own data as foods.yml has it, plus what the build day's bake says
+// own data as the site shows it (tools/shown.js), plus what the build day's bake says
 // about it (the verdict, the date line, its season in months, each
 // ring's own line) and the day that was true for. A never-food reads
 // NEVER with its line. Written into the built site after Jekyll, from
@@ -12,6 +12,7 @@
 const fs = require("fs");
 const path = require("path");
 const { loadYaml } = require("./yaml.js");
+const { shownFoods } = require("./shown.js");
 
 const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "_data");
@@ -32,7 +33,7 @@ function foodFile(food, baked) {
 }
 
 function writeAll(dir) {
-  const foods = loadYaml(path.join(DATA, "foods.yml"));
+  const foods = shownFoods(loadYaml(path.join(DATA, "foods.yml")));
   const never = fs.existsSync(path.join(DATA, "never.yml")) ? loadYaml(path.join(DATA, "never.yml")) : [];
   const baked = JSON.parse(fs.readFileSync(path.join(DATA, "baked.json"), "utf8"));
   const out = path.join(dir, "foods");

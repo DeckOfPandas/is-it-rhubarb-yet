@@ -1,0 +1,556 @@
+- key: tregothnan-faq
+  title: Frequently Asked Questions
+  publisher: Tregothnan
+  url: https://tregothnan.co.uk/faqs/
+  type: primary
+  published: 2026
+  published_note: Living FAQ page with no date line; footer copyright 2026.
+  accessed: '2026-11-10'
+- key: tregothnan-fresh-leaves
+  title: Fresh tea leaves and buds
+  publisher: Tregothnan
+  url: https://tregothnan.co.uk/products/fresh-tea-leaves-first-flush
+  type: primary
+  published: 2026
+  published_note: Live product page (priced, marked sold out when read) with no date line; footer copyright 2026.
+  accessed: '2026-11-10'
+- key: scotsmag-tea-gardens
+  title: Tea Tales From Tea Gardens Of Scotland
+  publisher: The Scots Magazine (DC Thomson)
+  url: https://wpcluster.dctdigital.com/scotsmagazine/articles/tea-gardens-scotland/
+  type: secondary
+  published: undated
+  published_note: No publication date shown on the page.
+  accessed: '2026-11-10'
+- key: pekoe-kinnettles-tea
+  title: Interview with Scottish tea grower Susie Walker-Munro of Tea Gardens of Scotland
+  publisher: Pekoe Tea
+  url: https://www.pekoetea.co.uk/blogs/kinnettles-tea-estate/interview-with-scottish-tea-grower-susie-walker-munro-of-tea-gardens-of-scotland
+  type: secondary
+  published: 2022
+  published_note: Dated 6 Apr 2022.
+  accessed: '2026-11-10'
+- key: woodlandtrust-penny-bun
+  title: Penny bun (Boletus edulis)
+  publisher: Woodland Trust
+  url: https://woodlandtrust.org.uk/trees-woods-and-wildlife/fungi-and-lichens/penny-bun/
+  type: primary
+  published: 2026
+  published_note: Living species page with no date line; counted as current (dating brief).
+  accessed: '2026-11-10'
+- key: woodlandtrust-chanterelle
+  title: Chanterelle, girolle (Cantharellus cibarius)
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/fungi-and-lichens/chanterelle/
+  type: primary
+  published: 2026
+  published_note: Living species page with no date line; counted as current (dating brief).
+  accessed: '2026-11-10'
+- key: woodlandtrust-morel
+  title: Morel (Morchella esculenta)
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/fungi-and-lichens/morel
+  type: primary
+  published: 2026
+  published_note: Living species page with no date line; counted as current (dating brief).
+  accessed: '2026-11-10'
+- key: woodlandtrust-oyster
+  title: Oyster mushroom (Pleurotus ostreatus)
+  publisher: Woodland Trust
+  url: https://www.woodlandtrust.org.uk/trees-woods-and-wildlife/fungi-and-lichens/oyster-mushroom/
+  type: primary
+  published: 2026
+  published_note: Living species page with no date line; counted as current (dating brief).
+  accessed: '2026-11-10'
+- key: wildlifetrusts-giant-puffball
+  title: Giant puffball
+  publisher: The Wildlife Trusts
+  url: https://www.wildlifetrusts.org/wildlife-explorer/fungi/giant-puffball
+  type: primary
+  published: 2026
+  published_note: Living Wildlife Explorer species page with no date line; counted as current (dating brief).
+  accessed: '2026-11-10'
+- key: wildlifetrusts-morel
+  title: Morel
+  publisher: The Wildlife Trusts
+  url: https://www.wildlifetrusts.org/wildlife-explorer/fungi/morel
+  type: primary
+  published: 2026
+  published_note: Living Wildlife Explorer species page with no date line; counted as current (dating brief).
+  accessed: '2026-11-10'
+- key: wildlifetrusts-oyster
+  title: Oyster mushroom
+  publisher: The Wildlife Trusts
+  url: https://www.wildlifetrusts.org/wildlife-explorer/fungi/oyster-mushroom
+  type: primary
+  published: 2026
+  published_note: Living Wildlife Explorer species page with no date line; counted as current (dating brief).
+  accessed: '2026-11-10'
+- key: kew-yellow-morel
+  title: Yellow morel
+  publisher: Royal Botanic Gardens, Kew (Grow Wild)
+  url: https://growwild.kew.org/plants/yellow-morel
+  type: primary
+  published: undated
+  published_note: Grow Wild species page with no date line or copyright year.
+  accessed: '2026-11-10'
+- key: gange-fungal-fruiting
+  title: Rapid and recent changes in fungal fruiting patterns (Gange, Gange, Sparks & Boddy, Science 316:71, 2007)
+  publisher: NERC Open Research Archive (UKCEH)
+  url: https://nora.nerc.ac.uk/id/eprint/1456/
+  type: primary
+  published: 2007
+  published_note: Year in title (Science 316:71, 2007).
+  accessed: '2026-11-10'
+- key: nature-fungi-season-news
+  title: UK fungi season lengthens (news, 5 April 2007)
+  publisher: Nature
+  url: https://www.nature.com/articles/news070402-8.pdf
+  type: secondary
+  published: 2007
+  published_note: Dated 5 Apr 2007 (in title).
+  accessed: '2026-11-10'
+- key: wildfooduk-cep
+  title: Cep
+  publisher: Wild Food UK
+  url: https://www.wildfooduk.com/mushroom/cep/
+  type: secondary
+  published: 2025
+  published_note: First published Jun 2017; page metadata shows it modified Oct 2025.
+  accessed: '2026-11-10'
+- key: wildfooduk-chanterelle
+  title: Chanterelle
+  publisher: Wild Food UK
+  url: https://wildfooduk.com/?p=10514
+  type: secondary
+  published: 2025
+  published_note: First published Jun 2017; page metadata shows it modified Aug 2025.
+  accessed: '2026-11-10'
+- key: wildfooduk-hedgehog
+  title: Hedgehog Fungus
+  publisher: Wild Food UK
+  url: https://wildfooduk.com/mushroom-guide/hedgehog-fungus
+  type: secondary
+  published: 2025
+  published_note: First published Jun 2017; page metadata shows it modified Apr 2025.
+  accessed: '2026-11-10'
+- key: wildfooduk-hen-of-the-woods
+  title: Hen of the Woods
+  publisher: Wild Food UK
+  url: https://www.wildfooduk.com/?p=13730
+  type: secondary
+  published: 2024
+  published_note: First published Oct 2018; page metadata shows it modified Nov 2024.
+  accessed: '2026-11-10'
+- key: wildfooduk-field-mushroom
+  title: Field Mushroom
+  publisher: Wild Food UK
+  url: https://www.wildfooduk.com/mushroom-guide/field-mushroom/
+  type: secondary
+  published: 2025
+  published_note: First published Jun 2017; page metadata shows it modified Apr 2025.
+  accessed: '2026-11-10'
+- key: mushroomdiary-calendar
+  title: 'Mushroom season UK: annual calendar'
+  publisher: Mushroom Diary
+  url: https://mushroomdiary.co.uk/mushroom-season-uk-annual-calendar
+  type: secondary
+  published: 2018
+  published_note: First published May 2014; updated Nov 2018.
+  accessed: '2026-11-10'
+- key: firstnature-field-mushroom
+  title: Agaricus campestris - Field Mushroom
+  publisher: First Nature
+  url: https://www.first-nature.com/fungi/agaricus-campestris.php
+  type: secondary
+  published: undated
+  published_note: No date line; the text mentions a book republished in September 2022, so it was revised then or
+    later.
+  accessed: '2026-11-10'
+- key: staffcanteen-wildharvest-20130729
+  title: Market Report - UK Seasonal update 29 July 2013 (Wild Harvest)
+  publisher: The Staff Canteen
+  url: https://thestaffcanteen.com/Market-Report-from-Land-and-Sea/market-report-uk-seasonal-update-29-july-2013
+  type: trade
+  published: 2013
+  published_note: Dated 29 Jul 2013 (in title).
+  accessed: '2026-11-10'
+- key: staffcanteen-wildharvest-20130909
+  title: Market Report - UK Seasonal update 9 September 2013 (Wild Harvest)
+  publisher: The Staff Canteen
+  url: https://www.thestaffcanteen.com/Market-Report-from-Land-and-Sea/market-report-uk-seasonal-update-9-september-2013
+  type: trade
+  published: 2013
+  published_note: Dated 9 Sep 2013 (in title).
+  accessed: '2026-11-10'
+- key: staffcanteen-wildharvest-20131104
+  title: Market Report - UK Seasonal update 4 November 2013 (Wild Harvest)
+  publisher: The Staff Canteen
+  url: https://www.thestaffcanteen.com/Market-Report-from-Land-and-Sea/market-report-uk-seasonal-update-4-november-2013
+  type: trade
+  published: 2013
+  published_note: Dated 4 Nov 2013 (in title).
+  accessed: '2026-11-10'
+- key: staffcanteen-wildharvest-20140407
+  title: Market Report - UK seasonal update 7 April 2014 (Wild Harvest)
+  publisher: The Staff Canteen
+  url: https://www.thestaffcanteen.com/Market-Report-from-Land-and-Sea/market-report-uk-seasonal-update-7-april-2014
+  type: trade
+  published: 2014
+  published_note: Dated 7 Apr 2014 (in title).
+  accessed: '2026-11-10'
+- key: staffcanteen-wildharvest-20151006
+  title: Market Report - UK seasonal update 6 October 2015 (Wild Harvest)
+  publisher: The Staff Canteen
+  url: https://www.thestaffcanteen.com/Market-Report-from-Land-and-Sea/market-report-uk-seasonal-update-6-october-2015
+  type: trade
+  published: 2015
+  published_note: Dated 6 Oct 2015 (in title).
+  accessed: '2026-11-10'
+- key: staffcanteen-wildharvest-20160704
+  title: Market Report - UK seasonal update 4 July 2016 (Wild Harvest)
+  publisher: The Staff Canteen
+  url: https://www.thestaffcanteen.com/Market-Report-from-Land-and-Sea/market-report-uk-seasonal-update-4-july-2016
+  type: trade
+  published: 2016
+  published_note: Dated 4 Jul 2016 (in title).
+  accessed: '2026-11-10'
+- key: staffcanteen-wildharvest-mushrooms
+  title: Mushroom season at Wild Harvest (4 November 2013)
+  publisher: The Staff Canteen
+  url: https://thestaffcanteen.com/Editorials-and-Advertorials/mushroom-season-at-wild-harvest
+  type: trade
+  published: 2013
+  published_note: Dated 4 Nov 2013 (in title).
+  accessed: '2026-11-10'
+- key: staffcanteen-mash-scottish-girolles
+  title: Scottish Girolles (Mash Purveyors, 15 July 2019)
+  publisher: The Staff Canteen
+  url: https://thestaffcanteen.com/post/Scottish-Girolles
+  type: secondary
+  published: 2019
+  published_note: Dated 15 Jul 2019 (in title).
+  accessed: '2026-11-10'
+- key: jancisrobinson-mushroom-man
+  title: The Mushroom Man of New Covent Garden Market
+  publisher: JancisRobinson.com
+  url: https://jancisrobinson.com/zh-hans/node/197403
+  type: secondary
+  published: 2006
+  published_note: Dated 6 May 2006 (English-language version of the same article).
+  accessed: '2026-11-10'
+- key: fsa-enoki-listeria
+  title: Rapid risk assessment of the detection of Listeria monocytogenes in enoki mushrooms (10 September 2024)
+  publisher: Food Standards Agency
+  url: https://science.food.gov.uk/article/122719-rapid-risk-assessment-of-the-detection-of-listeria-monocytogenes-in-enoki-mushrooms
+  type: primary
+  published: 2024
+  published_note: Dated 10 Sep 2024 (in title).
+  accessed: '2026-11-10'
+- key: sruc-mushroom-factsheet
+  title: 'Alternative crop factsheet: Mushrooms (April 2020)'
+  publisher: SAC Consulting / Scotland's Rural College
+  url: https://sruc.ac.uk/media/bl0pf5dr/sac_mushroom-factsheet-v1-0.pdf
+  type: primary
+  published: 2020
+  published_note: Dated April 2020 (in title).
+  accessed: '2026-11-10'
+- key: freshplaza-smithy-exotic
+  title: Vegans fuel UK exotic mushroom boom (27 January 2020)
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/europe/article/9183846/vegans-fuel-uk-exotic-mushroom-boom/
+  type: trade
+  published: 2020
+  published_note: Dated 27 Jan 2020 (in title).
+  accessed: '2026-11-10'
+- key: booths-smithy
+  title: Smithy Mushrooms
+  publisher: Booths
+  url: https://www.booths.co.uk/our-stories/our-products/smithy-mushrooms/
+  type: secondary
+  published: 2021
+  published_note: No date line; page metadata shows it modified Sep 2021.
+  accessed: '2026-11-10'
+- key: dailymail-livesey-exotic
+  title: Exotic mushrooms - from the Midlands (28 April 2015)
+  publisher: Scottish Daily Mail (via PressReader)
+  url: https://www.pressreader.com/uk/scottish-daily-mail/20150428/282454232540244
+  type: secondary
+  published: 2015
+  published_note: Dated 28 Apr 2015 (in title and URL).
+  accessed: '2026-11-10'
+- key: grocer-mushroom-miles
+  title: Quarter of mushrooms rack up 800-plus food miles, research shows
+  publisher: The Grocer
+  url: https://thegrocer.co.uk/news/quarter-of-mushrooms-rack-up-800-plus-food-miles-research-shows/601771.article
+  type: trade
+  published: 2020
+  published_note: No date line; the lead image is coded 200129 (29 January 2020), so taken as 2020.
+  accessed: '2026-11-10'
+- key: fpj-mushroom-sector
+  title: Mushroom sector at 35-year low
+  publisher: Fresh Produce Journal
+  url: https://fruitnet.com/fresh-produce-journal/mushroom-sector-at-35-year-low/144629.article
+  type: trade
+  published: 2008
+  published_note: No date line; the text cites October 2007 and looks ahead to the Mushroom Bureau's 2008 campaign,
+    so taken as early 2008.
+  accessed: '2026-11-10'
+- key: fpj-herbs-uk-kitchens
+  title: Herbs hold their own in UK kitchens
+  publisher: Fresh Produce Journal
+  url: https://fruitnet.com/fresh-produce-journal/herbs-hold-their-own-in-uk-kitchens/150816.article
+  type: trade
+  published: undated
+  published_note: No date line. The text cites 2009 research and says Lincolnshire Herbs was called Swedeponic until
+    the year before, which points to about 2010-11; treat as pre-2016.
+  accessed: '2026-11-10'
+- key: freshplaza-country-herbs
+  title: UK herb grower keeps up with the trends (6 December 2013; Country Herbs and Plants)
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/article/2115856/uk-herb-grower-keeps-up-with-the-trends/
+  type: trade
+  published: 2013
+  published_note: Dated 6 Dec 2013 (in title).
+  accessed: '2026-11-10'
+- key: vitacress-herbs
+  title: Herbs
+  publisher: Vitacress
+  url: https://vitacress.com/?p=41
+  type: primary
+  published: 2024
+  published_note: No date line; page metadata shows it modified Sep 2024 (footer copyright 2023).
+  accessed: '2026-11-10'
+- key: fpj-herbfresh-early-start
+  title: Herbfresh celebrates early start (undated)
+  publisher: Fresh Produce Journal
+  url: https://www.fruitnet.com/fresh-produce-journal/herbfresh-celebrates-early-start/153409.article
+  type: trade
+  published: undated
+  published_note: No date line and no year anywhere in the text; it sits among Fresh Produce Journal herb items
+    of the early 2010s, so probably pre-2016.
+  accessed: '2026-11-10'
+- key: freshplaza-lincolnshire-herbs
+  title: Sunshine brings increased demand for herbs (19 April 2013)
+  publisher: FreshPlaza
+  url: https://www.freshplaza.com/north-america/article/2108224/sunshine-brings-increased-demand-for-herbs/
+  type: trade
+  published: 2013
+  published_note: Dated 19 Apr 2013 (in title).
+  accessed: '2026-11-10'
+- key: hortidaily-lincolnshire-herbs
+  title: 'UK: Sunshine brings increased demand for herbs (23 April 2013)'
+  publisher: HortiDaily
+  url: https://www.hortidaily.com/article/6001898/uk-sunshine-brings-increased-demand-for-herbs/
+  type: trade
+  published: 2013
+  published_note: Dated 23 Apr 2013 (in title).
+  accessed: '2026-11-10'
+- key: ahdb-harvested-britain
+  title: 'Harvested in Britain: a year in the life of Britain''s horticultural harvest (c. 2015)'
+  publisher: AHDB Horticulture
+  url: https://projectbluearchive.blob.core.windows.net/media/Default/Imported%20Publication%20Docs/AHDB%20Horticulture%20/Harvested_in_Britain_web%20(2).pdf
+  type: primary
+  published: 2015
+  published_note: Copyright AHDB 2015 in the document.
+  accessed: '2026-11-10'
+- key: ahdb-grown-in-britain
+  title: 'Grown in Britain: your guide to British fresh produce (HDC News supplement, 2013)'
+  publisher: Horticultural Development Company, a division of AHDB
+  url: https://projectblue.blob.core.windows.net/media/Default/Imported%20Publication%20Docs/AHDB%20Horticulture%20/Grown%20in%20Britain%20Low%20res.pdf
+  type: primary
+  published: 2013
+  published_note: Year in title.
+  accessed: '2026-11-10'
+- key: ahdb-fv359-coriander-mint
+  title: 'FV 359 final report: nitrogen requirements of field-grown coriander and mint (2011)'
+  publisher: Horticultural Development Company (AHDB)
+  url: https://projectbluearchive.blob.core.windows.net/media/Default/Research%20Papers/Horticulture/FV%20359%20final%20psg.pdf
+  type: primary
+  published: 2011
+  published_note: Year in title.
+  accessed: '2026-11-10'
+- key: ahdb-fv318-parsley-coriander
+  title: 'FV 318 annual report 2008: seed-borne diseases of field-grown parsley and coriander'
+  publisher: Horticultural Development Company (AHDB)
+  url: https://projectbluearchive.blob.core.windows.net/media/Default/Horticulture/FV%20318%20Annual%20Report%202008.pdf
+  type: primary
+  published: 2008
+  published_note: Year in title.
+  accessed: '2026-11-10'
+- key: ahdb-fv381-itersonilia
+  title: 'FV 381 final report: survey of Itersonilia in UK herb crops (2011)'
+  publisher: Horticultural Development Company (AHDB)
+  url: https://projectbluearchive.blob.core.windows.net/media/Default/Research%20Papers/Horticulture/FV%20381%20final%20psg.pdf
+  type: primary
+  published: 2011
+  published_note: Year in title.
+  accessed: '2026-11-10'
+- key: freshview-seasonality
+  title: Seasonality calendar
+  publisher: Freshview Foods
+  url: https://freshviewfoods.co.uk/seasonality-calendar/
+  type: secondary
+  published: 2025
+  published_note: Living calendar page; page metadata shows it modified Feb 2025.
+  accessed: '2026-11-10'
+- key: rhs-basil
+  title: How to grow basil
+  publisher: Royal Horticultural Society
+  url: https://rhs.org.uk/herbs/basil/grow-your-own?type=h
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-coriander
+  title: How to grow coriander
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/advice/grow-your-own/herbs/coriander
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-chervil
+  title: How to grow chervil
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/chervil/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-dill
+  title: How to grow dill
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/dill/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-parsley
+  title: How to grow parsley
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/parsley/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-chives
+  title: How to grow chives
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/chives/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-mint
+  title: How to grow mint
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/mint/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-tarragon
+  title: How to grow tarragon
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/tarragon/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-sorrel
+  title: How to grow sorrel
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/sorrel/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-lovage
+  title: How to grow lovage
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/lovage/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-marjoram
+  title: How to grow marjoram
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/marjoram/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-oregano
+  title: How to grow oregano
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/oregano/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-rosemary
+  title: How to grow rosemary
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/rosemary/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-thyme
+  title: How to grow thyme
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/thyme/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-sage
+  title: How to grow sage
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/sage/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: rhs-bay
+  title: How to grow bay
+  publisher: Royal Horticultural Society
+  url: https://www.rhs.org.uk/herbs/bay/grow-your-own
+  type: secondary
+  published: 2026
+  published_note: Living RHS growing guide with no date line; footer copyright 2026. Counted as current (dating
+    brief).
+  accessed: '2026-11-10'
+- key: leaf-ofs-lincolnshire-herbs
+  title: 'Lincolnshire Herbs: open farm event listing (LEAF Open Farm Sunday, 7 June 2026)'
+  publisher: LEAF Open Farm Sunday (farm's own description)
+  url: https://farmsunday.org/visit-a-farm/shareEvent/84212
+  type: primary
+  published: 2026
+  published_note: Event listing for 7 June 2026; the farm description has no date of its own.
+  accessed: '2026-11-10'
+- key: foodmanufacture-langmead-herbs
+  title: Langmead Herbs buys Waitrose fresh herb supplier (8 September 2026)
+  publisher: Food Manufacture
+  url: https://www.foodmanufacture.co.uk/Article/2026/09/08/langmead-herbs-buys-waitrose-fresh-herb-supplier/
+  type: trade
+  published: 2026
+  published_note: Dated 8 Sep 2026 (in title and URL).
+  accessed: '2026-11-10'

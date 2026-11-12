@@ -1,0 +1,347 @@
+# Is It Rhubarb Yet? — clean-room seasonality, group: shoots-fruiting (researched 2026-11-10)
+# Week n = days 7n-6..7n from 1 Jan; month blocks: Jan 1-4, Feb 5-8, Mar 9-13, Apr 14-17, May 18-22,
+# Jun 23-26, Jul 27-30, Aug 31-35, Sep 36-39, Oct 40-43, Nov 44-48, Dec 49-52.
+
+# ---------------- Shoots, pods & stems ----------------
+
+- name: "Asparagus"
+  slug: asparagus
+  group: shoots-pods-stems
+  lines:
+    - name: "Outdoor"
+      kind: method
+      confidence: moderate
+      sources: [fpj-asparagus-2026, ahdb-grown-in-britain, freshplaza-asparagus-2022]
+      weeks:
+        - [14, 16, avail]
+        - [17, 25, in]
+        - [26, 26, avail]
+      notes:
+        season: "Growers' association season runs St George's Day (23 Apr) to the solstice (21 Jun), about eight weeks (fpj-asparagus-2026). Southern growers start cutting early to mid April and finish late June (ahdb-grown-in-britain). Volumes low at the official start; shelves fully British by early May (freshplaza-asparagus-2022). AHDB also mentions one grower cutting an autumn crop, no dates given."
+        discrepancy: "ahdb-grown-in-britain: early/mid April to late June; growers' association (via fpj-asparagus-2026): 23 Apr to 21 Jun. Edges kept as avail."
+    - name: "Protected"
+      kind: method
+      confidence: moderate
+      sources: [ahdb-grown-in-britain, freshplaza-asparagus-tunnels-2026, yahoo-asparagus-early-2022]
+      weeks:
+        - [5, 8, avail]
+        - [9, 16, in]
+      notes:
+        season: "Split added: tunnels and cloches bring the crop forward three to four weeks, and soil-heated beds give limited supply from early February (ahdb-grown-in-britain). A Hampshire grower using unheated coir tunnels had British spears in shops from 26 Feb 2022, week 9 (yahoo-asparagus-early-2022) and was cutting about six weeks early in March 2026 (freshplaza-asparagus-tunnels-2026). Rule 6 re-applied: no peak named, so the tunnel window (late February until the outdoor crop takes over) is in; the thin heated-bed supply in February is avail."
+
+- name: "Broad beans"
+  slug: broad-beans
+  group: shoots-pods-stems
+  lines:
+    - name: "Broad beans"
+      kind: whole
+      confidence: moderate
+      sources: [defra-wholesale-prices, lovefood-peas-broad-beans, foodandtravel-broad-beans, vegsoc-seasonal, unicorn-broad-beans-2026]
+      weeks:
+        - [23, 31, in]
+        - [32, 39, avail]
+      notes:
+        season: "Defra's fortnightly wholesale series quoted home-grown broad beans from 8 Jun to 3 Aug 2026, weeks 23 to 31 (defra-wholesale-prices); only one year was readable, so this is a single season. Rule 2: Defra dates used for in. Secondary sources run on into August and September (foodandtravel-broad-beans: June to September), with Scottish late-sown crops last (lovefood-peas-broad-beans), so August and September are avail. A northern co-op announced the start in early June 2026 (unicorn-broad-beans-2026), matching Defra."
+        discrepancy: "lovefood-peas-broad-beans names July and August as the best months, ending about four weeks after the last Defra quote; vegsoc-seasonal gives June to August."
+
+- name: "Runner & French beans"
+  slug: runner-french-beans
+  group: shoots-pods-stems
+  lines:
+    - name: "Runner"
+      kind: variety
+      confidence: moderate
+      sources: [defra-wholesale-prices, ma-runner-beans-2007, fpj-runner-beans, vegsoc-seasonal]
+      weeks:
+        - [27, 43, in]
+      notes:
+        season: "Split added because runner and French beans have separate sources and dates. Defra's wholesale series quoted home-grown runner beans from 6 Jul to 26 Oct 2026, weeks 27 to 43 (defra-wholesale-prices). A Wealmoor spokesman likewise gave July to October (fpj-runner-beans). Rule 2: Defra dates used, so October is now in."
+        discrepancy: "A foodservice supplier gave early July to end of September (ma-runner-beans-2007), four weeks shorter than Defra. vegsoc-seasonal lists June to October."
+    - name: "French"
+      kind: variety
+      confidence: moderate
+      sources: [defra-wholesale-prices, foodandtravel-french-beans, vegsoc-seasonal]
+      weeks:
+        - [27, 28, avail]
+        - [29, 41, in]
+      notes:
+        season: "Split added (see Runner). Defra's wholesale series quoted home-grown dwarf French beans from 20 Jul to 12 Oct 2026, weeks 29 to 41 (defra-wholesale-prices), one season only. Rule 2: Defra dates used for in. Secondary sources start in July (vegsoc-seasonal, foodandtravel-french-beans), so early July is avail; foodandtravel-french-beans also mentions a few early beans in late May, not added because no other source supports it."
+        discrepancy: "Secondary sources put the bulk of the crop in July and August (foodandtravel-french-beans, vegsoc-seasonal); Defra quotes run about six weeks later, to mid-October."
+
+- name: "Celery"
+  slug: celery
+  group: shoots-pods-stems
+  lines:
+    - name: "Field"
+      kind: method
+      confidence: moderate
+      sources: [ahdb-grown-in-britain, defra-wholesale-prices, vegsoc-seasonal, kentishstour-calendar]
+      weeks:
+        - [22, 48, in]
+      notes:
+        season: "Split added because PGI Fenland celery has a distinct, later season. Outdoor planting from early March; harvest from about the end of May until November (ahdb-grown-in-britain). Source-age pass: AHDB (2013) was the only basis for these dates, so the line was lowered to low, then refreshed. Defra's wholesale series quoted home-grown washed celery from 8 Jun to 26 Oct 2026, the series' last date, and again in December 2025 (defra-wholesale-prices); its start is within a week of AHDB's. Defra doesn't separate field from Fenland celery, and its series ends before November, so AHDB's November end stands. Confidence restored to moderate on the newer primary source."
+        discrepancy: "Secondary calendars differ widely: vegsoc-seasonal lists January and September to December; kentishstour-calendar lists April to early July. AHDB dates used (rule 2)."
+    - name: "Fenland"
+      kind: region
+      confidence: high
+      sources: [eu-fenland-celery-spec, gov-fenland-celery-pgi, ahdb-grown-in-britain, freshplaza-fenland-celery-2013, freshplaza-fenland-celery-2025]
+      weeks:
+        - [36, 52, in]
+      notes:
+        season: "PGI specification: transplanted June to July, earthed up in banks to blanch and protect from frost, harvested September to December; only three named varieties allowed (eu-fenland-celery-spec, gov-fenland-celery-pgi). AHDB likewise gives winter white celery as September to December (ahdb-grown-in-britain)."
+        discrepancy: "Trade press describes the traditional season as October to December (freshplaza-fenland-celery-2013), and in 2025 the harvest started late October with supply expected to early December (freshplaza-fenland-celery-2025). PGI dates used."
+
+- name: "Fennel"
+  slug: fennel
+  group: shoots-pods-stems
+  lines:
+    - name: "Fennel"
+      kind: whole
+      confidence: low
+      sources: [vegsoc-seasonal, kentishstour-calendar]
+      weeks:
+        - [27, 35, in]
+        - [36, 48, avail]
+      notes:
+        season: "Only secondary calendars found. Both list July and August; one runs on to November. Second pass: not in AHDB's produce guide or Defra's wholesale series; The Caterer's 'Home-grown harvest: Fennel' (Sept 2018) exists but could not be fetched."
+        discrepancy: "vegsoc-seasonal: July to August; kentishstour-calendar: July to November. The shared months are in, the rest avail."
+
+- name: "Globe artichokes"
+  slug: globe-artichokes
+  group: shoots-pods-stems
+  lines:
+    - name: "Globe artichokes"
+      kind: whole
+      confidence: moderate
+      sources: [caterer-artichokes-2018, abelandcole-holm-select, foodandtravel-artichokes, vegsoc-seasonal]
+      weeks:
+        - [23, 39, in]
+      notes:
+        season: "Holm Select, an organic grower, harvests globe artichokes June to September (caterer-artichokes-2018); its farms are in the Cambridgeshire Fens (abelandcole-holm-select). A food magazine says green globe is first in, in early June, with pick-your-own from mid-June (foodandtravel-artichokes), which agrees. No peak named. No Cornish grower source found."
+        discrepancy: "vegsoc-seasonal lists an unspecified 'artichoke' in March to May, which can't be confirmed as globe; not used."
+
+- name: "Mangetout"
+  slug: mangetout
+  group: shoots-pods-stems
+  lines:
+    - name: "Mangetout"
+      kind: whole
+      confidence: low
+      sources: [vegsoc-seasonal, kentishstour-calendar]
+      weeks:
+        - [27, 30, avail]
+        - [31, 39, in]
+      notes:
+        season: "Only secondary calendars found: August to September (vegsoc-seasonal) and July to September (kentishstour-calendar). Shared months in, July avail. Second pass: not in AHDB's produce guide or Defra's wholesale series; no grower or trade source found."
+
+- name: "Peas"
+  slug: peas
+  group: shoots-pods-stems
+  lines:
+    - name: "Peas"
+      kind: whole
+      confidence: moderate
+      sources: [peas-harvest, fpj-pea-harvest, fpj-peas-sainsburys, lovefood-peas-broad-beans]
+      weeks:
+        - [23, 25, avail]
+        - [26, 33, in]
+        - [34, 39, avail]
+      notes:
+        season: "Pea growers' body: harvest usually end of June to mid-August, about seven weeks, earlier and shorter in warm years (peas-harvest). That vining crop mostly goes for freezing (fpj-pea-harvest). Fresh peas in the pod are sold June to September (fpj-peas-sainsburys, quoting a supermarket buyer); July and August best (lovefood-peas-broad-beans)."
+
+- name: "Sweetcorn"
+  slug: sweetcorn
+  group: shoots-pods-stems
+  lines:
+    - name: "Sweetcorn"
+      kind: whole
+      confidence: moderate
+      sources: [defra-wholesale-prices, vegsoc-seasonal, plantura-calendar]
+      weeks:
+        - [29, 41, in]
+      notes:
+        season: "Defra's wholesale series quoted home-grown sweetcorn from 20 Jul to 12 Oct 2026, weeks 29 to 41 (defra-wholesale-prices), one season only. Two secondary calendars give August to October (vegsoc-seasonal, plantura-calendar), within two weeks at each end. Defra dates used (rule 2)."
+
+- name: "Sea kale"
+  slug: sea-kale
+  group: shoots-pods-stems
+  lines:
+    - name: "Forced"
+      kind: method
+      confidence: moderate
+      sources: [fpj-sea-kale-waitrose, grocer-sea-kale-waitrose, list-sea-kale-eassie, staffcanteen-westlands-sea-kale-2017]
+      weeks:
+        - [1, 13, in]
+        - [14, 22, avail]
+        - [49, 52, avail]
+      notes:
+        season: "Crowns are forced and blanched in the dark. Westland Nurseries (Worcestershire glasshouses) supplies forced stems January to March (fpj-sea-kale-waitrose); a Waitrose buyer gives the same months (grocer-sea-kale-waitrose); an Angus grower forces it in a heated dark room January to March (list-sea-kale-eassie). No peak named, so the agreed January to March window is in (rule 6)."
+        discrepancy: "A Westlands advertorial (Jan 2017) gives a December to May season (staffcanteen-westlands-sea-kale-2017); December and April to May kept as avail."
+    - name: "Wild"
+      kind: method
+      confidence: low
+      sources: [gallowaywildfoods-sea-kale]
+      weeks:
+        - [9, 22, in]
+      notes:
+        season: "A forager gives shoots and young leaves March to May, flower buds May to June and seed pods for about two weeks in June to July (gallowaywildfoods-sea-kale). Shoot window used, as that is what the forced line sells; buds and pods not split out. Only one secondary source, so low. No legal or harvesting advice stated, as no primary source was found (rule 7)."
+
+# ---------------- Squash & fruiting veg ----------------
+
+- name: "Aubergine"
+  slug: aubergine
+  group: squash-fruiting
+  lines:
+    - name: "Glasshouse"
+      kind: method
+      confidence: moderate
+      sources: [caterer-aubergines-2017, fpj-aubergines-evs, lvga-home, ahdb-grown-in-britain]
+      weeks:
+        - [9, 43, in]
+        - [44, 48, avail]
+      notes:
+        season: "UK crop is grown almost entirely in greenhouses, March to October; traditionally picked July to September, with modern methods adding about two months at each end (caterer-aubergines-2017). The Lea Valley grows around three-quarters of British aubergines under glass (lvga-home); AHDB lists it as a hydroponic glasshouse crop (ahdb-grown-in-britain). Rule 6 re-applied: no current peak named (the July to September picking is described as historical), so the whole March to October window is in. No outdoor commercial line found."
+        discrepancy: "A Yorkshire grower said supply would run until November (fpj-aubergines-evs), about four weeks past caterer-aubergines-2017; November kept as avail."
+
+- name: "Chillies"
+  slug: chillies
+  group: squash-fruiting
+  lines:
+    - name: "Glasshouse"
+      kind: method
+      confidence: low
+      sources: [ahdb-grown-in-britain, vegsoc-seasonal]
+      weeks:
+        - [18, 43, in]
+      notes:
+        season: "AHDB says UK chillies are mainly grown under glass, with some unprotected on warm southern sites, but gives no months (ahdb-grown-in-britain). Dates come from a secondary calendar listing May to October (vegsoc-seasonal). Rule 6 re-applied: no peak named, so the whole window is in. Not in Defra's wholesale series. No outdoor line added because no dates were found for it."
+
+- name: "Courgettes"
+  slug: courgettes
+  group: squash-fruiting
+  lines:
+    - name: "Courgettes"
+      kind: whole
+      confidence: moderate
+      sources: [defra-wholesale-prices, vegsoc-seasonal, kentishstour-calendar, ocado-courgettes, gbc-courgettes, foodomarket-season]
+      weeks:
+        - [23, 24, avail]
+        - [25, 39, in]
+        - [40, 43, avail]
+      notes:
+        season: "Defra's wholesale series quoted home-grown courgettes from 22 Jun to 28 Sep 2026, weeks 25 to 39 (defra-wholesale-prices), one season only; used for in (rule 2). Secondary sources run from June (vegsoc-seasonal, kentishstour-calendar) to October (ocado-courgettes: July to October), so early June and October are avail."
+        discrepancy: "Two calendars give June to October (vegsoc-seasonal, kentishstour-calendar), about four weeks past the last Defra quote; gbc-courgettes gives June to September; foodomarket-season gives June to August."
+
+- name: "Courgette flowers"
+  slug: courgette-flowers
+  group: squash-fruiting
+  lines:
+    - name: "Courgette flowers"
+      kind: whole
+      confidence: low
+      sources: [farmdirect-courgette-flowers-2013, osolocal-courgette-flowers]
+      weeks: []
+      notes:
+        season: "Still no dated UK-grown window. Third pass: a London organic box scheme sold courgette flowers hand-picked by a named grower at Wild Fields in early July 2013, calling them something never seen in supermarkets (farmdirect-courgette-flowers-2013); one dated sale, no window. A UK foodservice supplier lists Israeli flowers and says it imports from the Netherlands outside the UK season, which it calls late spring and summer without months (osolocal-courgette-flowers). Searched The Caterer, FPJ, The Grocer, FreshPlaza and Hortidaily (Dutch growers only), and chef-facing growers in Cornwall, Kent, Sussex, Norfolk and Worcestershire (Westlands and Nurtured in Norfolk do not list them). Small UK supply evidently exists, so not a never case, but no source names months."
+
+- name: "Marrow"
+  slug: marrow
+  group: squash-fruiting
+  lines:
+    - name: "Marrow"
+      kind: whole
+      confidence: low
+      sources: [kentishstour-calendar, vegsoc-seasonal]
+      weeks:
+        - [18, 43, in]
+      notes:
+        season: "Only secondary calendars found: May to October (kentishstour-calendar); vegsoc-seasonal lists May, June and August to October, skipping July, which looks like an omission. Second pass: not in AHDB's produce guide or Defra's wholesale series; no grower or trade source found."
+
+- name: "Peppers"
+  slug: peppers
+  group: squash-fruiting
+  lines:
+    - name: "Glasshouse"
+      kind: method
+      confidence: moderate
+      sources: [ahdb-grown-in-britain, hortidaily-peppers-lvga-2017, lvga-home, defra-wholesale-prices]
+      weeks:
+        - [13, 22, avail]
+        - [23, 35, in]
+        - [36, 46, avail]
+      notes:
+        season: "Harvested late March to mid-November, peak June to August (ahdb-grown-in-britain); peak in, rest avail (rule 6). The Lea Valley grows about three-quarters of British sweet peppers under glass (lvga-home). Defra's wholesale series quoted home-grown red peppers from 30 Mar to 12 Oct 2026 (defra-wholesale-prices), close to AHDB's start."
+        discrepancy: "The Lea Valley growers' secretary said the 2017 crop started in January and would run to November (hortidaily-peppers-lvga-2017), about ten weeks earlier than AHDB's start; Defra also has a home-grown elongated pepper quote in December 2025. Defra's last quote (12 Oct 2026) is about five weeks before AHDB's mid-November end. AHDB dates used."
+    - name: "Outdoor"
+      kind: method
+      confidence: low
+      sources: [plantura-calendar, ahdb-grown-in-britain]
+      weeks:
+        - [31, 43, in]
+      notes:
+        season: "Only a gardening calendar found, giving outdoor peppers August to October (plantura-calendar). AHDB treats peppers as a glasshouse crop (ahdb-grown-in-britain); Defra's wholesale series doesn't split outdoor peppers. No source found for commercial outdoor UK peppers, so these dates reflect garden growing."
+
+- name: "Pumpkin"
+  slug: pumpkin
+  group: squash-fruiting
+  lines:
+    - name: "Pumpkin"
+      kind: whole
+      confidence: low
+      sources: [vegsoc-seasonal, kentishstour-calendar, foodomarket-season, grocerygazette-pumpkins-2022]
+      weeks:
+        - [1, 13, avail]
+        - [30, 30, avail]
+        - [31, 52, in]
+      notes:
+        season: "Only secondary sources found for the window. August to December (vegsoc-seasonal); late July to March (kentishstour-calendar). A large UK grower's pumpkins went into Tesco stores from about 10 Oct 2022 for Halloween (grocerygazette-pumpkins-2022), which gives no season length. January to March was store in the first pass, but no source says UK pumpkins are sold from store, so it is now avail, citing the two sources that list those months."
+        discrepancy: "foodomarket-season gives September to February; kentishstour-calendar runs to March."
+
+- name: "Squash"
+  slug: squash
+  group: squash-fruiting
+  lines:
+    - name: "Winter"
+      kind: variety
+      confidence: low
+      sources: [fpj-barfoots-butternut, vegsoc-seasonal, foodomarket-season, plantura-calendar]
+      weeks:
+        - [1, 8, avail]
+        - [36, 39, avail]
+        - [40, 52, in]
+      notes:
+        season: "Split added because sources list summer and winter squash separately. Barfoots harvests its British butternut in October (fpj-barfoots-butternut, quoting its farm director), and vegsoc-seasonal gives winter squash October to December, so October to December is in. September (vegsoc-seasonal butternut, foodomarket-season) and January to February (plain 'squash' in vegsoc-seasonal; foodomarket-season to February) are avail. The first pass marked January and February store, but no source says UK squash is sold from store, so that was removed."
+        discrepancy: "vegsoc-seasonal gives butternut from September, about four weeks before the Barfoots harvest; plantura-calendar lists butternut in November only."
+    - name: "Summer"
+      kind: variety
+      confidence: low
+      sources: [vegsoc-seasonal]
+      weeks:
+        - [23, 43, in]
+      notes:
+        season: "Split added (see Winter). Summer squash listed June to October (vegsoc-seasonal). Courgettes, a summer squash, have their own entry; their Defra dates are not copied here (rule 8). Second pass found no grower or trade source for other summer squash."
+
+- name: "Tomatoes"
+  slug: tomatoes
+  group: squash-fruiting
+  lines:
+    - name: "Glasshouse"
+      kind: method
+      confidence: moderate
+      sources: [btga-fortnight-2025, btga-about, btga-when-in-season, hortidaily-tomato-fortnight-2026, fpj-buy-british-tomatoes, ahdb-grown-in-britain, defra-wholesale-prices]
+      weeks:
+        - [1, 8, avail]
+        - [9, 48, in]
+        - [49, 52, avail]
+      notes:
+        season: "Rule 6 re-applied. Growers' association: conventional season March to November (btga-fortnight-2025), with year-round supply from some growers using lighting (btga-when-in-season). AHDB: heated-glasshouse fruit marketed February to November, with lit crops on about 12% of the area picking every week (ahdb-grown-in-britain). Neither names a peak, so the whole March to November window is in. British Tomato Fortnight (1 to 14 June in 2026, hortidaily-tomato-fortnight-2026) is a promotion, not a peak, and is no longer used."
+        year_round: "On sale all year from lit glasshouses (btga-when-in-season, ahdb-grown-in-britain). Main season March to November (btga-fortnight-2025). Avail in December to February means out of the main season, not hard to get."
+        discrepancy: "btga-about gives March to October; ahdb-grown-in-britain starts in February; both about four weeks off btga-fortnight-2025. Defra's wholesale series quoted home-grown round tomatoes from 27 Apr to 26 Oct 2026, with vine and cherry also quoted in December 2025 but not January to mid-April (defra-wholesale-prices). In one year the association announced the season start on 17 April (fpj-buy-british-tomatoes)."
+    - name: "Outdoor"
+      kind: method
+      confidence: low
+      sources: [plantura-calendar, ahdb-grown-in-britain]
+      weeks:
+        - [31, 43, in]
+      notes:
+        season: "No source found for commercial outdoor UK tomatoes; AHDB says all significant UK production is under glass (ahdb-grown-in-britain). The only outdoor-specific source is a gardening calendar giving August to October (plantura-calendar), so these dates reflect garden growing. Rule 8: the first pass also used general tomato calendars from a wholesaler and the Vegetarian Society, which don't separate outdoor from glasshouse; they are no longer used for this line."

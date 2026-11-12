@@ -60,7 +60,7 @@ opacity), dot (dot radius), arcs (false draws dots only).
 {%- comment -%} Only rings that give the verdict place a food (not another
    coast, a glasshouse or a wild ring beside a market one), and a food
    that cannot be sold is not drawn. {%- endcomment -%}
-{%- for food in site.data.foods -%}
+{%- for food in site.data.shown -%}
   {%- if keys contains food.group and food.unsold == nil -%}
     {%- assign start = 99 -%}
     {%- assign length = 0 -%}
@@ -173,7 +173,7 @@ Ranks are found by sorting "<length + 100> <name>|slug" strings.
     {%- assign third1 = n | plus: 1 | divided_by: 3 -%}
     {%- for e in mine -%}
       {%- assign parts = e | split: "|" -%}
-      {%- assign food = site.data.foods | where: "slug", parts[1] | first -%}
+      {%- assign food = site.data.shown | where: "slug", parts[1] | first -%}
       {%- assign length = parts[2] | plus: 0 -%}
       {%- assign k = forloop.index0 -%}
       {%- assign pass = k | modulo: 3 -%}

@@ -958,13 +958,28 @@ body:has([data-tt]) .site-footer { padding-bottom: calc(var(--sp-5) + 44px + var
 /* Source data: "common knowledge*" is a prose link to its footnote at
    the foot of the page, quiet, behind a bar, which ends with the way
    back up (the arrow turned up). The lists of sources are plain, a
-   little apart. */
+   little apart, each kind folded. */
 .sources .footnote { margin: var(--sp-4) 0 0; padding-left: var(--sp-2); border-left: 3px solid var(--rule); color: var(--muted); font-size: var(--fs-small); }
 .back-up .arrow { transform: rotate(-90deg); }
 .sources .footnote p { margin: 0 0 var(--sp-1); }
 .sources .footnote ol { margin: 0 0 var(--sp-1); padding-left: 1.4rem; }
 .source-list { padding-left: 1.2rem; margin: 0 0 var(--sp-2); }
 .source-list li { margin: 0.2rem 0; }
+/* Each kind of source folds: its heading and count behind a triangle
+   that points right when shut and turns down when open. */
+.source-kind { margin: var(--sp-2) 0 0; }
+.source-kind summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.5em; }
+.source-kind summary::-webkit-details-marker { display: none; }
+.source-kind summary::before {
+  content: ""; flex: none; width: 0; height: 0;
+  border-left: 0.55em solid var(--muted); border-top: 0.35em solid transparent; border-bottom: 0.35em solid transparent;
+  transition: transform 0.2s ease;
+}
+.source-kind[open] summary::before { transform: rotate(90deg); }
+.source-kind summary h3 { margin: 0; }
+.source-kind summary .count { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 0.2em; }
+.source-kind .source-list { margin-top: var(--sp-1); }
+@media (prefers-reduced-motion: reduce) { .source-kind summary::before { transition: none; } }
 /* The credits close Source data, under an Anton label, small and muted. */
 .sources .credits p { color: var(--muted); font-size: var(--fs-small); max-width: 40rem; }
 

@@ -11,10 +11,13 @@ const fs = require("fs");
 const path = require("path");
 const { LIMIT } = require("../../tools/fold-ics.js");
 const { loadYaml } = require("../../tools/yaml.js");
+const { shownFoods, isHidden, DATA_ONLY } = require("../../tools/shown.js");
+const V = require("../../assets/verdict.js");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const SITE = path.join(ROOT, "_site");
-const foods = loadYaml(path.join(ROOT, "_data", "foods.yml"));
+const data = loadYaml(path.join(ROOT, "_data", "foods.yml"));
+const foods = shownFoods(data);
 const never = loadYaml(path.join(ROOT, "_data", "never.yml"));
 
 function read(rel) {
@@ -38,13 +41,41 @@ test("search.json parses, one entry per food and never-food, with what the scrip
   assert.equal(new Set(slugs).size, slugs.length, "every slug once");
 });
 
-test("foods.json parses and is the data file, one entry per food", () => {
+test("foods.json parses and is the data as the site shows it, one entry per food", () => {
   const items = JSON.parse(read("foods.json"));
   assert.equal(items.length, foods.length);
+  assert.deepEqual(items, foods, "foods.json is tools/shown.js's view of foods.yml");
   for (const f of items) {
     for (const key of ["slug", "name", "group", "colour", "varieties"]) assert.ok(key in f, `${f.slug}: no ${key}`);
     assert.ok(f.varieties.length > 0, `${f.slug}: no rings`);
     for (const v of f.varieties) assert.ok(Array.isArray(v.weeks), `${f.slug}/${v.name}: no weeks`);
+  }
+});
+
+test("nothing hidden or data-only reaches a published file", () => {
+  // The JSON carries none of the data-only keys, each at its own level (a
+  // fish's food-level buy is shown; a ring's is data only).
+  const json = JSON.parse(read("foods.json")).concat(data.map((f) => JSON.parse(read(path.join("foods", f.slug + ".json")))));
+  for (const f of json) {
+    DATA_ONLY.food.forEach((k) => assert.ok(!(k in f), `${f.slug}: "${k}" is published`));
+    for (const v of f.varieties) DATA_ONLY.ring.forEach((k) => assert.ok(!(k in v), `${f.slug}/${v.name}: "${k}" is published`));
+  }
+  // A hidden ring is in no ring list, no dial and no feed. The ring list's
+  // names and the dial's ring titles are the page's only ring names.
+  const hidden = data.flatMap((f) => f.varieties.filter(isHidden).map((v) => [f, v]));
+  assert.ok(hidden.length > 0, "the data has hidden rings to look for");
+  for (const [f, v] of hidden) {
+    const page = read(path.join(f.slug, "index.html"));
+    const names = [...page.matchAll(/class="line-name">([^<]*)</g), ...page.matchAll(/<title>([^<]*)<\/title>\s*<circle/g)]
+      .map((m) => m[1].replace(/&amp;/g, "&"));
+    const shownNames = foods.find((x) => x.slug === f.slug).varieties.map((x) => x.name || f.name);
+    if (!shownNames.includes(v.name)) assert.ok(!names.includes(v.name), `${f.slug}: hidden ring ${v.name} is on its page`);
+    const label = V.varietyLabel(v);
+    if (label) assert.ok(!read(path.join("remind", f.slug + ".ics")).includes(`(${label})`), `${f.slug}: hidden ring ${v.name} is in its feed`);
+  }
+  // Meat's buy lines wait for their design.
+  for (const f of data.filter((x) => x.group === "meat" && x.buy)) {
+    assert.ok(!read(path.join(f.slug, "index.html")).includes('class="buy"'), `${f.slug}: its buy line is shown`);
   }
 });
 
